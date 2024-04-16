@@ -9,7 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Home")
+            .font(.system(size: 60, weight: .bold))
+            .position(x: 100, y: 50)
+            
     }
 }
 

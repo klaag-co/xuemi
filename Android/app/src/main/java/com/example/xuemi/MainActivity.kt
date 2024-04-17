@@ -40,10 +40,7 @@ fun Main() {
         )
         Row {
             Button(onClick = { /*TODO*/ }) {
-                Column {
-                    Text("ee")
-                    Text("oh wow")
-                }
+
             }
         }
     }

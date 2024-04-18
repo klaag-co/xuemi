@@ -40,7 +40,9 @@ fun Main() {
         )
         Row {
             Button(onClick = { /*TODO*/ }) {
-
+                Text(
+                    "test",
+                    modifier = Modifier.padding(16.dp))
             }
         }
     }

@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Main() {
-    Column {
+    Column {// Whole app Column
         Text(
             "Home",
             fontSize = 70.sp,
@@ -39,7 +39,7 @@ fun Main() {
             modifier = Modifier.padding(horizontal = 16.dp)
         )
         Row {
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(16.dp)) {
                 Text(
                     "test",
                     modifier = Modifier.padding(16.dp))

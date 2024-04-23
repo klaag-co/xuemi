@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -31,18 +32,34 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Main() {
-    Column {
+    Column {// Whole app Column
         Text(
             "Home",
             fontSize = 70.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-        Row {
-            Button(onClick = { /*TODO*/ }) {
-
-            }
+        Button(onClick = { /*TODO*/ }) {
+            Image
         }
+//        Row {// 1st button row
+//            Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(16.dp), shape = RoundedCornerShape(20.dp)) {
+//                Column {
+//                    Text(
+//                        text = "Secondary",
+//                        fontSize = 30.sp
+//                    )
+//                    Text(
+//                        text = "1",
+//                        fontSize = 80.sp,
+//                        modifier = Modifier.padding(horizontal = 58.dp,)
+//                    )
+//                }
+//
+//            }
+//
+//
+//        }
     }
     
 }

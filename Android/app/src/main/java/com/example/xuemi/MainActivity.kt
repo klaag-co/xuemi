@@ -12,12 +12,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,12 +45,13 @@ fun Main() {
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-        Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(20.dp)) {
+
+        Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(3,115,206)), shape = RoundedCornerShape(20.dp), modifier = Modifier.padding(horizontal = 16.dp)) {
             Image(
                 painter = painterResource(id = R.drawable.continue_learning),
                 contentDescription = "Continue learning button",
-                modifier = Modifier.background(Color.Black)
-
+                modifier = Modifier
+                    .size(1000.dp,130.dp)
             )
         }
 //        Row {// 1st button row

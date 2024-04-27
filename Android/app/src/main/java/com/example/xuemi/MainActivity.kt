@@ -51,7 +51,7 @@ fun Main() {
                 painter = painterResource(id = R.drawable.continue_learning),
                 contentDescription = "Continue learning button",
                 modifier = Modifier
-                    .size(1000.dp,130.dp)
+                    .size(1000.dp,136.dp)
             )
         }
 //        Row {// 1st button row

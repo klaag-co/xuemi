@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -54,24 +55,42 @@ fun Main() {
                     .size(1000.dp,136.dp)
             )
         }
-//        Row {// 1st button row
-//            Button(onClick = { /*TODO*/ }, modifier = Modifier.padding(16.dp), shape = RoundedCornerShape(20.dp)) {
-//                Column {
-//                    Text(
-//                        text = "Secondary",
-//                        fontSize = 30.sp
-//                    )
-//                    Text(
-//                        text = "1",
-//                        fontSize = 80.sp,
-//                        modifier = Modifier.padding(horizontal = 58.dp,)
-//                    )
-//                }
-//
-//            }
-//
-//
-//        }
+        Row {// 1st button row
+            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), modifier = Modifier.padding(horizontal = 22.dp, vertical = 16.dp), shape = RoundedCornerShape(20.dp)) {
+                Column {
+                    Text(
+                        text = "Secondary",
+                        fontSize = 24.sp
+                    )
+                    Text(
+                        text = "1",
+                        fontSize = 70.sp,
+                        modifier = Modifier.padding(horizontal = 35.dp),
+                        fontWeight = FontWeight.Black
+                    )
+                    Text("")
+                }
+
+            }
+            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), modifier = Modifier.padding(horizontal = 1.dp, vertical = 16.dp), shape = RoundedCornerShape(20.dp)) {
+                Column {
+                    Text(
+                        text = "Secondary",
+                        fontSize = 24.sp
+                    )
+                    Text(
+                        text = "2",
+                        fontSize = 70.sp,
+                        modifier = Modifier.padding(horizontal = 35.dp,),
+                        fontWeight = FontWeight.Black
+                    )
+                    Text("")
+                }
+
+            }
+
+
+        }
     }
     
 }

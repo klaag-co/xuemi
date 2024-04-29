@@ -206,10 +206,11 @@ fun MainBottomBar() {
         }
     )
 }
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     XuemiTheme {
-        Main()
+        MainBottomBar()
     }
 }

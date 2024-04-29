@@ -8,39 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
-
+    
     var body: some View {
         TabView {
             HomeView()
                 .tabItem {
-                    VStack {
-                        Image(systemName: "house")
-                        Text("Home")
-                    }
+                    Label("Home", systemImage: "house")
                 }
             FavouritesView()
                 .tabItem {
-                    VStack {
-                        Image(systemName: "star")
-                        Text("Favourites")
-                    }
+                    Label("Favourites", systemImage: "star")
                 }
             NotesView()
                 .tabItem {
-                    VStack {
-                        Image(systemName: "doc")
-                        Text("Notes")
-                    }
+                    Label("Notes", systemImage: "doc")
                 }
             SettingsView()
                 .tabItem{
-                    VStack{
-                        Image(systemName: "gear")
-                        Text("Settings")
-                    }
+                    Label("Settings", systemImage: "gear")
+                }
         }
     }
-}
 }
 #Preview {
     ContentView()

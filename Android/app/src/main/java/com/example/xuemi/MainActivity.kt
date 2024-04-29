@@ -143,24 +143,26 @@ fun Main() {
             }
 
         }
-//        Button(onClick = { /*TODO*/ },
-//            colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
-//            border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),
-//            shape = RoundedCornerShape(20.dp),
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(horizontal = 22.dp, vertical = 8.dp))
-//
-//
-//        {
-//            Text(
-//                text = "O-Level\n\nPractice",
-//                fontSize = 40.sp,
-//            )
-//        }
-//        BottomAppBar {
-//
-//        }
+        Button(onClick = { /*TODO*/ },
+            colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
+            border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 25.dp, vertical = 8.dp))
+
+
+        {
+            Text(
+                text = "O-Level\n\nPractice",
+                fontSize = 40.sp,
+                fontWeight = FontWeight.Black,
+                modifier = Modifier.padding(vertical = 5.dp)
+            )
+        }
+        BottomAppBar {
+
+        }
     }
     
 }

@@ -39,7 +39,7 @@ struct HomeView: View {
                     Text("1")
                         .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
                         .bold()
-                        .font(.system(size:65))
+                        .font(.system(size:55))
                 }
             }
             .background(.customteal)
@@ -48,7 +48,7 @@ struct HomeView: View {
             .foregroundStyle(.white)
             .padding(2)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 105, y: 120)
+            .position(x: 105, y: 111)
             Button() {
                 print("eheh")
             } label: {
@@ -59,7 +59,7 @@ struct HomeView: View {
                     Text("2")
                         .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
                         .bold()
-                        .font(.system(size:65))
+                        .font(.system(size:55))
                 }
             }
             .buttonStyle(.bordered)
@@ -80,7 +80,7 @@ struct HomeView: View {
                     Text("3")
                         .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
                         .bold()
-                        .font(.system(size:65))
+                        .font(.system(size:55))
                 }
             }
             .buttonStyle(.bordered)
@@ -89,7 +89,7 @@ struct HomeView: View {
             .background(.customteal)
             .padding(2)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 105, y: 65)
+            .position(x: 105, y: 57)
             
             Button() {
                 print("eheh")
@@ -101,7 +101,7 @@ struct HomeView: View {
                     Text("4")
                         .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
                         .bold()
-                        .font(.system(size:65))
+                        .font(.system(size:55))
                 }
             }
             .buttonStyle(.bordered)

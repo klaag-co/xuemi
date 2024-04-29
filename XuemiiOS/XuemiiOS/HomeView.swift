@@ -17,21 +17,122 @@ struct HomeView: View {
             print("eheh")
         } label: {
             VStack{
+                Image("ContinueLearning")
+                    .resizable()
+            }
+        }
+        .buttonStyle(.bordered)
+        .foregroundStyle(.white)
+        .background(.customblue)
+        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
+        .position(x: 175, y: 84)
+        .padding(.vertical, -22).padding(.horizontal, 20)
+        
+        Button() {
+            print("eheh")
+        } label: {
+            VStack{
                 Text("Secondary")
-                    .padding(EdgeInsets(top:15, leading: 0, bottom:0, trailing: 0))
+                    .padding(EdgeInsets(top:10, leading: 2, bottom:0, trailing: 2))
+                    .font(.system(size: 30))
                 Text("1")
                     .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
-                    .font(.system(size:55))
-                    
+                    .bold()
+                    .font(.system(size:65))
+            }
+        }
+        .background(.customteal)
+        .buttonStyle(.bordered)
+        .font(.system(size: 40))
+        .foregroundStyle(.white)
+        .padding(2)
+        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
+        .position(x: 105, y: 120)
+        
+        Button() {
+            print("eheh")
+        } label: {
+            VStack{
+                Text("Secondary")
+                    .padding(EdgeInsets(top:10, leading: 2, bottom:0, trailing: 2))
+                    .font(.system(size: 30))
+                Text("2")
+                    .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
+                    .bold()
+                    .font(.system(size:65))
             }
         }
         .buttonStyle(.bordered)
         .font(.system(size: 40))
         .foregroundStyle(.white)
-        .background(.blue)
+        .background(.customteal)
         .padding(2)
         .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-        .position(x: 150, y: -40)
+        .position(x: 286, y: 10)
+        
+        Button() {
+            print("eheh")
+        } label: {
+            VStack{
+                Text("Secondary")
+                    .padding(EdgeInsets(top:10, leading: 2, bottom:0, trailing: 2))
+                    .font(.system(size: 30))
+                Text("3")
+                    .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
+                    .bold()
+                    .font(.system(size:65))
+            }
+        }
+        .buttonStyle(.bordered)
+        .font(.system(size: 40))
+        .foregroundStyle(.white)
+        .background(.customteal)
+        .padding(2)
+        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
+        .position(x: 105, y: 65)
+        
+        Button() {
+            print("eheh")
+        } label: {
+            VStack{
+                Text("Secondary")
+                    .padding(EdgeInsets(top:10, leading: 2, bottom:0, trailing: 2))
+                    .font(.system(size: 30))
+                Text("4")
+                    .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
+                    .bold()
+                    .font(.system(size:65))
+            }
+        }
+        .buttonStyle(.bordered)
+        .font(.system(size: 40))
+        .foregroundStyle(.white)
+        .background(.customteal)
+        .padding(2)
+        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
+        .position(x: 286, y: -45)
+        
+        Button() {
+            print("eheh")
+        } label: {
+            VStack{
+                Text("O-Level")
+                    .padding(EdgeInsets(top:10, leading: 72, bottom:0, trailing: 72))
+                    .bold()
+                    .font(.system(size: 50))
+                Text("Practice")
+                    .padding(EdgeInsets(top:0, leading: 72, bottom:15, trailing: 72))
+                    .bold()
+                    .font(.system(size:50))
+            }
+        }
+        .buttonStyle(.bordered)
+        .font(.system(size: 40))
+        .foregroundStyle(.white)
+        .background(.customteal)
+        .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
+        .position(x: 287, y: 40)
+        .padding(.vertical, -22).padding(.horizontal, -90)
     }
 }
 

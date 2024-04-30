@@ -39,7 +39,7 @@ struct HomeView: View {
                     Text("1")
                         .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
                         .bold()
-                        .font(.system(size:55))
+                        .font(.system(size:65))
                 }
             }
             .background(.customteal)
@@ -49,7 +49,7 @@ struct HomeView: View {
             .padding(2)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
             .position(x: 105, y: 111)
-           
+            .position(x: 105, y: 120)
             Button() {
                 print("eheh")
             } label: {
@@ -60,7 +60,7 @@ struct HomeView: View {
                     Text("2")
                         .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
                         .bold()
-                        .font(.system(size:55))
+                        .font(.system(size:65))
                 }
             }
             .buttonStyle(.bordered)
@@ -81,7 +81,7 @@ struct HomeView: View {
                     Text("3")
                         .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
                         .bold()
-                        .font(.system(size:55))
+                        .font(.system(size:65))
                 }
             }
             .buttonStyle(.bordered)
@@ -90,7 +90,7 @@ struct HomeView: View {
             .background(.customteal)
             .padding(2)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 105, y: 57)
+            .position(x: 105, y: 65)
             
             Button() {
                 print("eheh")
@@ -102,7 +102,7 @@ struct HomeView: View {
                     Text("4")
                         .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
                         .bold()
-                        .font(.system(size:55))
+                        .font(.system(size:65))
                 }
             }
             .buttonStyle(.bordered)
@@ -118,13 +118,13 @@ struct HomeView: View {
             } label: {
                 VStack{
                     Text("O-Level")
-                        .padding(EdgeInsets(top:10, leading: 91, bottom:0, trailing: 91))
+                        .padding(EdgeInsets(top:10, leading: 72, bottom:0, trailing: 72))
                         .bold()
-                        .font(.system(size: 40))
+                        .font(.system(size: 50))
                     Text("Practice")
-                        .padding(EdgeInsets(top:0, leading: 91, bottom:15, trailing: 91))
+                        .padding(EdgeInsets(top:0, leading: 72, bottom:15, trailing: 72))
                         .bold()
-                        .font(.system(size:40))
+                        .font(.system(size:50))
                 }
             }
             .buttonStyle(.bordered)
@@ -133,10 +133,11 @@ struct HomeView: View {
             .background(.customteal)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
             .position(x: 287, y: 40)
-            .padding(.vertical, -40).padding(.horizontal, -90)
+            .padding(.vertical, -22).padding(.horizontal, -90)
         }
     }
 }
+
 #Preview {
     HomeView()
 }

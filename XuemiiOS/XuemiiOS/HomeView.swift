@@ -49,6 +49,7 @@ struct HomeView: View {
             .padding(2)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
             .position(x: 105, y: 111)
+           
             Button() {
                 print("eheh")
             } label: {

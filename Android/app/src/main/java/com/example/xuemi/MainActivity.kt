@@ -1,7 +1,5 @@
 package com.example.xuemi
 
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Star
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,12 +9,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.List
-import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -61,7 +59,7 @@ class MainActivity : ComponentActivity() {
             val favouritesTab = TabBarItem(
                 title = "Favourites",
                 selectedIcon = Icons.Filled.Star,
-                unselectedIcon = R.drawable.outline_star
+                unselectedIcon = Icons.Outlined.Star
             )
             val notesTab = TabBarItem(
                 title = "Notes",

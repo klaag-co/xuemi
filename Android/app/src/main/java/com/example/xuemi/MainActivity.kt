@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
             val favouritesTab = TabBarItem(
                 title = "Favourites",
                 selectedIcon = Icons.Filled.Star,
-                unselectedIcon = Icons.Outlined.Star
+                unselectedIcon = R.drawable.outline_star
             )
             val notesTab = TabBarItem(
                 title = "Notes",
@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
             val settingsTab = TabBarItem(
                 title = "Settings",
                 selectedIcon = Icons.Filled.Settings,
-                unselectedIcon = Icons.Outlined.Settings
+                unselectedIcon = Icons.Outlined.Settings,
             )
 
             // creating a list of all the tabs

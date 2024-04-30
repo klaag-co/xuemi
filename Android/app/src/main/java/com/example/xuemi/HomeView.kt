@@ -145,7 +145,7 @@ fun Home() {
                 text = "O-Level\n\nPractice",
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Black,
-                modifier = Modifier.padding(vertical = 5.dp)
+                modifier = Modifier.padding(vertical = 2.dp)
             )
         }
 

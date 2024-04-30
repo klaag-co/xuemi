@@ -58,24 +58,24 @@ class MainActivity : ComponentActivity() {
                 selectedIcon = Icons.Filled.Home,
                 unselectedIcon = Icons.Outlined.Home
             )
-            val alertsTab = TabBarItem(
+            val favouritesTab = TabBarItem(
                 title = "Favourites",
                 selectedIcon = Icons.Filled.Star,
                 unselectedIcon = Icons.Outlined.Star
             )
-            val settingsTab = TabBarItem(
+            val notesTab = TabBarItem(
                 title = "Notes",
                 selectedIcon = Icons.Filled.List,
                 unselectedIcon = Icons.Outlined.List
             )
-            val moreTab = TabBarItem(
+            val settingsTab = TabBarItem(
                 title = "Settings",
                 selectedIcon = Icons.Filled.Settings,
                 unselectedIcon = Icons.Outlined.Settings
             )
 
             // creating a list of all the tabs
-            val tabBarItems = listOf(homeTab, alertsTab, settingsTab, moreTab)
+            val tabBarItems = listOf(homeTab, favouritesTab, notesTab, settingsTab)
 
             // creating our navController
             val navController = rememberNavController()
@@ -91,13 +91,13 @@ class MainActivity : ComponentActivity() {
                             composable(homeTab.title) {
                                 Home()
                             }
-                            composable(alertsTab.title) {
+                            composable(favouritesTab.title) {
                                 Favourites()
                             }
-                            composable(settingsTab.title) {
+                            composable(notesTab.title) {
                                 Notes()
                             }
-                            composable(moreTab.title) {
+                            composable(settingsTab.title) {
                                 Settings()
                             }
                         }

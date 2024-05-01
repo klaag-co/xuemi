@@ -132,7 +132,7 @@ struct HomeView: View {
             .foregroundStyle(.white)
             .background(.customteal)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 287, y: 40)
+            .position(x: 287, y: 30)
             .padding(.vertical, -22).padding(.horizontal, -90)
         }
     }

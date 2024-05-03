@@ -32,6 +32,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -41,8 +42,8 @@ import com.example.xuemi.ui.theme.XuemiTheme
 
 data class TabBarItem(
     val title: String,
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector,
+    val selectedIcon: Int,
+    val unselectedIcon: Int,
     val badgeAmount: Int? = null
 )
 class MainActivity : ComponentActivity() {
@@ -53,23 +54,23 @@ class MainActivity : ComponentActivity() {
             // setting up the individual tabs
             val homeTab = TabBarItem(
                 title = "Home",
-                selectedIcon = Icons.Filled.Home,
-                unselectedIcon = Icons.Outlined.Home
+                selectedIcon = R.drawable.home,
+                unselectedIcon = R.drawable.o_home
             )
             val favouritesTab = TabBarItem(
                 title = "Favourites",
-                selectedIcon = Icons.Filled.Star,
-                unselectedIcon = Icons.Outlined.Star
+                selectedIcon = R.drawable.star,
+                unselectedIcon = R.drawable.o_star
             )
             val notesTab = TabBarItem(
                 title = "Notes",
-                selectedIcon = Icons.Filled.List,
-                unselectedIcon = Icons.Outlined.List
+                selectedIcon = R.drawable.notes,
+                unselectedIcon = R.drawable.o_notes
             )
             val settingsTab = TabBarItem(
                 title = "Settings",
-                selectedIcon = Icons.Filled.Settings,
-                unselectedIcon = Icons.Outlined.Settings,
+                selectedIcon = R.drawable.settings,
+                unselectedIcon = R.drawable.o_settings,
             )
 
             // creating a list of all the tabs
@@ -138,13 +139,13 @@ fun TabView(tabBarItems: List<TabBarItem>, navController: NavController) {
 @Composable
 fun TabBarIconView(
     isSelected: Boolean,
-    selectedIcon: ImageVector,
-    unselectedIcon: ImageVector,
+    selectedIcon: Int,
+    unselectedIcon: Int,
     title: String,
 ) {
     BadgedBox(badge = { }) {
         Icon(
-            imageVector = if (isSelected) {selectedIcon} else {unselectedIcon},
+            painter = painterResource(id = if (isSelected) {selectedIcon} else {unselectedIcon}),
             contentDescription = title
         )
     }

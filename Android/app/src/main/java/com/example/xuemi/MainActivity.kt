@@ -51,6 +51,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             // setting up the individual tabs
             val homeTab = TabBarItem(
                 title = "Home",

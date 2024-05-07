@@ -48,7 +48,7 @@ struct HomeView: View {
             .foregroundStyle(.white)
             .padding(2)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 105, y: 111)
+            .position(x: 105, y: 112)
             
             Button() {
                 print("eheh")
@@ -122,7 +122,7 @@ struct HomeView: View {
                         .bold()
                         .font(.system(size: 50))
                     Text("Practice")
-                        .padding(EdgeInsets(top:0, leading: 72, bottom:15, trailing: 72))
+                        .padding(EdgeInsets(top:0, leading: 72, bottom:12, trailing: 72))
                         .bold()
                         .font(.system(size:50))
                 }

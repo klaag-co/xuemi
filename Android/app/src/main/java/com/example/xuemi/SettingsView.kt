@@ -37,7 +37,7 @@ import com.example.xuemi.ui.theme.XuemiTheme
 fun Settings() {
     Text(
         "Settings",
-        fontSize = 150.sp,
+        fontSize = 100.sp,
         fontWeight = FontWeight.Bold,
         modifier = Modifier.padding(horizontal = 16.dp)
     )

@@ -21,7 +21,7 @@ struct ContentView: View {
                 }
             NotesView()
                 .tabItem {
-                    Label("Notes", systemImage: "doc")
+                    Label("Notes", systemImage: "doc.text")
                 }
             SettingsView()
                 .tabItem{

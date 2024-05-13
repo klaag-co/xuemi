@@ -48,7 +48,7 @@ struct HomeView: View {
             .foregroundStyle(.white)
             .padding(2)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 105, y: 112)
+            .position(x: 105, y: 110)
             
             Button() {
                 print("eheh")
@@ -69,7 +69,7 @@ struct HomeView: View {
             .background(.customteal)
             .padding(2)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 286, y: 10)
+            .position(x: 286, y: 8)
             
             Button() {
                 print("eheh")
@@ -90,7 +90,7 @@ struct HomeView: View {
             .background(.customteal)
             .padding(2)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 105, y: 57)
+            .position(x: 105, y: 56)
             
             Button() {
                 print("eheh")
@@ -111,7 +111,7 @@ struct HomeView: View {
             .background(.customteal)
             .padding(2)
             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 286, y: -45)
+            .position(x: 286, y: -46)
             
             Button() {
                 print("eheh")

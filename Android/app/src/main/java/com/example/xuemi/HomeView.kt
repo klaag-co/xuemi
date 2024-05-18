@@ -34,7 +34,7 @@ fun Home() {
 
         Button(onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(Color(3,115,206)),
-            border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color.Black, Color.White))),
+            //border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color.Black, Color.White))),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier.padding(horizontal = 16.dp))
         {
@@ -46,8 +46,8 @@ fun Home() {
             )
         }
         Row {// 1st button row
-            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), border = BorderStroke(6.dp,
-                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))), modifier = Modifier.absolutePadding(top = 14.dp, bottom = 14.dp, right = 12.dp, left = 28.dp), shape = RoundedCornerShape(20.dp)
+            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
+                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.absolutePadding(top = 14.dp, bottom = 14.dp, right = 12.dp, left = 28.dp), shape = RoundedCornerShape(20.dp)
             ) {
                 Column {
                     Text(
@@ -66,8 +66,8 @@ fun Home() {
                 }
 
             }
-            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), border = BorderStroke(6.dp,
-                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))), modifier = Modifier.padding(horizontal = 1.dp, vertical = 14.dp), shape = RoundedCornerShape(20.dp)
+            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
+                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.padding(horizontal = 1.dp, vertical = 14.dp), shape = RoundedCornerShape(20.dp)
             ) {
                 Column {
                     Text(
@@ -89,8 +89,8 @@ fun Home() {
 
         }
         Row {// 2nd button row
-            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), border = BorderStroke(6.dp,
-                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))), modifier = Modifier.absolutePadding(right = 12.dp, left = 28.dp), shape = RoundedCornerShape(20.dp)
+            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
+                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.absolutePadding(right = 12.dp, left = 28.dp), shape = RoundedCornerShape(20.dp)
             ) {
                 Column {
                     Text(
@@ -109,8 +109,8 @@ fun Home() {
                 }
 
             }
-            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), border = BorderStroke(6.dp,
-                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))), modifier = Modifier.padding(horizontal = 1.dp), shape = RoundedCornerShape(20.dp)
+            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
+                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.padding(horizontal = 1.dp), shape = RoundedCornerShape(20.dp)
             ) {
                 Column {
                     Text(
@@ -133,7 +133,7 @@ fun Home() {
         }
         Button(onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
-            border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),
+            /*border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
                 .fillMaxWidth()

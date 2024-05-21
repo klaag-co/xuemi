@@ -15,7 +15,7 @@ struct HomeView: View {
                 .position(x: 100, y: 50)
             
             Button() {
-                print("eheh")
+                print("whoa u clicked me")
             } label: {
                 VStack{
                     Image("ContinueLearning")
@@ -30,7 +30,7 @@ struct HomeView: View {
             .padding(.vertical, -22).padding(.horizontal, 20)
             
             Button() {
-                print("eheh")
+                print("are u s1")
             } label: {
                 VStack{
                     Text("Secondary")
@@ -51,7 +51,7 @@ struct HomeView: View {
             .position(x: 105, y: 110)
             
             Button() {
-                print("eheh")
+                print("r u s2")
             } label: {
                 VStack{
                     Text("Secondary")
@@ -72,7 +72,7 @@ struct HomeView: View {
             .position(x: 286, y: 8)
             
             Button() {
-                print("eheh")
+                print("r u s3")
             } label: {
                 VStack{
                     Text("Secondary")
@@ -93,7 +93,7 @@ struct HomeView: View {
             .position(x: 105, y: 56)
             
             Button() {
-                print("eheh")
+                print("r u s4")
             } label: {
                 VStack{
                     Text("Secondary")

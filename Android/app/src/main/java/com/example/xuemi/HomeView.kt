@@ -27,7 +27,7 @@ fun Home() {
     Column {// Whole app Column
         Text(
             "Home",
-            fontSize = 50.sp,
+            fontSize = 45.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(vertical = 20.dp, horizontal = 16.dp)
         )
@@ -53,7 +53,6 @@ fun Home() {
                     Text(
                         text = "Secondary",
                         fontSize = 24.sp,
-
                         )
                     Text(
                         text = "1",
@@ -145,10 +144,9 @@ fun Home() {
                 text = "O-Level\n\nPractice",
                 fontSize = 40.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(vertical = 7.dp)
+                modifier = Modifier.padding(vertical = 6.dp)
             )
         }
-
 
     }
 

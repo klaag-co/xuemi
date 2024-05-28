@@ -22,7 +22,7 @@ fun Notes() {
         modifier = Modifier.padding(horizontal = 16.dp))
     {
         Image(
-            painter = painterResource(id = R.drawable.continue_learning3),
+            painter = painterResource(id = R.drawable.continue_learning),
             contentDescription = "Continue learning button",
             modifier = Modifier
                 .size(1000.dp,136.dp)

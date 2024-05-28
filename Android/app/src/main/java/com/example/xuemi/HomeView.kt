@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
 @Composable
 fun Home() {
     Column {// Whole app Column
@@ -29,14 +30,14 @@ fun Home() {
             modifier = Modifier.padding(horizontal = 16.dp)
         )
 
-        Button(onClick = { /*TODO*/ },
+        Button(onClick = {  },
             colors = ButtonDefaults.buttonColors(Color(3,115,206)),
             //border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color.Black, Color.White))),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier.padding(horizontal = 16.dp))
         {
             Image(
-                painter = painterResource(id = R.drawable.continue_learning3),
+                painter = painterResource(id = R.drawable.continue_learning),
                 contentDescription = "Continue learning button",
                 modifier = Modifier
                     .size(1000.dp,136.dp)
@@ -134,7 +135,7 @@ fun Home() {
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 25.dp, vertical = 6.dp))
+                .padding(horizontal = 25.dp, vertical = 10.dp))
 
 
         {

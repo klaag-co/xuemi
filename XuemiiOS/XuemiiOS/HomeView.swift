@@ -7,11 +7,39 @@
 
 import SwiftUI
 
-struct HomeView: View {
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "HelveticaNeue-Bold", size: 50)!]
-            
+enum SecondaryNumber {
+    case one, two, three, four
+    
+    var string: String {
+        switch self {
+        case .one:
+            return "1"
+        case .two:
+            return "2"
+        case .three:
+            return "3"
+        case .four:
+            return "4"
+        }
     }
+    
+    var chapters: [String] {
+        switch self {
+        case .one:
+            return ["Chapter 1","Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6"]
+        case .two:
+            return ["mrscaryman", "galvanised square steel"]
+        case .three:
+            return ["EEEEEEEEEEEEEEE", "stubby"]
+        case .four:
+            return ["appla"]
+        }
+    }
+
+}
+
+struct HomeView: View {
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -26,30 +54,28 @@ struct HomeView: View {
                 .foregroundStyle(.white)
                 .background(.customblue)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
-                
-                
+
                 HStack {
-                    tile(level: "1")
-                    tile(level: "2")
+                    navigationTile(level: .one)
+                    navigationTile(level: .two)
                 }
-                
+
                 HStack {
-                    tile(level: "3")
-                    tile(level: "4")
+                    navigationTile(level: .three)
+                    navigationTile(level: .four)
                 }
-                
-                
+
                 Button {
                     print("eheh")
                 } label: {
-                    VStack{
+                    VStack {
                         Text("O-Level")
                             .padding(.top, 10)
                         Text("Practice")
                             .padding(.bottom, 10)
                     }
                     .bold()
-                    .font(.system(size:50))
+                    .font(.system(size: 50))
                 }
                 .font(.system(size: 40))
                 .foregroundStyle(.white)
@@ -62,15 +88,15 @@ struct HomeView: View {
             .navigationBarTitleDisplayMode(.large)
         }
     }
-    
-    func tile(level: String) -> some View {
-        Button {
-            print("are u s\(level)")
+
+    func navigationTile(level: SecondaryNumber) -> some View {
+        NavigationLink {
+            ChapterView(level: level)
         } label: {
             VStack {
                 Text("Secondary")
                     .font(.system(size: 30))
-                Text(level)
+                Text(level.string)
                     .font(.system(size: 55))
             }
             .padding()

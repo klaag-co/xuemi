@@ -60,8 +60,8 @@ class MainActivity : ComponentActivity() {
             )
             val favouritesTab = TabBarItem(
                 title = "Favourites",
-                selectedIcon = R.drawable.star,
-                unselectedIcon = R.drawable.o_star
+                selectedIcon = R.drawable.bookmark,
+                unselectedIcon = R.drawable.o_bookmark
             )
             val notesTab = TabBarItem(
                 title = "Notes",

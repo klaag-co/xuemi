@@ -93,7 +93,7 @@ fun Home(navController: NavController) {
 
 @Composable
 fun squaretemplate(navController: NavController, secondary: String?, top: Int, bottom: Int, right: Int, left: Int) {
-    Button(onClick = { navController.navigate("flashcard/1") }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
+    Button(onClick = { navController.navigate("flashcard/$secondary") }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
                 Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.absolutePadding(top = top.dp, bottom = bottom.dp, right = right.dp, left = left.dp), shape = RoundedCornerShape(20.dp)
     ) {
         Column {

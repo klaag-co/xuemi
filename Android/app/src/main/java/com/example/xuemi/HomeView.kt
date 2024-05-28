@@ -17,13 +17,25 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+import androidx.navigation.NavController
+import androidx.navigation.compose.*
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun Home() {
+fun HomeNav() {
+    val navController = rememberNavController()
+
+    NavHost(navController, startDestination = "home") {
+        composable("home") {Home(navController)}
+        composable("flashcard") {Flashcard()}
+    }
+}
+
+@Composable
+fun Home(navController: NavController) {
     Column {// Whole app Column
         Text(
             "Home",
@@ -32,7 +44,7 @@ fun Home() {
             modifier = Modifier.padding(vertical = 20.dp, horizontal = 16.dp)
         )
 
-        Button(onClick = {  },
+        Button(onClick = { },
             colors = ButtonDefaults.buttonColors(Color(3,115,206)),
             //border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color.Black, Color.White))),
             shape = RoundedCornerShape(20.dp),
@@ -46,7 +58,7 @@ fun Home() {
             )
         }
         Row {// 1st button row
-            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
+            Button(onClick = { navController.navigate("flashcard") }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
                 Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.absolutePadding(top = 14.dp, bottom = 14.dp, right = 12.dp, left = 28.dp), shape = RoundedCornerShape(20.dp)
             ) {
                 Column {

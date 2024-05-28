@@ -89,7 +89,7 @@ class MainActivity : ComponentActivity() {
                     Scaffold(bottomBar = { TabView(tabBarItems, navController) }) {
                         NavHost(navController = navController, startDestination = homeTab.title) {
                             composable(homeTab.title) {
-                                Home()
+                                HomeNav()
                             }
                             composable(favouritesTab.title) {
                                 Favourites()
@@ -157,6 +157,6 @@ fun TabBarIconView(
 @Composable
 fun GreetingPreview() {
     XuemiTheme {
-        Home()
+        HomeNav()
     }
 }

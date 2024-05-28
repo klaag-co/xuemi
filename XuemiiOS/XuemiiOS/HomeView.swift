@@ -8,133 +8,78 @@
 import SwiftUI
 
 struct HomeView: View {
-    var body: some View {
-        VStack {
-            Text("Home")
-                .font(.system(size: 55, weight: .bold))
-                .position(x: 100, y: 50)
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "HelveticaNeue-Bold", size: 50)!]
             
-            Button() {
-                print("whoa u clicked me")
-            } label: {
-                VStack{
+    }
+    var body: some View {
+        NavigationStack {
+            VStack {
+                Button {
+                    print("whoa u clicked me")
+                } label: {
                     Image("ContinueLearning")
                         .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity)
                 }
-            }
-            .buttonStyle(.bordered)
-            .foregroundStyle(.white)
-            .background(.customblue)
-            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 175, y: 84)
-            .padding(.vertical, -22).padding(.horizontal, 20)
-            
-            Button() {
-                print("are u s1")
-            } label: {
-                VStack{
-                    Text("Secondary")
-                        .padding(EdgeInsets(top:10, leading: 2, bottom:0, trailing: 2))
-                        .font(.system(size: 30))
-                    Text("1")
-                        .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
-                        .bold()
-                        .font(.system(size:55))
+                .foregroundStyle(.white)
+                .background(.customblue)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                
+                
+                HStack {
+                    tile(level: "1")
+                    tile(level: "2")
                 }
-            }
-            .background(.customteal)
-            .buttonStyle(.bordered)
-            .font(.system(size: 40))
-            .foregroundStyle(.white)
-            .padding(2)
-            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 105, y: 110)
-            
-            Button() {
-                print("r u s2")
-            } label: {
-                VStack{
-                    Text("Secondary")
-                        .padding(EdgeInsets(top:10, leading: 2, bottom:0, trailing: 2))
-                        .font(.system(size: 30))
-                    Text("2")
-                        .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
-                        .bold()
-                        .font(.system(size:55))
+                
+                HStack {
+                    tile(level: "3")
+                    tile(level: "4")
                 }
-            }
-            .buttonStyle(.bordered)
-            .font(.system(size: 40))
-            .foregroundStyle(.white)
-            .background(.customteal)
-            .padding(2)
-            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 286, y: 8)
-            
-            Button() {
-                print("r u s3")
-            } label: {
-                VStack{
-                    Text("Secondary")
-                        .padding(EdgeInsets(top:10, leading: 2, bottom:0, trailing: 2))
-                        .font(.system(size: 30))
-                    Text("3")
-                        .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
-                        .bold()
-                        .font(.system(size:55))
+                
+                
+                Button {
+                    print("eheh")
+                } label: {
+                    VStack{
+                        Text("O-Level")
+                            .padding(.top, 10)
+                        Text("Practice")
+                            .padding(.bottom, 10)
+                    }
+                    .bold()
+                    .font(.system(size:50))
                 }
+                .font(.system(size: 40))
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .background(.customteal)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
             }
-            .buttonStyle(.bordered)
-            .font(.system(size: 40))
-            .foregroundStyle(.white)
-            .background(.customteal)
-            .padding(2)
-            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 105, y: 56)
-            
-            Button() {
-                print("r u s4")
-            } label: {
-                VStack{
-                    Text("Secondary")
-                        .padding(EdgeInsets(top:10, leading: 2, bottom:0, trailing: 2))
-                        .font(.system(size: 30))
-                    Text("4")
-                        .padding(EdgeInsets(top:0, leading: 0, bottom:15, trailing: 0))
-                        .bold()
-                        .font(.system(size:55))
-                }
-            }
-            .buttonStyle(.bordered)
-            .font(.system(size: 40))
-            .foregroundStyle(.white)
-            .background(.customteal)
-            .padding(2)
-            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 286, y: -46)
-            
-            Button() {
-                print("eheh")
-            } label: {
-                VStack{
-                    Text("O-Level")
-                        .padding(EdgeInsets(top:10, leading: 72, bottom:0, trailing: 72))
-                        .bold()
-                        .font(.system(size: 50))
-                    Text("Practice")
-                        .padding(EdgeInsets(top:0, leading: 72, bottom:12, trailing: 72))
-                        .bold()
-                        .font(.system(size:50))
-                }
-            }
-            .buttonStyle(.bordered)
-            .font(.system(size: 40))
-            .foregroundStyle(.white)
-            .background(.customteal)
-            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 30, height: 10)))
-            .position(x: 287, y: 30)
-            .padding(.vertical, -22).padding(.horizontal, -90)
+            .padding()
+            .navigationTitle("Home")
+            .navigationBarTitleDisplayMode(.large)
         }
+    }
+    
+    func tile(level: String) -> some View {
+        Button {
+            print("are u s\(level)")
+        } label: {
+            VStack {
+                Text("Secondary")
+                    .font(.system(size: 30))
+                Text(level)
+                    .font(.system(size: 55))
+            }
+            .padding()
+            .background(.customteal)
+            .foregroundStyle(.white)
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.plain)
     }
 }
 

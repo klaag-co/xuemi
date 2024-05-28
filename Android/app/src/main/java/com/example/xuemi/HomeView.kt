@@ -17,7 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -30,7 +29,10 @@ fun HomeNav() {
 
     NavHost(navController, startDestination = "home") {
         composable("home") {Home(navController)}
-        composable("flashcard") {Flashcard()}
+        composable("flashcard/{item}") {backStackEntry ->
+            // Retrieving the argument passed via the route
+            Flashcard(secondary = backStackEntry.arguments?.getString("item"))
+        }
     }
 }
 
@@ -58,88 +60,13 @@ fun Home(navController: NavController) {
             )
         }
         Row {// 1st button row
-            Button(onClick = { navController.navigate("flashcard") }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
-                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.absolutePadding(top = 14.dp, bottom = 14.dp, right = 12.dp, left = 28.dp), shape = RoundedCornerShape(20.dp)
-            ) {
-                Column {
-                    Text(
-                        text = "Secondary",
-                        fontSize = 24.sp,
-                        )
-                    Text(
-                        text = "1",
-                        fontSize = 65.sp,
-                        modifier = Modifier
-                            .padding(horizontal = 35.dp)
-                            .absolutePadding(bottom = 10.dp),
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-
-            }
-            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
-                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.padding(horizontal = 1.dp, vertical = 14.dp), shape = RoundedCornerShape(20.dp)
-            ) {
-                Column {
-                    Text(
-                        text = "Secondary",
-                        fontSize = 24.sp
-                    )
-                    Text(
-                        text = "2",
-                        fontSize = 65.sp,
-                        modifier = Modifier
-                            .padding(horizontal = 35.dp)
-                            .absolutePadding(bottom = 10.dp)
-                        ,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-
-            }
+            squaretemplate(navController = navController, secondary = "1", top = 14, bottom = 14, right = 12, left = 28)
+            squaretemplate(navController = navController, secondary = "2", top = 14, bottom = 14, right = 1, left = 1)
 
         }
         Row {// 2nd button row
-            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
-                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.absolutePadding(right = 12.dp, left = 28.dp), shape = RoundedCornerShape(20.dp)
-            ) {
-                Column {
-                    Text(
-                        text = "Secondary",
-                        fontSize = 24.sp
-                    )
-                    Text(
-                        text = "3",
-                        fontSize = 65.sp,
-                        modifier = Modifier
-                            .padding(horizontal = 35.dp)
-                            .absolutePadding(bottom = 10.dp)
-                        ,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-
-            }
-            Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
-                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.padding(horizontal = 1.dp), shape = RoundedCornerShape(20.dp)
-            ) {
-                Column {
-                    Text(
-                        text = "Secondary",
-                        fontSize = 24.sp
-                    )
-                    Text(
-                        text = "4",
-                        fontSize = 65.sp,
-                        modifier = Modifier
-                            .padding(horizontal = 35.dp)
-                            .absolutePadding(bottom = 10.dp)
-                        ,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-
-            }
+            squaretemplate(navController = navController, secondary = "3", top = 0, bottom = 0, right = 12, left = 28)
+            squaretemplate(navController = navController, secondary = "4", top = 0, bottom = 0, right = 1, left = 1)
 
         }
         Button(onClick = { /*TODO*/ },
@@ -162,4 +89,27 @@ fun Home(navController: NavController) {
 
     }
 
+}
+
+@Composable
+fun squaretemplate(navController: NavController, secondary: String?, top: Int, bottom: Int, right: Int, left: Int) {
+    Button(onClick = { navController.navigate("flashcard/1") }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
+                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.absolutePadding(top = top.dp, bottom = bottom.dp, right = right.dp, left = left.dp), shape = RoundedCornerShape(20.dp)
+    ) {
+        Column {
+            Text(
+                text = "Secondary",
+                fontSize = 24.sp,
+            )
+            Text(
+                text = "$secondary",
+                fontSize = 65.sp,
+                modifier = Modifier
+                    .padding(horizontal = 35.dp)
+                    .absolutePadding(bottom = 10.dp),
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+    }
 }

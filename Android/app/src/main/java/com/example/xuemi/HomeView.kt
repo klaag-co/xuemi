@@ -16,18 +16,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun Home() {
     Column {// Whole app Column
         Text(
             "Home",
-            fontSize = 65.sp,
+            fontSize = 50.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(vertical = 20.dp, horizontal = 16.dp)
         )
 
         Button(onClick = {  },
@@ -40,7 +42,7 @@ fun Home() {
                 painter = painterResource(id = R.drawable.continue_learning),
                 contentDescription = "Continue learning button",
                 modifier = Modifier
-                    .size(1000.dp,136.dp)
+                    .size(900.dp,136.dp)
             )
         }
         Row {// 1st button row
@@ -59,7 +61,7 @@ fun Home() {
                         modifier = Modifier
                             .padding(horizontal = 35.dp)
                             .absolutePadding(bottom = 10.dp),
-                        fontWeight = FontWeight.Black
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -79,7 +81,7 @@ fun Home() {
                             .padding(horizontal = 35.dp)
                             .absolutePadding(bottom = 10.dp)
                         ,
-                        fontWeight = FontWeight.Black
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -102,7 +104,7 @@ fun Home() {
                             .padding(horizontal = 35.dp)
                             .absolutePadding(bottom = 10.dp)
                         ,
-                        fontWeight = FontWeight.Black
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -122,7 +124,7 @@ fun Home() {
                             .padding(horizontal = 35.dp)
                             .absolutePadding(bottom = 10.dp)
                         ,
-                        fontWeight = FontWeight.Black
+                        fontWeight = FontWeight.Bold
                     )
                 }
 
@@ -135,15 +137,15 @@ fun Home() {
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 25.dp, vertical = 10.dp))
+                .padding(horizontal = 25.dp, vertical = 15.dp))
 
 
         {
             Text(
                 text = "O-Level\n\nPractice",
                 fontSize = 40.sp,
-                fontWeight = FontWeight.Black,
-                modifier = Modifier.padding(vertical = 2.dp)
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(vertical = 7.dp)
             )
         }
 

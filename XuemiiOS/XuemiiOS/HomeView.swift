@@ -57,7 +57,7 @@ struct HomeView: View {
                 .background(.customteal)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
             }
-            .padding()
+            .padding(20)
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.large)
         }

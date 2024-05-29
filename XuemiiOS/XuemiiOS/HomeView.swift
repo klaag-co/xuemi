@@ -26,16 +26,15 @@ enum SecondaryNumber {
     var chapters: [String] {
         switch self {
         case .one:
-            return ["Chapter 1","Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6"]
+            return ["Chapter 1","Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "EOY Practice"]
         case .two:
-            return ["mrscaryman", "galvanised square steel"]
+            return ["Chapter 1","Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "EOY Practice"]
         case .three:
-            return ["EEEEEEEEEEEEEEE", "stubby"]
+            return ["Chapter 1","Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "EOY Practice"]
         case .four:
-            return ["appla"]
+            return ["Chapter 1","Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "EOY Practice"]
         }
     }
-
 }
 
 struct HomeView: View {

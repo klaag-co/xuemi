@@ -43,20 +43,21 @@ fun Home(navController: NavController) {
             "Home",
             fontSize = 45.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 20.dp, horizontal = 16.dp)
+            modifier = Modifier.padding(vertical = 20.dp, horizontal = 23.dp)
         )
 
         Button(onClick = { },
-            colors = ButtonDefaults.buttonColors(Color(3,115,206)),
+            colors = ButtonDefaults.buttonColors(Color(49, 113, 200)),
             //border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color.Black, Color.White))),
             shape = RoundedCornerShape(20.dp),
-            modifier = Modifier.padding(horizontal = 16.dp))
+            modifier = Modifier.padding(horizontal = 26.dp))
         {
             Image(
                 painter = painterResource(id = R.drawable.continue_learning),
                 contentDescription = "Continue learning button",
                 modifier = Modifier
-                    .size(900.dp,136.dp)
+                    .size(400.dp, 120.dp)
+
             )
         }
         Row {// 1st button row
@@ -93,8 +94,17 @@ fun Home(navController: NavController) {
 
 @Composable
 fun squaretemplate(navController: NavController, secondary: String?, top: Int, bottom: Int, right: Int, left: Int) {
-    Button(onClick = { navController.navigate("flashcard/$secondary") }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
-                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/ modifier = Modifier.absolutePadding(top = top.dp, bottom = bottom.dp, right = right.dp, left = left.dp), shape = RoundedCornerShape(20.dp)
+    Button(
+        onClick = { navController.navigate("flashcard/$secondary") },
+        colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
+                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
+        modifier = Modifier.absolutePadding(
+            top = top.dp,
+            bottom = bottom.dp,
+            right = right.dp,
+            left = left.dp
+        ),
+        shape = RoundedCornerShape(20.dp)
     ) {
         Column {
             Text(
@@ -110,6 +120,5 @@ fun squaretemplate(navController: NavController, secondary: String?, top: Int, b
                 fontWeight = FontWeight.Bold
             )
         }
-
     }
 }

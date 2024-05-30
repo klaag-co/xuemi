@@ -23,16 +23,244 @@ enum SecondaryNumber {
         }
     }
     
-    var chapters: [String] {
+    func getData(chapter: Chapter, topic: Topic) -> [String] {
         switch self {
         case .one:
-            return ["Chapter 1","Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "EOY Practice"]
+            switch chapter {
+            case .one:
+                switch topic {
+                case .one:
+                    return ["word 1", "word 2"]
+                case .two:
+                    return ["something 1", "something 2"]
+                case .three:
+                    return []
+                }
+            case .two:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .three:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .four:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .five:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .six:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .eoy:
+                return []
+            }
         case .two:
-            return ["Chapter 1","Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "EOY Practice"]
+            switch chapter {
+            case .one:
+                switch topic {
+                case .one:
+                    return ["word 1", "word 2"]
+                case .two:
+                    return ["something 1", "something 2"]
+                case .three:
+                    return []
+                }
+            case .two:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .three:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .four:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .five:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .six:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .eoy:
+                return []
+            }
         case .three:
-            return ["Chapter 1","Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "EOY Practice"]
+            switch chapter {
+            case .one:
+                switch topic {
+                case .one:
+                    return ["word 1", "word 2"]
+                case .two:
+                    return ["something 1", "something 2"]
+                case .three:
+                    return []
+                }
+            case .two:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .three:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .four:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .five:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .six:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .eoy:
+                return []
+            }
         case .four:
-            return ["Chapter 1","Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "EOY Practice"]
+            switch chapter {
+            case .one:
+                switch topic {
+                case .one:
+                    return ["word 1", "word 2"]
+                case .two:
+                    return ["something 1", "something 2"]
+                case .three:
+                    return []
+                }
+            case .two:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .three:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .four:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .five:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .six:
+                switch topic {
+                case .one:
+                    return []
+                case .two:
+                    return []
+                case .three:
+                    return []
+                }
+            case .eoy:
+                return []
+            }
         }
     }
 }

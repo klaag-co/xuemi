@@ -15,7 +15,8 @@
 		1D0898D32BCE6A8000F2AFCA /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0898D22BCE6A8000F2AFCA /* BookmarkView.swift */; };
 		1D0898D52BCE6A9700F2AFCA /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0898D42BCE6A9700F2AFCA /* NotesView.swift */; };
 		1D0898D72BCE6AA500F2AFCA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0898D62BCE6AA500F2AFCA /* SettingsView.swift */; };
-		1D26145A2BD5F27600953589 /* SOneFlashcardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D2614592BD5F27600953589 /* SOneFlashcardView.swift */; };
+		1DE2948C2C05D1CA00AB6763 /* ChapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE2948B2C05D1CA00AB6763 /* ChapterView.swift */; };
+		1DE294942C0857A200AB6763 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE294932C0857A200AB6763 /* TopicView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +29,8 @@
 		1D0898D22BCE6A8000F2AFCA /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		1D0898D42BCE6A9700F2AFCA /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		1D0898D62BCE6AA500F2AFCA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		1D2614592BD5F27600953589 /* SOneFlashcardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SOneFlashcardView.swift; sourceTree = "<group>"; };
+		1DE2948B2C05D1CA00AB6763 /* ChapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterView.swift; sourceTree = "<group>"; };
+		1DE294932C0857A200AB6763 /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,8 @@
 				1D0898C22BCE669700F2AFCA /* XuemiiOSApp.swift */,
 				1D0898C42BCE669700F2AFCA /* ContentView.swift */,
 				1D0898D02BCE68AF00F2AFCA /* HomeView.swift */,
-				1D2614592BD5F27600953589 /* SOneFlashcardView.swift */,
+				1DE2948B2C05D1CA00AB6763 /* ChapterView.swift */,
+				1DE294932C0857A200AB6763 /* TopicView.swift */,
 				1D0898D22BCE6A8000F2AFCA /* BookmarkView.swift */,
 				1D0898D42BCE6A9700F2AFCA /* NotesView.swift */,
 				1D0898D62BCE6AA500F2AFCA /* SettingsView.swift */,
@@ -152,12 +155,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DE2948C2C05D1CA00AB6763 /* ChapterView.swift in Sources */,
 				1D0898D12BCE68AF00F2AFCA /* HomeView.swift in Sources */,
 				1D0898C52BCE669700F2AFCA /* ContentView.swift in Sources */,
 				1D0898D52BCE6A9700F2AFCA /* NotesView.swift in Sources */,
+				1DE294942C0857A200AB6763 /* TopicView.swift in Sources */,
 				1D0898D72BCE6AA500F2AFCA /* SettingsView.swift in Sources */,
 				1D0898D32BCE6A8000F2AFCA /* BookmarkView.swift in Sources */,
-				1D26145A2BD5F27600953589 /* SOneFlashcardView.swift in Sources */,
 				1D0898C32BCE669700F2AFCA /* XuemiiOSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

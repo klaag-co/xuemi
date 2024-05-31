@@ -19,7 +19,12 @@ struct ContentView: View {
                 .tabItem {
                     Label("Bookmarks", systemImage: "bookmark")
                 }
-            NotesView()
+            NotesView(note: .constant(Note(
+                id: UUID(),
+                title: "Sample Note",
+                content: "This is a sample note.",
+                noteType: .note
+            )))
                 .tabItem {
                     Label("Notes", systemImage: "doc.text")
                 }

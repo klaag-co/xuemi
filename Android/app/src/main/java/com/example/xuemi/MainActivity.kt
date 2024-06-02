@@ -1,6 +1,7 @@
 package com.example.xuemi
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -47,8 +48,8 @@ class MainActivity : ComponentActivity() {
                 selectedIcon = R.drawable.home,
                 unselectedIcon = R.drawable.o_home
             )
-            val favouritesTab = TabBarItem(
-                title = "Favourites",
+            val bookmarkTab = TabBarItem(
+                title = "Bookmarks",
                 selectedIcon = R.drawable.bookmark,
                 unselectedIcon = R.drawable.o_bookmark
             )
@@ -64,7 +65,7 @@ class MainActivity : ComponentActivity() {
             )
 
             // creating a list of all the tabs
-            val tabBarItems = listOf(homeTab, favouritesTab, notesTab, settingsTab)
+            val tabBarItems = listOf(homeTab, bookmarkTab, notesTab, settingsTab)
 
             // creating our navController
             val navController = rememberNavController()
@@ -80,7 +81,7 @@ class MainActivity : ComponentActivity() {
                             composable(homeTab.title) {
                                 HomeNav()
                             }
-                            composable(favouritesTab.title) {
+                            composable(bookmarkTab.title) {
                                 Favourites()
                             }
                             composable(notesTab.title) {
@@ -146,6 +147,6 @@ fun TabBarIconView(
 @Composable
 fun GreetingPreview() {
     XuemiTheme {
-        Secondary(viewModel = MyViewModel(), secondary = "2")
+        Secondary(viewModel = MyViewModel(), navController = rememberNavController())
     }
 }

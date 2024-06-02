@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.example.xuemi.ui.theme.XuemiTheme
 
 @Composable
-fun Flashcard(secondary: String?) {
+fun Secondary(viewModel: MyViewModel) {
     val numOfChapters = listOf<Int>(6, )
 
     Card(modifier = Modifier.fillMaxWidth().padding(horizontal = 25.dp, vertical = 15.dp),
@@ -31,36 +31,24 @@ fun Flashcard(secondary: String?) {
     )){
         Row {
             Text(
-                text = "Secondary",
+                text = "Secondary ${viewModel.getSecondary()}",
                 textAlign = TextAlign.Center,
                 fontSize = 30.sp,
-                modifier = Modifier.absolutePadding(top = 14.dp, bottom = 6.dp, right = 5.dp, left = 70.dp)
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.absolutePadding(top = 10.dp, bottom = 10.dp, right = 5.dp, left = 80.dp)
             )
 
         }
     }
-//    Button(onClick = { /*TODO*/ }, colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
-//        /*border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
-//        shape = RoundedCornerShape(20.dp),
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(horizontal = 25.dp, vertical = 15.dp)){
-//        Row {
-//            Text(text = "Secondary $secondary",
-//                fontSize = 40.sp,
-//                modifier = Modifier.padding(vertical = 6.dp)
-//            )
-//
-//
-//        }
-//
-//    }
 }
+
+
+
 
 @Preview(showSystemUi = true)
 @Composable
 fun FlashcardPreview() {
     XuemiTheme {
-        Flashcard(secondary = "2")
+        Secondary(viewModel = MyViewModel())
     }
 }

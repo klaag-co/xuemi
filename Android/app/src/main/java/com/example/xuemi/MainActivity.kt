@@ -146,6 +146,6 @@ fun TabBarIconView(
 @Composable
 fun GreetingPreview() {
     XuemiTheme {
-        Flashcard(secondary = "2")
+        Secondary(viewModel = MyViewModel(), secondary = "2")
     }
 }

@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//use observableobject to story the thing for secondary chapter topic
+
 enum SecondaryNumber {
     case one, two, three, four
     

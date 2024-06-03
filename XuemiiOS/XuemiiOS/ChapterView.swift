@@ -35,20 +35,41 @@ struct ChapterView: View {
     var level: SecondaryNumber
     
     var body: some View {
-        List {
-            ForEach(level == .four ? Chapter.allCases.filter({ $0 != .six }) : Chapter.allCases, id: \.hashValue) { chapter in
-                NavigationLink {
-                    if chapter != .eoy {
-                        TopicView(level: level, chapter: chapter)
-                    } else {
-                        
+        ScrollView {
+            Text("Secondary \(level.string)")
+                .font(.largeTitle)
+                .fontWeight(.heavy)
+                .padding()
+                .frame(height: 80)
+                .frame(maxWidth: .infinity)
+                .foregroundStyle(.white)
+                .background(.customblue)
+                .mask(RoundedRectangle(cornerRadius: 16))
+                .padding([.horizontal, .bottom])
+            VStack(spacing: 12) {
+                ForEach(level == .four ? Chapter.allCases.filter({ $0 != .six }) : Chapter.allCases, id: \.hashValue) { chapter in
+                    NavigationLink {
+                        if chapter != .eoy {
+                            TopicView(level: level, chapter: chapter)
+                        } else {
+                            
+                        }
+                    } label: {
+                        Text(chapter.string)
+                            .font(.title)
+                            .padding()
+                            .frame(height: 65)
+                            .frame(maxWidth: .infinity)
+                            .foregroundStyle(.black)
+                            .background(.customgray)
+                            .mask(RoundedRectangle(cornerRadius: 16))
+                            .padding(.horizontal)
                     }
-                } label: {
-                    Text(chapter.string)
                 }
             }
         }
-        .navigationTitle("Secondary \(level.string)")
+        .navigationBarTitleDisplayMode(.inline)
+        .padding(.vertical)
     }
 }
 

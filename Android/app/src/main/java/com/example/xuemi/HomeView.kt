@@ -60,11 +60,12 @@ fun HomeNav() {
     val navController = rememberNavController()
     val viewModel: MyViewModel = viewModel()
 
+
     NavHost(navController, startDestination = "home") {
         composable("home") { Home(viewModel, navController) }
         composable("secondary") { Secondary(viewModel, navController) }
         composable("chapter")  { Chapter(viewModel, navController) }
-        composable("topic") { Topic(viewModel) }
+//        composable("topic") { Topic(viewModel) {false} }
     }
 }
 

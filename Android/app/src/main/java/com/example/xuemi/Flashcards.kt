@@ -1,8 +1,11 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.example.xuemi
 
 import android.adservices.topics.Topic
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,10 +14,16 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -23,7 +32,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.xuemi.ui.theme.XuemiTheme
 
 @Composable
@@ -53,7 +61,7 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
                     color = Color.Black,
                     fontSize = 28.sp,
                     modifier = Modifier
-                        .padding(5.dp)
+                        .padding(horizontal = 5.dp, vertical = 7.dp)
 
                 )
             }
@@ -65,21 +73,42 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
 
 @Composable
 fun Chapter(viewModel: MyViewModel, navController: NavController) {
+    val sheetstate = rememberModalBottomSheetState()
+    var isSheetOpen: Boolean by rememberSaveable {
+        mutableStateOf(false)
+    }
+    var topicNum: String by rememberSaveable {
+        mutableStateOf("1")
+    }
     Column {
         title(viewModel)
-        topictemplate(viewModel, navController, "1")
-        topictemplate(viewModel, navController,"2")
-        topictemplate(viewModel, navController,"3")
+        topictemplate(viewModel,  { isSheetOpen = true}, {topicNum = "1"}, "1" )
+        topictemplate(viewModel,  { isSheetOpen = true }, {topicNum = "2"}, "2")
+        topictemplate(viewModel,  { isSheetOpen = true }, {topicNum = "3"}, "3")
+
     }
+    if (isSheetOpen) {
+        ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
+            Topic(viewModel, topicNum)
+        }
+    }
+
 }
 
 @Composable
-fun Topic(viewModel: MyViewModel) {
+fun Topic(viewModel: MyViewModel, topic: String?) {
     Column {
-        title(viewModel)
+        Text(
+            "Topic $topic",
+            fontSize = 45.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(horizontal = 23.dp, vertical = 4.dp)
+        )
+
         quiztemplate(viewModel, "Handwriting")
         quiztemplate(viewModel, "MCQ")
         quiztemplate(viewModel, "Flashcards")
+        Spacer(modifier = Modifier.padding(10.dp))
     }
 }
 
@@ -133,7 +162,7 @@ fun quiztemplate(viewModel: MyViewModel, quiz: String?) {
                 color = Color.Black,
                 fontSize = 28.sp,
                 modifier = Modifier
-                    .padding(5.dp)
+                    .padding(horizontal = 5.dp, vertical = 7.dp)
 
             )
         }
@@ -157,17 +186,19 @@ fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapte
                 color = Color.Black,
                 fontSize = 28.sp,
                 modifier = Modifier
-                    .padding(5.dp)
+                    .padding(horizontal = 5.dp, vertical = 7.dp)
 
             )
         }
     }
 }
 @Composable
-fun topictemplate(viewModel: MyViewModel, navController: NavController, topic: String?) {
+fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topicFun: () -> Unit, topic: String?) {
     Button(
         onClick = { viewModel.updateItem(2, "$topic")
-                  navController.navigate("topic") },
+                    onButtonClick()
+                    topicFun()
+                  },
         colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
@@ -180,7 +211,7 @@ fun topictemplate(viewModel: MyViewModel, navController: NavController, topic: S
                 color = Color.Black,
                 fontSize = 28.sp,
                 modifier = Modifier
-                    .padding(5.dp)
+                    .padding(horizontal = 5.dp, vertical = 7.dp)
 
             )
         }

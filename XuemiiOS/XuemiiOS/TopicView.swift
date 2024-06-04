@@ -159,6 +159,7 @@ struct TopicView: View {
                             .onDisappear {
                                 self.topicSelected = nil
                             }
+                            .padding(.top, -30)
                         }
                     }
                 }

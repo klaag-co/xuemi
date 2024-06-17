@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct CreateNoteView: View {
-    
     @State private var newTitle: String = ""
     @State private var newContent: String = ""
     @State var newNoteType: NoteType = .note
     
     @ObservedObject var notesManager: NotesManager = .shared
-    
     @Environment(\.dismiss) var dismiss
     
     var body: some View {

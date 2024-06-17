@@ -5,7 +5,6 @@
 //  Created by Gracelyn Gosal on 30/5/24.
 //
 
-import Foundation
 import SwiftUI
 
 struct Note: Codable, Identifiable {

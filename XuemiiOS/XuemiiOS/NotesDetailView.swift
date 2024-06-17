@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct NotesDetailView: View {
-    
     @Binding var note: Note
     
     var body: some View {
@@ -21,6 +20,7 @@ struct NotesDetailView: View {
             
             ScrollView {
                 TextField("Type something...", text: $note.content, axis: .vertical)
+                    .textFieldStyle(PlainTextFieldStyle())
             }
         }
         .padding(.horizontal)

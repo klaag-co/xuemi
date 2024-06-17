@@ -11,7 +11,6 @@ struct NotesView: View {
     @State private var searchText = ""
     @State private var isCreateNoteViewPresented = false
     @ObservedObject var notesManager: NotesManager = .shared
-    @Binding var note: Note
     
     private var filteredNotes: [Note] {
         if searchText.isEmpty {
@@ -26,8 +25,10 @@ struct NotesView: View {
             List {
                 Section(header: Text("Exam")) {
                     ForEach(filteredNotes.filter { $0.noteType == .exam }, id: \.id) { note in
-                        NavigationLink(destination: NotesDetailView(note: .constant(note))) {
-                            Text(note.title)
+                        if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {
+                            NavigationLink(destination: NotesDetailView(note: $notesManager.notes[index])) {
+                                Text(note.title)
+                            }
                         }
                     }
                     .onDelete { indexSet in
@@ -38,8 +39,10 @@ struct NotesView: View {
                 
                 Section(header: Text("Notes")) {
                     ForEach(filteredNotes.filter { $0.noteType == .note }, id: \.id) { note in
-                        NavigationLink(destination: NotesDetailView(note: .constant(note))) {
-                            Text(note.title)
+                        if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {
+                            NavigationLink(destination: NotesDetailView(note: $notesManager.notes[index])) {
+                                Text(note.title)
+                            }
                         }
                     }
                     .onDelete { indexSet in
@@ -71,10 +74,5 @@ struct NotesView: View {
 }
 
 #Preview {
-    NotesView(note: .constant(Note(
-        id: UUID(),
-        title: "Sample Note",
-        content: "This is a sample note.",
-        noteType: .note
-    )))
+    NotesView()
 }

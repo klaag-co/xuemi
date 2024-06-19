@@ -16,35 +16,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.*
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
-@Composable
-fun HomeNav(viewModel: MyViewModel) {
-    val navController = rememberNavController()
-
-    NavHost(navController, startDestination = "home") {
-        composable("home") { Home(viewModel, navController) }
-        composable("secondary") { Secondary(viewModel, navController) }
-        composable("chapter")  { Chapter(viewModel, navController) }
-//        composable("topic") { Topic(viewModel) {false} }
-    }
-}
 
 @Composable
 fun Home(viewModel: MyViewModel, navController: NavController) {
     Column {// Whole app Column
         Text(
             "Home",
-            fontSize = 45.sp,
+            fontSize = 38.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(vertical = 20.dp, horizontal = 23.dp)
         )

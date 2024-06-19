@@ -1,7 +1,6 @@
 package com.example.xuemi
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,14 +17,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -35,6 +33,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
+
 data class TabBarItem(
     val title: String,
     val selectedIcon: Int,
@@ -43,7 +42,6 @@ data class TabBarItem(
 )
 class MyViewModel : ViewModel() {
     private val _items = MutableStateFlow(listOf("N", "N", "N", "N"))
-    val items: StateFlow<List<String>> = _items
 
     fun updateItem(index: Int, newItem: String) {
         val currentList = _items.value.toMutableList()
@@ -73,15 +71,28 @@ class MyViewModel : ViewModel() {
 
 //============================================================//
 
-    private val _examNotes = MutableStateFlow(Section(
-        "EXAM@", "EXAM#"
-    ))
+    private val _examNotes = MutableStateFlow(listOf(
+        Section("EXAM1", "EXAMS ARE NOT COOL")))
 
-    val examNotes: MutableStateFlow<Section> = _examNotes
+    val examNotes: MutableStateFlow<List<Section>> = _examNotes
 
 
-    private val _notesNotes = MutableStateFlow(listOf("note1", "note2", "note3"))
-    val notesNotes: MutableStateFlow<List<String>> = _notesNotes
+    private val _notesNotes = MutableStateFlow(listOf(
+        Section("NOte1", "whoa its a note")))
+    val notesNotes: MutableStateFlow<List<Section>> = _notesNotes
+
+    fun add(type: String, title: String, body: String) {
+        if (type == "exam") {
+            val exam = _examNotes.value.toMutableList()
+            exam.add(Section(title,body))
+            _examNotes.value = exam
+        } else {
+            val notes = _notesNotes.value.toMutableList()
+            notes.add(Section(title,body))
+            _notesNotes.value = notes
+        }
+    }
+
 
 //============================================================//
 
@@ -156,17 +167,21 @@ class MainActivity : ComponentActivity() {
                     Scaffold(bottomBar = { TabView(tabBarItems, navController) }) {
                         NavHost(navController = navController, startDestination = homeTab.title) {
                             composable(homeTab.title) {
-                                HomeNav(viewModel)
+                                Home(viewModel, navController)
                             }
                             composable(bookmarkTab.title) {
                                 Favourites()
                             }
                             composable(notesTab.title) {
-                                Notes(viewModel)
+                                Notes(viewModel, navController)
                             }
                             composable(settingsTab.title) {
                                 Settings()
                             }
+                            composable("secondary") { Secondary(viewModel, navController) }
+                            composable("chapter")  { Chapter(viewModel, navController) }
+                            composable("notes") { Notes(viewModel, navController)}
+                            composable("addnote") { CreateNote(viewModel, navController)}
                         }
                     }
                 }
@@ -178,7 +193,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TabView(tabBarItems: List<TabBarItem>, navController: NavController) {
     var selectedTabIndex by rememberSaveable {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
 
     NavigationBar {

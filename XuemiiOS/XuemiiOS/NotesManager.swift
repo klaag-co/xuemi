@@ -15,7 +15,7 @@ struct Note: Codable, Identifiable {
 }
 
 enum NoteType: Codable, CaseIterable {
-    case exam, note
+    case exam, note, sone, stwo, sthree, sfour
     
     var string: String {
         switch self {
@@ -23,6 +23,14 @@ enum NoteType: Codable, CaseIterable {
             return "Exam"
         case .note:
             return "Note"
+        case .sone:
+            return "Secondary 1"
+        case .stwo:
+            return "Secondary 2"
+        case .sthree:
+            return "Secondary 3"
+        case .sfour:
+            return "Secondary 4"
         }
     }
 }

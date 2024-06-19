@@ -50,6 +50,58 @@ struct NotesView: View {
                         notesManager.notes.removeAll { idsToDelete.contains($0.id) }
                     }
                 }
+                Section(header: Text("Secondary 1")) {
+                    ForEach(filteredNotes.filter { $0.noteType == .sone }, id: \.id) { note in
+                        if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {
+                            NavigationLink(destination: NotesDetailView(note: $notesManager.notes[index])) {
+                                Text(note.title)
+                            }
+                        }
+                    }
+                    .onDelete { indexSet in
+                        let idsToDelete = indexSet.map { filteredNotes.filter { $0.noteType == .sone }[$0].id }
+                        notesManager.notes.removeAll { idsToDelete.contains($0.id) }
+                    }
+                }
+                Section(header: Text("Secondary 2")) {
+                    ForEach(filteredNotes.filter { $0.noteType == .stwo }, id: \.id) { note in
+                        if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {
+                            NavigationLink(destination: NotesDetailView(note: $notesManager.notes[index])) {
+                                Text(note.title)
+                            }
+                        }
+                    }
+                    .onDelete { indexSet in
+                        let idsToDelete = indexSet.map { filteredNotes.filter { $0.noteType == .stwo }[$0].id }
+                        notesManager.notes.removeAll { idsToDelete.contains($0.id) }
+                    }
+                }
+                Section(header: Text("Secondary 3")) {
+                    ForEach(filteredNotes.filter { $0.noteType == .sthree }, id: \.id) { note in
+                        if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {
+                            NavigationLink(destination: NotesDetailView(note: $notesManager.notes[index])) {
+                                Text(note.title)
+                            }
+                        }
+                    }
+                    .onDelete { indexSet in
+                        let idsToDelete = indexSet.map { filteredNotes.filter { $0.noteType == .sthree }[$0].id }
+                        notesManager.notes.removeAll { idsToDelete.contains($0.id) }
+                    }
+                }
+                Section(header: Text("Secondary 4")) {
+                    ForEach(filteredNotes.filter { $0.noteType == .sfour }, id: \.id) { note in
+                        if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {
+                            NavigationLink(destination: NotesDetailView(note: $notesManager.notes[index])) {
+                                Text(note.title)
+                            }
+                        }
+                    }
+                    .onDelete { indexSet in
+                        let idsToDelete = indexSet.map { filteredNotes.filter { $0.noteType == .sfour }[$0].id }
+                        notesManager.notes.removeAll { idsToDelete.contains($0.id) }
+                    }
+                }
             }
             .navigationTitle("Notepad")
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))

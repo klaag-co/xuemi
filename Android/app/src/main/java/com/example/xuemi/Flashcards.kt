@@ -102,13 +102,13 @@ fun Topic(viewModel: MyViewModel, topic: String?) {
             "Topic $topic",
             fontSize = 45.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(horizontal = 23.dp, vertical = 4.dp)
+            modifier = Modifier.padding(horizontal = 25.dp, vertical = 4.dp)
         )
-
+        Spacer(modifier = Modifier.padding(5.dp))
         quiztemplate(viewModel, "Handwriting")
         quiztemplate(viewModel, "MCQ")
         quiztemplate(viewModel, "Flashcards")
-        Spacer(modifier = Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.padding(20.dp))
     }
 }
 

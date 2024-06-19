@@ -25,41 +25,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
-class MyViewModel : ViewModel() {
-    private val _items = MutableStateFlow(listOf("N", "N", "N", "N"))
-    val items: StateFlow<List<String>> = _items
-
-    fun updateItem(index: Int, newItem: String) {
-        val currentList = _items.value.toMutableList()
-        if (index in currentList.indices) {
-            currentList[index] = newItem
-            _items.value = currentList
-        }
-    }
-    fun getFromList(index: Int): String {
-        val currentList = _items.value.toMutableList()
-        return currentList[index]
-    }
-
-
-    private val _showButton = MutableStateFlow(true)
-    val showButton: StateFlow<Boolean> = _showButton
-
-    fun offButton() {
-        _showButton.value = false
-    }
-    fun onButton() {
-        _showButton.value = true
-    }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun HomeNav() {
+fun HomeNav(viewModel: MyViewModel) {
     val navController = rememberNavController()
-    val viewModel: MyViewModel = viewModel()
-
 
     NavHost(navController, startDestination = "home") {
         composable("home") { Home(viewModel, navController) }

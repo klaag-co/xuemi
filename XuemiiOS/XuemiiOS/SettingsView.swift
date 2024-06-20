@@ -12,19 +12,16 @@ struct SettingsView: View {
         NavigationView {
             List {
 
-                // App Section
                 Section(header: Text("App").font(.headline)) {
                     AppInfoView()
                 }
                 
-                // Acknowledgement Section
                 Section(header: Text("Acknowledgement").font(.headline)) {
                     ForEach(acknowledgements, id: \.self) { person in
                         AcknowledgementDetailView(person: person)
                     }
                 }
                 
-                // Help and Support Section
                 Section(header: Text("Help and Support").font(.headline)) {
                     HelpSupportView()
                 }
@@ -92,8 +89,8 @@ let acknowledgements = [
     Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill")
 ]
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
+
+#Preview {
+    SettingsView()
 }
+

@@ -1,7 +1,6 @@
 package com.example.xuemi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,8 +8,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -18,6 +19,8 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -27,11 +30,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,7 +49,7 @@ import androidx.room.PrimaryKey
 
 
 enum class NoteType {
-    Note, Exam
+    Exam, Note
 }
 
 @Entity
@@ -57,7 +62,7 @@ data class Note(
 )
 
 @Composable
-fun groupedList(header: String, sections: List<Note>, ) {
+fun groupedList(header: String, sections: List<Note>, delete: String, viewModel: MyViewModel) {
     LazyColumn {
         item {
             Text(
@@ -66,34 +71,41 @@ fun groupedList(header: String, sections: List<Note>, ) {
                 color = Color.Gray
             )
         }
-        items(sections.count()) { i ->
-            noteItem(sections[i].title)
+        itemsIndexed(sections){ _: Int, item: Note ->
+            noteItem(item = item, delete= delete, onDelete = { viewModel.delete(item.id) })
         }
 
-
     }
+
 }
 @Composable
 fun Notes(viewModel: MyViewModel, navController: NavController) {
     val notes by viewModel.noteslist.observeAsState()
-
     val examNotes = notes?.filter { it.type == NoteType.Exam }
     val notesNotes = notes?.filter { it.type == NoteType.Note }
+
+    var delete: String by rememberSaveable {
+        mutableStateOf("Edit")
+    }
+
     Column {
         Row(modifier = Modifier.absolutePadding(top = 10.dp, left = 10.dp)) {
-            TextButton( onClick = {/*TODO*/}) {
-                Text("Edit",
+            TextButton(
+                onClick = {
+                delete = if (delete == "Edit") {
+                    "Done"
+                } else {
+                    "Edit"
+                }
+            },
+                modifier = Modifier.size(width = 76.dp, height = 50.dp)
+            ) {
+                Text(delete,
                     color = Color(70, 156,253),
                     fontSize = 20.sp)
             }
-            Spacer(modifier = Modifier.padding(horizontal = 45.dp))
-            Text(
-                "Notepad",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                modifier = Modifier.absolutePadding(top = 6.dp)
-            )
-            Spacer(modifier = Modifier.padding(horizontal = 45.dp))
+            Spacer(modifier = Modifier.padding(horizontal = 125.dp))
+
             TextButton( onClick = { navController.navigate("addnote") }) {
                 Text("＋",
                     color = Color(70, 156,253),
@@ -102,34 +114,54 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
                 )
             }
         }
+        Text(
+            "Notepad",
+            fontWeight = FontWeight.Bold,
+            fontSize = 40.sp,
+            modifier = Modifier.absolutePadding(left = 17.dp, top = 6.dp)
+        )
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
-        examNotes?.let { groupedList(header = "EXAM", sections = it) }
+        examNotes?.let { groupedList(header = "EXAM", sections = it, delete, viewModel) }
         Spacer(modifier = Modifier.padding(vertical = 14.dp))
-        notesNotes?.let { groupedList(header = "NOTES", sections = it) }
+        notesNotes?.let { groupedList(header = "NOTES", sections = it, delete, viewModel) }
 
     }
 }
 
 
 @Composable
-fun noteItem(item: String) {
-    Button(
-        onClick = { /*TODO*/ },
-        shape = RoundedCornerShape(10.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 17.dp),
-        colors = ButtonDefaults.buttonColors(Color(239, 238,246)),
+fun noteItem(item: Note, delete: String, onDelete: ()-> Unit) {
+    Row (Modifier.padding(horizontal = 17.dp)){
+        if (delete == "Done") {
+            IconButton(
+                onClick = { onDelete() }
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.delete),
+                    contentDescription = "delete",
+                    tint = Color.Red
+                )
+            }
+        }
 
-    ) {
-        Text(
-            text = item,
-            fontSize = 20.sp,
-            textAlign = TextAlign.Start,
-            color = Color.Black,
+        Button(
+            onClick = { /*TODO*/ },
+            shape = RoundedCornerShape(10.dp),
             modifier = Modifier
-                .fillMaxWidth()
-        )
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(Color(239, 238, 246)),
+
+            ) {
+
+            Text(
+                text = item.title,
+                fontSize = 20.sp,
+                textAlign = TextAlign.Start,
+                color = Color.Black,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+        }
     }
 }
 
@@ -138,7 +170,7 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
     var title by remember { mutableStateOf("") }
     var body by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
-    var selectedType by remember { mutableStateOf(NoteType.Note) }
+    var selectedType by remember { mutableStateOf(NoteType.Exam) }
 
     Column {
         Row {
@@ -200,7 +232,7 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
                 Box(modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.TopStart)) {
-                    Text("${selectedType} ▼",
+                    Text("$selectedType ▼",
                         fontSize = 16.sp,
                         color = Color(73, 69, 79),
                         modifier = Modifier
@@ -255,41 +287,9 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
     }
 }
 
-@Composable
-fun CustomTextButton(
-    text: String,
-    onClick: () -> Unit,
-    align: TextAlign,
-    top: Int,
-    bottom: Int,
-    left: Int,
-    right: Int
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 25.dp, vertical = 7.dp)
-            .background(Color(217, 217, 217), shape = RoundedCornerShape(20.dp))
-            .clickable(
-                interactionSource = interactionSource,
-                indication = null // Disable ripple effect
-            ) {
-                onClick()
-            }
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Save",
-            color = Color(70, 156, 253),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun Preview() {
-    CreateNote(viewModel = MyViewModel(), navController = rememberNavController())
+    Notes(viewModel = MyViewModel(), navController = rememberNavController())
 }
+

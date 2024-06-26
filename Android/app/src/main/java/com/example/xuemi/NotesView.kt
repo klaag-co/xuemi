@@ -17,10 +17,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -37,13 +40,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -62,7 +65,7 @@ data class Note(
 )
 
 @Composable
-fun groupedList(header: String, sections: List<Note>, delete: String, viewModel: MyViewModel) {
+fun groupedList(navController: NavController, header: String, sections: List<Note>, delete: String, viewModel: MyViewModel) {
     LazyColumn {
         item {
             Text(
@@ -72,7 +75,8 @@ fun groupedList(header: String, sections: List<Note>, delete: String, viewModel:
             )
         }
         itemsIndexed(sections){ _: Int, item: Note ->
-            noteItem(item = item, delete= delete, onDelete = { viewModel.delete(item.id) })
+            noteItem(navController = navController, item = item, delete= delete, onDelete = { viewModel.delete(item.id) }
+            )
         }
 
     }
@@ -80,7 +84,7 @@ fun groupedList(header: String, sections: List<Note>, delete: String, viewModel:
 }
 @Composable
 fun Notes(viewModel: MyViewModel, navController: NavController) {
-    val notes by viewModel.noteslist.observeAsState()
+    val notes by viewModel.notesList.observeAsState()
     val examNotes = notes?.filter { it.type == NoteType.Exam }
     val notesNotes = notes?.filter { it.type == NoteType.Note }
 
@@ -121,16 +125,16 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
             modifier = Modifier.absolutePadding(left = 17.dp, top = 6.dp)
         )
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
-        examNotes?.let { groupedList(header = "EXAM", sections = it, delete, viewModel) }
+        examNotes?.let { groupedList(navController = navController, header = "EXAM", it, delete, viewModel) }
         Spacer(modifier = Modifier.padding(vertical = 14.dp))
-        notesNotes?.let { groupedList(header = "NOTES", sections = it, delete, viewModel) }
+        notesNotes?.let { groupedList(navController = navController, header = "NOTES", it, delete, viewModel) }
 
     }
 }
 
 
 @Composable
-fun noteItem(item: Note, delete: String, onDelete: ()-> Unit) {
+fun noteItem(navController: NavController, item: Note, delete: String, onDelete: ()-> Unit) {
     Row (Modifier.padding(horizontal = 17.dp)){
         if (delete == "Done") {
             IconButton(
@@ -145,7 +149,7 @@ fun noteItem(item: Note, delete: String, onDelete: ()-> Unit) {
         }
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(item.id) },
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
                 .fillMaxWidth(),
@@ -286,10 +290,53 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
 
     }
 }
+@Composable
+fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemId: Int?) {
+    val item = itemId?.let { viewModel.getNoteById(it) }
+    var title by remember { mutableStateOf(item?.title ?: "") }
+    var body by remember { mutableStateOf(item?.body ?: "") }
+    Column{
+        TextButton(
+            onClick = {
+                viewModel.update(title, body, item?.id ?: 0)
+                navController.navigate("notes")},
+        ) {
+            Text(
+                text = "< Notepad",
+                color = Color(70, 156, 253),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.End
+
+            )
+        }
+        OutlinedTextField(
+            value = title,
+            onValueChange = { title = it },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color.White,
+            ),
+            textStyle = TextStyle(
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 25.sp
+            )
+        )
+        Divider(Modifier.padding(horizontal = 10.dp))
+        OutlinedTextField(
+            value = body,
+            onValueChange = { body = it },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color.White,
+            )
+        )
+
+    }
+}
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun Preview() {
-    Notes(viewModel = MyViewModel(), navController = rememberNavController())
 }
 

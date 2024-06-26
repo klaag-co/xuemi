@@ -23,15 +23,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.xuemi.ui.theme.XuemiTheme
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 
 data class TabBarItem(
@@ -86,22 +82,20 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Scaffold(bottomBar = { TabView(tabBarItems, navController) }) {
                         NavHost(navController = navController, startDestination = homeTab.title) {
-                            composable(homeTab.title) {
-                                Home(viewModel, navController)
-                            }
-                            composable(bookmarkTab.title) {
-                                Favourites()
-                            }
-                            composable(notesTab.title) {
-                                Notes(viewModel, navController)
-                            }
-                            composable(settingsTab.title) {
-                                Settings()
-                            }
+                            // tabs
+                            composable(homeTab.title) { Home(viewModel, navController) }
+                            composable(bookmarkTab.title) { Favourites() }
+                            composable(notesTab.title) { Notes(viewModel, navController) }
+                            composable(settingsTab.title) { Settings() }
+
+                            // navigation
                             composable("secondary") { Secondary(viewModel, navController) }
                             composable("chapter")  { Chapter(viewModel, navController) }
                             composable("notes") { Notes(viewModel, navController)}
                             composable("addnote") { CreateNote(viewModel, navController)}
+                            composable("update/{item}") { backStackEntry ->
+                                UpdateNote(navController, viewModel, itemId = backStackEntry.arguments?.getInt("item"))
+                            }
                         }
                     }
                 }

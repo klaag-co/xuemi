@@ -59,7 +59,8 @@ class MyViewModel : ViewModel() {
 //============================================================//
 
     val notesDao = MainApplication.notesDatabase.getNotesDao()
-    val noteslist: LiveData<List<Note>> = notesDao.getAllNotes()
+    val notesList: LiveData<List<Note>> = notesDao.getAllNotes()
+
 
     fun add(type: NoteType, title: String, body: String) {
         viewModelScope.launch (Dispatchers.IO) {
@@ -70,6 +71,19 @@ class MyViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             notesDao.deleteNote(id)
         }
+    }
+
+    fun update(title: String, body: String, id: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            notesDao.updateNote(title, body, id)
+        }
+    }
+    fun getNoteById(noteId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val note = notesDao.getNoteById(noteId)
+            notesList.setValue(listOf(note))
+        }
+
     }
 
 

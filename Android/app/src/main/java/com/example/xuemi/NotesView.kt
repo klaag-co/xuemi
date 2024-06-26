@@ -149,7 +149,7 @@ fun noteItem(navController: NavController, item: Note, delete: String, onDelete:
         }
 
         Button(
-            onClick = { navController.navigate(item.id) },
+            onClick = { navController.navigate("update/${item.id}") },
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
                 .fillMaxWidth(),
@@ -176,9 +176,9 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
     var expanded by remember { mutableStateOf(false) }
     var selectedType by remember { mutableStateOf(NoteType.Exam) }
 
-    Column {
+    Column (Modifier.absolutePadding(15.dp)){
         Row {
-            Spacer(modifier = Modifier.padding(horizontal = 155.dp))
+            Spacer(modifier = Modifier.padding(horizontal = 145.dp))
             TextButton(
                 onClick = {
                     viewModel.add(selectedType, title, body)
@@ -192,8 +192,6 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.End,
                     modifier = Modifier
-                        .absolutePadding(right = 10.dp, top = 20.dp)
-
                 )
             }
         }
@@ -291,8 +289,9 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
     }
 }
 @Composable
-fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemId: Int?) {
-    val item = itemId?.let { viewModel.getNoteById(it) }
+fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemID: Int?) {
+    val notes by viewModel.notesList.observeAsState()
+    val item: Note? = notes?.find { it.id == itemID }
     var title by remember { mutableStateOf(item?.title ?: "") }
     var body by remember { mutableStateOf(item?.body ?: "") }
     Column{

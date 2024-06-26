@@ -93,8 +93,9 @@ class MainActivity : ComponentActivity() {
                             composable("chapter")  { Chapter(viewModel, navController) }
                             composable("notes") { Notes(viewModel, navController)}
                             composable("addnote") { CreateNote(viewModel, navController)}
-                            composable("update/{item}") { backStackEntry ->
-                                UpdateNote(navController, viewModel, itemId = backStackEntry.arguments?.getInt("item"))
+                            composable("update/{itemId}") { backStackEntry ->
+                                val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
+                                UpdateNote(navController, viewModel, itemID = itemId)
                             }
                         }
                     }

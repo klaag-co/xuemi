@@ -78,13 +78,9 @@ class MyViewModel : ViewModel() {
             notesDao.updateNote(title, body, id)
         }
     }
-    fun getNoteById(noteId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val note = notesDao.getNoteById(noteId)
-            notesList.setValue(listOf(note))
-        }
-
-    }
+//    fun getNoteById(noteId: Int): LiveData<Note?> {
+//        return notesDao.getNoteById(noteId)
+//    }
 
 
 //============================================================//

@@ -2,6 +2,7 @@ package com.example.xuemi
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
@@ -59,23 +60,38 @@ class MyViewModel : ViewModel() {
 //============================================================//
 
     val notesDao = MainApplication.notesDatabase.getNotesDao()
-    val notesList: LiveData<List<Note>> = notesDao.getAllNotes()
+//    val notesList: LiveData<List<Note>> = notesDao.getAllNotes()
+    private val _notesList = MutableLiveData<List<Note>>()
+    val notesList: LiveData<List<Note>> get() = _notesList
+
+    init {
+        loadNotes()
+    }
+    private fun loadNotes() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val notes = notesDao.getAllNotes()
+            _notesList.postValue(notes)
+        }
+    }
 
 
     fun add(type: NoteType, title: String, body: String) {
         viewModelScope.launch (Dispatchers.IO) {
             notesDao.addNote(Note(type = type, title = title, body = body))
+            loadNotes()
         }
     }
     fun delete(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             notesDao.deleteNote(id)
+            loadNotes()
         }
     }
 
     fun update(title: String, body: String, id: Int){
         viewModelScope.launch(Dispatchers.IO) {
             notesDao.updateNote(title, body, id)
+            loadNotes()
         }
     }
 

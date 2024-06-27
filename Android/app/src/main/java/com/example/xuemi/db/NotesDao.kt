@@ -14,7 +14,7 @@ data class Title(
 @Dao
 interface NotesDao {
     @Query("SELECT * FROM NOTE")
-    fun getAllNotes(): LiveData<List<Note>>
+    fun getAllNotes(): List<Note>
 
     @Insert
     fun addNote(note: Note)

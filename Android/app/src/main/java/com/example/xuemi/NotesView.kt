@@ -1,6 +1,7 @@
 package com.example.xuemi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,7 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -29,6 +30,8 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -57,15 +60,15 @@ enum class NoteType {
 
 @Entity
 data class Note(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    @PrimaryKey (autoGenerate = true)
+    val id: Int= 0,
     var type: NoteType,
     val title: String,
     val body: String
 )
 
 @Composable
-fun groupedList(navController: NavController, header: String, sections: List<Note>, delete: String, viewModel: MyViewModel) {
+fun groupedList(navController: NavController, header: String, sections: State<List<Note>?>, delete: String, viewModel: MyViewModel) {
     LazyColumn {
         item {
             Text(
@@ -74,9 +77,12 @@ fun groupedList(navController: NavController, header: String, sections: List<Not
                 color = Color.Gray
             )
         }
-        itemsIndexed(sections){ _: Int, item: Note ->
-            noteItem(navController = navController, item = item, delete= delete, onDelete = { viewModel.delete(item.id) }
-            )
+        items(sections.value ?: emptyList()) { note ->
+            noteItem(navController = navController, viewModel = viewModel, item = note, delete = delete) {
+
+            }
+
+
         }
 
     }
@@ -84,16 +90,19 @@ fun groupedList(navController: NavController, header: String, sections: List<Not
 }
 @Composable
 fun Notes(viewModel: MyViewModel, navController: NavController) {
-    val notes by viewModel.notesList.observeAsState()
-    val examNotes = notes?.filter { it.type == NoteType.Exam }
-    val notesNotes = notes?.filter { it.type == NoteType.Note }
+    val isSearching by viewModel.isSearching.collectAsState()
+    val searchText = remember { mutableStateOf("") }
+
+    val examNotes = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Exam).observeAsState(emptyList())
+    val notesNotes = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Note).observeAsState(emptyList())
 
     var delete: String by rememberSaveable {
         mutableStateOf("Edit")
     }
 
+
     Column {
-        Row(modifier = Modifier.absolutePadding(top = 10.dp, left = 10.dp)) {
+        Row(modifier = Modifier.absolutePadding(top = 10.dp, left = 10.dp), horizontalArrangement = Arrangement.SpaceBetween,) {
             TextButton(
                 onClick = {
                 delete = if (delete == "Edit") {
@@ -108,8 +117,9 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
                     color = Color(70, 156,253),
                     fontSize = 20.sp)
             }
-            Spacer(modifier = Modifier.padding(horizontal = 125.dp))
-
+            Box(Modifier.fillMaxWidth(if (isSearching) 1f else 0.7f),) {
+                TextField(searchText.value, { searchText.value = it })
+            }
             TextButton( onClick = { navController.navigate("addnote") }) {
                 Text("＋",
                     color = Color(70, 156,253),
@@ -125,20 +135,19 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
             modifier = Modifier.absolutePadding(left = 17.dp, top = 6.dp)
         )
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
-        examNotes?.let { groupedList(navController = navController, header = "EXAM", it, delete, viewModel) }
+        groupedList(navController, "EXAM", examNotes, delete, viewModel)
         Spacer(modifier = Modifier.padding(vertical = 14.dp))
-        notesNotes?.let { groupedList(navController = navController, header = "NOTES", it, delete, viewModel) }
-
+        groupedList(navController, "NOTES", notesNotes, delete, viewModel)
     }
 }
 
 
 @Composable
-fun noteItem(navController: NavController, item: Note, delete: String, onDelete: ()-> Unit) {
+fun noteItem(navController: NavController, viewModel: MyViewModel, item: Note, delete: String, onDelete: ()-> Unit) {
     Row (Modifier.padding(horizontal = 17.dp)){
         if (delete == "Done") {
             IconButton(
-                onClick = { onDelete() }
+                onClick = { viewModel.delete(item.id) }
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.delete),
@@ -176,7 +185,7 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
     var expanded by remember { mutableStateOf(false) }
     var selectedType by remember { mutableStateOf(NoteType.Exam) }
 
-    Column (Modifier.absolutePadding(15.dp)){
+    Column (Modifier.absolutePadding(top = 15.dp)){
         Row {
             Spacer(modifier = Modifier.padding(horizontal = 145.dp))
             TextButton(
@@ -294,6 +303,7 @@ fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemID: Int
     val item: Note? = notes?.find { it.id == itemID }
     var title by remember { mutableStateOf(item?.title ?: "") }
     var body by remember { mutableStateOf(item?.body ?: "") }
+
     Column{
         TextButton(
             onClick = {
@@ -303,7 +313,7 @@ fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemID: Int
             Text(
                 text = "< Notepad",
                 color = Color(70, 156, 253),
-                fontSize = 18.sp,
+                fontSize = 19.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.End
 

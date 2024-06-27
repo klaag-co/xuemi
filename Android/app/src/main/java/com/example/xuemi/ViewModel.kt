@@ -78,35 +78,40 @@ class MyViewModel : ViewModel() {
             notesDao.updateNote(title, body, id)
         }
     }
-//    fun getNoteById(noteId: Int): LiveData<Note?> {
-//        return notesDao.getNoteById(noteId)
-//    }
-
 
 //============================================================//
 
     private val _isSearching = MutableStateFlow(false)
     val isSearching = _isSearching.asStateFlow()
 
-//============================================================//
 
     private val _searchText = MutableStateFlow("")
     val searchText = _searchText.asStateFlow()
 
+
 //============================================================//
 
-//private val _searchList = MutableStateFlow(countries)
-//val countriesList = searchText
-//    .combine(_countriesList) { text, countries ->//combine searchText with _contriesList
-//        if (text.isBlank()) { //return the entery list of countries if not is typed
-//            countries
-//        }
-//        countries.filter { country ->// filter and return a list of countries based on the text the user typed
-//            country.uppercase().contains(text.trim().uppercase())
-//        }
-//    }.stateIn(//basically convert the Flow returned from combine operator to StateFlow
-//        scope = viewModelScope,
-//        started = SharingStarted.WhileSubscribed(5000),//it will allow the StateFlow survive 5 seconds before it been canceled
-//        initialValue = _countriesList.value
-//    )
+    private val _countriesList = MutableStateFlow(listOf("ehe", "anotherone", "crazy", "whoa"))
+//    val countriesList =
+//        searchText.combine(_countriesList) { text, countries ->//combine searchText with _contriesList
+//            if (text.isBlank()) { //return the entry list of countries if not is typed countries
+//            }
+//            countries.filter { country ->// filter and return a list of countries based on the text the user typed
+//                country.uppercase().contains(text.trim().uppercase())
+//            }
+//        }.stateIn(//basically convert the Flow returned from combine operator to StateFlow
+//            scope = viewModelScope,
+//            started = SharingStarted.WhileSubscribed(5000),//it will allow the StateFlow survive 5 seconds before it been canceled
+//            initialValue = _countriesList.value
+//        )
+    fun searchNotesByTitle(searchText: String, type: NoteType): LiveData<List<Note>> {
+        return notesDao.searchNotesByTitle(searchText, type)
+    }
+    fun onSearchTextChange(text: String) {
+        _searchText.value = text
+    }
+
+    fun onToggleSearch(active: Boolean) {
+        _isSearching.value = active
+    }
 }

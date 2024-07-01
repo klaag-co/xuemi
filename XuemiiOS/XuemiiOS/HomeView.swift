@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//use observableobject to story the thing for secondary chapter topic
+//use observableobject to store the thing for secondary chapter topic
 
 enum SecondaryNumber {
     case one, two, three, four
@@ -15,254 +15,13 @@ enum SecondaryNumber {
     var string: String {
         switch self {
         case .one:
-            return "1"
+            return "一"
         case .two:
-            return "2"
+            return "二"
         case .three:
-            return "3"
+            return "三"
         case .four:
-            return "4"
-        }
-    }
-    
-    func getData(chapter: Chapter, topic: Topic) -> [String] {
-        switch self {
-        case .one:
-            switch chapter {
-            case .one:
-                switch topic {
-                case .one:
-                    return ["word 1", "word 2"]
-                case .two:
-                    return ["something 1", "something 2"]
-                case .three:
-                    return []
-                }
-            case .two:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .three:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .four:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .five:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .six:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .eoy:
-                return []
-            }
-        case .two:
-            switch chapter {
-            case .one:
-                switch topic {
-                case .one:
-                    return ["word 1", "word 2"]
-                case .two:
-                    return ["something 1", "something 2"]
-                case .three:
-                    return []
-                }
-            case .two:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .three:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .four:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .five:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .six:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .eoy:
-                return []
-            }
-        case .three:
-            switch chapter {
-            case .one:
-                switch topic {
-                case .one:
-                    return ["word 1", "word 2"]
-                case .two:
-                    return ["something 1", "something 2"]
-                case .three:
-                    return []
-                }
-            case .two:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .three:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .four:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .five:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .six:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .eoy:
-                return []
-            }
-        case .four:
-            switch chapter {
-            case .one:
-                switch topic {
-                case .one:
-                    return ["word 1", "word 2"]
-                case .two:
-                    return ["something 1", "something 2"]
-                case .three:
-                    return []
-                }
-            case .two:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .three:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .four:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .five:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .six:
-                switch topic {
-                case .one:
-                    return []
-                case .two:
-                    return []
-                case .three:
-                    return []
-                }
-            case .eoy:
-                return []
-            }
+            return "四"
         }
     }
 }
@@ -315,6 +74,8 @@ struct HomeView: View {
             .padding(20)
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.large)
+            
+           Spacer()
         }
     }
 
@@ -322,12 +83,15 @@ struct HomeView: View {
         NavigationLink {
             ChapterView(level: level)
         } label: {
-            VStack {
-                Text("Secondary")
-                    .font(.system(size: 30))
+            HStack {
+                Text("中")
+                    .font(.system(size: 55))
+                    .bold()
                 Text(level.string)
                     .font(.system(size: 55))
+                    .bold()
             }
+            .padding()
             .padding()
             .background(.customteal)
             .foregroundStyle(.white)

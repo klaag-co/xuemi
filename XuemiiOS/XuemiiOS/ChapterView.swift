@@ -13,17 +13,17 @@ enum Chapter: CaseIterable {
     var string: String {
         switch self {
         case .one:
-            return "Chapter 1"
+            return "单元一"
         case .two:
-            return "Chapter 2"
+            return "单元二"
         case .three:
-            return "Chapter 3"
+            return "单元三"
         case .four:
-            return "Chapter 4"
+            return "单元四"
         case .five:
-            return "Chapter 5"
+            return "单元五"
         case .six:
-            return "Chapter 6"
+            return "单元六"
         case .eoy:
             return "EOY Practice"
         }
@@ -36,9 +36,9 @@ struct ChapterView: View {
     
     var body: some View {
         ScrollView {
-            Text("Secondary \(level.string)")
+            Text("中 \(level.string)")
                 .font(.largeTitle)
-                .fontWeight(.heavy)
+                .bold()
                 .padding()
                 .frame(height: 80)
                 .frame(maxWidth: .infinity)

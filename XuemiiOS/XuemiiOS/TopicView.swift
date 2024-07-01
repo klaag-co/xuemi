@@ -28,12 +28,14 @@ struct TopicView: View {
     var level: SecondaryNumber
     var chapter: Chapter
     
+    @State var showingFlashcards = false
+    
     @State var topicSelected: Topic?
     //    @State var showingSheet = false
     
     var body: some View {
         ScrollView {
-            Text("Secondary \(level.string)")
+            Text("中 \(level.string)")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
                 .padding()
@@ -59,7 +61,6 @@ struct TopicView: View {
                             .mask(RoundedRectangle(cornerRadius: 16))
                             .padding(.horizontal)
                     }
-                    
                     //                    HStack {
                     //                        Button {
                     //
@@ -110,7 +111,6 @@ struct TopicView: View {
                         if let topicSelected = topicSelected {
                             NavigationStack {
                                 VStack {
-                                    // use level.getData(chapter: chapter, topic: topicSelected) to get data for each level, chapter, and topic :)
                                     Button {
                                         
                                     } label: {
@@ -140,7 +140,7 @@ struct TopicView: View {
                                     }
                                     
                                     Button {
-                                        
+                                        showingFlashcards.toggle()
                                     } label: {
                                         Text("Flashcards")
                                             .font(.title)
@@ -164,6 +164,9 @@ struct TopicView: View {
                     }
                 }
             }
+        }
+        .navigationDestination(isPresented: $showingFlashcards) {
+            FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "secondary1", chapter: "chapter", topic: "topic"))
         }
     }
 }

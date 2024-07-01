@@ -23,15 +23,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.xuemi.ui.theme.XuemiTheme
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 
 data class TabBarItem(
@@ -40,87 +36,7 @@ data class TabBarItem(
     val unselectedIcon: Int,
     val badgeAmount: Int? = null
 )
-class MyViewModel : ViewModel() {
-    private val _items = MutableStateFlow(listOf("N", "N", "N", "N"))
 
-    fun updateItem(index: Int, newItem: String) {
-        val currentList = _items.value.toMutableList()
-        if (index in currentList.indices) {
-            currentList[index] = newItem
-            _items.value = currentList
-        }
-    }
-
-    fun getFromList(index: Int): String {
-        val currentList = _items.value.toMutableList()
-        return currentList[index]
-    }
-
-//============================================================//
-
-    private val _showButton = MutableStateFlow(true)
-    val showButton: StateFlow<Boolean> = _showButton
-
-    fun offButton() {
-        _showButton.value = false
-    }
-
-    fun onButton() {
-        _showButton.value = true
-    }
-
-//============================================================//
-
-    private val _examNotes = MutableStateFlow(listOf(
-        Section("EXAM1", "EXAMS ARE NOT COOL")))
-
-    val examNotes: MutableStateFlow<List<Section>> = _examNotes
-
-
-    private val _notesNotes = MutableStateFlow(listOf(
-        Section("NOte1", "whoa its a note")))
-    val notesNotes: MutableStateFlow<List<Section>> = _notesNotes
-
-    fun add(type: String, title: String, body: String) {
-        if (type == "exam") {
-            val exam = _examNotes.value.toMutableList()
-            exam.add(Section(title,body))
-            _examNotes.value = exam
-        } else {
-            val notes = _notesNotes.value.toMutableList()
-            notes.add(Section(title,body))
-            _notesNotes.value = notes
-        }
-    }
-
-
-//============================================================//
-
-    private val _isSearching = MutableStateFlow(false)
-    val isSearching = _isSearching.asStateFlow()
-
-//============================================================//
-
-    private val _searchText = MutableStateFlow("")
-    val searchText = _searchText.asStateFlow()
-
-//============================================================//
-
-//private val _searchList = MutableStateFlow(countries)
-//val countriesList = searchText
-//    .combine(_countriesList) { text, countries ->//combine searchText with _contriesList
-//        if (text.isBlank()) { //return the entery list of countries if not is typed
-//            countries
-//        }
-//        countries.filter { country ->// filter and return a list of countries based on the text the user typed
-//            country.uppercase().contains(text.trim().uppercase())
-//        }
-//    }.stateIn(//basically convert the Flow returned from combine operator to StateFlow
-//        scope = viewModelScope,
-//        started = SharingStarted.WhileSubscribed(5000),//it will allow the StateFlow survive 5 seconds before it been canceled
-//        initialValue = _countriesList.value
-//    )
-}
 
 class MainActivity : ComponentActivity() {
     private val viewModel: MyViewModel by viewModels()
@@ -166,22 +82,21 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Scaffold(bottomBar = { TabView(tabBarItems, navController) }) {
                         NavHost(navController = navController, startDestination = homeTab.title) {
-                            composable(homeTab.title) {
-                                Home(viewModel, navController)
-                            }
-                            composable(bookmarkTab.title) {
-                                Favourites()
-                            }
-                            composable(notesTab.title) {
-                                Notes(viewModel, navController)
-                            }
-                            composable(settingsTab.title) {
-                                Settings()
-                            }
+                            // tabs
+                            composable(homeTab.title) { Home(viewModel, navController) }
+                            composable(bookmarkTab.title) { Favourites() }
+                            composable(notesTab.title) { Notes(viewModel, navController) }
+                            composable(settingsTab.title) { Settings() }
+
+                            // navigation
                             composable("secondary") { Secondary(viewModel, navController) }
                             composable("chapter")  { Chapter(viewModel, navController) }
                             composable("notes") { Notes(viewModel, navController)}
                             composable("addnote") { CreateNote(viewModel, navController)}
+                            composable("update/{itemId}") { backStackEntry ->
+                                val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
+                                UpdateNote(navController, viewModel, itemID = itemId)
+                            }
                         }
                     }
                 }

@@ -1,6 +1,7 @@
 package com.example.xuemi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,44 +9,66 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
-data class Section(val title: String, val body: String)
+enum class NoteType {
+    Exam, Note
+}
+
+@Entity
+data class Note(
+    @PrimaryKey (autoGenerate = true)
+    val id: Int= 0,
+    var type: NoteType,
+    val title: String,
+    val body: String
+)
 
 @Composable
-fun groupedList(header: String, sections: List<Section>, ) {
-
-
+fun groupedList(navController: NavController, header: String, sections: State<List<Note>?>, delete: String, viewModel: MyViewModel) {
     LazyColumn {
         item {
             Text(
@@ -54,32 +77,49 @@ fun groupedList(header: String, sections: List<Section>, ) {
                 color = Color.Gray
             )
         }
-        items(sections.count()) { i ->
-            noteItem(sections[i].title)
+        items(sections.value ?: emptyList()) { note ->
+            noteItem(navController = navController, viewModel = viewModel, item = note, delete = delete) {
+
+            }
+
+
         }
 
-
     }
+
 }
 @Composable
 fun Notes(viewModel: MyViewModel, navController: NavController) {
-    val examNotes by viewModel.examNotes.collectAsState()
-    val notesNotes by viewModel.notesNotes.collectAsState()
+    val isSearching by viewModel.isSearching.collectAsState()
+    val searchText = remember { mutableStateOf("") }
+
+    val examNotes = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Exam).observeAsState(emptyList())
+    val notesNotes = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Note).observeAsState(emptyList())
+
+    var delete: String by rememberSaveable {
+        mutableStateOf("Edit")
+    }
+
+
     Column {
-        Row(modifier = Modifier.absolutePadding(top = 10.dp, left = 10.dp)) {
-            TextButton( onClick = {/*TODO*/}) {
-                Text("Edit",
+        Row(modifier = Modifier.absolutePadding(top = 10.dp, left = 10.dp), horizontalArrangement = Arrangement.SpaceBetween,) {
+            TextButton(
+                onClick = {
+                delete = if (delete == "Edit") {
+                    "Done"
+                } else {
+                    "Edit"
+                }
+            },
+                modifier = Modifier.size(width = 76.dp, height = 50.dp)
+            ) {
+                Text(delete,
                     color = Color(70, 156,253),
                     fontSize = 20.sp)
             }
-            Spacer(modifier = Modifier.padding(horizontal = 45.dp))
-            Text(
-                "Notepad",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                modifier = Modifier.absolutePadding(top = 6.dp)
-            )
-            Spacer(modifier = Modifier.padding(horizontal = 45.dp))
+            Box(Modifier.fillMaxWidth(if (isSearching) 1f else 0.7f),) {
+                TextField(searchText.value, { searchText.value = it })
+            }
             TextButton( onClick = { navController.navigate("addnote") }) {
                 Text("＋",
                     color = Color(70, 156,253),
@@ -88,34 +128,53 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
                 )
             }
         }
+        Text(
+            "Notepad",
+            fontWeight = FontWeight.Bold,
+            fontSize = 40.sp,
+            modifier = Modifier.absolutePadding(left = 17.dp, top = 6.dp)
+        )
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
-        groupedList(header = "EXAM", sections = examNotes)
+        groupedList(navController, "EXAM", examNotes, delete, viewModel)
         Spacer(modifier = Modifier.padding(vertical = 14.dp))
-        groupedList(header = "NOTES", sections = notesNotes)
-
+        groupedList(navController, "NOTES", notesNotes, delete, viewModel)
     }
 }
 
 
 @Composable
-fun noteItem(item: String) {
-    Button(
-        onClick = { /*TODO*/ },
-        shape = RoundedCornerShape(10.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 17.dp),
-        colors = ButtonDefaults.buttonColors(Color(239, 238,246)),
+fun noteItem(navController: NavController, viewModel: MyViewModel, item: Note, delete: String, onDelete: ()-> Unit) {
+    Row (Modifier.padding(horizontal = 17.dp)){
+        if (delete == "Done") {
+            IconButton(
+                onClick = { viewModel.delete(item.id) }
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.delete),
+                    contentDescription = "delete",
+                    tint = Color.Red
+                )
+            }
+        }
 
-    ) {
-        Text(
-            text = item,
-            fontSize = 20.sp,
-            textAlign = TextAlign.Start,
-            color = Color.Black,
+        Button(
+            onClick = { navController.navigate("update/${item.id}") },
+            shape = RoundedCornerShape(10.dp),
             modifier = Modifier
-                .fillMaxWidth()
-        )
+                .fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(Color(239, 238, 246)),
+
+            ) {
+
+            Text(
+                text = item.title,
+                fontSize = 20.sp,
+                textAlign = TextAlign.Start,
+                color = Color.Black,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+        }
     }
 }
 
@@ -124,26 +183,26 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
     var title by remember { mutableStateOf("") }
     var body by remember { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
-    val items = listOf("Note", "Exam")
-    var selectedIndex by remember{ mutableStateOf(0) }
-    Column {
-        TextButton(
-            onClick = { viewModel.add(items[selectedIndex], title, body)
-                navController.navigate("notes")
-                      },
-            modifier = Modifier.background(Color.Transparent)
-        ) {
-            Text(
-                text = "Save",
-                color = Color(70, 156, 253),
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.End,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .absolutePadding(right = 10.dp, top = 20.dp)
+    var selectedType by remember { mutableStateOf(NoteType.Exam) }
 
-            )
+    Column (Modifier.absolutePadding(top = 15.dp)){
+        Row {
+            Spacer(modifier = Modifier.padding(horizontal = 145.dp))
+            TextButton(
+                onClick = {
+                    viewModel.add(selectedType, title, body)
+                    navController.navigate("notes")
+                },
+            ) {
+                Text(
+                    text = "Save",
+                    color = Color(70, 156, 253),
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.End,
+                    modifier = Modifier
+                )
+            }
         }
         Text(
             "New Note",
@@ -180,11 +239,11 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
                     fontSize = 16.sp,
                 )
 
-                Spacer(Modifier.padding(horizontal = 95.dp))
+                Spacer(Modifier.padding(horizontal = 92.dp))
                 Box(modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentSize(Alignment.TopStart)) {
-                    Text("${items[selectedIndex]} ▼",
+                    Text("$selectedType ▼",
                         fontSize = 16.sp,
                         color = Color(73, 69, 79),
                         modifier = Modifier
@@ -202,10 +261,11 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
                             )
 
                     ) {
-                        items.forEachIndexed { index, s ->
+                        NoteType.entries.forEach { type ->
                             DropdownMenuItem(
-                                text = { Text(s) },
-                                onClick = { selectedIndex = index
+                                text = { Text(type.name) },
+                                onClick = {
+                                    selectedType = type
                                     expanded = false
                                 }
                             )
@@ -237,9 +297,55 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
 
     }
 }
+@Composable
+fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemID: Int?) {
+    val notes by viewModel.notesList.observeAsState()
+    val item: Note? = notes?.find { it.id == itemID }
+    var title by remember { mutableStateOf(item?.title ?: "") }
+    var body by remember { mutableStateOf(item?.body ?: "") }
+
+    Column{
+        TextButton(
+            onClick = {
+                viewModel.update(title, body, item?.id ?: 0)
+                navController.navigate("notes")},
+        ) {
+            Text(
+                text = "< Notepad",
+                color = Color(70, 156, 253),
+                fontSize = 19.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.End
+
+            )
+        }
+        OutlinedTextField(
+            value = title,
+            onValueChange = { title = it },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color.White,
+            ),
+            textStyle = TextStyle(
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 25.sp
+            )
+        )
+        Divider(Modifier.padding(horizontal = 10.dp))
+        OutlinedTextField(
+            value = body,
+            onValueChange = { body = it },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color.White,
+            )
+        )
+
+    }
+}
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun Preview() {
-    CreateNote(viewModel = MyViewModel(), navController = rememberNavController())
 }
+

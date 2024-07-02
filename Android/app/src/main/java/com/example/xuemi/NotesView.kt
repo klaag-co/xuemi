@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.absolutePadding
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -55,7 +56,7 @@ import androidx.room.PrimaryKey
 
 
 enum class NoteType {
-    Exam, Note
+    Exam, Note, Sec1, Sec2, Sec3, Sec4
 }
 
 @Entity
@@ -69,6 +70,7 @@ data class Note(
 
 @Composable
 fun groupedList(navController: NavController, header: String, sections: State<List<Note>?>, delete: String, viewModel: MyViewModel) {
+    Spacer(modifier = Modifier.padding(bottom = 20.dp))
     LazyColumn {
         item {
             Text(
@@ -95,6 +97,12 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
 
     val examNotes = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Exam).observeAsState(emptyList())
     val notesNotes = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Note).observeAsState(emptyList())
+    val sec1 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Sec1).observeAsState(emptyList())
+    val sec2 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Sec2).observeAsState(emptyList())
+    val sec3 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Sec3).observeAsState(emptyList())
+    val sec4 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Sec4).observeAsState(emptyList())
+
+
 
     var delete: String by rememberSaveable {
         mutableStateOf("Edit")
@@ -102,7 +110,9 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
 
 
     Column {
-        Row(modifier = Modifier.absolutePadding(top = 10.dp, left = 10.dp), horizontalArrangement = Arrangement.SpaceBetween,) {
+        Row(modifier = Modifier
+            .padding(top = 10.dp)
+            .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, ) {
             TextButton(
                 onClick = {
                 delete = if (delete == "Edit") {
@@ -117,14 +127,13 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
                     color = Color(70, 156,253),
                     fontSize = 20.sp)
             }
-            Box(Modifier.fillMaxWidth(if (isSearching) 1f else 0.7f),) {
-                TextField(searchText.value, { searchText.value = it })
-            }
+            Spacer(modifier = Modifier.fillMaxWidth(0.7f))
+
             TextButton( onClick = { navController.navigate("addnote") }) {
                 Text("＋",
                     color = Color(70, 156,253),
                     fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
                 )
             }
         }
@@ -132,12 +141,38 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
             "Notepad",
             fontWeight = FontWeight.Bold,
             fontSize = 40.sp,
-            modifier = Modifier.absolutePadding(left = 17.dp, top = 6.dp)
+            modifier = Modifier.padding(start = 17.dp, top = 6.dp)
         )
-        Spacer(modifier = Modifier.padding(vertical = 5.dp))
+        TextField(
+            searchText.value,
+            { searchText.value = it },
+            shape = RoundedCornerShape(15.dp),
+            colors = TextFieldDefaults.colors(
+                unfocusedContainerColor = Color(239, 238,246),
+                unfocusedIndicatorColor = Color(239, 238,246),
+                focusedContainerColor = Color(239, 238,246),
+                focusedIndicatorColor = Color(239, 238,246)
+            ),
+            leadingIcon = { Icon(
+                painter = painterResource(id = R.drawable.search),
+                contentDescription = "search",
+            ) },
+            placeholder = {
+                    Text("Search") /// Modifier.padding(start = 3.dp, bottom = 1.dp)
+                          },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 15.dp)
+                .padding(top = 10.dp)
+                .fillMaxHeight(0.077f))
+
+
         groupedList(navController, "EXAM", examNotes, delete, viewModel)
-        Spacer(modifier = Modifier.padding(vertical = 14.dp))
         groupedList(navController, "NOTES", notesNotes, delete, viewModel)
+        groupedList(navController, "SECONDARY 1", sec1, delete, viewModel)
+        groupedList(navController, "SECONDARY 2", sec2, delete, viewModel)
+        groupedList(navController, "SECONDARY 3", sec3, delete, viewModel)
+        groupedList(navController, "SECONDARY 4", sec4, delete, viewModel)
     }
 }
 
@@ -161,8 +196,9 @@ fun noteItem(navController: NavController, viewModel: MyViewModel, item: Note, d
             onClick = { navController.navigate("update/${item.id}") },
             shape = RoundedCornerShape(10.dp),
             modifier = Modifier
-                .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(Color(239, 238, 246)),
+                .fillMaxWidth()
+                .padding(3.dp),
+            colors = ButtonDefaults.buttonColors(Color(243, 242, 245)),
 
             ) {
 
@@ -173,6 +209,7 @@ fun noteItem(navController: NavController, viewModel: MyViewModel, item: Note, d
                 color = Color.Black,
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(vertical = 2.dp)
             )
         }
     }
@@ -261,15 +298,29 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
                             )
 
                     ) {
-                        NoteType.entries.forEach { type ->
-                            DropdownMenuItem(
-                                text = { Text(type.name) },
-                                onClick = {
-                                    selectedType = type
-                                    expanded = false
-                                }
-                            )
-                        }
+//                        NoteType.entries.forEach { type ->
+//                            DropdownMenuItem(
+//                                text = { Text(type.name) },
+//                                onClick = {
+//                                    selectedType = type
+//                                    expanded = false
+//                                }
+//                            )
+//                        }
+                        DropdownMenuItem(
+                            text = { Text("Exam") },
+                            onClick = {
+                                selectedType = NoteType.Exam
+                                expanded = false
+                            }
+                        )
+                        DropdownMenuItem(
+                            text = { Text("Note") },
+                            onClick = {
+                                selectedType = NoteType.Note
+                                expanded = false
+                            }
+                        )
                     }
                 }
             }

@@ -1,8 +1,5 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
+package com.example.xuemi.flashcards
 
-package com.example.xuemi
-
-import android.adservices.topics.Topic
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,24 +25,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.xuemi.ui.theme.XuemiTheme
+import com.example.xuemi.MyViewModel
 
 @Composable
 fun Secondary(viewModel: MyViewModel, navController: NavController) {
     val showButton by viewModel.showButton.collectAsState()
     Column {
         title(viewModel = viewModel)
-        chaptertemplate(viewModel, navController, "1")
-        chaptertemplate(viewModel, navController,"2")
-        chaptertemplate(viewModel, navController,"3")
-        chaptertemplate(viewModel, navController,"4")
-        chaptertemplate(viewModel, navController,"5")
+        chaptertemplate(viewModel, navController, "一")
+        chaptertemplate(viewModel, navController,"二")
+        chaptertemplate(viewModel, navController,"三")
+        chaptertemplate(viewModel, navController,"四")
+        chaptertemplate(viewModel, navController,"五")
         if (showButton) {
-            chaptertemplate(viewModel, navController, "6")
+            chaptertemplate(viewModel, navController, "六")
         }
         Button(
             onClick = { },
@@ -71,6 +67,7 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
 
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Chapter(viewModel: MyViewModel, navController: NavController) {
     val sheetstate = rememberModalBottomSheetState()
@@ -82,24 +79,24 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
     }
     Column {
         title(viewModel)
-        topictemplate(viewModel,  { isSheetOpen = true}, {topicNum = "1"}, "1" )
-        topictemplate(viewModel,  { isSheetOpen = true }, {topicNum = "2"}, "2")
-        topictemplate(viewModel,  { isSheetOpen = true }, {topicNum = "3"}, "3")
+        topictemplate(viewModel,  { isSheetOpen = true}, {topicNum = "一"}, "一" )
+        topictemplate(viewModel,  { isSheetOpen = true }, {topicNum = "二"}, "二")
+        topictemplate(viewModel,  { isSheetOpen = true }, {topicNum = "三"}, "三")
 
     }
     if (isSheetOpen) {
         ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
-            Topic(viewModel, topicNum)
+            Topic(viewModel)
         }
     }
 
 }
 
 @Composable
-fun Topic(viewModel: MyViewModel, topic: String?) {
+fun Topic(viewModel: MyViewModel) {
     Column {
         Text(
-            "Topic $topic",
+            "习题",
             fontSize = 45.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 25.dp, vertical = 4.dp)
@@ -129,16 +126,11 @@ fun title(viewModel: MyViewModel) {
     ) {
         Row {
             Text(
-                text = "Secondary ${viewModel.getFromList(0)}",
+                text = "中${viewModel.getFromList(0)}",
                 textAlign = TextAlign.Center,
                 fontSize = 35.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.absolutePadding(
-                    top = 15.dp,
-                    bottom = 15.dp,
-                    right = 10.dp,
-                    left = 70.dp
-                )
+                modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp)
             )
 
         }
@@ -149,7 +141,7 @@ fun title(viewModel: MyViewModel) {
 fun quiztemplate(viewModel: MyViewModel, quiz: String?) {
     Button(
         onClick = { viewModel.updateItem(3, "${quiz?.first()}")
-                  },
+        },
         colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
@@ -182,7 +174,7 @@ fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapte
     ) {
         Column {
             Text(
-                text = "Chapter $chapter",
+                text = "单元$chapter",
                 color = Color.Black,
                 fontSize = 28.sp,
                 modifier = Modifier
@@ -196,9 +188,9 @@ fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapte
 fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topicFun: () -> Unit, topic: String?) {
     Button(
         onClick = { viewModel.updateItem(2, "$topic")
-                    onButtonClick()
-                    topicFun()
-                  },
+            onButtonClick()
+            topicFun()
+        },
         colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
@@ -207,7 +199,7 @@ fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topicFun: (
     ) {
         Column {
             Text(
-                text = "Topic $topic",
+                text = "第${topic}课",
                 color = Color.Black,
                 fontSize = 28.sp,
                 modifier = Modifier
@@ -215,13 +207,5 @@ fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topicFun: (
 
             )
         }
-    }
-}
-
-
-@Preview(showSystemUi = true)
-@Composable
-fun FlashcardPreview() {
-    XuemiTheme {
     }
 }

@@ -35,13 +35,13 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
     val showButton by viewModel.showButton.collectAsState()
     Column {
         title(viewModel = viewModel)
-        chaptertemplate(viewModel, navController, "一")
-        chaptertemplate(viewModel, navController,"二")
-        chaptertemplate(viewModel, navController,"三")
-        chaptertemplate(viewModel, navController,"四")
-        chaptertemplate(viewModel, navController,"五")
+        chaptertemplate(viewModel, navController, "一","0")
+        chaptertemplate(viewModel, navController,"二","1")
+        chaptertemplate(viewModel, navController,"三","2")
+        chaptertemplate(viewModel, navController,"四","3")
+        chaptertemplate(viewModel, navController,"五","4")
         if (showButton) {
-            chaptertemplate(viewModel, navController, "六")
+            chaptertemplate(viewModel, navController, "六","5")
         }
         Button(
             onClick = { },
@@ -79,21 +79,23 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
     }
     Column {
         title(viewModel)
-        topictemplate(viewModel,  { isSheetOpen = true}, {topicNum = "一"}, "一" )
-        topictemplate(viewModel,  { isSheetOpen = true }, {topicNum = "二"}, "二")
-        topictemplate(viewModel,  { isSheetOpen = true }, {topicNum = "三"}, "三")
-
+        topictemplate(viewModel, { isSheetOpen = true}, {topicNum = "一"}, "一",)
+        topictemplate(viewModel, { isSheetOpen = true }, {topicNum = "二"}, "二", )
+        topictemplate(viewModel, { isSheetOpen = true }, {topicNum = "三"}, "三", )
+        Button(onClick = { navController.navigate("home") }) {
+            Text("Home")
+        }
     }
     if (isSheetOpen) {
         ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
-            Topic(viewModel)
+            Topic(viewModel, navController)
         }
     }
 
 }
 
 @Composable
-fun Topic(viewModel: MyViewModel) {
+fun Topic(viewModel: MyViewModel, navController: NavController) {
     Column {
         Text(
             "习题",
@@ -102,9 +104,9 @@ fun Topic(viewModel: MyViewModel) {
             modifier = Modifier.padding(horizontal = 25.dp, vertical = 4.dp)
         )
         Spacer(modifier = Modifier.padding(5.dp))
-        quiztemplate(viewModel, "Handwriting")
-        quiztemplate(viewModel, "MCQ")
-        quiztemplate(viewModel, "Flashcards")
+        quiztemplate(viewModel, navController,"Handwriting")
+        quiztemplate(viewModel, navController,"MCQ")
+        quiztemplate(viewModel, navController,"Flashcards")
         Spacer(modifier = Modifier.padding(20.dp))
     }
 }
@@ -138,9 +140,13 @@ fun title(viewModel: MyViewModel) {
 }
 
 @Composable
-fun quiztemplate(viewModel: MyViewModel, quiz: String?) {
+fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: String?) {
     Button(
-        onClick = { viewModel.updateItem(3, "${quiz?.first()}")
+        onClick = {
+            viewModel.updateItem(4, "${quiz?.first()}")
+            if (quiz == "Flashcards") {
+                navController.navigate("flashcard")
+            }
         },
         colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
         shape = RoundedCornerShape(20.dp),
@@ -161,11 +167,13 @@ fun quiztemplate(viewModel: MyViewModel, quiz: String?) {
     }
 }
 @Composable
-fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapter: String?) {
+fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapter: String?, chapterNUM: String) {
     Button(
         onClick = {
             navController.navigate("chapter")
-            viewModel.updateItem(1, "$chapter") },
+            viewModel.updateItem(2, chapterNUM)
+            chapter?.let { viewModel.updateItem(1, it) }
+        },
         colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
@@ -187,7 +195,7 @@ fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapte
 @Composable
 fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topicFun: () -> Unit, topic: String?) {
     Button(
-        onClick = { viewModel.updateItem(2, "$topic")
+        onClick = { viewModel.updateItem(3, "$topic")
             onButtonClick()
             topicFun()
         },

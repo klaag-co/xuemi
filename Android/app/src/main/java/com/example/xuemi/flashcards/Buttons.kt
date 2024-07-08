@@ -29,11 +29,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.xuemi.MyViewModel
+import com.example.xuemi.backButton
 
 @Composable
 fun Secondary(viewModel: MyViewModel, navController: NavController) {
     val showButton by viewModel.showButton.collectAsState()
     Column {
+        backButton("Home") {
+            navController.navigate("home")
+        }
         title(viewModel = viewModel)
         chaptertemplate(viewModel, navController, "一","0")
         chaptertemplate(viewModel, navController,"二","1")
@@ -74,17 +78,15 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
     var isSheetOpen: Boolean by rememberSaveable {
         mutableStateOf(false)
     }
-    var topicNum: String by rememberSaveable {
-        mutableStateOf("1")
-    }
+
     Column {
-        title(viewModel)
-        topictemplate(viewModel, { isSheetOpen = true}, {topicNum = "一"}, "一",)
-        topictemplate(viewModel, { isSheetOpen = true }, {topicNum = "二"}, "二", )
-        topictemplate(viewModel, { isSheetOpen = true }, {topicNum = "三"}, "三", )
-        Button(onClick = { navController.navigate("home") }) {
-            Text("Home")
+        backButton("Back") {
+            navController.navigate("secondary")
         }
+        title(viewModel)
+        topictemplate(viewModel, { isSheetOpen = true}, "一")
+        topictemplate(viewModel, { isSheetOpen = true }, "二" )
+        topictemplate(viewModel, { isSheetOpen = true }, "三")
     }
     if (isSheetOpen) {
         ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
@@ -120,7 +122,7 @@ fun title(viewModel: MyViewModel) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .absolutePadding(top = 20.dp, bottom = 7.dp, right = 25.dp, left = 25.dp),
+            .absolutePadding(bottom = 7.dp, right = 25.dp, left = 25.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(126, 190, 240),
             contentColor = Color.White
@@ -132,7 +134,9 @@ fun title(viewModel: MyViewModel) {
                 textAlign = TextAlign.Center,
                 fontSize = 35.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 10.dp)
             )
 
         }
@@ -145,7 +149,7 @@ fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: Str
         onClick = {
             viewModel.updateItem(4, "${quiz?.first()}")
             if (quiz == "Flashcards") {
-                navController.navigate("flashcard")
+                navController.navigate("flashcard/中${viewModel.getFromList(0)}")
             }
         },
         colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
@@ -186,18 +190,17 @@ fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapte
                 color = Color.Black,
                 fontSize = 28.sp,
                 modifier = Modifier
-                    .padding(horizontal = 5.dp, vertical = 7.dp)
+                    .padding(horizontal = 5.dp, vertical = 5.dp)
 
             )
         }
     }
 }
 @Composable
-fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topicFun: () -> Unit, topic: String?) {
+fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: String?) {
     Button(
         onClick = { viewModel.updateItem(3, "$topic")
             onButtonClick()
-            topicFun()
         },
         colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
         shape = RoundedCornerShape(20.dp),

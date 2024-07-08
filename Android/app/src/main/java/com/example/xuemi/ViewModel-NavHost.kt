@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -22,7 +21,6 @@ import com.example.xuemi.flashcards.Secondary
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MainApplication: Application() {
@@ -40,15 +38,6 @@ class MainApplication: Application() {
     }
 }
 
-class MyViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MyViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return MyViewModel(context) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
 class MyViewModel( appContext: Context ) : ViewModel() {
 
     private val _current = MutableStateFlow(listOf("S", "C", "C.", "T", "Q", "W."))
@@ -81,7 +70,6 @@ class MyViewModel( appContext: Context ) : ViewModel() {
 //============================================================//
 
     val notesDao = MainApplication.notesDatabase.getNotesDao()
-//    val notesList: LiveData<List<Note>> = notesDao.getAllNotes()
     private val _notesList = MutableLiveData<List<Note>>()
     val notesList: LiveData<List<Note>> get() = _notesList
 
@@ -116,35 +104,20 @@ class MyViewModel( appContext: Context ) : ViewModel() {
         }
     }
 
-//============================================================//
-
-    private val _isSearching = MutableStateFlow(false)
-    val isSearching = _isSearching.asStateFlow()
-
-
-    private val _searchText = MutableStateFlow("")
-    val searchText = _searchText.asStateFlow()
-
 
 //============================================================//
 
     fun searchNotesByTitle(searchText: String, type: NoteType): LiveData<List<Note>> {
         return notesDao.searchNotesByTitle(searchText, type)
     }
-    fun onSearchTextChange(text: String) {
-        _searchText.value = text
-    }
 
-    fun onToggleSearch(active: Boolean) {
-        _isSearching.value = active
-    }
 
 //============================================================//
 
     private val jsonReader = JsonReader(appContext)
 
-    fun loadDataFromJson(): Secondary? {
-        return jsonReader.readJsonFile("secondary1.json")
+    fun loadDataFromJson(name: String): Secondary? {
+        return jsonReader.readJsonFile(name)
     }
 }
 
@@ -193,7 +166,10 @@ fun HomeNav(viewModel: MyViewModel) {
                 val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
                 UpdateNote(navController, viewModel, itemID = itemId)
             }
-            composable("flashcard") { FlashcardScreen(viewModel, navController) }
+            composable("flashcard/{secondary}") {backStackEntry ->
+                val secondary= backStackEntry.arguments?.getString("secondary")
+                FlashcardScreen(viewModel, secondary.toString())
+            }
 
         }
     }

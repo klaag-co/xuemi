@@ -3,13 +3,13 @@ package com.example.xuemi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -46,13 +46,13 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             )
         }
         Row {// 1st button row
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "1", top = 14, bottom = 14, right = 12, left = 28)
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "2", top = 14, bottom = 14, right = 1, left = 1)
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "一", top = 14, bottom = 14, right = 12, left = 28)
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "二", top = 14, bottom = 14, right = 1, left = 1)
 
         }
         Row {// 2nd button row
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "3", top = 0, bottom = 0, right = 12, left = 28)
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "4", top = 0, bottom = 0, right = 1, left = 1)
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "三", top = 0, bottom = 0, right = 12, left = 28)
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "四", top = 0, bottom = 0, right = 1, left = 1)
 
         }
         Button(onClick = { /*TODO*/ },
@@ -90,25 +90,18 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
                   },
         colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
                 Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
-        modifier = Modifier.absolutePadding(
+        modifier = Modifier.padding(
             top = top.dp,
             bottom = bottom.dp,
-            right = right.dp,
-            left = left.dp
+            end = right.dp,
+            start = left.dp
         ),
         shape = RoundedCornerShape(20.dp)
     ) {
         Column {
-            Text(
-                text = "Secondary",
-                fontSize = 24.sp,
-            )
-            Text(
-                text = "$secondary",
-                fontSize = 65.sp,
-                modifier = Modifier
-                    .padding(horizontal = 35.dp)
-                    .absolutePadding(bottom = 10.dp),
+            Text("中$secondary",
+                modifier = Modifier.padding(vertical = 25.dp),
+                style = MaterialTheme.typography.displayLarge,
                 fontWeight = FontWeight.Bold
             )
         }

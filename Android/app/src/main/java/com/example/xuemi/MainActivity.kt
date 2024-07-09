@@ -1,10 +1,10 @@
 package com.example.xuemi
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,7 +12,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,11 +21,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.xuemi.ui.theme.XuemiTheme
 
 
@@ -39,70 +34,26 @@ data class TabBarItem(
 
 
 class MainActivity : ComponentActivity() {
-    private val viewModel: MyViewModel by viewModels()
-
+    private val context: Context = this
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-
-            // setting up the individual tabs
-            val homeTab = TabBarItem(
-                title = "Home",
-                selectedIcon = R.drawable.home,
-                unselectedIcon = R.drawable.o_home
-            )
-            val bookmarkTab = TabBarItem(
-                title = "Bookmarks",
-                selectedIcon = R.drawable.bookmark,
-                unselectedIcon = R.drawable.o_bookmark
-            )
-            val notesTab = TabBarItem(
-                title = "Notes",
-                selectedIcon = R.drawable.notes,
-                unselectedIcon = R.drawable.o_notes
-            )
-            val settingsTab = TabBarItem(
-                title = "Settings",
-                selectedIcon = R.drawable.settings,
-                unselectedIcon = R.drawable.o_settings,
-            )
-
-            // creating a list of all the tabs
-            val tabBarItems = listOf(homeTab, bookmarkTab, notesTab, settingsTab)
-
-            // creating our navController
-            val navController = rememberNavController()
-
             XuemiTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Scaffold(bottomBar = { TabView(tabBarItems, navController) }) {
-                        NavHost(navController = navController, startDestination = homeTab.title) {
-                            // tabs
-                            composable(homeTab.title) { Home(viewModel, navController) }
-                            composable(bookmarkTab.title) { Favourites() }
-                            composable(notesTab.title) { Notes(viewModel, navController) }
-                            composable(settingsTab.title) { Settings() }
-
-                            // navigation
-                            composable("secondary") { Secondary(viewModel, navController) }
-                            composable("chapter")  { Chapter(viewModel, navController) }
-                            composable("notes") { Notes(viewModel, navController)}
-                            composable("addnote") { CreateNote(viewModel, navController)}
-                            composable("update/{itemId}") { backStackEntry ->
-                                val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
-                                UpdateNote(navController, viewModel, itemID = itemId)
-                            }
-                        }
-                    }
+                    HomeNav(
+                        viewModel = MyViewModel(context)
+                    )
                 }
             }
         }
     }
+
 }
 
 @Composable
@@ -128,7 +79,7 @@ fun TabView(tabBarItems: List<TabBarItem>, navController: NavController) {
                         title = tabBarItem.title
                     )
                 },
-                label = {Text(tabBarItem.title)})
+                label = { Text(tabBarItem.title) })
         }
     }
 }
@@ -149,11 +100,3 @@ fun TabBarIconView(
     }
 }
 
-
-@Preview(showSystemUi = true)
-@Composable
-fun GreetingPreview() {
-    XuemiTheme {
-        Secondary(viewModel = MyViewModel(), navController = rememberNavController())
-    }
-}

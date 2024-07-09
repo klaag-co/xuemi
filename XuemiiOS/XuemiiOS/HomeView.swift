@@ -11,7 +11,7 @@ import SwiftUI
 
 enum SecondaryNumber {
     case one, two, three, four
-    
+
     var string: String {
         switch self {
         case .one:
@@ -22,6 +22,19 @@ enum SecondaryNumber {
             return "三"
         case .four:
             return "四"
+        }
+    }
+
+    var filename: String {
+        switch self {
+        case .one:
+            return "中一"
+        case .two:
+            return "中二"
+        case .three:
+            return "中三"
+        case .four:
+            return "中四"
         }
     }
 }

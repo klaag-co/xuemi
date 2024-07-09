@@ -9,76 +9,73 @@ import SwiftUI
 
 struct FlashcardView: View {
     @State private var currentSet: Int = 0
-    @State var vocabularies: [Vocabulary]
-    
+    var vocabularies: [Vocabulary]
+    var level: String
+    var chapter: String
+    var topic: String
+
     var body: some View {
         ZStack {
-            Color(UIColor(red: 240/255, green: 248/255, blue: 255/255, alpha: 1))
-                .edgesIgnoringSafeArea(.all)
             VStack {
-                HStack {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 24))
-                        .foregroundColor(.black)
-                        .padding(.leading, 16)
-                    
-                    Spacer()
-                    
-                    ProgressView(value: Double(currentSet) / Double(vocabularies.count), total: 1)
-                        .accentColor(.blue)
-                        .padding(.trailing, 16)
-                }
-                .padding(.top, 16)
-                
+                ProgressView(value: Double(currentSet) / Double(vocabularies.count), total: 1)
+                    .accentColor(.blue)
+                    .padding(30)
+
                 Spacer()
-                
-                TabView {
-                    ForEach($vocabularies, id: \.index) { vocab in
-                        VStack(spacing: 0) {
-                            ZStack {
+
+                if vocabularies.isEmpty {
+                    Text("No vocabulary found")
+                } else {
+                    TabView {
+                        ForEach(vocabularies, id: \.index) { vocab in
+                            VStack(spacing: 0) {
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(Color(UIColor(red: 240/255, green: 248/255, blue: 255/255, alpha: 1)))
                                     .shadow(radius: 4)
-                                    .padding(.horizontal, 30)
-                                    .padding(.vertical, 50)
-                                
-                                VStack(spacing: 16) {
-                                    HStack {
-                                        Spacer()
-                                        
-                                        Text(vocab.word.wrappedValue)
-                                            .font(.title2)
-                                            .fontWeight(.bold)
-                                        
-                                        Spacer()
-                                        
-                                        Image(systemName: "bookmark.fill")
-                                            .font(.system(size: 20))
+                                    .overlay {
+                                        VStack {
+                                            HStack {
+                                                Spacer()
+                                                Text("\(level): \(chapter) - \(topic)")
+                                                    .font(.title3)
+                                                    .fontWeight(.bold)
+                                                Spacer()
+                                                Button {
+
+                                                } label: {
+                                                    Image(systemName: "bookmark")
+                                                }
+                                            }
+                                            .padding([.horizontal, .top], 30)
+                                            Spacer()
+
+                                            Text(vocab.word)
+                                                .font(.system(size: 48))
+                                                .fontWeight(.bold)
+
+                                            Text(vocab.pinyin)
+                                                .font(.largeTitle)
+                                                .padding(.top, 5)
+
+                                            VStack {
+                                                Text(vocab.englishDefinition)
+                                                Text(vocab.chineseDefinition)
+                                                    .padding(.top, 5)
+                                            }
+                                            .font(.title3)
+                                            .padding(.top)
+                                            .multilineTextAlignment(.center)
+                                            Spacer()
+                                        }
+                                        .padding(.horizontal)
                                     }
-                                    .padding(.horizontal, 16)
-                                    .padding()
-                                    
-                                    Text(vocab.pinyin.wrappedValue)
-                                        .font(.largeTitle)
-                                        .fontWeight(.bold)
-                                    
-                                    Text(vocab.example.wrappedValue)
-                                        .font(.title2)
-                                    
-                                    Text(vocab.englishDefinition.wrappedValue)
-                                        .font(.title2)
-                                    
-                                    Text(vocab.chineseDefinition.wrappedValue)
-                                        .font(.title2)
-                                }
-                                .padding()
                             }
+                            .padding(30)
                         }
-                        .padding()
                     }
+                    .tabViewStyle(.page(indexDisplayMode: .never))
                 }
-                .tabViewStyle(.page(indexDisplayMode: .always))
-                
+
                 Spacer()
             }
         }
@@ -87,7 +84,7 @@ struct FlashcardView: View {
 
 #Preview {
     FlashcardView(vocabularies: [
-        Vocabulary(index: 1, word: "hi", pinyin: "hi", englishDefinition: "hi", chineseDefinition: "hi", example: "hi"),
+        Vocabulary(index: 1, word: "hello", pinyin: "hi", englishDefinition: "hi", chineseDefinition: "hi", example: "hi"),
         Vocabulary(index: 2, word: "hi2", pinyin: "hi2", englishDefinition: "hi2", chineseDefinition: "hi2", example: "hi2")
-                                ])
+    ], level: "中一", chapter: "单元一", topic: "Topic 1")
 }

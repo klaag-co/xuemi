@@ -18,20 +18,16 @@ enum Topic: CaseIterable {
             return "Topic 2"
         case .three:
             return "Topic 3"
-
         }
     }
 }
 
 struct TopicView: View {
-    
     var level: SecondaryNumber
     var chapter: Chapter
     
-    @State var showingFlashcards = false
-    
-    @State var topicSelected: Topic?
-    //    @State var showingSheet = false
+    @State private var showingFlashcards = false
+    @State private var topicSelected: Topic?
     
     var body: some View {
         ScrollView {
@@ -46,7 +42,7 @@ struct TopicView: View {
                 .mask(RoundedRectangle(cornerRadius: 16))
                 .padding([.horizontal, .bottom])
             
-            ForEach(Topic.allCases, id: \.hashValue) { topic in
+            ForEach(Topic.allCases, id: \.self) { topic in
                 Button {
                     topicSelected = topic
                 } label: {
@@ -61,112 +57,66 @@ struct TopicView: View {
                             .mask(RoundedRectangle(cornerRadius: 16))
                             .padding(.horizontal)
                     }
-                    //                    HStack {
-                    //                        Button {
-                    //
-                    //                        } label: {
-                    //                            Image(systemName: "hand.draw.fill")
-                    //                                .font(.title3)
-                    //                                .frame(maxWidth: .infinity)
-                    //                                .frame(height: 40)
-                    //                                .background(.customblue)
-                    //                                .foregroundStyle(.white)
-                    //                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                    //                        }
-                    //                        .padding(.horizontal)
-                    //
-                    //                        Button {
-                    //
-                    //                        } label: {
-                    //                            Image(systemName: "list.number")
-                    //                                .font(.title3)
-                    //                                .frame(maxWidth: .infinity)
-                    //                                .frame(height: 40)
-                    //                                .background(.customblue)
-                    //                                .foregroundStyle(.white)
-                    //                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                    //                        }
-                    //                        .padding(.horizontal)
-                    //
-                    //                        Button {
-                    //
-                    //                        } label: {
-                    //                            Image(systemName: "rectangle.portrait.on.rectangle.portrait.angled.fill")
-                    //                                .font(.title3)
-                    //                                .frame(maxWidth: .infinity)
-                    //                                .frame(height: 40)
-                    //                                .background(.customblue)
-                    //                                .foregroundStyle(.white)
-                    //                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                    //                        }
-                    //                        .padding(.horizontal)
-                    //                    }
-                    //                }
-                    //            }
-                    //            .buttonStyle(.plain)
-                    //        }
-                    //    }
-                    .navigationTitle(chapter.string)
-                    .sheet(isPresented: .constant(topicSelected != nil)) {
-                        if let topicSelected = topicSelected {
-                            NavigationStack {
-                                VStack {
-                                    Button {
-                                        
-                                    } label: {
-                                        Text("Handwriting")
-                                            .font(.title)
-                                            .padding()
-                                            .frame(height: 65)
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.black)
-                                            .background(.customgray)
-                                            .mask(RoundedRectangle(cornerRadius: 16))
-                                            .padding(.horizontal)
-                                    }
-                                    
-                                    Button {
-                                        
-                                    } label: {
-                                        Text("MCQ")
-                                            .font(.title)
-                                            .padding()
-                                            .frame(height: 65)
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.black)
-                                            .background(.customgray)
-                                            .mask(RoundedRectangle(cornerRadius: 16))
-                                            .padding(.horizontal)
-                                    }
-                                    
-                                    Button {
-                                        showingFlashcards.toggle()
-                                    } label: {
-                                        Text("Flashcards")
-                                            .font(.title)
-                                            .padding()
-                                            .frame(height: 65)
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.black)
-                                            .background(.customgray)
-                                            .mask(RoundedRectangle(cornerRadius: 16))
-                                            .padding(.horizontal)
-                                    }
+                }
+                .navigationTitle(chapter.string)
+                .sheet(isPresented: .constant(topicSelected != nil)) {
+                    if let topicSelected = topicSelected {
+                        NavigationStack {
+                            VStack {
+                                Button {
+                                    // Handwriting action
+                                } label: {
+                                    Text("Handwriting")
+                                        .font(.title)
+                                        .padding()
+                                        .frame(height: 65)
+                                        .frame(maxWidth: .infinity)
+                                        .foregroundStyle(.black)
+                                        .background(.customgray)
+                                        .mask(RoundedRectangle(cornerRadius: 16))
+                                        .padding(.horizontal)
                                 }
-                                .navigationTitle(topicSelected.string)
+                                
+                                Button {
+                                    // MCQ action
+                                } label: {
+                                    Text("MCQ")
+                                        .font(.title)
+                                        .padding()
+                                        .frame(height: 65)
+                                        .frame(maxWidth: .infinity)
+                                        .foregroundStyle(.black)
+                                        .background(.customgray)
+                                        .mask(RoundedRectangle(cornerRadius: 16))
+                                        .padding(.horizontal)
+                                }
+                                
+                                Button {
+                                    showingFlashcards.toggle()
+                                } label: {
+                                    Text("Flashcards")
+                                        .font(.title)
+                                        .padding()
+                                        .frame(height: 65)
+                                        .frame(maxWidth: .infinity)
+                                        .foregroundStyle(.black)
+                                        .background(.customgray)
+                                        .mask(RoundedRectangle(cornerRadius: 16))
+                                        .padding(.horizontal)
+                                }
                             }
-                            .presentationDetents([.medium])
-                            .onDisappear {
-                                self.topicSelected = nil
-                            }
-                            .padding(.top, -30)
+                            .navigationTitle(topicSelected.string)
                         }
+                        .presentationDetents([.medium])
+                        .padding(.top, -30)
                     }
                 }
             }
         }
         .navigationDestination(isPresented: $showingFlashcards) {
-            FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "secondary1", chapter: "chapter", topic: "topic"))
+            if let topicSelected = topicSelected {
+                FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string), level: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string)
+            }
         }
     }
 }

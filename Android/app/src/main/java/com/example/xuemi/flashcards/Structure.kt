@@ -13,7 +13,6 @@ data class Word (
     var chineseDefinition: String,
     var example: String
 )
-
 data class Topic(
     val topic1: List<Word> = emptyList(),
     val topic2: List<Word> = emptyList(),

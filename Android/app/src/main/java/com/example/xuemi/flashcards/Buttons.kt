@@ -84,7 +84,7 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
             navController.navigate("secondary")
         }
         title(viewModel)
-        topictemplate(viewModel, { isSheetOpen = true}, "一")
+        topictemplate(viewModel, { isSheetOpen = true }, "一")
         topictemplate(viewModel, { isSheetOpen = true }, "二" )
         topictemplate(viewModel, { isSheetOpen = true }, "三")
     }

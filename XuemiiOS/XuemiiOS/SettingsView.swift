@@ -24,14 +24,12 @@ struct SettingsView: View {
                     }
                 }
                 
-                // Acknowledgement Section
                 Section(header: Text("Acknowledgement").font(.headline)) {
                     ForEach(acknowledgements, id: \.self) { person in
                         AcknowledgementDetailView(person: person)
                     }
                 }
                 
-                // Help and Support Section
                 Section(header: Text("Help and Support").font(.headline)) {
                     HelpSupportView()
                 }
@@ -40,42 +38,6 @@ struct SettingsView: View {
         }
     }
 }
-
-//struct AppearanceView: View {
-//    var body: some View {
-//        VStack(alignment: .leading, spacing: 10) {
-//            Text("Select your preferred appearance mode:")
-//                .padding(.bottom)
-//            
-//            HStack {
-//                Button("Light Mode") {
-//                    UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .light
-//                }
-//                .padding()
-//                .background(Color.blue)
-//                .foregroundColor(.white)
-//                .cornerRadius(8)
-//                
-//                Button("Dark Mode") {
-//                    UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .dark
-//                }
-//                .padding()
-//                .background(Color.blue)
-//                .foregroundColor(.white)
-//                .cornerRadius(8)
-//                
-//                Button("System Default") {
-//                    UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .unspecified
-//                }
-//                .padding()
-//                .background(Color.blue)
-//                .foregroundColor(.white)
-//                .cornerRadius(8)
-//            }
-//        }
-//        .padding()
-//    }
-//}
 
 struct AppInfoDetailView: View {
     var body: some View {
@@ -133,7 +95,10 @@ let acknowledgements = [
     Acknowledgement(name: "Gracelyn Gosal", role: "Lead Developer (iOS), marketing", icon: "hammer.fill"),
     Acknowledgement(name: "Lau Rei Yan Abigail", role: "Lead Developer (Android)", icon: "hammer.fill"),
     Acknowledgement(name: "Yoshioka Lili", role: "Lead designer, marketing", icon: "paintbrush.fill"),
-    Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill")
+    Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill"),
+    Acknowledgement(name: "Ms Wong Lu Ting", role: "Head Of Department", icon: "person.fill"),
+    Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill"),
+    Acknowledgement(name: "Tristan Chay", role: "Consultant", icon: "person.fill")
 ]
 
 #Preview {

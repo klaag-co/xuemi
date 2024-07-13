@@ -13,6 +13,8 @@ struct FlashcardView: View {
     var level: String
     var chapter: String
     var topic: String
+    
+    @EnvironmentObject var bookmarkManager: BookmarkManager
 
     var body: some View {
         ZStack {
@@ -41,9 +43,13 @@ struct FlashcardView: View {
                                                     .fontWeight(.bold)
                                                 Spacer()
                                                 Button {
-
+                                                    if bookmarkManager.isBookmarked(vocabulary: vocab, level: level) {
+                                                        bookmarkManager.removeBookmark(vocabulary: vocab, level: level)
+                                                    } else {
+                                                        bookmarkManager.addBookmark(vocabulary: vocab, level: level)
+                                                    }
                                                 } label: {
-                                                    Image(systemName: "bookmark")
+                                                    Image(systemName: bookmarkManager.isBookmarked(vocabulary: vocab, level: level) ? "bookmark.fill" : "bookmark")
                                                 }
                                             }
                                             .padding([.horizontal, .top], 30)
@@ -87,4 +93,5 @@ struct FlashcardView: View {
         Vocabulary(index: 1, word: "hello", pinyin: "hi", englishDefinition: "hi", chineseDefinition: "hi", example: "hi"),
         Vocabulary(index: 2, word: "hi2", pinyin: "hi2", englishDefinition: "hi2", chineseDefinition: "hi2", example: "hi2")
     ], level: "中一", chapter: "单元一", topic: "Topic 1")
+    .environmentObject(BookmarkManager.shared)
 }

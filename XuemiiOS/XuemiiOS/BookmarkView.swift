@@ -8,38 +8,35 @@
 import SwiftUI
 
 struct BookmarkView: View {
-    struct FileItem: Hashable, Identifiable, CustomStringConvertible {
-        var id: Self { self }
-        var name: String
-        var children: [FileItem]? = nil
-        var description: String {
-            switch children {
-            case nil:
-                return "\(name)"
-            case .some(let children):
-                return children.isEmpty ? "\(name)" : "\(name)"
-            }
-        }
-    }
-
     @State private var searchText = ""
     
-    let fileHierarchyData: [FileItem] = [
-        FileItem(name: "中一", children: [
-            FileItem(name: "Random Word 1"),
-            FileItem(name: "Random Word 2"),
-            FileItem(name: "Random Word 3"),
-        ]),
-        FileItem(name: "中二", children: [
-            FileItem(name: "Random Word 4"),
-            FileItem(name: "Random Word 5"),
-        ])
-    ]
+    @EnvironmentObject var bookmarkManager: BookmarkManager
+    
+    var filteredBookmarks: [String: [Vocabulary]] {
+        if searchText.isEmpty {
+            return bookmarkManager.bookmarks
+        } else {
+            var result = [String: [Vocabulary]]()
+            for (key, value) in bookmarkManager.bookmarks {
+                let filtered = value.filter { $0.word.contains(searchText) }
+                if !filtered.isEmpty {
+                    result[key] = filtered
+                }
+            }
+            return result
+        }
+    }
     
     var body: some View {
         NavigationStack {
-            List(fileHierarchyData, children: \.children) { item in
-                Text(item.description)
+            List {
+                ForEach(filteredBookmarks.keys.sorted(), id: \.self) { level in
+                    Section(header: Text(level)) {
+                        ForEach(filteredBookmarks[level]!, id: \.index) { vocab in
+                            Text(vocab.word)
+                        }
+                    }
+                }
             }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .navigationTitle("Bookmarks")
@@ -49,4 +46,5 @@ struct BookmarkView: View {
 
 #Preview {
     BookmarkView()
+        .environmentObject(BookmarkManager.shared)
 }

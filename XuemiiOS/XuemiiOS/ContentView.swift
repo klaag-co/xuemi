@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @StateObject private var bookmarkManager = BookmarkManager.shared
+
     var body: some View {
         TabView {
             HomeView()
@@ -24,12 +25,14 @@ struct ContentView: View {
                     Label("Notes", systemImage: "doc.text")
                 }
             SettingsView()
-                .tabItem{
+                .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
         }
+        .environmentObject(bookmarkManager)
     }
 }
+
 #Preview {
     ContentView()
 }

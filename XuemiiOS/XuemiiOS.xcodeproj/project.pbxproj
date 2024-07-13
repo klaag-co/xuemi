@@ -15,6 +15,7 @@
 		1D0898D32BCE6A8000F2AFCA /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0898D22BCE6A8000F2AFCA /* BookmarkView.swift */; };
 		1D0898D52BCE6A9700F2AFCA /* NotesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0898D42BCE6A9700F2AFCA /* NotesDetailView.swift */; };
 		1D0898D72BCE6AA500F2AFCA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0898D62BCE6AA500F2AFCA /* SettingsView.swift */; };
+		1D7C2C9A2C421922000F1F1C /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C2C992C421922000F1F1C /* BookmarkManager.swift */; };
 		1D938C7E2C22BD6600329042 /* FlashcardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D938C7D2C22BD6600329042 /* FlashcardView.swift */; };
 		1D9DD61E2C3268F5004DA356 /* 中一.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D9DD61D2C3268F5004DA356 /* 中一.json */; };
 		1D9DD6202C326A23004DA356 /* Vocabulary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9DD61F2C326A23004DA356 /* Vocabulary.swift */; };
@@ -39,6 +40,7 @@
 		1D0898D22BCE6A8000F2AFCA /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
 		1D0898D42BCE6A9700F2AFCA /* NotesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDetailView.swift; sourceTree = "<group>"; };
 		1D0898D62BCE6AA500F2AFCA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		1D7C2C992C421922000F1F1C /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
 		1D938C7D2C22BD6600329042 /* FlashcardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardView.swift; sourceTree = "<group>"; };
 		1D9DD61D2C3268F5004DA356 /* 中一.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "中一.json"; sourceTree = "<group>"; };
 		1D9DD61F2C326A23004DA356 /* Vocabulary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocabulary.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				1D938C7D2C22BD6600329042 /* FlashcardView.swift */,
 				1D9DD61F2C326A23004DA356 /* Vocabulary.swift */,
 				1D0898D22BCE6A8000F2AFCA /* BookmarkView.swift */,
+				1D7C2C992C421922000F1F1C /* BookmarkManager.swift */,
 				1D9E9F152C3F9B31000AE606 /* BookmarkDetailView.swift */,
 				1DE294972C089C6400AB6763 /* NotesView.swift */,
 				1DE294992C089DAD00AB6763 /* NotesManager.swift */,
@@ -191,6 +194,7 @@
 			files = (
 				1DE2948C2C05D1CA00AB6763 /* ChapterView.swift in Sources */,
 				1D938C7E2C22BD6600329042 /* FlashcardView.swift in Sources */,
+				1D7C2C9A2C421922000F1F1C /* BookmarkManager.swift in Sources */,
 				1D9DD6202C326A23004DA356 /* Vocabulary.swift in Sources */,
 				1D0898D12BCE68AF00F2AFCA /* HomeView.swift in Sources */,
 				1DE294982C089C6400AB6763 /* NotesView.swift in Sources */,

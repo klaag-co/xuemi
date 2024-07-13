@@ -17,14 +17,232 @@ enum Topic: Identifiable, Codable, CaseIterable {
         }
     }
     
-    var string: String {
-        switch self {
+    func string(level: SecondaryNumber, chapter: Chapter) -> String {
+        switch level {
         case .one:
-            return "Topic 1"
+            switch chapter {
+            case .one:
+                switch self {
+                case .one:
+                    return "我的新同学"
+                case .two:
+                    return "一个蛋两个蛋三个蛋 "
+                case .three:
+                    return "张老师“审案”"
+                }
+            case .two:
+                switch self {
+                case .one:
+                    return "世界各地的新年风俗"
+                case .two:
+                    return "团圆饭"
+                case .three:
+                    return "幸运饺子"
+                }
+            case .three:
+                switch self {
+                case .one:
+                    return "走街串巷逛狮城"
+                case .two:
+                    return "魅力四射  星耀樟宜"
+                case .three:
+                    return "国家美术馆探秘"
+                }
+            case .four:
+                switch self {
+                case .one:
+                    return "培养好习惯"
+                case .two:
+                    return "迟到"
+                case .three:
+                    return "差不多先生"
+                }
+            case .five:
+                switch self {
+                case .one:
+                    return "我是创新王"
+                case .two:
+                    return "海底牧场游记"
+                case .three:
+                    return "难忘的建筑之旅"
+                }
+            case .six:
+                switch self {
+                case .one:
+                    return "我们的无名英雄"
+                case .two:
+                    return "我为狮城做贡献——走访地铁维修人员"
+                case .three:
+                    return "小人物的心声“一人一首新谣”专题系列报道"
+                }
+            case .eoy: return ""
+            }
         case .two:
-            return "Topic 2"
+            switch chapter {
+            case .one:
+                switch self {
+                case .one:
+                    return "我想对您说"
+                case .two:
+                    return "把爱说出来"
+                case .three:
+                    return "放风筝"
+                }
+            case .two:
+                switch self {
+                case .one:
+                    return "助养野生动物"
+                case .two:
+                    return "猫"
+                case .three:
+                    return "山中奇遇"
+                }
+            case .three:
+                switch self {
+                case .one:
+                    return "水都去哪儿了？"
+                case .two:
+                    return "人类最糟糕的发明"
+                case .three:
+                    return "手机被丢弃之后"
+                }
+            case .four:
+                switch self {
+                case .one:
+                    return "心情手账"
+                case .two:
+                    return "恐怖事件"
+                case .three:
+                    return "最美的姿势"
+                }
+            case .five:
+                switch self {
+                case .one:
+                    return "组屋：新加坡一道美丽的风景线"
+                case .two:
+                    return "雨树"
+                case .three:
+                    return "如果走散了"
+                }
+            case .six:
+                switch self {
+                case .one:
+                    return "新加坡与世界的联系"
+                case .two:
+                    return "多元而开放的新加坡"
+                case .three:
+                    return "别上假信息的当"
+                }
+            case .eoy: return ""
+            }
         case .three:
-            return "Topic 3"
+            switch chapter {
+            case .one:
+                switch self {
+                case .one:
+                    return "如何建立良好的人际关系"
+                case .two:
+                    return "谢谢你的沉默"
+                case .three:
+                    return "饼干罐的秘密"
+                }
+            case .two:
+                switch self {
+                case .one:
+                    return "健康生活系列广告"
+                case .two:
+                    return "吃茶 喝茶 品茶"
+                case .three:
+                    return "街舞"
+                }
+            case .three:
+                switch self {
+                case .one:
+                    return "我的社区节"
+                case .two:
+                    return "远亲不如近邻"
+                case .three:
+                    return "社区网络群组  让邻里感情更深厚"
+                }
+            case .four:
+                switch self {
+                case .one:
+                    return "成为演说高手"
+                case .two:
+                    return "沟通面面观"
+                case .three:
+                    return "社交媒体  拉近你我他"
+                }
+            case .five:
+                switch self {
+                case .one:
+                    return "你在学什么"
+                case .two:
+                    return "学然后知不足"
+                case .three:
+                    return "终身学习"
+                }
+            case .six:
+                switch self {
+                case .one:
+                    return "真善美摄影展"
+                case .two:
+                    return "父亲和鱼"
+                case .three:
+                    return "唯一的听众"
+                }
+            case .eoy: return ""
+            }
+        case .four:
+            switch chapter {
+            case .one:
+                switch self {
+                case .one:
+                    return "关怀满人间>——慈善团体简介"
+                case .two:
+                    return "坦然走过乞丐"
+                case .three:
+                    return "给善良插上翅膀"
+                }
+            case .two:
+                switch self {
+                case .one:
+                    return "戏剧中的人生百态"
+                case .two:
+                    return "林黛玉进贾府"
+                case .three:
+                    return "三顾茅庐"
+                }
+            case .three:
+                switch self {
+                case .one:
+                    return "被破坏的生态平衡"
+                case .two:
+                    return "对抗气候变化的超级英雄——红树林"
+                case .three:
+                    return "狼鹿效应"
+                }
+            case .four:
+                switch self {
+                case .one:
+                    return "亚细安知多少"
+                case .two:
+                    return "自知之明"
+                case .three:
+                    return "小国更需要合作"
+                }
+            case .five:
+                switch self {
+                case .one:
+                    return "追逐梦想——为梦想加油点赞"
+                case .two:
+                    return "江城子 · 密州出猎"
+                case .three:
+                    return "在山的那边"
+                }
+            case .six: return ""
+            case .eoy: return ""
+            }
         }
     }
 }
@@ -56,7 +274,7 @@ struct TopicView: View {
                     topicSelected = topic
                 } label: {
                     VStack(alignment: .leading) {
-                        Text(topic.string)
+                        Text(topic.string(level: level, chapter: chapter))
                             .font(.title)
                             .padding()
                             .frame(height: 65)
@@ -115,7 +333,7 @@ struct TopicView: View {
                                         .padding(.horizontal)
                                 }
                             }
-                            .navigationTitle(topicSelected.string)
+                            .navigationTitle(topicSelected.string(level: level, chapter: chapter))
                         }
                         .presentationDetents([.medium])
                         .padding(.top, -30)
@@ -125,7 +343,7 @@ struct TopicView: View {
         }
         .navigationDestination(isPresented: $showingFlashcards) {
             if let topicSelected = topicSelected {
-                FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string), level: level, chapter: chapter, topic: topicSelected)
+                FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string(level: level, chapter: chapter)), level: level, chapter: chapter, topic: topicSelected)
             }
         }
     }

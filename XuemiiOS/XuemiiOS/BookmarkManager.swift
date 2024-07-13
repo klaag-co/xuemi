@@ -7,10 +7,18 @@
 
 import Foundation
 
+struct BookmarkedVocabulary: Identifiable, Codable {
+    var id = UUID()
+    var vocab: Vocabulary
+    var level: SecondaryNumber
+    var chapter: Chapter
+    var topic: Topic
+}
+
 class BookmarkManager: ObservableObject {
     static let shared: BookmarkManager = .init()
     
-    @Published var bookmarks: [String: [Vocabulary]] = [:] {
+    @Published var bookmarks: [BookmarkedVocabulary] = [] {
         didSet {
             save()
         }
@@ -39,25 +47,8 @@ class BookmarkManager: ObservableObject {
         let propertyListDecoder = PropertyListDecoder()
                 
         if let retrievedBookmarkData = try? Data(contentsOf: archiveURL),
-            let bookmarksDecoded = try? propertyListDecoder.decode([String: [Vocabulary]].self, from: retrievedBookmarkData) {
+            let bookmarksDecoded = try? propertyListDecoder.decode([BookmarkedVocabulary].self, from: retrievedBookmarkData) {
             bookmarks = bookmarksDecoded
         }
-    }
-    
-    func addBookmark(vocabulary: Vocabulary, level: String) {
-        if bookmarks[level] == nil {
-            bookmarks[level] = []
-        }
-        if !bookmarks[level]!.contains(where: { $0.index == vocabulary.index }) {
-            bookmarks[level]!.append(vocabulary)
-        }
-    }
-    
-    func removeBookmark(vocabulary: Vocabulary, level: String) {
-        bookmarks[level]?.removeAll(where: { $0.index == vocabulary.index })
-    }
-    
-    func isBookmarked(vocabulary: Vocabulary, level: String) -> Bool {
-        return bookmarks[level]?.contains(where: { $0.index == vocabulary.index }) ?? false
     }
 }

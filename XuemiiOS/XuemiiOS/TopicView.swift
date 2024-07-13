@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Topic: Identifiable, CaseIterable {
+enum Topic: Identifiable, Codable, CaseIterable {
     case one, two, three
     
     var id: UUID {
@@ -125,7 +125,7 @@ struct TopicView: View {
         }
         .navigationDestination(isPresented: $showingFlashcards) {
             if let topicSelected = topicSelected {
-                FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string), level: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string)
+                FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string), level: level, chapter: chapter, topic: topicSelected)
             }
         }
     }

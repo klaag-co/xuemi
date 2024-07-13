@@ -12,34 +12,32 @@ struct BookmarkView: View {
     
     @EnvironmentObject var bookmarkManager: BookmarkManager
     
-    var filteredBookmarks: [String: [Vocabulary]] {
+    var filteredBookmarks: [BookmarkedVocabulary] {
         if searchText.isEmpty {
             return bookmarkManager.bookmarks
         } else {
-            var result = [String: [Vocabulary]]()
-            for (key, value) in bookmarkManager.bookmarks {
-                let filtered = value.filter { $0.word.contains(searchText) }
-                if !filtered.isEmpty {
-                    result[key] = filtered
-                }
-            }
-            return result
+            return bookmarkManager.bookmarks.filter({ $0.vocab.word.uppercased().contains(searchText.uppercased()) })
         }
     }
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(filteredBookmarks.keys.sorted(), id: \.self) { level in
-                    Section(header: Text(level)) {
-                        ForEach(filteredBookmarks[level]!, id: \.index) { vocab in
-                            Text(vocab.word)
-                        }
-                    }
-                }
+                bookmarkedWordsForLevel(level: .one)
+                bookmarkedWordsForLevel(level: .two)
+                bookmarkedWordsForLevel(level: .three)
+                bookmarkedWordsForLevel(level: .four)
             }
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .navigationTitle("Bookmarks")
+        }
+    }
+    
+    func bookmarkedWordsForLevel(level: SecondaryNumber) -> some View {
+        DisclosureGroup(level.filename) {
+            ForEach(filteredBookmarks.filter({$0.level == level}), id: \.id) { bookmarkedVocab in
+                Text(bookmarkedVocab.vocab.word)
+            }
         }
     }
 }

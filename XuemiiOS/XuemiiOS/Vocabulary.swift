@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Vocabulary: Codable {
+struct Vocabulary: Codable, Equatable {
     var index: Int
     var word: String
     var pinyin: String

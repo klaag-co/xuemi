@@ -75,12 +75,12 @@ struct AcknowledgementDetailView: View {
 
 struct HelpSupportView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading) {
             Text("For help and support, please contact:")
-            Text("kmy_er_sze_lei@s2023.ssts.edu.sg")
-                .foregroundColor(.blue)
+            Link(destination: URL(string: "mailto:kmy_er_sze_lei@s2023.ssts.edu.sg")!) {
+                Text("kmy_er_sze_lei@s2023.ssts.edu.sg")
+            }
         }
-        .padding()
     }
 }
 
@@ -96,9 +96,9 @@ let acknowledgements = [
     Acknowledgement(name: "Lau Rei Yan Abigail", role: "Lead Developer (Android)", icon: "hammer.fill"),
     Acknowledgement(name: "Yoshioka Lili", role: "Lead designer, marketing", icon: "paintbrush.fill"),
     Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill"),
+    Acknowledgement(name: "Chay Yu Hung Tristan", role: "Consultant", icon: "person.fill"),
     Acknowledgement(name: "Ms Wong Lu Ting", role: "Head Of Department", icon: "person.fill"),
-    Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill"),
-    Acknowledgement(name: "Tristan Chay", role: "Consultant", icon: "person.fill")
+    Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill")
 ]
 
 #Preview {

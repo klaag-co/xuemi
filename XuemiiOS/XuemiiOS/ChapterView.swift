@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Chapter: CaseIterable {
+enum Chapter: CaseIterable, Codable {
     case one, two, three, four, five, six, eoy
     
     var string: String {

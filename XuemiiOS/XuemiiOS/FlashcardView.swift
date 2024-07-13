@@ -10,9 +10,11 @@ import SwiftUI
 struct FlashcardView: View {
     @State private var currentSet: Int = 0
     var vocabularies: [Vocabulary]
-    var level: String
-    var chapter: String
-    var topic: String
+    var level: SecondaryNumber
+    var chapter: Chapter
+    var topic: Topic
+    
+    @EnvironmentObject var bookmarkManager: BookmarkManager
 
     var body: some View {
         ZStack {
@@ -36,14 +38,18 @@ struct FlashcardView: View {
                                         VStack {
                                             HStack {
                                                 Spacer()
-                                                Text("\(level): \(chapter) - \(topic)")
+                                                Text("中\(level.string): \(chapter.string) - \(topic.string)")
                                                     .font(.title3)
                                                     .fontWeight(.bold)
                                                 Spacer()
                                                 Button {
-
+                                                    if !bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
+                                                        bookmarkManager.bookmarks.append(BookmarkedVocabulary(vocab: vocab, level: level, chapter: chapter, topic: topic))
+                                                    } else {
+                                                        bookmarkManager.bookmarks.removeAll(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic})
+                                                    }
                                                 } label: {
-                                                    Image(systemName: "bookmark")
+                                                    Image(systemName: bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) ? "bookmark.fill" : "bookmark")
                                                 }
                                             }
                                             .padding([.horizontal, .top], 30)
@@ -86,5 +92,6 @@ struct FlashcardView: View {
     FlashcardView(vocabularies: [
         Vocabulary(index: 1, word: "hello", pinyin: "hi", englishDefinition: "hi", chineseDefinition: "hi", example: "hi"),
         Vocabulary(index: 2, word: "hi2", pinyin: "hi2", englishDefinition: "hi2", chineseDefinition: "hi2", example: "hi2")
-    ], level: "中一", chapter: "单元一", topic: "Topic 1")
+    ], level: .one, chapter: .one, topic: .one)
+    .environmentObject(BookmarkManager.shared)
 }

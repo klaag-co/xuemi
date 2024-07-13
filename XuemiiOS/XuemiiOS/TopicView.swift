@@ -7,8 +7,15 @@
 
 import SwiftUI
 
-enum Topic: CaseIterable {
+enum Topic: Identifiable, Codable, CaseIterable {
     case one, two, three
+    
+    var id: UUID {
+        switch self {
+        case .one, .two, .three:
+            return UUID()
+        }
+    }
     
     var string: String {
         switch self {
@@ -26,6 +33,7 @@ struct TopicView: View {
     var level: SecondaryNumber
     var chapter: Chapter
     
+    @State private var showingSheet = false
     @State private var showingFlashcards = false
     @State private var topicSelected: Topic?
     
@@ -44,6 +52,7 @@ struct TopicView: View {
             
             ForEach(Topic.allCases, id: \.self) { topic in
                 Button {
+                    showingSheet = true
                     topicSelected = topic
                 } label: {
                     VStack(alignment: .leading) {
@@ -59,7 +68,7 @@ struct TopicView: View {
                     }
                 }
                 .navigationTitle(chapter.string)
-                .sheet(isPresented: .constant(topicSelected != nil)) {
+                .sheet(isPresented: $showingSheet) {
                     if let topicSelected = topicSelected {
                         NavigationStack {
                             VStack {
@@ -92,6 +101,7 @@ struct TopicView: View {
                                 }
                                 
                                 Button {
+                                    showingSheet = false
                                     showingFlashcards.toggle()
                                 } label: {
                                     Text("Flashcards")
@@ -115,7 +125,7 @@ struct TopicView: View {
         }
         .navigationDestination(isPresented: $showingFlashcards) {
             if let topicSelected = topicSelected {
-                FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string), level: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string)
+                FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string), level: level, chapter: chapter, topic: topicSelected)
             }
         }
     }

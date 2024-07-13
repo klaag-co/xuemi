@@ -11,9 +11,17 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-
+                
+                // App Section
                 Section(header: Text("App").font(.headline)) {
-                    AppInfoView()
+                    NavigationLink(destination: AppInfoDetailView()) {
+                        HStack {
+                            Text("About Our App")
+                            Spacer()
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.vertical, 8)
+                    }
                 }
                 
                 Section(header: Text("Acknowledgement").font(.headline)) {
@@ -31,16 +39,17 @@ struct SettingsView: View {
     }
 }
 
-
-
-struct AppInfoView: View {
+struct AppInfoDetailView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Our app, Xuemi, is an app that will help secondary school students improve their Chinese language in a more convenient manner.")
-            Text("Students will be able to study anywhere, anytime. The app features will allow students to practise their reading and writing and strengthen their use of the Chinese language. Students will be able to learn how to write the Chinese words correctly, and read passages fluently and with confidence.")
-            Text("The app includes a test function which tests students based on the ‘O’ level marking scheme. The content from sec 1-sec 4 will be compiled in this app, allowing easier access to materials for students. Additionally, we will include a note-taking function in the app.")
+        ScrollView {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Our app, Xuemi, is an app that will help secondary school students improve their Chinese language in a more convenient manner.")
+                Text("Students will be able to study anywhere, anytime. The app features will allow students to practise their reading and writing and strengthen their use of the Chinese language. Students will be able to learn how to write the Chinese words correctly, and read passages fluently and with confidence.")
+                Text("The app includes a test function which tests students based on the ‘O’ level marking scheme. The content from sec 1-sec 4 will be compiled in this app, allowing easier access to materials for students. Additionally, we will include a note-taking function in the app.")
+            }
+            .padding()
         }
-        .padding()
+        .navigationTitle("About Our App")
     }
 }
 
@@ -66,12 +75,12 @@ struct AcknowledgementDetailView: View {
 
 struct HelpSupportView: View {
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading) {
             Text("For help and support, please contact:")
-            Text("kmy_er_sze_lei@s2023.ssts.edu.sg")
-                .foregroundColor(.blue)
+            Link(destination: URL(string: "mailto:kmy_er_sze_lei@s2023.ssts.edu.sg")!) {
+                Text("kmy_er_sze_lei@s2023.ssts.edu.sg")
+            }
         }
-        .padding()
     }
 }
 
@@ -86,9 +95,11 @@ let acknowledgements = [
     Acknowledgement(name: "Gracelyn Gosal", role: "Lead Developer (iOS), marketing", icon: "hammer.fill"),
     Acknowledgement(name: "Lau Rei Yan Abigail", role: "Lead Developer (Android)", icon: "hammer.fill"),
     Acknowledgement(name: "Yoshioka Lili", role: "Lead designer, marketing", icon: "paintbrush.fill"),
-    Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill")
+    Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill"),
+    Acknowledgement(name: "Chay Yu Hung Tristan", role: "Consultant", icon: "person.fill"),
+    Acknowledgement(name: "Ms Wong Lu Ting", role: "Head Of Department", icon: "person.fill"),
+    Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill")
 ]
-
 
 #Preview {
     SettingsView()

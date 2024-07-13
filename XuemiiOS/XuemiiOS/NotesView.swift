@@ -16,7 +16,7 @@ struct NotesView: View {
         if searchText.isEmpty {
             return notesManager.notes
         } else {
-            return notesManager.notes.filter { $0.title.contains(searchText) }
+            return notesManager.notes.filter { $0.title.uppercased().contains(searchText.uppercased()) }
         }
     }
 

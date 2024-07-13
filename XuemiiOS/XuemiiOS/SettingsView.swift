@@ -78,7 +78,7 @@ struct HelpSupportView: View {
         VStack(alignment: .leading) {
             Text("For help and support, please contact:")
             Link(destination: URL(string: "mailto:kmy_er_sze_lei@s2023.ssts.edu.sg")!) {
-                Text("kmy_er_sze_lei@s2023.ssts.edu.sg")
+                Text("kmy_er_sze_lei@s2023.ssts.edu.sg, klaag.co@gmail.com")
             }
         }
     }

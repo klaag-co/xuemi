@@ -3,6 +3,7 @@ package com.example.xuemi
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.LiveData
@@ -13,6 +14,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
+import com.example.xuemi.db.BookmarksDatabase
+import com.example.xuemi.db.BookmarksRepository
 import com.example.xuemi.db.NotesDatabase
 import com.example.xuemi.flashcards.Chapter
 import com.example.xuemi.flashcards.FlashcardScreen
@@ -26,6 +29,7 @@ import kotlinx.coroutines.launch
 class MainApplication: Application() {
     companion object {
         lateinit var notesDatabase: NotesDatabase
+        lateinit var bookmarksDatabase: BookmarksDatabase
     }
 
     override fun onCreate() {
@@ -35,8 +39,15 @@ class MainApplication: Application() {
             NotesDatabase::class.java,
             NotesDatabase.NAME
         ).build()
+        bookmarksDatabase = Room.databaseBuilder(
+            applicationContext,
+            BookmarksDatabase::class.java,
+            BookmarksDatabase.NAME
+        ).build()
     }
 }
+
+
 
 class MyViewModel( appContext: Context ) : ViewModel() {
 
@@ -111,6 +122,65 @@ class MyViewModel( appContext: Context ) : ViewModel() {
         return notesDao.searchNotesByTitle(searchText, type)
     }
 
+//============================================================//
+
+    val bookmarksDao = MainApplication.bookmarksDatabase.getBookmarksDao()
+    private val _bookmarksList = MutableLiveData<List<Bookmark>>()
+    val bookmarksList: LiveData<List<Bookmark>> get() = _bookmarksList
+    private val repository: BookmarksRepository
+
+    init {
+        loadBookmarks()
+        repository = BookmarksRepository(bookmarksDao)
+    }
+    fun loadBookmarks() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val bookmarks = bookmarksDao.getAllBookmarks()
+            _bookmarksList.postValue(bookmarks)
+        }
+    }
+
+
+    fun addBookmark(section: BookmarkSection, word: String, chapter: String, topic: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                bookmarksDao.addBookmark(Bookmark(type = section, word = word, chapter = chapter, topic = topic))
+            } catch (e: Exception) {
+                // Handle exception (e.g., log error message)
+                Log.e("MyViewModel", "Error adding bookmark: ${e.message}", e)
+            }        }
+    }
+
+    fun deleteBookmark(id: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            bookmarksDao.deleteBookmark(id)
+        }
+    }
+
+    fun clearAllBookmarks() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.clearAllBookmarks()
+        }
+    }
+
+
+
+    private val _bookmarkWords = MutableLiveData<List<String>>()
+    val bookmarkWords: LiveData<List<String>> get() = _bookmarkWords
+
+    fun loadBookmarkNames() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val words = repository.getBookmarkWords()
+            _bookmarkWords.postValue(words)
+        }
+    }
+
+
+//============================================================//
+
+    fun searchBookmarksByTitle(searchText: String, type: BookmarkSection): LiveData<List<Bookmark>> {
+        return bookmarksDao.searchBookmarksByTitle(searchText, type)
+    }
 
 //============================================================//
 
@@ -153,7 +223,7 @@ fun HomeNav(viewModel: MyViewModel) {
         NavHost(navController, startDestination = homeTab.title) {
             // tabs
             composable(homeTab.title) { Home(viewModel, navController) }
-            composable(bookmarkTab.title) { Favourites() }
+            composable(bookmarkTab.title) { Bookmarks(viewModel) }
             composable(notesTab.title) { Notes(viewModel, navController) }
             composable(settingsTab.title) { Settings() }
 
@@ -166,10 +236,7 @@ fun HomeNav(viewModel: MyViewModel) {
                 val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
                 UpdateNote(navController, viewModel, itemID = itemId)
             }
-            composable("flashcard/{secondary}") {backStackEntry ->
-                val secondary= backStackEntry.arguments?.getString("secondary")
-                FlashcardScreen(viewModel, secondary.toString())
-            }
+            composable("flashcards") { FlashcardScreen(viewModel) }
 
         }
     }

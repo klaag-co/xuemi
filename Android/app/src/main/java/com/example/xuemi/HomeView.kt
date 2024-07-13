@@ -1,8 +1,11 @@
 package com.example.xuemi
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -35,7 +39,10 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             colors = ButtonDefaults.buttonColors(Color(49, 113, 200)),
             //border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color.Black, Color.White))),
             shape = RoundedCornerShape(20.dp),
-            modifier = Modifier.padding(horizontal = 26.dp))
+            modifier = Modifier
+                .padding(horizontal = 26.dp)
+                .padding(bottom = 10.dp))
+
         {
             Image(
                 painter = painterResource(id = R.drawable.continue_learning),
@@ -45,15 +52,17 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
 
             )
         }
-        Row {// 1st button row
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "一", top = 14, bottom = 14, right = 12, left = 28)
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "二", top = 14, bottom = 14, right = 1, left = 1)
-
+        Row (horizontalArrangement = Arrangement.Center, modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(0.29f),){// 1st button row
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "一", 0.44f)
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "二", 0.8f)
         }
-        Row {// 2nd button row
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "三", top = 0, bottom = 0, right = 12, left = 28)
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "四", top = 0, bottom = 0, right = 1, left = 1)
-
+        Row (horizontalArrangement = Arrangement.Center, modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(0.4f)){// 2nd button row
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "三",0.44f)
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "四",0.8f)
         }
         Button(onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
@@ -61,7 +70,7 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 25.dp, vertical = 15.dp))
+                .padding(horizontal = 25.dp, vertical = 10.dp))
 
 
         {
@@ -78,32 +87,36 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
 }
 
 @Composable
-fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: Boolean, secondary: String?, top: Int, bottom: Int, right: Int, left: Int) {
-    Button(
-        onClick = { navController.navigate("secondary")
-                  viewModel.updateItem(0, "$secondary")
-                  if (sec4) {
-                      viewModel.offButton()
-                  } else {
-                      viewModel.onButton()
-                  }
-                  },
-        colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
-                Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
-        modifier = Modifier.padding(
-            top = top.dp,
-            bottom = bottom.dp,
-            end = right.dp,
-            start = left.dp
-        ),
-        shape = RoundedCornerShape(20.dp)
-    ) {
-        Column {
-            Text("中$secondary",
-                modifier = Modifier.padding(vertical = 25.dp),
-                style = MaterialTheme.typography.displayLarge,
-                fontWeight = FontWeight.Bold
-            )
+fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: Boolean, secondary: String?, size: Float) {
+    Box (Modifier.fillMaxWidth(size)){
+        Button(
+            onClick = {
+                navController.navigate("secondary")
+                viewModel.updateItem(0, "$secondary")
+                if (sec4) {
+                    viewModel.offButton()
+                } else {
+                    viewModel.onButton()
+                }
+            },
+            colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
+            Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
+
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .padding(5.dp)
+                .fillMaxHeight()
+                .fillMaxWidth()
+        ) {
+            Column {
+                Text(
+                    "中$secondary",
+//                modifier = Modifier.padding(vertical = 26.dp, horizontal = 3.dp),
+                    style = MaterialTheme.typography.displayLarge,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }

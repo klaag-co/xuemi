@@ -3,7 +3,6 @@ package com.example.xuemi
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.LiveData
@@ -116,7 +115,6 @@ class MyViewModel( appContext: Context ) : ViewModel() {
     }
 
 
-//============================================================//
 
     fun searchNotesByTitle(searchText: String, type: NoteType): LiveData<List<Note>> {
         return notesDao.searchNotesByTitle(searchText, type)
@@ -130,9 +128,12 @@ class MyViewModel( appContext: Context ) : ViewModel() {
     private val repository: BookmarksRepository
 
     init {
-        loadBookmarks()
         repository = BookmarksRepository(bookmarksDao)
+        loadBookmarks()
+        loadBookmarkNames()
     }
+
+
     fun loadBookmarks() {
         viewModelScope.launch(Dispatchers.IO) {
             val bookmarks = bookmarksDao.getAllBookmarks()
@@ -140,26 +141,28 @@ class MyViewModel( appContext: Context ) : ViewModel() {
         }
     }
 
-
-    fun addBookmark(section: BookmarkSection, word: String, chapter: String, topic: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                bookmarksDao.addBookmark(Bookmark(type = section, word = word, chapter = chapter, topic = topic))
-            } catch (e: Exception) {
-                // Handle exception (e.g., log error message)
-                Log.e("MyViewModel", "Error adding bookmark: ${e.message}", e)
-            }        }
-    }
-
-    fun deleteBookmark(id: Long) {
+    fun deleteBookmark(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             bookmarksDao.deleteBookmark(id)
+            loadBookmarks()
+            loadBookmarkNames()
+
         }
     }
 
-    fun clearAllBookmarks() {
+
+    fun addBookmark(section: BookmarkSection, word: String, chapter: String, topic: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.clearAllBookmarks()
+            bookmarksDao.addBookmark(
+                Bookmark(
+                    type = section,
+                    word = word,
+                    chapter = chapter,
+                    topic = topic
+                )
+            )
+            loadBookmarks()
+            loadBookmarkNames()
         }
     }
 
@@ -172,11 +175,11 @@ class MyViewModel( appContext: Context ) : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val words = repository.getBookmarkWords()
             _bookmarkWords.postValue(words)
+            loadBookmarks()
+            loadBookmarkNames()
         }
     }
 
-
-//============================================================//
 
     fun searchBookmarksByTitle(searchText: String, type: BookmarkSection): LiveData<List<Bookmark>> {
         return bookmarksDao.searchBookmarksByTitle(searchText, type)
@@ -223,7 +226,7 @@ fun HomeNav(viewModel: MyViewModel) {
         NavHost(navController, startDestination = homeTab.title) {
             // tabs
             composable(homeTab.title) { Home(viewModel, navController) }
-            composable(bookmarkTab.title) { Bookmarks(viewModel) }
+            composable(bookmarkTab.title) { Bookmarks(viewModel, navController) }
             composable(notesTab.title) { Notes(viewModel, navController) }
             composable(settingsTab.title) { Settings() }
 

@@ -183,7 +183,7 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
             )
 
             LazyColumn (Modifier.padding(bottom = 100.dp)){
-                items(1) {
+                item {
                     groupedList(navController, "EXAM", examNotes, delete, viewModel)
                     groupedList(navController, "NOTES", notesNotes, delete, viewModel)
                     groupedList(navController, "SECONDARY 1", sec1, delete, viewModel)

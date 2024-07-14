@@ -1,5 +1,6 @@
 package com.example.xuemi.flashcards
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -24,7 +25,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -56,6 +56,12 @@ fun FlashcardScreen(viewModel: MyViewModel) {
         "三" -> chapterData?.topic3?.topic
         else -> emptyList()
     }
+    val wordName = when (viewModel.getFromList(3)) {
+        "一" -> chapterData?.topic1?.name
+        "二" -> chapterData?.topic2?.name
+        "三" -> chapterData?.topic3?.name
+        else -> ""
+    }
 
     wordDataSize = wordList?.size ?: 0
 
@@ -82,7 +88,9 @@ fun FlashcardScreen(viewModel: MyViewModel) {
 
                 if (wordData != null) {
                     Column {
-                        Flashcard(wordData, viewModel)
+                        Flashcard(wordData, viewModel, viewModel.getFromList(0), viewModel.getFromList(1),
+                            wordName.toString()
+                        )
                         Spacer(Modifier.padding(30.dp))
                     }
 
@@ -98,19 +106,19 @@ fun FlashcardScreen(viewModel: MyViewModel) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Flashcard(wordSets: Word, viewModel: MyViewModel) {
+fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter: String, topic: String) {
     LaunchedEffect(Unit) {
+        viewModel.loadBookmarks()
         viewModel.loadBookmarkNames()
     }
 
     val bookmarkNames by viewModel.bookmarkWords.observeAsState(emptyList())
-    var bookmarkState by remember { mutableStateOf(wordSets.word in bookmarkNames) }
-    val bookmarkList = viewModel.bookmarksList.observeAsState(emptyList())
-    val bookmarkId = bookmarkList.value.find { Abookmark ->
-        // Replace 'condition' with your actual condition to find the bookmark you want
-        // For example, finding a bookmark with a specific word
-        Abookmark.word == wordSets.word
-    }?.id
+    val bookmarkList by viewModel.bookmarksList.observeAsState(emptyList())
+
+    val bookmarkInside = bookmarkNames.contains(wordSets.word)
+
+
+
     Card (
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
@@ -122,6 +130,8 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel) {
 
     ){
         Box( Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Log.d("BookmarkCheck","${wordSets.word} $bookmarkInside")
+
 
             LazyColumn(modifier = Modifier
                 .padding(vertical = 50.dp)
@@ -130,16 +140,16 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel) {
 
                 stickyHeader {
                     Text(
-                        "中${viewModel.getFromList(0)}:单元${viewModel.getFromList(1)}", style = MaterialTheme.typography.h5,
+                        "中$secondary: 单元$chapter: $topic", style = MaterialTheme.typography.h6,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
                             .background(color = Color(219, 238, 255))
                             .fillMaxWidth()
-                            .padding(vertical = 10.dp)
+                            .padding(vertical = 12.dp)
 
                     )
                 }
-                items(1) {
+                item {
                     Text(wordSets.word, textAlign = TextAlign.Center, style = MaterialTheme.typography.h2)
                     Text(wordSets.pinyin, textAlign = TextAlign.Center, style = MaterialTheme.typography.h4)
                     Text(wordSets.chineseDefinition, textAlign = TextAlign.Center, style = MaterialTheme.typography.h4, modifier = Modifier.padding(vertical = 10.dp))
@@ -149,30 +159,30 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel) {
             Box (
                 Modifier
                     .fillMaxSize()
-                    .padding(top = 26.dp, end = 17.dp), contentAlignment = Alignment.TopEnd){
+                    .padding(top = 18.dp, bottom= 20.dp, end = 17.dp), contentAlignment = Alignment.TopEnd){
                 IconButton(
                     onClick = {
-                        if (bookmarkState) {
-                            bookmarkId?.let { viewModel.deleteBookmark(it) }
+                        if (bookmarkInside) {
+                            val bookmarkToDelete = bookmarkList.find { it.word == wordSets.word }
+                            bookmarkToDelete?.let { viewModel.deleteBookmark(it.id) }
+
 
                         } else {
                             viewModel.addBookmark(
                                 BookmarkSection.valueOf("中${viewModel.getFromList(0)}"),
                                 wordSets.word,
-                                viewModel.getFromList(0),
-                                viewModel.getFromList(1)
+                                viewModel.getFromList(1),
+                                viewModel.getFromList(3)
                             )
 
                         }
-                        bookmarkState = !bookmarkState
-
-
+                        viewModel.loadBookmarkNames()
                     }
                 )
                 {
                     Icon(
                         painter = painterResource(id =
-                        if (bookmarkState) {
+                        if (bookmarkInside) {
                             R.drawable.bookmark
                         } else {
                             R.drawable.o_bookmark

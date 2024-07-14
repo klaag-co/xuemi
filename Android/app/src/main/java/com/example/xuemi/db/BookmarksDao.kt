@@ -19,25 +19,19 @@ interface BookmarksDao {
     @Insert
     fun addBookmark(bookmark: Bookmark)
 
-    @Query("Delete FROM BOOKMARK where id=:id")
-    fun deleteBookmark(id: Long)
+    @Query("DELETE FROM BOOKMARK where id=:id")
+    fun deleteBookmark(id: Int)
     @Query("SELECT word FROM Bookmark")
     fun loadWords(): List<BookmarkWord>
 
     @Query("SELECT * FROM Bookmark WHERE word LIKE '%' || :searchText  || '%' AND type = :type")
     fun searchBookmarksByTitle(searchText: String, type: BookmarkSection): LiveData<List<Bookmark>>
 
-    @Query("DELETE FROM bookmark")
-    fun clearAllBookmarks()
 
 }
 
 class BookmarksRepository(private val bookmarksDao: BookmarksDao) {
-
     fun getBookmarkWords(): List<String> {
         return bookmarksDao.loadWords().map { it.word }
-    }
-    fun clearAllBookmarks() {
-        bookmarksDao.clearAllBookmarks()
     }
 }

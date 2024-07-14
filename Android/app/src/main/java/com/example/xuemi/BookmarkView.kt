@@ -1,4 +1,6 @@
 package com.example.xuemi
+
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -11,17 +13,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
@@ -38,8 +40,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+
 
 enum class BookmarkSection {
     中一, 中二, 中三, 中四
@@ -47,7 +51,7 @@ enum class BookmarkSection {
 @Entity
 data class Bookmark(
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    val id: Int = 0,
     val type: BookmarkSection,
     val word: String,
     val chapter: String,
@@ -55,18 +59,24 @@ data class Bookmark(
 )
 
 @Composable
-fun dropdown(viewModel: MyViewModel, secondary: String, bookmarksList: State<List<Bookmark>>) {
+fun dropdown(viewModel: MyViewModel, navController: NavController,secondary: String, bookmarksList: List<Bookmark>, isFocused: Boolean) {
+    val dataFromJson = remember { viewModel.loadDataFromJson("$secondary.json") }
+    val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toInt())?.topics
+
     var expanded by remember { mutableStateOf(false) }
+
+
     Column(modifier = Modifier
         .fillMaxWidth()
-        .padding(8.dp)) {
+        .padding(vertical = 10.dp, horizontal = 20.dp)) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.LightGray)
-                .padding(16.dp)
+                .background(Color(227, 227, 227))
+                .padding(19.dp)
                 .clickable { expanded = !expanded },
-            contentAlignment = Alignment.CenterStart
+            contentAlignment = Alignment.CenterStart,
+
         ) {
             Text(
                 text = secondary,
@@ -74,29 +84,46 @@ fun dropdown(viewModel: MyViewModel, secondary: String, bookmarksList: State<Lis
                 fontWeight = FontWeight.Bold,
             )
             Icon(
-                imageVector = if (expanded) Icons.AutoMirrored.Filled.KeyboardArrowRight else Icons.Default.KeyboardArrowDown,
+                imageVector =
+                if (expanded && bookmarksList.isNotEmpty()) {
+                    Icons.Default.KeyboardArrowDown }
+                else {
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight
+                     },
                 contentDescription = null,
                 modifier = Modifier.align(Alignment.CenterEnd)
             )
         }
+        if (isFocused) {
+            expanded = true
+        }
         if (expanded) {
-            LazyColumn {
-                items(bookmarksList.value.size) { item ->
-                    val bookmark = bookmarksList.value[item]
+            Column {
+                bookmarksList.forEach { bookmark ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color.Gray)
-                            .padding(16.dp)
-                            .clickable { /* Handle click */ },
+                            .background(Color.LightGray)
+                            .padding(19.dp)
+                            .clickable { },
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Column {
-                            Text(text = bookmark.word, fontWeight = FontWeight.Bold)
-                            Text("单元${bookmark.chapter} 第${bookmark.topic}课")
+                            Text(
+                                text = bookmark.word,
+                                fontWeight = FontWeight.Bold,
+                                style = MaterialTheme.typography.body1
+                            )
+                            Text(
+                                "单元${bookmark.chapter} 第${bookmark.topic}课",
+                                style = MaterialTheme.typography.body1
+                            )
                         }
-                        IconButton(onClick = { viewModel.deleteBookmark(bookmark.id) }) {
+                        IconButton(onClick = {
+                            viewModel.deleteBookmark(bookmark.id)
+                            viewModel.loadBookmarks()
 
+                        }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.bookmark),
                                 contentDescription = null
@@ -112,26 +139,28 @@ fun dropdown(viewModel: MyViewModel, secondary: String, bookmarksList: State<Lis
 
 
 @Composable
-fun Bookmarks(viewModel: MyViewModel) {
-    val searchText = remember { mutableStateOf("") }
+fun Bookmarks(viewModel: MyViewModel, navController: NavController) {
+    var searchText = remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
+    var isFocused by remember { mutableStateOf(false) }
 
-    val sec1 = viewModel.searchBookmarksByTitle("", BookmarkSection.中一).observeAsState(emptyList())
-    val sec2 = viewModel.searchBookmarksByTitle("", BookmarkSection.中二).observeAsState(emptyList())
-    val sec3 = viewModel.searchBookmarksByTitle("", BookmarkSection.中三).observeAsState(emptyList())
-    val sec4 = viewModel.searchBookmarksByTitle("", BookmarkSection.中四).observeAsState(emptyList())
 
-    Column ( Modifier.pointerInput(Unit) { detectTapGestures(onTap = { focusManager.clearFocus() }) }
-    ){
-        Button(onClick = { viewModel.clearAllBookmarks() }) {
-            Text("")
-        }
+    val sec1 by viewModel.searchBookmarksByTitle(searchText.value, BookmarkSection.中一).observeAsState(emptyList())
+    val sec2 by viewModel.searchBookmarksByTitle(searchText.value, BookmarkSection.中二).observeAsState(emptyList())
+    val sec3 by viewModel.searchBookmarksByTitle(searchText.value, BookmarkSection.中三).observeAsState(emptyList())
+    val sec4 by viewModel.searchBookmarksByTitle(searchText.value, BookmarkSection.中四).observeAsState(emptyList())
+
+    Column ( Modifier.pointerInput(Unit) { detectTapGestures(onTap = {
+        focusManager.clearFocus()
+
+    }) }
+    ) {
         Text(
             "Bookmarks",
             fontWeight = FontWeight.Bold,
             fontSize = 40.sp,
-            modifier = Modifier.padding(start = 17.dp, top = 6.dp)
+            modifier = Modifier.padding(start = 17.dp, top = 12.dp)
         )
         TextField(
             searchText.value,
@@ -143,6 +172,7 @@ fun Bookmarks(viewModel: MyViewModel) {
                 focusedContainerColor = Color(239, 238, 246),
                 focusedIndicatorColor = Color(239, 238, 246)
             ),
+
             leadingIcon = {
                 Icon(
                     painter = painterResource(id = R.drawable.search),
@@ -155,14 +185,21 @@ fun Bookmarks(viewModel: MyViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 15.dp)
-                .padding(top = 10.dp)
+                .padding(top = 10.dp, bottom = 10.dp)
                 .fillMaxHeight(0.077f)
                 .focusRequester(focusRequester)
+                .onFocusChanged { focusState ->
+                    isFocused = focusState.isFocused
+                }
         )
-
-        dropdown(viewModel, secondary = "中一", bookmarksList = sec1)
-        dropdown(viewModel, secondary = "中二", bookmarksList = sec2)
-        dropdown(viewModel, secondary = "中三", bookmarksList = sec3)
-        dropdown(viewModel, secondary = "中四", bookmarksList = sec4)
+        LazyColumn(Modifier.padding(bottom = 100.dp)) {
+            item {
+                dropdown(viewModel, secondary = "中一", bookmarksList = sec1, navController = navController, isFocused = isFocused)
+                dropdown(viewModel, secondary = "中二", bookmarksList = sec2, navController = navController, isFocused = isFocused)
+                dropdown(viewModel, secondary = "中三", bookmarksList = sec3, navController = navController, isFocused = isFocused)
+                dropdown(viewModel, secondary = "中四", bookmarksList = sec4, navController = navController, isFocused = isFocused)
+            }
+        }
     }
+
 }

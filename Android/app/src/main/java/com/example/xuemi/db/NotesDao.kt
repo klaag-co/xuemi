@@ -8,9 +8,7 @@ import androidx.room.Query
 import com.example.xuemi.Note
 import com.example.xuemi.NoteType
 
-data class Title(
-    @ColumnInfo(name = "title") val title: String
-)
+
 @Dao
 interface NotesDao {
     @Query("SELECT * FROM NOTE")

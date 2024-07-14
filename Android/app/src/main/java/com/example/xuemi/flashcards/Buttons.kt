@@ -83,7 +83,7 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
 
     Column {
         Row (verticalAlignment = Alignment.CenterVertically){
-            backButton("Back") {
+            backButton("中${viewModel.getFromList(0)}") {
                 navController.navigate("secondary")
             }
             Spacer(Modifier.fillMaxWidth(0.3f))

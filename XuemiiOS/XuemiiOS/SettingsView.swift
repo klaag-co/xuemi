@@ -91,13 +91,13 @@ struct Acknowledgement: Hashable {
 }
 
 let acknowledgements = [
-    Acknowledgement(name: "Kmy Er Sze Lei", role: "Project coordinator, designer, developer", icon: "person.fill"),
-    Acknowledgement(name: "Gracelyn Gosal", role: "Lead Developer (iOS), marketing", icon: "hammer.fill"),
+    Acknowledgement(name: "Kmy Er Sze Lei", role: "Project Coordinator, Designer, Developer", icon: "person.fill"),
+    Acknowledgement(name: "Gracelyn Gosal", role: "Lead Developer (iOS), Marketing", icon: "hammer.fill"),
     Acknowledgement(name: "Lau Rei Yan Abigail", role: "Lead Developer (Android)", icon: "hammer.fill"),
-    Acknowledgement(name: "Yoshioka Lili", role: "Lead designer, marketing", icon: "paintbrush.fill"),
+    Acknowledgement(name: "Yoshioka Lili", role: "Lead Designer, Marketing", icon: "paintbrush.fill"),
     Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill"),
     Acknowledgement(name: "Chay Yu Hung Tristan", role: "Consultant", icon: "person.fill"),
-    Acknowledgement(name: "Ms Wong Lu Ting", role: "Head Of Department", icon: "person.fill"),
+    Acknowledgement(name: "Ms Wong Lu Ting", role: "Head of Department", icon: "person.fill"),
     Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill")
 ]
 

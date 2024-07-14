@@ -38,7 +38,7 @@ struct FlashcardView: View {
                                         VStack {
                                             HStack {
                                                 Spacer()
-                                                Text("中\(level.string): \(chapter.string) - \(topic.string)")
+                                                Text("中\(level.string): \(chapter.string) - \(topic.string(level: level, chapter: chapter))")
                                                     .font(.title3)
                                                     .fontWeight(.bold)
                                                 Spacer()

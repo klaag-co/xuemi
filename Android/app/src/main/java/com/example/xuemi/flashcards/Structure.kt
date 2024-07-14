@@ -11,12 +11,17 @@ data class Word (
     var pinyin: String,
     var englishDefinition: String,
     var chineseDefinition: String,
-    var example: String
+    var example: String,
+)
+
+data class CombinedWord(
+    val name: String,
+    val topic: List<Word> = emptyList()
 )
 data class Topic(
-    val topic1: List<Word> = emptyList(),
-    val topic2: List<Word> = emptyList(),
-    val topic3: List<Word> = emptyList()
+    val topic1: CombinedWord,
+    val topic2: CombinedWord,
+    val topic3: CombinedWord
 )
 
 data class Chapter(

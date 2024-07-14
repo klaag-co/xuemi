@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -67,7 +66,7 @@ enum class NoteType {
 @Entity
 data class Note(
     @PrimaryKey (autoGenerate = true)
-    val id: Int= 0,
+    val id: Int = 0,
     var type: NoteType,
     val title: String,
     val body: String
@@ -76,15 +75,14 @@ data class Note(
 @Composable
 fun groupedList(navController: NavController, header: String, sections: State<List<Note>?>, delete: String, viewModel: MyViewModel) {
     Spacer(modifier = Modifier.padding(bottom = 20.dp))
-    LazyColumn {
-        item {
-            Text(
-                text = header,
-                modifier = Modifier.padding(horizontal = 30.dp),
-                color = Color.Gray
-            )
-        }
-        items(sections.value ?: emptyList()) { note ->
+    Column {
+        Text(
+            text = header,
+            modifier = Modifier.padding(horizontal = 30.dp),
+            color = Color.Gray
+        )
+
+        sections.value?.forEach { note ->
             noteItem(navController = navController, viewModel = viewModel, item = note, delete = delete) {
 
             }
@@ -109,14 +107,13 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
     val sec4 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Sec4).observeAsState(emptyList())
 
 
-
     var delete: String by rememberSaveable {
         mutableStateOf("Edit")
     }
 
     Box (modifier = Modifier
-        .fillMaxSize().
-        pointerInput(Unit) { detectTapGestures (onTap = { focusManager.clearFocus() }) }
+        .fillMaxSize()
+        .pointerInput(Unit) { detectTapGestures(onTap = { focusManager.clearFocus() }) }
     ){
         Column {
             Row(
@@ -185,13 +182,16 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
                     .focusRequester(focusRequester)
             )
 
-
-            groupedList(navController, "EXAM", examNotes, delete, viewModel)
-            groupedList(navController, "NOTES", notesNotes, delete, viewModel)
-            groupedList(navController, "SECONDARY 1", sec1, delete, viewModel)
-            groupedList(navController, "SECONDARY 2", sec2, delete, viewModel)
-            groupedList(navController, "SECONDARY 3", sec3, delete, viewModel)
-            groupedList(navController, "SECONDARY 4", sec4, delete, viewModel)
+            LazyColumn (Modifier.padding(bottom = 100.dp)){
+                items(1) {
+                    groupedList(navController, "EXAM", examNotes, delete, viewModel)
+                    groupedList(navController, "NOTES", notesNotes, delete, viewModel)
+                    groupedList(navController, "SECONDARY 1", sec1, delete, viewModel)
+                    groupedList(navController, "SECONDARY 2", sec2, delete, viewModel)
+                    groupedList(navController, "SECONDARY 3", sec3, delete, viewModel)
+                    groupedList(navController, "SECONDARY 4", sec4, delete, viewModel)
+                }
+            }
         }
     }
 }
@@ -417,8 +417,6 @@ fun backButton(text: String, onClick: () -> Unit) {
             color = Color(70, 156, 253),
             fontSize = 19.sp,
             fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.End
-
         )
     }
 }

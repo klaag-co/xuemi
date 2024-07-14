@@ -19,8 +19,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -80,8 +82,15 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
     }
 
     Column {
-        backButton("Back") {
-            navController.navigate("secondary")
+        Row (verticalAlignment = Alignment.CenterVertically){
+            backButton("Back") {
+                navController.navigate("secondary")
+            }
+            Spacer(Modifier.fillMaxWidth(0.3f))
+            Text("单元${viewModel.getFromList(1)}",
+                fontSize = 19.sp,
+                fontWeight = FontWeight.Bold,
+            )
         }
         title(viewModel)
         topictemplate(viewModel, { isSheetOpen = true }, "一")
@@ -142,34 +151,6 @@ fun title(viewModel: MyViewModel) {
         }
     }
 }
-
-@Composable
-fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: String?) {
-    Button(
-        onClick = {
-            viewModel.updateItem(4, "${quiz?.first()}")
-            if (quiz == "Flashcards") {
-                navController.navigate("flashcard/中${viewModel.getFromList(0)}")
-            }
-        },
-        colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
-        shape = RoundedCornerShape(20.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 25.dp, vertical = 7.dp)
-    ) {
-        Column {
-            Text(
-                text = "$quiz",
-                color = Color.Black,
-                fontSize = 28.sp,
-                modifier = Modifier
-                    .padding(horizontal = 5.dp, vertical = 7.dp)
-
-            )
-        }
-    }
-}
 @Composable
 fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapter: String?, chapterNUM: String) {
     Button(
@@ -196,10 +177,21 @@ fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapte
         }
     }
 }
+
 @Composable
-fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: String?) {
+fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: String) {
+    val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
+    val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
+
+    val name: String? = when (topic) {
+        "一" -> chapterData?.topic1?.name
+        "二" -> chapterData?.topic2?.name
+        "三" -> chapterData?.topic3?.name
+        else -> ""
+    }
     Button(
-        onClick = { viewModel.updateItem(3, "$topic")
+        onClick = { viewModel.updateItem(3, topic)
+
             onButtonClick()
         },
         colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
@@ -210,7 +202,35 @@ fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: Stri
     ) {
         Column {
             Text(
-                text = "第${topic}课",
+                text = name.toString(),
+                textAlign = TextAlign.Center,
+                color = Color.Black,
+                fontSize = 24.sp,
+                lineHeight = 25.sp,
+                modifier = Modifier
+                    .padding(horizontal = 5.dp, vertical = 7.dp)
+            )
+
+        }
+    }
+}
+
+@Composable
+fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: String) {
+    Button(
+        onClick = {
+            viewModel.updateItem(4, "${quiz.first()}")
+            navController.navigate(quiz.lowercase())
+        },
+        colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
+        shape = RoundedCornerShape(20.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 25.dp, vertical = 7.dp)
+    ) {
+        Column {
+            Text(
+                text = quiz,
                 color = Color.Black,
                 fontSize = 28.sp,
                 modifier = Modifier
@@ -220,3 +240,4 @@ fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: Stri
         }
     }
 }
+

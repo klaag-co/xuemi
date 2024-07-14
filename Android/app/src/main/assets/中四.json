@@ -1,1354 +1,1399 @@
 {
     "chapters": [
         {
-            "name": "chapter1",
+            "name": "单元一",
             "topics": {
-                "topic1": [
-                    {
-                        "index": 1,
-                        "word": "责无旁贷",
-                        "pinyin": "zé wú páng dài",
-                        "englishDefinition": "to be duty bound",
-                        "chineseDefinition": "自己应尽的责任，不能推卸给旁人。",
-                        "example": "在危机时刻，每个团队成员都有~的职责。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "分忧",
-                        "pinyin": "fēn yōu",
-                        "englishDefinition": "to help somebody with worries and difficulties",
-                        "chineseDefinition": "（动）分担别人的忧虑。",
-                        "example": "朋友之间应该互相~，共同度过困难时刻。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "残障",
-                        "pinyin": "cán zhàng",
-                        "englishDefinition": "handicapped",
-                        "chineseDefinition": "肢体有缺陷。 肢体有缺陷的人。",
-                        "example": "社会需要更多关注~人士的权益。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "聘请",
-                        "pinyin": "pìn qǐng",
-                        "englishDefinition": "to engage; to hire (a lawyer etc)",
-                        "chineseDefinition": "（动）请人担任职务：～数学教师。［反］辞退。",
-                        "example": "公司决定~一位经验丰富的顾问来提升业务水平。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "同工同酬",
-                        "pinyin": "tóng gōng tóng chóu",
-                        "englishDefinition": "equal pay for equal work",
-                        "chineseDefinition": "不分种族、民族、性别、年龄，做同样的工作，工作的质量、数量相同的，给予同样的报酬。",
-                        "example": "公司一直倡导~的工资政策。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "权利",
-                        "pinyin": "quán lì",
-                        "englishDefinition": "right (i.e. an entitlement to something). power and wealth",
-                        "chineseDefinition": "（名）公民或法人依法行使权力和享受的利益。",
-                        "example": "公民应该了解自己的~和责任。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "雇主",
-                        "pinyin": "gù zhǔ",
-                        "englishDefinition": "employer",
-                        "chineseDefinition": "（名）雇用雇工或车船等的人。",
-                        "example": "~应该关心员工的职业发展和福利。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "纠纷",
-                        "pinyin": "jiū fēn",
-                        "englishDefinition": "dispute",
-                        "chineseDefinition": "（名）争执的事情：调解～。",
-                        "example": "双方为了避免长时间的~，选择进行调解。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "小贩",
-                        "pinyin": "xiǎo fàn",
-                        "englishDefinition": "peddler; hawker",
-                        "chineseDefinition": "小批量贩卖商品，沿街叫卖或挨户出售日用杂货的人",
-                        "example": "~们在街头摆摊，吸引了不少顾客。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "摊位",
-                        "pinyin": "tān wèi",
-                        "englishDefinition": "vendor's booth",
-                        "chineseDefinition": "（名）设售货摊的地方；一个货摊所占的位置",
-                        "example": "我们在集市上租了一个~来销售手工艺品。"
-                    },
-                    {
-                        "index": 11,
-                        "word": "呵护",
-                        "pinyin": "hē hù",
-                        "englishDefinition": "to cherish; to take good care of",
-                        "chineseDefinition": "（动）保佑。 爱护；保护",
-                        "example": "父母对孩子的~是他们成长的重要支持。"
-                    },
-                    {
-                        "index": 12,
-                        "word": "缓解",
-                        "pinyin": "huǎn jiě",
-                        "englishDefinition": "to bring relief; to alleviate (a crisis); to dull (a pain)",
-                        "chineseDefinition": "（动）（使）矛盾缓和或紧张程度减轻，情况向好的方面转化［反］激化|紧张。",
-                        "example": "医生给他开了一些药物，以~他的疼痛。"
-                    }
-                ],
-                "topic2": [
-                    {
-                        "index": 1,
-                        "word": "乞丐",
-                        "pinyin": "qǐ gài",
-                        "englishDefinition": "beggar",
-                        "chineseDefinition": "（名）生活没有着落而专靠向人乞讨过活的人。",
-                        "example": "我们应该同情并帮助那些生活在街头的~。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "跪",
-                        "pinyin": "guì",
-                        "englishDefinition": "to kneel",
-                        "chineseDefinition": "（动）两膝弯曲，使一个或两个膝盖着地。",
-                        "example": "在庄严的仪式中，人们常常会~下表达崇敬之情。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "肮脏",
-                        "pinyin": "āng zāng",
-                        "englishDefinition": "dirty; filthy",
-                        "chineseDefinition": "不干净。 比喻人的思想丑恶、卑鄙。",
-                        "example": "这个角落被垃圾弄得又~又难闻。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "贫穷",
-                        "pinyin": "pín qióng",
-                        "englishDefinition": "poor; impoverished",
-                        "chineseDefinition": "（形）缺乏生产资料或生活资料。［反］富有|富裕。",
-                        "example": "政府应该采取措施改善~地区的生活状况。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "赤裸裸",
-                        "pinyin": "chì luǒ luǒ",
-                        "englishDefinition": "bare; naked; (fig.) plain; undisguised",
-                        "chineseDefinition": "（形）光着身子。 比喻毫无遮掩。",
-                        "example": "这个艺术作品~地展现了作者的思想。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "祈求",
-                        "pinyin": "qí qiú",
-                        "englishDefinition": "to appeal",
-                        "chineseDefinition": "（动）恳切地请求。",
-                        "example": "在困境中，人们常常会~上天的保佑。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "距离",
-                        "pinyin": "jù lí",
-                        "englishDefinition": "distance",
-                        "chineseDefinition": "（动）两物体或地点间的空间间隔",
-                        "example": "驾驶员应该保持安全~，避免交通事故。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "慈悲",
-                        "pinyin": "cí bēi",
-                        "englishDefinition": "mercy",
-                        "chineseDefinition": "（形）原为佛教用语，指慈善和怜悯。 对他人苦难的同情和帮助。",
-                        "example": "他以~的心态对待每一个需要帮助的人。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "阻挡",
-                        "pinyin": "zǔ dǎng",
-                        "englishDefinition": "to resist; to obstruct",
-                        "chineseDefinition": "（动）阻止；拦住。［反］推进。",
-                        "example": "队员们奋力~对手的进攻，最终取得胜利。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "肆无忌惮",
-                        "pinyin": "sì wú jì dàn",
-                        "englishDefinition": "absolutely unrestrained",
-                        "chineseDefinition": "非常放肆，毫无顾忌和畏惧。",
-                        "example": "他对待他人的态度总是~，缺乏基本的礼貌。"
-                    },
-                    {
-                        "index": 11,
-                        "word": "褴褛",
-                        "pinyin": "lán lǚ",
-                        "englishDefinition": "ragged; shabby",
-                        "chineseDefinition": "（衣服）破烂：衣衫～。",
-                        "example": "那位乞丐衣衫~，让人心生怜悯。"
-                    },
-                    {
-                        "index": 12,
-                        "word": "革履",
-                        "pinyin": "gé lǚ",
-                        "englishDefinition": "leather (shoes); fig. Western dress",
-                        "chineseDefinition": "皮鞋。",
-                        "example": "王经理西装~，衣冠楚楚地向会场走去。"
-                    },
-                    {
-                        "index": 13,
-                        "word": "侦探",
-                        "pinyin": "zhēn tàn",
-                        "englishDefinition": "detective; to do detective work",
-                        "chineseDefinition": "（动）暗中侦察、探听。  （名）指做侦察工作的人；间谍。",
-                        "example": "这位~在案发现场寻找线索。"
-                    },
-                    {
-                        "index": 14,
-                        "word": "仁慈",
-                        "pinyin": "rén cí",
-                        "englishDefinition": "benevolent; charitable; merciful",
-                        "chineseDefinition": "（形）仁爱慈善。[反］残忍|残酷。",
-                        "example": "~的人愿意帮助他人，不计较回报。"
-                    },
-                    {
-                        "index": 15,
-                        "word": "叩头",
-                        "pinyin": "kòu tóu",
-                        "englishDefinition": "to kowtow",
-                        "chineseDefinition": "磕头。",
-                        "example": "在传统礼仪中，人们常常会~以示尊敬。"
-                    },
-                    {
-                        "index": 16,
-                        "word": "残疾",
-                        "pinyin": "cán jí",
-                        "englishDefinition": "disabled; deformity on a person or animal",
-                        "chineseDefinition": "（名）肢体、器官或其功能方面的缺陷。",
-                        "example": "~并不影响他积极面对生活的态度。"
-                    }
-                ],
-                "topic3": [
-                    {
-                        "index": 1,
-                        "word": "质朴",
-                        "pinyin": "zhì pǔ",
-                        "englishDefinition": "simple; unsophisticated",
-                        "chineseDefinition": "（形）朴实：为人～|话说得很～。",
-                        "example": "他的生活~而充实，追求简单的快乐。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "大概",
-                        "pinyin": "dà gài",
-                        "englishDefinition": "roughly; probably",
-                        "chineseDefinition": "（名）大致的内容或情况［反］详情。",
-                        "example": "我们~需要一个小时才能到达目的地。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "晓得",
-                        "pinyin": "xiǎo de",
-                        "englishDefinition": "to know",
-                        "chineseDefinition": "知道、明白。",
-                        "example": "你~他为什么突然离开吗？"
-                    },
-                    {
-                        "index": 4,
-                        "word": "蓦然",
-                        "pinyin": "mò rán",
-                        "englishDefinition": "suddenly; sudden",
-                        "chineseDefinition": "（副）不经心地；猛然一下。",
-                        "example": "他~回首，发现自己已经走了很远的路。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "推心置腹",
-                        "pinyin": "tuī xīn zhì fù",
-                        "englishDefinition": "to trust completely; to confide in somebody with entire sincerity",
-                        "chineseDefinition": "比喻以真心待人。",
-                        "example": "朋友之间应该~，分享彼此的心事。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "否则",
-                        "pinyin": "fǒu zé",
-                        "englishDefinition": "if not; otherwise",
-                        "chineseDefinition": "（连）如果不这样。",
-                        "example": "多注意身体健康，~容易生病。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "感恩",
-                        "pinyin": "gǎn ēn",
-                        "englishDefinition": "to be grateful",
-                        "chineseDefinition": "（动）感谢别人给予自己的恩惠。",
-                        "example": "在成功之际，我们应该~身边支持我们的人。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "匆匆",
-                        "pinyin": "cōng cōng",
-                        "englishDefinition": "hurriedly",
-                        "chineseDefinition": "（形）急急忙忙的样子［反］徐徐。",
-                        "example": "他~赶到会议室，没来得及喝杯水。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "婴儿",
-                        "pinyin": "yīng ér",
-                        "englishDefinition": "infant; baby",
-                        "chineseDefinition": "出生不久的儿童",
-                        "example": "~需要细心呵护和关爱。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "翅膀",
-                        "pinyin": "chì bǎng",
-                        "englishDefinition": "wing",
-                        "chineseDefinition": "（名）昆虫、鸟类的飞行器官。物体上形状或作用像翅膀的部分：飞机～。",
-                        "example": "孩子们希望拥有~，自由地飞翔在天空中。"
-                    }
-                ]
+                "topic1": {
+                    "name": "关怀满人间>——慈善团体简介",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "责无旁贷",
+                            "pinyin": "zé wú páng dài",
+                            "englishDefinition": "to be duty bound",
+                            "chineseDefinition": "自己应尽的责任，不能推卸给旁人。",
+                            "example": "在危机时刻，每个团队成员都有~的职责。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "分忧",
+                            "pinyin": "fēn yōu",
+                            "englishDefinition": "to help somebody with worries and difficulties",
+                            "chineseDefinition": "（动）分担别人的忧虑。",
+                            "example": "朋友之间应该互相~，共同度过困难时刻。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "残障",
+                            "pinyin": "cán zhàng",
+                            "englishDefinition": "handicapped",
+                            "chineseDefinition": "肢体有缺陷。 肢体有缺陷的人。",
+                            "example": "社会需要更多关注~人士的权益。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "聘请",
+                            "pinyin": "pìn qǐng",
+                            "englishDefinition": "to engage; to hire (a lawyer etc)",
+                            "chineseDefinition": "（动）请人担任职务：～数学教师。［反］辞退。",
+                            "example": "公司决定~一位经验丰富的顾问来提升业务水平。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "同工同酬",
+                            "pinyin": "tóng gōng tóng chóu",
+                            "englishDefinition": "equal pay for equal work",
+                            "chineseDefinition": "不分种族、民族、性别、年龄，做同样的工作，工作的质量、数量相同的，给予同样的报酬。",
+                            "example": "公司一直倡导~的工资政策。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "权利",
+                            "pinyin": "quán lì",
+                            "englishDefinition": "right (i.e. an entitlement to something). power and wealth",
+                            "chineseDefinition": "（名）公民或法人依法行使权力和享受的利益。",
+                            "example": "公民应该了解自己的~和责任。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "雇主",
+                            "pinyin": "gù zhǔ",
+                            "englishDefinition": "employer",
+                            "chineseDefinition": "（名）雇用雇工或车船等的人。",
+                            "example": "~应该关心员工的职业发展和福利。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "纠纷",
+                            "pinyin": "jiū fēn",
+                            "englishDefinition": "dispute",
+                            "chineseDefinition": "（名）争执的事情：调解～。",
+                            "example": "双方为了避免长时间的~，选择进行调解。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "小贩",
+                            "pinyin": "xiǎo fàn",
+                            "englishDefinition": "peddler; hawker",
+                            "chineseDefinition": "小批量贩卖商品，沿街叫卖或挨户出售日用杂货的人",
+                            "example": "~们在街头摆摊，吸引了不少顾客。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "摊位",
+                            "pinyin": "tān wèi",
+                            "englishDefinition": "vendor's booth",
+                            "chineseDefinition": "（名）设售货摊的地方；一个货摊所占的位置",
+                            "example": "我们在集市上租了一个~来销售手工艺品。"
+                        },
+                        {
+                            "index": 11,
+                            "word": "呵护",
+                            "pinyin": "hē hù",
+                            "englishDefinition": "to cherish; to take good care of",
+                            "chineseDefinition": "（动）保佑。 爱护；保护",
+                            "example": "父母对孩子的~是他们成长的重要支持。"
+                        },
+                        {
+                            "index": 12,
+                            "word": "缓解",
+                            "pinyin": "huǎn jiě",
+                            "englishDefinition": "to bring relief; to alleviate (a crisis); to dull (a pain)",
+                            "chineseDefinition": "（动）（使）矛盾缓和或紧张程度减轻，情况向好的方面转化［反］激化|紧张。",
+                            "example": "医生给他开了一些药物，以~他的疼痛。"
+                        }
+                    ]
+                },
+                "topic2": {
+                    "name": "坦然走过乞丐",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "乞丐",
+                            "pinyin": "qǐ gài",
+                            "englishDefinition": "beggar",
+                            "chineseDefinition": "（名）生活没有着落而专靠向人乞讨过活的人。",
+                            "example": "我们应该同情并帮助那些生活在街头的~。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "跪",
+                            "pinyin": "guì",
+                            "englishDefinition": "to kneel",
+                            "chineseDefinition": "（动）两膝弯曲，使一个或两个膝盖着地。",
+                            "example": "在庄严的仪式中，人们常常会~下表达崇敬之情。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "肮脏",
+                            "pinyin": "āng zāng",
+                            "englishDefinition": "dirty; filthy",
+                            "chineseDefinition": "不干净。 比喻人的思想丑恶、卑鄙。",
+                            "example": "这个角落被垃圾弄得又~又难闻。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "贫穷",
+                            "pinyin": "pín qióng",
+                            "englishDefinition": "poor; impoverished",
+                            "chineseDefinition": "（形）缺乏生产资料或生活资料。［反］富有|富裕。",
+                            "example": "政府应该采取措施改善~地区的生活状况。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "赤裸裸",
+                            "pinyin": "chì luǒ luǒ",
+                            "englishDefinition": "bare; naked; (fig.) plain; undisguised",
+                            "chineseDefinition": "（形）光着身子。 比喻毫无遮掩。",
+                            "example": "这个艺术作品~地展现了作者的思想。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "祈求",
+                            "pinyin": "qí qiú",
+                            "englishDefinition": "to appeal",
+                            "chineseDefinition": "（动）恳切地请求。",
+                            "example": "在困境中，人们常常会~上天的保佑。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "距离",
+                            "pinyin": "jù lí",
+                            "englishDefinition": "distance",
+                            "chineseDefinition": "（动）两物体或地点间的空间间隔",
+                            "example": "驾驶员应该保持安全~，避免交通事故。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "慈悲",
+                            "pinyin": "cí bēi",
+                            "englishDefinition": "mercy",
+                            "chineseDefinition": "（形）原为佛教用语，指慈善和怜悯。 对他人苦难的同情和帮助。",
+                            "example": "他以~的心态对待每一个需要帮助的人。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "阻挡",
+                            "pinyin": "zǔ dǎng",
+                            "englishDefinition": "to resist; to obstruct",
+                            "chineseDefinition": "（动）阻止；拦住。［反］推进。",
+                            "example": "队员们奋力~对手的进攻，最终取得胜利。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "肆无忌惮",
+                            "pinyin": "sì wú jì dàn",
+                            "englishDefinition": "absolutely unrestrained",
+                            "chineseDefinition": "非常放肆，毫无顾忌和畏惧。",
+                            "example": "他对待他人的态度总是~，缺乏基本的礼貌。"
+                        },
+                        {
+                            "index": 11,
+                            "word": "褴褛",
+                            "pinyin": "lán lǚ",
+                            "englishDefinition": "ragged; shabby",
+                            "chineseDefinition": "（衣服）破烂：衣衫～。",
+                            "example": "那位乞丐衣衫~，让人心生怜悯。"
+                        },
+                        {
+                            "index": 12,
+                            "word": "革履",
+                            "pinyin": "gé lǚ",
+                            "englishDefinition": "leather (shoes); fig. Western dress",
+                            "chineseDefinition": "皮鞋。",
+                            "example": "王经理西装~，衣冠楚楚地向会场走去。"
+                        },
+                        {
+                            "index": 13,
+                            "word": "侦探",
+                            "pinyin": "zhēn tàn",
+                            "englishDefinition": "detective; to do detective work",
+                            "chineseDefinition": "（动）暗中侦察、探听。  （名）指做侦察工作的人；间谍。",
+                            "example": "这位~在案发现场寻找线索。"
+                        },
+                        {
+                            "index": 14,
+                            "word": "仁慈",
+                            "pinyin": "rén cí",
+                            "englishDefinition": "benevolent; charitable; merciful",
+                            "chineseDefinition": "（形）仁爱慈善。[反］残忍|残酷。",
+                            "example": "~的人愿意帮助他人，不计较回报。"
+                        },
+                        {
+                            "index": 15,
+                            "word": "叩头",
+                            "pinyin": "kòu tóu",
+                            "englishDefinition": "to kowtow",
+                            "chineseDefinition": "磕头。",
+                            "example": "在传统礼仪中，人们常常会~以示尊敬。"
+                        },
+                        {
+                            "index": 16,
+                            "word": "残疾",
+                            "pinyin": "cán jí",
+                            "englishDefinition": "disabled; deformity on a person or animal",
+                            "chineseDefinition": "（名）肢体、器官或其功能方面的缺陷。",
+                            "example": "~并不影响他积极面对生活的态度。"
+                        }
+                    ]
+                },
+                "topic3": {
+                    "name": "给善良插上翅膀",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "质朴",
+                            "pinyin": "zhì pǔ",
+                            "englishDefinition": "simple; unsophisticated",
+                            "chineseDefinition": "（形）朴实：为人～|话说得很～。",
+                            "example": "他的生活~而充实，追求简单的快乐。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "大概",
+                            "pinyin": "dà gài",
+                            "englishDefinition": "roughly; probably",
+                            "chineseDefinition": "（名）大致的内容或情况［反］详情。",
+                            "example": "我们~需要一个小时才能到达目的地。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "晓得",
+                            "pinyin": "xiǎo de",
+                            "englishDefinition": "to know",
+                            "chineseDefinition": "知道、明白。",
+                            "example": "你~他为什么突然离开吗？"
+                        },
+                        {
+                            "index": 4,
+                            "word": "蓦然",
+                            "pinyin": "mò rán",
+                            "englishDefinition": "suddenly; sudden",
+                            "chineseDefinition": "（副）不经心地；猛然一下。",
+                            "example": "他~回首，发现自己已经走了很远的路。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "推心置腹",
+                            "pinyin": "tuī xīn zhì fù",
+                            "englishDefinition": "to trust completely; to confide in somebody with entire sincerity",
+                            "chineseDefinition": "比喻以真心待人。",
+                            "example": "朋友之间应该~，分享彼此的心事。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "否则",
+                            "pinyin": "fǒu zé",
+                            "englishDefinition": "if not; otherwise",
+                            "chineseDefinition": "（连）如果不这样。",
+                            "example": "多注意身体健康，~容易生病。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "感恩",
+                            "pinyin": "gǎn ēn",
+                            "englishDefinition": "to be grateful",
+                            "chineseDefinition": "（动）感谢别人给予自己的恩惠。",
+                            "example": "在成功之际，我们应该~身边支持我们的人。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "匆匆",
+                            "pinyin": "cōng cōng",
+                            "englishDefinition": "hurriedly",
+                            "chineseDefinition": "（形）急急忙忙的样子［反］徐徐。",
+                            "example": "他~赶到会议室，没来得及喝杯水。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "婴儿",
+                            "pinyin": "yīng ér",
+                            "englishDefinition": "infant; baby",
+                            "chineseDefinition": "出生不久的儿童",
+                            "example": "~需要细心呵护和关爱。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "翅膀",
+                            "pinyin": "chì bǎng",
+                            "englishDefinition": "wing",
+                            "chineseDefinition": "（名）昆虫、鸟类的飞行器官。物体上形状或作用像翅膀的部分：飞机～。",
+                            "example": "孩子们希望拥有~，自由地飞翔在天空中。"
+                        }
+                    ]
+                }
             }
         },
         {
-            "name": "chapter2",
+            "name": "单元二",
             "topics": {
-                "topic1": [
-                    {
-                        "index": 1,
-                        "word": "呈献",
-                        "pinyin": "chéng xiàn",
-                        "englishDefinition": "to present respectfully",
-                        "chineseDefinition": "（动）恭敬地送给别人。",
-                        "example": "他们~了一份精美的礼物，表达对老师的敬意。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "扣人心弦",
-                        "pinyin": "kòu rén xīn xián",
-                        "englishDefinition": "to excite; to thrill",
-                        "chineseDefinition": "形容使人非常激动或能牵动人心如诗文和表演。",
-                        "example": "音乐会上的演奏~，让人久久不能忘怀。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "爱恋",
-                        "pinyin": "ài liàn",
-                        "englishDefinition": "in love with; to feel deeply attached to",
-                        "chineseDefinition": "（动）喜爱而难以分开，多指男女恋情：无限～。",
-                        "example": "他们之间的~在岁月的冲刷下依然鲜明。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "唏嘘",
-                        "pinyin": "xī xū",
-                        "englishDefinition": "to sigh",
-                        "chineseDefinition": "因感叹、感慨而发出的声音",
-                        "example": "故事的结局令人~不已，让人心生悲痛。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "著名",
-                        "pinyin": "zhù míng",
-                        "englishDefinition": "famous;  well-known",
-                        "chineseDefinition": "（形）有名；出名［反］无名。",
-                        "example": "这位作家是一位~的文学巨匠，影响深远。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "兴旺",
-                        "pinyin": "xīng wàng",
-                        "englishDefinition": "prosperous; thriving",
-                        "chineseDefinition": "（形）兴盛；旺盛。［反］衰败。",
-                        "example": "这个地区的经济逐渐~，吸引了大量的投资。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "负荷",
-                        "pinyin": "fù hè",
-                        "englishDefinition": "load; burden",
-                        "chineseDefinition": "（动）承受的压力或负担：难以～。",
-                        "example": "电力系统在高峰时段需要承受大量的~。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "反映",
-                        "pinyin": "fǎn yìng",
-                        "englishDefinition": "to mirror; to reflect",
-                        "chineseDefinition": "（动）比喻把客观事物的实质表现出来。",
-                        "example": "他的作品真实地~了当时社会的生活状况。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "岔路口",
-                        "pinyin": "chà lù kǒu",
-                        "englishDefinition": "fork in road",
-                        "chineseDefinition": "道路分岔的地方。",
-                        "example": "走到~时，请注意交通信号和标识。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "惆怅",
-                        "pinyin": "chóu chàng",
-                        "englishDefinition": "melancholy; depression",
-                        "chineseDefinition": "（形）失意，伤感：无限～。",
-                        "example": "看到老照片，他不禁感慨万分，心中充满了~。"
-                    },
-                    {
-                        "index": 11,
-                        "word": "紧凑",
-                        "pinyin": "jǐn còu",
-                        "englishDefinition": "compact; tight (schedule)",
-                        "chineseDefinition": "（形）密切连接：结构～。［反］松散。",
-                        "example": "文章结构设计得很~，内容紧扣主题。"
-                    },
-                    {
-                        "index": 12,
-                        "word": "小卒",
-                        "pinyin": "xiǎo zú",
-                        "englishDefinition": "foot soldier; minor figure",
-                        "chineseDefinition": "（名）士兵。引申为起不了大作用的人：无名～。",
-                        "example": "这个故事讲述了一个~在危急时刻挺身而出的感人故事。"
-                    }
-                ],
-                "topic2": [
-                    {
-                        "index": 1,
-                        "word": "轿子",
-                        "pinyin": "jiào zi",
-                        "englishDefinition": "sedan chair",
-                        "chineseDefinition": "旧时的交通工具。方形，用竹子或木头制成，外面套着帷子，两边各有一根杆子，由人抬着走或由骡马驮着走。",
-                        "example": "在古代，贵族们常常乘坐~行走于城市之间。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "何况",
-                        "pinyin": "hé kuàng",
-                        "englishDefinition": "let alone; to say nothing of",
-                        "chineseDefinition": "（连）表示递进（多含反问意）。",
-                        "example": "他的工作已经很辛苦了，~还要兼顾家庭生活。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "耻笑",
-                        "pinyin": "chǐ xiào",
-                        "englishDefinition": "to sneer at somebody; to ridicule",
-                        "chineseDefinition": "（动）羞辱和嘲笑",
-                        "example": "~弱者是一种不道德的行为。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "搀扶",
-                        "pinyin": "chān fú",
-                        "englishDefinition": "to lend an arm to support somebody",
-                        "chineseDefinition": "（动）用手轻轻地架住对方的手或胳膊。",
-                        "example": "护士～着病人上了病床。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "罢了",
-                        "pinyin": "bà le",
-                        "englishDefinition": "a modal particle indicating (that's all, only, nothing much)",
-                        "chineseDefinition": "（助）用在陈述句的末尾，有“仅此而已”的意思",
-                        "example": "他努力了很久，最终还是没能达到预期的目标，只好~。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "姊妹",
-                        "pinyin": "zǐ mèi",
-                        "englishDefinition": "(older and younger) sisters",
-                        "chineseDefinition": "姐姐和妹妹；及对年辈相当的女性的友好称呼。",
-                        "example": "她们是从小一起长大的~，关系非常亲密。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "顽劣",
-                        "pinyin": "wán liè",
-                        "englishDefinition": "stubborn and naughty",
-                        "chineseDefinition": "（形）顽固无知；顽皮不顺从：天性～。",
-                        "example": "孩子们有时候的~行为其实是在寻求关注。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "溺爱",
-                        "pinyin": "nì ài",
-                        "englishDefinition": "to spoil; to pamper",
-                        "chineseDefinition": "（动）过分宠爱自己的孩子",
-                        "example": "虽然父母心疼孩子，但也不能过分~，要适度教育。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "颈项",
-                        "pinyin": "jǐng xiàng",
-                        "englishDefinition": "neck",
-                        "chineseDefinition": "头颈喉管的前面为颈，后面为项。",
-                        "example": "漂亮的项链能够很好地修饰女性的~线条。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "鬓",
-                        "pinyin": "bìn",
-                        "englishDefinition": "temples; hair on the temples",
-                        "chineseDefinition": "鬓角，面颊两边靠近耳朵前面的地方； 也指这个部位所长的头发。",
-                        "example": "年岁渐长，他的~渐渐泛白，显得更加沧桑。"
-                    },
-                    {
-                        "index": 11,
-                        "word": "桃",
-                        "pinyin": "táo",
-                        "englishDefinition": "peach",
-                        "chineseDefinition": "桃树，落叶小乔木，叶子长圆披针形，花单生，粉红色。果实略呈球形，表面多有短绒毛，味甜，是常见水果。",
-                        "example": "山里的~熟了，吸引了不少游客前来采摘。"
-                    },
-                    {
-                        "index": 12,
-                        "word": "瓣",
-                        "pinyin": "bàn",
-                        "englishDefinition": "petal",
-                        "chineseDefinition": "花瓣。植物的种子、果实或球茎可以分开的小块儿。",
-                        "example": "这种花有五个粉红色的~，非常美丽。"
-                    },
-                    {
-                        "index": 13,
-                        "word": "重逢",
-                        "pinyin": "chóng féng",
-                        "englishDefinition": "to meet again; to be reunited",
-                        "chineseDefinition": "朋友或亲人在长久分别之后再次见面。分别后又见面；再次相逢；再遇见",
-                        "example": "在这个温馨的节日，亲人之间~的时刻格外珍贵。"
-                    },
-                    {
-                        "index": 14,
-                        "word": "稀罕",
-                        "pinyin": "xī han",
-                        "englishDefinition": "rare; uncommon",
-                        "chineseDefinition": "（形）少有；不容易看到的。 （动）认为稀奇而喜爱。",
-                        "example": "孩子们总是对新奇的事物感到~。"
-                    }
-                ],
-                "topic3": [
-                    {
-                        "index": 1,
-                        "word": "三顾茅庐",
-                        "pinyin": "sān gù máo lú",
-                        "englishDefinition": "to invite someone else with complete sincerity",
-                        "chineseDefinition": "刘备为请诸葛亮，三次到草庐中去拜访他。后比喻诚心诚意地邀请或过访。",
-                        "example": "这位企业家为了请到一位顶级设计师，不惜~地走访。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "争霸",
-                        "pinyin": "zhēng bà",
-                        "englishDefinition": "to contend for hegemony; a power struggle",
-                        "chineseDefinition": "争夺霸权、争夺霸主",
-                        "example": "这两支球队正在为联赛的~而展开激烈的较量。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "足智多谋",
-                        "pinyin": "zú zhì duō móu",
-                        "englishDefinition": "resourceful; full of stratagems",
-                        "chineseDefinition": "富有智慧，善于谋划。",
-                        "example": "他在困境中展现出的~令人刮目相看，成功化解了危机。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "起伏",
-                        "pinyin": "qǐ fú",
-                        "englishDefinition": "to move up and down",
-                        "chineseDefinition": "（动）一起一落。 比喻盛衰、兴废。 高低不平的样子。",
-                        "example": "生活总是有~，有时顺风顺水，有时有不少~。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "斥责",
-                        "pinyin": "chì zé",
-                        "englishDefinition": "to lash out; to reprimand",
-                        "chineseDefinition": "（动）严厉地责备：～不讲公德的行为。",
-                        "example": "我们不应该公开~犯错的人。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "严寒",
-                        "pinyin": "yán hán",
-                        "englishDefinition": "bitter cold; severe winter",
-                        "chineseDefinition": "（形）（气候）特别寒冷。［反］酷暑。",
-                        "example": "在北方，冬天的~天气让人感到刺骨寒冷。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "恳请",
-                        "pinyin": "kěn qǐng",
-                        "englishDefinition": "to request earnestly",
-                        "chineseDefinition": "诚恳地邀请或请求：～出席。～原谅。",
-                        "example": "我们~您参加这次慈善活动，为社区的孩子们提供帮助。"
-                    }
-                ]
+                "topic1": {
+                    "name": "戏剧中的人生百态",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "呈献",
+                            "pinyin": "chéng xiàn",
+                            "englishDefinition": "to present respectfully",
+                            "chineseDefinition": "（动）恭敬地送给别人。",
+                            "example": "他们~了一份精美的礼物，表达对老师的敬意。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "扣人心弦",
+                            "pinyin": "kòu rén xīn xián",
+                            "englishDefinition": "to excite; to thrill",
+                            "chineseDefinition": "形容使人非常激动或能牵动人心如诗文和表演。",
+                            "example": "音乐会上的演奏~，让人久久不能忘怀。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "爱恋",
+                            "pinyin": "ài liàn",
+                            "englishDefinition": "in love with; to feel deeply attached to",
+                            "chineseDefinition": "（动）喜爱而难以分开，多指男女恋情：无限～。",
+                            "example": "他们之间的~在岁月的冲刷下依然鲜明。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "唏嘘",
+                            "pinyin": "xī xū",
+                            "englishDefinition": "to sigh",
+                            "chineseDefinition": "因感叹、感慨而发出的声音",
+                            "example": "故事的结局令人~不已，让人心生悲痛。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "著名",
+                            "pinyin": "zhù míng",
+                            "englishDefinition": "famous;  well-known",
+                            "chineseDefinition": "（形）有名；出名［反］无名。",
+                            "example": "这位作家是一位~的文学巨匠，影响深远。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "兴旺",
+                            "pinyin": "xīng wàng",
+                            "englishDefinition": "prosperous; thriving",
+                            "chineseDefinition": "（形）兴盛；旺盛。［反］衰败。",
+                            "example": "这个地区的经济逐渐~，吸引了大量的投资。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "负荷",
+                            "pinyin": "fù hè",
+                            "englishDefinition": "load; burden",
+                            "chineseDefinition": "（动）承受的压力或负担：难以～。",
+                            "example": "电力系统在高峰时段需要承受大量的~。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "反映",
+                            "pinyin": "fǎn yìng",
+                            "englishDefinition": "to mirror; to reflect",
+                            "chineseDefinition": "（动）比喻把客观事物的实质表现出来。",
+                            "example": "他的作品真实地~了当时社会的生活状况。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "岔路口",
+                            "pinyin": "chà lù kǒu",
+                            "englishDefinition": "fork in road",
+                            "chineseDefinition": "道路分岔的地方。",
+                            "example": "走到~时，请注意交通信号和标识。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "惆怅",
+                            "pinyin": "chóu chàng",
+                            "englishDefinition": "melancholy; depression",
+                            "chineseDefinition": "（形）失意，伤感：无限～。",
+                            "example": "看到老照片，他不禁感慨万分，心中充满了~。"
+                        },
+                        {
+                            "index": 11,
+                            "word": "紧凑",
+                            "pinyin": "jǐn còu",
+                            "englishDefinition": "compact; tight (schedule)",
+                            "chineseDefinition": "（形）密切连接：结构～。［反］松散。",
+                            "example": "文章结构设计得很~，内容紧扣主题。"
+                        },
+                        {
+                            "index": 12,
+                            "word": "小卒",
+                            "pinyin": "xiǎo zú",
+                            "englishDefinition": "foot soldier; minor figure",
+                            "chineseDefinition": "（名）士兵。引申为起不了大作用的人：无名～。",
+                            "example": "这个故事讲述了一个~在危急时刻挺身而出的感人故事。"
+                        }
+                    ]
+                },
+                "topic2": {
+                    "name": "林黛玉进贾府",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "轿子",
+                            "pinyin": "jiào zi",
+                            "englishDefinition": "sedan chair",
+                            "chineseDefinition": "旧时的交通工具。方形，用竹子或木头制成，外面套着帷子，两边各有一根杆子，由人抬着走或由骡马驮着走。",
+                            "example": "在古代，贵族们常常乘坐~行走于城市之间。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "何况",
+                            "pinyin": "hé kuàng",
+                            "englishDefinition": "let alone; to say nothing of",
+                            "chineseDefinition": "（连）表示递进（多含反问意）。",
+                            "example": "他的工作已经很辛苦了，~还要兼顾家庭生活。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "耻笑",
+                            "pinyin": "chǐ xiào",
+                            "englishDefinition": "to sneer at somebody; to ridicule",
+                            "chineseDefinition": "（动）羞辱和嘲笑",
+                            "example": "~弱者是一种不道德的行为。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "搀扶",
+                            "pinyin": "chān fú",
+                            "englishDefinition": "to lend an arm to support somebody",
+                            "chineseDefinition": "（动）用手轻轻地架住对方的手或胳膊。",
+                            "example": "护士～着病人上了病床。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "罢了",
+                            "pinyin": "bà le",
+                            "englishDefinition": "a modal particle indicating (that's all, only, nothing much)",
+                            "chineseDefinition": "（助）用在陈述句的末尾，有“仅此而已”的意思",
+                            "example": "他努力了很久，最终还是没能达到预期的目标，只好~。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "姊妹",
+                            "pinyin": "zǐ mèi",
+                            "englishDefinition": "(older and younger) sisters",
+                            "chineseDefinition": "姐姐和妹妹；及对年辈相当的女性的友好称呼。",
+                            "example": "她们是从小一起长大的~，关系非常亲密。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "顽劣",
+                            "pinyin": "wán liè",
+                            "englishDefinition": "stubborn and naughty",
+                            "chineseDefinition": "（形）顽固无知；顽皮不顺从：天性～。",
+                            "example": "孩子们有时候的~行为其实是在寻求关注。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "溺爱",
+                            "pinyin": "nì ài",
+                            "englishDefinition": "to spoil; to pamper",
+                            "chineseDefinition": "（动）过分宠爱自己的孩子",
+                            "example": "虽然父母心疼孩子，但也不能过分~，要适度教育。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "颈项",
+                            "pinyin": "jǐng xiàng",
+                            "englishDefinition": "neck",
+                            "chineseDefinition": "头颈喉管的前面为颈，后面为项。",
+                            "example": "漂亮的项链能够很好地修饰女性的~线条。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "鬓",
+                            "pinyin": "bìn",
+                            "englishDefinition": "temples; hair on the temples",
+                            "chineseDefinition": "鬓角，面颊两边靠近耳朵前面的地方； 也指这个部位所长的头发。",
+                            "example": "年岁渐长，他的~渐渐泛白，显得更加沧桑。"
+                        },
+                        {
+                            "index": 11,
+                            "word": "桃",
+                            "pinyin": "táo",
+                            "englishDefinition": "peach",
+                            "chineseDefinition": "桃树，落叶小乔木，叶子长圆披针形，花单生，粉红色。果实略呈球形，表面多有短绒毛，味甜，是常见水果。",
+                            "example": "山里的~熟了，吸引了不少游客前来采摘。"
+                        },
+                        {
+                            "index": 12,
+                            "word": "瓣",
+                            "pinyin": "bàn",
+                            "englishDefinition": "petal",
+                            "chineseDefinition": "花瓣。植物的种子、果实或球茎可以分开的小块儿。",
+                            "example": "这种花有五个粉红色的~，非常美丽。"
+                        },
+                        {
+                            "index": 13,
+                            "word": "重逢",
+                            "pinyin": "chóng féng",
+                            "englishDefinition": "to meet again; to be reunited",
+                            "chineseDefinition": "朋友或亲人在长久分别之后再次见面。分别后又见面；再次相逢；再遇见",
+                            "example": "在这个温馨的节日，亲人之间~的时刻格外珍贵。"
+                        },
+                        {
+                            "index": 14,
+                            "word": "稀罕",
+                            "pinyin": "xī han",
+                            "englishDefinition": "rare; uncommon",
+                            "chineseDefinition": "（形）少有；不容易看到的。 （动）认为稀奇而喜爱。",
+                            "example": "孩子们总是对新奇的事物感到~。"
+                        }
+                    ]
+                },
+                "topic3": {
+                    "name": "三顾茅庐",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "三顾茅庐",
+                            "pinyin": "sān gù máo lú",
+                            "englishDefinition": "to invite someone else with complete sincerity",
+                            "chineseDefinition": "刘备为请诸葛亮，三次到草庐中去拜访他。后比喻诚心诚意地邀请或过访。",
+                            "example": "这位企业家为了请到一位顶级设计师，不惜~地走访。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "争霸",
+                            "pinyin": "zhēng bà",
+                            "englishDefinition": "to contend for hegemony; a power struggle",
+                            "chineseDefinition": "争夺霸权、争夺霸主",
+                            "example": "这两支球队正在为联赛的~而展开激烈的较量。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "足智多谋",
+                            "pinyin": "zú zhì duō móu",
+                            "englishDefinition": "resourceful; full of stratagems",
+                            "chineseDefinition": "富有智慧，善于谋划。",
+                            "example": "他在困境中展现出的~令人刮目相看，成功化解了危机。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "起伏",
+                            "pinyin": "qǐ fú",
+                            "englishDefinition": "to move up and down",
+                            "chineseDefinition": "（动）一起一落。 比喻盛衰、兴废。 高低不平的样子。",
+                            "example": "生活总是有~，有时顺风顺水，有时有不少~。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "斥责",
+                            "pinyin": "chì zé",
+                            "englishDefinition": "to lash out; to reprimand",
+                            "chineseDefinition": "（动）严厉地责备：～不讲公德的行为。",
+                            "example": "我们不应该公开~犯错的人。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "严寒",
+                            "pinyin": "yán hán",
+                            "englishDefinition": "bitter cold; severe winter",
+                            "chineseDefinition": "（形）（气候）特别寒冷。［反］酷暑。",
+                            "example": "在北方，冬天的~天气让人感到刺骨寒冷。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "恳请",
+                            "pinyin": "kěn qǐng",
+                            "englishDefinition": "to request earnestly",
+                            "chineseDefinition": "诚恳地邀请或请求：～出席。～原谅。",
+                            "example": "我们~您参加这次慈善活动，为社区的孩子们提供帮助。"
+                        }
+                    ]
+                }
             }
         },
         {
-            "name": "chapter3",
+            "name": "单元三",
             "topics": {
-                "topic1": [
-                    {
-                        "index": 1,
-                        "word": "酿",
-                        "pinyin": "niàng",
-                        "englishDefinition": "to ferment; to brew;",
-                        "chineseDefinition": "酿造：～酒。",
-                        "example": "他的一时疏忽，险些~成大祸。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "涌",
-                        "pinyin": "yǒng",
-                        "englishDefinition": "to bubble up; to rush forth",
-                        "chineseDefinition": "水或云气冒出。迅速而强烈地出现。",
-                        "example": "在这个行业中，新的技术不断~出，给市场带来了变革。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "繁殖",
-                        "pinyin": "fán zhí",
-                        "englishDefinition": "to breed; to reproduce",
-                        "chineseDefinition": "（动）生物产生新的一代个体。",
-                        "example": "动物为了~，会选择适合生存的环境。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "饲料",
-                        "pinyin": "sì liào",
-                        "englishDefinition": "feed; fodder",
-                        "chineseDefinition": "喂养动物的食物。",
-                        "example": "农民们精心准备了丰富的~，以保证牲畜在冬季有足够的营养。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "佳肴",
-                        "pinyin": "jiā yáo",
-                        "englishDefinition": "fine food; delicacies",
-                        "chineseDefinition": "（名）精美的菜肴：美酒～。",
-                        "example": "这家餐厅以独特的烹饪技艺制作出一道道~，引得食客纷纷赞叹。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "啃",
-                        "pinyin": "kěn",
-                        "englishDefinition": "to gnaw; to nibble",
-                        "chineseDefinition": "用牙齿一点儿一点儿地往下咬。",
-                        "example": "孩子们在野餐时~着苹果，笑容满面。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "入侵",
-                        "pinyin": "rù qīn",
-                        "englishDefinition": "to invade",
-                        "chineseDefinition": "（动）侵入，侵犯",
-                        "example": "为了抗击~的敌人，那个国家派兵前往边境守卫。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "盎然",
-                        "pinyin": "àng rán",
-                        "englishDefinition": "abundant; overflowing",
-                        "chineseDefinition": "（形）气氛、趣味洋溢的样子。",
-                        "example": "在公园里，处处可看到春意~的景色。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "砍伐",
-                        "pinyin": "kǎn fá",
-                        "englishDefinition": "to cut down",
-                        "chineseDefinition": "（动）砍倒或锯下树木的枝干。",
-                        "example": "过度的~对森林的生态系统造成了严重的破坏。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "栖息",
-                        "pinyin": "qī xī",
-                        "englishDefinition": "(of a bird) to perch; (of creatures in general) to inhabit; to dwell",
-                        "chineseDefinition": "（动）停留，休息（多指鸟类）。",
-                        "example": "这种鸟类通常在湖泊边缘附近~，寻找食物。"
-                    },
-                    {
-                        "index": 11,
-                        "word": "牢记",
-                        "pinyin": "láo jì",
-                        "englishDefinition": "to keep in mind; to remember",
-                        "chineseDefinition": "（动）长久清晰地记住。［反］忘记|淡忘。",
-                        "example": "学生们要~老师的教诲，努力成为更好的人。"
-                    },
-                    {
-                        "index": 12,
-                        "word": "勿",
-                        "pinyin": "wù",
-                        "englishDefinition": "do not",
-                        "chineseDefinition": "表示禁止或劝阻。",
-                        "example": "在实验室里工作时，~忘记戴上防护装备。"
-                    },
-                    {
-                        "index": 13,
-                        "word": "惩罚",
-                        "pinyin": "chéng fá",
-                        "englishDefinition": "penalty; punishmen",
-                        "chineseDefinition": "（动）严厉地处罚",
-                        "example": "无论是谁，犯了罪都要受到应有的～。"
-                    }
-                ],
-                "topic2": [
-                    {
-                        "index": 1,
-                        "word": "茂密",
-                        "pinyin": "mào mì",
-                        "englishDefinition": "dense (of plant growth); lush",
-                        "chineseDefinition": "（形）草木旺盛而繁多。［反］稀疏。",
-                        "example": "这片森林生长着~的树木，形成了一个天然的生态系统。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "恶劣",
-                        "pinyin": "è liè",
-                        "englishDefinition": "vile; nasty; of very poor quality",
-                        "chineseDefinition": "（形）很坏；极差。［反］高尚。",
-                        "example": "这种~的天气条件不利于户外活动。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "浸泡",
-                        "pinyin": "jìn pào",
-                        "englishDefinition": "to steep; to soak",
-                        "chineseDefinition": "（动）把东西放在液体中泡。",
-                        "example": "把干燥的花草放入水中，让其充分~，能使花朵更加鲜艳。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "牺牲",
-                        "pinyin": "xī shēng",
-                        "englishDefinition": "to sacrifice (sth valued)",
-                        "chineseDefinition": "（动）为了正义的目的舍弃自己的生命，泛指为某种目的付出代价或受到损害：流血～|～自我。",
-                        "example": "他们为保卫家园，不惜~生命。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "锐减",
-                        "pinyin": "ruì jiǎn",
-                        "englishDefinition": "steep decline",
-                        "chineseDefinition": "（动）急剧减少、迅速下降。",
-                        "example": "由于自然灾害，该地区的粮食产量~，引起了社会的关注。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "保育",
-                        "pinyin": "bǎo yù",
-                        "englishDefinition": "childcare; conservation (of the environment etc)",
-                        "chineseDefinition": "照管幼儿 。对儿童的养育",
-                        "example": "这个地区的自然环境非常美丽，需要加强~工作。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "储存",
-                        "pinyin": "chǔ cún",
-                        "englishDefinition": "stockpile; to store",
-                        "chineseDefinition": "（动）把东西存起来：～粮食［反］支取。",
-                        "example": "粮食丰收时，要及时~，以备不时之需。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "身躯",
-                        "pinyin": "shēn qū",
-                        "englishDefinition": "body",
-                        "chineseDefinition": "身体；身材。",
-                        "example": "这位运动员的~强健，是经过长期的锻炼获得的。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "侵蚀",
-                        "pinyin": "qīn shí",
-                        "englishDefinition": "to erode; to corrode",
-                        "chineseDefinition": "（动）逐渐侵害使变坏。 暗中一点一点地侵占（财物）。",
-                        "example": "这些古代的石雕，由于风雨的~，字迹已经模糊不清了。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "空隙",
-                        "pinyin": "kòng xì",
-                        "englishDefinition": "crack; gap between two objects",
-                        "chineseDefinition": "（名）没有占用的地方或时间。 比喻可乘的机会。",
-                        "example": "阳光从树叶的~中洒下，照在了我的脚下。"
-                    },
-                    {
-                        "index": 11,
-                        "word": "堤",
-                        "pinyin": "dī",
-                        "englishDefinition": "dike",
-                        "chineseDefinition": "沿河、沿湖或沿海的防水构筑物，多用土石等筑成。",
-                        "example": "雨季来临前，工程师们加固了河~，以防止洪水泛滥。"
-                    }
-                ],
-                "topic3": [
-                    {
-                        "index": 1,
-                        "word": "窥视",
-                        "pinyin": "kuī shì",
-                        "englishDefinition": "to peep at; to spy on",
-                        "chineseDefinition": "（动）偷看。",
-                        "example": "小偷在黑暗中~着周围的情况，准备行窃。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "宣布",
-                        "pinyin": "xuān bù",
-                        "englishDefinition": "to declare; to announce",
-                        "chineseDefinition": "（动）公开告诉大家。［反］撤销。",
-                        "example": "政府官员在新闻发布会上~了紧急状态的实施。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "狩猎",
-                        "pinyin": "shòu liè",
-                        "englishDefinition": "to hunt; hunting",
-                        "chineseDefinition": "捕杀或猎取野生动物。",
-                        "example": "在过去，人们通过~获取食物来维持生计。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "饥饿",
-                        "pinyin": "jī è",
-                        "englishDefinition": "hunger; starvation",
-                        "chineseDefinition": "（形）肚子空而想吃东西。",
-                        "example": "这个地区的居民长期面临着缺少食物导致的~问题。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "糟蹋",
-                        "pinyin": "zāo tà",
-                        "englishDefinition": "to waste; to abuse",
-                        "chineseDefinition": "（动）浪费或随意损坏［反］爱惜。",
-                        "example": "食物很珍贵，我们不应该~食物。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "毁灭",
-                        "pinyin": "huǐ miè",
-                        "englishDefinition": "to ruin; to destroy",
-                        "chineseDefinition": "（动）彻底破坏或消灭。",
-                        "example": "火灾~了整个建筑物，造成了巨大的财产损失。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "罪魁祸首",
-                        "pinyin": "zuì kuí huò shǒu",
-                        "englishDefinition": "main offender; main cause of a disaster",
-                        "chineseDefinition": "犯罪作恶的为首分子。 问题的根本原因，主要责任人。",
-                        "example": "缺少高质量的睡眠是导致疲劳的主要~。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "竞争",
-                        "pinyin": "jìng zhēng",
-                        "englishDefinition": "to compete; competition",
-                        "chineseDefinition": "（动）互相争胜。",
-                        "example": "市场上的~非常激烈，每个企业都在争取更多的市场份额。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "袭击",
-                        "pinyin": "xí jī",
-                        "englishDefinition": "attack (esp. surprise attack)",
-                        "chineseDefinition": "（动）军事上指出其不意地进攻。",
-                        "example": "敌军在夜间对阵地进行了~，造成了严重的损失。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "违背",
-                        "pinyin": "wéi bèi",
-                        "englishDefinition": "to go against; to violate",
-                        "chineseDefinition": "（动）不遵守；不符合。［反］遵守。",
-                        "example": "契约是双方答应共同遵守的，不能随意~约定内容。"
-                    },
-                    {
-                        "index": 11,
-                        "word": "拼搏",
-                        "pinyin": "pīn bó",
-                        "englishDefinition": "to struggle; to wrestle",
-                        "chineseDefinition": "（动）用尽一切力量去争夺或争取。",
-                        "example": "他一直在为自己的梦想~，从不轻言放弃。"
-                    }
-                ]
+                "topic1": {
+                    "name": "被破坏的生态平衡",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "酿",
+                            "pinyin": "niàng",
+                            "englishDefinition": "to ferment; to brew;",
+                            "chineseDefinition": "酿造：～酒。",
+                            "example": "他的一时疏忽，险些~成大祸。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "涌",
+                            "pinyin": "yǒng",
+                            "englishDefinition": "to bubble up; to rush forth",
+                            "chineseDefinition": "水或云气冒出。迅速而强烈地出现。",
+                            "example": "在这个行业中，新的技术不断~出，给市场带来了变革。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "繁殖",
+                            "pinyin": "fán zhí",
+                            "englishDefinition": "to breed; to reproduce",
+                            "chineseDefinition": "（动）生物产生新的一代个体。",
+                            "example": "动物为了~，会选择适合生存的环境。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "饲料",
+                            "pinyin": "sì liào",
+                            "englishDefinition": "feed; fodder",
+                            "chineseDefinition": "喂养动物的食物。",
+                            "example": "农民们精心准备了丰富的~，以保证牲畜在冬季有足够的营养。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "佳肴",
+                            "pinyin": "jiā yáo",
+                            "englishDefinition": "fine food; delicacies",
+                            "chineseDefinition": "（名）精美的菜肴：美酒～。",
+                            "example": "这家餐厅以独特的烹饪技艺制作出一道道~，引得食客纷纷赞叹。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "啃",
+                            "pinyin": "kěn",
+                            "englishDefinition": "to gnaw; to nibble",
+                            "chineseDefinition": "用牙齿一点儿一点儿地往下咬。",
+                            "example": "孩子们在野餐时~着苹果，笑容满面。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "入侵",
+                            "pinyin": "rù qīn",
+                            "englishDefinition": "to invade",
+                            "chineseDefinition": "（动）侵入，侵犯",
+                            "example": "为了抗击~的敌人，那个国家派兵前往边境守卫。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "盎然",
+                            "pinyin": "àng rán",
+                            "englishDefinition": "abundant; overflowing",
+                            "chineseDefinition": "（形）气氛、趣味洋溢的样子。",
+                            "example": "在公园里，处处可看到春意~的景色。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "砍伐",
+                            "pinyin": "kǎn fá",
+                            "englishDefinition": "to cut down",
+                            "chineseDefinition": "（动）砍倒或锯下树木的枝干。",
+                            "example": "过度的~对森林的生态系统造成了严重的破坏。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "栖息",
+                            "pinyin": "qī xī",
+                            "englishDefinition": "(of a bird) to perch; (of creatures in general) to inhabit; to dwell",
+                            "chineseDefinition": "（动）停留，休息（多指鸟类）。",
+                            "example": "这种鸟类通常在湖泊边缘附近~，寻找食物。"
+                        },
+                        {
+                            "index": 11,
+                            "word": "牢记",
+                            "pinyin": "láo jì",
+                            "englishDefinition": "to keep in mind; to remember",
+                            "chineseDefinition": "（动）长久清晰地记住。［反］忘记|淡忘。",
+                            "example": "学生们要~老师的教诲，努力成为更好的人。"
+                        },
+                        {
+                            "index": 12,
+                            "word": "勿",
+                            "pinyin": "wù",
+                            "englishDefinition": "do not",
+                            "chineseDefinition": "表示禁止或劝阻。",
+                            "example": "在实验室里工作时，~忘记戴上防护装备。"
+                        },
+                        {
+                            "index": 13,
+                            "word": "惩罚",
+                            "pinyin": "chéng fá",
+                            "englishDefinition": "penalty; punishmen",
+                            "chineseDefinition": "（动）严厉地处罚",
+                            "example": "无论是谁，犯了罪都要受到应有的～。"
+                        }
+                    ]
+                },
+                "topic2": {
+                    "name": "对抗气候变化的超级英雄——红树林",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "茂密",
+                            "pinyin": "mào mì",
+                            "englishDefinition": "dense (of plant growth); lush",
+                            "chineseDefinition": "（形）草木旺盛而繁多。［反］稀疏。",
+                            "example": "这片森林生长着~的树木，形成了一个天然的生态系统。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "恶劣",
+                            "pinyin": "è liè",
+                            "englishDefinition": "vile; nasty; of very poor quality",
+                            "chineseDefinition": "（形）很坏；极差。［反］高尚。",
+                            "example": "这种~的天气条件不利于户外活动。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "浸泡",
+                            "pinyin": "jìn pào",
+                            "englishDefinition": "to steep; to soak",
+                            "chineseDefinition": "（动）把东西放在液体中泡。",
+                            "example": "把干燥的花草放入水中，让其充分~，能使花朵更加鲜艳。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "牺牲",
+                            "pinyin": "xī shēng",
+                            "englishDefinition": "to sacrifice (sth valued)",
+                            "chineseDefinition": "（动）为了正义的目的舍弃自己的生命，泛指为某种目的付出代价或受到损害：流血～|～自我。",
+                            "example": "他们为保卫家园，不惜~生命。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "锐减",
+                            "pinyin": "ruì jiǎn",
+                            "englishDefinition": "steep decline",
+                            "chineseDefinition": "（动）急剧减少、迅速下降。",
+                            "example": "由于自然灾害，该地区的粮食产量~，引起了社会的关注。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "保育",
+                            "pinyin": "bǎo yù",
+                            "englishDefinition": "childcare; conservation (of the environment etc)",
+                            "chineseDefinition": "照管幼儿 。对儿童的养育",
+                            "example": "这个地区的自然环境非常美丽，需要加强~工作。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "储存",
+                            "pinyin": "chǔ cún",
+                            "englishDefinition": "stockpile; to store",
+                            "chineseDefinition": "（动）把东西存起来：～粮食［反］支取。",
+                            "example": "粮食丰收时，要及时~，以备不时之需。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "身躯",
+                            "pinyin": "shēn qū",
+                            "englishDefinition": "body",
+                            "chineseDefinition": "身体；身材。",
+                            "example": "这位运动员的~强健，是经过长期的锻炼获得的。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "侵蚀",
+                            "pinyin": "qīn shí",
+                            "englishDefinition": "to erode; to corrode",
+                            "chineseDefinition": "（动）逐渐侵害使变坏。 暗中一点一点地侵占（财物）。",
+                            "example": "这些古代的石雕，由于风雨的~，字迹已经模糊不清了。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "空隙",
+                            "pinyin": "kòng xì",
+                            "englishDefinition": "crack; gap between two objects",
+                            "chineseDefinition": "（名）没有占用的地方或时间。 比喻可乘的机会。",
+                            "example": "阳光从树叶的~中洒下，照在了我的脚下。"
+                        },
+                        {
+                            "index": 11,
+                            "word": "堤",
+                            "pinyin": "dī",
+                            "englishDefinition": "dike",
+                            "chineseDefinition": "沿河、沿湖或沿海的防水构筑物，多用土石等筑成。",
+                            "example": "雨季来临前，工程师们加固了河~，以防止洪水泛滥。"
+                        }
+                    ]
+                },
+                "topic3": {
+                    "name": "狼鹿效应",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "窥视",
+                            "pinyin": "kuī shì",
+                            "englishDefinition": "to peep at; to spy on",
+                            "chineseDefinition": "（动）偷看。",
+                            "example": "小偷在黑暗中~着周围的情况，准备行窃。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "宣布",
+                            "pinyin": "xuān bù",
+                            "englishDefinition": "to declare; to announce",
+                            "chineseDefinition": "（动）公开告诉大家。［反］撤销。",
+                            "example": "政府官员在新闻发布会上~了紧急状态的实施。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "狩猎",
+                            "pinyin": "shòu liè",
+                            "englishDefinition": "to hunt; hunting",
+                            "chineseDefinition": "捕杀或猎取野生动物。",
+                            "example": "在过去，人们通过~获取食物来维持生计。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "饥饿",
+                            "pinyin": "jī è",
+                            "englishDefinition": "hunger; starvation",
+                            "chineseDefinition": "（形）肚子空而想吃东西。",
+                            "example": "这个地区的居民长期面临着缺少食物导致的~问题。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "糟蹋",
+                            "pinyin": "zāo tà",
+                            "englishDefinition": "to waste; to abuse",
+                            "chineseDefinition": "（动）浪费或随意损坏［反］爱惜。",
+                            "example": "食物很珍贵，我们不应该~食物。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "毁灭",
+                            "pinyin": "huǐ miè",
+                            "englishDefinition": "to ruin; to destroy",
+                            "chineseDefinition": "（动）彻底破坏或消灭。",
+                            "example": "火灾~了整个建筑物，造成了巨大的财产损失。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "罪魁祸首",
+                            "pinyin": "zuì kuí huò shǒu",
+                            "englishDefinition": "main offender; main cause of a disaster",
+                            "chineseDefinition": "犯罪作恶的为首分子。 问题的根本原因，主要责任人。",
+                            "example": "缺少高质量的睡眠是导致疲劳的主要~。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "竞争",
+                            "pinyin": "jìng zhēng",
+                            "englishDefinition": "to compete; competition",
+                            "chineseDefinition": "（动）互相争胜。",
+                            "example": "市场上的~非常激烈，每个企业都在争取更多的市场份额。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "袭击",
+                            "pinyin": "xí jī",
+                            "englishDefinition": "attack (esp. surprise attack)",
+                            "chineseDefinition": "（动）军事上指出其不意地进攻。",
+                            "example": "敌军在夜间对阵地进行了~，造成了严重的损失。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "违背",
+                            "pinyin": "wéi bèi",
+                            "englishDefinition": "to go against; to violate",
+                            "chineseDefinition": "（动）不遵守；不符合。［反］遵守。",
+                            "example": "契约是双方答应共同遵守的，不能随意~约定内容。"
+                        },
+                        {
+                            "index": 11,
+                            "word": "拼搏",
+                            "pinyin": "pīn bó",
+                            "englishDefinition": "to struggle; to wrestle",
+                            "chineseDefinition": "（动）用尽一切力量去争夺或争取。",
+                            "example": "他一直在为自己的梦想~，从不轻言放弃。"
+                        }
+                    ]
+                }
             }
         },
         {
-            "name": "chapter4",
+            "name": "单元四",
             "topics": {
-                "topic1": [
-                    {
-                        "index": 1,
-                        "word": "联盟",
-                        "pinyin": "lián méng",
-                        "englishDefinition": "alliance; union",
-                        "chineseDefinition": "两个或两个以上的独立的国家或民族为了互相保卫通过正式协定(条约或合同)建立的集团。",
-                        "example": "不同国家之间的~有助于维护地区的和平与稳定。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "迄今",
-                        "pinyin": "qì jīn",
-                        "englishDefinition": "to date; until now",
-                        "chineseDefinition": "持续到或迟至目前",
-                        "example": "这是他~最成功的一部作品，备受好评。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "蜿蜒",
-                        "pinyin": "wān yán",
-                        "englishDefinition": "winding; to meander",
-                        "chineseDefinition": "蛇类向前爬行的曲折样子。 （山脉、河流、道路等）弯曲。",
-                        "example": "小溪在山间~流淌，宛如一条银色的丝带。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "辽阔",
-                        "pinyin": "liáo kuò",
-                        "englishDefinition": "vast; extensive",
-                        "chineseDefinition": "（形）空旷而宽广。［反］狭窄。",
-                        "example": "这片~的草原一望无际，是野生动物的天堂。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "诸多",
-                        "pinyin": "zhū duō",
-                        "englishDefinition": "a lot of",
-                        "chineseDefinition": "（形）许多；好些个（用于抽象事物）。",
-                        "example": "这个问题涉及到~方面的因素，需要综合考虑。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "古迹",
-                        "pinyin": "gǔ jì",
-                        "englishDefinition": "places of historic interest; historical sites",
-                        "chineseDefinition": "（名）古代留存下来的建筑物或遗迹。",
-                        "example": "参观名胜~是了解历史文化的好途径。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "雕刻",
-                        "pinyin": "diāo kè",
-                        "englishDefinition": "to carve; carving",
-                        "chineseDefinition": "（动）在金属、象牙、骨头或其他材料上刻出花纹、形象。（名）雕刻成的艺术品。",
-                        "example": "他花费了数月的时间，精心~一尊栩栩如生的雕像。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "啧啧称奇",
-                        "pinyin": "zé zé chēng qí",
-                        "englishDefinition": "to click one's tongue in wonder (idiom); to be astonished",
-                        "chineseDefinition": "咂着嘴称赞它的奇妙。",
-                        "example": "大家对他的创意十分~，纷纷表示佩服。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "赞叹",
-                        "pinyin": "zàn tàn",
-                        "englishDefinition": "to sigh or gasp in admiration; high praise",
-                        "chineseDefinition": "（动）极为称赞。［反］贬斥|批评。",
-                        "example": "面对这座宏伟的建筑，游客都不禁~不已。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "底蕴",
-                        "pinyin": "dǐ yùn",
-                        "englishDefinition": "inside information; concrete details",
-                        "chineseDefinition": "（名）事情的详细内容或内情。",
-                        "example": "这个品牌的成功离不开它丰富的历史~和独特的风格。"
-                    },
-                    {
-                        "index": 11,
-                        "word": "灿烂",
-                        "pinyin": "càn làn",
-                        "englishDefinition": "to glitter; brilliant",
-                        "chineseDefinition": "（形）光彩鲜明耀眼。［反］暗淡",
-                        "example": "夜空中繁星点点，展现出一幅~的星空画卷。"
-                    },
-                    {
-                        "index": 12,
-                        "word": "金碧辉煌",
-                        "pinyin": "jīn bì huī huáng",
-                        "englishDefinition": "a dazzling sight (e.g. royal palace)",
-                        "chineseDefinition": "形容建筑装饰华丽，光彩耀眼的样子。",
-                        "example": "这座宫殿的建筑风格~，令人叹为观止。"
-                    },
-                    {
-                        "index": 13,
-                        "word": "绚丽",
-                        "pinyin": "xuàn lì",
-                        "englishDefinition": "gorgeous; magnificent",
-                        "chineseDefinition": "（形）灿烂美丽：～的云霞|～的篇章。",
-                        "example": "她穿着一袭~的礼服，成为舞台上的焦点。"
-                    }
-                ],
-                "topic2": [
-                    {
-                        "index": 1,
-                        "word": "颇",
-                        "pinyin": "pō",
-                        "englishDefinition": "rather; quite",
-                        "chineseDefinition": "很；相当地。〈副〉",
-                        "example": "这个项目的难度~大，需要充分的准备。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "独树一帜",
-                        "pinyin": "dú shù yī zhì",
-                        "englishDefinition": "to stand out; to have attitude of one's own",
-                        "chineseDefinition": "比喻创造出独特的风格、主张，自成一家。",
-                        "example": "这位设计师的作品总是~，充满创意和个性。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "赋税",
-                        "pinyin": "fù shuì",
-                        "englishDefinition": "taxation",
-                        "chineseDefinition": "（名）田赋和各种捐税的总称。",
-                        "example": "政府通过对富人的~来筹集资金，用于扶贫和教育。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "揭竿而起",
-                        "pinyin": "jiē gān ér qǐ",
-                        "englishDefinition": "rise up in arms",
-                        "chineseDefinition": "高举反抗的旗帜，起来斗争。泛指人民武装起义。",
-                        "example": "这场社会运动让人们看到了民众集体~的力量。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "暴虐",
-                        "pinyin": "bào nüè",
-                        "englishDefinition": "brutal; tyrannical",
-                        "chineseDefinition": "（形）凶狠残暴没有人道：～无道。",
-                        "example": "历史上的一些暴君对人民实施了~的统治。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "葬送",
-                        "pinyin": "zàng sòng",
-                        "englishDefinition": "to give somebody a final send-off; to ruin (one's future prospects etc)",
-                        "chineseDefinition": "（动）比喻断送、毁灭：～前程。",
-                        "example": "错误的决策可能~整个项目的前景。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "推卸",
-                        "pinyin": "tuī xiè",
-                        "englishDefinition": "to avoid (esp. responsibility); to shift (the blame)",
-                        "chineseDefinition": "（动）不愿承担（某种责任）。",
-                        "example": "面对挑战，我们不能选择~责任，而是要积极解决问题。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "停滞",
-                        "pinyin": "tíng zhì",
-                        "englishDefinition": "stagnation; at a standstill",
-                        "chineseDefinition": "（动）因受阻碍而长时间停止或前进极慢，不能顺利发展",
-                        "example": "生活中遇到困难时，不要让自己~不前进，要勇往直前。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "趾高气扬",
-                        "pinyin": "zhǐ gāo qì yáng",
-                        "englishDefinition": "high and mighty (idiom); arrogant",
-                        "chineseDefinition": "形容骄傲自大、得意忘形。［反］低三下四|奴颜婢膝。",
-                        "example": "他~的举止引起了同事们的反感，需要调整态度。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "谦逊",
-                        "pinyin": "qiān xùn",
-                        "englishDefinition": "humble; modest",
-                        "chineseDefinition": "（形）谦虚；恭让",
-                        "example": "成功者应该保持~的态度，不忘初心。"
-                    },
-                    {
-                        "index": 11,
-                        "word": "梦寐以求",
-                        "pinyin": "mèng mèi yǐ qiú",
-                        "englishDefinition": "to yearn for sth even in one's dreams (idiom); to long for sth day and night",
-                        "chineseDefinition": "渴望得到，一直梦想着",
-                        "example": "这份工作是我多年来~的机会，我会全力以赴。"
-                    },
-                    {
-                        "index": 12,
-                        "word": "昌盛",
-                        "pinyin": "chāng shèng",
-                        "englishDefinition": "prosperous",
-                        "chineseDefinition": "（形）兴旺［反］破落|衰落。",
-                        "example": "那个时期是这个国家文化的~时期，许多艺术繁荣发展。"
-                    }
-                ],
-                "topic3": [
-                    {
-                        "index": 1,
-                        "word": "协作",
-                        "pinyin": "xié zuò",
-                        "englishDefinition": "cooperation; coordination",
-                        "chineseDefinition": "（动）互相配合完成某任务：密切～。",
-                        "example": "团队成员之间的有效~对于项目的成功至关重要。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "论坛",
-                        "pinyin": "lùn tán",
-                        "englishDefinition": "forum (for discussion)",
-                        "chineseDefinition": "对公众发表议论的地方，指报刊、座谈会等：工人～。",
-                        "example": "学术~是学者们交流研究成果的重要场所。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "毋庸讳言",
-                        "pinyin": "wú yōng huì yán",
-                        "englishDefinition": "needless to say",
-                        "chineseDefinition": "用不着隐讳，可以直说的内容。",
-                        "example": "这个问题的解决方案，~，需要大家共同努力。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "棘手",
-                        "pinyin": "jí shǒu",
-                        "englishDefinition": "thorny (problem); intractable",
-                        "chineseDefinition": "（形）形容事情难办：～的问题［反］顺手。",
-                        "example": "面对这个~的问题，我们需要制定一套全面的解决方案。"
-                    }
-                ]
+                "topic1": {
+                    "name": "亚细安知多少",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "联盟",
+                            "pinyin": "lián méng",
+                            "englishDefinition": "alliance; union",
+                            "chineseDefinition": "两个或两个以上的独立的国家或民族为了互相保卫通过正式协定(条约或合同)建立的集团。",
+                            "example": "不同国家之间的~有助于维护地区的和平与稳定。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "迄今",
+                            "pinyin": "qì jīn",
+                            "englishDefinition": "to date; until now",
+                            "chineseDefinition": "持续到或迟至目前",
+                            "example": "这是他~最成功的一部作品，备受好评。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "蜿蜒",
+                            "pinyin": "wān yán",
+                            "englishDefinition": "winding; to meander",
+                            "chineseDefinition": "蛇类向前爬行的曲折样子。 （山脉、河流、道路等）弯曲。",
+                            "example": "小溪在山间~流淌，宛如一条银色的丝带。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "辽阔",
+                            "pinyin": "liáo kuò",
+                            "englishDefinition": "vast; extensive",
+                            "chineseDefinition": "（形）空旷而宽广。［反］狭窄。",
+                            "example": "这片~的草原一望无际，是野生动物的天堂。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "诸多",
+                            "pinyin": "zhū duō",
+                            "englishDefinition": "a lot of",
+                            "chineseDefinition": "（形）许多；好些个（用于抽象事物）。",
+                            "example": "这个问题涉及到~方面的因素，需要综合考虑。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "古迹",
+                            "pinyin": "gǔ jì",
+                            "englishDefinition": "places of historic interest; historical sites",
+                            "chineseDefinition": "（名）古代留存下来的建筑物或遗迹。",
+                            "example": "参观名胜~是了解历史文化的好途径。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "雕刻",
+                            "pinyin": "diāo kè",
+                            "englishDefinition": "to carve; carving",
+                            "chineseDefinition": "（动）在金属、象牙、骨头或其他材料上刻出花纹、形象。（名）雕刻成的艺术品。",
+                            "example": "他花费了数月的时间，精心~一尊栩栩如生的雕像。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "啧啧称奇",
+                            "pinyin": "zé zé chēng qí",
+                            "englishDefinition": "to click one's tongue in wonder (idiom); to be astonished",
+                            "chineseDefinition": "咂着嘴称赞它的奇妙。",
+                            "example": "大家对他的创意十分~，纷纷表示佩服。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "赞叹",
+                            "pinyin": "zàn tàn",
+                            "englishDefinition": "to sigh or gasp in admiration; high praise",
+                            "chineseDefinition": "（动）极为称赞。［反］贬斥|批评。",
+                            "example": "面对这座宏伟的建筑，游客都不禁~不已。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "底蕴",
+                            "pinyin": "dǐ yùn",
+                            "englishDefinition": "inside information; concrete details",
+                            "chineseDefinition": "（名）事情的详细内容或内情。",
+                            "example": "这个品牌的成功离不开它丰富的历史~和独特的风格。"
+                        },
+                        {
+                            "index": 11,
+                            "word": "灿烂",
+                            "pinyin": "càn làn",
+                            "englishDefinition": "to glitter; brilliant",
+                            "chineseDefinition": "（形）光彩鲜明耀眼。［反］暗淡",
+                            "example": "夜空中繁星点点，展现出一幅~的星空画卷。"
+                        },
+                        {
+                            "index": 12,
+                            "word": "金碧辉煌",
+                            "pinyin": "jīn bì huī huáng",
+                            "englishDefinition": "a dazzling sight (e.g. royal palace)",
+                            "chineseDefinition": "形容建筑装饰华丽，光彩耀眼的样子。",
+                            "example": "这座宫殿的建筑风格~，令人叹为观止。"
+                        },
+                        {
+                            "index": 13,
+                            "word": "绚丽",
+                            "pinyin": "xuàn lì",
+                            "englishDefinition": "gorgeous; magnificent",
+                            "chineseDefinition": "（形）灿烂美丽：～的云霞|～的篇章。",
+                            "example": "她穿着一袭~的礼服，成为舞台上的焦点。"
+                        }
+                    ]
+                },
+                "topic2": {
+                    "name": "自知之明",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "颇",
+                            "pinyin": "pō",
+                            "englishDefinition": "rather; quite",
+                            "chineseDefinition": "很；相当地。〈副〉",
+                            "example": "这个项目的难度~大，需要充分的准备。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "独树一帜",
+                            "pinyin": "dú shù yī zhì",
+                            "englishDefinition": "to stand out; to have attitude of one's own",
+                            "chineseDefinition": "比喻创造出独特的风格、主张，自成一家。",
+                            "example": "这位设计师的作品总是~，充满创意和个性。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "赋税",
+                            "pinyin": "fù shuì",
+                            "englishDefinition": "taxation",
+                            "chineseDefinition": "（名）田赋和各种捐税的总称。",
+                            "example": "政府通过对富人的~来筹集资金，用于扶贫和教育。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "揭竿而起",
+                            "pinyin": "jiē gān ér qǐ",
+                            "englishDefinition": "rise up in arms",
+                            "chineseDefinition": "高举反抗的旗帜，起来斗争。泛指人民武装起义。",
+                            "example": "这场社会运动让人们看到了民众集体~的力量。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "暴虐",
+                            "pinyin": "bào nüè",
+                            "englishDefinition": "brutal; tyrannical",
+                            "chineseDefinition": "（形）凶狠残暴没有人道：～无道。",
+                            "example": "历史上的一些暴君对人民实施了~的统治。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "葬送",
+                            "pinyin": "zàng sòng",
+                            "englishDefinition": "to give somebody a final send-off; to ruin (one's future prospects etc)",
+                            "chineseDefinition": "（动）比喻断送、毁灭：～前程。",
+                            "example": "错误的决策可能~整个项目的前景。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "推卸",
+                            "pinyin": "tuī xiè",
+                            "englishDefinition": "to avoid (esp. responsibility); to shift (the blame)",
+                            "chineseDefinition": "（动）不愿承担（某种责任）。",
+                            "example": "面对挑战，我们不能选择~责任，而是要积极解决问题。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "停滞",
+                            "pinyin": "tíng zhì",
+                            "englishDefinition": "stagnation; at a standstill",
+                            "chineseDefinition": "（动）因受阻碍而长时间停止或前进极慢，不能顺利发展",
+                            "example": "生活中遇到困难时，不要让自己~不前进，要勇往直前。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "趾高气扬",
+                            "pinyin": "zhǐ gāo qì yáng",
+                            "englishDefinition": "high and mighty (idiom); arrogant",
+                            "chineseDefinition": "形容骄傲自大、得意忘形。［反］低三下四|奴颜婢膝。",
+                            "example": "他~的举止引起了同事们的反感，需要调整态度。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "谦逊",
+                            "pinyin": "qiān xùn",
+                            "englishDefinition": "humble; modest",
+                            "chineseDefinition": "（形）谦虚；恭让",
+                            "example": "成功者应该保持~的态度，不忘初心。"
+                        },
+                        {
+                            "index": 11,
+                            "word": "梦寐以求",
+                            "pinyin": "mèng mèi yǐ qiú",
+                            "englishDefinition": "to yearn for sth even in one's dreams (idiom); to long for sth day and night",
+                            "chineseDefinition": "渴望得到，一直梦想着",
+                            "example": "这份工作是我多年来~的机会，我会全力以赴。"
+                        },
+                        {
+                            "index": 12,
+                            "word": "昌盛",
+                            "pinyin": "chāng shèng",
+                            "englishDefinition": "prosperous",
+                            "chineseDefinition": "（形）兴旺［反］破落|衰落。",
+                            "example": "那个时期是这个国家文化的~时期，许多艺术繁荣发展。"
+                        }
+                    ]
+                },
+                "topic3": {
+                    "name": "小国更需要合作",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "协作",
+                            "pinyin": "xié zuò",
+                            "englishDefinition": "cooperation; coordination",
+                            "chineseDefinition": "（动）互相配合完成某任务：密切～。",
+                            "example": "团队成员之间的有效~对于项目的成功至关重要。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "论坛",
+                            "pinyin": "lùn tán",
+                            "englishDefinition": "forum (for discussion)",
+                            "chineseDefinition": "对公众发表议论的地方，指报刊、座谈会等：工人～。",
+                            "example": "学术~是学者们交流研究成果的重要场所。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "毋庸讳言",
+                            "pinyin": "wú yōng huì yán",
+                            "englishDefinition": "needless to say",
+                            "chineseDefinition": "用不着隐讳，可以直说的内容。",
+                            "example": "这个问题的解决方案，~，需要大家共同努力。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "棘手",
+                            "pinyin": "jí shǒu",
+                            "englishDefinition": "thorny (problem); intractable",
+                            "chineseDefinition": "（形）形容事情难办：～的问题［反］顺手。",
+                            "example": "面对这个~的问题，我们需要制定一套全面的解决方案。"
+                        }
+                    ]
+                }
             }
         },
         {
-            "name": "chapter5",
+            "name": "单元五",
             "topics": {
-                "topic1": [
-                    {
-                        "index": 1,
-                        "word": "里程碑",
-                        "pinyin": "lǐ chéng bēi",
-                        "englishDefinition": "milestone",
-                        "chineseDefinition": "（名）设置在路旁边记载表明里数的标志。比喻在某一事业或历史发展过程中可以作为标志的大事件。",
-                        "example": "公司上市是公司发展的一个重要~，值得庆祝。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "开拓",
-                        "pinyin": "kāi tuò",
-                        "englishDefinition": "to break new ground (for agriculture); to open up (new horizons)",
-                        "chineseDefinition": "（动）扩大、发展：～边疆。",
-                        "example": "他们努力~市场，推出了一系列受欢迎的新产品。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "先驱",
-                        "pinyin": "xiān qū",
-                        "englishDefinition": "pioneer",
-                        "chineseDefinition": "（动）走在前面引导：～者。",
-                        "example": "这位科学家是该领域的~，为后来的研究提供了宝贵的经验。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "气馁",
-                        "pinyin": "qì něi",
-                        "englishDefinition": "to be discouraged",
-                        "chineseDefinition": "（形）失掉勇气。［反］发奋|发愤。",
-                        "example": "面对困难，我们不能轻易~，要坚持不懈地努力。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "出类拔萃",
-                        "pinyin": "chū lèi bá cuì",
-                        "englishDefinition": "to excel the common (idiom); outstanding",
-                        "chineseDefinition": "超出同类之上。形容一个人的品德、才能出众。",
-                        "example": "这位运动员凭借~的表现，成为了体坛的新星。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "韧性",
-                        "pinyin": "rèn xìng",
-                        "englishDefinition": "toughness, tenacity",
-                        "chineseDefinition": "（名）物体柔软不易折断的性能。 指坚韧不拔、顽强持久的精神。",
-                        "example": "在面对挫折时，需要保持~，勇敢面对困难。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "浩瀚",
-                        "pinyin": "hào hàn",
-                        "englishDefinition": "vast (of ocean); boundless",
-                        "chineseDefinition": "（书）（形）水势深广，比喻广大、繁多。［反］渺小。",
-                        "example": "星空中的银河是如此~，让人感叹宇宙的神秘。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "天方夜谭",
-                        "pinyin": "tiān fāng yè tán",
-                        "englishDefinition": "fantasy story",
-                        "chineseDefinition": "比喻离奇怪诞的说法或传闻。",
-                        "example": "他所说的那些理论听起来像是一个~，缺乏实际可行性。"
-                    }
-                ],
-                "topic2": [
-                    {
-                        "index": 1,
-                        "word": "贬",
-                        "pinyin": "biǎn",
-                        "englishDefinition": "to diminish; to demote",
-                        "chineseDefinition": "降低（现代多指价值）。指出缺点，给予不好的评价。",
-                        "example": "每个人都值得被尊重，我们不应该~低别人的努力，。"
-                    },
-                    {
-                        "index": 2,
-                        "word": "粮食",
-                        "pinyin": "liáng shi",
-                        "englishDefinition": "foodstuff; cereals",
-                        "chineseDefinition": "（名）供食用的谷物、豆类和薯类的统称。",
-                        "example": "父母一直教育我们要珍惜~，杜绝浪费。"
-                    },
-                    {
-                        "index": 3,
-                        "word": "豁达",
-                        "pinyin": "huò dá",
-                        "englishDefinition": "magnanimous; open-minded",
-                        "chineseDefinition": "（形）性格开朗；气量大 [反］狭隘。",
-                        "example": "他的性格非常~，经常以宽广的胸怀看待问题。"
-                    },
-                    {
-                        "index": 4,
-                        "word": "满腔",
-                        "pinyin": "mǎn qiāng",
-                        "englishDefinition": "one's heart filled with",
-                        "chineseDefinition": "心中充满",
-                        "example": "他对工作充满~的激情，总是全力以赴。"
-                    },
-                    {
-                        "index": 5,
-                        "word": "霜",
-                        "pinyin": "shuāng",
-                        "englishDefinition": "frost; white powder or cream spread over a surface; frosting; (skin) cream",
-                        "chineseDefinition": "接近地面的水汽遇冷在地面或物体上凝结成的白色细微颗粒。",
-                        "example": "秋天的早晨，田野上覆盖着一层~，显得格外清新。"
-                    },
-                    {
-                        "index": 6,
-                        "word": "遣",
-                        "pinyin": "qiǎn",
-                        "englishDefinition": "to dispatch; to send; to dispel",
-                        "chineseDefinition": "派；打发：特～。～送。排解；发泄：～闷。消～。〈动〉",
-                        "example": "他升职了，被调~到总统府工作。"
-                    },
-                    {
-                        "index": 7,
-                        "word": "挽",
-                        "pinyin": "wǎn",
-                        "englishDefinition": "to pull; to draw (a cart or a bow); to carry on the arm; to lament the dead",
-                        "chineseDefinition": "拉；牵：～弓。设法使好转或恢复：～救。追悼死者：～歌。向上卷起：～起裤脚儿。",
-                        "example": "弟弟摔倒时，爸爸及时~住了他，避免了意外。"
-                    },
-                    {
-                        "index": 8,
-                        "word": "豪迈",
-                        "pinyin": "háo mài",
-                        "englishDefinition": "bold; open-minded; heroic",
-                        "chineseDefinition": "（形）气魄大，勇气足。",
-                        "example": "这首歌表达了年轻一代的~心态和对未来的向往。"
-                    },
-                    {
-                        "index": 9,
-                        "word": "慷慨激昂",
-                        "pinyin": "kāng kǎi jī áng",
-                        "englishDefinition": "impassioned; vehement",
-                        "chineseDefinition": "形容精神振奋，情绪激动。",
-                        "example": "演讲者~地表达了对国家的热爱和对未来的期许。"
-                    },
-                    {
-                        "index": 10,
-                        "word": "勉励",
-                        "pinyin": "miǎn lì",
-                        "englishDefinition": "to encourage",
-                        "chineseDefinition": "（动）鼓励、劝告人努力",
-                        "example": "教练用自己的成功经验来~运动员，激发他们更大的潜力。"
-                    },
-                    {
-                        "index": 11,
-                        "word": "朝廷",
-                        "pinyin": "cháo tíng",
-                        "englishDefinition": "imperial court",
-                        "chineseDefinition": "（名）君主时代君主处理政事的地方。  以君主为首的中央统治机构。",
-                        "example": "君主在~中发布了一系列法令，调整国家的政治制度。"
-                    },
-                    {
-                        "index": 12,
-                        "word": "笔锋",
-                        "pinyin": "bǐ fēng",
-                        "englishDefinition": "the tip of a writing brush; vigor of style in writing",
-                        "chineseDefinition": "（名）本指毛笔的尖端，后比喻书画的笔势，文章的锋芒：～犀利。",
-                        "example": "这篇文章的~非常犀利，引起了读者的强烈共鸣。"
-                    }
-                ],
-                "topic3": [
-                    {
-                        "index": 1,
-                        "word": "扎",
-                        "pinyin": "zā",
-                        "englishDefinition": "to tie; to bind; classifier for flowers, banknotes etc",
-                        "chineseDefinition": "刺：～针。驻、扎：～营。捆，缠束：～辫子。",
-                        "example": "花匠巧妙地~入花杆，使花束更加美观。"
-                    },
-                    {
-                        "index": 1,
-                        "word": "喧腾",
-                        "pinyin": "xuān téng",
-                        "englishDefinition": "hubbub; uproar",
-                        "chineseDefinition": "吵闹沸腾。 比喻声名广播。",
-                        "example": "节日的彩车巡游，现场热闹~，欢呼声不绝于耳。"
-                    },
-                    {
-                        "index": 1,
-                        "word": "感悟",
-                        "pinyin": "gǎn wù",
-                        "englishDefinition": "to come to realize; to appreciate (feelings)",
-                        "chineseDefinition": "（动）受到感动而领悟。",
-                        "example": "在旅途中，他深深~到生活的真谛和人生的意义。"
-                    },
-                    {
-                        "index": 1,
-                        "word": "崭新",
-                        "pinyin": "zhǎn xīn",
-                        "englishDefinition": "brand new",
-                        "chineseDefinition": "（形）非常新；簇新。［反］陈旧。",
-                        "example": "刚刚购置的车子还是~的，一点儿污垢都没有。"
-                    },
-                    {
-                        "index": 1,
-                        "word": "迥然",
-                        "pinyin": "jiǒng rán",
-                        "englishDefinition": "vastly (different)",
-                        "chineseDefinition": "形容差别很大",
-                        "example": "这幅画的风格与其他作品~不同，引人注目。"
-                    },
-                    {
-                        "index": 1,
-                        "word": "奋斗",
-                        "pinyin": "fèn dòu",
-                        "englishDefinition": "to strive; to struggle",
-                        "chineseDefinition": "（动）为实现一定目标而努力斗争。",
-                        "example": "年轻人应该在青春年华努力~，创造更美好的未来。"
-                    },
-                    {
-                        "index": 1,
-                        "word": "崎岖",
-                        "pinyin": "qí qū",
-                        "englishDefinition": "rugged; craggy",
-                        "chineseDefinition": "形容山路坎坷。也比喻处境十分困难。",
-                        "example": "山区的道路~难行，需要小心驾驶。"
-                    }
-                ]
+                "topic1": {
+                    "name": "追逐梦想——为梦想加油点赞",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "里程碑",
+                            "pinyin": "lǐ chéng bēi",
+                            "englishDefinition": "milestone",
+                            "chineseDefinition": "（名）设置在路旁边记载表明里数的标志。比喻在某一事业或历史发展过程中可以作为标志的大事件。",
+                            "example": "公司上市是公司发展的一个重要~，值得庆祝。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "开拓",
+                            "pinyin": "kāi tuò",
+                            "englishDefinition": "to break new ground (for agriculture); to open up (new horizons)",
+                            "chineseDefinition": "（动）扩大、发展：～边疆。",
+                            "example": "他们努力~市场，推出了一系列受欢迎的新产品。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "先驱",
+                            "pinyin": "xiān qū",
+                            "englishDefinition": "pioneer",
+                            "chineseDefinition": "（动）走在前面引导：～者。",
+                            "example": "这位科学家是该领域的~，为后来的研究提供了宝贵的经验。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "气馁",
+                            "pinyin": "qì něi",
+                            "englishDefinition": "to be discouraged",
+                            "chineseDefinition": "（形）失掉勇气。［反］发奋|发愤。",
+                            "example": "面对困难，我们不能轻易~，要坚持不懈地努力。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "出类拔萃",
+                            "pinyin": "chū lèi bá cuì",
+                            "englishDefinition": "to excel the common (idiom); outstanding",
+                            "chineseDefinition": "超出同类之上。形容一个人的品德、才能出众。",
+                            "example": "这位运动员凭借~的表现，成为了体坛的新星。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "韧性",
+                            "pinyin": "rèn xìng",
+                            "englishDefinition": "toughness, tenacity",
+                            "chineseDefinition": "（名）物体柔软不易折断的性能。 指坚韧不拔、顽强持久的精神。",
+                            "example": "在面对挫折时，需要保持~，勇敢面对困难。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "浩瀚",
+                            "pinyin": "hào hàn",
+                            "englishDefinition": "vast (of ocean); boundless",
+                            "chineseDefinition": "（书）（形）水势深广，比喻广大、繁多。［反］渺小。",
+                            "example": "星空中的银河是如此~，让人感叹宇宙的神秘。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "天方夜谭",
+                            "pinyin": "tiān fāng yè tán",
+                            "englishDefinition": "fantasy story",
+                            "chineseDefinition": "比喻离奇怪诞的说法或传闻。",
+                            "example": "他所说的那些理论听起来像是一个~，缺乏实际可行性。"
+                        }
+                    ]
+                },
+                "topic2": {
+                    "name": "江城子·密州出猎",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "贬",
+                            "pinyin": "biǎn",
+                            "englishDefinition": "to diminish; to demote",
+                            "chineseDefinition": "降低（现代多指价值）。指出缺点，给予不好的评价。",
+                            "example": "每个人都值得被尊重，我们不应该~低别人的努力，。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "粮食",
+                            "pinyin": "liáng shi",
+                            "englishDefinition": "foodstuff; cereals",
+                            "chineseDefinition": "（名）供食用的谷物、豆类和薯类的统称。",
+                            "example": "父母一直教育我们要珍惜~，杜绝浪费。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "豁达",
+                            "pinyin": "huò dá",
+                            "englishDefinition": "magnanimous; open-minded",
+                            "chineseDefinition": "（形）性格开朗；气量大 [反］狭隘。",
+                            "example": "他的性格非常~，经常以宽广的胸怀看待问题。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "满腔",
+                            "pinyin": "mǎn qiāng",
+                            "englishDefinition": "one's heart filled with",
+                            "chineseDefinition": "心中充满",
+                            "example": "他对工作充满~的激情，总是全力以赴。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "霜",
+                            "pinyin": "shuāng",
+                            "englishDefinition": "frost; white powder or cream spread over a surface; frosting; (skin) cream",
+                            "chineseDefinition": "接近地面的水汽遇冷在地面或物体上凝结成的白色细微颗粒。",
+                            "example": "秋天的早晨，田野上覆盖着一层~，显得格外清新。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "遣",
+                            "pinyin": "qiǎn",
+                            "englishDefinition": "to dispatch; to send; to dispel",
+                            "chineseDefinition": "派；打发：特～。～送。排解；发泄：～闷。消～。〈动〉",
+                            "example": "他升职了，被调~到总统府工作。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "挽",
+                            "pinyin": "wǎn",
+                            "englishDefinition": "to pull; to draw (a cart or a bow); to carry on the arm; to lament the dead",
+                            "chineseDefinition": "拉；牵：～弓。设法使好转或恢复：～救。追悼死者：～歌。向上卷起：～起裤脚儿。",
+                            "example": "弟弟摔倒时，爸爸及时~住了他，避免了意外。"
+                        },
+                        {
+                            "index": 8,
+                            "word": "豪迈",
+                            "pinyin": "háo mài",
+                            "englishDefinition": "bold; open-minded; heroic",
+                            "chineseDefinition": "（形）气魄大，勇气足。",
+                            "example": "这首歌表达了年轻一代的~心态和对未来的向往。"
+                        },
+                        {
+                            "index": 9,
+                            "word": "慷慨激昂",
+                            "pinyin": "kāng kǎi jī áng",
+                            "englishDefinition": "impassioned; vehement",
+                            "chineseDefinition": "形容精神振奋，情绪激动。",
+                            "example": "演讲者~地表达了对国家的热爱和对未来的期许。"
+                        },
+                        {
+                            "index": 10,
+                            "word": "勉励",
+                            "pinyin": "miǎn lì",
+                            "englishDefinition": "to encourage",
+                            "chineseDefinition": "（动）鼓励、劝告人努力",
+                            "example": "教练用自己的成功经验来~运动员，激发他们更大的潜力。"
+                        },
+                        {
+                            "index": 11,
+                            "word": "朝廷",
+                            "pinyin": "cháo tíng",
+                            "englishDefinition": "imperial court",
+                            "chineseDefinition": "（名）君主时代君主处理政事的地方。  以君主为首的中央统治机构。",
+                            "example": "君主在~中发布了一系列法令，调整国家的政治制度。"
+                        },
+                        {
+                            "index": 12,
+                            "word": "笔锋",
+                            "pinyin": "bǐ fēng",
+                            "englishDefinition": "the tip of a writing brush; vigor of style in writing",
+                            "chineseDefinition": "（名）本指毛笔的尖端，后比喻书画的笔势，文章的锋芒：～犀利。",
+                            "example": "这篇文章的~非常犀利，引起了读者的强烈共鸣。"
+                        }
+                    ]
+                },
+                "topic3": {
+                    "name": "在山的那边",
+                    "topic": [
+                        {
+                            "index": 1,
+                            "word": "扎",
+                            "pinyin": "zā",
+                            "englishDefinition": "to tie; to bind; classifier for flowers, banknotes etc",
+                            "chineseDefinition": "刺：～针。驻、扎：～营。捆，缠束：～辫子。",
+                            "example": "花匠巧妙地~入花杆，使花束更加美观。"
+                        },
+                        {
+                            "index": 2,
+                            "word": "喧腾",
+                            "pinyin": "xuān téng",
+                            "englishDefinition": "hubbub; uproar",
+                            "chineseDefinition": "吵闹沸腾。 比喻声名广播。",
+                            "example": "节日的彩车巡游，现场热闹~，欢呼声不绝于耳。"
+                        },
+                        {
+                            "index": 3,
+                            "word": "感悟",
+                            "pinyin": "gǎn wù",
+                            "englishDefinition": "to come to realize; to appreciate (feelings)",
+                            "chineseDefinition": "（动）受到感动而领悟。",
+                            "example": "在旅途中，他深深~到生活的真谛和人生的意义。"
+                        },
+                        {
+                            "index": 4,
+                            "word": "崭新",
+                            "pinyin": "zhǎn xīn",
+                            "englishDefinition": "brand new",
+                            "chineseDefinition": "（形）非常新；簇新。［反］陈旧。",
+                            "example": "刚刚购置的车子还是~的，一点儿污垢都没有。"
+                        },
+                        {
+                            "index": 5,
+                            "word": "迥然",
+                            "pinyin": "jiǒng rán",
+                            "englishDefinition": "vastly (different)",
+                            "chineseDefinition": "形容差别很大",
+                            "example": "这幅画的风格与其他作品~不同，引人注目。"
+                        },
+                        {
+                            "index": 6,
+                            "word": "奋斗",
+                            "pinyin": "fèn dòu",
+                            "englishDefinition": "to strive; to struggle",
+                            "chineseDefinition": "（动）为实现一定目标而努力斗争。",
+                            "example": "年轻人应该在青春年华努力~，创造更美好的未来。"
+                        },
+                        {
+                            "index": 7,
+                            "word": "崎岖",
+                            "pinyin": "qí qū",
+                            "englishDefinition": "rugged; craggy",
+                            "chineseDefinition": "形容山路坎坷。也比喻处境十分困难。",
+                            "example": "山区的道路~难行，需要小心驾驶。"
+                        }
+                    ]
+                }
             }
         }
     ]

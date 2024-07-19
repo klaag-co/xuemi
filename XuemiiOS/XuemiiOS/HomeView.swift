@@ -97,15 +97,12 @@ struct HomeView: View {
             ChapterView(level: level)
         } label: {
             HStack {
-                Text("中")
-                    .font(.system(size: 55))
-                    .bold()
-                Text(level.string)
+                Text("中\(level.string)")
+                    .minimumScaleFactor(0.1)
                     .font(.system(size: 55))
                     .bold()
             }
-            .padding()
-            .padding()
+            .padding(30)
             .background(.customteal)
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: 16))

@@ -1,10 +1,10 @@
 package com.example.xuemi.flashcards
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,9 +34,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.xuemi.BookmarkSection
 import com.example.xuemi.MyViewModel
 import com.example.xuemi.R
+import com.example.xuemi.backButton
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -44,7 +46,7 @@ import com.google.accompanist.pager.rememberPagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun FlashcardScreen(viewModel: MyViewModel) {
+fun FlashcardScreen(viewModel: MyViewModel, navController: NavController) {
     val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
     val pagerState = rememberPagerState()
     val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toInt())?.topics
@@ -66,6 +68,10 @@ fun FlashcardScreen(viewModel: MyViewModel) {
     wordDataSize = wordList?.size ?: 0
 
     Column (Modifier.padding(16.dp)){
+
+        backButton("单元${viewModel.getFromList(1)}") {
+            navController.navigate("chapter")
+        }
         LinearProgressIndicator(
             progress = pagerState.currentPage.toFloat() / (wordDataSize - 1),
             color = Color(0xFF7EBDF0),
@@ -75,6 +81,7 @@ fun FlashcardScreen(viewModel: MyViewModel) {
                 .padding(vertical = 15.dp, horizontal = 20.dp)
                 .clip(RoundedCornerShape(20.dp))
         )
+
 
 
         HorizontalPager(
@@ -130,24 +137,62 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
 
     ){
         Box( Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Log.d("BookmarkCheck","${wordSets.word} $bookmarkInside")
 
 
             LazyColumn(modifier = Modifier
-                .padding(vertical = 50.dp)
+                .padding(bottom = 45.dp, top = 15.dp)
                 .fillMaxWidth(0.79f), horizontalAlignment = Alignment.CenterHorizontally)
             {
 
                 stickyHeader {
-                    Text(
-                        "中$secondary: 单元$chapter: $topic", style = MaterialTheme.typography.h6,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .background(color = Color(219, 238, 255))
-                            .fillMaxWidth()
-                            .padding(vertical = 12.dp)
+                    Row {
+                        Text(
+                            "中$secondary: 单元$chapter", style = MaterialTheme.typography.h6,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .background(color = Color(219, 238, 255))
+                                .fillMaxWidth()
+                                .padding(vertical = 12.dp)
 
-                    )
+                        )
+                        Box (
+                            Modifier
+                                .fillMaxSize()
+                                .padding(top = 18.dp, bottom = 20.dp, end = 17.dp), contentAlignment = Alignment.TopEnd){
+                            IconButton(
+                                onClick = {
+                                    if (bookmarkInside) {
+                                        val bookmarkToDelete = bookmarkList.find { it.word == wordSets.word }
+                                        bookmarkToDelete?.let { viewModel.deleteBookmark(it.id) }
+
+
+                                    } else {
+                                        viewModel.addBookmark(
+                                            BookmarkSection.valueOf("中${viewModel.getFromList(0)}"),
+                                            wordSets.word,
+                                            viewModel.getFromList(1),
+                                            viewModel.getFromList(3)
+                                        )
+
+                                    }
+                                    viewModel.loadBookmarkNames()
+                                }
+                            )
+                            {
+                                Icon(
+                                    painter = painterResource(id =
+                                    if (bookmarkInside) {
+                                        R.drawable.bookmark
+                                    } else {
+                                        R.drawable.o_bookmark
+                                    }
+                                    ),
+                                    contentDescription = "bookmark?",
+                                    modifier = Modifier.size(39.dp)
+                                )
+                            }
+                        }
+                    }
                 }
                 item {
                     Text(wordSets.word, textAlign = TextAlign.Center, style = MaterialTheme.typography.h2)
@@ -156,43 +201,7 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
                     Text(wordSets.englishDefinition, textAlign = TextAlign.Center, style = MaterialTheme.typography.h5)
                 }
             }
-            Box (
-                Modifier
-                    .fillMaxSize()
-                    .padding(top = 18.dp, bottom= 20.dp, end = 17.dp), contentAlignment = Alignment.TopEnd){
-                IconButton(
-                    onClick = {
-                        if (bookmarkInside) {
-                            val bookmarkToDelete = bookmarkList.find { it.word == wordSets.word }
-                            bookmarkToDelete?.let { viewModel.deleteBookmark(it.id) }
 
-
-                        } else {
-                            viewModel.addBookmark(
-                                BookmarkSection.valueOf("中${viewModel.getFromList(0)}"),
-                                wordSets.word,
-                                viewModel.getFromList(1),
-                                viewModel.getFromList(3)
-                            )
-
-                        }
-                        viewModel.loadBookmarkNames()
-                    }
-                )
-                {
-                    Icon(
-                        painter = painterResource(id =
-                        if (bookmarkInside) {
-                            R.drawable.bookmark
-                        } else {
-                            R.drawable.o_bookmark
-                        }
-                        ),
-                        contentDescription = "bookmark?",
-                        modifier = Modifier.size(39.dp)
-                    )
-                }
-            }
         }
     }
 }

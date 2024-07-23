@@ -191,7 +191,6 @@ fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: Stri
     }
     Button(
         onClick = { viewModel.updateItem(3, topic)
-
             onButtonClick()
         },
         colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),

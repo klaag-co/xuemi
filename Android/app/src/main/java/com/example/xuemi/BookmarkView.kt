@@ -40,7 +40,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -59,7 +58,7 @@ data class Bookmark(
 )
 
 @Composable
-fun dropdown(viewModel: MyViewModel, navController: NavController,secondary: String, bookmarksList: List<Bookmark>, isFocused: Boolean) {
+fun dropdown(viewModel: MyViewModel, secondary: String, bookmarksList: List<Bookmark>, isFocused: Boolean) {
     val dataFromJson = remember { viewModel.loadDataFromJson("$secondary.json") }
     val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toInt())?.topics
 
@@ -139,7 +138,7 @@ fun dropdown(viewModel: MyViewModel, navController: NavController,secondary: Str
 
 
 @Composable
-fun Bookmarks(viewModel: MyViewModel, navController: NavController) {
+fun Bookmarks(viewModel: MyViewModel) {
     var searchText = remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
@@ -194,10 +193,10 @@ fun Bookmarks(viewModel: MyViewModel, navController: NavController) {
         )
         LazyColumn(Modifier.padding(bottom = 100.dp)) {
             item {
-                dropdown(viewModel, secondary = "中一", bookmarksList = sec1, navController = navController, isFocused = isFocused)
-                dropdown(viewModel, secondary = "中二", bookmarksList = sec2, navController = navController, isFocused = isFocused)
-                dropdown(viewModel, secondary = "中三", bookmarksList = sec3, navController = navController, isFocused = isFocused)
-                dropdown(viewModel, secondary = "中四", bookmarksList = sec4, navController = navController, isFocused = isFocused)
+                dropdown(viewModel, secondary = "中一", bookmarksList = sec1, isFocused = isFocused)
+                dropdown(viewModel, secondary = "中二", bookmarksList = sec2, isFocused = isFocused)
+                dropdown(viewModel, secondary = "中三", bookmarksList = sec3, isFocused = isFocused)
+                dropdown(viewModel, secondary = "中四", bookmarksList = sec4, isFocused = isFocused)
             }
         }
     }

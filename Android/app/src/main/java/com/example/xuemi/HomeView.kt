@@ -35,7 +35,7 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             modifier = Modifier.padding(vertical = 20.dp, horizontal = 23.dp)
         )
 
-        Button(onClick = { },
+        Button(onClick = { navController.navigate("flashcards") },
             colors = ButtonDefaults.buttonColors(Color(49, 113, 200)),
             //border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color.Black, Color.White))),
             shape = RoundedCornerShape(20.dp),

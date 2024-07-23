@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     HomeNav(
-                        viewModel = MyViewModel(context)
+                        viewModel = MyViewModel(context, application)
                     )
                 }
             }

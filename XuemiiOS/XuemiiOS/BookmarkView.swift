@@ -35,8 +35,13 @@ struct BookmarkView: View {
     
     func bookmarkedWordsForLevel(level: SecondaryNumber) -> some View {
         DisclosureGroup(level.filename) {
-            ForEach(filteredBookmarks.filter({$0.level == level}), id: \.id) { bookmarkedVocab in
-                Text(bookmarkedVocab.vocab.word)
+            ForEach(filteredBookmarks.filter { $0.level == level }, id: \.id) { bookmarkedVocab in
+                VStack(alignment: .leading) {
+                    Text(bookmarkedVocab.vocab.word)
+                    Text("\(bookmarkedVocab.level.filename) \(bookmarkedVocab.chapter.string)")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
             }
         }
     }

@@ -13,6 +13,7 @@ struct MCQView: View {
     @State private var currentVocabularyIndex = 0
     @State private var shuffledOptions: [[String]] = []
     @State private var selectedQuestions: [String] = []
+    @State private var userAnswers: [String?] = []
     var vocabularies: [Vocabulary]
     
     init(vocabularies: [Vocabulary]) {
@@ -25,6 +26,7 @@ struct MCQView: View {
             return finalOptions.shuffled()
         })
         self._selectedQuestions = State(initialValue: vocabularies.map { _ in Bool.random() ? "q1" : "q2" })
+        self._userAnswers = State(initialValue: Array(repeating: nil, count: vocabularies.count))
     }
     
     var currentVocabulary: Vocabulary {
@@ -53,6 +55,7 @@ struct MCQView: View {
                 Button(action: {
                     if !showAnswer {
                         selectedAnswer = option
+                        userAnswers[currentVocabularyIndex] = option
                         showAnswer = true
                     }
                 }) {
@@ -76,7 +79,7 @@ struct MCQView: View {
                 Button(action: {
                     if currentVocabularyIndex > 0 {
                         currentVocabularyIndex -= 1
-                        resetState()
+                        loadPreviousState()
                     }
                 }) {
                     Image(systemName: "chevron.left")
@@ -95,7 +98,7 @@ struct MCQView: View {
                     Image(systemName: "chevron.right")
                         .padding()
                 }
-                .disabled(currentVocabularyIndex == vocabularies.count - 1)
+                .disabled(currentVocabularyIndex == vocabularies.count - 1 || !showAnswer)
             }
             .padding(.horizontal)
         }
@@ -114,12 +117,17 @@ struct MCQView: View {
     }
     
     func resetState() {
-        selectedAnswer = nil
-        showAnswer = false
-        selectedQuestions[currentVocabularyIndex] = Bool.random() ? "q1" : "q2"
+        if userAnswers[currentVocabularyIndex] == nil {
+            selectedAnswer = nil
+            showAnswer = false
+        }
+    }
+    
+    func loadPreviousState() {
+        selectedAnswer = userAnswers[currentVocabularyIndex]
+        showAnswer = selectedAnswer != nil
     }
 }
-
 
 #Preview {
     MCQView(vocabularies: [

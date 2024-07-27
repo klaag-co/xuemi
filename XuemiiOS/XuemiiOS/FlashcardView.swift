@@ -16,6 +16,8 @@ struct FlashcardView: View {
     
     @State var selection: Int? = 0
     
+    @State var spellingText: String? = nil
+    
     @EnvironmentObject var bookmarkManager: BookmarkManager
 
     var body: some View {
@@ -49,6 +51,9 @@ struct FlashcardView: View {
 
                 Spacer()
             }
+        }
+        .sheet(item: $spellingText) { text in
+            StrokeWriteView(word: text)
         }
     }
     
@@ -88,6 +93,9 @@ struct FlashcardView: View {
                         Text(vocab.word)
                             .font(.system(size: 48))
                             .fontWeight(.bold)
+                            .onTapGesture {
+                                spellingText = vocab.word
+                            }
                         
                         Text(vocab.pinyin)
                             .font(.largeTitle)
@@ -118,4 +126,8 @@ struct FlashcardView: View {
         Vocabulary(index: 2, word: "hi2", pinyin: "hi2", englishDefinition: "hi2", chineseDefinition: "hi2", example: "hi2", q1: "", q2: "")
     ], level: .one, chapter: .one, topic: .one)
     .environmentObject(BookmarkManager.shared)
+}
+
+extension String: Identifiable {
+    public var id: String { self }
 }

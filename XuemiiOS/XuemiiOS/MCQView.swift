@@ -47,7 +47,7 @@ struct MCQView: View {
                 .minimumScaleFactor(0.1)
                 .padding()
             
-            Text(selectedAnswer == currentVocabulary.word ? " " : "什么字呢？")
+            Text(selectedAnswer == currentVocabulary.word ? " " : "正确答案是什么呢？")
                 .foregroundColor(showAnswer ? .red : .white)
                 .font(.headline)
         

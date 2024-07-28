@@ -26,7 +26,7 @@ enum Topic: Identifiable, Codable, CaseIterable {
                 case .one:
                     return "我的新同学"
                 case .two:
-                    return "一个蛋两个蛋三个蛋 "
+                    return "一个蛋两个蛋三个蛋"
                 case .three:
                     return "张老师“审案”"
                 }
@@ -198,7 +198,7 @@ enum Topic: Identifiable, Codable, CaseIterable {
             case .one:
                 switch self {
                 case .one:
-                    return "关怀满人间>——慈善团体简介"
+                    return "关怀满人间——慈善团体简介"
                 case .two:
                     return "坦然走过乞丐"
                 case .three:
@@ -253,6 +253,7 @@ struct TopicView: View {
     
     @State private var showingSheet = false
     @State private var showingFlashcards = false
+    @State private var showingMCQ = false
     @State private var topicSelected: Topic?
     
     var body: some View {
@@ -276,6 +277,7 @@ struct TopicView: View {
                     VStack(alignment: .leading) {
                         Text(topic.string(level: level, chapter: chapter))
                             .font(.title)
+                            .minimumScaleFactor(0.1)
                             .padding()
                             .frame(height: 65)
                             .frame(maxWidth: .infinity)
@@ -287,63 +289,67 @@ struct TopicView: View {
                 }
                 .navigationTitle(chapter.string)
                 .sheet(isPresented: $showingSheet) {
-                    if let topicSelected = topicSelected {
-                        NavigationStack {
-                            VStack {
-                                Button {
-                                    // Handwriting action
-                                } label: {
-                                    Text("Handwriting")
-                                        .font(.title)
-                                        .padding()
-                                        .frame(height: 65)
-                                        .frame(maxWidth: .infinity)
-                                        .foregroundStyle(.black)
-                                        .background(.customgray)
-                                        .mask(RoundedRectangle(cornerRadius: 16))
-                                        .padding(.horizontal)
-                                }
-                                
-                                Button {
-                                    // MCQ action
-                                } label: {
-                                    Text("MCQ")
-                                        .font(.title)
-                                        .padding()
-                                        .frame(height: 65)
-                                        .frame(maxWidth: .infinity)
-                                        .foregroundStyle(.black)
-                                        .background(.customgray)
-                                        .mask(RoundedRectangle(cornerRadius: 16))
-                                        .padding(.horizontal)
-                                }
-                                
-                                Button {
-                                    showingSheet = false
-                                    showingFlashcards.toggle()
-                                } label: {
-                                    Text("Flashcards")
-                                        .font(.title)
-                                        .padding()
-                                        .frame(height: 65)
-                                        .frame(maxWidth: .infinity)
-                                        .foregroundStyle(.black)
-                                        .background(.customgray)
-                                        .mask(RoundedRectangle(cornerRadius: 16))
-                                        .padding(.horizontal)
-                                }
+                    NavigationStack {
+                        VStack {
+//                            Button {
+//                                // Handwriting action
+//                            } label: {
+//                                Text("Handwriting")
+//                                    .font(.title)
+//                                    .padding()
+//                                    .frame(height: 65)
+//                                    .frame(maxWidth: .infinity)
+//                                    .foregroundStyle(.black)
+//                                    .background(.customgray)
+//                                    .mask(RoundedRectangle(cornerRadius: 16))
+//                                    .padding(.horizontal)
+//                            }
+//                            
+                            Button {
+                                showingSheet = false
+                                showingMCQ.toggle()
+                            } label: {
+                                Text("MCQ")
+                                    .font(.title)
+                                    .padding()
+                                    .frame(height: 65)
+                                    .frame(maxWidth: .infinity)
+                                    .foregroundStyle(.black)
+                                    .background(.customgray)
+                                    .mask(RoundedRectangle(cornerRadius: 16))
+                                    .padding(.horizontal)
                             }
-                            .navigationTitle(topicSelected.string(level: level, chapter: chapter))
+                            
+                            Button {
+                                showingSheet = false
+                                showingFlashcards.toggle()
+                            } label: {
+                                Text("Flashcards")
+                                    .font(.title)
+                                    .padding()
+                                    .frame(height: 65)
+                                    .frame(maxWidth: .infinity)
+                                    .foregroundStyle(.black)
+                                    .background(.customgray)
+                                    .mask(RoundedRectangle(cornerRadius: 16))
+                                    .padding(.horizontal)
+                            }
                         }
-                        .presentationDetents([.medium])
-                        .padding(.top, -30)
+                        .navigationTitle("习题")
                     }
+                    .presentationDetents([.medium])
+                    .padding(.top, -30)
                 }
             }
         }
         .navigationDestination(isPresented: $showingFlashcards) {
             if let topicSelected = topicSelected {
                 FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string(level: level, chapter: chapter)), level: level, chapter: chapter, topic: topicSelected)
+            }
+        }
+        .navigationDestination(isPresented: $showingMCQ) {
+            if let topicSelected = topicSelected {
+                MCQView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string(level: level, chapter: chapter)))
             }
         }
     }

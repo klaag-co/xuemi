@@ -16,6 +16,8 @@ struct FlashcardView: View {
     
     @State var selection: Int? = 0
     
+    @State var spellingText: String? = nil
+    
     @EnvironmentObject var bookmarkManager: BookmarkManager
 
     var body: some View {
@@ -50,6 +52,9 @@ struct FlashcardView: View {
                 Spacer()
             }
         }
+        .sheet(item: $spellingText) { text in
+            StrokeWriteView(word: text)
+        }
     }
     
     func viewForCard(vocab: Vocabulary) -> some View {
@@ -64,7 +69,7 @@ struct FlashcardView: View {
                     VStack {
                         HStack {
                             Spacer()
-                            Text("中\(level.string): \(chapter.string) - \(topic.string(level: level, chapter: chapter))")
+                            Text("中\(level.string): \(chapter.string)")
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.1)
                                 .font(.title3)
@@ -72,9 +77,11 @@ struct FlashcardView: View {
                             Spacer()
                             Button {
                                 if !bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
+                                    print("Bookmark appended for word: \(vocab.word)")
                                     bookmarkManager.bookmarks.append(BookmarkedVocabulary(vocab: vocab, level: level, chapter: chapter, topic: topic))
                                 } else {
-                                    bookmarkManager.bookmarks.removeAll(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic})
+                                    print("Bookmark removed for word: \(vocab.word)")
+                                    bookmarkManager.bookmarks.removeAll(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic })
                                 }
                             } label: {
                                 Image(systemName: bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) ? "bookmark.fill" : "bookmark")
@@ -86,15 +93,21 @@ struct FlashcardView: View {
                         Text(vocab.word)
                             .font(.system(size: 48))
                             .fontWeight(.bold)
+                            .onTapGesture {
+                                spellingText = vocab.word
+                            }
                         
                         Text(vocab.pinyin)
                             .font(.largeTitle)
                             .padding(.top, 5)
                         
                         VStack {
-                            Text(vocab.englishDefinition)
                             Text(vocab.chineseDefinition)
+                                .minimumScaleFactor(0.1)
+                            Text(vocab.englishDefinition)
+                                .minimumScaleFactor(0.1)
                                 .padding(.top, 5)
+                                .padding(.bottom, 10)
                         }
                         .font(.title3)
                         .padding(.top)
@@ -104,16 +117,17 @@ struct FlashcardView: View {
                     .padding(.horizontal)
                 }
         }
-        .onAppear {
-            print(vocab.word)
-        }
     }
 }
 
 #Preview {
     FlashcardView(vocabularies: [
-        Vocabulary(index: 1, word: "hello", pinyin: "hi", englishDefinition: "hi", chineseDefinition: "hi", example: "hi"),
-        Vocabulary(index: 2, word: "hi2", pinyin: "hi2", englishDefinition: "hi2", chineseDefinition: "hi2", example: "hi2")
+        Vocabulary(index: 1, word: "hello", pinyin: "hi", englishDefinition: "hi", chineseDefinition: "hi", example: "hi", q1: "", q2: ""),
+        Vocabulary(index: 2, word: "hi2", pinyin: "hi2", englishDefinition: "hi2", chineseDefinition: "hi2", example: "hi2", q1: "", q2: "")
     ], level: .one, chapter: .one, topic: .one)
     .environmentObject(BookmarkManager.shared)
+}
+
+extension String: Identifiable {
+    public var id: String { self }
 }

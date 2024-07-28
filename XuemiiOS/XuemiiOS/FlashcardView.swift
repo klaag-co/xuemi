@@ -90,8 +90,13 @@ struct FlashcardView: View {
                         .padding([.horizontal, .top], 30)
                         Spacer()
                         
+                        Text("Click the word to practice handwriting!")
+                            .font(.system(size: 10))
+                            .padding(.bottom, 10)
+                        
                         Text(vocab.word)
                             .font(.system(size: 48))
+                            .underline()
                             .fontWeight(.bold)
                             .onTapGesture {
                                 spellingText = vocab.word

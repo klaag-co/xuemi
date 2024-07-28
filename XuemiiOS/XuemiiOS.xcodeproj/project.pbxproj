@@ -17,6 +17,7 @@
 		1D0898D72BCE6AA500F2AFCA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0898D62BCE6AA500F2AFCA /* SettingsView.swift */; };
 		1D7C2C9A2C421922000F1F1C /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7C2C992C421922000F1F1C /* BookmarkManager.swift */; };
 		1D938C7E2C22BD6600329042 /* FlashcardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D938C7D2C22BD6600329042 /* FlashcardView.swift */; };
+		1D98FBD72C568CDF008B49F5 /* MCQResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98FBD62C568CDF008B49F5 /* MCQResultsView.swift */; };
 		1D9DD61E2C3268F5004DA356 /* 中一.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D9DD61D2C3268F5004DA356 /* 中一.json */; };
 		1D9DD6202C326A23004DA356 /* Vocabulary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9DD61F2C326A23004DA356 /* Vocabulary.swift */; };
 		1D9E9EF42C3CD662000AE606 /* 中二.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D9E9EF32C3CD662000AE606 /* 中二.json */; };
@@ -50,6 +51,7 @@
 		1D0898D62BCE6AA500F2AFCA /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		1D7C2C992C421922000F1F1C /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
 		1D938C7D2C22BD6600329042 /* FlashcardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardView.swift; sourceTree = "<group>"; };
+		1D98FBD62C568CDF008B49F5 /* MCQResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCQResultsView.swift; sourceTree = "<group>"; };
 		1D9DD61D2C3268F5004DA356 /* 中一.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "中一.json"; sourceTree = "<group>"; };
 		1D9DD61F2C326A23004DA356 /* Vocabulary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocabulary.swift; sourceTree = "<group>"; };
 		1D9E9EF32C3CD662000AE606 /* 中二.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "中二.json"; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				1D938C7D2C22BD6600329042 /* FlashcardView.swift */,
 				1D9DD61F2C326A23004DA356 /* Vocabulary.swift */,
 				1DBBCE0A2C46757A00BCF40C /* MCQView.swift */,
+				1D98FBD62C568CDF008B49F5 /* MCQResultsView.swift */,
 				1D0898D22BCE6A8000F2AFCA /* BookmarkView.swift */,
 				1D7C2C992C421922000F1F1C /* BookmarkManager.swift */,
 				1D9E9F152C3F9B31000AE606 /* BookmarkDetailView.swift */,
@@ -253,6 +256,7 @@
 				1DE2949A2C089DAD00AB6763 /* NotesManager.swift in Sources */,
 				F879C9D52C54A54300C047AA /* CanvasController.swift in Sources */,
 				1D0898D72BCE6AA500F2AFCA /* SettingsView.swift in Sources */,
+				1D98FBD72C568CDF008B49F5 /* MCQResultsView.swift in Sources */,
 				1D0898D32BCE6A8000F2AFCA /* BookmarkView.swift in Sources */,
 				1D0898C32BCE669700F2AFCA /* XuemiiOSApp.swift in Sources */,
 			);

@@ -16,20 +16,26 @@ struct BookmarkView: View {
         if searchText.isEmpty {
             return bookmarkManager.bookmarks
         } else {
-            return bookmarkManager.bookmarks.filter({ $0.vocab.word.uppercased().contains(searchText.uppercased()) })
+            return bookmarkManager.bookmarks.filter { $0.vocab.word.uppercased().contains(searchText.uppercased()) }
         }
     }
     
     var body: some View {
         NavigationStack {
-            List {
-                bookmarkedWordsForLevel(level: .one)
-                bookmarkedWordsForLevel(level: .two)
-                bookmarkedWordsForLevel(level: .three)
-                bookmarkedWordsForLevel(level: .four)
+            VStack {
+                List {
+                    bookmarkedWordsForLevel(level: .one)
+                    bookmarkedWordsForLevel(level: .two)
+                    bookmarkedWordsForLevel(level: .three)
+                    bookmarkedWordsForLevel(level: .four)
+                    
+                    Section(header: Text("Swipe left to unbookmark")){
+                        //nothing
+                    }
+                }
+                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+                .navigationTitle("Bookmarks")
             }
-            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-            .navigationTitle("Bookmarks")
         }
     }
     
@@ -37,12 +43,29 @@ struct BookmarkView: View {
         DisclosureGroup(level.filename) {
             ForEach(filteredBookmarks.filter { $0.level == level }, id: \.id) { bookmarkedVocab in
                 VStack(alignment: .leading) {
-                    Text(bookmarkedVocab.vocab.word)
-                    Text("\(bookmarkedVocab.level.filename) \(bookmarkedVocab.chapter.string)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                    NavigationLink(destination: FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(bookmarkedVocab.level.string)", chapter: bookmarkedVocab.chapter.string, topic: bookmarkedVocab.topic.string(level: bookmarkedVocab.level, chapter: bookmarkedVocab.chapter)), level: bookmarkedVocab.level, chapter: bookmarkedVocab.chapter, topic: bookmarkedVocab.topic)) {
+                        VStack(alignment: .leading) {
+                            Text(bookmarkedVocab.vocab.word)
+                            Text("\(bookmarkedVocab.level.filename) \(bookmarkedVocab.chapter.string)")
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
+                .swipeActions {
+                    Button(role: .destructive) {
+                        removeBookmark(bookmarkedVocab)
+                    } label: {
+                        Label("Unbookmark", systemImage: "trash")
+                    }
                 }
             }
+        }
+    }
+    
+    func removeBookmark(_ bookmarkedVocab: BookmarkedVocabulary) {
+        if let index = bookmarkManager.bookmarks.firstIndex(where: { $0.id == bookmarkedVocab.id }) {
+            bookmarkManager.bookmarks.remove(at: index)
         }
     }
 }

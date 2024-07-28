@@ -48,7 +48,7 @@ struct MCQView: View {
                 .padding()
             
             Text(selectedAnswer == currentVocabulary.word ? " " : "正确答案是什么呢？")
-                .foregroundColor(showAnswer ? .red : .white)
+                .foregroundColor(showAnswer && selectedAnswer != currentVocabulary.word ? .red : .white)
                 .font(.headline)
         
             ForEach(shuffledOptions[currentVocabularyIndex], id: \.self) { option in
@@ -102,6 +102,9 @@ struct MCQView: View {
             }
             .padding(.horizontal)
         }
+        .onAppear {
+            loadPreviousState()
+        }
     }
     
     func buttonColor(for option: String) -> Color {
@@ -117,10 +120,8 @@ struct MCQView: View {
     }
     
     func resetState() {
-        if userAnswers[currentVocabularyIndex] == nil {
-            selectedAnswer = nil
-            showAnswer = false
-        }
+        selectedAnswer = userAnswers[currentVocabularyIndex]
+        showAnswer = selectedAnswer != nil
     }
     
     func loadPreviousState() {

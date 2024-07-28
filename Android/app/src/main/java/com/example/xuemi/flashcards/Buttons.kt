@@ -1,5 +1,6 @@
 package com.example.xuemi.flashcards
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,8 +17,10 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -32,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.xuemi.MyViewModel
 import com.example.xuemi.backButton
+import kotlin.random.Random
 
 @Composable
 fun Secondary(viewModel: MyViewModel, navController: NavController) {
@@ -214,12 +218,65 @@ fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: Stri
     }
 }
 
+fun generateListOfMCQQuestions(words: List<Word>?): List<MCQquestion> {
+    return words?.map { word ->
+        val question = if (Random.nextBoolean()) word.q1 else word.q2
+        val otherOptions = words.filter { it != word }.shuffled().take(3).map { it.word }
+        val optionList = (otherOptions + word.word).shuffled()
+        MCQquestion(question = question, optionList = optionList, correct = word.word, selected = "")
+    } ?: listOf(MCQquestion("", listOf("", "", "", ""), "", ""))
+}
 @Composable
 fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: String) {
+    val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
+    val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
+
+    val name: String? = when (viewModel.getFromList(3)) {
+        "一" -> chapterData?.topic1?.name
+        "二" -> chapterData?.topic2?.name
+        "三" -> chapterData?.topic3?.name
+        else -> ""
+    }
+    val words: List<Word>? = when (viewModel.getFromList(3)) {
+        "一" -> chapterData?.topic1?.topic
+        "二" -> chapterData?.topic2?.topic
+        "三" -> chapterData?.topic3?.topic
+        else -> null
+    }
+    val topicExists by viewModel.checkIfTopicExists(name.toString()).observeAsState(false)
+    val questions by viewModel.mcqList.observeAsState(emptyList())
+
+    val navigateToMCQ = remember { mutableStateOf(false) }
+
+    LaunchedEffect(topicExists) {
+        if (navigateToMCQ.value) {
+            if (topicExists) {
+                navController.navigate("${quiz.lowercase()}/$name")
+            }
+            navigateToMCQ.value = false
+        }
+    }
+
+    Log.d("exists", questions.toString())
+
     Button(
         onClick = {
             viewModel.updateItem(4, "${quiz.first()}")
-            navController.navigate(quiz.lowercase())
+            viewModel.updateItem(5, "true")
+            if (quiz == "MCQ") {
+                Log.d("crashing", topicExists.toString())
+                if (topicExists) {
+                    navController.navigate("${quiz.lowercase()}/$name")
+                } else {
+                    viewModel.addQuiz(
+                        topic = name.toString(),
+                        questions = generateListOfMCQQuestions(words).shuffled()
+                    )
+                    navigateToMCQ.value = true
+                }
+            } else {
+                navController.navigate(quiz.lowercase())
+            }
         },
         colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
         shape = RoundedCornerShape(20.dp),
@@ -234,9 +291,9 @@ fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: Str
                 fontSize = 28.sp,
                 modifier = Modifier
                     .padding(horizontal = 5.dp, vertical = 7.dp)
-
             )
         }
     }
 }
+
 

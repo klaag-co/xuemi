@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.AndroidViewModel
@@ -16,23 +17,25 @@ import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.example.xuemi.db.BookmarksDatabase
 import com.example.xuemi.db.BookmarksRepository
+import com.example.xuemi.db.MCQDatabase
 import com.example.xuemi.db.NotesDatabase
 import com.example.xuemi.flashcards.Chapter
 import com.example.xuemi.flashcards.FlashcardScreen
 import com.example.xuemi.flashcards.JsonReader
 import com.example.xuemi.flashcards.MCQ
+import com.example.xuemi.flashcards.MCQquestion
+import com.example.xuemi.flashcards.MCQtopic
 import com.example.xuemi.flashcards.Secondary
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MainApplication: Application() {
     companion object {
         lateinit var notesDatabase: NotesDatabase
         lateinit var bookmarksDatabase: BookmarksDatabase
+        lateinit var mcqDatabase: MCQDatabase
     }
 
     override fun onCreate() {
@@ -47,6 +50,11 @@ class MainApplication: Application() {
             BookmarksDatabase::class.java,
             BookmarksDatabase.NAME
         ).build()
+        mcqDatabase = Room.databaseBuilder(
+            applicationContext,
+            MCQDatabase::class.java,
+            MCQDatabase.NAME
+        ).build()
     }
 }
 
@@ -54,10 +62,7 @@ class MainApplication: Application() {
 
 class MyViewModel( appContext: Context, application: Application ) : AndroidViewModel(application) {
     private val sharedPreferences: SharedPreferences = application.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-    private val gson = Gson()
     private val _current: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences())
-    val current: StateFlow<List<String>> get() = _current.asStateFlow()
-
     private fun loadListFromPreferences(): List<String> {
         val defaultList = listOf("S", "C", "C.", "T", "Q", "W.")
         val listString = sharedPreferences.getString("current_list", null) ?: return defaultList
@@ -81,7 +86,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     fun getFromList(index: Int): String {
         return _current.value.getOrElse(index) { "" }
     }
-
 //============================================================//
 
     private val _showButton = MutableStateFlow(true)
@@ -205,6 +209,85 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 
 //============================================================//
 
+    val mcqDao = MainApplication.mcqDatabase.getMCQDao()
+    private val _mcqList = MutableLiveData<List<MCQtopic>>()
+    private val _mcqTopic = MutableLiveData<MCQtopic?>()
+    val mcqList: MutableLiveData<List<MCQtopic>> get() = _mcqList
+    val mcqTopic: MutableLiveData<MCQtopic?> get() = _mcqTopic
+
+    init {
+        loadMCQ()
+    }
+    fun loadMCQ() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val mcqs = mcqDao.getAllQuestions()
+            _mcqList.postValue(mcqs)
+        }
+    }
+
+    fun addQuiz(topic: String, questions: List<MCQquestion>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val exists = mcqDao.topicExists(topic)
+            if (exists == 0) {
+                mcqDao.addTopic(MCQtopic(topic = topic, leftOff = 0, questions = questions))
+            } else {
+                Log.d("exists", "Topic already exists: $topic")
+            }
+            loadMCQ()
+        }
+    }
+
+    fun deleteQuiz(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            mcqDao.deleteTopic(id)
+            loadMCQ()
+        }
+    }
+
+    fun deleteAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            mcqDao.deleteAll()
+            loadMCQ()
+        }
+    }
+
+    fun getTopicByID(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _mcqTopic.postValue(mcqDao.getTopicById(id))
+            loadMCQ()
+        }
+    }
+
+    fun updateLeftOff(newLeftOff: Int, topicId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            mcqDao.updateLeftOff(newLeftOff, topicId)
+            Log.d("fixleftoff", "viewModel updated to: $newLeftOff")
+            loadMCQ()
+        }
+    }
+    fun updateQuestionSelected(topicId: Int, questionIndex: Int, newSelected: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            mcqDao.updateSelectedQuestion(topicId, questionIndex, newSelected)
+            _mcqTopic.postValue(mcqDao.getTopicById(topicId)) // Refresh the topic after update
+            loadMCQ()
+        }
+    }
+    fun checkIfTopicExists(topic: String): LiveData<Boolean> {
+        val exists = MutableLiveData<Boolean>()
+        viewModelScope.launch(Dispatchers.IO) {
+            val count = mcqDao.topicExists(topic)
+            exists.postValue(count > 0)
+        }
+        return exists
+    }
+
+
+
+
+
+//============================================================//
+
+
     private val jsonReader = JsonReader(appContext)
 
     fun loadDataFromJson(name: String): Secondary? {
@@ -258,7 +341,11 @@ fun HomeNav(viewModel: MyViewModel) {
                 UpdateNote(navController, viewModel, itemID = itemId)
             }
             composable("flashcards") { FlashcardScreen(viewModel, navController) }
-            composable("mcq"){ MCQ(viewModel, navController) }
+            composable("mcq/{name}"){backStackEntry ->
+                val name = backStackEntry.arguments?.getString("name") ?: "name"
+                MCQ(viewModel, navController, name)
+
+            }
 
         }
     }

@@ -27,6 +27,10 @@ import androidx.navigation.NavController
 
 @Composable
 fun Home(viewModel: MyViewModel, navController: NavController) {
+    Button(onClick = { viewModel.deleteAll() }) {
+        Text("DELETE ALL")
+
+    }
     Column {// Whole app Column
         Text(
             "Home",
@@ -35,7 +39,11 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             modifier = Modifier.padding(vertical = 20.dp, horizontal = 23.dp)
         )
 
-        Button(onClick = { navController.navigate("flashcards") },
+        Button(onClick = {
+            if (viewModel.getFromList(5) == "true") {
+                navController.navigate("flashcards")
+            }
+                         },
             colors = ButtonDefaults.buttonColors(Color(49, 113, 200)),
             //border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color.Black, Color.White))),
             shape = RoundedCornerShape(20.dp),
@@ -93,6 +101,7 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
             onClick = {
                 navController.navigate("secondary")
                 viewModel.updateItem(0, "$secondary")
+                viewModel.updateItem(4, "false")
                 if (sec4) {
                     viewModel.offButton()
                 } else {

@@ -11,7 +11,8 @@ data class Word (
     var pinyin: String,
     var englishDefinition: String,
     var chineseDefinition: String,
-    var example: String,
+    var q1: String,
+    var q2: String
 )
 
 data class CombinedWord(

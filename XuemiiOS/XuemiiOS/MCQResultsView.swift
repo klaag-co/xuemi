@@ -17,33 +17,45 @@ struct MCQResultsView: View {
     
     var body: some View {
         VStack {
-            Text("Quiz Results")
-                .font(.largeTitle)
-                .padding()
+            if Double(wrongAnswers) / Double(totalQuestions) >= 0.5 {
+                Text("继续努力！💪")
+                    .font(.largeTitle)
+                    .padding()
+            }
+            
+            if Double(wrongAnswers) / Double(totalQuestions) < 0.5 {
+                Text("好棒喔！👏")
+                    .font(.largeTitle)
+                    .padding()
+            }
             
             ZStack {
-            Circle()
-                .stroke(lineWidth: 20)
-                .opacity(0.3)
-                .foregroundColor(.gray)
-                .frame(width: 200, height: 200)
-            
-            Circle()
-                .trim(from: 0.0, to: CGFloat(min(Double(correctAnswers) / Double(totalQuestions), 1.0)))
-                .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
-                .foregroundColor(.green)
-                .rotationEffect(Angle(degrees: 270.0))
-                .animation(.linear, value: correctAnswers)
-                .frame(width: 200, height: 200)
-            
-            Circle()
-                .trim(from: 0.0, to: CGFloat(min(Double(wrongAnswers) / Double(totalQuestions), 1.0)))
-                .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
-                .foregroundColor(.red)
-                .rotationEffect(Angle(degrees: 270.0))
-                .offset(x: 0, y: 0)
-                .animation(.linear, value: wrongAnswers)
-                .frame(width: 200, height: 200)
+                Circle()
+                    .stroke(lineWidth: 20)
+                    .opacity(0.3)
+                    .foregroundColor(.gray)
+                    .frame(width: 200, height: 200)
+                
+                if Double(wrongAnswers) / Double(totalQuestions) < 0.5 {
+                    Circle()
+                        .trim(from: 0.0, to: CGFloat(min(Double(correctAnswers) / Double(totalQuestions), 1.0)))
+                        .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
+                        .foregroundColor(.green)
+                        .rotationEffect(Angle(degrees: 270.0))
+                        .animation(.linear, value: correctAnswers)
+                        .frame(width: 200, height: 200)
+                }
+                
+                if Double(wrongAnswers) / Double(totalQuestions) >= 0.5 {
+                    Circle()
+                        .trim(from: 0.0, to: CGFloat(min(Double(wrongAnswers) / Double(totalQuestions), 1.0)))
+                        .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
+                        .foregroundColor(.red)
+                        .rotationEffect(Angle(degrees: 270.0))
+                        .offset(x: 0, y: 0)
+                        .animation(.linear, value: wrongAnswers)
+                        .frame(width: 200, height: 200)
+                }
                 
                 VStack {
                     Text("Correct: \(correctAnswers)")

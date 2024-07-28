@@ -291,20 +291,20 @@ struct TopicView: View {
                 .sheet(isPresented: $showingSheet) {
                     NavigationStack {
                         VStack {
-//                            Button {
-//                                // Handwriting action
-//                            } label: {
-//                                Text("Handwriting")
-//                                    .font(.title)
-//                                    .padding()
-//                                    .frame(height: 65)
-//                                    .frame(maxWidth: .infinity)
-//                                    .foregroundStyle(.black)
-//                                    .background(.customgray)
-//                                    .mask(RoundedRectangle(cornerRadius: 16))
-//                                    .padding(.horizontal)
-//                            }
-//                            
+                            //                            Button {
+                            //                                // Handwriting action
+                            //                            } label: {
+                            //                                Text("Handwriting")
+                            //                                    .font(.title)
+                            //                                    .padding()
+                            //                                    .frame(height: 65)
+                            //                                    .frame(maxWidth: .infinity)
+                            //                                    .foregroundStyle(.black)
+                            //                                    .background(.customgray)
+                            //                                    .mask(RoundedRectangle(cornerRadius: 16))
+                            //                                    .padding(.horizontal)
+                            //                            }
+                            //
                             Button {
                                 showingSheet = false
                                 showingMCQ.toggle()
@@ -349,7 +349,12 @@ struct TopicView: View {
         }
         .navigationDestination(isPresented: $showingMCQ) {
             if let topicSelected = topicSelected {
-                MCQView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string(level: level, chapter: chapter)))
+                MCQView(
+                    vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string(level: level, chapter: chapter)),
+                    level: level.string,
+                    chapter: chapter.string,
+                    topic: topicSelected.string(level: level, chapter: chapter)
+                )
             }
         }
     }

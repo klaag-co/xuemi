@@ -71,5 +71,26 @@ class NotesManager: ObservableObject {
             notes = notesDecoded
         }
     }
-}
 
+    func addResult(level: String, chapter: String, topic: String, correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
+        let title = "\(level) \(chapter) \(topic) Results"
+        let content = "Correct Answers: \(correctAnswers)\nWrong Answers: \(wrongAnswers)\nTotal Questions: \(totalQuestions)"
+        let noteType: NoteType
+
+        switch level {
+        case "中一":
+            noteType = .sone
+        case "中二":
+            noteType = .stwo
+        case "中三":
+            noteType = .sthree
+        case "中四":
+            noteType = .sfour
+        default:
+            noteType = .note
+        }
+
+        let newNote = Note(title: title, content: content, noteType: noteType)
+        notes.append(newNote)
+    }
+}

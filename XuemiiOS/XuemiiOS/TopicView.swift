@@ -291,20 +291,20 @@ struct TopicView: View {
                 .sheet(isPresented: $showingSheet) {
                     NavigationStack {
                         VStack {
-                            Button {
-                                // Handwriting action
-                            } label: {
-                                Text("Handwriting")
-                                    .font(.title)
-                                    .padding()
-                                    .frame(height: 65)
-                                    .frame(maxWidth: .infinity)
-                                    .foregroundStyle(.black)
-                                    .background(.customgray)
-                                    .mask(RoundedRectangle(cornerRadius: 16))
-                                    .padding(.horizontal)
-                            }
-                            
+//                            Button {
+//                                // Handwriting action
+//                            } label: {
+//                                Text("Handwriting")
+//                                    .font(.title)
+//                                    .padding()
+//                                    .frame(height: 65)
+//                                    .frame(maxWidth: .infinity)
+//                                    .foregroundStyle(.black)
+//                                    .background(.customgray)
+//                                    .mask(RoundedRectangle(cornerRadius: 16))
+//                                    .padding(.horizontal)
+//                            }
+//                            
                             Button {
                                 showingSheet = false
                                 showingMCQ.toggle()

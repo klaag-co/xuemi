@@ -3,20 +3,50 @@ package com.example.xuemi.db
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.xuemi.Note
-import com.example.xuemi.flashcards.MCQ
+import androidx.room.Transaction
+import com.example.xuemi.flashcards.MCQquestion
+import com.example.xuemi.flashcards.MCQtopic
+
 
 @Dao
 interface MCQDao {
-    @Query("SELECT * FROM MCQ")
-    fun getAllQuestions(): List<MCQ>
+    @Query("SELECT * FROM MCQtopic")
+    fun getAllQuestions(): List<MCQtopic>
 
     @Insert
-    fun addQuestion(note: MCQ)
+    fun addTopic(topic: MCQtopic)
 
-    @Query("Delete FROM Note where id=:id")
-    fun deleteNote(id: Int)
+    @Query("DELETE FROM MCQtopic WHERE id=:id")
+    fun deleteTopic(id: Int)
 
-    @Query("UPDATE NOTE set title = :title, body = :body where id=:id")
-    fun updateNote(title: String, body: String, id: Int)
+    @Query("DELETE FROM MCQtopic")
+    fun deleteAll()
+
+    @Query("UPDATE MCQtopic SET questions=:questions WHERE id=:id")
+    fun updateQuestions(questions: List<MCQquestion>, id: Int)
+
+    @Query("SELECT * FROM MCQtopic WHERE id = :topicId")
+    fun getTopicById(topicId: Int): MCQtopic?
+
+    @Query("SELECT * FROM MCQtopic WHERE topic = :topicName")
+    fun getTopicByName(topicName: String): MCQtopic?
+
+    @Query("SELECT COUNT(*) FROM MCQtopic WHERE topic = :topic")
+    suspend fun topicExists(topic: String): Int
+
+    @Query("UPDATE MCQtopic SET leftOff = :leftOff WHERE id = :id")
+    fun updateLeftOff(leftOff: Int, id: Int)
+
+
+    @Transaction
+    fun updateSelectedQuestion(topicId: Int, questionIndex: Int, newSelected: String) {
+        val topic = getTopicById(topicId)
+        topic?.let {
+            val updatedQuestions = it.questions.toMutableList().apply {
+                this[questionIndex] = this[questionIndex].copy(selected = newSelected)
+            }
+            updateQuestions(updatedQuestions, topicId)
+        }
+    }
+
 }

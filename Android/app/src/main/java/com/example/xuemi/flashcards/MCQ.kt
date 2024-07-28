@@ -1,5 +1,6 @@
 package com.example.xuemi.flashcards
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,54 +30,72 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.xuemi.MyViewModel
 
-//@Entity
-data class MCQ(
-//    @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val topic: String,
+@Entity
+data class MCQtopic(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    var topic: String,
     val leftOff: Int,
-    val questions: List<String>,
-    val optionList: List<List<Pair<String, String>>>
+    val questions: List<MCQquestion>
+)
+data class MCQquestion(
+    val question: String,
+    val optionList: List<String>,
+    val correct: String,
+    val selected: String
 )
 
-var questions = listOf(
-    MCQ(
-        id = 0,
-        topic = "我的新同学",
-        leftOff = 2,
-        questions = listOf("1.顽皮  2.生闲气；惹气。", "你的主意糟透了，只会给我们~麻烦。", "讲义气，愿意为朋友做出牺牲"), // should be generated randomly beforehand, assume it is
-        optionList = listOf(
-            listOf("淘气" to "correct", "wrong answer" to "wrong", "wrong answer" to "wrong", "wrong answer" to "wrong"),
-            listOf("惹" to "correct", "wrong answer" to "wrong", "wrong answer" to "wrong", "wrong answer" to "wrong"),
-            listOf("两肋插刀" to "correct", "wrong answer" to "wrong", "wrong answer" to "wrong", "wrong answer" to "wrong")))
-)
 
-fun generateRandomMCQ(topicName: String): Triple<List<String>, List<List<Pair<String, String>>>, Int> {
+fun generateMCQ(topicName: String, questions: List<MCQtopic>): Pair<List<MCQquestion>, Int>{
     val topicIndex = questions.indexOfFirst { it.topic == topicName }
     val question = questions[topicIndex].questions
-    val answerOptions = questions[topicIndex].optionList
     val leftOff = questions[topicIndex].leftOff
 
-    return Triple(question, answerOptions, leftOff)
+    return Pair(question, leftOff)
+}
+fun buttonColor(option: String, correctAnswer: String, selectedAnswer: String, showAnswer: Boolean): Color {
+    if (showAnswer) {
+        if (option == correctAnswer) {
+            return Color(107, 237, 97)
+        } else if (selectedAnswer == "") {
+            return Color(126, 190, 240)
+        } else if (option == selectedAnswer) {
+            return Color(235, 64, 52)
+        } else {
+            return Color(126, 190, 240)
+
+        }
+    } else {
+        return Color(126, 190, 240)
+    }
 }
 
 
 @Composable
-fun MCQ(viewModel: MyViewModel, navController: NavController) {
+fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String) {
+    val questions by viewModel.mcqList.observeAsState(emptyList())
+    val topicIndex = questions.indexOfFirst { it.topic == topicName }
+    val topic = questions.getOrNull(topicIndex)
+    val question = questions[topicIndex].questions
+    var leftOff = topic?.leftOff ?: 0
+
+    var currentQN by remember { mutableIntStateOf(leftOff) }
+    var selectedAnswer by remember { mutableStateOf("") }
+
+    var wordDataSize by remember { mutableIntStateOf(question.size) }
+
+    var progress by remember { mutableStateOf(leftOff.toFloat() / (wordDataSize - 1)) }
+    var enabled by remember { mutableStateOf(currentQN != leftOff) }
+    var isFirst_enabled by remember { mutableStateOf(currentQN != 0) }
+    var showAnswer by remember { mutableStateOf(topic!!.questions[currentQN].selected != "") }
+
+
+    wordDataSize = question.size
     Column {
-        val (question, answerOptions, leftOff) = generateRandomMCQ("我的新同学")
-        var progress by remember { mutableStateOf(0f) }
-
-        var wordDataSize by remember { mutableIntStateOf(0) }
-
-        var currentQN by remember {
-            mutableIntStateOf(0)
-        }
-
-        wordDataSize = question.size
-
         LinearProgressIndicator(
             progress = progress,
             color = Color(0xFF7EBDF0),
@@ -85,56 +105,65 @@ fun MCQ(viewModel: MyViewModel, navController: NavController) {
                 .padding(vertical = 15.dp, horizontal = 20.dp)
                 .clip(RoundedCornerShape(20.dp))
         )
-        Text(question[currentQN], modifier = Modifier.padding(horizontal = 20.dp),fontWeight = FontWeight.Bold, style = MaterialTheme.typography.h4)
-        val optionNumberList = (0..3).toList().shuffled()
-        option(answerOptions[currentQN][optionNumberList[0]])
-        option(answerOptions[currentQN][optionNumberList[1]])
-        option(answerOptions[currentQN][optionNumberList[2]])
-        option(answerOptions[currentQN][optionNumberList[3]])
+        Text(question[currentQN].question, modifier = Modifier.padding(horizontal = 20.dp), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.h4)
+        val optionNumberList = (0..3).toList()
 
-
-
+        (0..3).forEach { number ->
+            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                val option = question[currentQN].optionList[optionNumberList[number]]
+                Button(
+                    onClick = {
+                        if (!showAnswer) {
+                            selectedAnswer = option
+                            showAnswer = true
+                            Log.d("fixleftoff", topic!!.id.toString())
+                            if (leftOff == currentQN) {
+                                leftOff+=1
+                            }
+                            viewModel.updateLeftOff(leftOff, topic.id)
+                            Log.d("fixleftoff", "after, currentQN: $currentQN, leftoff: $leftOff")
+                            enabled = true
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .height(60.dp)
+                        .padding(vertical = 5.dp),
+                    colors = ButtonDefaults.buttonColors(buttonColor(option, question[currentQN].correct, selectedAnswer, showAnswer)),
+                    shape = RoundedCornerShape(10.dp),
+                ) {
+                    Text(
+                        option,
+                        textAlign = TextAlign.Center,
+                    )
+                }
+            }
+        }
 
         Row {
             TextButton(onClick = {
-                if (progress > 0.001f) {
-                    progress -= 1f/wordDataSize
+                if (currentQN > 0) {
                     currentQN -= 1
+                    progress -= 1f / (wordDataSize - 1)
+                    isFirst_enabled = currentQN != 0
+                    enabled = true
                 }
-            }) {
+            }, enabled = isFirst_enabled
+            ) {
                 Text("<")
             }
             TextButton(onClick = {
-                if (progress < ((leftOff / wordDataSize.toFloat()) ?: 0f)) {
-                    progress += 1f/wordDataSize
+                if (currentQN < leftOff) {
                     currentQN += 1
+                    progress += 1f / (wordDataSize - 1)
+                    selectedAnswer = ""
+                    showAnswer = false
+                    enabled = currentQN != leftOff
+                    isFirst_enabled = true
                 }
-            }) {
+            }, enabled = enabled) {
                 Text(">")
             }
-        }
-        Button(onClick = { navController.navigate("home")}) {
-            Text("Home")
-        }
-    }
-}
-
-@Composable
-fun option(word: Pair<String, String>) {
-    Box (Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .height(60.dp)
-                .padding(vertical = 5.dp),
-            colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
-            shape = RoundedCornerShape(10.dp)
-        ) {
-            Text(
-                word.first,
-                textAlign = TextAlign.Center,
-            )
         }
     }
 }

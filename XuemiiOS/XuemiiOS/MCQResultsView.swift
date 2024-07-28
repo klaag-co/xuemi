@@ -48,7 +48,7 @@ struct MCQResultsView: View {
                 
                 if Double(wrongAnswers) / Double(totalQuestions) >= 0.5 {
                     Circle()
-                        .trim(from: 0.0, to: CGFloat(min(Double(wrongAnswers) / Double(totalQuestions), 1.0)))
+                        .trim(from: 0.0, to: CGFloat(min(Double(correctAnswers) / Double(totalQuestions), 1.0)))
                         .stroke(style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
                         .foregroundColor(.red)
                         .rotationEffect(Angle(degrees: 270.0))
@@ -56,14 +56,21 @@ struct MCQResultsView: View {
                         .animation(.linear, value: wrongAnswers)
                         .frame(width: 200, height: 200)
                 }
-                
-                VStack {
-                    Text("Correct: \(correctAnswers)")
-                    Text("Wrong: \(wrongAnswers)")
-                    Text("Total: \(totalQuestions)")
-                }
             }
             .frame(width: 200, height: 200)
+            .padding(20)
+            
+            Text("你答对了\(correctAnswers)个问题")
+                .font(.title)
+                .foregroundStyle(.green)
+                .padding(5)
+            Text("你答错了\(wrongAnswers)个问题")
+                .font(.title)
+                .foregroundStyle(.red)
+                .padding(5)
+            Text("你的总数是\(correctAnswers)/\(totalQuestions)")
+                .font(.title)
+                .padding(5)
             
             Spacer()
         }

@@ -4,7 +4,9 @@ import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -29,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -50,37 +53,29 @@ data class MCQquestion(
 )
 
 
-fun generateMCQ(topicName: String, questions: List<MCQtopic>): Pair<List<MCQquestion>, Int>{
-    val topicIndex = questions.indexOfFirst { it.topic == topicName }
-    val question = questions[topicIndex].questions
-    val leftOff = questions[topicIndex].leftOff
-
-    return Pair(question, leftOff)
-}
-fun buttonColor(option: String, correctAnswer: String, selectedAnswer: String, showAnswer: Boolean): Color {
+fun buttonColor(option: String, correctAnswer: String, selectedAnswer: String, showAnswer: Boolean, wrong: () -> Unit): Color {
     if (showAnswer) {
         if (option == correctAnswer) {
             return Color(107, 237, 97)
         } else if (selectedAnswer == "") {
             return Color(126, 190, 240)
         } else if (option == selectedAnswer) {
+            wrong()
             return Color(235, 64, 52)
         } else {
             return Color(126, 190, 240)
-
         }
     } else {
         return Color(126, 190, 240)
     }
 }
 
-
 @Composable
 fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String) {
     val questions by viewModel.mcqList.observeAsState(emptyList())
     val topicIndex = questions.indexOfFirst { it.topic == topicName }
     val topic = questions.getOrNull(topicIndex)
-    val question = questions[topicIndex].questions
+    val question = questions?.get(topicIndex)?.questions ?: emptyList()
     var leftOff = topic?.leftOff ?: 0
 
     var currentQN by remember { mutableIntStateOf(leftOff) }
@@ -88,11 +83,11 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
 
     var wordDataSize by remember { mutableIntStateOf(question.size) }
 
-    var progress by remember { mutableStateOf(leftOff.toFloat() / (wordDataSize - 1)) }
+    var progress by remember { mutableStateOf((leftOff.toFloat() + 1) / wordDataSize) }
     var enabled by remember { mutableStateOf(currentQN != leftOff) }
     var isFirst_enabled by remember { mutableStateOf(currentQN != 0) }
-    var showAnswer by remember { mutableStateOf(topic!!.questions[currentQN].selected != "") }
-
+    var showAnswer by remember { mutableStateOf(question.getOrNull(currentQN)?.selected != "") }
+    var wrong by remember { mutableStateOf(false) }
 
     wordDataSize = question.size
     Column {
@@ -105,61 +100,83 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                 .padding(vertical = 15.dp, horizontal = 20.dp)
                 .clip(RoundedCornerShape(20.dp))
         )
-        Text(question[currentQN].question, modifier = Modifier.padding(horizontal = 20.dp), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.h4)
-        val optionNumberList = (0..3).toList()
+        question.getOrNull(currentQN)?.let {
+            Text(it.question, modifier = Modifier
+                .padding(horizontal = 20.dp)
+                .padding(top = 10.dp), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.h5)
+            val optionNumberList = (0..3).toList()
 
-        (0..3).forEach { number ->
-            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                val option = question[currentQN].optionList[optionNumberList[number]]
-                Button(
-                    onClick = {
-                        if (!showAnswer) {
-                            selectedAnswer = option
-                            showAnswer = true
-                            Log.d("fixleftoff", topic!!.id.toString())
-                            if (leftOff == currentQN) {
-                                leftOff+=1
+            Text("正确答案是什么呢？", color = if (wrong) Color.Red else Color.White, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+            optionNumberList.forEach { number ->
+                Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    val option = it.optionList[number]
+                    Button(
+                        onClick = {
+                            if (!showAnswer) {
+                                if (selectedAnswer == "") {
+                                    selectedAnswer = option
+                                }
+                                showAnswer = true
+                                if (leftOff == currentQN) {
+                                    leftOff += 1
+                                }
+                                viewModel.updateLeftOff(leftOff, topic!!.id)
+                                viewModel.updateQuestionSelected(topic.id, currentQN, selectedAnswer)
+                                enabled = true
                             }
-                            viewModel.updateLeftOff(leftOff, topic.id)
-                            Log.d("fixleftoff", "after, currentQN: $currentQN, leftoff: $leftOff")
-                            enabled = true
-                        }
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth(0.9f)
-                        .height(60.dp)
-                        .padding(vertical = 5.dp),
-                    colors = ButtonDefaults.buttonColors(buttonColor(option, question[currentQN].correct, selectedAnswer, showAnswer)),
-                    shape = RoundedCornerShape(10.dp),
-                ) {
-                    Text(
-                        option,
-                        textAlign = TextAlign.Center,
-                    )
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth(0.9f)
+                            .height(90.dp)
+                            .padding(vertical = 15.dp),
+                        colors = ButtonDefaults.buttonColors(buttonColor(option, it.correct, selectedAnswer, showAnswer) { wrong = true }),
+                        shape = RoundedCornerShape(10.dp),
+                    ) {
+                        Text(
+                            option,
+                            textAlign = TextAlign.Center,
+                            fontSize = 30.sp
+                        )
+                    }
                 }
             }
         }
+        Log.d("checkenabled", "$enabled, leftoff:$leftOff, currentQN:$currentQN")
 
         Row {
             TextButton(onClick = {
                 if (currentQN > 0) {
                     currentQN -= 1
-                    progress -= 1f / (wordDataSize - 1)
+                    progress = (currentQN + 1).toFloat() / wordDataSize
                     isFirst_enabled = currentQN != 0
                     enabled = true
+                    wrong = false
+                    if (selectedAnswer != "") {
+                        selectedAnswer = question[currentQN].selected
+                    }
                 }
             }, enabled = isFirst_enabled
             ) {
                 Text("<")
             }
+            Spacer(Modifier.fillMaxSize(0.82f))
             TextButton(onClick = {
+
                 if (currentQN < leftOff) {
                     currentQN += 1
-                    progress += 1f / (wordDataSize - 1)
-                    selectedAnswer = ""
-                    showAnswer = false
+                    progress = (currentQN + 1).toFloat() / wordDataSize
+                    if (question[currentQN].selected != "") {
+                        selectedAnswer = question[currentQN].selected
+                        showAnswer = true
+                        isFirst_enabled = true
+                    } else {
+                        selectedAnswer = ""
+                        showAnswer = false
+                        isFirst_enabled = true
+                        wrong = false
+                    }
                     enabled = currentQN != leftOff
-                    isFirst_enabled = true
+
                 }
             }, enabled = enabled) {
                 Text(">")

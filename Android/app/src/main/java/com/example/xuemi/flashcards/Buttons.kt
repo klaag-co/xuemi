@@ -119,7 +119,7 @@ fun Topic(viewModel: MyViewModel, navController: NavController) {
             modifier = Modifier.padding(horizontal = 25.dp, vertical = 4.dp)
         )
         Spacer(modifier = Modifier.padding(5.dp))
-        quiztemplate(viewModel, navController,"Handwriting")
+//        quiztemplate(viewModel, navController,"Handwriting")
         quiztemplate(viewModel, navController,"MCQ")
         quiztemplate(viewModel, navController,"Flashcards")
         Spacer(modifier = Modifier.padding(20.dp))

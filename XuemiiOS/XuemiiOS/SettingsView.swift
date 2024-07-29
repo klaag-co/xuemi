@@ -97,6 +97,7 @@ let acknowledgements = [
     Acknowledgement(name: "Yoshioka Lili", role: "Lead Designer, Marketing", icon: "paintbrush.fill"),
     Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill"),
     Acknowledgement(name: "Chay Yu Hung Tristan", role: "Consultant", icon: "person.fill"),
+    Acknowledgement(name: "Tay Kai Quan", role: "Consultant", icon: "person.fill"),
     Acknowledgement(name: "Ms Wong Lu Ting", role: "Head of Department", icon: "person.fill"),
     Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill")
 ]

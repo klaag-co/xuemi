@@ -5,7 +5,7 @@
 //  Created by Gracelyn Gosal on 30/5/24.
 //
 
-import SwiftUI
+import Foundation
 
 struct Note: Codable, Identifiable {
     var id = UUID()
@@ -71,12 +71,10 @@ class NotesManager: ObservableObject {
             notes = notesDecoded
         }
     }
-
+    
     func addResult(level: String, chapter: String, topic: String, correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
-        let title = "\(level) \(chapter) \(topic) Results"
-        let content = "Correct Answers: \(correctAnswers)\nWrong Answers: \(wrongAnswers)\nTotal Questions: \(totalQuestions)"
         let noteType: NoteType
-
+        
         switch level {
         case "中一":
             noteType = .sone
@@ -89,8 +87,11 @@ class NotesManager: ObservableObject {
         default:
             noteType = .note
         }
-
+        
+        let title = "\(level) - \(topic) - \(chapter)"
+        let content = "Correct: \(correctAnswers)\nWrong: \(wrongAnswers)\nTotal: \(correctAnswers)/\(totalQuestions)"
         let newNote = Note(title: title, content: content, noteType: noteType)
+        
         notes.append(newNote)
     }
 }

@@ -72,10 +72,23 @@ struct MCQResultsView: View {
                 .font(.title)
                 .padding(5)
             
+            Button("Home") {
+                PathManager.global.popToRoot()
+            }
+            .buttonStyle(.borderedProminent)
+            .font(.largeTitle)
+            
             Spacer()
         }
         .onDisappear {
-            NotesManager.shared.addResult(level: level, chapter: chapter, topic: topic, correctAnswers: correctAnswers, wrongAnswers: wrongAnswers, totalQuestions: totalQuestions)
+            NotesManager.shared.addResult(
+                level: level,
+                chapter: chapter,
+                topic: topic,
+                correctAnswers: correctAnswers,
+                wrongAnswers: wrongAnswers,
+                totalQuestions: totalQuestions
+            )
         }
     }
 }

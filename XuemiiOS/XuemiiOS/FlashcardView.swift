@@ -154,7 +154,7 @@ public struct FlashcardView: View {
     @EnvironmentObject var bookmarkManager: BookmarkManager
     private var synthesizer = AVSpeechSynthesizer()
     
-    public init(vocabularies: [Vocabulary], level: SecondaryNumber, chapter: Chapter, topic: Topic) {
+    init(vocabularies: [Vocabulary], level: SecondaryNumber, chapter: Chapter, topic: Topic) {
         self.vocabularies = vocabularies
         self.level = level
         self.chapter = chapter
@@ -234,6 +234,7 @@ public struct FlashcardView: View {
                         HStack {
                             Text("Click the word to practice handwriting!")
                                 .font(.system(size: 10))
+                                .padding(.leading, 55)
                                 .padding(.bottom, 10)
                             Spacer()
                         }

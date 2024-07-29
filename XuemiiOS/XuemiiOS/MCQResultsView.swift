@@ -77,6 +77,7 @@ struct MCQResultsView: View {
             }
             .buttonStyle(.borderedProminent)
             .font(.largeTitle)
+            .padding(.vertical)
             
             Spacer()
         }

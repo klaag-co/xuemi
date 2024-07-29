@@ -39,10 +39,25 @@ enum SecondaryNumber: Codable {
     }
 }
 
+class PathManager: ObservableObject {
+    @Published var path: NavigationPath = .init()
+    
+    static var global: PathManager = .init()
+    
+    private init() {}
+    
+    func popToRoot() {
+        while !path.isEmpty {
+            path.removeLast()
+        }
+    }
+}
+
 struct HomeView: View {
+    @ObservedObject var pathManager: PathManager = .global
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $pathManager.path) {
             VStack {
                 Button {
                     print("whoa u clicked me")
@@ -87,15 +102,16 @@ struct HomeView: View {
             .padding(20)
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.large)
+            .navigationDestination(for: SecondaryNumber.self) { level in
+                ChapterView(level: level)
+            }
             
-           Spacer()
+            Spacer()
         }
     }
 
     func navigationTile(level: SecondaryNumber) -> some View {
-        NavigationLink {
-            ChapterView(level: level)
-        } label: {
+        NavigationLink(value: level) {
             HStack {
                 Text("中\(level.string)")
                     .minimumScaleFactor(0.1)

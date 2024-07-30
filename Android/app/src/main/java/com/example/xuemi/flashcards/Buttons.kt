@@ -63,7 +63,7 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
         ) {
             Column {
                 Text(
-                    text = "EOY Practice",
+                    text = "年终考试",
                     color = Color.Black,
                     fontSize = 28.sp,
                     modifier = Modifier

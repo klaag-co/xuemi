@@ -85,10 +85,10 @@ struct HomeView: View {
                     print("eheh")
                 } label: {
                     VStack {
-                        Text("O-Level")
-                            .padding(.top, 10)
-                        Text("Practice")
-                            .padding(.bottom, 10)
+                        Text("O 水准备考")
+                            .padding(.top, 40)
+                        Text("")
+                            .padding(.bottom, 30)
                     }
                     .bold()
                     .font(.system(size: 50))

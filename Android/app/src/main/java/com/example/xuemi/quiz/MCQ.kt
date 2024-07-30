@@ -1,4 +1,4 @@
-package com.example.xuemi.flashcards
+package com.example.xuemi.quiz
 
 import android.util.Log
 import androidx.compose.foundation.layout.Box

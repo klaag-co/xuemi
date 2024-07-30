@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import com.example.xuemi.flashcards.MCQquestion
-import com.example.xuemi.flashcards.MCQtopic
+import com.example.xuemi.quiz.MCQquestion
+import com.example.xuemi.quiz.MCQtopic
 
 
 @Dao

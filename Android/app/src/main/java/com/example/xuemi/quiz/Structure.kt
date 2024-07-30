@@ -1,4 +1,4 @@
-package com.example.xuemi.flashcards
+package com.example.xuemi.quiz
 
 import android.content.Context
 import com.google.gson.Gson

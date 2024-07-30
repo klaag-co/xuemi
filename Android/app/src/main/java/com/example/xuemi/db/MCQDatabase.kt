@@ -4,8 +4,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import com.example.xuemi.flashcards.MCQquestion
-import com.example.xuemi.flashcards.MCQtopic
+import com.example.xuemi.quiz.MCQquestion
+import com.example.xuemi.quiz.MCQtopic
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

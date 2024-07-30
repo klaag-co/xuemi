@@ -1,4 +1,4 @@
-package com.example.xuemi.flashcards
+package com.example.xuemi
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -33,8 +33,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.xuemi.MyViewModel
-import com.example.xuemi.backButton
+import com.example.xuemi.quiz.MCQquestion
+import com.example.xuemi.quiz.Word
 import kotlin.random.Random
 
 @Composable

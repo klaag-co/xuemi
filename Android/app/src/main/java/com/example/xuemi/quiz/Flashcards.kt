@@ -1,4 +1,4 @@
-package com.example.xuemi.flashcards
+package com.example.xuemi.quiz
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background

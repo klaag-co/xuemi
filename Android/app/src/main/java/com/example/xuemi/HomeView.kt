@@ -83,10 +83,10 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
 
         {
             Text(
-                text = "O-Level\n\nPractice",
-                fontSize = 40.sp,
+                text = "O 水准备考",
+                style = MaterialTheme.typography.displayLarge,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(vertical = 5.dp)
+                modifier = Modifier.padding(vertical = 20.dp)
             )
         }
 

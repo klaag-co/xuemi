@@ -1,13 +1,7 @@
-//
-//  FlashcardView.swift
-//  XuemiiOS
-//
-//  Created by Gracelyn Gosal on 19/6/24.
-//
-
 import SwiftUI
+import AVFoundation
 
-struct FlashcardView: View {
+public struct FlashcardView: View {
     @State private var currentSet: Int = 0
     var vocabularies: [Vocabulary]
     var level: SecondaryNumber
@@ -15,15 +9,22 @@ struct FlashcardView: View {
     var topic: Topic
     
     @State var selection: Int? = 0
-    
     @State var spellingText: String? = nil
     
     @EnvironmentObject var bookmarkManager: BookmarkManager
-
-    var body: some View {
+    private var synthesizer = AVSpeechSynthesizer()
+    
+    init(vocabularies: [Vocabulary], level: SecondaryNumber, chapter: Chapter, topic: Topic) {
+        self.vocabularies = vocabularies
+        self.level = level
+        self.chapter = chapter
+        self.topic = topic
+    }
+    
+    public var body: some View {
         ZStack {
             VStack {
-                ProgressView(value: Double(selection ?? 0) / Double(vocabularies.count-1), total: 1)
+                ProgressView(value: Double(selection ?? 0) / Double(vocabularies.count - 1), total: 1)
                     .accentColor(.blue)
                     .padding(30)
                     .animation(.default, value: selection)
@@ -90,21 +91,40 @@ struct FlashcardView: View {
                         .padding([.horizontal, .top], 30)
                         Spacer()
                         
-                        Text("Click the word to practice handwriting!")
-                            .font(.system(size: 10))
-                            .padding(.bottom, 10)
+                        HStack {
+                            Text("Click the word to practice handwriting!")
+                                .font(.system(size: 10))
+                                .padding(.leading, 55)
+                                .padding(.bottom, 10)
+                            Spacer()
+                        }
                         
-                        Text(vocab.word)
-                            .font(.system(size: 48))
-                            .underline()
-                            .fontWeight(.bold)
-                            .onTapGesture {
-                                spellingText = vocab.word
+                        VStack {
+                            Text(vocab.word)
+                                .font(.system(size: 48))
+                                .underline()
+                                .fontWeight(.bold)
+                                .onTapGesture {
+                                    spellingText = vocab.word
+                                }
+                        }
+                        
+                        HStack {
+                            Text(vocab.pinyin)
+                                .font(.largeTitle)
+                            Button(action: {
+                                let utterance = AVSpeechUtterance(string: vocab.word)
+                                utterance.voice = AVSpeechSynthesisVoice(language: "zh-SG")
+                                utterance.rate = 0.1
+                                synthesizer.speak(utterance)
+                            }) {
+                                Image(systemName: "speaker.wave.2.fill")
+                                    .font(.system(size: 30))
+                                    .foregroundColor(.blue)
+                                    .padding(.leading, 5)
                             }
-                        
-                        Text(vocab.pinyin)
-                            .font(.largeTitle)
-                            .padding(.top, 5)
+                        }
+                        .padding(.top, 5)
                         
                         VStack {
                             Text(vocab.chineseDefinition)
@@ -136,3 +156,4 @@ struct FlashcardView: View {
 extension String: Identifiable {
     public var id: String { self }
 }
+

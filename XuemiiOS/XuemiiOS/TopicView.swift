@@ -8,11 +8,11 @@
 import SwiftUI
 
 enum Topic: Identifiable, Codable, CaseIterable {
-    case one, two, three
+    case one, two, three, eoy
     
     var id: UUID {
         switch self {
-        case .one, .two, .three:
+        case .one, .two, .three, .eoy:
             return UUID()
         }
     }
@@ -29,6 +29,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "一个蛋两个蛋三个蛋"
                 case .three:
                     return "张老师“审案”"
+                case .eoy:
+                    return "年终考试"
                 }
             case .two:
                 switch self {
@@ -38,6 +40,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "团圆饭"
                 case .three:
                     return "幸运饺子"
+                case .eoy:
+                    return "年终考试"
                 }
             case .three:
                 switch self {
@@ -47,6 +51,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "魅力四射  星耀樟宜"
                 case .three:
                     return "国家美术馆探秘"
+                case .eoy:
+                    return "年终考试"
                 }
             case .four:
                 switch self {
@@ -56,6 +62,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "迟到"
                 case .three:
                     return "差不多先生"
+                case .eoy:
+                    return "年终考试"
                 }
             case .five:
                 switch self {
@@ -65,6 +73,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "海底牧场游记"
                 case .three:
                     return "难忘的建筑之旅"
+                case .eoy:
+                    return "年终考试"
                 }
             case .six:
                 switch self {
@@ -74,6 +84,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "我为狮城做贡献——走访地铁维修人员"
                 case .three:
                     return "小人物的心声“一人一首新谣”专题系列报道"
+                case .eoy:
+                    return "年终考试"
                 }
             case .eoy: return ""
             }
@@ -87,6 +99,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "把爱说出来"
                 case .three:
                     return "放风筝"
+                case .eoy:
+                    return "年终考试"
                 }
             case .two:
                 switch self {
@@ -96,6 +110,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "猫"
                 case .three:
                     return "山中奇遇"
+                case .eoy:
+                    return "年终考试"
                 }
             case .three:
                 switch self {
@@ -105,6 +121,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "人类最糟糕的发明"
                 case .three:
                     return "手机被丢弃之后"
+                case .eoy:
+                    return "年终考试"
                 }
             case .four:
                 switch self {
@@ -114,6 +132,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "恐怖事件"
                 case .three:
                     return "最美的姿势"
+                case .eoy:
+                    return "年终考试"
                 }
             case .five:
                 switch self {
@@ -123,6 +143,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "雨树"
                 case .three:
                     return "如果走散了"
+                case .eoy:
+                    return "年终考试"
                 }
             case .six:
                 switch self {
@@ -132,6 +154,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "多元而开放的新加坡"
                 case .three:
                     return "别上假信息的当"
+                case .eoy:
+                    return "年终考试"
                 }
             case .eoy: return ""
             }
@@ -145,6 +169,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "谢谢你的沉默"
                 case .three:
                     return "饼干罐的秘密"
+                case .eoy:
+                    return "年终考试"
                 }
             case .two:
                 switch self {
@@ -154,6 +180,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "吃茶 喝茶 品茶"
                 case .three:
                     return "街舞"
+                case .eoy:
+                    return "年终考试"
                 }
             case .three:
                 switch self {
@@ -162,7 +190,9 @@ enum Topic: Identifiable, Codable, CaseIterable {
                 case .two:
                     return "远亲不如近邻"
                 case .three:
-                    return "社区网络群组  让邻里感情更深厚"
+                    return "社区网络群组让邻里感情更深厚"
+                case .eoy:
+                    return "年终考试"
                 }
             case .four:
                 switch self {
@@ -172,6 +202,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "沟通面面观"
                 case .three:
                     return "社交媒体  拉近你我他"
+                case .eoy:
+                    return "年终考试"
                 }
             case .five:
                 switch self {
@@ -181,6 +213,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "学然后知不足"
                 case .three:
                     return "终身学习"
+                case .eoy:
+                    return "年终考试"
                 }
             case .six:
                 switch self {
@@ -190,6 +224,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "父亲和鱼"
                 case .three:
                     return "唯一的听众"
+                case .eoy:
+                    return "年终考试"
                 }
             case .eoy: return ""
             }
@@ -203,6 +239,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "坦然走过乞丐"
                 case .three:
                     return "给善良插上翅膀"
+                case .eoy:
+                    return "年终考试"
                 }
             case .two:
                 switch self {
@@ -212,6 +250,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "林黛玉进贾府"
                 case .three:
                     return "三顾茅庐"
+                case .eoy:
+                    return "年终考试"
                 }
             case .three:
                 switch self {
@@ -221,6 +261,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "对抗气候变化的超级英雄——红树林"
                 case .three:
                     return "狼鹿效应"
+                case .eoy:
+                    return "年终考试"
                 }
             case .four:
                 switch self {
@@ -230,6 +272,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "自知之明"
                 case .three:
                     return "小国更需要合作"
+                case .eoy:
+                    return "年终考试"
                 }
             case .five:
                 switch self {
@@ -239,6 +283,8 @@ enum Topic: Identifiable, Codable, CaseIterable {
                     return "江城子 · 密州出猎"
                 case .three:
                     return "在山的那边"
+                case .eoy:
+                    return "年终考试"
                 }
             case .six: return ""
             case .eoy: return ""
@@ -270,75 +316,77 @@ struct TopicView: View {
                 .padding([.horizontal, .bottom])
             
             ForEach(Topic.allCases, id: \.self) { topic in
-                Button {
-                    showingSheet = true
-                    topicSelected = topic
-                } label: {
-                    VStack(alignment: .leading) {
-                        Text(topic.string(level: level, chapter: chapter))
-                            .font(.title)
-                            .minimumScaleFactor(0.1)
-                            .padding()
-                            .frame(height: 65)
-                            .frame(maxWidth: .infinity)
-                            .foregroundStyle(.black)
-                            .background(.customgray)
-                            .mask(RoundedRectangle(cornerRadius: 16))
-                            .padding(.horizontal)
-                    }
-                }
-                .navigationTitle(chapter.string)
-                .sheet(isPresented: $showingSheet) {
-                    NavigationStack {
-                        VStack {
-                            //                            Button {
-                            //                                // Handwriting action
-                            //                            } label: {
-                            //                                Text("Handwriting")
-                            //                                    .font(.title)
-                            //                                    .padding()
-                            //                                    .frame(height: 65)
-                            //                                    .frame(maxWidth: .infinity)
-                            //                                    .foregroundStyle(.black)
-                            //                                    .background(.customgray)
-                            //                                    .mask(RoundedRectangle(cornerRadius: 16))
-                            //                                    .padding(.horizontal)
-                            //                            }
-                            //
-                            Button {
-                                showingSheet = false
-                                showingMCQ.toggle()
-                            } label: {
-                                Text("MCQ")
-                                    .font(.title)
-                                    .padding()
-                                    .frame(height: 65)
-                                    .frame(maxWidth: .infinity)
-                                    .foregroundStyle(.black)
-                                    .background(.customgray)
-                                    .mask(RoundedRectangle(cornerRadius: 16))
-                                    .padding(.horizontal)
-                            }
-                            
-                            Button {
-                                showingSheet = false
-                                showingFlashcards.toggle()
-                            } label: {
-                                Text("Flashcards")
-                                    .font(.title)
-                                    .padding()
-                                    .frame(height: 65)
-                                    .frame(maxWidth: .infinity)
-                                    .foregroundStyle(.black)
-                                    .background(.customgray)
-                                    .mask(RoundedRectangle(cornerRadius: 16))
-                                    .padding(.horizontal)
-                            }
+                if topic != .eoy {
+                    Button {
+                        showingSheet = true
+                        topicSelected = topic
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(topic.string(level: level, chapter: chapter))
+                                .font(.title)
+                                .minimumScaleFactor(0.1)
+                                .padding()
+                                .frame(height: 65)
+                                .frame(maxWidth: .infinity)
+                                .foregroundStyle(.black)
+                                .background(.customgray)
+                                .mask(RoundedRectangle(cornerRadius: 16))
+                                .padding(.horizontal)
                         }
-                        .navigationTitle("习题")
                     }
-                    .presentationDetents([.medium])
-                    .padding(.top, -30)
+                    .navigationTitle(chapter.string)
+                    .sheet(isPresented: $showingSheet) {
+                        NavigationStack {
+                            VStack {
+                                //                            Button {
+                                //                                // Handwriting action
+                                //                            } label: {
+                                //                                Text("Handwriting")
+                                //                                    .font(.title)
+                                //                                    .padding()
+                                //                                    .frame(height: 65)
+                                //                                    .frame(maxWidth: .infinity)
+                                //                                    .foregroundStyle(.black)
+                                //                                    .background(.customgray)
+                                //                                    .mask(RoundedRectangle(cornerRadius: 16))
+                                //                                    .padding(.horizontal)
+                                //                            }
+                                //
+                                Button {
+                                    showingSheet = false
+                                    showingMCQ.toggle()
+                                } label: {
+                                    Text("MCQ")
+                                        .font(.title)
+                                        .padding()
+                                        .frame(height: 65)
+                                        .frame(maxWidth: .infinity)
+                                        .foregroundStyle(.black)
+                                        .background(.customgray)
+                                        .mask(RoundedRectangle(cornerRadius: 16))
+                                        .padding(.horizontal)
+                                }
+                                
+                                Button {
+                                    showingSheet = false
+                                    showingFlashcards.toggle()
+                                } label: {
+                                    Text("Flashcards")
+                                        .font(.title)
+                                        .padding()
+                                        .frame(height: 65)
+                                        .frame(maxWidth: .infinity)
+                                        .foregroundStyle(.black)
+                                        .background(.customgray)
+                                        .mask(RoundedRectangle(cornerRadius: 16))
+                                        .padding(.horizontal)
+                                }
+                            }
+                            .navigationTitle("习题")
+                        }
+                        .presentationDetents([.medium])
+                        .padding(.top, -30)
+                    }
                 }
             }
         }

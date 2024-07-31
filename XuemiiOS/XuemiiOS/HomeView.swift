@@ -9,7 +9,7 @@ import SwiftUI
 
 //use observableobject to store the thing for secondary chapter topic
 
-enum SecondaryNumber: Codable {
+enum SecondaryNumber: Codable, CaseIterable {
     case one, two, three, four
 
     var string: String {
@@ -54,21 +54,39 @@ class PathManager: ObservableObject {
 }
 
 struct HomeView: View {
+    
+    @State var vocabsToPass: [Vocabulary]? = nil
+    
     @ObservedObject var pathManager: PathManager = .global
+    @ObservedObject var progressManager = ProgressManager.shared
+    
+    var allVocabularies: [Vocabulary] {
+        var allVocabs: [Vocabulary] = []
+        for level in SecondaryNumber.allCases {
+            for chapter in Chapter.allCases {
+                for topic in Topic.allCases {
+                    allVocabs.append(contentsOf: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topic.string(level: level, chapter: chapter)))
+                }
+            }
+        }
+        return allVocabs
+    }
 
     var body: some View {
         NavigationStack(path: $pathManager.path) {
             VStack {
-                Button {
-                    print("whoa u clicked me")
-                } label: {
+                Button(action: {
+                    if let progress = progressManager.currentProgress {
+                        pathManager.path.append(progress)
+                    }
+                }) {
                     Image("ContinueLearning")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: .infinity)
                 }
                 .foregroundStyle(.white)
-                .background(.customblue)
+                .background(Color.customblue)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
 
                 HStack {
@@ -82,7 +100,7 @@ struct HomeView: View {
                 }
 
                 Button {
-                    print("eheh")
+                    vocabsToPass = Array(allVocabularies.shuffled().prefix(15))
                 } label: {
                     VStack {
                         Text("O 水准备考")
@@ -96,7 +114,7 @@ struct HomeView: View {
                 .font(.system(size: 40))
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
-                .background(.customteal)
+                .background(Color.customteal)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
             }
             .padding(20)
@@ -105,7 +123,20 @@ struct HomeView: View {
             .navigationDestination(for: SecondaryNumber.self) { level in
                 ChapterView(level: level)
             }
-            
+            .navigationDestination(for: ProgressState.self) { progress in
+                let level = progress.level
+                let chapter = progress.chapter
+                let topic = progress.topic
+                FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topic.string(level: level, chapter: chapter)), level: level, chapter: chapter, topic: topic, currentIndex: progress.currentIndex)
+            }
+            .navigationDestination(item: $vocabsToPass) { vocabs in
+                MCQView(
+                    vocabularies: vocabs,
+                    level: "O 水准备考",
+                    chapter: "chapter",
+                    topic: "topic"
+                )
+            }
             Spacer()
         }
     }
@@ -119,12 +150,16 @@ struct HomeView: View {
                     .bold()
             }
             .padding(30)
-            .background(.customteal)
+            .background(Color.customteal)
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .frame(maxWidth: .infinity)
         }
         .buttonStyle(.plain)
+    }
+    func loadVocabularies(for level: SecondaryNumber, chapter: String, topic: String) -> [Vocabulary] {
+        //eee
+        return []
     }
 }
 

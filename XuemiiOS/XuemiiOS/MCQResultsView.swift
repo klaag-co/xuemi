@@ -18,7 +18,7 @@ struct MCQResultsView: View {
         VStack {
             Spacer()
             
-            if Double(wrongAnswers) / Double(totalQuestions) >= 0.5 {
+            if Double(correctAnswers) / Double(totalQuestions) < 0.7 {
                 Text("继续努力！💪")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -29,7 +29,7 @@ struct MCQResultsView: View {
                     .shadow(radius: 10)
             }
             
-            if Double(wrongAnswers) / Double(totalQuestions) < 0.5 {
+            if Double(correctAnswers) / Double(totalQuestions) >= 0.7 {
                 Text("好棒喔！👏")
                     .font(.largeTitle)
                     .fontWeight(.bold)

@@ -25,7 +25,7 @@ enum Chapter: CaseIterable, Codable {
         case .six:
             return "单元六"
         case .eoy:
-            return "EOY Practice"
+            return "年终考试"
         }
     }
 }
@@ -33,6 +33,16 @@ enum Chapter: CaseIterable, Codable {
 struct ChapterView: View {
     
     var level: SecondaryNumber
+    
+    var allVocabularies: [Vocabulary] {
+        var allVocabs: [Vocabulary] = []
+        for chapter in Chapter.allCases {
+            for topic in Topic.allCases {
+                allVocabs.append(contentsOf: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topic.string(level: level, chapter: chapter)))
+            }
+        }
+        return allVocabs
+    }
     
     var body: some View {
         ScrollView {
@@ -52,7 +62,12 @@ struct ChapterView: View {
                         if chapter != .eoy {
                             TopicView(level: level, chapter: chapter)
                         } else {
-                            
+                            MCQView(
+                                vocabularies: Array(allVocabularies.shuffled().prefix(15)),
+                                level: level.string,
+                                chapter: chapter.string,
+                                topic: Topic.eoy.string(level: level, chapter: chapter)
+                            )
                         }
                     } label: {
                         Text(chapter.string)

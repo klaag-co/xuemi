@@ -134,10 +134,8 @@ struct HomeView: View {
         }
         .buttonStyle(.plain)
     }
-
-    // Assuming `loadVocabularies` is defined somewhere in your project
     func loadVocabularies(for level: SecondaryNumber, chapter: String, topic: String) -> [Vocabulary] {
-        // Implement the logic to load vocabularies based on level, chapter, and topic
+        //eee
         return []
     }
 }

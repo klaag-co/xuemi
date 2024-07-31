@@ -55,20 +55,23 @@ class PathManager: ObservableObject {
 
 struct HomeView: View {
     @ObservedObject var pathManager: PathManager = .global
+    @ObservedObject var progressManager = ProgressManager.shared
 
     var body: some View {
         NavigationStack(path: $pathManager.path) {
             VStack {
-                Button {
-                    print("whoa u clicked me")
-                } label: {
+                Button(action: {
+                    if let progress = progressManager.currentProgress {
+                        pathManager.path.append(progress)
+                    }
+                }) {
                     Image("ContinueLearning")
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: .infinity)
                 }
                 .foregroundStyle(.white)
-                .background(.customblue)
+                .background(Color.customblue)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
 
                 HStack {
@@ -96,7 +99,7 @@ struct HomeView: View {
                 .font(.system(size: 40))
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
-                .background(.customteal)
+                .background(Color.customteal)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
             }
             .padding(20)
@@ -105,7 +108,12 @@ struct HomeView: View {
             .navigationDestination(for: SecondaryNumber.self) { level in
                 ChapterView(level: level)
             }
-            
+            .navigationDestination(for: ProgressState.self) { progress in
+                let level = progress.level
+                let chapter = progress.chapter
+                let topic = progress.topic
+                FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topic.string(level: level, chapter: chapter)), level: level, chapter: chapter, topic: topic, currentIndex: progress.currentIndex)
+            }
             Spacer()
         }
     }
@@ -119,12 +127,18 @@ struct HomeView: View {
                     .bold()
             }
             .padding(30)
-            .background(.customteal)
+            .background(Color.customteal)
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .frame(maxWidth: .infinity)
         }
         .buttonStyle(.plain)
+    }
+
+    // Assuming `loadVocabularies` is defined somewhere in your project
+    func loadVocabularies(for level: SecondaryNumber, chapter: String, topic: String) -> [Vocabulary] {
+        // Implement the logic to load vocabularies based on level, chapter, and topic
+        return []
     }
 }
 

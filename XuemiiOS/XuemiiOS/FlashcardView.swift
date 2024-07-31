@@ -1,3 +1,10 @@
+//
+//  FlashcardView.swift
+//  XuemiiOS
+//
+//  Created by Gracelyn Gosal on 30/5/24.
+//
+
 import SwiftUI
 import AVFoundation
 
@@ -7,18 +14,20 @@ public struct FlashcardView: View {
     var level: SecondaryNumber
     var chapter: Chapter
     var topic: Topic
-    
+    var currentIndex: Int?
     @State var selection: Int? = 0
     @State var spellingText: String? = nil
     
-    @EnvironmentObject var bookmarkManager: BookmarkManager
+    @ObservedObject var bookmarkManager: BookmarkManager = .shared
+    @ObservedObject var progressManager: ProgressManager = .shared
     private var synthesizer = AVSpeechSynthesizer()
     
-    init(vocabularies: [Vocabulary], level: SecondaryNumber, chapter: Chapter, topic: Topic) {
+    init(vocabularies: [Vocabulary], level: SecondaryNumber, chapter: Chapter, topic: Topic, currentIndex: Int? = nil) {
         self.vocabularies = vocabularies
         self.level = level
         self.chapter = chapter
         self.topic = topic
+        self.currentIndex = currentIndex
     }
     
     public var body: some View {
@@ -28,9 +37,9 @@ public struct FlashcardView: View {
                     .accentColor(.blue)
                     .padding(30)
                     .animation(.default, value: selection)
-
+                
                 Spacer()
-
+                
                 if vocabularies.isEmpty {
                     Text("No vocabulary found")
                 } else {
@@ -49,12 +58,30 @@ public struct FlashcardView: View {
                     .scrollTargetBehavior(.viewAligned)
                     .safeAreaPadding(.horizontal, 25)
                 }
-
+                
                 Spacer()
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $spellingText) { text in
             StrokeWriteView(word: text)
+        }
+        .onDisappear {
+            if let selection = selection {
+                progressManager.updateProgress(
+                    level: level,
+                    chapter: chapter,
+                    topic: topic,
+                    currentIndex: selection
+                )
+            }
+        }
+        .onAppear {
+            if let currentIndex = currentIndex {
+                withAnimation {
+                    selection = currentIndex
+                }
+            }
         }
     }
     
@@ -86,6 +113,7 @@ public struct FlashcardView: View {
                                 }
                             } label: {
                                 Image(systemName: bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) ? "bookmark.fill" : "bookmark")
+                                    .font(.system(size: 20))
                             }
                         }
                         .padding([.horizontal, .top], 30)
@@ -151,9 +179,9 @@ public struct FlashcardView: View {
         Vocabulary(index: 2, word: "hi2", pinyin: "hi2", englishDefinition: "hi2", chineseDefinition: "hi2", example: "hi2", q1: "", q2: "")
     ], level: .one, chapter: .one, topic: .one)
     .environmentObject(BookmarkManager.shared)
+    .environmentObject(ProgressManager.shared)
 }
 
 extension String: Identifiable {
     public var id: String { self }
 }
-

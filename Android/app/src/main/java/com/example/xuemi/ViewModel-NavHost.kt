@@ -19,10 +19,12 @@ import com.example.xuemi.db.BookmarksDatabase
 import com.example.xuemi.db.BookmarksRepository
 import com.example.xuemi.db.MCQDatabase
 import com.example.xuemi.db.NotesDatabase
+import com.example.xuemi.quiz.Chapter
 import com.example.xuemi.quiz.FlashcardScreen
 import com.example.xuemi.quiz.JsonReader
 import com.example.xuemi.quiz.MCQ
 import com.example.xuemi.quiz.MCQquestion
+import com.example.xuemi.quiz.MCQresults
 import com.example.xuemi.quiz.MCQtopic
 import com.example.xuemi.quiz.Secondary
 import kotlinx.coroutines.Dispatchers
@@ -250,12 +252,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         }
     }
 
-    fun getTopicByID(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _mcqTopic.postValue(mcqDao.getTopicById(id))
-            loadMCQ()
-        }
-    }
 
     fun updateLeftOff(newLeftOff: Int, topicId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -280,8 +276,10 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         return exists
     }
 
-
-
+    fun countIncorrectAnswers(topicName: String): Int {
+        val questions = _mcqList.value?.firstOrNull { it.topic == topicName }?.questions ?: emptyList()
+        return questions.count { it.selected.isNotEmpty() && it.selected != it.correct }
+    }
 
 
 //============================================================//
@@ -344,6 +342,11 @@ fun HomeNav(viewModel: MyViewModel) {
                 val name = backStackEntry.arguments?.getString("name") ?: "name"
                 MCQ(viewModel, navController, name)
 
+            }
+            composable("mcqresults/{wrong},{correct}") {backStackEntry ->
+                val wrong = backStackEntry.arguments?.getString("wrong")!!.toInt()
+                val correct = backStackEntry.arguments?.getString("correct")!!.toInt()
+                MCQresults(navController, wrong , correct)
             }
 
         }

@@ -89,6 +89,8 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
     var showAnswer by remember { mutableStateOf(question.getOrNull(currentQN)?.selected != "") }
     var wrong by remember { mutableStateOf(false) }
 
+
+
     wordDataSize = question.size
     Column {
         LinearProgressIndicator(
@@ -141,7 +143,6 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                 }
             }
         }
-        Log.d("checkenabled", "$enabled, leftoff:$leftOff, currentQN:$currentQN")
 
         Row {
             TextButton(onClick = {
@@ -161,8 +162,14 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
             }
             Spacer(Modifier.fillMaxSize(0.82f))
             TextButton(onClick = {
-
-                if (currentQN < leftOff) {
+                if (currentQN+1 == wordDataSize) {
+                    Log.d("mcqresults", "end of quiz")
+                    val wrongNum = viewModel.countIncorrectAnswers(topicName)
+                    val correctNum = wordDataSize-wrongNum
+                    navController.navigate("mcqresults/$wrongNum,$correctNum")
+                    viewModel.deleteQuiz(topic!!.id)
+                } else if (currentQN < leftOff) {
+                    Log.d("mcqresults", "$currentQN, $leftOff")
                     currentQN += 1
                     progress = (currentQN + 1).toFloat() / wordDataSize
                     if (question[currentQN].selected != "") {
@@ -176,7 +183,6 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                         wrong = false
                     }
                     enabled = currentQN != leftOff
-
                 }
             }, enabled = enabled) {
                 Text(">")

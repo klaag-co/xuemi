@@ -19,7 +19,7 @@ struct MCQView: View {
     @State private var correctAnswers: Int = 0
     @State private var wrongAnswers: Int = 0
     
-    var vocabularies: [Vocabulary]
+    @State var vocabularies: [Vocabulary]
     var level: String
     var chapter: String
     var topic: String
@@ -123,6 +123,7 @@ struct MCQView: View {
             }
             .padding(.horizontal)
         }
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             loadPreviousState()
         }

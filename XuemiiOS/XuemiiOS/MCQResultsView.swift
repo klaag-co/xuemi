@@ -53,7 +53,7 @@ struct MCQResultsView: View {
             
             Spacer()
             
-            Text("你的总数是\(correctAnswers)/\(totalQuestions)")
+            Text("总分是\(correctAnswers)/\(totalQuestions)")
                 .font(.title)
                 .padding(5)
             

@@ -99,9 +99,7 @@ struct HomeView: View {
                     navigationTile(level: .four)
                 }
 
-                Button {
-                    vocabsToPass = Array(allVocabularies.shuffled().prefix(15))
-                } label: {
+                NavigationLink(value: OLevels.oLevels) {
                     VStack {
                         Text("O 水准备考")
                             .padding(.top, 40)
@@ -129,13 +127,20 @@ struct HomeView: View {
                 let topic = progress.topic
                 FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topic.string(level: level, chapter: chapter)), level: level, chapter: chapter, topic: topic, currentIndex: progress.currentIndex)
             }
-            .navigationDestination(item: $vocabsToPass) { vocabs in
-                MCQView(
-                    vocabularies: vocabs,
-                    level: "O 水准备考",
-                    chapter: "chapter",
-                    topic: "topic"
-                )
+            .navigationDestination(for: OLevels.self) { _ in
+                Group {
+                    if let vocabsToPass {
+                        MCQView(
+                            vocabularies: vocabsToPass,
+                            level: "O 水准备考",
+                            chapter: "chapter",
+                            topic: "topic"
+                        )
+                    }
+                }
+                .onAppear {
+                    vocabsToPass = Array(allVocabularies.shuffled().prefix(15))
+                }
             }
             Spacer()
         }
@@ -161,6 +166,10 @@ struct HomeView: View {
         //eee
         return []
     }
+}
+
+enum OLevels: Hashable {
+    case oLevels
 }
 
 #Preview {

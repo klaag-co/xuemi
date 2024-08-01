@@ -23,7 +23,6 @@
 		1D9E9EF42C3CD662000AE606 /* 中二.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D9E9EF32C3CD662000AE606 /* 中二.json */; };
 		1D9E9EF62C3D0FA4000AE606 /* 中三.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D9E9EF52C3D0FA4000AE606 /* 中三.json */; };
 		1D9E9EF82C3D1198000AE606 /* 中四.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D9E9EF72C3D1197000AE606 /* 中四.json */; };
-		1D9E9F162C3F9B31000AE606 /* BookmarkDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9E9F152C3F9B31000AE606 /* BookmarkDetailView.swift */; };
 		1DA035602C5935D50049C5A1 /* ProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA0355F2C5935D50049C5A1 /* ProgressManager.swift */; };
 		1DBBCE0B2C46757A00BCF40C /* MCQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBBCE0A2C46757A00BCF40C /* MCQView.swift */; };
 		1DE2948C2C05D1CA00AB6763 /* ChapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE2948B2C05D1CA00AB6763 /* ChapterView.swift */; };
@@ -58,7 +57,6 @@
 		1D9E9EF32C3CD662000AE606 /* 中二.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "中二.json"; sourceTree = "<group>"; };
 		1D9E9EF52C3D0FA4000AE606 /* 中三.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "中三.json"; sourceTree = "<group>"; };
 		1D9E9EF72C3D1197000AE606 /* 中四.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "中四.json"; sourceTree = "<group>"; };
-		1D9E9F152C3F9B31000AE606 /* BookmarkDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDetailView.swift; sourceTree = "<group>"; };
 		1DA0355F2C5935D50049C5A1 /* ProgressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressManager.swift; sourceTree = "<group>"; };
 		1DBBCE0A2C46757A00BCF40C /* MCQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCQView.swift; sourceTree = "<group>"; };
 		1DE2948B2C05D1CA00AB6763 /* ChapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterView.swift; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 				1D98FBD62C568CDF008B49F5 /* MCQResultsView.swift */,
 				1D0898D22BCE6A8000F2AFCA /* BookmarkView.swift */,
 				1D7C2C992C421922000F1F1C /* BookmarkManager.swift */,
-				1D9E9F152C3F9B31000AE606 /* BookmarkDetailView.swift */,
 				1DE294972C089C6400AB6763 /* NotesView.swift */,
 				1DE294992C089DAD00AB6763 /* NotesManager.swift */,
 				1D0898D42BCE6A9700F2AFCA /* NotesDetailView.swift */,
@@ -253,7 +250,6 @@
 				1DE294962C08974700AB6763 /* CreateNoteView.swift in Sources */,
 				F879C9D82C54A5F500C047AA /* CanvasView.swift in Sources */,
 				1D0898C52BCE669700F2AFCA /* ContentView.swift in Sources */,
-				1D9E9F162C3F9B31000AE606 /* BookmarkDetailView.swift in Sources */,
 				1D0898D52BCE6A9700F2AFCA /* NotesDetailView.swift in Sources */,
 				1DE294942C0857A200AB6763 /* TopicView.swift in Sources */,
 				1DE2949A2C089DAD00AB6763 /* NotesManager.swift in Sources */,

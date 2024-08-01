@@ -76,13 +76,13 @@ class NotesManager: ObservableObject {
         let noteType: NoteType
         
         switch level {
-        case "中一":
+        case "一":
             noteType = .sone
-        case "中二":
+        case "二":
             noteType = .stwo
-        case "中三":
+        case "三":
             noteType = .sthree
-        case "中四":
+        case "四":
             noteType = .sfour
         default:
             noteType = .note

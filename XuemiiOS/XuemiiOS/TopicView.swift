@@ -280,7 +280,7 @@ enum Topic: Identifiable, Codable, CaseIterable {
                 case .one:
                     return "追逐梦想——为梦想加油点赞"
                 case .two:
-                    return "江城子 · 密州出猎"
+                    return "江城子·密州出猎"
                 case .three:
                     return "在山的那边"
                 case .eoy:

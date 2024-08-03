@@ -26,7 +26,7 @@ enum SecondaryNumber: Codable, CaseIterable {
     }
 
     var filename: String {
-        switch self {f
+        switch self {
         case .one:
             return "中一"
         case .two:

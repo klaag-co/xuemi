@@ -40,6 +40,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -58,9 +59,8 @@ data class Bookmark(
 )
 
 @Composable
-fun dropdown(viewModel: MyViewModel, secondary: String, bookmarksList: List<Bookmark>, isFocused: Boolean) {
-    val dataFromJson = remember { viewModel.loadDataFromJson("$secondary.json") }
-    val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toInt())?.topics
+fun dropdown(viewModel: MyViewModel, navController: NavController, secondary: String, bookmarksList: List<Bookmark>, isFocused: Boolean) {
+    val dataFromJson = remember { viewModel.loadDataFromJson("中中$secondary.json") }
 
     var expanded by remember { mutableStateOf(false) }
 
@@ -104,7 +104,18 @@ fun dropdown(viewModel: MyViewModel, secondary: String, bookmarksList: List<Book
                             .fillMaxWidth()
                             .background(Color.LightGray)
                             .padding(19.dp)
-                            .clickable { },
+                            .clickable {
+                                val chapter_ = when (bookmark.chapter) {
+                                    "一" -> 0
+                                    "二" -> 1
+                                    "三" -> 2
+                                    "四" -> 3
+                                    "五" -> 4
+                                    "六" -> 5
+                                    else -> 0
+                                }
+                                navController.navigate("flashcards/${secondary}/${bookmark.chapter}/${chapter_}/${bookmark.topic}")
+                            },
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Column {
@@ -138,7 +149,7 @@ fun dropdown(viewModel: MyViewModel, secondary: String, bookmarksList: List<Book
 
 
 @Composable
-fun Bookmarks(viewModel: MyViewModel) {
+fun Bookmarks(viewModel: MyViewModel, navController: NavController) {
     var searchText = remember { mutableStateOf("") }
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
@@ -152,7 +163,6 @@ fun Bookmarks(viewModel: MyViewModel) {
 
     Column ( Modifier.pointerInput(Unit) { detectTapGestures(onTap = {
         focusManager.clearFocus()
-
     }) }
     ) {
         Text(
@@ -193,10 +203,10 @@ fun Bookmarks(viewModel: MyViewModel) {
         )
         LazyColumn(Modifier.padding(bottom = 100.dp)) {
             item {
-                dropdown(viewModel, secondary = "中一", bookmarksList = sec1, isFocused = isFocused)
-                dropdown(viewModel, secondary = "中二", bookmarksList = sec2, isFocused = isFocused)
-                dropdown(viewModel, secondary = "中三", bookmarksList = sec3, isFocused = isFocused)
-                dropdown(viewModel, secondary = "中四", bookmarksList = sec4, isFocused = isFocused)
+                dropdown(viewModel, navController, secondary = "一", bookmarksList = sec1, isFocused = isFocused)
+                dropdown(viewModel, navController, secondary = "二", bookmarksList = sec2, isFocused = isFocused)
+                dropdown(viewModel, navController, secondary = "三", bookmarksList = sec3, isFocused = isFocused)
+                dropdown(viewModel, navController, secondary = "四", bookmarksList = sec4, isFocused = isFocused)
             }
         }
     }

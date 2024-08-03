@@ -45,19 +45,19 @@ import com.google.accompanist.pager.rememberPagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun FlashcardScreen(viewModel: MyViewModel, navController: NavController) {
-    val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
+fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, secondary: String, chapter: String, chapter_: Int,  topic: String) {
+    val dataFromJson = remember { viewModel.loadDataFromJson("中${secondary}.json") }
     val pagerState = rememberPagerState()
-    val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toInt())?.topics
+    val chapterData = dataFromJson?.chapters?.getOrNull(chapter_)?.topics
     var wordDataSize by remember { mutableIntStateOf(0) }
 
-    val wordList = when (viewModel.getFromList(3)) {
+    val wordList = when (topic) {
         "一" -> chapterData?.topic1?.topic
         "二" -> chapterData?.topic2?.topic
         "三" -> chapterData?.topic3?.topic
         else -> emptyList()
     }
-    val wordName = when (viewModel.getFromList(3)) {
+    val wordName = when (topic) {
         "一" -> chapterData?.topic1?.name
         "二" -> chapterData?.topic2?.name
         "三" -> chapterData?.topic3?.name
@@ -67,8 +67,7 @@ fun FlashcardScreen(viewModel: MyViewModel, navController: NavController) {
     wordDataSize = wordList?.size ?: 0
 
     Column (Modifier.padding(16.dp)){
-
-        backButton("单元${viewModel.getFromList(1)}") {
+        backButton("单元${chapter}") {
             navController.navigate("chapter")
         }
         LinearProgressIndicator(
@@ -94,7 +93,7 @@ fun FlashcardScreen(viewModel: MyViewModel, navController: NavController) {
 
                 if (wordData != null) {
                     Column {
-                        Flashcard(wordData, viewModel, viewModel.getFromList(0), viewModel.getFromList(1),
+                        Flashcard(wordData, viewModel, secondary, chapter,
                             wordName.toString()
                         )
                         Spacer(Modifier.padding(30.dp))
@@ -174,10 +173,10 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
 
                         } else {
                             viewModel.addBookmark(
-                                BookmarkSection.valueOf("中${viewModel.getFromList(0)}"),
+                                BookmarkSection.valueOf("中${viewModel.flashcardGetFromList(0)}"),
                                 wordSets.word,
-                                viewModel.getFromList(1),
-                                viewModel.getFromList(3)
+                                viewModel.flashcardGetFromList(1),
+                                viewModel.flashcardGetFromList(3)
                             )
 
                         }

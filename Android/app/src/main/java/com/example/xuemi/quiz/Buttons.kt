@@ -1,6 +1,5 @@
 package com.example.xuemi.quiz
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -193,6 +192,7 @@ fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: Stri
         "三" -> chapterData?.topic3?.name
         else -> ""
     }
+
     Button(
         onClick = { viewModel.updateItem(3, topic)
             onButtonClick()
@@ -257,14 +257,12 @@ fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: Str
         }
     }
 
-    Log.d("exists", questions.toString())
 
     Button(
         onClick = {
             viewModel.updateItem(4, "${quiz.first()}")
             viewModel.updateItem(5, "true")
             if (quiz == "MCQ") {
-                Log.d("crashing", topicExists.toString())
                 if (topicExists) {
                     navController.navigate("${quiz.lowercase()}/$name")
                 } else {
@@ -274,6 +272,9 @@ fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: Str
                     )
                     navigateToMCQ.value = true
                 }
+            } else if (quiz == "Flashcards"){
+                viewModel.saveContinueLearning()
+                navController.navigate("${quiz.lowercase()}/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}")
             } else {
                 navController.navigate(quiz.lowercase())
             }

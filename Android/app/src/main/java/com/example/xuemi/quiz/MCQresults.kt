@@ -13,18 +13,19 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import com.example.xuemi.MyViewModel
+import com.example.xuemi.NoteType
 
 
 @Composable
-fun MCQresults(navController: NavController, wrong: Int, correct: Int) {
+fun MCQresults(viewModel: MyViewModel, navController: NavController, topicName: String, wrong: Int, correct: Int) {
     val halfWrong = wrong >= correct
     val colour: Color = if (halfWrong) {
         Color(252, 216, 68)
@@ -87,11 +88,8 @@ fun MCQresults(navController: NavController, wrong: Int, correct: Int) {
             }
         }
     }
+    DisposableEffect(Unit) {
+        onDispose { viewModel.add(NoteType.valueOf("中${viewModel.getFromList(0)}"), "${viewModel.getFromList(0)} - $topicName - 单元${viewModel.getFromList(1)}", "Correct: $correct\nWrong: $wrong\nTotal: ${correct}/${correct + wrong}") }
+    }
 
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun resulsPreview() {
-    MCQresults(navController = rememberNavController(), wrong = 5, correct = 3 )
 }

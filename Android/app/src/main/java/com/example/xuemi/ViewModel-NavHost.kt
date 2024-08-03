@@ -30,6 +30,7 @@ import com.example.xuemi.quiz.Secondary
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MainApplication: Application() {
@@ -63,16 +64,31 @@ class MainApplication: Application() {
 
 class MyViewModel( appContext: Context, application: Application ) : AndroidViewModel(application) {
     private val sharedPreferences: SharedPreferences = application.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-    private val _current: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences())
+    private val _default: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences())
+    val _current = MutableStateFlow(listOf("S", "C", "C.", "T", "Q", "W."))
+
+    val default: StateFlow<List<String>> get() = _default.asStateFlow()
+
+    init {
+        loadListFromPreferences()
+    }
     private fun loadListFromPreferences(): List<String> {
-        val defaultList = listOf("S", "C", "C.", "T", "Q", "W.")
-        val listString = sharedPreferences.getString("current_list", null) ?: return defaultList
+        val defaultList = listOf("S", "C", "C.", "T")
+        val listString = sharedPreferences.getString("default_list", null) ?: return defaultList
         return listString.split(",").map { it.trim() }
+
     }
 
     private fun saveListToPreferences(list: List<String>) {
         val listString = list.joinToString(",")
-        sharedPreferences.edit().putString("current_list", listString).apply()
+        sharedPreferences.edit().putString("default_list", listString).apply()
+        loadListFromPreferences()
+    }
+
+    fun getFromList(index: Int): String {
+        val currentList = _current.value.toMutableList()
+        loadListFromPreferences()
+        return currentList[index]
     }
 
     fun updateItem(index: Int, newItem: String) {
@@ -80,13 +96,27 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         if (index in currentList.indices) {
             currentList[index] = newItem
             _current.value = currentList
-            saveListToPreferences(currentList)
         }
+        loadListFromPreferences()
     }
 
-    fun getFromList(index: Int): String {
-        return _current.value.getOrElse(index) { "" }
+    fun flashcardGetFromList(index: Int): String {
+        val defaultPath = loadListFromPreferences()
+        loadListFromPreferences()
+        return defaultPath[index]
     }
+
+    fun saveContinueLearning() {
+        val currentList = _current.value.toMutableList()
+        val defaultList = _default.value.toMutableList()
+        val saveList = intArrayOf(0, 1, 2, 3)
+        defaultList.forEachIndexed { index, s ->
+            defaultList[index] = currentList[saveList[index]]
+        }
+        loadListFromPreferences()
+        saveListToPreferences(defaultList)
+    }
+
 //============================================================//
 
     private val _showButton = MutableStateFlow(true)
@@ -256,7 +286,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     fun updateLeftOff(newLeftOff: Int, topicId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             mcqDao.updateLeftOff(newLeftOff, topicId)
-            Log.d("fixleftoff", "viewModel updated to: $newLeftOff")
             loadMCQ()
         }
     }
@@ -324,7 +353,7 @@ fun HomeNav(viewModel: MyViewModel) {
         NavHost(navController, startDestination = homeTab.title) {
             // tabs
             composable(homeTab.title) { Home(viewModel, navController) }
-            composable(bookmarkTab.title) { Bookmarks(viewModel) }
+            composable(bookmarkTab.title) { Bookmarks(viewModel, navController) }
             composable(notesTab.title) { Notes(viewModel, navController) }
             composable(settingsTab.title) { Settings() }
 
@@ -337,16 +366,23 @@ fun HomeNav(viewModel: MyViewModel) {
                 val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
                 UpdateNote(navController, viewModel, itemID = itemId)
             }
-            composable("flashcards") { FlashcardScreen(viewModel, navController) }
+            composable("flashcards/{sec}/{chap}/{chap_}/{topic}") { backStackEntry ->
+                val secondary = backStackEntry.arguments?.getString("sec")!!
+                val chapter = backStackEntry.arguments?.getString("chap")!!
+                val chapter_ = backStackEntry.arguments?.getString("chap_")!!.toInt()
+                val topic = backStackEntry.arguments?.getString("topic")!!
+                FlashcardScreen(viewModel, navController, secondary, chapter, chapter_, topic)
+            }
             composable("mcq/{name}"){backStackEntry ->
                 val name = backStackEntry.arguments?.getString("name") ?: "name"
                 MCQ(viewModel, navController, name)
 
             }
-            composable("mcqresults/{wrong},{correct}") {backStackEntry ->
+            composable("mcqresults/{name}/{wrong},{correct}") {backStackEntry ->
                 val wrong = backStackEntry.arguments?.getString("wrong")!!.toInt()
                 val correct = backStackEntry.arguments?.getString("correct")!!.toInt()
-                MCQresults(navController, wrong , correct)
+                val name = backStackEntry.arguments?.getString("name").toString()
+                MCQresults(viewModel, navController, name, wrong, correct)
             }
 
         }

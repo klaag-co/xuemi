@@ -29,7 +29,6 @@ import androidx.navigation.NavController
 fun Home(viewModel: MyViewModel, navController: NavController) {
     Button(onClick = { viewModel.deleteAll() }) {
         Text("DELETE ALL")
-
     }
     Column {// Whole app Column
         Text(
@@ -40,8 +39,8 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
         )
 
         Button(onClick = {
-            if (viewModel.getFromList(5) == "true") {
-                navController.navigate("flashcards")
+            if (viewModel.flashcardGetFromList(3) != "T") {
+                navController.navigate("flashcards/${viewModel.flashcardGetFromList(0)}/${viewModel.flashcardGetFromList(1)}/${viewModel.flashcardGetFromList(2)}/${viewModel.flashcardGetFromList(3)}")
             }
                          },
             colors = ButtonDefaults.buttonColors(Color(49, 113, 200)),

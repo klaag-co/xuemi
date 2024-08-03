@@ -60,7 +60,7 @@ import androidx.room.PrimaryKey
 
 
 enum class NoteType {
-    Exam, Note, Sec1, Sec2, Sec3, Sec4
+    Exam, Note, 中一, 中二, 中三, 中四
 }
 
 @Entity
@@ -101,10 +101,10 @@ fun Notes(viewModel: MyViewModel, navController: NavController) {
 
     val examNotes = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Exam).observeAsState(emptyList())
     val notesNotes = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Note).observeAsState(emptyList())
-    val sec1 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Sec1).observeAsState(emptyList())
-    val sec2 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Sec2).observeAsState(emptyList())
-    val sec3 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Sec3).observeAsState(emptyList())
-    val sec4 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.Sec4).observeAsState(emptyList())
+    val sec1 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.中一).observeAsState(emptyList())
+    val sec2 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.中二).observeAsState(emptyList())
+    val sec3 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.中三).observeAsState(emptyList())
+    val sec4 = viewModel.searchNotesByTitle(searchText.value, type = NoteType.中四).observeAsState(emptyList())
 
 
     var delete: String by rememberSaveable {

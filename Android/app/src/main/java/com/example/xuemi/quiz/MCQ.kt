@@ -1,6 +1,5 @@
 package com.example.xuemi.quiz
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -90,9 +89,9 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
     var wrong by remember { mutableStateOf(false) }
 
 
-
     wordDataSize = question.size
     Column {
+
         LinearProgressIndicator(
             progress = progress,
             color = Color(0xFF7EBDF0),
@@ -158,18 +157,17 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                 }
             }, enabled = isFirst_enabled
             ) {
-                Text("<")
+                Text("<",
+                    style = MaterialTheme.typography.h4)
             }
             Spacer(Modifier.fillMaxSize(0.82f))
             TextButton(onClick = {
                 if (currentQN+1 == wordDataSize) {
-                    Log.d("mcqresults", "end of quiz")
                     val wrongNum = viewModel.countIncorrectAnswers(topicName)
                     val correctNum = wordDataSize-wrongNum
-                    navController.navigate("mcqresults/$wrongNum,$correctNum")
+                    navController.navigate("mcqresults/$topicName/$wrongNum,$correctNum")
                     viewModel.deleteQuiz(topic!!.id)
                 } else if (currentQN < leftOff) {
-                    Log.d("mcqresults", "$currentQN, $leftOff")
                     currentQN += 1
                     progress = (currentQN + 1).toFloat() / wordDataSize
                     if (question[currentQN].selected != "") {
@@ -185,7 +183,9 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                     enabled = currentQN != leftOff
                 }
             }, enabled = enabled) {
-                Text(">")
+                Text(
+                    ">",
+                    style = MaterialTheme.typography.h4)
             }
         }
     }

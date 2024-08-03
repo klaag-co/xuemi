@@ -67,7 +67,7 @@ class NotesManager: ObservableObject {
         let propertyListDecoder = PropertyListDecoder()
                 
         if let retrievedNoteData = try? Data(contentsOf: archiveURL),
-            let notesDecoded = try? propertyListDecoder.decode([Note].self, from: retrievedNoteData) {
+           let notesDecoded = try? propertyListDecoder.decode([Note].self, from: retrievedNoteData) {
             notes = notesDecoded
         }
     }
@@ -76,20 +76,20 @@ class NotesManager: ObservableObject {
         let noteType: NoteType
         
         switch level {
-        case "中一":
+        case "一":
             noteType = .sone
-        case "中二":
+        case "二":
             noteType = .stwo
-        case "中三":
+        case "三":
             noteType = .sthree
-        case "中四":
+        case "四", "O 水准备考":
             noteType = .sfour
         default:
             noteType = .note
         }
         
         var title = ""
-        if chapter == "年终考试" {
+        if chapter == "年终考试" || level == "O  水准备考" {
             title = "\(level) - \(chapter)"
         } else {
             title = "\(level) - \(topic) - \(chapter)"

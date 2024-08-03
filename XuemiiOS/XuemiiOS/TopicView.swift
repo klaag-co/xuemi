@@ -48,7 +48,7 @@ enum Topic: Identifiable, Codable, CaseIterable {
                 case .one:
                     return "走街串巷逛狮城"
                 case .two:
-                    return "魅力四射  星耀樟宜"
+                    return "魅力四射 星耀樟宜"
                 case .three:
                     return "国家美术馆探秘"
                 case .eoy:
@@ -177,7 +177,7 @@ enum Topic: Identifiable, Codable, CaseIterable {
                 case .one:
                     return "健康生活系列广告"
                 case .two:
-                    return "吃茶 喝茶 品茶"
+                    return "吃茶喝茶品茶"
                 case .three:
                     return "街舞"
                 case .eoy:
@@ -201,7 +201,7 @@ enum Topic: Identifiable, Codable, CaseIterable {
                 case .two:
                     return "沟通面面观"
                 case .three:
-                    return "社交媒体  拉近你我他"
+                    return "社交媒体拉近你我他"
                 case .eoy:
                     return "年终考试"
                 }
@@ -280,7 +280,7 @@ enum Topic: Identifiable, Codable, CaseIterable {
                 case .one:
                     return "追逐梦想——为梦想加油点赞"
                 case .two:
-                    return "江城子 · 密州出猎"
+                    return "江城子·密州出猎"
                 case .three:
                     return "在山的那边"
                 case .eoy:

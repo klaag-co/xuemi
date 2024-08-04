@@ -114,7 +114,7 @@ fun dropdown(viewModel: MyViewModel, navController: NavController, secondary: St
                                     "六" -> 5
                                     else -> 0
                                 }
-                                navController.navigate("flashcards/${secondary}/${bookmark.chapter}/${chapter_}/${bookmark.topic}")
+                                navController.navigate("flashcards/${secondary}/${bookmark.chapter}/${chapter_}/${bookmark.topic}.bookmarks")
                             },
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {

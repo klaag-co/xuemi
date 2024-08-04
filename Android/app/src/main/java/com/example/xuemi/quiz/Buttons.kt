@@ -1,5 +1,6 @@
 package com.example.xuemi.quiz
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.example.xuemi.MyViewModel
 import com.example.xuemi.backButton
@@ -53,7 +55,7 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
             chaptertemplate(viewModel, navController, "六","5")
         }
         Button(
-            onClick = { },
+            onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(Color(194, 206, 217)),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
@@ -103,6 +105,7 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
     if (isSheetOpen) {
         ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
             Topic(viewModel, navController)
+            Log.d("clicked", "sheet opened")
         }
     }
 
@@ -218,24 +221,45 @@ fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: Stri
     }
 }
 
-fun generateListOfMCQQuestions(words: List<Word>?): List<MCQquestion> {
-    return words?.map { word ->
-        val question = if (Random.nextBoolean()) word.q1 else word.q2
-        val otherOptions = words.filter { it != word }.shuffled().take(3).map { it.word }
-        val optionList = (otherOptions + word.word).shuffled()
-        MCQquestion(question = question, optionList = optionList, correct = word.word, selected = "")
-    } ?: listOf(MCQquestion("", listOf("", "", "", ""), "", ""))
+fun generateListOfMCQQuestions(words: List<Word>?, limit: Boolean): List<MCQquestion> {
+    if (limit) {
+        return words?.map { word ->
+            val question = if (Random.nextBoolean()) word.q1 else word.q2
+            val otherOptions = words.filter { it != word }.shuffled().take(3).map { it.word }
+            val optionList = (otherOptions + word.word).shuffled()
+            MCQquestion(
+                question = question,
+                optionList = optionList,
+                correct = word.word,
+                selected = ""
+            )
+        }?.shuffled() ?.take(15) ?: listOf(MCQquestion("", listOf("", "", "", ""), "", ""))
+    } else {
+        return words?.map { word ->
+            val question = if (Random.nextBoolean()) word.q1 else word.q2
+            val otherOptions = words.filter { it != word }.shuffled().take(3).map { it.word }
+            val optionList = (otherOptions + word.word).shuffled()
+            MCQquestion(
+                question = question,
+                optionList = optionList,
+                correct = word.word,
+                selected = ""
+            )
+        }?.shuffled() ?: listOf(MCQquestion("", listOf("", "", "", ""), "", ""))
+
+    }
 }
 @Composable
 fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: String) {
     val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
-    val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
+    val chapterData =
+        dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
 
     val name: String? = when (viewModel.getFromList(3)) {
         "一" -> chapterData?.topic1?.name
         "二" -> chapterData?.topic2?.name
         "三" -> chapterData?.topic3?.name
-        else -> ""
+        else -> null
     }
     val words: List<Word>? = when (viewModel.getFromList(3)) {
         "一" -> chapterData?.topic1?.topic
@@ -243,38 +267,47 @@ fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: Str
         "三" -> chapterData?.topic3?.topic
         else -> null
     }
-    val topicExists by viewModel.checkIfTopicExists(name.toString()).observeAsState(false)
-    val questions by viewModel.mcqList.observeAsState(emptyList())
+
+    val topicExists = name?.let { viewModel.checkIfTopicExists(it) } ?: MutableLiveData(false)
+    val topicExistsState by topicExists.observeAsState(false)
 
     val navigateToMCQ = remember { mutableStateOf(false) }
 
-    LaunchedEffect(topicExists) {
+    LaunchedEffect(topicExistsState, navigateToMCQ.value) {
         if (navigateToMCQ.value) {
-            if (topicExists) {
+            if (topicExistsState && name != null) {
                 navController.navigate("${quiz.lowercase()}/$name")
             }
             navigateToMCQ.value = false
         }
-    }
 
+    }
 
     Button(
         onClick = {
             viewModel.updateItem(4, "${quiz.first()}")
             viewModel.updateItem(5, "true")
+
             if (quiz == "MCQ") {
-                if (topicExists) {
+                if (topicExistsState && name != null) {
                     navController.navigate("${quiz.lowercase()}/$name")
                 } else {
-                    viewModel.addQuiz(
-                        topic = name.toString(),
-                        questions = generateListOfMCQQuestions(words).shuffled()
-                    )
-                    navigateToMCQ.value = true
+                    val generatedQuestions = generateListOfMCQQuestions(words, false)
+                    Log.d("clicked", "Generated questions: $generatedQuestions")
+                    if (name != null) {
+                        viewModel.addQuiz(
+                            topic = name,
+                            questions = generatedQuestions
+                        )
+                        navigateToMCQ.value = true
+                        Log.d("clicked", navigateToMCQ.value.toString())
+                    }
                 }
-            } else if (quiz == "Flashcards"){
+            } else if (quiz == "Flashcards") {
                 viewModel.saveContinueLearning()
-                navController.navigate("${quiz.lowercase()}/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}")
+                navController.navigate(
+                    "${quiz.lowercase()}/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}.chapter"
+                )
             } else {
                 navController.navigate(quiz.lowercase())
             }

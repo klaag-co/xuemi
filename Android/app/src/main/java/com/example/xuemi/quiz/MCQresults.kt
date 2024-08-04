@@ -89,6 +89,7 @@ fun MCQresults(viewModel: MyViewModel, navController: NavController, topicName: 
         }
     }
     DisposableEffect(Unit) {
+
         onDispose { viewModel.add(NoteType.valueOf("中${viewModel.getFromList(0)}"), "${viewModel.getFromList(0)} - $topicName - 单元${viewModel.getFromList(1)}", "Correct: $correct\nWrong: $wrong\nTotal: ${correct}/${correct + wrong}") }
     }
 

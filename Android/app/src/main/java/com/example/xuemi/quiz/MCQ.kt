@@ -78,7 +78,7 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
     var leftOff = topic?.leftOff ?: 0
 
     var currentQN by remember { mutableIntStateOf(leftOff) }
-    var selectedAnswer by remember { mutableStateOf("") }
+    var selectedAnswer by remember { mutableStateOf(question.getOrNull(currentQN)?.selected ?: "") }
 
     var wordDataSize by remember { mutableIntStateOf(question.size) }
 
@@ -88,8 +88,8 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
     var showAnswer by remember { mutableStateOf(question.getOrNull(currentQN)?.selected != "") }
     var wrong by remember { mutableStateOf(false) }
 
-
     wordDataSize = question.size
+
     Column {
 
         LinearProgressIndicator(
@@ -147,13 +147,12 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
             TextButton(onClick = {
                 if (currentQN > 0) {
                     currentQN -= 1
+                    selectedAnswer = question[currentQN].selected
+                    showAnswer = selectedAnswer != ""
                     progress = (currentQN + 1).toFloat() / wordDataSize
                     isFirst_enabled = currentQN != 0
                     enabled = true
                     wrong = false
-                    if (selectedAnswer != "") {
-                        selectedAnswer = question[currentQN].selected
-                    }
                 }
             }, enabled = isFirst_enabled
             ) {
@@ -162,25 +161,20 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
             }
             Spacer(Modifier.fillMaxSize(0.82f))
             TextButton(onClick = {
-                if (currentQN+1 == wordDataSize) {
+
+                if (currentQN+1 >= wordDataSize) {
                     val wrongNum = viewModel.countIncorrectAnswers(topicName)
                     val correctNum = wordDataSize-wrongNum
                     navController.navigate("mcqresults/$topicName/$wrongNum,$correctNum")
                     viewModel.deleteQuiz(topic!!.id)
                 } else if (currentQN < leftOff) {
                     currentQN += 1
+                    selectedAnswer = question[currentQN].selected
+                    showAnswer = selectedAnswer != ""
                     progress = (currentQN + 1).toFloat() / wordDataSize
-                    if (question[currentQN].selected != "") {
-                        selectedAnswer = question[currentQN].selected
-                        showAnswer = true
-                        isFirst_enabled = true
-                    } else {
-                        selectedAnswer = ""
-                        showAnswer = false
-                        isFirst_enabled = true
-                        wrong = false
-                    }
+                    isFirst_enabled = true
                     enabled = currentQN != leftOff
+                    wrong = false
                 }
             }, enabled = enabled) {
                 Text(

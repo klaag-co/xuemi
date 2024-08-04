@@ -261,6 +261,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             val exists = mcqDao.topicExists(topic)
             if (exists == 0) {
                 mcqDao.addTopic(MCQtopic(topic = topic, leftOff = 0, questions = questions))
+                Log.d("clicked", "added")
             } else {
                 Log.d("exists", "Topic already exists: $topic")
             }
@@ -300,6 +301,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         val exists = MutableLiveData<Boolean>()
         viewModelScope.launch(Dispatchers.IO) {
             val count = mcqDao.topicExists(topic)
+            Log.d("clicked", "topic $topic exists: ${count > 0}")
             exists.postValue(count > 0)
         }
         return exists
@@ -366,12 +368,13 @@ fun HomeNav(viewModel: MyViewModel) {
                 val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
                 UpdateNote(navController, viewModel, itemID = itemId)
             }
-            composable("flashcards/{sec}/{chap}/{chap_}/{topic}") { backStackEntry ->
+            composable("flashcards/{sec}/{chap}/{chap_}/{topic}.{fromHome}") { backStackEntry ->
                 val secondary = backStackEntry.arguments?.getString("sec")!!
                 val chapter = backStackEntry.arguments?.getString("chap")!!
                 val chapter_ = backStackEntry.arguments?.getString("chap_")!!.toInt()
                 val topic = backStackEntry.arguments?.getString("topic")!!
-                FlashcardScreen(viewModel, navController, secondary, chapter, chapter_, topic)
+                val fromHome = backStackEntry.arguments?.getString("fromHome")!!
+                FlashcardScreen(viewModel, navController, fromHome, secondary, chapter, chapter_, topic)
             }
             composable("mcq/{name}"){backStackEntry ->
                 val name = backStackEntry.arguments?.getString("name") ?: "name"

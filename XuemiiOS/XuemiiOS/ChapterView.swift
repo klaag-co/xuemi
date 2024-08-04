@@ -34,15 +34,7 @@ struct ChapterView: View {
     
     var level: SecondaryNumber
     
-    var allVocabularies: [Vocabulary] {
-        var allVocabs: [Vocabulary] = []
-        for chapter in Chapter.allCases {
-            for topic in Topic.allCases {
-                allVocabs.append(contentsOf: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topic.string(level: level, chapter: chapter)))
-            }
-        }
-        return allVocabs
-    }
+    @State var vocabsToPass: [Vocabulary] = []
     
     var body: some View {
         ScrollView {
@@ -62,12 +54,17 @@ struct ChapterView: View {
                         if chapter != .eoy {
                             TopicView(level: level, chapter: chapter)
                         } else {
-                            MCQView(
-                                vocabularies: Array(allVocabularies.shuffled().prefix(15)),
-                                level: level.string,
-                                chapter: chapter.string,
-                                topic: Topic.eoy.string(level: level, chapter: chapter)
-                            )
+                            Group {
+                                MCQView(
+                                    vocabularies: vocabsToPass,
+                                    level: level.string,
+                                    chapter: chapter.string,
+                                    topic: Topic.eoy.string(level: level, chapter: chapter)
+                                )
+                            }
+                            .onAppear {
+                                vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
+                            }
                         }
                     } label: {
                         Text(chapter.string)
@@ -85,6 +82,19 @@ struct ChapterView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .padding(.vertical)
+        .onAppear {
+            self.vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
+        }
+    }
+    
+    func allVocabularies() -> [Vocabulary] {
+        var allVocabs: [Vocabulary] = []
+        for chapter in Chapter.allCases {
+            for topic in Topic.allCases {
+                allVocabs.append(contentsOf: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topic.string(level: level, chapter: chapter)))
+            }
+        }
+        return allVocabs
     }
 }
 

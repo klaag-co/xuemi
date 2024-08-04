@@ -89,7 +89,7 @@ class NotesManager: ObservableObject {
         }
         
         var title = ""
-        if chapter == "年终考试" || level == "O  水准备考" {
+        if chapter == "年终考试" || level == "O 水准备考" {
             title = "\(level) - \(chapter)"
         } else {
             title = "\(level) - \(topic) - \(chapter)"

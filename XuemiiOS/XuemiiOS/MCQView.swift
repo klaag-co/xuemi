@@ -51,6 +51,7 @@ struct MCQView: View {
     var body: some View {
         VStack {
             ProgressView(value: Double(currentVocabularyIndex + 1), total: Double(vocabularies.count))
+                .animation(.easeInOut, value: currentVocabulary)
                 .padding()
             
             Text(currentQuestion)

@@ -357,7 +357,7 @@ fun HomeNav(viewModel: MyViewModel) {
             composable(homeTab.title) { Home(viewModel, navController) }
             composable(bookmarkTab.title) { Bookmarks(viewModel, navController) }
             composable(notesTab.title) { Notes(viewModel, navController) }
-            composable(settingsTab.title) { Settings() }
+            composable(settingsTab.title) { SettingsView() }
 
             // navigation
             composable("secondary") { Secondary(viewModel, navController) }

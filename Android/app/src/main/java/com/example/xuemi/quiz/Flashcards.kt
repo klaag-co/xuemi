@@ -45,7 +45,7 @@ import com.google.accompanist.pager.rememberPagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, secondary: String, chapter: String, chapter_: Int,  topic: String) {
+fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHome: String, secondary: String, chapter: String, chapter_: Int,  topic: String) {
     val dataFromJson = remember { viewModel.loadDataFromJson("中${secondary}.json") }
     val pagerState = rememberPagerState()
     val chapterData = dataFromJson?.chapters?.getOrNull(chapter_)?.topics
@@ -67,8 +67,18 @@ fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, second
     wordDataSize = wordList?.size ?: 0
 
     Column (Modifier.padding(16.dp)){
-        backButton("单元${chapter}") {
-            navController.navigate("chapter")
+        if (fromHome == "home") {
+            backButton("Home") {
+                navController.navigate("home")
+            }
+        } else if (fromHome == "bookmarks"){
+            backButton("Bookmarks") {
+                navController.navigate("bookmarks")
+            }
+        } else {
+            backButton("单元${chapter}") {
+                navController.navigate("chapter")
+            }
         }
         LinearProgressIndicator(
             progress = pagerState.currentPage.toFloat() / (wordDataSize - 1),

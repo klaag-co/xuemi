@@ -30,15 +30,20 @@ val acknowledgements = listOf(
     Acknowledgement("Ms Wong Lu Ting", "Head of Department", R.drawable.person_fill),
     Acknowledgement("CL Department", "Client", R.drawable.building_2_fill)
 )
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsView() {
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Text("Settings")
-            })
+            TopAppBar(
+                title = {
+                    Text(
+                        "Settings",
+                        fontSize = 45.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            )
         }
     ) { paddingValues ->
         LazyColumn(
@@ -74,7 +79,7 @@ fun SettingsView() {
 fun SectionHeader(title: String) {
     Text(
         text = title,
-        fontSize = 20.sp,
+        fontSize = 22.sp,
         fontWeight = FontWeight.Bold,
         modifier = Modifier.padding(vertical = 8.dp)
     )

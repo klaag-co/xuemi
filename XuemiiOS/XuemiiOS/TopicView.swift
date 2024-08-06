@@ -48,7 +48,7 @@ enum Topic: Identifiable, Codable, CaseIterable {
                 case .one:
                     return "走街串巷逛狮城"
                 case .two:
-                    return "魅力四射  星耀樟宜"
+                    return "魅力四射 星耀樟宜"
                 case .three:
                     return "国家美术馆探秘"
                 case .eoy:

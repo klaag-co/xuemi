@@ -89,10 +89,12 @@ class NotesManager: ObservableObject {
         }
         
         var title = ""
-        if chapter == "年终考试" || level == "O 水准备考" {
+        if chapter == "年终考试" {
+            title = "中\(level) - \(chapter)"
+        } else if level == "O 水准备考" {
             title = "\(level) - \(chapter)"
         } else {
-            title = "\(level) - \(topic) - \(chapter)"
+            title = "中\(level) - \(chapter) - \(topic)"
         }
         let content = "Correct: \(correctAnswers)\nWrong: \(wrongAnswers)\nTotal: \(correctAnswers)/\(totalQuestions)"
         let newNote = Note(title: title, content: content, noteType: noteType)

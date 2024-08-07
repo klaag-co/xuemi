@@ -113,7 +113,45 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
 
 @Composable
 fun Topic(viewModel: MyViewModel, navController: NavController) {
+    val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
+
+    val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
+
+    val name: String? = when (viewModel.getFromList(3)) {
+        "一" -> chapterData?.topic1?.name
+        "二" -> chapterData?.topic2?.name
+        "三" -> chapterData?.topic3?.name
+        else -> null
+    }
+
+    val words: List<Word>? = when (viewModel.getFromList(3)) {
+        "一" -> chapterData?.topic1?.topic
+        "二" -> chapterData?.topic2?.topic
+        "三" -> chapterData?.topic3?.topic
+        else -> null
+    }
+
+    val topicExists = name?.let { viewModel.checkIfTopicExists(it) } ?: MutableLiveData(false)
+    val topicExistsState by topicExists.observeAsState(false)
+
+
+    LaunchedEffect(Unit) {
+        if (topicExistsState && name != null) {
+            navController.navigate("flashcards/$name")
+        } else {
+            val generatedQuestions = generateListOfMCQQuestions(words, false)
+            if (name != null) {
+                viewModel.addQuiz(
+                    topic = name,
+                    questions = generatedQuestions
+                )
+
+                Log.d("clicked", "topicExistsState = ${topicExistsState}")
+            }
+        }
+    }
     Column {
+
         Text(
             "习题",
             fontSize = 45.sp,
@@ -252,19 +290,12 @@ fun generateListOfMCQQuestions(words: List<Word>?, limit: Boolean): List<MCQques
 @Composable
 fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: String) {
     val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
-    val chapterData =
-        dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
+    val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
 
     val name: String? = when (viewModel.getFromList(3)) {
         "一" -> chapterData?.topic1?.name
         "二" -> chapterData?.topic2?.name
         "三" -> chapterData?.topic3?.name
-        else -> null
-    }
-    val words: List<Word>? = when (viewModel.getFromList(3)) {
-        "一" -> chapterData?.topic1?.topic
-        "二" -> chapterData?.topic2?.topic
-        "三" -> chapterData?.topic3?.topic
         else -> null
     }
 
@@ -289,20 +320,7 @@ fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: Str
             viewModel.updateItem(5, "true")
 
             if (quiz == "MCQ") {
-                if (topicExistsState && name != null) {
-                    navController.navigate("${quiz.lowercase()}/$name")
-                } else {
-                    val generatedQuestions = generateListOfMCQQuestions(words, false)
-                    Log.d("clicked", "Generated questions: $generatedQuestions")
-                    if (name != null) {
-                        viewModel.addQuiz(
-                            topic = name,
-                            questions = generatedQuestions
-                        )
-                        navigateToMCQ.value = true
-                        Log.d("clicked", navigateToMCQ.value.toString())
-                    }
-                }
+                navigateToMCQ.value = true
             } else if (quiz == "Flashcards") {
                 viewModel.saveContinueLearning()
                 navController.navigate(

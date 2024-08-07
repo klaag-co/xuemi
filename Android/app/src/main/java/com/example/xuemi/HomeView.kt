@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -30,41 +29,29 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.xuemi.quiz.Word
 import com.example.xuemi.quiz.generateListOfMCQQuestions
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 
 @Composable
 fun Home(viewModel: MyViewModel, navController: NavController) {
-    val secondarys = listOf("中一", "中二", "中三", "中四")
-    val words = remember { mutableStateListOf<Word>() }
-
+    // Collect words from the StateFlow
+    val words by viewModel.words.observeAsState()
     val topicExists = "o level".let { viewModel.checkIfTopicExists(it) }
     val topicExistsState by topicExists.observeAsState(false)
 
     val navigateToMCQ = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        withContext(Dispatchers.IO) {
-            secondarys.forEach { secondary ->
-                val currentSec = viewModel.loadDataFromJson("$secondary.json")
-                currentSec?.chapters?.let { chapters ->
-                    (0 until chapters.size).forEach { chapter ->
-                        val currentChapter = chapters.getOrNull(chapter)?.topics
-                        currentChapter?.let {
-                            withContext(Dispatchers.Main) {
-                                words.addAll(it.topic1.topic)
-                                words.addAll(it.topic2.topic)
-                                words.addAll(it.topic3.topic)
-                            }
-                        }
-                    }
-                }
-            }
+        if (!topicExistsState) {
+            viewModel.updateItem(0, "四")
+            val generatedQuestions = generateListOfMCQQuestions(words, true)
+            viewModel.addQuiz(
+                topic = "o level",
+                questions = generatedQuestions
+            )
+        } else {
+            Log.d("temp", "topic already exists (Home)")
         }
-        Log.d("o.level", words.getOrNull(240)?.toString() ?: "No data at index 240")
     }
 
     LaunchedEffect(topicExistsState, navigateToMCQ.value) {
@@ -86,7 +73,7 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             "Home",
             fontSize = 38.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 20.dp, horizontal = 23.dp)
+            modifier = Modifier.padding(vertical = 20.dp, horizontal = 20.dp)
         )
 
         Button(onClick = {
@@ -122,18 +109,7 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "四",0.8f)
         }
         Button(onClick = {
-            viewModel.updateItem(0, "四")
-            if (topicExistsState) {
-                navController.navigate("mcq/o level")
-            } else {
-                val generatedQuestions = generateListOfMCQQuestions(words, true)
-                Log.d("clicked", "Generated questions: $generatedQuestions")
-                viewModel.addQuiz(
-                    topic = "o level",
-                    questions = generatedQuestions
-                )
-                navigateToMCQ.value = true
-            }
+            navigateToMCQ.value = true
         },
             colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
             /*border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/

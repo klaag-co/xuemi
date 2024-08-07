@@ -27,10 +27,10 @@ import com.example.xuemi.quiz.MCQquestion
 import com.example.xuemi.quiz.MCQresults
 import com.example.xuemi.quiz.MCQtopic
 import com.example.xuemi.quiz.Secondary
+import com.example.xuemi.quiz.Word
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MainApplication: Application() {
@@ -63,15 +63,30 @@ class MainApplication: Application() {
 
 
 class MyViewModel( appContext: Context, application: Application ) : AndroidViewModel(application) {
-    private val sharedPreferences: SharedPreferences = application.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-    private val _default: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences())
+    private val sharedPreferences: SharedPreferences =
+        application.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+    private val _default: MutableStateFlow<List<String>> =
+        MutableStateFlow(loadListFromPreferences())
     val _current = MutableStateFlow(listOf("S", "C", "C.", "T", "Q", "W."))
 
-    val default: StateFlow<List<String>> get() = _default.asStateFlow()
+    private val _words = MutableLiveData<List<Word>>()
+
+    val words: MutableLiveData<List<Word>> = _words
 
     init {
         loadListFromPreferences()
+        complete()
     }
+
+    //============================================================//
+
+
+    private val jsonReader = JsonReader(appContext)
+
+    fun loadDataFromJson(name: String): Secondary? {
+        return jsonReader.readJsonFile(name)
+    }
+
     private fun loadListFromPreferences(): List<String> {
         val defaultList = listOf("S", "C", "C.", "T")
         val listString = sharedPreferences.getString("default_list", null) ?: return defaultList
@@ -83,6 +98,32 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         val listString = list.joinToString(",")
         sharedPreferences.edit().putString("default_list", listString).apply()
         loadListFromPreferences()
+    }
+
+    fun complete() {
+        val secondarys = listOf("中一", "中二", "中三", "中四")
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val allWords = mutableListOf<Word>()
+            secondarys.forEach { secondary ->
+                val currentSec = loadDataFromJson("$secondary.json")
+                currentSec?.chapters?.let { chapters ->
+                    chapters.indices.forEach { chapter ->
+                        val currentChapter = chapters.getOrNull(chapter)?.topics
+                        currentChapter?.let {
+                            allWords.addAll(it.topic1.topic)
+                            allWords.addAll(it.topic2.topic)
+                            allWords.addAll(it.topic3.topic)
+                        }
+                    }
+                }
+            }
+            _words.postValue(allWords)
+            // Update the StateFlow on the main thread
+//            withContext(Dispatchers.Main) {
+//                _words.value = allWords
+//            }
+        }
     }
 
     fun getFromList(index: Int): String {
@@ -139,6 +180,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     init {
         loadNotes()
     }
+
     private fun loadNotes() {
         viewModelScope.launch(Dispatchers.IO) {
             val notes = notesDao.getAllNotes()
@@ -148,11 +190,12 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 
 
     fun add(type: NoteType, title: String, body: String) {
-        viewModelScope.launch (Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             notesDao.addNote(Note(type = type, title = title, body = body))
             loadNotes()
         }
     }
+
     fun delete(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             notesDao.deleteNote(id)
@@ -160,13 +203,12 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         }
     }
 
-    fun update(title: String, body: String, id: Int){
+    fun update(title: String, body: String, id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             notesDao.updateNote(title, body, id)
             loadNotes()
         }
     }
-
 
 
     fun searchNotesByTitle(searchText: String, type: NoteType): LiveData<List<Note>> {
@@ -220,7 +262,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     }
 
 
-
     private val _bookmarkWords = MutableLiveData<List<String>>()
     val bookmarkWords: LiveData<List<String>> get() = _bookmarkWords
 
@@ -234,7 +275,10 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     }
 
 
-    fun searchBookmarksByTitle(searchText: String, type: BookmarkSection): LiveData<List<Bookmark>> {
+    fun searchBookmarksByTitle(
+        searchText: String,
+        type: BookmarkSection
+    ): LiveData<List<Bookmark>> {
         return bookmarksDao.searchBookmarksByTitle(searchText, type)
     }
 
@@ -249,6 +293,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     init {
         loadMCQ()
     }
+
     fun loadMCQ() {
         viewModelScope.launch(Dispatchers.IO) {
             val mcqs = mcqDao.getAllQuestions()
@@ -261,9 +306,8 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             val exists = mcqDao.topicExists(topic)
             if (exists == 0) {
                 mcqDao.addTopic(MCQtopic(topic = topic, leftOff = 0, questions = questions))
-                Log.d("clicked", "added")
             } else {
-                Log.d("exists", "Topic already exists: $topic")
+                Log.d("temp", "Topic already exists: $topic")
             }
             loadMCQ()
         }
@@ -290,6 +334,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             loadMCQ()
         }
     }
+
     fun updateQuestionSelected(topicId: Int, questionIndex: Int, newSelected: String) {
         viewModelScope.launch(Dispatchers.IO) {
             mcqDao.updateSelectedQuestion(topicId, questionIndex, newSelected)
@@ -297,6 +342,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             loadMCQ()
         }
     }
+
     fun checkIfTopicExists(topic: String): LiveData<Boolean> {
         val exists = MutableLiveData<Boolean>()
         viewModelScope.launch(Dispatchers.IO) {
@@ -308,20 +354,13 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     }
 
     fun countIncorrectAnswers(topicName: String): Int {
-        val questions = _mcqList.value?.firstOrNull { it.topic == topicName }?.questions ?: emptyList()
+        val questions =
+            _mcqList.value?.firstOrNull { it.topic == topicName }?.questions ?: emptyList()
         return questions.count { it.selected.isNotEmpty() && it.selected != it.correct }
     }
-
-
-//============================================================//
-
-
-    private val jsonReader = JsonReader(appContext)
-
-    fun loadDataFromJson(name: String): Secondary? {
-        return jsonReader.readJsonFile(name)
-    }
 }
+
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

@@ -40,6 +40,11 @@ import kotlin.random.Random
 
 @Composable
 fun Secondary(viewModel: MyViewModel, navController: NavController) {
+    LaunchedEffect(Unit) {
+        viewModel.loadData("中${viewModel.getFromList(0)}.json")
+    }
+    val dataFromJson by viewModel.loadedData.collectAsState()
+
     val showButton by viewModel.showButton.collectAsState()
     Column {
         backButton("Home") {
@@ -113,8 +118,11 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
 
 @Composable
 fun Topic(viewModel: MyViewModel, navController: NavController) {
-    val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
+    LaunchedEffect(Unit) {
+        viewModel.loadData("中${viewModel.getFromList(0)}.json")
+    }
 
+    val dataFromJson by viewModel.loadedData.collectAsState()
     val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
 
     val name: String? = when (viewModel.getFromList(3)) {
@@ -224,7 +232,11 @@ fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapte
 
 @Composable
 fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: String) {
-    val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
+    LaunchedEffect(Unit) {
+        viewModel.loadData("中${viewModel.getFromList(0)}.json")
+    }
+
+    val dataFromJson by viewModel.loadedData.collectAsState()
     val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
 
     val name: String? = when (topic) {
@@ -289,7 +301,11 @@ fun generateListOfMCQQuestions(words: List<Word>?, limit: Boolean): List<MCQques
 }
 @Composable
 fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: String) {
-    val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
+    LaunchedEffect(Unit) {
+        viewModel.loadData("中${viewModel.getFromList(0)}.json")
+    }
+
+    val dataFromJson by viewModel.loadedData.collectAsState()
     val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
 
     val name: String? = when (viewModel.getFromList(3)) {

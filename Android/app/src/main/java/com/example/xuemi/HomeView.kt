@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -34,8 +35,7 @@ import com.example.xuemi.quiz.generateListOfMCQQuestions
 
 @Composable
 fun Home(viewModel: MyViewModel, navController: NavController) {
-    // Collect words from the StateFlow
-    val words by viewModel.words.observeAsState()
+    val words by viewModel.words.collectAsState()
     val topicExists = "o level".let { viewModel.checkIfTopicExists(it) }
     val topicExistsState by topicExists.observeAsState(false)
 

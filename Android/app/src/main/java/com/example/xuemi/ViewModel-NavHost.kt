@@ -28,10 +28,13 @@ import com.example.xuemi.quiz.MCQresults
 import com.example.xuemi.quiz.MCQtopic
 import com.example.xuemi.quiz.Secondary
 import com.example.xuemi.quiz.Word
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainApplication: Application() {
     companion object {
@@ -69,22 +72,44 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         MutableStateFlow(loadListFromPreferences())
     val _current = MutableStateFlow(listOf("S", "C", "C.", "T", "Q", "W."))
 
-    private val _words = MutableLiveData<List<Word>>()
+    private val _words: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
+    val words: MutableStateFlow<List<Word>> = _words
 
-    val words: MutableLiveData<List<Word>> = _words
+    private val _secondary1: MutableStateFlow<Secondary?> = MutableStateFlow(null)
+    val secondary1: StateFlow<Secondary?> = _secondary1
+
+    private val _secondary2: MutableStateFlow<Secondary?> = MutableStateFlow(null)
+    val secondary2: StateFlow<Secondary?> = _secondary2
+
+    private val _secondary3: MutableStateFlow<Secondary?> = MutableStateFlow(null)
+    val secondary3: StateFlow<Secondary?> = _secondary3
+
+    private val _secondary4: MutableStateFlow<Secondary?> = MutableStateFlow(null)
+    val secondary4: StateFlow<Secondary?> = _secondary4
 
     init {
         loadListFromPreferences()
-        complete()
+        complete_words(listOf("中一", "中二", "中三", "中四"))
     }
 
     //============================================================//
 
 
-    private val jsonReader = JsonReader(appContext)
+    private var jsonReader: JsonReader? = JsonReader(appContext)
+    private val _loadedData = MutableStateFlow<Secondary?>(null)
+    val loadedData: StateFlow<Secondary?> get() = _loadedData
 
-    fun loadDataFromJson(name: String): Secondary? {
-        return jsonReader.readJsonFile(name)
+
+    suspend fun loadDataFromJson(name: String): Secondary? {
+        return jsonReader?.readJsonFile(name)
+    }
+
+
+    fun loadData(name: String) {
+        viewModelScope.launch {
+            val data = loadDataFromJson(name)
+            _loadedData.value = data
+        }
     }
 
     private fun loadListFromPreferences(): List<String> {
@@ -100,31 +125,44 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         loadListFromPreferences()
     }
 
-    fun complete() {
-        val secondarys = listOf("中一", "中二", "中三", "中四")
-
-        viewModelScope.launch(Dispatchers.IO) {
+    fun complete(secondaryList: List<String>): Deferred<List<Word>> {
+        return viewModelScope.async(Dispatchers.IO) {
             val allWords = mutableListOf<Word>()
-            secondarys.forEach { secondary ->
-                val currentSec = loadDataFromJson("$secondary.json")
-                currentSec?.chapters?.let { chapters ->
-                    chapters.indices.forEach { chapter ->
-                        val currentChapter = chapters.getOrNull(chapter)?.topics
-                        currentChapter?.let {
-                            allWords.addAll(it.topic1.topic)
-                            allWords.addAll(it.topic2.topic)
-                            allWords.addAll(it.topic3.topic)
+            secondaryList.forEachIndexed { index, secondaryName ->
+                val secondaryData = loadDataFromJson("$secondaryName.json")
+                withContext(Dispatchers.Main) {
+                    when (index) {
+                        0 -> _secondary1.value = secondaryData
+                        1 -> _secondary2.value = secondaryData
+                        2 -> _secondary3.value = secondaryData
+                        3 -> _secondary4.value = secondaryData
+
+                    }
+                }
+                secondaryData?.chapters?.let { chapters ->
+                    chapters.forEach { chapter ->
+                        chapter.topics.let { topics ->
+                            allWords.addAll(topics.topic1.topic)
+                            allWords.addAll(topics.topic2.topic)
+                            allWords.addAll(topics.topic3.topic)
                         }
                     }
                 }
             }
-            _words.postValue(allWords)
-            // Update the StateFlow on the main thread
-//            withContext(Dispatchers.Main) {
-//                _words.value = allWords
-//            }
+            withContext(Dispatchers.Main) {
+                _words.value = allWords
+            }
+            allWords
         }
     }
+
+    fun complete_words(secondarys: List<String>) {
+        viewModelScope.launch {
+            val words = complete(secondarys).await()
+            _words.value = words
+        }
+    }
+
 
     fun getFromList(index: Int): String {
         val currentList = _current.value.toMutableList()
@@ -288,7 +326,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     private val _mcqList = MutableLiveData<List<MCQtopic>>()
     private val _mcqTopic = MutableLiveData<MCQtopic?>()
     val mcqList: MutableLiveData<List<MCQtopic>> get() = _mcqList
-    val mcqTopic: MutableLiveData<MCQtopic?> get() = _mcqTopic
 
     init {
         loadMCQ()

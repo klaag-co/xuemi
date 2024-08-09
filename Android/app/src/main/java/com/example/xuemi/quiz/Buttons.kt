@@ -35,12 +35,57 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.example.xuemi.MyViewModel
+import com.example.xuemi.SecondaryType
 import com.example.xuemi.backButton
 import kotlin.random.Random
 
 @Composable
 fun Secondary(viewModel: MyViewModel, navController: NavController) {
+    LaunchedEffect(Unit) {
+        viewModel.loadData("中${viewModel.getFromList(0)}.json")
+    }
+
+    val name = viewModel.getFromList(0)
+
+    val enumType = when(name){
+        "一" -> SecondaryType.SEC1
+        "二" -> SecondaryType.SEC2
+        "三" -> SecondaryType.SEC3
+        "四" -> SecondaryType.SEC4
+        else -> SecondaryType.SEC1
+    }
+    val secondaryFlow = viewModel.secondaryStates[enumType]
+
+    val words: List<Word>? = secondaryFlow?.collectAsState()?.value
+    val topicExists = name.let { viewModel.checkIfTopicExists(it) }
+    val topicExistsState by topicExists.observeAsState(false)
+
     val showButton by viewModel.showButton.collectAsState()
+
+    val navigateToMCQ = remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        if (!topicExistsState) {
+            viewModel.updateItem(0, name)
+            val generatedQuestions = generateListOfMCQQuestions(words, true)
+            viewModel.addQuiz(
+                topic = name,
+                questions = generatedQuestions
+            )
+        } else {
+            Log.d("temp", "topic already exists (EOY)")
+        }
+    }
+
+    LaunchedEffect(topicExistsState, navigateToMCQ.value) {
+        if (navigateToMCQ.value) {
+            if (topicExistsState) {
+                navController.navigate("mcq/$name")
+            }
+            navigateToMCQ.value = false
+        }
+
+    }
     Column {
         backButton("Home") {
             navController.navigate("home")
@@ -55,7 +100,9 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
             chaptertemplate(viewModel, navController, "六","5")
         }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                navigateToMCQ.value = true
+            },
             colors = ButtonDefaults.buttonColors(Color(194, 206, 217)),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
@@ -113,7 +160,48 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
 
 @Composable
 fun Topic(viewModel: MyViewModel, navController: NavController) {
+    LaunchedEffect(Unit) {
+        viewModel.loadData("中${viewModel.getFromList(0)}.json")
+    }
+
+    val dataFromJson by viewModel.loadedData.collectAsState()
+    val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
+
+    val name: String? = when (viewModel.getFromList(3)) {
+        "一" -> chapterData?.topic1?.name
+        "二" -> chapterData?.topic2?.name
+        "三" -> chapterData?.topic3?.name
+        else -> null
+    }
+
+    val words: List<Word>? = when (viewModel.getFromList(3)) {
+        "一" -> chapterData?.topic1?.topic
+        "二" -> chapterData?.topic2?.topic
+        "三" -> chapterData?.topic3?.topic
+        else -> null
+    }
+
+    val topicExists = name?.let { viewModel.checkIfTopicExists(it) } ?: MutableLiveData(false)
+    val topicExistsState by topicExists.observeAsState(false)
+
+
+    LaunchedEffect(Unit) {
+        if (topicExistsState && name != null) {
+            navController.navigate("flashcards/$name")
+        } else {
+            val generatedQuestions = generateListOfMCQQuestions(words, false)
+            if (name != null) {
+                viewModel.addQuiz(
+                    topic = name,
+                    questions = generatedQuestions
+                )
+
+                Log.d("clicked", "topicExistsState = ${topicExistsState}")
+            }
+        }
+    }
     Column {
+
         Text(
             "习题",
             fontSize = 45.sp,
@@ -186,7 +274,11 @@ fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapte
 
 @Composable
 fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: String) {
-    val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
+    LaunchedEffect(Unit) {
+        viewModel.loadData("中${viewModel.getFromList(0)}.json")
+    }
+
+    val dataFromJson by viewModel.loadedData.collectAsState()
     val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
 
     val name: String? = when (topic) {
@@ -251,20 +343,17 @@ fun generateListOfMCQQuestions(words: List<Word>?, limit: Boolean): List<MCQques
 }
 @Composable
 fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: String) {
-    val dataFromJson = remember { viewModel.loadDataFromJson("中${viewModel.getFromList(0)}.json") }
-    val chapterData =
-        dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
+    LaunchedEffect(Unit) {
+        viewModel.loadData("中${viewModel.getFromList(0)}.json")
+    }
+
+    val dataFromJson by viewModel.loadedData.collectAsState()
+    val chapterData = dataFromJson?.chapters?.getOrNull(viewModel.getFromList(2).toIntOrNull() ?: 0)?.topics
 
     val name: String? = when (viewModel.getFromList(3)) {
         "一" -> chapterData?.topic1?.name
         "二" -> chapterData?.topic2?.name
         "三" -> chapterData?.topic3?.name
-        else -> null
-    }
-    val words: List<Word>? = when (viewModel.getFromList(3)) {
-        "一" -> chapterData?.topic1?.topic
-        "二" -> chapterData?.topic2?.topic
-        "三" -> chapterData?.topic3?.topic
         else -> null
     }
 
@@ -289,20 +378,7 @@ fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: Str
             viewModel.updateItem(5, "true")
 
             if (quiz == "MCQ") {
-                if (topicExistsState && name != null) {
-                    navController.navigate("${quiz.lowercase()}/$name")
-                } else {
-                    val generatedQuestions = generateListOfMCQQuestions(words, false)
-                    Log.d("clicked", "Generated questions: $generatedQuestions")
-                    if (name != null) {
-                        viewModel.addQuiz(
-                            topic = name,
-                            questions = generatedQuestions
-                        )
-                        navigateToMCQ.value = true
-                        Log.d("clicked", navigateToMCQ.value.toString())
-                    }
-                }
+                navigateToMCQ.value = true
             } else if (quiz == "Flashcards") {
                 viewModel.saveContinueLearning()
                 navController.navigate(

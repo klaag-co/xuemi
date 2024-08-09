@@ -21,6 +21,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
@@ -46,7 +47,11 @@ import com.google.accompanist.pager.rememberPagerState
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHome: String, secondary: String, chapter: String, chapter_: Int,  topic: String) {
-    val dataFromJson = remember { viewModel.loadDataFromJson("中${secondary}.json") }
+    LaunchedEffect(Unit) {
+        viewModel.loadData("中${viewModel.getFromList(0)}.json")
+    }
+
+    val dataFromJson by viewModel.loadedData.collectAsState()
     val pagerState = rememberPagerState()
     val chapterData = dataFromJson?.chapters?.getOrNull(chapter_)?.topics
     var wordDataSize by remember { mutableIntStateOf(0) }

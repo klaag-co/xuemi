@@ -60,8 +60,6 @@ data class Bookmark(
 
 @Composable
 fun dropdown(viewModel: MyViewModel, navController: NavController, secondary: String, bookmarksList: List<Bookmark>, isFocused: Boolean) {
-    val dataFromJson = remember { viewModel.loadDataFromJson("中中$secondary.json") }
-
     var expanded by remember { mutableStateOf(false) }
 
 

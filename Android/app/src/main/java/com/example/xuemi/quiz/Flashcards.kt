@@ -52,7 +52,7 @@ import com.google.accompanist.pager.rememberPagerState
 @Composable
 fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHome: String, secondary: String, chapter: String, chapter_: Int,  topic: String) {
     LaunchedEffect(Unit) {
-        viewModel.loadData("中${viewModel.getFromList(0)}.json")
+        viewModel.loadData("中${secondary}.json")
     }
 
     val dataFromJson by viewModel.loadedData.collectAsState()

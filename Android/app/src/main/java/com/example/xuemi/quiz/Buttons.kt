@@ -152,7 +152,6 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
     if (isSheetOpen) {
         ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
             Topic(viewModel, navController)
-            Log.d("clicked", "sheet opened")
         }
     }
 
@@ -195,8 +194,6 @@ fun Topic(viewModel: MyViewModel, navController: NavController) {
                     topic = name,
                     questions = generatedQuestions
                 )
-
-                Log.d("clicked", "topicExistsState = ${topicExistsState}")
             }
         }
     }

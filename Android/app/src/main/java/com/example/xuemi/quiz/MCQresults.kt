@@ -1,5 +1,6 @@
 package com.example.xuemi.quiz
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -23,10 +24,10 @@ import androidx.navigation.NavController
 import com.example.xuemi.MyViewModel
 import com.example.xuemi.NoteType
 
-// ensure o level + eoy cases are handled
 
 @Composable
 fun MCQresults(viewModel: MyViewModel, navController: NavController, topicName: String, wrong: Int, correct: Int) {
+    Log.d("results", "topicName: $topicName, wrong: $wrong, correct: $correct")
     val halfWrong = wrong >= correct
     val colour: Color = if (halfWrong) {
         Color(252, 216, 68)

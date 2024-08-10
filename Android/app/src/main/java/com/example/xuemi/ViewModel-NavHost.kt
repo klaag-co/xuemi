@@ -409,7 +409,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         val exists = MutableLiveData<Boolean>()
         viewModelScope.launch(Dispatchers.IO) {
             val count = mcqDao.topicExists(topic)
-            Log.d("clicked", "topic $topic exists: ${count > 0}")
             exists.postValue(count > 0)
         }
         return exists

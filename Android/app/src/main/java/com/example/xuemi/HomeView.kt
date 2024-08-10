@@ -35,36 +35,6 @@ import com.example.xuemi.quiz.generateListOfMCQQuestions
 
 @Composable
 fun Home(viewModel: MyViewModel, navController: NavController) {
-    val words by viewModel.words.collectAsState()
-    val topicExists = "o level".let { viewModel.checkIfTopicExists(it) }
-    val topicExistsState by topicExists.observeAsState(false)
-
-    val navigateToMCQ = remember { mutableStateOf(false) }
-
-    LaunchedEffect(Unit) {
-        if (!topicExistsState) {
-            viewModel.updateItem(0, "四")
-            val generatedQuestions = generateListOfMCQQuestions(words, true)
-            viewModel.addQuiz(
-                topic = "o level",
-                questions = generatedQuestions
-            )
-        } else {
-            Log.d("temp", "topic already exists (Home)")
-        }
-    }
-
-    LaunchedEffect(topicExistsState, navigateToMCQ.value) {
-        if (navigateToMCQ.value) {
-            if (topicExistsState) {
-                navController.navigate("mcq/o level")
-            }
-            navigateToMCQ.value = false
-        }
-
-    }
-
-
     Button(onClick = { viewModel.deleteAll() }) {
         Text("DELETE ALL")
     }
@@ -109,7 +79,7 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "四",0.8f)
         }
         Button(onClick = {
-            navigateToMCQ.value = true
+            navController.navigate("olevel")
         },
             colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
             /*border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
@@ -161,6 +131,77 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
                     style = MaterialTheme.typography.displayLarge,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun olevel(viewModel: MyViewModel, navController: NavController) {
+    val words by viewModel.words.collectAsState()
+    val topicExists = "o level".let { viewModel.checkIfTopicExists(it) }
+    val topicExistsState by topicExists.observeAsState(false)
+
+    val navigateToMCQ = remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        if (!topicExistsState) {
+            viewModel.updateItem(0, "四")
+            val generatedQuestions = generateListOfMCQQuestions(words, true)
+            viewModel.addQuiz(
+                topic = "o level",
+                questions = generatedQuestions
+            )
+        } else {
+            Log.d("temp", "topic already exists (Home)")
+        }
+    }
+
+    LaunchedEffect(topicExistsState, navigateToMCQ.value) {
+        if (navigateToMCQ.value) {
+            if (topicExistsState) {
+                navController.navigate("mcq/o level")
+            }
+            navigateToMCQ.value = false
+        }
+    }
+    Column(verticalArrangement = Arrangement.Center) {
+        Button(
+            onClick = { /*TODO*/ },
+            colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 25.dp, vertical = 7.dp)
+        ) {
+            Column {
+                Text(
+                    text = "Mid-Year Practice",
+                    color = Color.Black,
+                    fontSize = 28.sp,
+                    modifier = Modifier
+                        .padding(horizontal = 5.dp, vertical = 5.dp)
+
+                )
+            }
+        }
+        Button(
+            onClick = { navigateToMCQ.value = true },
+            colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 25.dp, vertical = 7.dp)
+        ) {
+            Column {
+                Text(
+                    text = "End-Of-Year Practice",
+                    color = Color.Black,
+                    fontSize = 28.sp,
+                    modifier = Modifier
+                        .padding(horizontal = 5.dp, vertical = 5.dp)
+
                 )
             }
         }

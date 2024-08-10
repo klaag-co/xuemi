@@ -1,19 +1,29 @@
 package com.example.xuemi
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.example.xuemi.db.BookmarksDatabase
 import com.example.xuemi.db.BookmarksRepository
@@ -401,72 +411,165 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 
 
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+//@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+//@Composable
+//fun HomeNav(viewModel: MyViewModel) {
+//    val navController = rememberNavController()
+//    val homeTab = TabBarItem(
+//        title = "Home",
+//        selectedIcon = R.drawable.home,
+//        unselectedIcon = R.drawable.o_home
+//    )
+//    val bookmarkTab = TabBarItem(
+//        title = "Bookmarks",
+//        selectedIcon = R.drawable.bookmark,
+//        unselectedIcon = R.drawable.o_bookmark
+//    )
+//    val notesTab = TabBarItem(
+//        title = "Notes",
+//        selectedIcon = R.drawable.notes,
+//        unselectedIcon = R.drawable.o_notes
+//    )
+//    val settingsTab = TabBarItem(
+//        title = "Settings",
+//        selectedIcon = R.drawable.settings,
+//        unselectedIcon = R.drawable.o_settings
+//    )
+//
+//    val tabBarItems = listOf(homeTab, bookmarkTab, notesTab, settingsTab)
+//
+//    Scaffold(bottomBar = { TabView(tabBarItems, navController) }) {
+//
+//        NavHost(navController, startDestination = homeTab.title) {
+//            // tabs
+//            composable(homeTab.title) { Home(viewModel, navController) }
+//            composable(bookmarkTab.title) { Bookmarks(viewModel, navController) }
+//            composable(notesTab.title) { Notes(viewModel, navController) }
+//            composable(settingsTab.title) { SettingsView() }
+//
+//            // navigation
+//            composable("secondary") { Secondary(viewModel, navController) }
+//            composable("chapter") { Chapter(viewModel, navController) }
+//            composable("notes") { Notes(viewModel, navController) }
+//            composable("addnote") { CreateNote(viewModel, navController) }
+//            composable("update/{itemId}") { backStackEntry ->
+//                val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
+//                UpdateNote(navController, viewModel, itemID = itemId)
+//            }
+//            composable("flashcards/{sec}/{chap}/{chap_}/{topic}.{fromHome}") { backStackEntry ->
+//                val secondary = backStackEntry.arguments?.getString("sec")!!
+//                val chapter = backStackEntry.arguments?.getString("chap")!!
+//                val chapter_ = backStackEntry.arguments?.getString("chap_")!!.toInt()
+//                val topic = backStackEntry.arguments?.getString("topic")!!
+//                val fromHome = backStackEntry.arguments?.getString("fromHome")!!
+//                FlashcardScreen(viewModel, navController, fromHome, secondary, chapter, chapter_, topic)
+//            }
+//            composable("mcq/{name}"){backStackEntry ->
+//                val name = backStackEntry.arguments?.getString("name") ?: "name"
+//                MCQ(viewModel, navController, name)
+//
+//            }
+//            composable("mcqresults/{name}/{wrong},{correct}") {backStackEntry ->
+//                val wrong = backStackEntry.arguments?.getString("wrong")!!.toInt()
+//                val correct = backStackEntry.arguments?.getString("correct")!!.toInt()
+//                val name = backStackEntry.arguments?.getString("name").toString()
+//                MCQresults(viewModel, navController, name, wrong, correct)
+//            }
+//
+//        }
+//    }
+//
+//}
+
+data class NavItem(
+    val label: String,
+    val selected: Int,
+    val unselected: Int
+)
+
 @Composable
-fun HomeNav(viewModel: MyViewModel) {
-    val navController = rememberNavController()
-    val homeTab = TabBarItem(
-        title = "Home",
-        selectedIcon = R.drawable.home,
-        unselectedIcon = R.drawable.o_home
-    )
-    val bookmarkTab = TabBarItem(
-        title = "Bookmarks",
-        selectedIcon = R.drawable.bookmark,
-        unselectedIcon = R.drawable.o_bookmark
-    )
-    val notesTab = TabBarItem(
-        title = "Notes",
-        selectedIcon = R.drawable.notes,
-        unselectedIcon = R.drawable.o_notes
-    )
-    val settingsTab = TabBarItem(
-        title = "Settings",
-        selectedIcon = R.drawable.settings,
-        unselectedIcon = R.drawable.o_settings
+fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
+    val itemList = listOf(
+        NavItem("Home", R.drawable.home, R.drawable.o_home),
+        NavItem("Bookmarks", R.drawable.bookmark, R.drawable.o_bookmark),
+        NavItem("Notes", R.drawable.notes, R.drawable.o_notes),
+        NavItem("Settings",R.drawable.settings, R.drawable.o_settings)
     )
 
-    val tabBarItems = listOf(homeTab, bookmarkTab, notesTab, settingsTab)
-
-    Scaffold(bottomBar = { TabView(tabBarItems, navController) }) {
-
-        NavHost(navController, startDestination = homeTab.title) {
-            // tabs
-            composable(homeTab.title) { Home(viewModel, navController) }
-            composable(bookmarkTab.title) { Bookmarks(viewModel, navController) }
-            composable(notesTab.title) { Notes(viewModel, navController) }
-            composable(settingsTab.title) { SettingsView() }
-
-            // navigation
-            composable("secondary") { Secondary(viewModel, navController) }
-            composable("chapter") { Chapter(viewModel, navController) }
-            composable("notes") { Notes(viewModel, navController) }
-            composable("addnote") { CreateNote(viewModel, navController) }
-            composable("update/{itemId}") { backStackEntry ->
-                val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
-                UpdateNote(navController, viewModel, itemID = itemId)
+    var selectedTabIndex by rememberSaveable {
+        mutableIntStateOf(0)
+    }
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+                itemList.forEachIndexed { index, navItem ->
+                    NavigationBarItem(
+                        selected = selectedTabIndex == index,
+                        onClick = {
+                            selectedTabIndex = index
+                            navController.navigate(navItem.label) {
+                                popUpTo(navController.graph.startDestinationId) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        },
+                        icon = {
+                            Icon(painter = painterResource(id = if (selectedTabIndex == index) {navItem.selected} else {navItem.unselected}), contentDescription = null)
+                        },
+                        label = {
+                            Text(navItem.label)
+                        }
+                    )
+                }
             }
-            composable("flashcards/{sec}/{chap}/{chap_}/{topic}.{fromHome}") { backStackEntry ->
-                val secondary = backStackEntry.arguments?.getString("sec")!!
-                val chapter = backStackEntry.arguments?.getString("chap")!!
-                val chapter_ = backStackEntry.arguments?.getString("chap_")!!.toInt()
-                val topic = backStackEntry.arguments?.getString("topic")!!
-                val fromHome = backStackEntry.arguments?.getString("fromHome")!!
-                FlashcardScreen(viewModel, navController, fromHome, secondary, chapter, chapter_, topic)
-            }
-            composable("mcq/{name}"){backStackEntry ->
-                val name = backStackEntry.arguments?.getString("name") ?: "name"
-                MCQ(viewModel, navController, name)
+        }
+    ) { innerPadding ->
+        ContentScreen(viewModel, navController, Modifier.padding(innerPadding))
+    }
+}
 
-            }
-            composable("mcqresults/{name}/{wrong},{correct}") {backStackEntry ->
-                val wrong = backStackEntry.arguments?.getString("wrong")!!.toInt()
-                val correct = backStackEntry.arguments?.getString("correct")!!.toInt()
-                val name = backStackEntry.arguments?.getString("name").toString()
-                MCQresults(viewModel, navController, name, wrong, correct)
-            }
+@Composable
+fun ContentScreen(viewModel: MyViewModel, navController: NavHostController, modifier: Modifier = Modifier) {
+    NavHost(navController, startDestination = "home") {
+        // tabs
+        composable("home") { Home(viewModel, navController) }
+        composable("bookmarks") { Bookmarks(viewModel, navController) }
+        composable("notes") { Notes(viewModel, navController) }
+        composable("settings") { SettingsView() }
+
+        // navigation
+        composable("secondary") { Secondary(viewModel, navController) }
+        composable("chapter") { Chapter(viewModel, navController) }
+        composable("notes") { Notes(viewModel, navController) }
+        composable("addnote") { CreateNote(viewModel, navController) }
+        composable("update/{itemId}") { backStackEntry ->
+            val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
+            UpdateNote(navController, viewModel, itemID = itemId)
+        }
+        composable("flashcards/{sec}/{chap}/{chap_}/{topic}.{fromHome}") { backStackEntry ->
+            val secondary = backStackEntry.arguments?.getString("sec")!!
+            val chapter = backStackEntry.arguments?.getString("chap")!!
+            val chapter_ = backStackEntry.arguments?.getString("chap_")!!.toInt()
+            val topic = backStackEntry.arguments?.getString("topic")!!
+            val fromHome = backStackEntry.arguments?.getString("fromHome")!!
+            FlashcardScreen(viewModel, navController, fromHome, secondary, chapter, chapter_, topic)
+        }
+        composable("mcq/{name}"){backStackEntry ->
+            val name = backStackEntry.arguments?.getString("name") ?: "name"
+            MCQ(viewModel, navController, name)
 
         }
-    }
+        composable("mcqresults/{name}/{wrong},{correct}") {backStackEntry ->
+            val wrong = backStackEntry.arguments?.getString("wrong")!!.toInt()
+            val correct = backStackEntry.arguments?.getString("correct")!!.toInt()
+            val name = backStackEntry.arguments?.getString("name").toString()
+            MCQresults(viewModel, navController, name, wrong, correct)
+        }
+        composable("olevel") {
+            olevel(viewModel, navController)
+        }
 
+    }
 }

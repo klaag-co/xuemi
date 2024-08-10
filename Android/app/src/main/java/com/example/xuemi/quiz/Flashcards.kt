@@ -46,7 +46,6 @@ import com.example.xuemi.backButton
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
-import com.example.xuemi.quiz.HanziWriterWebView as HanziWriterWebView
 
 
 @OptIn(ExperimentalPagerApi::class)
@@ -142,8 +141,6 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
 
     val bookmarkInside = bookmarkNames.contains(wordSets.word)
 
-
-
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
@@ -180,7 +177,7 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
                         modifier = Modifier
                             .clickable {
                                 // Trigger the WebView to show the strokes for this word
-                                HanziWriterWebView(character = wordSets.word)
+//                                HanziWriterWebView(character = wordSets.word)
                             }
                             .padding(16.dp)
                     )
@@ -205,46 +202,47 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
         }
     }
 
-    Box (
-                Modifier
-                    .fillMaxSize()
-                    .padding(top = 18.dp, bottom = 20.dp, end = 17.dp), contentAlignment = Alignment.TopEnd){
-                IconButton(
-                    onClick = {
-                        if (bookmarkInside) {
-                            val bookmarkToDelete = bookmarkList.find { it.word == wordSets.word }
-                            bookmarkToDelete?.let { viewModel.deleteBookmark(it.id) }
+    Box(
+        Modifier
+            .fillMaxSize()
+            .padding(top = 18.dp, bottom = 20.dp, end = 17.dp), contentAlignment = Alignment.TopEnd
+    ) {
+        IconButton(
+            onClick = {
+                if (bookmarkInside) {
+                    val bookmarkToDelete = bookmarkList.find { it.word == wordSets.word }
+                    bookmarkToDelete?.let { viewModel.deleteBookmark(it.id) }
 
 
-                        } else {
-                            viewModel.addBookmark(
-                                BookmarkSection.valueOf("中${viewModel.flashcardGetFromList(0)}"),
-                                wordSets.word,
-                                viewModel.flashcardGetFromList(1),
-                                viewModel.flashcardGetFromList(3)
-                            )
-
-                        }
-                        viewModel.loadBookmarkNames()
-                    }
-                )
-                {
-                    Icon(
-                        painter = painterResource(id =
-                        if (bookmarkInside) {
-                            R.drawable.bookmark
-                        } else {
-                            R.drawable.o_bookmark
-                        }
-                        ),
-                        contentDescription = "bookmark?",
-                        modifier = Modifier.size(39.dp)
+                } else {
+                    viewModel.addBookmark(
+                        BookmarkSection.valueOf("中${viewModel.flashcardGetFromList(0)}"),
+                        wordSets.word,
+                        viewModel.flashcardGetFromList(1),
+                        viewModel.flashcardGetFromList(3)
                     )
+
                 }
+                viewModel.loadBookmarkNames()
             }
+        )
+        {
+            Icon(
+                painter = painterResource(
+                    id =
+                    if (bookmarkInside) {
+                        R.drawable.bookmark
+                    } else {
+                        R.drawable.o_bookmark
+                    }
+                ),
+                contentDescription = "bookmark?",
+                modifier = Modifier.size(39.dp)
+            )
         }
     }
 }
+
 
 @Composable
 fun HanziWriterWebView(character: String) {

@@ -94,7 +94,6 @@ fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHo
                 .padding(vertical = 15.dp, horizontal = 20.dp)
                 .clip(RoundedCornerShape(20.dp))
         )
-        )
 
 
 

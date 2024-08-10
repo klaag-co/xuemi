@@ -1,5 +1,6 @@
 package com.example.xuemi
 
+import FlashcardScreen
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
@@ -20,7 +21,6 @@ import com.example.xuemi.db.BookmarksRepository
 import com.example.xuemi.db.MCQDatabase
 import com.example.xuemi.db.NotesDatabase
 import com.example.xuemi.quiz.Chapter
-import com.example.xuemi.quiz.FlashcardScreen
 import com.example.xuemi.quiz.JsonReader
 import com.example.xuemi.quiz.MCQ
 import com.example.xuemi.quiz.MCQquestion

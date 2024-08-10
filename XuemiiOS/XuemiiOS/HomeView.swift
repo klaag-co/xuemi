@@ -190,12 +190,12 @@ struct HomeView: View {
                     .minimumScaleFactor(0.1)
                     .font(.system(size: 55))
                     .bold()
+                    .frame(maxWidth: .infinity)
             }
             .padding(30)
             .background(Color.customteal)
             .foregroundStyle(.white)
             .clipShape(RoundedRectangle(cornerRadius: 16))
-            .frame(maxWidth: .infinity)
         }
         .buttonStyle(.plain)
     }
@@ -213,8 +213,4 @@ enum OLevels: Hashable {
             return "End-Of-Year Practice"
         }
     }
-}
-
-#Preview {
-    HomeView()
 }

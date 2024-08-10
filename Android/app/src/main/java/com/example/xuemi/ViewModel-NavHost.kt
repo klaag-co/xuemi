@@ -63,7 +63,12 @@ class MainApplication: Application() {
     }
 }
 
-
+enum class SecondaryType {
+    SEC1,
+    SEC2,
+    SEC3,
+    SEC4
+}
 
 class MyViewModel( appContext: Context, application: Application ) : AndroidViewModel(application) {
     private val sharedPreferences: SharedPreferences =
@@ -75,17 +80,11 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     private val _words: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
     val words: MutableStateFlow<List<Word>> = _words
 
-    private val _secondary1: MutableStateFlow<Secondary?> = MutableStateFlow(null)
-    val secondary1: StateFlow<Secondary?> = _secondary1
+    private val _secondaryStates: MutableMap<SecondaryType, MutableStateFlow<List<Word>?>> =
+        SecondaryType.entries.associateWith { MutableStateFlow<List<Word>?>(null) }.toMutableMap()
 
-    private val _secondary2: MutableStateFlow<Secondary?> = MutableStateFlow(null)
-    val secondary2: StateFlow<Secondary?> = _secondary2
+    val secondaryStates: Map<SecondaryType, StateFlow<List<Word>?>> = _secondaryStates
 
-    private val _secondary3: MutableStateFlow<Secondary?> = MutableStateFlow(null)
-    val secondary3: StateFlow<Secondary?> = _secondary3
-
-    private val _secondary4: MutableStateFlow<Secondary?> = MutableStateFlow(null)
-    val secondary4: StateFlow<Secondary?> = _secondary4
 
     init {
         loadListFromPreferences()
@@ -128,34 +127,37 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     fun complete(secondaryList: List<String>): Deferred<List<Word>> {
         return viewModelScope.async(Dispatchers.IO) {
             val allWords = mutableListOf<Word>()
-            secondaryList.forEachIndexed { index, secondaryName ->
-                val secondaryData = loadDataFromJson("$secondaryName.json")
-                withContext(Dispatchers.Main) {
-                    when (index) {
-                        0 -> _secondary1.value = secondaryData
-                        1 -> _secondary2.value = secondaryData
-                        2 -> _secondary3.value = secondaryData
-                        3 -> _secondary4.value = secondaryData
 
+            secondaryList.forEachIndexed { index, secondaryName ->
+                val secondaryType = SecondaryType.values().getOrNull(index) ?: return@forEachIndexed
+
+                // Load the Secondary data from JSON
+                val secondaryData = loadDataFromJson("$secondaryName.json")
+
+                // Extract words from the secondary data
+                val wordsForSecondary = mutableListOf<Word>()
+                secondaryData?.chapters?.forEach { chapter ->
+                    chapter.topics.let { topics ->
+                        wordsForSecondary.addAll(topics.topic1.topic)
+                        wordsForSecondary.addAll(topics.topic2.topic)
+                        wordsForSecondary.addAll(topics.topic3.topic)
                     }
                 }
-                secondaryData?.chapters?.let { chapters ->
-                    chapters.forEach { chapter ->
-                        chapter.topics.let { topics ->
-                            allWords.addAll(topics.topic1.topic)
-                            allWords.addAll(topics.topic2.topic)
-                            allWords.addAll(topics.topic3.topic)
-                        }
-                    }
-                }
+
+                // Update the state for the current secondary type with the list of words
+                _secondaryStates[secondaryType]?.value = wordsForSecondary
+
+                // Add the words for this secondary to the overall word list
+                allWords.addAll(wordsForSecondary)
             }
+
+            // Update the overall words state on the Main thread
             withContext(Dispatchers.Main) {
                 _words.value = allWords
             }
             allWords
         }
     }
-
     fun complete_words(secondarys: List<String>) {
         viewModelScope.launch {
             val words = complete(secondarys).await()

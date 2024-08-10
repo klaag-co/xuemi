@@ -3,8 +3,11 @@ package com.example.xuemi
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.webkit.WebView
+import android.webkit.WebViewClient // <-- New import for WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box // <-- New import for Box layout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -22,6 +25,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.viewinterop.AndroidView // <-- New import for integrating Android views in Compose
 import androidx.navigation.NavController
 import com.example.xuemi.ui.theme.XuemiTheme
 

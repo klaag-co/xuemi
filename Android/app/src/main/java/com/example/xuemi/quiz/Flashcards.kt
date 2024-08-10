@@ -1,7 +1,10 @@
 package com.example.xuemi.quiz
 
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.xuemi.BookmarkSection
 import com.example.xuemi.MyViewModel
@@ -42,6 +46,7 @@ import com.example.xuemi.backButton
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import com.example.xuemi.quiz.HanziWriterWebView as HanziWriterWebView
 
 
 @OptIn(ExperimentalPagerApi::class)
@@ -139,7 +144,7 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
 
 
 
-    Card (
+    Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
             .fillMaxWidth(0.8f)
@@ -147,15 +152,15 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
         colors = CardDefaults.cardColors(
             containerColor = Color(219, 238, 255),
         )
+    ) {
+        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 
-    ){
-        Box( Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-
-
-            LazyColumn(modifier = Modifier
-                .padding(bottom = 45.dp, top = 1.dp)
-                .fillMaxWidth(0.79f), horizontalAlignment = Alignment.CenterHorizontally)
-            {
+            LazyColumn(
+                modifier = Modifier
+                    .padding(bottom = 45.dp, top = 1.dp)
+                    .fillMaxWidth(0.79f),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
 
                 stickyHeader {
                     Text(
@@ -165,17 +170,42 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
                             .background(color = Color(219, 238, 255))
                             .fillMaxWidth()
                             .padding(vertical = 12.dp)
-
                     )
                 }
                 item {
-                    Text(wordSets.word, textAlign = TextAlign.Center, style = MaterialTheme.typography.h2)
-                    Text(wordSets.pinyin, textAlign = TextAlign.Center, style = MaterialTheme.typography.h4)
-                    Text(wordSets.chineseDefinition, textAlign = TextAlign.Center, style = MaterialTheme.typography.h4, modifier = Modifier.padding(vertical = 10.dp))
-                    Text(wordSets.englishDefinition, textAlign = TextAlign.Center, style = MaterialTheme.typography.h5)
+                    Text(
+                        wordSets.word,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h2,
+                        modifier = Modifier
+                            .clickable {
+                                // Trigger the WebView to show the strokes for this word
+                                HanziWriterWebView(character = wordSets.word)
+                            }
+                            .padding(16.dp)
+                    )
+                    Text(
+                        wordSets.pinyin,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h4
+                    )
+                    Text(
+                        wordSets.chineseDefinition,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h4,
+                        modifier = Modifier.padding(vertical = 10.dp)
+                    )
+                    Text(
+                        wordSets.englishDefinition,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.h5
+                    )
                 }
             }
-            Box (
+        }
+    }
+
+    Box (
                 Modifier
                     .fillMaxSize()
                     .padding(top = 18.dp, bottom = 20.dp, end = 17.dp), contentAlignment = Alignment.TopEnd){
@@ -213,5 +243,23 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
                 }
             }
         }
+    }
+}
+
+@Composable
+fun HanziWriterWebView(character: String) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        AndroidView(factory = { context ->
+            WebView(context).apply {
+                settings.javaScriptEnabled = true
+                webViewClient = WebViewClient()
+
+                // Load the HanziWriter HTML file
+                loadUrl("file:///android_asset/hanzi_writer.html")
+
+                // Once loaded, inject the character to animate
+                evaluateJavascript("loadHanziCharacter('$character')", null)
+            }
+        })
     }
 }

@@ -43,7 +43,13 @@ struct BookmarkView: View {
         DisclosureGroup(level.filename) {
             ForEach(filteredBookmarks.filter { $0.level == level }, id: \.id) { bookmarkedVocab in
                 VStack(alignment: .leading) {
-                    NavigationLink(destination: FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(bookmarkedVocab.level.string)", chapter: bookmarkedVocab.chapter.string, topic: bookmarkedVocab.topic.string(level: bookmarkedVocab.level, chapter: bookmarkedVocab.chapter)), level: bookmarkedVocab.level, chapter: bookmarkedVocab.chapter, topic: bookmarkedVocab.topic)) {
+                    NavigationLink(destination: FlashcardView(
+                        vocabularies: loadVocabulariesFromJSON(fileName: "中\(bookmarkedVocab.level.string)", chapter: bookmarkedVocab.chapter.string, topic: bookmarkedVocab.topic.string(level: bookmarkedVocab.level, chapter: bookmarkedVocab.chapter)),
+                        level: bookmarkedVocab.level,
+                        chapter: bookmarkedVocab.chapter,
+                        topic: bookmarkedVocab.topic,
+                        currentIndex: bookmarkedVocab.currentIndex
+                    )) {
                         VStack(alignment: .leading) {
                             Text(bookmarkedVocab.vocab.word)
                             Text("\(bookmarkedVocab.level.filename) \(bookmarkedVocab.chapter.string)")

@@ -87,8 +87,11 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         MutableStateFlow(loadListFromPreferences())
     val _current = MutableStateFlow(listOf("S", "C", "C.", "T", "Q", "W."))
 
-    private val _words: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
-    val words: MutableStateFlow<List<Word>> = _words
+    private val _eoy: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
+    val eoy: MutableStateFlow<List<Word>> = _eoy
+    private val _mid: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
+    val mid: MutableStateFlow<List<Word>> = _mid
+
 
     private val _secondaryStates: MutableMap<SecondaryType, MutableStateFlow<List<Word>?>> =
         SecondaryType.entries.associateWith { MutableStateFlow<List<Word>?>(null) }.toMutableMap()
@@ -134,19 +137,26 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         loadListFromPreferences()
     }
 
-    fun complete(secondaryList: List<String>): Deferred<List<Word>> {
+    fun complete(secondaryList: List<String>, excludeLastTwo: Boolean = false): Deferred<List<Word>> {
         return viewModelScope.async(Dispatchers.IO) {
             val allWords = mutableListOf<Word>()
 
             secondaryList.forEachIndexed { index, secondaryName ->
-                val secondaryType = SecondaryType.values().getOrNull(index) ?: return@forEachIndexed
+                val secondaryType = SecondaryType.entries.getOrNull(index) ?: return@forEachIndexed
 
                 // Load the Secondary data from JSON
                 val secondaryData = loadDataFromJson("$secondaryName.json")
 
-                // Extract words from the secondary data
+                // Determine which chapters to process
+                val chaptersToProcess = if (excludeLastTwo && secondaryName == "中四") {
+                    secondaryData?.chapters?.dropLast(2)
+                } else {
+                    secondaryData?.chapters
+                }
+
+                // Extract words from the selected chapters
                 val wordsForSecondary = mutableListOf<Word>()
-                secondaryData?.chapters?.forEach { chapter ->
+                chaptersToProcess?.forEach { chapter ->
                     chapter.topics.let { topics ->
                         wordsForSecondary.addAll(topics.topic1.topic)
                         wordsForSecondary.addAll(topics.topic2.topic)
@@ -154,24 +164,27 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
                     }
                 }
 
-                // Update the state for the current secondary type with the list of words
                 _secondaryStates[secondaryType]?.value = wordsForSecondary
 
-                // Add the words for this secondary to the overall word list
                 allWords.addAll(wordsForSecondary)
             }
 
-            // Update the overall words state on the Main thread
             withContext(Dispatchers.Main) {
-                _words.value = allWords
+                if (excludeLastTwo) {
+                    _mid.value = allWords
+                } else {
+                    _eoy.value = allWords
+                }
             }
             allWords
         }
     }
     fun complete_words(secondarys: List<String>) {
         viewModelScope.launch {
-            val words = complete(secondarys).await()
-            _words.value = words
+            val eoy = complete(secondarys, false).await()
+            val mid = complete(secondarys, true).await()
+            _eoy.value = eoy
+            _mid.value = mid
         }
     }
 
@@ -410,76 +423,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 }
 
 
-
-//@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-//@Composable
-//fun HomeNav(viewModel: MyViewModel) {
-//    val navController = rememberNavController()
-//    val homeTab = TabBarItem(
-//        title = "Home",
-//        selectedIcon = R.drawable.home,
-//        unselectedIcon = R.drawable.o_home
-//    )
-//    val bookmarkTab = TabBarItem(
-//        title = "Bookmarks",
-//        selectedIcon = R.drawable.bookmark,
-//        unselectedIcon = R.drawable.o_bookmark
-//    )
-//    val notesTab = TabBarItem(
-//        title = "Notes",
-//        selectedIcon = R.drawable.notes,
-//        unselectedIcon = R.drawable.o_notes
-//    )
-//    val settingsTab = TabBarItem(
-//        title = "Settings",
-//        selectedIcon = R.drawable.settings,
-//        unselectedIcon = R.drawable.o_settings
-//    )
-//
-//    val tabBarItems = listOf(homeTab, bookmarkTab, notesTab, settingsTab)
-//
-//    Scaffold(bottomBar = { TabView(tabBarItems, navController) }) {
-//
-//        NavHost(navController, startDestination = homeTab.title) {
-//            // tabs
-//            composable(homeTab.title) { Home(viewModel, navController) }
-//            composable(bookmarkTab.title) { Bookmarks(viewModel, navController) }
-//            composable(notesTab.title) { Notes(viewModel, navController) }
-//            composable(settingsTab.title) { SettingsView() }
-//
-//            // navigation
-//            composable("secondary") { Secondary(viewModel, navController) }
-//            composable("chapter") { Chapter(viewModel, navController) }
-//            composable("notes") { Notes(viewModel, navController) }
-//            composable("addnote") { CreateNote(viewModel, navController) }
-//            composable("update/{itemId}") { backStackEntry ->
-//                val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
-//                UpdateNote(navController, viewModel, itemID = itemId)
-//            }
-//            composable("flashcards/{sec}/{chap}/{chap_}/{topic}.{fromHome}") { backStackEntry ->
-//                val secondary = backStackEntry.arguments?.getString("sec")!!
-//                val chapter = backStackEntry.arguments?.getString("chap")!!
-//                val chapter_ = backStackEntry.arguments?.getString("chap_")!!.toInt()
-//                val topic = backStackEntry.arguments?.getString("topic")!!
-//                val fromHome = backStackEntry.arguments?.getString("fromHome")!!
-//                FlashcardScreen(viewModel, navController, fromHome, secondary, chapter, chapter_, topic)
-//            }
-//            composable("mcq/{name}"){backStackEntry ->
-//                val name = backStackEntry.arguments?.getString("name") ?: "name"
-//                MCQ(viewModel, navController, name)
-//
-//            }
-//            composable("mcqresults/{name}/{wrong},{correct}") {backStackEntry ->
-//                val wrong = backStackEntry.arguments?.getString("wrong")!!.toInt()
-//                val correct = backStackEntry.arguments?.getString("correct")!!.toInt()
-//                val name = backStackEntry.arguments?.getString("name").toString()
-//                MCQresults(viewModel, navController, name, wrong, correct)
-//            }
-//
-//        }
-//    }
-//
-//}
 
 data class NavItem(
     val label: String,

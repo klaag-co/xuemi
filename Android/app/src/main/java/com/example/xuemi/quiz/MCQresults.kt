@@ -91,8 +91,10 @@ fun MCQresults(viewModel: MyViewModel, navController: NavController, topicName: 
     }
     DisposableEffect(Unit) {
         val body = "Correct: $correct\nWrong: $wrong\nTotal: ${correct}/${correct + wrong}"
-        if (topicName == "o level") {
-            onDispose { viewModel.add(NoteType.中四, "O 学准备考", body)}
+        if (topicName == "oeoy") {
+            onDispose { viewModel.add(NoteType.中四, "O 学准备考 - End-Of-Year Practice", body)}
+        } else if (topicName == "omid"){
+            onDispose { viewModel.add(NoteType.中四, "O 学准备考 - Mid-Year Practice", body) }
         } else if (topicName.substring(0, minOf(3, topicName.length)) == "EOY") {
             onDispose { viewModel.add(NoteType.valueOf("中${viewModel.getFromList(0)}"), "中${viewModel.getFromList(0)} - 年终考试", body)}
         } else {

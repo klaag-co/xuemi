@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -139,19 +140,26 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
 
 @Composable
 fun olevel(viewModel: MyViewModel, navController: NavController) {
-    val words by viewModel.words.collectAsState()
-    val topicExists = "o level".let { viewModel.checkIfTopicExists(it) }
+    val eoy by viewModel.eoy.collectAsState()
+    val mid by viewModel.mid.collectAsState()
+    val topicExists = "oeoy".let { viewModel.checkIfTopicExists(it) }
     val topicExistsState by topicExists.observeAsState(false)
 
     val navigateToMCQ = remember { mutableStateOf(false) }
+    var clicked = remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         if (!topicExistsState) {
             viewModel.updateItem(0, "四")
-            val generatedQuestions = generateListOfMCQQuestions(words, true)
+            val egeneratedQuestions = generateListOfMCQQuestions(eoy, true)
+            val mgeneratedQuestions = generateListOfMCQQuestions(mid, true)
             viewModel.addQuiz(
-                topic = "o level",
-                questions = generatedQuestions
+                topic = "oeoy",
+                questions = egeneratedQuestions
+            )
+            viewModel.addQuiz(
+                topic = "omid",
+                questions = mgeneratedQuestions
             )
         } else {
             Log.d("temp", "topic already exists (Home)")
@@ -161,14 +169,20 @@ fun olevel(viewModel: MyViewModel, navController: NavController) {
     LaunchedEffect(topicExistsState, navigateToMCQ.value) {
         if (navigateToMCQ.value) {
             if (topicExistsState) {
-                navController.navigate("mcq/o level")
+                if (clicked.value == "eoy") {
+                    navController.navigate("mcq/oeoy")
+                } else {
+                    navController.navigate("mcq/omid")
+                }
             }
             navigateToMCQ.value = false
         }
     }
-    Column(verticalArrangement = Arrangement.Center) {
+    Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navigateToMCQ.value = true
+                        clicked.value = "mid"
+                      },
             colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
@@ -187,7 +201,9 @@ fun olevel(viewModel: MyViewModel, navController: NavController) {
             }
         }
         Button(
-            onClick = { navigateToMCQ.value = true },
+            onClick = { navigateToMCQ.value = true
+                        clicked.value = "eoy"
+                      },
             colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier

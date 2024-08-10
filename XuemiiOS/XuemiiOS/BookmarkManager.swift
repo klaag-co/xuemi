@@ -13,6 +13,7 @@ struct BookmarkedVocabulary: Identifiable, Codable {
     var level: SecondaryNumber
     var chapter: Chapter
     var topic: Topic
+    var currentIndex: Int
 }
 
 class BookmarkManager: ObservableObject {

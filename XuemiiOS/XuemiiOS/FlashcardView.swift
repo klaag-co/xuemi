@@ -106,7 +106,7 @@ public struct FlashcardView: View {
                             Button {
                                 if !bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
                                     print("Bookmark appended for word: \(vocab.word)")
-                                    bookmarkManager.bookmarks.append(BookmarkedVocabulary(vocab: vocab, level: level, chapter: chapter, topic: topic))
+                                    bookmarkManager.bookmarks.append(BookmarkedVocabulary(vocab: vocab, level: level, chapter: chapter, topic: topic, currentIndex: selection ?? 0))
                                 } else {
                                     print("Bookmark removed for word: \(vocab.word)")
                                     bookmarkManager.bookmarks.removeAll(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic })

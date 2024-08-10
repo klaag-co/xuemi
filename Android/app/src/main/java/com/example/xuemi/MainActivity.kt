@@ -12,6 +12,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -60,27 +61,30 @@ fun TabView(tabBarItems: List<TabBarItem>, navController: NavController) {
     var selectedTabIndex by rememberSaveable {
         mutableIntStateOf(0)
     }
-
-    NavigationBar {
-        // looping over each tab to generate the views and navigation for each item
-        tabBarItems.forEachIndexed { index, tabBarItem ->
-            NavigationBarItem(
-                selected = selectedTabIndex == index,
-                onClick = {
-                    selectedTabIndex = index
-                    navController.navigate(tabBarItem.title)
-                },
-                icon = {
-                    TabBarIconView(
-                        isSelected = selectedTabIndex == index,
-                        selectedIcon = tabBarItem.selectedIcon,
-                        unselectedIcon = tabBarItem.unselectedIcon,
-                        title = tabBarItem.title
-                    )
-                },
-                label = { Text(tabBarItem.title) })
+    Scaffold(
+        bottomBar = {
+            NavigationBar {
+                // looping over each tab to generate the views and navigation for each item
+                tabBarItems.forEachIndexed { index, tabBarItem ->
+                    NavigationBarItem(
+                        selected = selectedTabIndex == index,
+                        onClick = {
+                            selectedTabIndex = index
+                            navController.navigate(tabBarItem.title)
+                        },
+                        icon = {
+                            TabBarIconView(
+                                isSelected = selectedTabIndex == index,
+                                selectedIcon = tabBarItem.selectedIcon,
+                                unselectedIcon = tabBarItem.unselectedIcon,
+                                title = tabBarItem.title
+                            )
+                        },
+                        label = { Text(tabBarItem.title) })
+                }
+            }
         }
-    }
+    ) {}
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

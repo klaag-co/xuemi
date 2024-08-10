@@ -90,7 +90,14 @@ fun MCQresults(viewModel: MyViewModel, navController: NavController, topicName: 
         }
     }
     DisposableEffect(Unit) {
-        onDispose { viewModel.add(NoteType.valueOf("中${viewModel.getFromList(0)}"), "${viewModel.getFromList(0)} - $topicName - 单元${viewModel.getFromList(1)}", "Correct: $correct\nWrong: $wrong\nTotal: ${correct}/${correct + wrong}") }
+        val body = "Correct: $correct\nWrong: $wrong\nTotal: ${correct}/${correct + wrong}"
+        if (topicName == "o level") {
+            onDispose { viewModel.add(NoteType.中四, "O 学准备考", body)}
+        } else if (topicName.substring(0, minOf(3, topicName.length)) == "EOY") {
+            onDispose { viewModel.add(NoteType.valueOf("中${viewModel.getFromList(0)}"), "中${viewModel.getFromList(0)} - 年终考试", body)}
+        } else {
+            onDispose { viewModel.add(NoteType.valueOf("中${viewModel.getFromList(0)}"), "${viewModel.getFromList(0)} - $topicName - 单元${viewModel.getFromList(1)}", body)}
+        }
     }
 
 }

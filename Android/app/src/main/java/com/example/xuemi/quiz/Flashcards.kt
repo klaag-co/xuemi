@@ -71,12 +71,12 @@ fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHo
 
     wordDataSize = wordList?.size ?: 0
 
-    Column (Modifier.padding(16.dp)){
+    Column (Modifier.padding(16.dp)) {
         if (fromHome == "home") {
             backButton("Home") {
                 navController.navigate("home")
             }
-        } else if (fromHome == "bookmarks"){
+        } else if (fromHome == "bookmarks") {
             backButton("Bookmarks") {
                 navController.navigate("bookmarks")
             }
@@ -93,7 +93,6 @@ fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHo
                 .fillMaxHeight(0.06f)
                 .padding(vertical = 15.dp, horizontal = 20.dp)
                 .clip(RoundedCornerShape(20.dp))
-        )
         )
 
 

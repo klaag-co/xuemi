@@ -1,5 +1,6 @@
 package com.example.xuemi.quiz
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -23,10 +24,10 @@ import androidx.navigation.NavController
 import com.example.xuemi.MyViewModel
 import com.example.xuemi.NoteType
 
-// ensure o level + eoy cases are handled
 
 @Composable
 fun MCQresults(viewModel: MyViewModel, navController: NavController, topicName: String, wrong: Int, correct: Int) {
+    Log.d("results", "topicName: $topicName, wrong: $wrong, correct: $correct")
     val halfWrong = wrong >= correct
     val colour: Color = if (halfWrong) {
         Color(252, 216, 68)
@@ -90,7 +91,16 @@ fun MCQresults(viewModel: MyViewModel, navController: NavController, topicName: 
         }
     }
     DisposableEffect(Unit) {
-        onDispose { viewModel.add(NoteType.valueOf("中${viewModel.getFromList(0)}"), "${viewModel.getFromList(0)} - $topicName - 单元${viewModel.getFromList(1)}", "Correct: $correct\nWrong: $wrong\nTotal: ${correct}/${correct + wrong}") }
+        val body = "Correct: $correct\nWrong: $wrong\nTotal: ${correct}/${correct + wrong}"
+        if (topicName == "oeoy") {
+            onDispose { viewModel.add(NoteType.中四, "O 学准备考 - End-Of-Year Practice", body)}
+        } else if (topicName == "omid"){
+            onDispose { viewModel.add(NoteType.中四, "O 学准备考 - Mid-Year Practice", body) }
+        } else if (topicName.substring(0, minOf(3, topicName.length)) == "EOY") {
+            onDispose { viewModel.add(NoteType.valueOf("中${viewModel.getFromList(0)}"), "中${viewModel.getFromList(0)} - 年终考试", body)}
+        } else {
+            onDispose { viewModel.add(NoteType.valueOf("中${viewModel.getFromList(0)}"), "${viewModel.getFromList(0)} - $topicName - 单元${viewModel.getFromList(1)}", body)}
+        }
     }
 
 }

@@ -45,13 +45,13 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
         viewModel.loadData("中${viewModel.getFromList(0)}.json")
     }
 
-    val name = viewModel.getFromList(0)
+    val name = "EOY${viewModel.getFromList(0)}"
 
     val enumType = when(name){
-        "一" -> SecondaryType.SEC1
-        "二" -> SecondaryType.SEC2
-        "三" -> SecondaryType.SEC3
-        "四" -> SecondaryType.SEC4
+        "EOY一" -> SecondaryType.SEC1
+        "EOY二" -> SecondaryType.SEC2
+        "EOY三" -> SecondaryType.SEC3
+        "EOY四" -> SecondaryType.SEC4
         else -> SecondaryType.SEC1
     }
     val secondaryFlow = viewModel.secondaryStates[enumType]
@@ -66,7 +66,7 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
 
     LaunchedEffect(Unit) {
         if (!topicExistsState) {
-            viewModel.updateItem(0, name)
+            viewModel.updateItem(0, name.takeLast(1))
             val generatedQuestions = generateListOfMCQQuestions(words, true)
             viewModel.addQuiz(
                 topic = name,
@@ -152,7 +152,6 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
     if (isSheetOpen) {
         ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
             Topic(viewModel, navController)
-            Log.d("clicked", "sheet opened")
         }
     }
 
@@ -195,8 +194,6 @@ fun Topic(viewModel: MyViewModel, navController: NavController) {
                     topic = name,
                     questions = generatedQuestions
                 )
-
-                Log.d("clicked", "topicExistsState = ${topicExistsState}")
             }
         }
     }

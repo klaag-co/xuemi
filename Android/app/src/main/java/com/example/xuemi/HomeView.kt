@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,36 +36,6 @@ import com.example.xuemi.quiz.generateListOfMCQQuestions
 
 @Composable
 fun Home(viewModel: MyViewModel, navController: NavController) {
-    val words by viewModel.words.collectAsState()
-    val topicExists = "o level".let { viewModel.checkIfTopicExists(it) }
-    val topicExistsState by topicExists.observeAsState(false)
-
-    val navigateToMCQ = remember { mutableStateOf(false) }
-
-    LaunchedEffect(Unit) {
-        if (!topicExistsState) {
-            viewModel.updateItem(0, "四")
-            val generatedQuestions = generateListOfMCQQuestions(words, true)
-            viewModel.addQuiz(
-                topic = "o level",
-                questions = generatedQuestions
-            )
-        } else {
-            Log.d("temp", "topic already exists (Home)")
-        }
-    }
-
-    LaunchedEffect(topicExistsState, navigateToMCQ.value) {
-        if (navigateToMCQ.value) {
-            if (topicExistsState) {
-                navController.navigate("mcq/o level")
-            }
-            navigateToMCQ.value = false
-        }
-
-    }
-
-
     Button(onClick = { viewModel.deleteAll() }) {
         Text("DELETE ALL")
     }
@@ -78,10 +49,10 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
 
         Button(onClick = {
             if (viewModel.flashcardGetFromList(3) != "T") {
+                Log.d("continue", "\"flashcards/${viewModel.flashcardGetFromList(0)}/${viewModel.flashcardGetFromList(1)}/${viewModel.flashcardGetFromList(2)}/${viewModel.flashcardGetFromList(3)}.home")
                 navController.navigate("flashcards/${viewModel.flashcardGetFromList(0)}/${viewModel.flashcardGetFromList(1)}/${viewModel.flashcardGetFromList(2)}/${viewModel.flashcardGetFromList(3)}.home")
             } },
             colors = ButtonDefaults.buttonColors(Color(49, 113, 200)),
-//            border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color.Black, Color.White))),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
                 .padding(horizontal = 26.dp)
@@ -109,7 +80,7 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "四",0.8f)
         }
         Button(onClick = {
-            navigateToMCQ.value = true
+            navController.navigate("olevel")
         },
             colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
             /*border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
@@ -161,6 +132,92 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
                     style = MaterialTheme.typography.displayLarge,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun olevel(viewModel: MyViewModel, navController: NavController) {
+    val eoy by viewModel.eoy.collectAsState()
+    val mid by viewModel.mid.collectAsState()
+    val topicExists = "oeoy".let { viewModel.checkIfTopicExists(it) }
+    val topicExistsState by topicExists.observeAsState(false)
+
+    val navigateToMCQ = remember { mutableStateOf(false) }
+    var clicked = remember { mutableStateOf("") }
+
+    LaunchedEffect(Unit) {
+        if (!topicExistsState) {
+            viewModel.updateItem(0, "四")
+            val egeneratedQuestions = generateListOfMCQQuestions(eoy, true)
+            val mgeneratedQuestions = generateListOfMCQQuestions(mid, true)
+            viewModel.addQuiz(
+                topic = "oeoy",
+                questions = egeneratedQuestions
+            )
+            viewModel.addQuiz(
+                topic = "omid",
+                questions = mgeneratedQuestions
+            )
+        } else {
+            Log.d("temp", "topic already exists (Home)")
+        }
+    }
+
+    LaunchedEffect(topicExistsState, navigateToMCQ.value) {
+        if (navigateToMCQ.value) {
+            if (topicExistsState) {
+                if (clicked.value == "eoy") {
+                    navController.navigate("mcq/oeoy")
+                } else {
+                    navController.navigate("mcq/omid")
+                }
+            }
+            navigateToMCQ.value = false
+        }
+    }
+    Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+        Button(
+            onClick = { navigateToMCQ.value = true
+                        clicked.value = "mid"
+                      },
+            colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 25.dp, vertical = 7.dp)
+        ) {
+            Column {
+                Text(
+                    text = "Mid-Year Practice",
+                    color = Color.Black,
+                    fontSize = 28.sp,
+                    modifier = Modifier
+                        .padding(horizontal = 5.dp, vertical = 5.dp)
+
+                )
+            }
+        }
+        Button(
+            onClick = { navigateToMCQ.value = true
+                        clicked.value = "eoy"
+                      },
+            colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
+            shape = RoundedCornerShape(20.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 25.dp, vertical = 7.dp)
+        ) {
+            Column {
+                Text(
+                    text = "End-Of-Year Practice",
+                    color = Color.Black,
+                    fontSize = 28.sp,
+                    modifier = Modifier
+                        .padding(horizontal = 5.dp, vertical = 5.dp)
+
                 )
             }
         }

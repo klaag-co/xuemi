@@ -153,13 +153,13 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
         )
     ) {
         Column {
-            Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+            Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
                 Text(
                     "中$secondary: 单元$chapter", style = MaterialTheme.typography.h6,
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.End,
                     modifier = Modifier
                         .background(color = Color(219, 238, 255))
-                        .fillMaxWidth(0.6f)
+                        .fillMaxWidth(0.65f)
                         .padding(vertical = 12.dp)
                 )
                 IconButton(

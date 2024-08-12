@@ -7,7 +7,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -166,7 +165,7 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
                     textAlign = TextAlign.End,
                     modifier = Modifier
                         .background(color = Color(219, 238, 255))
-                        .fillMaxWidth(0.65f)
+                        .fillMaxWidth(0.6f)
                         .padding(vertical = 12.dp)
                 )
                 IconButton(
@@ -209,17 +208,6 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
                         .fillMaxHeight(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-//                    stickyHeader {
-//                        Text(
-//                            "中$secondary: 单元$chapter", style = MaterialTheme.typography.h6,
-//                            textAlign = TextAlign.Center,
-//                            modifier = Modifier
-//                                .background(color = Color(219, 238, 255))
-//                                .fillMaxWidth()
-//                                .padding(vertical = 12.dp)
-//                        )
-//
-//                    }
                     item {
                         HanziWriterWebView(character = wordSets.word)
                     }

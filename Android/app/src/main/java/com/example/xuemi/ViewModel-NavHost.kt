@@ -454,7 +454,9 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                                     saveState = true
                                 }
                                 launchSingleTop = true
-                                restoreState = true
+                                if (navItem.label != "home") {
+                                    restoreState = true
+                                }
                             }
                         },
                         icon = {

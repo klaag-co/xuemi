@@ -5,8 +5,10 @@ import android.webkit.WebViewClient
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -150,95 +152,97 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
             containerColor = Color(219, 238, 255),
         )
     ) {
-        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-
-            LazyColumn(
-                modifier = Modifier
-                    .padding(bottom = 45.dp, top = 1.dp)
-                    .fillMaxWidth(0.79f),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-
-                stickyHeader {
-                    Text(
-                        "中$secondary: 单元$chapter", style = MaterialTheme.typography.h6,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .background(color = Color(219, 238, 255))
-                            .fillMaxWidth()
-                            .padding(vertical = 12.dp)
-                    )
-                }
-                item {
-                    Text(
-                        wordSets.word,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h2,
-                        modifier = Modifier
-                            .clickable {
-                                // Trigger the WebView to show the strokes for this word
-//                                HanziWriterWebView(character = wordSets.word)
+        Column {
+            Row (modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                Text(
+                    "中$secondary: 单元$chapter", style = MaterialTheme.typography.h6,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .background(color = Color(219, 238, 255))
+                        .fillMaxWidth(0.6f)
+                        .padding(vertical = 12.dp)
+                )
+                IconButton(
+                    onClick = {
+                        if (bookmarkInside) {
+                            val bookmarkToDelete = bookmarkList.find { it.word == wordSets.word }
+                            bookmarkToDelete?.let { viewModel.deleteBookmark(it.id) }
+                        } else {
+                            viewModel.addBookmark(
+                                BookmarkSection.valueOf("中${viewModel.flashcardGetFromList(0)}"),
+                                wordSets.word,
+                                viewModel.flashcardGetFromList(1),
+                                viewModel.flashcardGetFromList(3)
+                            )
+                        }
+                        viewModel.loadBookmarkNames()
+                    },
+                    modifier = Modifier
+                        .padding(top = 18.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(
+                            id = if (bookmarkInside) {
+                                R.drawable.bookmark
+                            } else {
+                                R.drawable.o_bookmark
                             }
-                            .padding(16.dp)
-                    )
-                    Text(
-                        wordSets.pinyin,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h4
-                    )
-                    Text(
-                        wordSets.chineseDefinition,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h4,
-                        modifier = Modifier.padding(vertical = 10.dp)
-                    )
-                    Text(
-                        wordSets.englishDefinition,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h5
+                        ),
+                        contentDescription = "bookmark?",
+                        modifier = Modifier.size(39.dp)
                     )
                 }
             }
-        }
-    }
 
-    Box(
-        Modifier
-            .fillMaxSize()
-            .padding(top = 18.dp, bottom = 20.dp, end = 17.dp), contentAlignment = Alignment.TopEnd
-    ) {
-        IconButton(
-            onClick = {
-                if (bookmarkInside) {
-                    val bookmarkToDelete = bookmarkList.find { it.word == wordSets.word }
-                    bookmarkToDelete?.let { viewModel.deleteBookmark(it.id) }
-
-
-                } else {
-                    viewModel.addBookmark(
-                        BookmarkSection.valueOf("中${viewModel.flashcardGetFromList(0)}"),
-                        wordSets.word,
-                        viewModel.flashcardGetFromList(1),
-                        viewModel.flashcardGetFromList(3)
-                    )
-
-                }
-                viewModel.loadBookmarkNames()
-            }
-        )
-        {
-            Icon(
-                painter = painterResource(
-                    id =
-                    if (bookmarkInside) {
-                        R.drawable.bookmark
-                    } else {
-                        R.drawable.o_bookmark
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(bottom = 45.dp, top = 1.dp)
+                        .fillMaxWidth(0.79f),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+//                    stickyHeader {
+//                        Text(
+//                            "中$secondary: 单元$chapter", style = MaterialTheme.typography.h6,
+//                            textAlign = TextAlign.Center,
+//                            modifier = Modifier
+//                                .background(color = Color(219, 238, 255))
+//                                .fillMaxWidth()
+//                                .padding(vertical = 12.dp)
+//                        )
+//
+//                    }
+                    item {
+                        Text(
+                            wordSets.word,
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.h2,
+                            modifier = Modifier
+                                .clickable {
+                                    // Trigger the WebView to show the strokes for this word
+//                                HanziWriterWebView(character = wordSets.word)
+                                }
+                                .padding(12.dp)
+                        )
+                        Text(
+                            wordSets.pinyin,
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.h4
+                        )
+                        Text(
+                            wordSets.chineseDefinition,
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.h4,
+                            modifier = Modifier.padding(vertical = 10.dp)
+                        )
+                        Text(
+                            wordSets.englishDefinition,
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.h5
+                        )
                     }
-                ),
-                contentDescription = "bookmark?",
-                modifier = Modifier.size(39.dp)
-            )
+                }
+            }
         }
     }
 }

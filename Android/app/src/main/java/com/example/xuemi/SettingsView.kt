@@ -44,6 +44,10 @@ val acknowledgements = listOf(
     Acknowledgement("Yeo Shu Axelia", "Marketing IC", R.drawable.megaphone_fill),
     Acknowledgement("Chay Yu Hung Tristan", "Consultant", R.drawable.person_fill),
     Acknowledgement("Ms Wong Lu Ting", "Head of Department", R.drawable.person_fill),
+    Acknowledgement("Ms Yap Hui Min", "Teacher-in-charge", R.drawable.person_fill),
+    Acknowledgement("Ms Tan Sook Qin", "Teacher-in-charge", R.drawable.person_fill),
+    Acknowledgement("Ms Yeo Sok Hui", "Teacher-in-charge", R.drawable.person_fill),
+    Acknowledgement("Ms Xu Wei", "Teacher-in-charge", R.drawable.person_fill),
     Acknowledgement("CL Department", "Client", R.drawable.building_2_fill)
 )
 

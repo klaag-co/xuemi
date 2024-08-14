@@ -36,9 +36,6 @@ import com.example.xuemi.quiz.generateListOfMCQQuestions
 
 @Composable
 fun Home(viewModel: MyViewModel, navController: NavController) {
-    Button(onClick = { viewModel.deleteAll() }) {
-        Text("DELETE ALL")
-    }
     Column {// Whole app Column
         Text(
             "Home",

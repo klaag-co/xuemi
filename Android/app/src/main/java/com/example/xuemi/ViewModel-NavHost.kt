@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -83,9 +85,8 @@ enum class SecondaryType {
 class MyViewModel( appContext: Context, application: Application ) : AndroidViewModel(application) {
     private val sharedPreferences: SharedPreferences =
         application.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-    private val _default: MutableStateFlow<List<String>> =
-        MutableStateFlow(loadListFromPreferences())
-    val _current = MutableStateFlow(listOf("S", "C", "C.", "T", "Q", "W."))
+    private val _current: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences())
+    private val _default: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences())
 
     private val _eoy: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
     val eoy: MutableStateFlow<List<Word>> = _eoy
@@ -125,15 +126,14 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     }
 
     private fun loadListFromPreferences(): List<String> {
-        val defaultList = listOf("S", "C", "C.", "T")
-        val listString = sharedPreferences.getString("default_list", null) ?: return defaultList
+        val defaultList = listOf("S", "C", "C.", "T", "Q", "W.")
+        val listString = sharedPreferences.getString("current_list", null) ?: return defaultList
         return listString.split(",").map { it.trim() }
-
     }
 
-    private fun saveListToPreferences(list: List<String>) {
+    private fun saveListToPreferences(name: String, list: List<String>) {
         val listString = list.joinToString(",")
-        sharedPreferences.edit().putString("default_list", listString).apply()
+        sharedPreferences.edit().putString(name, listString).apply()
         loadListFromPreferences()
     }
 
@@ -218,7 +218,8 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             defaultList[index] = currentList[saveList[index]]
         }
         loadListFromPreferences()
-        saveListToPreferences(defaultList)
+        saveListToPreferences("default_list", defaultList)
+        saveListToPreferences("current_list", currentList)
     }
 
 //============================================================//
@@ -476,7 +477,17 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
 
 @Composable
 fun ContentScreen(viewModel: MyViewModel, navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController, startDestination = "home") {
+    NavHost(navController,
+        startDestination = "home",
+        enterTransition = {
+            // you can change whatever you want transition
+            EnterTransition.None
+        },
+        exitTransition = {
+            // you can change whatever you want transition
+            ExitTransition.None
+        }
+        ) {
         // tabs
         composable("home") { Home(viewModel, navController) }
         composable("bookmarks") { Bookmarks(viewModel, navController) }
@@ -511,9 +522,8 @@ fun ContentScreen(viewModel: MyViewModel, navController: NavHostController, modi
             val name = backStackEntry.arguments?.getString("name").toString()
             MCQresults(viewModel, navController, name, wrong, correct)
         }
-        composable("olevel") {
-            olevel(viewModel, navController)
-        }
+        composable("olevel") { olevel(viewModel, navController) }
+
 
     }
 }

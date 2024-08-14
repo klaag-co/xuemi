@@ -129,6 +129,8 @@ public struct FlashcardView: View {
                         
                         VStack {
                             Text(vocab.word)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.1)
                                 .font(.system(size: 48))
                                 .underline()
                                 .fontWeight(.bold)
@@ -139,6 +141,8 @@ public struct FlashcardView: View {
                         
                         HStack {
                             Text(vocab.pinyin)
+                                .lineLimit(2)
+                                .minimumScaleFactor(0.1)
                                 .font(.largeTitle)
                             Button(action: {
                                 let utterance = AVSpeechUtterance(string: vocab.word)

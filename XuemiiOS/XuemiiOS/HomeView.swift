@@ -103,6 +103,7 @@ struct HomeView: View {
                 .font(.system(size: 40))
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
+                .frame(maxHeight: .infinity)
                 .background(Color.customteal)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
             }
@@ -191,6 +192,7 @@ struct HomeView: View {
                     .font(.system(size: 55))
                     .bold()
                     .frame(maxWidth: .infinity)
+                    .frame(maxHeight: .infinity)
             }
             .padding(30)
             .background(Color.customteal)

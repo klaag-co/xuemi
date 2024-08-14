@@ -481,7 +481,8 @@ fun ContentScreen(viewModel: MyViewModel, navController: NavHostController, modi
         composable("home") { Home(viewModel, navController) }
         composable("bookmarks") { Bookmarks(viewModel, navController) }
         composable("notes") { Notes(viewModel, navController) }
-        composable("settings") { SettingsView() }
+        composable("settings") { SettingsView(navController) }
+        composable("helloWorld") { HelloWorldScreen() }
 
         // navigation
         composable("secondary") { Secondary(viewModel, navController) }

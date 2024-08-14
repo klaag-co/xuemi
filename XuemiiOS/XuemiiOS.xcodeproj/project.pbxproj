@@ -395,7 +395,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "XuemiiOS/中三.json web/index.html XuemiiOS/中一.json web/demo.js web/hanzi-writer.min.js XuemiiOS/中二.json web/jquery.min.js XuemiiOS/Preview\\ Content XuemiiOS/中四.json";
-				DEVELOPMENT_TEAM = HN3U82MX94;
+				DEVELOPMENT_TEAM = 7K6ZTDFM48;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = XuemiiOS/Info.plist;
@@ -433,7 +433,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "XuemiiOS/中三.json web/index.html XuemiiOS/中一.json web/demo.js web/hanzi-writer.min.js XuemiiOS/中二.json web/jquery.min.js XuemiiOS/Preview\\ Content XuemiiOS/中四.json";
-				DEVELOPMENT_TEAM = HN3U82MX94;
+				DEVELOPMENT_TEAM = 7K6ZTDFM48;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = XuemiiOS/Info.plist;

@@ -7,9 +7,9 @@
                 "pinyin": "yóu yù",
                 "englishDefinition": "to hesitate",
                 "chineseDefinition": "（形）拿不定主意：～不决。［反］果断|武断。 ",
-                "example": "我们~了很久，才决定买这所房子。",
+                "example": "我们~了很久，才决定买这栋房子。",
                 "q1": "（形）拿不定主意：～不决。［反］果断|武断。 ",
-                "q2": "我们~了很久，才决定买这所房子。"
+                "q2": "我们~了很久，才决定买这栋房子。"
             },
             {
                 "index": 2,
@@ -17,14 +17,14 @@
                 "pinyin": "bù fēn qīng hóng zào bái",
                 "englishDefinition": "not to distinguish between right and wrong",
                 "chineseDefinition": "不分黑白，不分是非。 ",
-                "example": "他~,一见面就劈头劈脸把他大骂了一顿。",
+                "example": "他~，一见面就劈头劈脸把他大骂了一顿。",
                 "q1": "不分黑白，不分是非。 ",
-                "q2": "他~,一见面就劈头劈脸把他大骂了一顿。"
+                "q2": "他~，一见面就劈头劈脸把他大骂了一顿。"
             },
             {
                 "index": 3,
                 "word": "教训",
-                "pinyin": "jiào xun",
+                "pinyin": "jiào xùn",
                 "englishDefinition": "lesson; moral; to lecture somebody",
                 "chineseDefinition": "（动）教育训诫 ②（名）指从错误、挫折中取得的经验",
                 "example": "我们要从过去的错误中吸取～，以免重蹈覆辙。",
@@ -35,16 +35,16 @@
                 "index": 4,
                 "word": "叛逆",
                 "pinyin": "pàn nì",
-                "englishDefinition": "to rebel; a rebel",
+                "englishDefinition": "rebel against；revolt against; a rebel",
                 "chineseDefinition": "（动）违背自己的阶级或集团的利益而投入到敌对的一方去。②（名）有背叛行为的人。 ",
-                "example": "有些学生上了中学后变得很～，不愿意听师长的劝导。",
+                "example": "升上中学后，他变得很～，根本不愿意听师长的劝导。",
                 "q1": "（动）违背自己的阶级或集团的利益而投入到敌对的一方去。②（名）有背叛行为的人。 ",
-                "q2": "有些学生上了中学后变得很～，不愿意听师长的劝导。"
+                "q2": "升上中学后，他变得很～，根本不愿意听师长的劝导。"
             },
             {
                 "index": 5,
                 "word": "委屈",
-                "pinyin": "wěi qu",
+                "pinyin": "wěi qū",
                 "englishDefinition": "to feel wronged; to cause somebody to feel wronged; grievance",
                 "chineseDefinition": "（形）受到不应有的指责或待遇，感到心里难过。②（动）使人受到委屈 ",
                 "example": "朋友误会了他，他觉得很～。",
@@ -67,9 +67,9 @@
                 "pinyin": "bù fáng",
                 "englishDefinition": "there is no harm in; might as well",
                 "chineseDefinition": "（副）没有妨碍，表示可以这样做",
-                "example": "当额外的工作分配到你头上时，～视之为一种机遇。",
+                "example": "同学之间有什么意见～当面提出来，不要在背后议论。",
                 "q1": "（副）没有妨碍，表示可以这样做",
-                "q2": "当额外的工作分配到你头上时，～视之为一种机遇。"
+                "q2": "同学之间有什么意见～当面提出来，不要在背后议论。"
             },
             {
                 "index": 8,
@@ -77,9 +77,9 @@
                 "pinyin": "nì míng",
                 "englishDefinition": "anonymous",
                 "chineseDefinition": " 没有写姓名或真实姓名。 ",
-                "example": "在班上的～选举中，我被推选为班长。",
+                "example": "在这个网站，用户可以～发帖和浏览。",
                 "q1": " 没有写姓名或真实姓名。 ",
-                "q2": "在班上的～选举中，我被推选为班长。"
+                "q2": "在这个网站，用户可以～发帖和浏览。"
             },
             {
                 "index": 9,
@@ -87,9 +87,9 @@
                 "pinyin": "jiān dū",
                 "englishDefinition": "to control; to supervise",
                 "chineseDefinition": "（动）监察督促。 ",
-                "example": "这对新婚夫妇不时到新房～装修过程。",
+                "example": "这对新婚夫妇不时到新房监～修过程，确保每一个细节都符合他们的要求。",
                 "q1": "（动）监察督促。 ",
-                "q2": "这对新婚夫妇不时到新房～装修过程。"
+                "q2": "这对新婚夫妇不时到新房监～修过程，确保每一个细节都符合他们的要求。"
             },
             {
                 "index": 10,
@@ -97,9 +97,9 @@
                 "pinyin": "dài gōu",
                 "englishDefinition": "generation gap",
                 "chineseDefinition": "（名）指两代人之间在观念、生活等方面的隔阂",
-                "example": "我和爷爷之间有～，我有时不明白他的想法。",
+                "example": "父母和孩子之间的～有时会导致沟通上的困难。",
                 "q1": "（名）指两代人之间在观念、生活等方面的隔阂",
-                "q2": "我和爷爷之间有～，我有时不明白他的想法。"
+                "q2": "父母和孩子之间的～有时会导致沟通上的困难。"
             },
             {
                 "index": 11,
@@ -107,9 +107,9 @@
                 "pinyin": "shàng yǐn",
                 "englishDefinition": "to get into a habit; to become addicted",
                 "chineseDefinition": " 喜爱某种事物，成了癖好。 ",
-                "example": "弟弟玩电脑游戏玩～，假期时一天玩十五个小时。",
+                "example": "烟草含有让人~的成分，戒烟过程往往非常艰难。",
                 "q1": " 喜爱某种事物，成了癖好。 ",
-                "q2": "弟弟玩电脑游戏玩～，假期时一天玩十五个小时。"
+                "q2": "烟草含有让人~的成分，戒烟过程往往非常艰难。"
             },
             {
                 "index": 12,
@@ -117,9 +117,9 @@
                 "pinyin": "shū yuǎn",
                 "englishDefinition": "to drift apart; to become estranged",
                 "chineseDefinition": " 关系生疏，不亲近。 ",
-                "example": "自从我升上中学，因为课业繁重，我和父母的关系渐渐～。",
+                "example": "由于长时间的分离，我和他的关系渐渐～了。",
                 "q1": " 关系生疏，不亲近。 ",
-                "q2": "自从我升上中学，因为课业繁重，我和父母的关系渐渐～。"
+                "q2": "由于长时间的分离，我和他的关系渐渐～了。"
             }
         ],
         "把爱说出来": [
@@ -129,18 +129,18 @@
                 "pinyin": "yíng rèn ér jiě",
                 "englishDefinition": " (idiom); (figurative) easily solved",
                 "chineseDefinition": " 碰到刀口就分开了。比喻事情容易解决。",
-                "example": "在他的领导下，许多伤脑筋的问题都～。",
+                "example": "经过团队的共同努力，项目中的困难～。",
                 "q1": " 碰到刀口就分开了。比喻事情容易解决。",
-                "q2": "在他的领导下，许多伤脑筋的问题都～。"
+                "q2": "经过团队的共同努力，项目中的困难～。"
             },
             {
                 "index": 2,
                 "word": "称赞",
                 "pinyin": "chēng zàn",
                 "englishDefinition": "to praise; to compliment",
-                "chineseDefinition": "（动）用言语表达对人或事物的优点的喜爱。",
+                "chineseDefinition": "（动）用言语表达对人或事物的优点的喜爱。［反］批评",
                 "example": "我扶老奶奶过马路，妈妈～我是个好孩子。",
-                "q1": "（动）用言语表达对人或事物的优点的喜爱。 ",
+                "q1": "（动）用言语表达对人或事物的优点的喜爱。［反］批评",
                 "q2": "我扶老奶奶过马路，妈妈～我是个好孩子。"
             },
             {
@@ -148,10 +148,10 @@
                 "word": "崇拜",
                 "pinyin": "chóng bài",
                 "englishDefinition": "to worship; adoration",
-                "chineseDefinition": "（动）尊敬；钦佩：～偶像。 ",
-                "example": "他为国家作出不少重要的贡献，我很～他。",
-                "q1": "（动）尊敬；钦佩：～偶像。",
-                "q2": "他为国家作出不少重要的贡献，我很～他。"
+                "chineseDefinition": "（动）尊敬；钦佩：～偶像。［反］鄙视。 ",
+                "example": "我很～为国家付出半辈子心血的前辈，他们的奉献精神深深激励了我。",
+                "q1": "（动）尊敬；钦佩：～偶像。［反］鄙视。 ",
+                "q2": "我很～为国家付出半辈子心血的前辈，他们的奉献精神深深激励了我。"
             },
             {
                 "index": 4,
@@ -169,9 +169,9 @@
                 "pinyin": "pèng dīng zi",
                 "englishDefinition": "to meet with a rebuff",
                 "chineseDefinition": "（动）常用以比喻遭到拒绝或受到斥责。 ",
-                "example": "他～后，再也不敢向朋友请教问题了。",
+                "example": "～虽让人感到沮丧，但也是成长和学习的机会。",
                 "q1": "（动）常用以比喻遭到拒绝或受到斥责。 ",
-                "q2": "他～后，再也不敢向朋友请教问题了。"
+                "q2": "～虽让人感到沮丧，但也是成长和学习的机会。"
             },
             {
                 "index": 6,
@@ -186,12 +186,12 @@
             {
                 "index": 7,
                 "word": "抽屉",
-                "pinyin": "chōu ti",
+                "pinyin": "chōu tì",
                 "englishDefinition": "drawer",
                 "chineseDefinition": " 附于桌子、柜子等家具上可抽动的匣子状的构件。供盛放东西用。 ",
-                "example": "我忘了自己把钥匙放进～里，找了老半天才找到。",
+                "example": "他从～里拿出一本厚厚的相册。",
                 "q1": " 附于桌子、柜子等家具上可抽动的匣子状的构件。供盛放东西用。 ",
-                "q2": "我忘了自己把钥匙放进～里，找了老半天才找到。"
+                "q2": "他从～里拿出一本厚厚的相册。"
             },
             {
                 "index": 8,
@@ -199,9 +199,9 @@
                 "pinyin": "jīng pí lì jié",
                 "englishDefinition": "spirit weary, strength exhausted (idiom); drained; washed out",
                 "chineseDefinition": " 精：精神，精力。竭：尽。精神非常疲劳，没有一点力气。",
-                "example": "爸爸是护士，下班后总是～。",
+                "example": "完成了一整天的工作后，～的她躺在沙发上，几乎没过多久就进入了沉沉的睡眠。",
                 "q1": " 精：精神，精力。竭：尽。精神非常疲劳，没有一点力气。",
-                "q2": "爸爸是护士，下班后总是～。"
+                "q2": "完成了一整天的工作后，～的她躺在沙发上，几乎没过多久就进入了沉沉的睡眠。"
             },
             {
                 "index": 9,
@@ -209,9 +209,9 @@
                 "pinyin": "shuāi lǎo",
                 "englishDefinition": "to deteriorate with age; old and weak",
                 "chineseDefinition": " 年纪大而精力虚弱。 ",
-                "example": "一个人无法不变老，但是他可以抵制～。",
+                "example": "我们无法避免面容随着岁月的流逝而渐渐～，但保持健康的生活习惯可以减缓这一过程。",
                 "q1": " 年纪大而精力虚弱。 ",
-                "q2": "一个人无法不变老，但是他可以抵制～。"
+                "q2": "我们无法避免面容随着岁月的流逝而渐渐～，但保持健康的生活习惯可以减缓这一过程。"
             },
             {
                 "index": 10,
@@ -219,9 +219,9 @@
                 "pinyin": "yì yù",
                 "englishDefinition": "depressed; gloomy; depression",
                 "chineseDefinition": "（形）心有愤恨，不能诉说而烦闷。",
-                "example": "没能考上理想的大学，姐姐显得有些～。",
+                "example": "运动能缓解～情绪，让我们心情更好，感到更加轻松和愉快。",
                 "q1": "（形）心有愤恨，不能诉说而烦闷。",
-                "q2": "没能考上理想的大学，姐姐显得有些～。"
+                "q2": "运动能缓解～情绪，让我们心情更好，感到更加轻松和愉快。"
             },
             {
                 "index": 11,
@@ -229,9 +229,9 @@
                 "pinyin": "jì mò",
                 "englishDefinition": "lonely",
                 "chineseDefinition": "（形）孤独冷清。",
-                "example": "没有人关心的孩子是～的。",
+                "example": "每当晚上一个人待在家里，他就会感到～和孤独。",
                 "q1": "（形）孤独冷清。",
-                "q2": "没有人关心的孩子是～的。"
+                "q2": "每当晚上一个人待在家里，他就会感到～和孤独。"
             },
             {
                 "index": 12,
@@ -239,19 +239,19 @@
                 "pinyin": "qǐ chǐ",
                 "englishDefinition": "to open one's mouth; to start talking",
                 "chineseDefinition": "（动）开口说话，多指向别人有所请求。 ",
-                "example": "要向朋友借钱,我难以～。",
+                "example": "这个尴尬的话题让她感到～，不知道如何开口。",
                 "q1": "（动）开口说话，多指向别人有所请求。 ",
-                "q2": "要向朋友借钱,我难以～。"
+                "q2": "这个尴尬的话题让她感到～，不知道如何开口。"
             },
             {
                 "index": 13,
                 "word": "打退堂鼓",
                 "pinyin": "dǎ tuì táng gǔ",
                 "englishDefinition": "(figurative) to give up; to turn tail",
-                "chineseDefinition": "今比喻与人共事而半路退缩。 ",
-                "example": "即使困难重重，我们绝不～。",
-                "q1": "今比喻与人共事而半路退缩。 ",
-                "q2": "即使困难重重，我们绝不～。"
+                "chineseDefinition": "比喻与人共事而半路退缩。 ",
+                "example": "即使困难重重，我们也绝不～。",
+                "q1": "比喻与人共事而半路退缩。 ",
+                "q2": "即使困难重重，我们也绝不～。"
             },
             {
                 "index": 14,
@@ -259,9 +259,9 @@
                 "pinyin": "ào nǎo",
                 "englishDefinition": "annoyed; vexed; upset",
                 "chineseDefinition": "（形）懊悔，烦恼。",
-                "example": "事情总是这么不顺，真让人～。",
+                "example": "他为了那个小失误而～不已。",
                 "q1": "（形）懊悔，烦恼。",
-                "q2": "事情总是这么不顺，真让人～。"
+                "q2": "他为了那个小失误而～不已。"
             },
             {
                 "index": 15,
@@ -289,18 +289,18 @@
                 "pinyin": "pò tiān huāng",
                 "englishDefinition": "unprecedented; for the first time; never before",
                 "chineseDefinition": "（动）指从没有过的或第一次出现的。",
-                "example": "这两位王不见王的巨星，将在这次晚会上～同臺演出。",
+                "example": "这一次他～地提前完成了所有的任务，真是让人意外。",
                 "q1": "（动）指从没有过的或第一次出现的。",
-                "q2": "这两位王不见王的巨星，将在这次晚会上～同臺演出。"
+                "q2": "这一次他～地提前完成了所有的任务，真是让人意外。"
             },
             {
                 "index": 18,
                 "word": "仓促",
                 "pinyin": "cāng cù",
                 "englishDefinition": "all of a sudden; hurriedly",
-                "chineseDefinition": "（形）匆忙；急促：～应战。 ",
+                "chineseDefinition": "（形）匆忙；急促：～应战。［反］从容。 ",
                 "example": "他来不及吃早餐，就～地离家上学去了。",
-                "q1": "（形）匆忙；急促：～应战。 ",
+                "q1": "（形）匆忙；急促：～应战。［反］从容。 ",
                 "q2": "他来不及吃早餐，就～地离家上学去了。"
             }
         ],
@@ -310,10 +310,10 @@
                 "word": "严肃",
                 "pinyin": "yán sù",
                 "englishDefinition": "solemn; grave; serious",
-                "chineseDefinition": "（形）郑重；认真。②（动）使人感到敬畏。 ",
-                "example": "老师总是～地批评犯错误的同学，从来不迁就。",
-                "q1": "（形）郑重；认真。②（动）使人感到敬畏。 ",
-                "q2": "老师总是～地批评犯错误的同学，从来不迁就。"
+                "chineseDefinition": "①（形）郑重；认真。②（动）使人感到敬畏。 ［反］活泼|幽默。",
+                "example": "她～地告诫孩子们不可以随便触碰危险的物品。",
+                "q1": "①（形）郑重；认真。②（动）使人感到敬畏。 ［反］活泼|幽默。",
+                "q2": "她～地告诫孩子们不可以随便触碰危险的物品。"
             },
             {
                 "index": 2,
@@ -331,18 +331,18 @@
                 "pinyin": "gān cuì",
                 "englishDefinition": "straightforward; blunt (e.g. statement); simply",
                 "chineseDefinition": "（形）爽快；直截了当。［反］拖拉。 ",
-                "example": "王经理办事～利落，员工们都很佩服。",
+                "example": "她遇到问题时总是～利索地解决，不留任何后患。",
                 "q1": "（形）爽快；直截了当。［反］拖拉。 ",
-                "q2": "王经理办事～利落，员工们都很佩服。"
+                "q2": "她遇到问题时总是～利索地解决，不留任何后患。"
             },
             {
                 "index": 4,
                 "word": "风筝",
                 "pinyin": "fēng zhēng",
                 "englishDefinition": "kite",
-                "chineseDefinition": "一种玩具,用一张轻质材料铺粘在框架上,通常还带一条起平衡作用的尾穗,以便在一根长线牵连下,飘扬空中。",
+                "chineseDefinition": "一种玩具，用一张轻质材料铺粘在框架上，通常还带一条起平衡作用的尾穗，以便在一根长线牵连下，飘扬空中。",
                 "example": "我和父母一起到滨海堤坝放～。",
-                "q1": "一种玩具,用一张轻质材料铺粘在框架上,通常还带一条起平衡作用的尾穗,以便在一根长线牵连下,飘扬空中。",
+                "q1": "一种玩具，用一张轻质材料铺粘在框架上，通常还带一条起平衡作用的尾穗，以便在一根长线牵连下，飘扬空中。",
                 "q2": "我和父母一起到滨海堤坝放～。"
             },
             {
@@ -350,9 +350,9 @@
                 "word": "挣脱",
                 "pinyin": "zhèng tuō",
                 "englishDefinition": "to throw off; to struggle free of",
-                "chineseDefinition": " 用力摆脱束缚，以获得自由。 ",
+                "chineseDefinition": "用力摆脱束缚，以获得自由。 ",
                 "example": "那狗～链子跑了。",
-                "q1": " 用力摆脱束缚，以获得自由。 ",
+                "q1": "用力摆脱束缚，以获得自由。 ",
                 "q2": "那狗～链子跑了。"
             },
             {
@@ -371,28 +371,28 @@
                 "pinyin": "bān",
                 "englishDefinition": "spot; colored patch; stripe; spotted",
                 "chineseDefinition": "在具有某种颜色的物体表面上夹有的另外颜色的点、条纹：红～。雀～。～竹。～马。〈名〉〈形〉",
-                "example": "你的衬衫上有一个墨水～。",
+                "example": "你的衬衫上有一个墨水～，需要及时清洗，否则可能会很难去掉。",
                 "q1": "在具有某种颜色的物体表面上夹有的另外颜色的点、条纹：红～。雀～。～竹。～马。〈名〉〈形〉",
-                "q2": "你的衬衫上有一个墨水～。"
+                "q2": "你的衬衫上有一个墨水～，需要及时清洗，否则可能会很难去掉。"
             },
             {
                 "index": 8,
                 "word": "缠绕",
                 "pinyin": "chán rào",
                 "englishDefinition": "twisting; to twine",
-                "chineseDefinition": "（动）①条状物旋绕在别的物体上②纠缠；搅扰。 ",
-                "example": "牵牛花～着栅栏爬满了一面墙，非常美丽。",
-                "q1": "（动）①条状物旋绕在别的物体上②纠缠；搅扰。 ",
-                "q2": "牵牛花～着栅栏爬满了一面墙，非常美丽。"
+                "chineseDefinition": "（动）①条状物旋绕在别的物体上 ②纠缠；搅扰。 ",
+                "example": "牵牛花～着栅栏爬满了一面墙，美丽极了。",
+                "q1": "（动）①条状物旋绕在别的物体上 ②纠缠；搅扰。 ",
+                "q2": "牵牛花～着栅栏爬满了一面墙，美丽极了。"
             },
             {
                 "index": 9,
                 "word": "搂",
                 "pinyin": "lǒu",
-                "englishDefinition": "to hug;to hold in one's arms",
-                "chineseDefinition": "1.搂抱2.两臂合抱的量为一搂：抱来一～麦秸。两～粗的大树。3. 用手或工具把东西聚集到自己面前：～柴火。～点儿干草烧。4.用手拢着提起来（指衣服）：～起袖子。她～着裙子蹚水过河。〈动〉〈动〉",
+                "englishDefinition": "to hug；to hold in one's arms",
+                "chineseDefinition": "（动）1.搂抱 2.用手或工具把东西聚集到自己面前：～柴火。～点儿干草烧。3.用手拢着提起来（指衣服）：～起袖子。她～着裙子蹚水过河。4. （量）两臂合抱的量为一搂：抱来一～麦秸。两～粗的大树。",
                 "example": "妈妈把我紧紧地～在怀里、好像怕我被风吹走似的。",
-                "q1": "1.搂抱2.两臂合抱的量为一搂：抱来一～麦秸。两～粗的大树。3. 用手或工具把东西聚集到自己面前：～柴火。～点儿干草烧。4.用手拢着提起来（指衣服）：～起袖子。她～着裙子蹚水过河。〈动〉〈动〉",
+                "q1": "（动）1.搂抱 2.用手或工具把东西聚集到自己面前：～柴火。～点儿干草烧。3.用手拢着提起来（指衣服）：～起袖子。她～着裙子蹚水过河。4. （量）两臂合抱的量为一搂：抱来一～麦秸。两～粗的大树。",
                 "q2": "妈妈把我紧紧地～在怀里、好像怕我被风吹走似的。"
             }
         ]
@@ -405,9 +405,9 @@
                 "pinyin": "juān kuǎn",
                 "englishDefinition": "to donate money;  contribution (of money)",
                 "chineseDefinition": "（动）捐助款项 ②（名）指捐助的款项",
-                "example": "为了支持灾区的建设，同学们踊跃地～捐物",
+                "example": "在得知灾区的需要后，他不仅～，还主动前往灾区帮忙",
                 "q1": "（动）捐助款项 ②（名）指捐助的款项",
-                "q2": "为了支持灾区的建设，同学们踊跃地～捐物"
+                "q2": "在得知灾区的需要后，他不仅～，还主动前往灾区帮忙"
             },
             {
                 "index": 2,
@@ -415,9 +415,9 @@
                 "pinyin": "zhěng jiù",
                 "englishDefinition": "to save; to rescue",
                 "chineseDefinition": "（动）援救；救助",
-                "example": "我们必须加强环保意识，～地球！",
+                "example": "救援队在山中～了被困的登山者。",
                 "q1": "（动）援救；救助",
-                "q2": "我们必须加强环保意识，～地球！"
+                "q2": "救援队在山中～了被困的登山者。"
             },
             {
                 "index": 3,
@@ -425,9 +425,9 @@
                 "pinyin": "yī liáo",
                 "englishDefinition": "medical treatment",
                 "chineseDefinition": "（动）对疾病的治疗。 ",
-                "example": "这里的～条件极差，只有几家医院。",
+                "example": "～保险可以帮助我们支付看病时的费用。",
                 "q1": "（动）对疾病的治疗。 ",
-                "q2": "这里的～条件极差，只有几家医院。"
+                "q2": "～保险可以帮助我们支付看病时的费用。"
             },
             {
                 "index": 4,
@@ -435,9 +435,9 @@
                 "pinyin": "yán jiū",
                 "englishDefinition": "research; to research; to look into",
                 "chineseDefinition": "（动）①探求事物的性质、规律等。②考虑；商讨",
-                "example": "科学家～很多新技术来改善我们的生活。",
+                "example": "她在大学里从事环境保护方面的～，致力于改善空气质量。",
                 "q1": "（动）①探求事物的性质、规律等。②考虑；商讨",
-                "q2": "科学家～很多新技术来改善我们的生活。"
+                "q2": "她在大学里从事环境保护方面的～，致力于改善空气质量。"
             },
             {
                 "index": 5,
@@ -445,9 +445,9 @@
                 "pinyin": "yōu huì",
                 "englishDefinition": "privilege; favorable (terms); preferential (treatment); discount (price)",
                 "chineseDefinition": "（形）比一般优厚：～条件。 ",
-                "example": "新会员享有不少～，赶紧报名吧！",
+                "example": "商店推出了新季商品的～活动，吸引了许多顾客前来购买。",
                 "q1": "（形）比一般优厚：～条件。 ",
-                "q2": "新会员享有不少～，赶紧报名吧！"
+                "q2": "商店推出了新季商品的～活动，吸引了许多顾客前来购买。"
             },
             {
                 "index": 6,
@@ -455,9 +455,9 @@
                 "pinyin": "quàn",
                 "englishDefinition": "voucher",
                 "chineseDefinition": "票据或作凭证的纸片：入场～。债～〈名〉",
-                "example": "我们拿到了赠～,因此我们免费看了演出。",
+                "example": "她用折扣～买了一些日常用品，节省了不少钱。",
                 "q1": "票据或作凭证的纸片：入场～。债～〈名〉",
-                "q2": "我们拿到了赠～,因此我们免费看了演出。"
+                "q2": "她用折扣～买了一些日常用品，节省了不少钱。"
             },
             {
                 "index": 7,
@@ -475,9 +475,9 @@
                 "pinyin": "mǐn jié",
                 "englishDefinition": "nimble; quick",
                 "chineseDefinition": "（形）动作等又迅速又灵敏：动作～|思维～。［反］迟缓|笨拙。 ",
-                "example": "他行动非常～，一转眼就没了踪影。",
+                "example": "她在羽球场上的表现非常～，迅速的动作赢得了观众的赞赏。",
                 "q1": "（形）动作等又迅速又灵敏：动作～|思维～。［反］迟缓|笨拙。 ",
-                "q2": "他行动非常～，一转眼就没了踪影。"
+                "q2": "她在羽球场上的表现非常～，迅速的动作赢得了观众的赞赏。"
             },
             {
                 "index": 9,
@@ -495,9 +495,9 @@
                 "pinyin": "yǒu shàn",
                 "englishDefinition": "friendly",
                 "chineseDefinition": "（形）朋友之间亲近和睦：～相处。 ",
-                "example": "那位阿姨～的微笑让我像回到了家一样，倍感亲切。",
+                "example": "他对每个人都很～，总是带着微笑和大家打招呼。",
                 "q1": "（形）朋友之间亲近和睦：～相处。 ",
-                "q2": "那位阿姨～的微笑让我像回到了家一样，倍感亲切。"
+                "q2": "他对每个人都很～，总是带着微笑和大家打招呼。"
             },
             {
                 "index": 11,
@@ -515,9 +515,9 @@
                 "pinyin": "hài xiū",
                 "englishDefinition": "shy; embarrassed; bashful",
                 "chineseDefinition": "（形）因胆小、怯生或怕受人嗤笑而心中不安。［反］大方。 ",
-                "example": "她第一次当众讲话，有些～。",
+                "example": "他在陌生人面前总是显得有些～，不太愿意主动讲话。",
                 "q1": "（形）因胆小、怯生或怕受人嗤笑而心中不安。［反］大方。 ",
-                "q2": "她第一次当众讲话，有些～。"
+                "q2": "他在陌生人面前总是显得有些～，不太愿意主动讲话。"
             },
             {
                 "index": 13,
@@ -525,9 +525,9 @@
                 "pinyin": "chán",
                 "englishDefinition": " greedy; to have a craving",
                 "chineseDefinition": "1.看见好的食物就想吃；专爱吃好的：嘴～。2.看到喜爱的事物希望参与或得到 3.想吃（某种食物)〈动〉",
-                "example": "这孩子不是肚子饿，就是嘴～。",
+                "example": "他看着桌上的美味蛋糕，～得直流口水，迫不及待地想要尝一尝。",
                 "q1": "1.看见好的食物就想吃；专爱吃好的：嘴～。2.看到喜爱的事物希望参与或得到 3.想吃（某种食物)〈动〉",
-                "q2": "这孩子不是肚子饿，就是嘴～。"
+                "q2": "他看着桌上的美味蛋糕，～得直流口水，迫不及待地想要尝一尝。"
             },
             {
                 "index": 14,
@@ -535,9 +535,9 @@
                 "pinyin": "tiáo pí",
                 "englishDefinition": "naughty; mischievous",
                 "chineseDefinition": "（形）顽皮，好开玩笑［反］听话|老实。 ",
-                "example": "小表妹～得简直就像个小猴儿似的。",
+                "example": "她~地对朋友眨了眨眼睛，引得大家都哈哈大笑。",
                 "q1": "（形）顽皮，好开玩笑［反］听话|老实。 ",
-                "q2": "小表妹～得简直就像个小猴儿似的。"
+                "q2": "她~地对朋友眨了眨眼睛，引得大家都哈哈大笑。"
             },
             {
                 "index": 15,
@@ -545,9 +545,9 @@
                 "pinyin": "shuāi jiāo",
                 "englishDefinition": "to trip and fall; wrestling (sports)",
                 "chineseDefinition": " 跌倒在地。 ",
-                "example": "我～后连路也走不动了。",
+                "example": "他因为不小心~了，膝盖擦伤了。",
                 "q1": " 跌倒在地。 ",
-                "q2": "我～后连路也走不动了。"
+                "q2": "他因为不小心~了，膝盖擦伤了。"
             }
         ],
         "猫": [
@@ -594,12 +594,12 @@
             {
                 "index": 5,
                 "word": "妻子",
-                "pinyin": "qī zi",
+                "pinyin": "qī zǐ",
                 "englishDefinition": "wife",
                 "chineseDefinition": " 男女两人结婚后，女子是男子的妻子。 ",
-                "example": "他五年前和～结婚。",
+                "example": "他和新婚～到日本度蜜月。",
                 "q1": " 男女两人结婚后，女子是男子的妻子。 ",
-                "q2": "他五年前和～结婚。"
+                "q2": "他和新婚～到日本度蜜月。"
             },
             {
                 "index": 6,
@@ -617,9 +617,9 @@
                 "pinyin": "yǎng",
                 "englishDefinition": "to face upward; to look up",
                 "chineseDefinition": "抬头，脸向上看。与「俯」相对。〈动〉",
-                "example": "一位土兵～面躺在铺位上。",
+                "example": "小孩～着脸看着飞过的飞机，眼中充满了好奇。",
                 "q1": "抬头，脸向上看。与「俯」相对。〈动〉",
-                "q2": "一位土兵～面躺在铺位上。"
+                "q2": "小孩～着脸看着飞过的飞机，眼中充满了好奇。"
             },
             {
                 "index": 8,
@@ -637,9 +637,9 @@
                 "pinyin": "niǎo lóng",
                 "englishDefinition": "birdcage",
                 "chineseDefinition": "养鸟的笼子 ",
-                "example": "他打开～，放了鸟儿。",
+                "example": "他打开～，释放了里面的鸟儿。",
                 "q1": "养鸟的笼子 ",
-                "q2": "他打开～，放了鸟儿。"
+                "q2": "他打开～，释放了里面的鸟儿。"
             },
             {
                 "index": 10,
@@ -647,9 +647,9 @@
                 "pinyin": "gé",
                 "englishDefinition": "to separate; to partition;  after or at an interval of",
                 "chineseDefinition": "1.遮断；隔开：～成两间房2.间隔；距离：～两周再去。相～不远。〈动〉〈名〉",
-                "example": "千山万水不能～断真诚的友谊。",
+                "example": "房间里有一扇窗户～开了两个区域，使空间看起来更大。",
                 "q1": "1.遮断；隔开：～成两间房2.间隔；距离：～两周再去。相～不远。〈动〉〈名〉",
-                "q2": "千山万水不能～断真诚的友谊。"
+                "q2": "房间里有一扇窗户～开了两个区域，使空间看起来更大。"
             },
             {
                 "index": 11,
@@ -657,19 +657,19 @@
                 "pinyin": "fèn nù",
                 "englishDefinition": "angry; indignant; wrath; ire",
                 "chineseDefinition": "（形）因愤恨而发怒：～的人群。",
-                "example": "他无耻的行为令我们全都～到了极点。",
+                "example": "他无耻的行为令我们～到了极点。",
                 "q1": "（形）因愤恨而发怒：～的人群。",
-                "q2": "他无耻的行为令我们全都～到了极点。"
+                "q2": "他无耻的行为令我们～到了极点。"
             },
             {
                 "index": 12,
                 "word": "畏罪潜逃",
                 "pinyin": "wèi zuì qián táo",
-                "englishDefinition": "flee to escape punishment;",
+                "englishDefinition": "flee to escape punishment",
                 "chineseDefinition": " 犯罪后害怕被制裁而逃走。畏罪：犯了罪怕被制裁。 ",
-                "example": "他心生贪念,偷走阿姨的项链,因为怕被发现,所以～。",
+                "example": "偷走项链的他，因怕被发现，所以～。",
                 "q1": " 犯罪后害怕被制裁而逃走。畏罪：犯了罪怕被制裁。 ",
-                "q2": "他心生贪念,偷走阿姨的项链,因为怕被发现,所以～。"
+                "q2": "偷走项链的他，因怕被发现，所以～。"
             },
             {
                 "index": 13,
@@ -677,18 +677,18 @@
                 "pinyin": "miāo",
                 "englishDefinition": "(onom.) meow; cat's mewing",
                 "chineseDefinition": "形容猫叫的声音。",
-                "example": "每当我们吃鱼的时候，小猫会～～叫。",
+                "example": "小猫在院子里跑来跑去，时不时发出～”的叫声。",
                 "q1": "形容猫叫的声音。",
-                "q2": "每当我们吃鱼的时候，小猫会～～叫。"
+                "q2": "小猫在院子里跑来跑去，时不时发出～”的叫声。"
             },
             {
                 "index": 14,
                 "word": "衔",
                 "pinyin": "xián",
                 "englishDefinition": "to hold in the mouth; to link",
-                "chineseDefinition": "1.马嚼子。2.用嘴含：燕子～泥。3.怀在心里：～恨。4.接受：～命。5.职务和级别的名号：职～。军～。大使～。",
+                "chineseDefinition": "1.用嘴含：燕子～泥。2.怀在心里：～恨。3.接受：～命。4.职务和级别的名号：职～。军～。大使～。",
                 "example": "小狗有时很淘气，口中～着奶奶的鞋子怎么也不放下。",
-                "q1": "1.马嚼子。2.用嘴含：燕子～泥。3.怀在心里：～恨。4.接受：～命。5.职务和级别的名号：职～。军～。大使～。",
+                "q1": "1.用嘴含：燕子～泥。2.怀在心里：～恨。3.接受：～命。4.职务和级别的名号：职～。军～。大使～。",
                 "q2": "小狗有时很淘气，口中～着奶奶的鞋子怎么也不放下。"
             },
             {
@@ -697,9 +697,9 @@
                 "pinyin": "gǎo",
                 "englishDefinition": "to do; to make",
                 "chineseDefinition": "1.做；干；从事：～生产。～工作。～建设。2.设法获得；弄：～点儿水来。～材料。〈动〉",
-                "example": "我也不知怎么～的，最近做什么事情总是心不在焉的。",
+                "example": "她最近～了很多研究，希望能在学术上取得一些突破。",
                 "q1": "1.做；干；从事：～生产。～工作。～建设。2.设法获得；弄：～点儿水来。～材料。〈动〉",
-                "q2": "我也不知怎么～的，最近做什么事情总是心不在焉的。"
+                "q2": "她最近～了很多研究，希望能在学术上取得一些突破。"
             },
             {
                 "index": 16,
@@ -707,9 +707,9 @@
                 "pinyin": "shī zōng",
                 "englishDefinition": "to be missing; to disappear",
                 "chineseDefinition": " 指去向不明，找不到踪迹。 ",
-                "example": "儿子的～使母亲的心破碎了。",
+                "example": "那位登山者在山中～了，救援队正在进行搜寻工作，希望可以尽快找到他。",
                 "q1": " 指去向不明，找不到踪迹。 ",
-                "q2": "儿子的～使母亲的心破碎了。"
+                "q2": "那位登山者在山中～了，救援队正在进行搜寻工作，希望可以尽快找到他。"
             },
             {
                 "index": 17,
@@ -729,9 +729,9 @@
                 "pinyin": "fēng fù",
                 "englishDefinition": "to enrich; rich; plentiful",
                 "chineseDefinition": "（形）种类多；数量大：资源～|经验～。［反］贫乏|单调。②（动）使丰富：～群众的业余生活。［反］减少。 ",
-                "example": "老师像人类灵魂的工程师，传授～的知识。",
+                "example": "这次旅行让我们体验了～的文化和美食。",
                 "q1": "（形）种类多；数量大：资源～|经验～。［反］贫乏|单调。②（动）使丰富：～群众的业余生活。［反］减少。 ",
-                "q2": "老师像人类灵魂的工程师，传授～的知识。"
+                "q2": "这次旅行让我们体验了～的文化和美食。"
             },
             {
                 "index": 2,
@@ -739,9 +739,9 @@
                 "pinyin": "hè",
                 "englishDefinition": "brown",
                 "chineseDefinition": "1.粗布或粗布衣服。2.黑黄色。〈名〉〈形〉",
-                "example": "巧克力的颜色是～色。",
+                "example": "他在画布上用了不同的～色画树干，让画面更有层次感。",
                 "q1": "1.粗布或粗布衣服。2.黑黄色。〈名〉〈形〉",
-                "q2": "巧克力的颜色是～色。"
+                "q2": "他在画布上用了不同的～色画树干，让画面更有层次感。"
             },
             {
                 "index": 3,
@@ -749,9 +749,9 @@
                 "pinyin": "pán xuán",
                 "englishDefinition": "to spiral; to go around; to hover",
                 "chineseDefinition": "（动）①回旋往复地绕着圈走或飞。②徘徊；逗留。 ",
-                "example": "飞机着陆前围绕机场～。",
+                "example": "他看着风筝在空中～，心情也变得轻松起来。",
                 "q1": "（动）①回旋往复地绕着圈走或飞。②徘徊；逗留。 ",
-                "q2": "飞机着陆前围绕机场～。"
+                "q2": "他看着风筝在空中～，心情也变得轻松起来。"
             },
             {
                 "index": 4,
@@ -759,9 +759,9 @@
                 "pinyin": "sī háo",
                 "englishDefinition": "the slightest amount or degree; a bit",
                 "chineseDefinition": "非常少或极小。 ",
-                "example": "学习要持之以恒,不能有～松懈。",
+                "example": "学习要持之以恒，不能有～松懈。",
                 "q1": "非常少或极小。 ",
-                "q2": "学习要持之以恒,不能有～松懈。"
+                "q2": "学习要持之以恒，不能有～松懈。"
             },
             {
                 "index": 5,
@@ -779,9 +779,9 @@
                 "pinyin": "lèng",
                 "englishDefinition": "to look distracted; to stare blankly",
                 "chineseDefinition": "1.失神；呆：发～。2.说话做事不考虑后果；鲁莽：～小子。开车小心点，别那么～。3.偏偏；偏要：明知不对，他～那么做。〈形〉〈副〉〈动〉",
-                "example": "这魔术让大家～住了，惊呼不可思议！",
+                "example": "他听到这个消息时～住了，一时间不知道该说什么。",
                 "q1": "1.失神；呆：发～。2.说话做事不考虑后果；鲁莽：～小子。开车小心点，别那么～。3.偏偏；偏要：明知不对，他～那么做。〈形〉〈副〉〈动〉",
-                "q2": "这魔术让大家～住了，惊呼不可思议！"
+                "q2": "他听到这个消息时～住了，一时间不知道该说什么。"
             },
             {
                 "index": 7,
@@ -803,9 +803,9 @@
                 "pinyin": "yīn sù",
                 "englishDefinition": "element; factor",
                 "chineseDefinition": "（名）①构成事物本质的成分。②决定事物成败的原因或条件。 ",
-                "example": "坚韧是成功的一大～。",
+                "example": "家庭环境是影响孩子成长的一个关键～。",
                 "q1": "（名）①构成事物本质的成分。②决定事物成败的原因或条件。 ",
-                "q2": "坚韧是成功的一大～。"
+                "q2": "家庭环境是影响孩子成长的一个关键～。"
             },
             {
                 "index": 2,
@@ -833,9 +833,9 @@
                 "pinyin": "jiān jù",
                 "englishDefinition": "arduous; terrible (task); very difficult",
                 "chineseDefinition": "（形）既困难又繁重：～的任务。 ",
-                "example": "经过通宵达旦的努力，杨海终于完成了这项～的任务。",
+                "example": "这项任务非常～，需要团队成员们共同努力才能完成。",
                 "q1": "（形）既困难又繁重：～的任务。 ",
-                "q2": "经过通宵达旦的努力，杨海终于完成了这项～的任务。"
+                "q2": "这项任务非常～，需要团队成员们共同努力才能完成。"
             },
             {
                 "index": 5,
@@ -863,9 +863,9 @@
                 "pinyin": "gān hàn",
                 "englishDefinition": "drought; arid; dry",
                 "chineseDefinition": "（形）因雨量不充足而土壤、气候干燥。",
-                "example": "一些植物在～的天气里会枯萎。",
+                "example": "～天气使得农作物无法生长，造成了农民的损失。",
                 "q1": "（形）因雨量不充足而土壤、气候干燥。",
-                "q2": "一些植物在～的天气里会枯萎。"
+                "q2": "～天气使得农作物无法生长，造成了农民的损失。"
             },
             {
                 "index": 8,
@@ -873,9 +873,9 @@
                 "pinyin": "kuò dà",
                 "englishDefinition": "to expand; to broaden one's scope",
                 "chineseDefinition": "（动）放大范围：～战果|～影响|～再生产。［反］缩小。 ",
-                "example": "为了满足需求，工厂～了生产。",
+                "example": "公司计划～生产线，以满足不断增长的市场需求。",
                 "q1": "（动）放大范围：～战果|～影响|～再生产。［反］缩小。 ",
-                "q2": "为了满足需求，工厂～了生产。"
+                "q2": "公司计划～生产线，以满足不断增长的市场需求。"
             },
             {
                 "index": 9,
@@ -893,19 +893,19 @@
                 "pinyin": "xǐ zǎo",
                 "englishDefinition": "to bathe; to take a shower",
                 "chineseDefinition": " 用水洗去身上的污垢。 ",
-                "example": "经常～可以保持身体的清洁。",
+                "example": "在炎热的夏天，～是一种非常舒服的享受。",
                 "q1": " 用水洗去身上的污垢。 ",
-                "q2": "经常～可以保持身体的清洁。"
+                "q2": "在炎热的夏天，～是一种非常舒服的享受。"
             },
             {
                 "index": 11,
                 "word": "浴室",
                 "pinyin": "yù shì",
                 "englishDefinition": "bathroom (room used for bathing)",
-                "chineseDefinition": " 1.有洗澡设备的房间。  ",
-                "example": "他慢吞吞地走进～洗澡。",
-                "q1": " 1.有洗澡设备的房间。  ",
-                "q2": "他慢吞吞地走进～洗澡。"
+                "chineseDefinition": " 有洗澡设备的房间。",
+                "example": "他在～里放了一些香氛蜡烛，让洗澡时更放松。",
+                "q1": " 有洗澡设备的房间。",
+                "q2": "他在～里放了一些香氛蜡烛，让洗澡时更放松。"
             },
             {
                 "index": 12,
@@ -913,9 +913,9 @@
                 "pinyin": "qū shì",
                 "englishDefinition": "trend; tendency",
                 "chineseDefinition": "（名）事物发展的倾向。",
-                "example": "连续几年景气不好，很多公司的营业状况都呈现江河日下的～。",
+                "example": "环保意识的提高使得可再生能源的使用成为全球发展的～。",
                 "q1": "（名）事物发展的倾向。",
-                "q2": "连续几年景气不好，很多公司的营业状况都呈现江河日下的～。"
+                "q2": "环保意识的提高使得可再生能源的使用成为全球发展的～。"
             },
             {
                 "index": 13,
@@ -923,9 +923,9 @@
                 "pinyin": "kāi yuán jié liú",
                 "englishDefinition": "to increase income and save on spending;",
                 "chineseDefinition": " 开辟水源，节制水流。比喻增加财物来源并节省开支。 ",
-                "example": "现在是非常时期，我们必须～，公司才能继续营业。",
+                "example": "政府通过～的政策，减少财政支出，优化资源分配。",
                 "q1": " 开辟水源，节制水流。比喻增加财物来源并节省开支。 ",
-                "q2": "现在是非常时期，我们必须～，公司才能继续营业。"
+                "q2": "政府通过～的政策，减少财政支出，优化资源分配。"
             }
         ],
         "人类最糟糕的发明": [
@@ -935,18 +935,18 @@
                 "pinyin": "méi tǐ",
                 "englishDefinition": "media, esp. news media",
                 "chineseDefinition": "（名）指交流、传播信息的工具，如报刊、广播、广告等：新闻～。",
-                "example": "各大～都纷纷报道了他的英雄事迹。",
+                "example": "社交～的普及改变了人们获取信息的方式。",
                 "q1": "（名）指交流、传播信息的工具，如报刊、广播、广告等：新闻～。",
-                "q2": "各大～都纷纷报道了他的英雄事迹。"
+                "q2": "社交～的普及改变了人们获取信息的方式。"
             },
             {
                 "index": 2,
                 "word": "塑料",
                 "pinyin": "sù liào",
                 "englishDefinition": "plastics",
-                "chineseDefinition": " 一般指以树脂为主要成分而具有可塑性的材料及其制品。在一定条件下，塑化成形，产品最后保持形状不变。种类很多，如电木、有机玻璃等。塑料具有质轻、绝缘、耐酸等优良特性。广泛用于制造业和生活用品，可代替金属、木材等。 ",
+                "chineseDefinition": " 一般指以树脂为主要成分而具有可塑性的材料及其制品。",
                 "example": "大家都以为这花是真的，没想到是用～做的。",
-                "q1": " 一般指以树脂为主要成分而具有可塑性的材料及其制品。在一定条件下，塑化成形，产品最后保持形状不变。种类很多，如电木、有机玻璃等。塑料具有质轻、绝缘、耐酸等优良特性。广泛用于制造业和生活用品，可代替金属、木材等。 ",
+                "q1": " 一般指以树脂为主要成分而具有可塑性的材料及其制品。",
                 "q2": "大家都以为这花是真的，没想到是用～做的。"
             },
             {
@@ -965,9 +965,9 @@
                 "pinyin": "lián jià",
                 "englishDefinition": "cheaply-priced; low-cost",
                 "chineseDefinition": "（形）①价钱比一般低：～商品|～劳动力。［反］昂贵。②比喻价值不大或没有价值的：～的眼泪打不动他。［反］昂贵。 ",
-                "example": "大家都不希望花太多钱因此喜欢买～物品。",
+                "example": "这种～的塑料产品虽然便宜，但使用寿命较短。",
                 "q1": "（形）①价钱比一般低：～商品|～劳动力。［反］昂贵。②比喻价值不大或没有价值的：～的眼泪打不动他。［反］昂贵。 ",
-                "q2": "大家都不希望花太多钱因此喜欢买～物品。"
+                "q2": "这种～的塑料产品虽然便宜，但使用寿命较短。"
             },
             {
                 "index": 5,
@@ -975,18 +975,18 @@
                 "pinyin": "tí gōng",
                 "englishDefinition": "to offer; to supply; to provide",
                 "chineseDefinition": "（动）供给：～方便|～帮助。 ",
-                "example": "他主动～帮助，我很感激他。",
+                "example": "公司将为员工～了各种培训，以帮助他们提高技能。",
                 "q1": "（动）供给：～方便|～帮助。 ",
-                "q2": "他主动～帮助，我很感激他。"
+                "q2": "公司将为员工～了各种培训，以帮助他们提高技能。"
             },
             {
                 "index": 6,
                 "word": "铺",
                 "pinyin": "pū",
                 "englishDefinition": "to spread; to display",
-                "chineseDefinition": "1.（～儿）铺子；商店：肉～。杂货～儿。2.用板子搭的床：床～。搭一个～。3.把东西展开或摊平：～床。～轨。～被褥。～平道路。平～直叙。〈动〉〈量〉〈名〉",
+                "chineseDefinition": "1.（～儿）铺子；商店：肉～。杂货～儿。2.用板子搭的床：床～。搭一个～。3.把东西展开或摊平：～床。～轨。～被褥。～平道路。平～直叙。〈动〉〈名〉〈动〉",
                 "example": "妈妈将地毯擦洗干净，～在客厅的地板上。",
-                "q1": "1.（～儿）铺子；商店：肉～。杂货～儿。2.用板子搭的床：床～。搭一个～。3.把东西展开或摊平：～床。～轨。～被褥。～平道路。平～直叙。〈动〉〈量〉〈名〉",
+                "q1": "1.（～儿）铺子；商店：肉～。杂货～儿。2.用板子搭的床：床～。搭一个～。3.把东西展开或摊平：～床。～轨。～被褥。～平道路。平～直叙。〈动〉〈名〉〈动〉",
                 "q2": "妈妈将地毯擦洗干净，～在客厅的地板上。"
             },
             {
@@ -1005,9 +1005,9 @@
                 "pinyin": "fén shāo",
                 "englishDefinition": "to burn; to set on fire",
                 "chineseDefinition": "（动）烧掉；烧毁：数千克毒品在会场当众被～了。 ",
-                "example": "新加坡～生活垃圾时产生的热能用于发电。",
+                "example": "由于天气干燥，～枯枝时要特别小心，避免引发火灾。",
                 "q1": "（动）烧掉；烧毁：数千克毒品在会场当众被～了。 ",
-                "q2": "新加坡～生活垃圾时产生的热能用于发电。"
+                "q2": "由于天气干燥，～枯枝时要特别小心，避免引发火灾。"
             },
             {
                 "index": 9,
@@ -1015,9 +1015,9 @@
                 "pinyin": "yān chén",
                 "englishDefinition": "smoke and dust",
                 "chineseDefinition": "（名）①烟雾和尘埃：～滚滚。②烽烟和战场上扬起的尘土，指战火：～四起。③（书）指人烟稠密的地方：地处偏僻，绝少～。 ",
-                "example": "这些车辆行驶时卷起一团团～。",
+                "example": "工厂排放的～对周围环境造成了严重污染。",
                 "q1": "（名）①烟雾和尘埃：～滚滚。②烽烟和战场上扬起的尘土，指战火：～四起。③（书）指人烟稠密的地方：地处偏僻，绝少～。 ",
-                "q2": "这些车辆行驶时卷起一团团～。"
+                "q2": "工厂排放的～对周围环境造成了严重污染。"
             },
             {
                 "index": 10,
@@ -1035,9 +1035,9 @@
                 "pinyin": "è zhì",
                 "englishDefinition": "to keep within limits; to constrain; to restrain",
                 "chineseDefinition": "（动）阻碍，禁绝：～政策|～敌人。 ",
-                "example": "由于不可～的贪欲，他最终身败名裂。",
+                "example": "学校努力～校园暴力，为学生创造一个安全的学习环境。",
                 "q1": "（动）阻碍，禁绝：～政策|～敌人。 ",
-                "q2": "由于不可～的贪欲，他最终身败名裂。"
+                "q2": "学校努力～校园暴力，为学生创造一个安全的学习环境。"
             },
             {
                 "index": 12,
@@ -1045,9 +1045,9 @@
                 "pinyin": "chàng dǎo",
                 "englishDefinition": "to advocate; to be a proponent of (an idea or school of thought)",
                 "chineseDefinition": "（动）带头提倡：～喜事新办。",
-                "example": "～高科技是本次科学节的一大特色。",
+                "example": "为了改善国民的健康状况，政府～健康生活，鼓励大家定期锻炼和保持均衡饮食。",
                 "q1": "（动）带头提倡：～喜事新办。",
-                "q2": "～高科技是本次科学节的一大特色。"
+                "q2": "为了改善国民的健康状况，政府～健康生活，鼓励大家定期锻炼和保持均衡饮食。"
             },
             {
                 "index": 13,
@@ -1055,19 +1055,19 @@
                 "pinyin": "zhú jiàn",
                 "englishDefinition": "gradually",
                 "chineseDefinition": "（副）渐渐：红颜色～消失了。［反］陡然。 ",
-                "example": "在同学的帮助下，我的成绩～变好了。",
+                "example": "在同学的帮助下，我的成绩～进步了。",
                 "q1": "（副）渐渐：红颜色～消失了。［反］陡然。 ",
-                "q2": "在同学的帮助下，我的成绩～变好了。"
+                "q2": "在同学的帮助下，我的成绩～进步了。"
             },
             {
                 "index": 14,
                 "word": "威胁",
                 "pinyin": "wēi xié",
                 "englishDefinition": "to threaten; to menace",
-                "chineseDefinition": "（动）用武力或权势逼迫、恫吓他人。［反］协助|帮助。 ",
-                "example": "面对歹徒的～，他丝毫不害怕。",
-                "q1": "（动）用武力或权势逼迫、恫吓他人。［反］协助|帮助。 ",
-                "q2": "面对歹徒的～，他丝毫不害怕。"
+                "chineseDefinition": "（动）用武力或权势逼迫、恫吓他人。［反］安抚｜宽慰",
+                "example": "过度捕捞对海洋生态系统构成了严重的～。",
+                "q1": "（动）用武力或权势逼迫、恫吓他人。［反］安抚｜宽慰",
+                "q2": "过度捕捞对海洋生态系统构成了严重的～。"
             },
             {
                 "index": 15,
@@ -1087,9 +1087,9 @@
                 "pinyin": "tǒng jì",
                 "englishDefinition": "statistics; to count; to add up",
                 "chineseDefinition": "（动）①总括地计算：～人数|把收支～一下。②指对某一现象有关的数据的搜集、整理、计算和分析等：～学|～人员。 ",
-                "example": "～完选票，老师宣布选举结果，明华当选班长。",
+                "example": "图书馆～了每个月借出的书籍数量，以便更好地管理书籍。",
                 "q1": "（动）①总括地计算：～人数|把收支～一下。②指对某一现象有关的数据的搜集、整理、计算和分析等：～学|～人员。 ",
-                "q2": "～完选票，老师宣布选举结果，明华当选班长。"
+                "q2": "图书馆～了每个月借出的书籍数量，以便更好地管理书籍。"
             },
             {
                 "index": 2,
@@ -1097,9 +1097,9 @@
                 "pinyin": "xuǎn zé",
                 "englishDefinition": "to select; to pick; choice",
                 "chineseDefinition": "（动）挑选：～商品|～题材。",
-                "example": "父母不应该干扰孩子的～，最多可以给他一些建议。",
+                "example": "她在书店里～了一本喜欢的小说作为生日礼物。",
                 "q1": "（动）挑选：～商品|～题材。",
-                "q2": "父母不应该干扰孩子的～，最多可以给他一些建议。"
+                "q2": "她在书店里～了一本喜欢的小说作为生日礼物。"
             },
             {
                 "index": 3,
@@ -1107,9 +1107,9 @@
                 "pinyin": "fàn làn",
                 "englishDefinition": "to be in flood; to overflow (the banks); to spread unchecked",
                 "chineseDefinition": "（动）江河湖泊的水溢出。比喻坏事坏思想任意流传扩散：洪水～|～成灾。 ",
-                "example": "听到河水～的消息，我心中着急极了。",
+                "example": "洪水使河水～，淹没了周围的田地和房屋。",
                 "q1": "（动）江河湖泊的水溢出。比喻坏事坏思想任意流传扩散：洪水～|～成灾。 ",
-                "q2": "听到河水～的消息，我心中着急极了。"
+                "q2": "洪水使河水～，淹没了周围的田地和房屋。"
             },
             {
                 "index": 4,
@@ -1137,19 +1137,19 @@
                 "pinyin": "quē fá",
                 "englishDefinition": "to lack; to be short of; lack; shortage",
                 "chineseDefinition": "（动）没有或不够：～人才|～经验。［反］充足。 ",
-                "example": "～睡眠是有害于健康的",
+                "example": "由于～时间管理，他经常在做作业时分心，结果经常无法准时交作业。",
                 "q1": "（动）没有或不够：～人才|～经验。［反］充足。 ",
-                "q2": "～睡眠是有害于健康的"
+                "q2": "由于～时间管理，他经常在做作业时分心，结果经常无法准时交作业。"
             },
             {
                 "index": 7,
                 "word": "亿",
                 "pinyin": "yì",
                 "englishDefinition": "100 million",
-                "chineseDefinition": "1.数目。一万万。",
-                "example": "2021年的世界人口达到79～人。",
-                "q1": "1.数目。一万万。",
-                "q2": "2021年的世界人口达到79～人。"
+                "chineseDefinition": "数目。一万万。",
+                "example": "全球有八十～人口。",
+                "q1": "数目。一万万。",
+                "q2": "全球有八十～人口。"
             },
             {
                 "index": 8,
@@ -1167,9 +1167,9 @@
                 "pinyin": "jǐn shèn",
                 "englishDefinition": "cautious; prudent",
                 "chineseDefinition": "（形）慎重；小心：小心～。［反］疏忽。 ",
-                "example": "选书应和交友一样～，因为书籍和朋友都会影响你。",
+                "example": "医生在进行手术时必须非常～，以确保病人的安全。",
                 "q1": "（形）慎重；小心：小心～。［反］疏忽。 ",
-                "q2": "选书应和交友一样～，因为书籍和朋友都会影响你。"
+                "q2": "医生在进行手术时必须非常～，以确保病人的安全。"
             },
             {
                 "index": 10,
@@ -1200,10 +1200,10 @@
                 "word": "身材",
                 "pinyin": "shēn cái",
                 "englishDefinition": "build (height and weight); figure",
-                "chineseDefinition": " 指身体的高低、肥瘦。 ",
-                "example": "他是个~高大的老先生。",
-                "q1": " 指身体的高低、肥瘦。 ",
-                "q2": "他是个~高大的老先生。"
+                "chineseDefinition": " 指身体的高矮胖瘦。 ",
+                "example": "健身房的教练会根据每个人的～制定个性化的锻炼计划。",
+                "q1": " 指身体的高矮胖瘦。 ",
+                "q2": "健身房的教练会根据每个人的～制定个性化的锻炼计划。"
             },
             {
                 "index": 3,
@@ -1231,9 +1231,9 @@
                 "pinyin": "yòu huò",
                 "englishDefinition": "to entice; to lure",
                 "chineseDefinition": "（动）①引诱；迷惑。②吸引；招引。",
-                "example": "小明因为经不起毒品的~而倾家荡产，现在后悔不已。",
+                "example": "街头的小吃摊总是充满了美食～，让人忍不住停下来尝尝。",
                 "q1": "（动）①引诱；迷惑。②吸引；招引。",
-                "q2": "小明因为经不起毒品的~而倾家荡产，现在后悔不已。"
+                "q2": "街头的小吃摊总是充满了美食～，让人忍不住停下来尝尝。"
             },
             {
                 "index": 6,
@@ -1241,9 +1241,9 @@
                 "pinyin": "yì lì",
                 "englishDefinition": "perseverance; willpower",
                 "chineseDefinition": "（名）坚定持久，毫不动摇的意志。 ",
-                "example": "做任何事情都需要耐心和~。",
+                "example": "他通过不断地练习，凭借～获得了奥林匹克游泳金牌。",
                 "q1": "（名）坚定持久，毫不动摇的意志。 ",
-                "q2": "做任何事情都需要耐心和~。"
+                "q2": "他通过不断地练习，凭借～获得了奥林匹克游泳金牌。"
             },
             {
                 "index": 7,
@@ -1251,7 +1251,7 @@
                 "pinyin": "jiè",
                 "englishDefinition": "to guard against; to give up or stop doing sth",
                 "chineseDefinition": "1.防备；警惕：～心。～备.2. 戒除：～烟。～毒。3.指禁止做的事情：开～。杀～。〈动〉〈名〉",
-                "example": "经过几年的努力，他终于成功戒烟了。",
+                "example": "经过几年的努力，他终于成功～烟了。",
                 "q1": "1.防备；警惕：～心。～备.2. 戒除：～烟。～毒。3.指禁止做的事情：开～。杀～。〈动〉〈名〉",
                 "q2": "经过几年的努力，他终于成功～烟了。"
             },
@@ -1281,9 +1281,9 @@
                 "pinyin": "xián",
                 "englishDefinition": "to dislike; suspicion; resentment; ",
                 "chineseDefinition": "1.嫌疑：避～。涉～。2.嫌怨：前～。3.厌恶；不满意：讨人～。〈动〉〈名〉",
-                "example": "老板~他拙手笨脚，所以把他辞退。",
+                "example": "老板~他拙手笨脚，所以把他辞退了。",
                 "q1": "1.嫌疑：避～。涉～。2.嫌怨：前～。3.厌恶；不满意：讨人～。〈动〉〈名〉",
-                "q2": "老板~他拙手笨脚，所以把他辞退。"
+                "q2": "老板~他拙手笨脚，所以把他辞退了。"
             },
             {
                 "index": 11,
@@ -1301,9 +1301,9 @@
                 "pinyin": "pēng rèn",
                 "englishDefinition": "cooking; culinary arts",
                 "chineseDefinition": "（动）做饭菜。 ",
-                "example": "她跟着~节目，依样画葫芦地炒了一道菜。 ",
+                "example": "他在～过程中加入了特别的调料，使菜肴更加美味。",
                 "q1": "（动）做饭菜。 ",
-                "q2": "她跟着~节目，依样画葫芦地炒了一道菜。 "
+                "q2": "他在～过程中加入了特别的调料，使菜肴更加美味。"
             },
             {
                 "index": 13,
@@ -1311,9 +1311,9 @@
                 "pinyin": "fú hé",
                 "englishDefinition": "in keeping with; in line with",
                 "chineseDefinition": "（动）（数量、形状、条件、情节等）相合；合乎：～条件|～规定|～事实。［反］违背。 ",
-                "example": "哥哥近视，可能不~当飞行员的要求。",
+                "example": "我们制作的视频既～国庆主题又有创意，结果获得了第一奖。",
                 "q1": "（动）（数量、形状、条件、情节等）相合；合乎：～条件|～规定|～事实。［反］违背。 ",
-                "q2": "哥哥近视，可能不~当飞行员的要求。"
+                "q2": "我们制作的视频既～国庆主题又有创意，结果获得了第一奖。"
             }
         ],
         "恐怖事件": [
@@ -1333,9 +1333,9 @@
                 "pinyin": "wěi wǎn",
                 "englishDefinition": "tactful",
                 "chineseDefinition": "（形）婉转，不生硬：语气很～。［反］直率。",
-                "example": "丈夫~地把那伤心的消息告诉他妻子。",
+                "example": "丈夫~地把那伤心的消息告诉妻子。",
                 "q1": "（形）婉转，不生硬：语气很～。［反］直率。",
-                "q2": "丈夫~地把那伤心的消息告诉他妻子。"
+                "q2": "丈夫~地把那伤心的消息告诉妻子。"
             },
             {
                 "index": 3,
@@ -1343,9 +1343,9 @@
                 "pinyin": "chè dǐ",
                 "englishDefinition": "thorough; thoroughly",
                 "chineseDefinition": "（形）一直到底；深而透：～改正缺点。 ",
-                "example": "打扫卫生时一定要~，不能留一个死角。",
+                "example": "他把房间～打扫了一遍，把每个角落都清理干净。",
                 "q1": "（形）一直到底；深而透：～改正缺点。 ",
-                "q2": "打扫卫生时一定要~，不能留一个死角。"
+                "q2": "他把房间～打扫了一遍，把每个角落都清理干净。"
             },
             {
                 "index": 4,
@@ -1353,9 +1353,9 @@
                 "pinyin": "fèng",
                 "englishDefinition": "seam; crack",
                 "chineseDefinition": "1.接合的地方：无～钢管。2.缝隙：裂～。见～插针。2.用针线将原来不在一起或开了口儿的东西连上：～件衣裳",
-                "example": "弟弟动过手术，伤口刚～好。",
+                "example": "～合伤口是医生在手术中重要的步骤。",
                 "q1": "1.接合的地方：无～钢管。2.缝隙：裂～。见～插针。2.用针线将原来不在一起或开了口儿的东西连上：～件衣裳",
-                "q2": "弟弟动过手术，伤口刚～好。"
+                "q2": "～合伤口是医生在手术中重要的步骤。"
             },
             {
                 "index": 5,
@@ -1363,9 +1363,9 @@
                 "pinyin": "yǎn",
                 "englishDefinition": "to cover up; to close; to surprise",
                 "chineseDefinition": "1.遮盖；掩蔽：～口而笑。～人耳目。2.关；合：虚～着房门。3.乘人不备（袭击、捕捉）：～杀。～捕。〈动〉",
-                "example": "我站在一旁，努力~藏自己的恐惧。",
+                "example": "她用手～住了自己的眼睛，不想看到那些令人不快的画面。",
                 "q1": "1.遮盖；掩蔽：～口而笑。～人耳目。2.关；合：虚～着房门。3.乘人不备（袭击、捕捉）：～杀。～捕。〈动〉",
-                "q2": "我站在一旁，努力~藏自己的恐惧。"
+                "q2": "她用手～住了自己的眼睛，不想看到那些令人不快的画面。"
             },
             {
                 "index": 6,
@@ -1373,9 +1373,9 @@
                 "pinyin": "kǒng jù",
                 "englishDefinition": "to be frightened; fear; dread",
                 "chineseDefinition": "（动）心里慌张不安、害怕：～不安。［近］恐怖|害怕。 ",
-                "example": "燕华因为~而发出了尖叫声。",
+                "example": "即使在小小的高台上，他也因为惧高症而感到～和不适。",
                 "q1": "（动）心里慌张不安、害怕：～不安。［近］恐怖|害怕。 ",
-                "q2": "燕华因为~而发出了尖叫声。"
+                "q2": "即使在小小的高台上，他也因为惧高症而感到～和不适。"
             },
             {
                 "index": 7,
@@ -1393,9 +1393,9 @@
                 "pinyin": "suǒ",
                 "englishDefinition": "to lock; lock",
                 "chineseDefinition": "1.安在门窗、器物等的开合处或连接处，使人不能随便打开的金属器具，要用钥匙、密码、磁卡等才能打开。2.用锁把门窗、器物等的开合处关住或拴住。",
-                "example": "你太粗心大意了，出门时竟然差点忘了~门。",
+                "example": "为了避免家中被盗，他在外出时总是～好门窗。",
                 "q1": "1.安在门窗、器物等的开合处或连接处，使人不能随便打开的金属器具，要用钥匙、密码、磁卡等才能打开。2.用锁把门窗、器物等的开合处关住或拴住。",
-                "q2": "你太粗心大意了，出门时竟然差点忘了~门。"
+                "q2": "为了避免家中被盗，他在外出时总是～好门窗。"
             },
             {
                 "index": 9,
@@ -1413,9 +1413,9 @@
                 "pinyin": "chàn dǒu",
                 "englishDefinition": "to shiver; to tremble",
                 "chineseDefinition": "（动）哆嗦；战栗。 ",
-                "example": "天气寒冷，他冻得全身都～。",
+                "example": "她因为天气寒冷而全身～。",
                 "q1": "（动）哆嗦；战栗。 ",
-                "q2": "天气寒冷，他冻得全身都～。"
+                "q2": "她因为天气寒冷而全身～。"
             },
             {
                 "index": 11,
@@ -1443,9 +1443,9 @@
                 "pinyin": "kǒng bù",
                 "englishDefinition": "terrible; frightful; frightening",
                 "chineseDefinition": "（形）因受到某种威胁而引起的恐惧：～事件|～气氛|～万分。［近］恐惧。 ",
-                "example": "看完~片后，他心惊肉跳，无法入睡。",
+                "example": "电影的～场景让她整晚都睡不着。",
                 "q1": "（形）因受到某种威胁而引起的恐惧：～事件|～气氛|～万分。［近］恐惧。 ",
-                "q2": "看完~片后，他心惊肉跳，无法入睡。"
+                "q2": "电影的～场景让她整晚都睡不着。"
             },
             {
                 "index": 14,
@@ -1453,9 +1453,9 @@
                 "pinyin": "tōng xiāo",
                 "englishDefinition": "all night; throughout the night",
                 "chineseDefinition": "（名）整夜：～达旦。［近］彻夜。 ",
-                "example": "为了考得更好，他~看书，结果适得其反。",
+                "example": "他为了准备考试，昨晚～达旦地复习。",
                 "q1": "（名）整夜：～达旦。［近］彻夜。 ",
-                "q2": "为了考得更好，他~看书，结果适得其反。"
+                "q2": "他为了准备考试，昨晚～达旦地复习。"
             },
             {
                 "index": 15,
@@ -1463,19 +1463,19 @@
                 "pinyin": "jīng sǒng",
                 "englishDefinition": "horror (movie); thriller",
                 "chineseDefinition": "惊惧。",
-                "example": "他在外面等候的时候看到了很~的一幕，吓了一跳。",
+                "example": "电影的～镜头让观众们都紧张得几乎无法呼吸。",
                 "q1": "惊惧。",
-                "q2": "他在外面等候的时候看到了很~的一幕，吓了一跳。"
+                "q2": "电影的～镜头让观众们都紧张得几乎无法呼吸。"
             },
             {
                 "index": 16,
                 "word": "和谐",
                 "pinyin": "hé xié",
                 "englishDefinition": "harmonious; harmony",
-                "chineseDefinition": "（形）协调而匀称：音调～。［近］协调。 ",
-                "example": "我们要关心残疾人的生活，努力构建~社会。 ",
-                "q1": "（形）协调而匀称：音调～。［近］协调。 ",
-                "q2": "我们要关心残疾人的生活，努力构建~社会。 "
+                "chineseDefinition": "（形）和睦协调",
+                "example": "政府致力于建设一个～社会，鼓励不同群体之间的理解与包容。",
+                "q1": "（形）和睦协调",
+                "q2": "政府致力于建设一个～社会，鼓励不同群体之间的理解与包容。"
             }
         ],
         "最美的姿势": [
@@ -1485,9 +1485,9 @@
                 "pinyin": "bó zi",
                 "englishDefinition": "neck",
                 "chineseDefinition": " 颈项﹐头和躯干相连接的部分。 ",
-                "example": "做完了手中的工作，爸爸活动了一下僵硬的~。",
+                "example": "她～上佩戴了一条精美的项链，使她显得格外迷人。",
                 "q1": " 颈项﹐头和躯干相连接的部分。 ",
-                "q2": "做完了手中的工作，爸爸活动了一下僵硬的~。"
+                "q2": "她～上佩戴了一条精美的项链，使她显得格外迷人。"
             },
             {
                 "index": 2,
@@ -1495,9 +1495,9 @@
                 "pinyin": "shè jiāo méi tǐ",
                 "englishDefinition": "social media",
                 "chineseDefinition": "指互联网上基于用户关系的内容生产与交换平台",
-                "example": "最近有一组视频在~疯传，你看过了吗？",
+                "example": "～上的虚假信息有时会误导人们的判断。",
                 "q1": "指互联网上基于用户关系的内容生产与交换平台",
-                "q2": "最近有一组视频在~疯传，你看过了吗？"
+                "q2": "～上的虚假信息有时会误导人们的判断。"
             },
             {
                 "index": 3,
@@ -1505,9 +1505,9 @@
                 "pinyin": "quē xiàn",
                 "englishDefinition": "defect; flaw",
                 "chineseDefinition": "（名）欠缺或不完满的地方：生理～。［近］缺点。［反］优点。",
-                "example": "拿别人的生理~取乐是不道德的行为。",
+                "example": "她从小就有听力～，所以每天都戴助听器。",
                 "q1": "（名）欠缺或不完满的地方：生理～。［近］缺点。［反］优点。",
-                "q2": "拿别人的生理~取乐是不道德的行为。"
+                "q2": "她从小就有听力～，所以每天都戴助听器。"
             },
             {
                 "index": 4,
@@ -1535,9 +1535,9 @@
                 "pinyin": "cáo zá",
                 "englishDefinition": "noisy; clamorous",
                 "chineseDefinition": "（形）（声音）杂乱；喧闹：人声～|声音～刺耳。 ",
-                "example": "老师一走进教室，教室里的~声立刻停止下来。",
+                "example": "餐厅里人声～，谈话时必须大声说话。",
                 "q1": "（形）（声音）杂乱；喧闹：人声～|声音～刺耳。 ",
-                "q2": "老师一走进教室，教室里的~声立刻停止下来。"
+                "q2": "餐厅里人声～，谈话时必须大声说话。"
             },
             {
                 "index": 7,
@@ -1545,9 +1545,9 @@
                 "pinyin": "jǔ sàng",
                 "englishDefinition": "dispirited; dejected; dismayed",
                 "chineseDefinition": "（形）灰心失望：神情～。［近］懊丧。［反］振奋|抖擞。②（动）使灰心失望。 ",
-                "example": "他因考试不及格深感~。 ",
+                "example": "他因考试不及格而感到非常~。 ",
                 "q1": "（形）灰心失望：神情～。［近］懊丧。［反］振奋|抖擞。②（动）使灰心失望。 ",
-                "q2": "他因考试不及格深感~。 "
+                "q2": "他因考试不及格而感到非常~。 "
             },
             {
                 "index": 8,
@@ -1555,9 +1555,9 @@
                 "pinyin": "ruò yǒu suǒ sī",
                 "englishDefinition": "looking pensive; thoughtfully",
                 "chineseDefinition": " 思：思考。好像在思考什么似的。形容沉思发愣的样子。 ",
-                "example": "她凝视着远去的他,~。",
+                "example": "她在听到这个消息后，～地沉默了一会儿。",
                 "q1": " 思：思考。好像在思考什么似的。形容沉思发愣的样子。 ",
-                "q2": "她凝视着远去的他,~。"
+                "q2": "她在听到这个消息后，～地沉默了一会儿。"
             },
             {
                 "index": 9,
@@ -1565,9 +1565,9 @@
                 "pinyin": "mó hu",
                 "englishDefinition": "vague; indistinct; fuzzy",
                 "chineseDefinition": "（形）不清楚；不分明。［近］含糊。［反］清楚|清晰。②（动）混淆：不能～概念。 ",
-                "example": "这张照片已经~不清，无法辨认了。",
+                "example": "她的记忆变得～，已经不太记得当时的具体情况",
                 "q1": "（形）不清楚；不分明。［近］含糊。［反］清楚|清晰。②（动）混淆：不能～概念。 ",
-                "q2": "这张照片已经~不清，无法辨认了。"
+                "q2": "她的记忆变得～，已经不太记得当时的具体情况"
             }
         ]
     },
@@ -1579,9 +1579,9 @@
                 "pinyin": "jiǎn lòu",
                 "englishDefinition": "simple and crude",
                 "chineseDefinition": "（形）（房屋、设备等）简单粗陋，不完备：设备～|～的工棚。［反］完善。 ",
-                "example": "这么~的山村学校，居然培养出那么多的优秀学生，真让人意外。",
+                "example": "他的房间很～，只有一张床和一张椅子。",
                 "q1": "（形）（房屋、设备等）简单粗陋，不完备：设备～|～的工棚。［反］完善。 ",
-                "q2": "这么~的山村学校，居然培养出那么多的优秀学生，真让人意外。"
+                "q2": "他的房间很～，只有一张床和一张椅子。"
             },
             {
                 "index": 2,
@@ -1589,29 +1589,29 @@
                 "pinyin": "zhèng fǔ",
                 "englishDefinition": "government",
                 "chineseDefinition": "（名）国家权力机关的执行机关，即国家行政机关。 ",
-                "example": "去年，~颁布了一条新的法律。",
+                "example": "～设立了一个专门的部门来处理环境保护问题。",
                 "q1": "（名）国家权力机关的执行机关，即国家行政机关。 ",
-                "q2": "去年，~颁布了一条新的法律。"
+                "q2": "～设立了一个专门的部门来处理环境保护问题。"
             },
             {
                 "index": 3,
                 "word": "开辟",
                 "pinyin": "kāi pì",
-                "englishDefinition": " to set up; to establish",
+                "englishDefinition": "to set up; to establish",
                 "chineseDefinition": " （动）①打开通路；创立：～航线|～市场。［近］开拓。②开拓发展；开垦：～工作",
-                "example": "新上任的总经理勇于~新市场，为救活公司作出了突出贡献。",
+                "example": "政府计划～一条新的高速公路，以改善城市之间的交通。",
                 "q1": " （动）①打开通路；创立：～航线|～市场。［近］开拓。②开拓发展；开垦：～工作",
-                "q2": "新上任的总经理勇于~新市场，为救活公司作出了突出贡献。"
+                "q2": "政府计划～一条新的高速公路，以改善城市之间的交通。"
             },
             {
                 "index": 4,
                 "word": "市镇",
                 "pinyin": "shì zhèn",
-                "englishDefinition": "small town",
-                "chineseDefinition": "行政分划的一种。",
-                "example": "由于远离~，住在这里的人们依然保持着朴实的本性。",
-                "q1": "行政分划的一种。",
-                "q2": "由于远离~，住在这里的人们依然保持着朴实的本性。"
+                "englishDefinition": "town",
+                "chineseDefinition": "是行政分划的一种，一般大于区县，小于市。",
+                "example": "这个～有着悠久的历史和丰富的文化传统。",
+                "q1": "是行政分划的一种，一般大于区县，小于市。",
+                "q2": "这个～有着悠久的历史和丰富的文化传统。"
             },
             {
                 "index": 5,
@@ -1619,9 +1619,9 @@
                 "pinyin": "zōng jiào",
                 "englishDefinition": "religion",
                 "chineseDefinition": "（名）一种社会意识形态，是对客观世界的一种虚幻的反映，要求人们信仰上帝、神道、精灵、因果报应等，把希望寄托于所谓天国或来世。",
-                "example": "新加坡的十大~包括佛教和基督教。",
+                "example": "我们必须尊重不同~的信仰，这样才能促进社会的和谐。",
                 "q1": "（名）一种社会意识形态，是对客观世界的一种虚幻的反映，要求人们信仰上帝、神道、精灵、因果报应等，把希望寄托于所谓天国或来世。",
-                "q2": "新加坡的十大~包括佛教和基督教。"
+                "q2": "我们必须尊重不同~的信仰，这样才能促进社会的和谐。"
             },
             {
                 "index": 6,
@@ -1629,9 +1629,9 @@
                 "pinyin": "zōng hé",
                 "englishDefinition": "comprehensive; synthesized",
                 "chineseDefinition": "（动）①把分析过的对象或现象的各个部分、各属性联合成一个统一的整体。［近］概括。［反］分析。②把各种不同而互相关联的事物或现象组合在一起：～利用。",
-                "example": "从他俩的~实力来看,水平不相上下。",
+                "example": "公司在产品设计中～了客户反馈和市场趋势，以提升产品质量。",
                 "q1": "（动）①把分析过的对象或现象的各个部分、各属性联合成一个统一的整体。［近］概括。［反］分析。②把各种不同而互相关联的事物或现象组合在一起：～利用。",
-                "q2": "从他俩的~实力来看,水平不相上下。"
+                "q2": "公司在产品设计中～了客户反馈和市场趋势，以提升产品质量。"
             },
             {
                 "index": 7,
@@ -1669,9 +1669,9 @@
                 "pinyin": "fù yù",
                 "englishDefinition": "prosperous; well-to-do; well-off",
                 "chineseDefinition": "（形）财物丰富充足：他家越来越～。［近］阔绰。［反］贫困。 ",
-                "example": "他的家境十分~，從小就不愁吃穿。",
+                "example": "她的家境～，每年都能去世界各地旅行。",
                 "q1": "（形）财物丰富充足：他家越来越～。［近］阔绰。［反］贫困。 ",
-                "q2": "他的家境十分~，從小就不愁吃穿。"
+                "q2": "她的家境～，每年都能去世界各地旅行。"
             },
             {
                 "index": 11,
@@ -1689,9 +1689,9 @@
                 "pinyin": "zhàng ài",
                 "englishDefinition": "barrier; obstacle",
                 "chineseDefinition": "（动）挡住道路；阻碍。②（名）阻挡前进的东西：清除～|思想～。 ",
-                "example": "这种人工智能机器人能随意行走并自动避让～物。",
+                "example": "心理～让他在公众场合发言时感到不安。",
                 "q1": "（动）挡住道路；阻碍。②（名）阻挡前进的东西：清除～|思想～。 ",
-                "q2": "这种人工智能机器人能随意行走并自动避让～物。"
+                "q2": "心理～让他在公众场合发言时感到不安。"
             },
             {
                 "index": 13,
@@ -1709,9 +1709,9 @@
                 "pinyin": "lǚ cì",
                 "englishDefinition": "repeatedly; time and again",
                 "chineseDefinition": "（副）表示动作、行为多次重复：～获奖。 ",
-                "example": "他~犯错，却从不接受教训。",
+                "example": "他~犯错，却从不接受批评。",
                 "q1": "（副）表示动作、行为多次重复：～获奖。 ",
-                "q2": "他~犯错，却从不接受教训。"
+                "q2": "他~犯错，却从不接受批评。"
             },
             {
                 "index": 15,
@@ -1719,9 +1719,9 @@
                 "pinyin": "róng yù",
                 "englishDefinition": "honor; credit; glory",
                 "chineseDefinition": "（名）光荣的名誉。［反］耻辱。 ",
-                "example": "他的成功给他带来了~，让他深受大家的喜爱。",
+                "example": "这位科学家因其杰出的研究成果获得了国家级～。",
                 "q1": "（名）光荣的名誉。［反］耻辱。 ",
-                "q2": "他的成功给他带来了~，让他深受大家的喜爱。"
+                "q2": "这位科学家因其杰出的研究成果获得了国家级～。"
             }
         ],
         "雨树": [
@@ -1731,19 +1731,19 @@
                 "pinyin": "zī tài",
                 "englishDefinition": "attitude; posture; stance",
                 "chineseDefinition": "（名）姿势；态度：～优美|谦虚的～。［近］姿势。 ",
-                "example": "购物中心的橱窗里摆放着~各异的模特。",
+                "example": "老师提醒学生在演讲时要注意自己的～，以提升表达效果。",
                 "q1": "（名）姿势；态度：～优美|谦虚的～。［近］姿势。 ",
-                "q2": "购物中心的橱窗里摆放着~各异的模特。"
+                "q2": "老师提醒学生在演讲时要注意自己的～，以提升表达效果。"
             },
             {
                 "index": 2,
                 "word": "接触",
                 "pinyin": "jiē chù",
                 "englishDefinition": "to touch; to contact",
-                "chineseDefinition": "（动）①挨着；碰着。②接近并交往。［反］隔绝|脱离。③指军事冲突。 ",
-                "example": "小张知书识礼，举止文雅，一~便给人留下了好的印象。",
-                "q1": "（动）①挨着；碰着。②接近并交往。［反］隔绝|脱离。③指军事冲突。 ",
-                "q2": "小张知书识礼，举止文雅，一~便给人留下了好的印象。"
+                "chineseDefinition": "（动）①挨着；碰着。②接近并交往。［反］隔绝|脱离。",
+                "example": "学校组织的交流活动使学生们有机会～不同的文化。",
+                "q1": "（动）①挨着；碰着。②接近并交往。［反］隔绝|脱离。",
+                "q2": "学校组织的交流活动使学生们有机会～不同的文化。"
             },
             {
                 "index": 3,
@@ -1760,9 +1760,9 @@
                 "word": "心旷神怡",
                 "pinyin": "xīn kuàng shén yí",
                 "englishDefinition": "carefree and relaxed",
-                "chineseDefinition": " 心情舒畅，精神愉快。［近］赏心悦目。［反］目不忍睹。 ",
+                "chineseDefinition": " 心情舒畅，精神愉快。［近］赏心悦目。［反］心如火焚。",
                 "example": "站在船头，放眼大海，真叫人~。",
-                "q1": " 心情舒畅，精神愉快。［近］赏心悦目。［反］目不忍睹。 ",
+                "q1": " 心情舒畅，精神愉快。［近］赏心悦目。［反］心如火焚。",
                 "q2": "站在船头，放眼大海，真叫人~。"
             },
             {
@@ -1771,19 +1771,19 @@
                 "pinyin": "hé lǒng",
                 "englishDefinition": "to close; to bring together; to fold (wings)",
                 "chineseDefinition": "（动）合在一块儿。 ",
-                "example": "只要你轻轻地碰含羞草，它的叶子就会合拢起来。",
+                "example": "只要你轻轻地碰含羞草，它的叶子就会～。",
                 "q1": "（动）合在一块儿。 ",
-                "q2": "只要你轻轻地碰含羞草，它的叶子就会合拢起来。"
+                "q2": "只要你轻轻地碰含羞草，它的叶子就会～。"
             },
             {
                 "index": 6,
                 "word": "林荫",
                 "pinyin": "lín yìn",
-                "englishDefinition": "--",
+                "englishDefinition": "an avenue of trees",
                 "chineseDefinition": "林木下的阴凉处。",
-                "example": "天气炎热，我在~下乘凉。",
+                "example": "公园里的～遮挡了炎热的阳光，让人感到舒适。",
                 "q1": "林木下的阴凉处。",
-                "q2": "天气炎热，我在~下乘凉。"
+                "q2": "公园里的～遮挡了炎热的阳光，让人感到舒适。"
             },
             {
                 "index": 7,
@@ -1791,9 +1791,9 @@
                 "pinyin": "zhāng yí",
                 "englishDefinition": "Changi",
                 "chineseDefinition": "Changi 新加坡地名",
-                "example": "有人说，~机场本身就是一个值得一游的目的地。",
+                "example": "新加坡的～机场被誉为全球最先进的机场之一，每年吸引着大量游客。",
                 "q1": "Changi 新加坡地名",
-                "q2": "有人说，~机场本身就是一个值得一游的目的地。"
+                "q2": "新加坡的～机场被誉为全球最先进的机场之一，每年吸引着大量游客。"
             },
             {
                 "index": 8,
@@ -1821,9 +1821,9 @@
                 "pinyin": "xīn shǎng",
                 "englishDefinition": "to appreciate; to enjoy; to admire",
                 "chineseDefinition": "（动）①用喜爱的心情享受美好的事物，领略其中的趣味：～音乐。［近］观赏。②认为好；喜欢：～这个人。 ",
-                "example": "我非常~那些助人为乐的好心人。",
+                "example": "他站在山顶，～着日落的美丽景色，感叹大自然的奇妙。",
                 "q1": "（动）①用喜爱的心情享受美好的事物，领略其中的趣味：～音乐。［近］观赏。②认为好；喜欢：～这个人。 ",
-                "q2": "我非常~那些助人为乐的好心人。"
+                "q2": "他站在山顶，～着日落的美丽景色，感叹大自然的奇妙。"
             },
             {
                 "index": 11,
@@ -1841,9 +1841,9 @@
                 "pinyin": "pó suō",
                 "englishDefinition": "to swirl about; (of leaves and branches) to sway",
                 "chineseDefinition": "（形）盘旋舞蹈的样子。 ",
-                "example": "公园里，人们随着悠扬的音乐~起舞。",
+                "example": "毕业晚会上，同学们随着悠扬的音乐~起舞。",
                 "q1": "（形）盘旋舞蹈的样子。 ",
-                "q2": "公园里，人们随着悠扬的音乐~起舞。"
+                "q2": "毕业晚会上，同学们随着悠扬的音乐~起舞。"
             },
             {
                 "index": 13,
@@ -1851,9 +1851,9 @@
                 "pinyin": "chēng",
                 "englishDefinition": "to support; to prop up; to maintain",
                 "chineseDefinition": "1.抵住：两手～着下巴沉思。2.用篙抵住河底使船行进：～船。3.支持 4.张开：～伞。5.充满到容不下的程度：少吃点，别～着。〈动〉〈形〉〈名〉",
-                "example": "下雨了，街上的行人纷纷开始~伞。",
+                "example": "下雨天，街上都是~伞而行的行人。",
                 "q1": "1.抵住：两手～着下巴沉思。2.用篙抵住河底使船行进：～船。3.支持 4.张开：～伞。5.充满到容不下的程度：少吃点，别～着。〈动〉〈形〉〈名〉",
-                "q2": "下雨了，街上的行人纷纷开始~伞。"
+                "q2": "下雨天，街上都是~伞而行的行人。"
             },
             {
                 "index": 14,
@@ -1881,9 +1881,9 @@
                 "pinyin": "yí mín",
                 "englishDefinition": "to immigrate; emigrant; immigrant",
                 "chineseDefinition": "（动）居民由一地或一国迁移到另一地或另一国落户：～海外。②（名）迁移到外地或外国去落户的人：安置～。 ",
-                "example": "我的爷爷多年前~到新加坡。",
+                "example": "舅舅一家决定~到新加坡。",
                 "q1": "（动）居民由一地或一国迁移到另一地或另一国落户：～海外。②（名）迁移到外地或外国去落户的人：安置～。 ",
-                "q2": "我的爷爷多年前~到新加坡。"
+                "q2": "舅舅一家决定~到新加坡。"
             },
             {
                 "index": 17,
@@ -1891,19 +1891,19 @@
                 "pinyin": "jiē nà",
                 "englishDefinition": "to admit (to membership)",
                 "chineseDefinition": "（动）接受容纳；采纳：他被～为物理学会会员。［近］接收。 ",
-                "example": "这家公司今年～了一批应届毕业生。",
+                "example": "他已经有自己的打算，不太愿意～我的建议。",
                 "q1": "（动）接受容纳；采纳：他被～为物理学会会员。［近］接收。 ",
-                "q2": "这家公司今年～了一批应届毕业生。"
+                "q2": "他已经有自己的打算，不太愿意～我的建议。"
             },
             {
                 "index": 18,
                 "word": "无怨无悔",
                 "pinyin": "wú yuàn wú huǐ",
                 "englishDefinition": "no complaints; to have no regrets",
-                "chineseDefinition": " 毫无怨恨。 ",
-                "example": "节日里，士兵们仍~地坚守着自己的工作岗位。",
-                "q1": " 毫无怨恨。 ",
-                "q2": "节日里，士兵们仍~地坚守着自己的工作岗位。"
+                "chineseDefinition": "没有懊恼和怨恨。",
+                "example": "她对自己选择的职业充满热情，即使遇到困难也～。",
+                "q1": "没有懊恼和怨恨。",
+                "q2": "她对自己选择的职业充满热情，即使遇到困难也～。"
             }
         ],
         "如果走散了": [
@@ -1913,9 +1913,9 @@
                 "pinyin": "huàn",
                 "englishDefinition": "to suffer (from illness); to contract (a disease)",
                 "chineseDefinition": "1.祸害；灾难：～难。防～未然。2.忧虑：忧～。～得～失。3.害（病）：～病。〈动〉〈名〉",
-                "example": "他因长期~病身体很虚弱。",
+                "example": "她的父亲～有心脏病，需要定期接受检查。",
                 "q1": "1.祸害；灾难：～难。防～未然。2.忧虑：忧～。～得～失。3.害（病）：～病。〈动〉〈名〉",
-                "q2": "他因长期~病身体很虚弱。"
+                "q2": "她的父亲～有心脏病，需要定期接受检查。"
             },
             {
                 "index": 2,
@@ -1923,9 +1923,9 @@
                 "pinyin": "shī zhì zhèng",
                 "englishDefinition": "dementia",
                 "chineseDefinition": "一种因脑部伤害或疾病所导致的渐进性认知功能退化，且此退化的幅度远高于正常老化的进展。",
-                "example": "奶奶患上~后，忘记了我的名字。",
+                "example": "～患者往往会忘记熟悉的人和事，这给家庭带来了很大的挑战。",
                 "q1": "一种因脑部伤害或疾病所导致的渐进性认知功能退化，且此退化的幅度远高于正常老化的进展。",
-                "q2": "奶奶患上~后，忘记了我的名字。"
+                "q2": "～患者往往会忘记熟悉的人和事，这给家庭带来了很大的挑战。"
             },
             {
                 "index": 3,
@@ -1933,9 +1933,9 @@
                 "pinyin": "xún zhǎo",
                 "englishDefinition": "to seek; to look for",
                 "chineseDefinition": "（动）找，为了要见到或得到而采取行动：～机会|～目标。［近］找寻|寻觅。",
-                "example": "这对夫妇夜以继日地~爱犬,满心期望它的归来。",
+                "example": "我们花了很长时间～丢失的钥匙，最后在沙发缝隙中找到了它。",
                 "q1": "（动）找，为了要见到或得到而采取行动：～机会|～目标。［近］找寻|寻觅。",
-                "q2": "这对夫妇夜以继日地~爱犬,满心期望它的归来。"
+                "q2": "我们花了很长时间～丢失的钥匙，最后在沙发缝隙中找到了它。"
             },
             {
                 "index": 4,
@@ -1953,9 +1953,9 @@
                 "pinyin": "xī xì",
                 "englishDefinition": "to frolic; to romp",
                 "chineseDefinition": "（书）（动）笑着闹着。 ",
-                "example": "远处传来了孩子们的～声，听了让人会心一笑。",
+                "example": "孩子们在公园里尽情～，享受着阳光和玩耍的乐趣。",
                 "q1": "（书）（动）笑着闹着。 ",
-                "q2": "远处传来了孩子们的～声，听了让人会心一笑。"
+                "q2": "孩子们在公园里尽情～，享受着阳光和玩耍的乐趣。"
             },
             {
                 "index": 6,
@@ -1963,19 +1963,19 @@
                 "pinyin": "gā lí bo",
                 "englishDefinition": "curry puff",
                 "chineseDefinition": "一种油炸的马来点心，内馅以肉丁、马铃薯为主，并加入咖喱。",
-                "example": "我最喜欢吃~，因为它外酥内软。",
+                "example": "我最喜欢吃外酥内软的～。",
                 "q1": "一种油炸的马来点心，内馅以肉丁、马铃薯为主，并加入咖喱。",
-                "q2": "我最喜欢吃~，因为它外酥内软。"
+                "q2": "我最喜欢吃外酥内软的～。"
             },
             {
                 "index": 7,
                 "word": "俏皮",
-                "pinyin": "qiào pi",
+                "pinyin": "qiào pí",
                 "englishDefinition": " charming; attractive; witty",
                 "chineseDefinition": "（形）①容貌或衣着好看。②谈话风趣，举止活泼伶俐：～话。",
-                "example": "照片上的女孩扎着2个马尾，~可爱。",
+                "example": "小狗的～动作逗得大家都哈哈大笑。",
                 "q1": "（形）①容貌或衣着好看。②谈话风趣，举止活泼伶俐：～话。",
-                "q2": "照片上的女孩扎着2个马尾，~可爱。"
+                "q2": "小狗的～动作逗得大家都哈哈大笑。"
             },
             {
                 "index": 8,
@@ -1983,9 +1983,9 @@
                 "pinyin": "xiān yàn",
                 "englishDefinition": "bright-colored",
                 "chineseDefinition": "（形）鲜明美丽。［近］鲜明。［反］素净。 ",
-                "example": "公园里的鲜花~，美丽又芳香四溢。",
+                "example": "这只鹦鹉的羽毛色彩非常～，让人一眼就能注意到它。",
                 "q1": "（形）鲜明美丽。［近］鲜明。［反］素净。 ",
-                "q2": "公园里的鲜花~，美丽又芳香四溢。"
+                "q2": "这只鹦鹉的羽毛色彩非常～，让人一眼就能注意到它。"
             },
             {
                 "index": 9,
@@ -1993,9 +1993,9 @@
                 "pinyin": "chéng zài",
                 "englishDefinition": "to bear the weight; to sustain",
                 "chineseDefinition": "（动）托着物体承受它的重量。 ",
-                "example": "这一张张信纸~着他对孩子的期望与爱。",
+                "example": "这座桥梁设计得非常坚固，能够～大量的车辆和行人。",
                 "q1": "（动）托着物体承受它的重量。 ",
-                "q2": "这一张张信纸~着他对孩子的期望与爱。"
+                "q2": "这座桥梁设计得非常坚固，能够～大量的车辆和行人。"
             }
         ]
     },
@@ -2007,9 +2007,9 @@
                 "pinyin": "mào yì",
                 "englishDefinition": "(commercial) trade",
                 "chineseDefinition": "（名）商业活动。 ",
-                "example": "新马两国人民进行着频繁的~往来。",
+                "example": "丝绸之路是古代东西方～的重要通道。",
                 "q1": "（名）商业活动。 ",
-                "q2": "新马两国人民进行着频繁的~往来。"
+                "q2": "丝绸之路是古代东西方～的重要通道。"
             },
             {
                 "index": 2,
@@ -2017,9 +2017,9 @@
                 "pinyin": "sī chóu",
                 "englishDefinition": "silk cloth; silk",
                 "chineseDefinition": "用蚕丝或人造丝织成的纺织品的总称。",
-                "example": "你知道这匹光滑的~是哪里出产的吗？",
+                "example": "当你抚摸这匹～时，会感受到它的细腻和光滑。",
                 "q1": "用蚕丝或人造丝织成的纺织品的总称。",
-                "q2": "你知道这匹光滑的~是哪里出产的吗？"
+                "q2": "当你抚摸这匹～时，会感受到它的细腻和光滑。"
             },
             {
                 "index": 3,
@@ -2037,15 +2037,15 @@
                 "pinyin": "shē chǐ",
                 "englishDefinition": "luxurious; extravagant",
                 "chineseDefinition": " 挥霍金钱过多，享受过度的。 ",
-                "example": "他们生活方式~，难怪背上了很多债。",
+                "example": "他们生活方式~，难怪背上了很多债务。",
                 "q1": " 挥霍金钱过多，享受过度的。 ",
-                "q2": "他们生活方式~，难怪背上了很多债。"
+                "q2": "他们生活方式~，难怪背上了很多债务。"
             },
             {
                 "index": 5,
                 "word": "瓷器",
                 "pinyin": "cí qì",
-                "englishDefinition": "chinaware; porcelain",
+                "englishDefinition": "porcelain",
                 "chineseDefinition": "（名）瓷质的器皿、用具等：～餐具。 ",
                 "example": "爸爸收藏了一套名贵的~，时不时拿出来欣赏。",
                 "q1": "（名）瓷质的器皿、用具等：～餐具。 ",
@@ -2067,9 +2067,9 @@
                 "pinyin": "bǐng chí",
                 "englishDefinition": "to uphold; to hold fast to",
                 "chineseDefinition": " 1.操持、执守。  2.持有﹐具有。  3.指操守。 ",
-                "example": "他~诚信，尊重公平竞赛，赢得世人景仰。",
+                "example": "公司～顾客至上的理念，不断提升服务质量。",
                 "q1": " 1.操持、执守。  2.持有﹐具有。  3.指操守。 ",
-                "q2": "他~诚信，尊重公平竞赛，赢得世人景仰。"
+                "q2": "公司～顾客至上的理念，不断提升服务质量。"
             },
             {
                 "index": 8,
@@ -2077,9 +2077,9 @@
                 "pinyin": "shū niǔ",
                 "englishDefinition": "hub (e.g. of traffic network)",
                 "chineseDefinition": " 事物的关键；事物相互联系的中心环节。 ",
-                "example": "新加坡是全球物流的~之一，与全球600多个港口相连。",
+                "example": "新加坡港口作为全球重要的～之一，每日处理大量的货物。",
                 "q1": " 事物的关键；事物相互联系的中心环节。 ",
-                "q2": "新加坡是全球物流的~之一，与全球600多个港口相连。"
+                "q2": "新加坡港口作为全球重要的～之一，每日处理大量的货物。"
             },
             {
                 "index": 9,
@@ -2087,9 +2087,9 @@
                 "pinyin": "gǎng kǒu",
                 "englishDefinition": "port; harbor",
                 "chineseDefinition": "（名）具有一定面积的水域或陆地，供船只进出、停泊、修理和装卸货物及旅客上下等的地方。",
-                "example": "过往船只纷纷停泊在~以期躲避即将来临的台风。",
+                "example": "数十艘豪华邮轮停泊在这个～，场面十分壮观。",
                 "q1": "（名）具有一定面积的水域或陆地，供船只进出、停泊、修理和装卸货物及旅客上下等的地方。",
-                "q2": "过往船只纷纷停泊在~以期躲避即将来临的台风。"
+                "q2": "数十艘豪华邮轮停泊在这个～，场面十分壮观。"
             },
             {
                 "index": 10,
@@ -2097,9 +2097,9 @@
                 "pinyin": "zhì lì",
                 "englishDefinition": "to devote one's efforts to",
                 "chineseDefinition": "（动）把力量全部用在某个方面：～科研。［近］努力。 ",
-                "example": "他一生致力科研，发明了很多东西。 ",
+                "example": "公司～于研发新技术，以保持在市场上的竞争力。",
                 "q1": "（动）把力量全部用在某个方面：～科研。［近］努力。 ",
-                "q2": "他一生致力科研，发明了很多东西。 "
+                "q2": "公司～于研发新技术，以保持在市场上的竞争力。"
             },
             {
                 "index": 11,
@@ -2107,9 +2107,9 @@
                 "pinyin": "gōu lè",
                 "englishDefinition": " to outline; to sketch",
                 "chineseDefinition": "（动）①用线条画出轮廓。②用简单的笔墨描写事物的大致情况。",
-                "example": "化妆时，她用眉笔细细~出漂亮的眉形。",
+                "example": "她用铅笔～出了风景画的轮廓。",
                 "q1": "（动）①用线条画出轮廓。②用简单的笔墨描写事物的大致情况。",
-                "q2": "化妆时，她用眉笔细细~出漂亮的眉形。"
+                "q2": "她用铅笔～出了风景画的轮廓。"
             },
             {
                 "index": 12,
@@ -2117,9 +2117,9 @@
                 "pinyin": "gāo zhān yuǎn zhǔ",
                 "englishDefinition": "acute foresight",
                 "chineseDefinition": " 站得高，看得远。比喻目光远大。［反］鼠目寸光。 ",
-                "example": "做事不能只顾眼前，要有~的胸怀。",
+                "example": "新加坡建国初期的政策显示出政府的～，为未来的繁荣奠定了基础。",
                 "q1": " 站得高，看得远。比喻目光远大。［反］鼠目寸光。 ",
-                "q2": "做事不能只顾眼前，要有~的胸怀。"
+                "q2": "新加坡建国初期的政策显示出政府的～，为未来的繁荣奠定了基础。"
             }
         ],
         "多元而开放的新加坡": [
@@ -2139,9 +2139,9 @@
                 "pinyin": "dǎo yǔ",
                 "englishDefinition": "island",
                 "chineseDefinition": "（名）岛的总称。 ",
-                "example": "假期时，我和朋友探索新加坡周边的~如圣约翰岛和乌敏岛。",
+                "example": "在海上的航行中，我们经过了几个迷人的小～。",
                 "q1": "（名）岛的总称。 ",
-                "q2": "假期时，我和朋友探索新加坡周边的~如圣约翰岛和乌敏岛。"
+                "q2": "在海上的航行中，我们经过了几个迷人的小～。"
             },
             {
                 "index": 3,
@@ -2159,9 +2159,9 @@
                 "pinyin": "lì shǐ",
                 "englishDefinition": "history",
                 "chineseDefinition": "（名）①自然界和人类社会的发展过程，也指某种事物的发展过程或个人的经历。②过去的事实。③过去事实的记载。 ",
-                "example": "我喜欢~因为它能映照现实，远观未来。",
+                "example": "博物馆里展示了许多具有～意义的文物。",
                 "q1": "（名）①自然界和人类社会的发展过程，也指某种事物的发展过程或个人的经历。②过去的事实。③过去事实的记载。 ",
-                "q2": "我喜欢~因为它能映照现实，远观未来。"
+                "q2": "博物馆里展示了许多具有～意义的文物。"
             },
             {
                 "index": 5,
@@ -2169,9 +2169,9 @@
                 "pinyin": "wā jué",
                 "englishDefinition": "to excavate; to dig",
                 "chineseDefinition": "（动）从深处挖出来：～地下宝藏。［近］发掘。［反］埋藏。 ",
-                "example": "埋藏在地底深处的化石~起来十分困难，但是具有很高的研究价值。",
+                "example": "考古学家在遗址中～出古老的器皿。",
                 "q1": "（动）从深处挖出来：～地下宝藏。［近］发掘。［反］埋藏。 ",
-                "q2": "埋藏在地底深处的化石~起来十分困难，但是具有很高的研究价值。"
+                "q2": "考古学家在遗址中～出古老的器皿。"
             },
             {
                 "index": 6,
@@ -2179,9 +2179,9 @@
                 "pinyin": "qū yù",
                 "englishDefinition": "area; region; district",
                 "chineseDefinition": "（名）地区范围：～性|～自治。 ",
-                "example": "一方水土养一方人，住在不同~的人有不同的特点。",
+                "example": "疫情期间，所有公共活动～都进行了彻底消毒，以减少病毒传播的风险。",
                 "q1": "（名）地区范围：～性|～自治。 ",
-                "q2": "一方水土养一方人，住在不同~的人有不同的特点。"
+                "q2": "疫情期间，所有公共活动～都进行了彻底消毒，以减少病毒传播的风险。"
             },
             {
                 "index": 7,
@@ -2189,9 +2189,9 @@
                 "pinyin": "huì jí",
                 "englishDefinition": "to collect; to compile; to converge",
                 "chineseDefinition": "（动）聚集：～精华|～一处。［近］会集|聚集。［反］分散|分开。 ",
-                "example": "运动会即将开始了，各班的运动员都~到了操场上。 ",
+                "example": "展览会～了来自不同国家的艺术作品。",
                 "q1": "（动）聚集：～精华|～一处。［近］会集|聚集。［反］分散|分开。 ",
-                "q2": "运动会即将开始了，各班的运动员都~到了操场上。 "
+                "q2": "展览会～了来自不同国家的艺术作品。"
             },
             {
                 "index": 8,
@@ -2199,9 +2199,9 @@
                 "pinyin": "fù yǔ",
                 "englishDefinition": "to assign; to entrust (a task); to bestow",
                 "chineseDefinition": "（动）交给（重大任务、使命）：～重任。",
-                "example": "因为狮子是百兽之王，所以石雕的狮子被人们~了特殊的使命。",
+                "example": "历史～我们许多宝贵的经验，以便我们能更好地面对未来。",
                 "q1": "（动）交给（重大任务、使命）：～重任。",
-                "q2": "因为狮子是百兽之王，所以石雕的狮子被人们~了特殊的使命。"
+                "q2": "历史～我们许多宝贵的经验，以便我们能更好地面对未来。"
             },
             {
                 "index": 9,
@@ -2228,10 +2228,10 @@
                 "word": "黄姜饭",
                 "pinyin": "huáng jiāng fàn",
                 "englishDefinition": "nasi biryani ",
-                "chineseDefinition": "民间美食。Nasi Biryani",
-                "example": "许多新加坡人喜欢香料味十足的~。",
-                "q1": "民间美食。Nasi Biryani",
-                "q2": "许多新加坡人喜欢香料味十足的~。"
+                "chineseDefinition": "民间美食，用黄姜煮的饭。",
+                "example": "为了保持～的美味，做饭时一定要使用新鲜的黄姜。",
+                "q1": "民间美食，用黄姜煮的饭。",
+                "q2": "为了保持～的美味，做饭时一定要使用新鲜的黄姜。"
             },
             {
                 "index": 12,
@@ -2249,9 +2249,9 @@
                 "pinyin": "jiān róng bìng xù",
                 "englishDefinition": "inclusive",
                 "chineseDefinition": "把不同内容、不同性质的东西收下来，保存起来。",
-                "example": "如果想要干一番大事业，应该~，博采众长。",
+                "example": "我们的团队理念是～，欢迎各种不同的意见和建议。",
                 "q1": "把不同内容、不同性质的东西收下来，保存起来。",
-                "q2": "如果想要干一番大事业，应该~，博采众长。"
+                "q2": "我们的团队理念是～，欢迎各种不同的意见和建议。"
             },
             {
                 "index": 14,
@@ -2269,9 +2269,9 @@
                 "pinyin": "huī huáng",
                 "englishDefinition": "splendid; glorious",
                 "chineseDefinition": "（形）①光辉灿烂：灯火～。②比喻极其优良、出色：成就～。［近］绚烂。 ",
-                "example": "广场上灯火~，如同白昼",
+                "example": "她的音乐会取得了～的成功，赢得了观众们的热烈掌声。",
                 "q1": "（形）①光辉灿烂：灯火～。②比喻极其优良、出色：成就～。［近］绚烂。 ",
-                "q2": "广场上灯火~，如同白昼"
+                "q2": "她的音乐会取得了～的成功，赢得了观众们的热烈掌声。"
             }
         ],
         "别上假信息的当": [
@@ -2291,9 +2291,9 @@
                 "pinyin": "diǎn xíng",
                 "englishDefinition": "model; typical; representative",
                 "chineseDefinition": "（名）①具有代表性或概括性的人或事件：～事迹。［近］典范。［反］一般。②文艺作品中塑造出来的个性和共性相统一的艺术形象。",
-                "example": "曹雪芹成功在《红楼梦》中刻画不少~人物如林黛玉和刘姥姥。",
+                "example": "曹雪芹成功在《红楼梦》中刻画不少~人物，如林黛玉和刘姥姥。",
                 "q1": "（名）①具有代表性或概括性的人或事件：～事迹。［近］典范。［反］一般。②文艺作品中塑造出来的个性和共性相统一的艺术形象。",
-                "q2": "曹雪芹成功在《红楼梦》中刻画不少~人物如林黛玉和刘姥姥。"
+                "q2": "曹雪芹成功在《红楼梦》中刻画不少~人物，如林黛玉和刘姥姥。"
             },
             {
                 "index": 3,
@@ -2301,9 +2301,9 @@
                 "pinyin": "pǔ jí",
                 "englishDefinition": "to spread extensively; widespread",
                 "chineseDefinition": "（动）①全面地传到（各个地区、范围等）。［近］推广。②为使大众化而普遍推广。［近］遍及。 ",
-                "example": "随着互联网的~使用，大部分人的家里都有一台电脑。",
+                "example": "随着互联网的~，大部分人的家里都有一台电脑。",
                 "q1": "（动）①全面地传到（各个地区、范围等）。［近］推广。②为使大众化而普遍推广。［近］遍及。 ",
-                "q2": "随着互联网的~使用，大部分人的家里都有一台电脑。"
+                "q2": "随着互联网的~，大部分人的家里都有一台电脑。"
             },
             {
                 "index": 4,
@@ -2321,9 +2321,9 @@
                 "pinyin": "bù fá",
                 "englishDefinition": "pace; (measured) step; march",
                 "chineseDefinition": "（名）队伍操练时脚步的大小快慢。［近］步调。 ",
-                "example": "我们要迟到了，还不赶紧加快~，向前冲。",
+                "example": "我们需要调整工作～，以适应新的项目要求。",
                 "q1": "（名）队伍操练时脚步的大小快慢。［近］步调。 ",
-                "q2": "我们要迟到了，还不赶紧加快~，向前冲。"
+                "q2": "我们需要调整工作～，以适应新的项目要求。"
             },
             {
                 "index": 6,
@@ -2331,9 +2331,9 @@
                 "pinyin": "xún wèn",
                 "englishDefinition": "to inquire",
                 "chineseDefinition": "（动）打听；征求意见：～下落|无处～。［反］答复。 ",
-                "example": "医生详细地~了病人的病情，然后对症下药。",
+                "example": "他详细地～了客户的需求，以便提供更好的服务。",
                 "q1": "（动）打听；征求意见：～下落|无处～。［反］答复。 ",
-                "q2": "医生详细地~了病人的病情，然后对症下药。"
+                "q2": "他详细地～了客户的需求，以便提供更好的服务。"
             },
             {
                 "index": 7,
@@ -2341,9 +2341,9 @@
                 "pinyin": "rén yún yì yún",
                 "englishDefinition": "to conform to what one perceives to be the majority view; to follow the herd",
                 "chineseDefinition": " 别人说什么，自己也跟着说什么。形容没有主见，随声附和。 ",
-                "example": "他凡事~，毫无主见。",
+                "example": "他总是～，缺乏自己的独立见解。",
                 "q1": " 别人说什么，自己也跟着说什么。形容没有主见，随声附和。 ",
-                "q2": "他凡事~，毫无主见。"
+                "q2": "他总是～，缺乏自己的独立见解。"
             },
             {
                 "index": 8,
@@ -2351,9 +2351,9 @@
                 "pinyin": "miǎn yì",
                 "englishDefinition": "immunity (to disease)",
                 "chineseDefinition": "（动）由于具有抵抗力而不患某种传染病。",
-                "example": "为了增强自身~力，他加强了体育锻炼。",
+                "example": "长期锻炼身体有助于增强～力，预防各种疾病。",
                 "q1": "（动）由于具有抵抗力而不患某种传染病。",
-                "q2": "为了增强自身~力，他加强了体育锻炼。"
+                "q2": "长期锻炼身体有助于增强～力，预防各种疾病。"
             },
             {
                 "index": 9,
@@ -2361,9 +2361,9 @@
                 "pinyin": "níng jù lì",
                 "englishDefinition": "cohesion; cohesiveness",
                 "chineseDefinition": "比喻团体内成员之间聚集、团结的力量：增强企业职工的～。 ",
-                "example": "他们上下一心，强大的凝聚力迸发出无比的力量，使他们成功克服困难。",
+                "example": "良好的沟通可以增强团队的～，提高工作效率。",
                 "q1": "比喻团体内成员之间聚集、团结的力量：增强企业职工的～。 ",
-                "q2": "他们上下一心，强大的凝聚力迸发出无比的力量，使他们成功克服困难。"
+                "q2": "良好的沟通可以增强团队的～，提高工作效率。"
             }
         ]
     }

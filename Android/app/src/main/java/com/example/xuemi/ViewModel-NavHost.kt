@@ -4,8 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -85,8 +83,8 @@ enum class SecondaryType {
 class MyViewModel( appContext: Context, application: Application ) : AndroidViewModel(application) {
     private val sharedPreferences: SharedPreferences =
         application.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-    private val _current: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences())
-    private val _default: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences())
+    private val _current: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences("current_list"))
+    private val _default: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences("default_list"))
 
     private val _eoy: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
     val eoy: MutableStateFlow<List<Word>> = _eoy
@@ -101,7 +99,8 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 
 
     init {
-        loadListFromPreferences()
+        loadListFromPreferences("current_list")
+        loadListFromPreferences("default_list")
         complete_words(listOf("中一", "中二", "中三", "中四"))
     }
 
@@ -125,16 +124,16 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         }
     }
 
-    private fun loadListFromPreferences(): List<String> {
+    private fun loadListFromPreferences(name: String): List<String> {
         val defaultList = listOf("S", "C", "C.", "T", "Q", "W.")
-        val listString = sharedPreferences.getString("current_list", null) ?: return defaultList
+        val listString = sharedPreferences.getString(name, null) ?: return defaultList
         return listString.split(",").map { it.trim() }
     }
 
     private fun saveListToPreferences(name: String, list: List<String>) {
         val listString = list.joinToString(",")
         sharedPreferences.edit().putString(name, listString).apply()
-        loadListFromPreferences()
+        loadListFromPreferences(name)
     }
 
     fun complete(secondaryList: List<String>, excludeLastTwo: Boolean = false): Deferred<List<Word>> {
@@ -191,7 +190,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 
     fun getFromList(index: Int): String {
         val currentList = _current.value.toMutableList()
-        loadListFromPreferences()
+        loadListFromPreferences("current_list")
         return currentList[index]
     }
 
@@ -201,12 +200,12 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             currentList[index] = newItem
             _current.value = currentList
         }
-        loadListFromPreferences()
+        loadListFromPreferences("current_list")
     }
 
     fun flashcardGetFromList(index: Int): String {
-        val defaultPath = loadListFromPreferences()
-        loadListFromPreferences()
+        val defaultPath = loadListFromPreferences("default_list")
+        loadListFromPreferences("default_list")
         return defaultPath[index]
     }
 
@@ -217,7 +216,8 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         defaultList.forEachIndexed { index, s ->
             defaultList[index] = currentList[saveList[index]]
         }
-        loadListFromPreferences()
+        loadListFromPreferences("default_list")
+        loadListFromPreferences("current_list")
         saveListToPreferences("default_list", defaultList)
         saveListToPreferences("current_list", currentList)
     }
@@ -479,14 +479,7 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
 fun ContentScreen(viewModel: MyViewModel, navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(navController,
         startDestination = "home",
-        enterTransition = {
-            // you can change whatever you want transition
-            EnterTransition.None
-        },
-        exitTransition = {
-            // you can change whatever you want transition
-            ExitTransition.None
-        }
+
         ) {
         // tabs
         composable("home") { Home(viewModel, navController) }

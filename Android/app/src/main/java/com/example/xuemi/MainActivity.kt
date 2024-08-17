@@ -14,13 +14,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.xuemi.ui.theme.XuemiTheme
 
 
-data class TabBarItem(
-    val title: String,
-    val selectedIcon: Int,
-    val unselectedIcon: Int,
-    val badgeAmount: Int? = null
-)
-
 
 class MainActivity : ComponentActivity() {
     private val context: Context = this

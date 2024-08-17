@@ -186,7 +186,7 @@ fun Topic(viewModel: MyViewModel, navController: NavController) {
 
     LaunchedEffect(Unit) {
         if (topicExistsState && name != null) {
-            navController.navigate("flashcards/$name")
+            navController.navigate("flashcards/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}")
         } else {
             val generatedQuestions = generateListOfMCQQuestions(words, false)
             if (name != null) {

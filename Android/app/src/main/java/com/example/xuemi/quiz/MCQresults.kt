@@ -113,7 +113,7 @@ fun MCQresults(viewModel: MyViewModel, navController: NavController, topicName: 
                 modifier = Modifier.padding(10.dp)
             )
             Button(
-                onClick = { navController.navigate("Home") },
+                onClick = { navController.popBackStack(navController.graph.startDestinationId, false) },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(Color(0, 123, 255))
             ) {

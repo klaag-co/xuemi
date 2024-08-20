@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -23,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -112,19 +115,19 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
                     viewModel.onButton()
                 }
             },
-            colors = ButtonDefaults.buttonColors(Color(126, 190, 240)), /*border = BorderStroke(6.dp,
-            Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
-
+            colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
                 .padding(5.dp)
-                .fillMaxHeight()
-                .fillMaxWidth()
+                .width(170.dp)
+                .height(155.dp)
         ) {
-            Column {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
                 Text(
-                    "中$secondary",
-//                modifier = Modifier.padding(vertical = 26.dp, horizontal = 3.dp),
+                    text = "中$secondary",
                     style = MaterialTheme.typography.displayLarge,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
@@ -174,47 +177,55 @@ fun olevel(viewModel: MyViewModel, navController: NavController) {
             navigateToMCQ.value = false
         }
     }
-    Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
-        Button(
-            onClick = { navigateToMCQ.value = true
-                        clicked.value = "mid"
-                      },
-            colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
-            shape = RoundedCornerShape(20.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 25.dp, vertical = 7.dp)
-        ) {
-            Column {
-                Text(
-                    text = "Mid-Year Practice",
-                    color = Color.Black,
-                    fontSize = 28.sp,
-                    modifier = Modifier
-                        .padding(horizontal = 5.dp, vertical = 5.dp)
+    screenTitle(
+        title = "O 学准备考",
+        backButton = true,
+        navController = navController
+    ) {
+        Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+            Button(
+                onClick = {
+                    navigateToMCQ.value = true
+                    clicked.value = "mid"
+                },
+                colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
+                shape = RoundedCornerShape(20.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 7.dp)
+            ) {
+                Column {
+                    Text(
+                        text = "Mid-Year Practice",
+                        color = Color.Black,
+                        fontSize = 28.sp,
+                        modifier = Modifier
+                            .padding(horizontal = 5.dp, vertical = 5.dp)
 
-                )
+                    )
+                }
             }
-        }
-        Button(
-            onClick = { navigateToMCQ.value = true
-                        clicked.value = "eoy"
-                      },
-            colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
-            shape = RoundedCornerShape(20.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 25.dp, vertical = 7.dp)
-        ) {
-            Column {
-                Text(
-                    text = "End-Of-Year Practice",
-                    color = Color.Black,
-                    fontSize = 28.sp,
-                    modifier = Modifier
-                        .padding(horizontal = 5.dp, vertical = 5.dp)
+            Button(
+                onClick = {
+                    navigateToMCQ.value = true
+                    clicked.value = "eoy"
+                },
+                colors = ButtonDefaults.buttonColors(Color(217, 217, 217)),
+                shape = RoundedCornerShape(20.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 7.dp)
+            ) {
+                Column {
+                    Text(
+                        text = "End-Of-Year Practice",
+                        color = Color.Black,
+                        fontSize = 28.sp,
+                        modifier = Modifier
+                            .padding(horizontal = 5.dp, vertical = 5.dp)
 
-                )
+                    )
+                }
             }
         }
     }

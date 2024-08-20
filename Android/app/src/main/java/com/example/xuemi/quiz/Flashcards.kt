@@ -159,15 +159,12 @@ fun checkAndSwitchToGoogleTTS(context: Context, tts: TextToSpeech) {
     val currentEngine = tts.defaultEngine
 
     if (currentEngine != googleTTSPackage) {
-        // Get all available TTS engines
         val engines = tts.engines
         val googleTtsEngine: TextToSpeech.EngineInfo? = engines.find { it.name == googleTTSPackage }
 
         if (googleTtsEngine != null) {
-            // Google TTS is available but not selected, prompt user to switch
             promptUserToSwitchToGoogleTTS(context)
         } else {
-            // Google TTS is not installed, prompt user to install it
             promptUserToInstallGoogleTTS(context)
         }
     }

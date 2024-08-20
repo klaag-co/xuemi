@@ -21,9 +21,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -375,7 +375,7 @@ fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemID: Int
     var title by remember { mutableStateOf(item?.title ?: "") }
     var body by remember { mutableStateOf(item?.body ?: "") }
 
-    Column{
+    Column {
         backButton("Notepad") {
             viewModel.update(title, body, item?.id ?: 0)
             navController.navigate("notes")
@@ -392,7 +392,7 @@ fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemID: Int
                 fontSize = 25.sp
             )
         )
-        Divider(Modifier.padding(horizontal = 10.dp))
+        HorizontalDivider(Modifier.padding(horizontal = 10.dp))
         OutlinedTextField(
             value = body,
             onValueChange = { body = it },
@@ -405,21 +405,7 @@ fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemID: Int
     }
 }
 
-@Composable
-fun backButton(text: String, onClick: () -> Unit) {
-    TextButton(
-        onClick = {
-            onClick()
-            },
-    ) {
-        Text(
-            text = "< $text",
-            color = Color(70, 156, 253),
-            fontSize = 19.sp,
-            fontWeight = FontWeight.Bold,
-        )
-    }
-}
+
 
 
 

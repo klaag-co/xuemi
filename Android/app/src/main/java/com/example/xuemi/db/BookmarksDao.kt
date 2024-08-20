@@ -1,12 +1,12 @@
-package org.sstinc.xuemi.db
+package com.example.xuemi.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import org.sstinc.xuemi.Bookmark
-import org.sstinc.xuemi.BookmarkSection
+import com.example.xuemi.Bookmark
+import com.example.xuemi.BookmarkSection
 
 data class BookmarkWord(
     @ColumnInfo(name = "word") val word: String

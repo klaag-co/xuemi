@@ -1,4 +1,4 @@
-package org.sstinc.xuemi.ui.theme
+package com.example.xuemi.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

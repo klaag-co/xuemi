@@ -1,4 +1,4 @@
-package org.sstinc.xuemi
+package com.example.xuemi
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -34,7 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import org.sstinc.xuemi.quiz.generateListOfMCQQuestions
+import com.example.xuemi.quiz.generateListOfMCQQuestions
 
 
 @Composable

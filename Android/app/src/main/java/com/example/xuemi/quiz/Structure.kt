@@ -1,4 +1,4 @@
-package org.sstinc.xuemi.quiz
+package com.example.xuemi.quiz
 
 import android.content.Context
 import com.google.gson.Gson

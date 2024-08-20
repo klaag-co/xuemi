@@ -1,12 +1,12 @@
-package org.sstinc.xuemi.db
+package com.example.xuemi.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.ColumnInfo
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import org.sstinc.xuemi.Note
-import org.sstinc.xuemi.NoteType
+import com.example.xuemi.Note
+import com.example.xuemi.NoteType
 
 
 @Dao

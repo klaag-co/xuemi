@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "org.sstinc.xuemi"
+    namespace = "com.example.xuemi"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "org.sstinc.xuemi"
+        applicationId = "com.example.xuemi"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

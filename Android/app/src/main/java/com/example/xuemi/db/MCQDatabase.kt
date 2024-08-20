@@ -1,11 +1,11 @@
-package org.sstinc.xuemi.db
+package com.example.xuemi.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
-import org.sstinc.xuemi.quiz.MCQquestion
-import org.sstinc.xuemi.quiz.MCQtopic
+import com.example.xuemi.quiz.MCQquestion
+import com.example.xuemi.quiz.MCQtopic
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

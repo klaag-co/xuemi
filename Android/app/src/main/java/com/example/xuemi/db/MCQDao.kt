@@ -1,11 +1,11 @@
-package org.sstinc.xuemi.db
+package com.example.xuemi.db
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
-import org.sstinc.xuemi.quiz.MCQquestion
-import org.sstinc.xuemi.quiz.MCQtopic
+import com.example.xuemi.quiz.MCQquestion
+import com.example.xuemi.quiz.MCQtopic
 
 
 @Dao

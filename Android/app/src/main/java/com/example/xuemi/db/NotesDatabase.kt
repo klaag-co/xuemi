@@ -1,9 +1,9 @@
-package com.example.xuemi.db
+package org.sstinc.xuemi.db
 
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.xuemi.Note
+import org.sstinc.xuemi.Note
 
 @Database(entities = [Note::class], version = 1)
 abstract class NotesDatabase: RoomDatabase() {

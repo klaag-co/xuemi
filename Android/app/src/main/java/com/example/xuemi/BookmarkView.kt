@@ -1,4 +1,4 @@
-package com.example.xuemi
+package org.sstinc.xuemi
 
 
 import androidx.compose.foundation.background

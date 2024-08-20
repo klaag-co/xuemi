@@ -1,4 +1,4 @@
-package com.example.xuemi.quiz
+package org.sstinc.xuemi.quiz
 
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -49,10 +49,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
-import com.example.xuemi.BookmarkSection
-import com.example.xuemi.MyViewModel
-import com.example.xuemi.R
-import com.example.xuemi.backButton
+import org.sstinc.xuemi.BookmarkSection
+import org.sstinc.xuemi.MyViewModel
+import org.sstinc.xuemi.R
+import org.sstinc.xuemi.backButton
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState

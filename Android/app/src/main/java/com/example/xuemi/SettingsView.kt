@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -54,49 +56,39 @@ fun SettingsView(navController: NavHostController) {
         backButton = false,
         navController = navController
     ) {
-        Column(
-//            modifier = Modifier.padding(16.dp)
-        ) {
+        LazyColumn {
+            item {
+                SectionHeader("App")
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    onClick = { navController.navigate("helloWorld") }
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text("About Our App")
+                        Text("→", color = Color.Gray)
+                    }
+                }
+                SectionHeader("Acknowledgement")
+            }
 
-            SectionHeader("App")
-
-            NavigationCard(
-                title = "About Our App",
-                onClick = { navController.navigate("helloWorld") }
-            )
-
-
-            SectionHeader("Acknowledgement")
-
-            acknowledgements.forEach { person ->
+            items(acknowledgements) { person ->
                 Person(person)
             }
 
-            SectionHeader("Help and Support")
-
-            HelpSupportView()
+            item {
+                SectionHeader("Help and Support")
+                HelpSupportView()
+            }
         }
     }
-
 }
-//    Scaffold(
-//        topBar = {
-//            TopAppBar(
-//                title = {
-//                    Text(
-//                        "Settings",
-//                        fontSize = 45.sp,
-//                        fontWeight = FontWeight.Bold,
-//                        modifier = Modifier.padding(top = 10.dp)
-//                    )
-//                }
-//            )
-//        },
-//        modifier = Modifier.padding(bottom = 20.dp)
-//    ) { paddingValues ->
-//
-//    }
-
 
 @Composable
 fun SectionHeader(title: String) {
@@ -108,25 +100,6 @@ fun SectionHeader(title: String) {
     )
 }
 
-@Composable
-fun NavigationCard(title: String, onClick: () -> Unit) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
-        onClick = onClick
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(title)
-            Text("→", color = Color.Gray)
-        }
-    }
-}
 
 @Composable
 fun Person(person: Acknowledgement) {
@@ -163,8 +136,7 @@ fun HelpSupportView() {
     val context = LocalContext.current
 
     Column(
-        modifier = Modifier
-            .padding(top = 16.dp)
+        modifier = Modifier.padding(top = 16.dp)
     ) {
         Text("For help and support, please contact:")
         Text(
@@ -183,7 +155,8 @@ fun HelloWorldScreen(navController: NavHostController) {
     screenTitle(
         title = "About Our App",
         backButton = true,
-        navController = navController) {
+        navController = navController
+    ) {
         Text(
             text = "Our app, Xuemi, is an app that will help secondary school students improve their Chinese language in a more convenient manner. Students will be able to study anywhere, anytime. The app features will allow students to practise their reading and writing and strengthen their use of the Chinese language. Students will be able to learn how to write the Chinese words correctly, and read passages fluently and with confidence. The app includes a test function which tests students based on the ‘O’ level marking scheme. The content from sec 1-sec 4 will be compiled in this app, allowing easier access to materials for students. Additionally, we will include a note-taking function in the app.",
             fontSize = 20.sp

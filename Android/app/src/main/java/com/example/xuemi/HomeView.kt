@@ -178,7 +178,7 @@ fun olevel(viewModel: MyViewModel, navController: NavController) {
         }
     }
     screenTitle(
-        title = "O 学准备考",
+        title = "",
         backButton = true,
         navController = navController
     ) {

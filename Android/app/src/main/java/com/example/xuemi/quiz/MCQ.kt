@@ -1,5 +1,6 @@
 package com.example.xuemi.quiz
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -90,6 +91,8 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
 
     wordDataSize = question.size
 
+    Log.d("MCQCHECK", "currentQN: $currentQN, leftOff: $leftOff")
+    
     Column {
 
         LinearProgressIndicator(
@@ -161,12 +164,10 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
             }
             Spacer(Modifier.fillMaxSize(0.82f))
             TextButton(onClick = {
-
                 if (currentQN+1 >= wordDataSize) {
                     val wrongNum = viewModel.countIncorrectAnswers(topicName)
                     val correctNum = wordDataSize-wrongNum
-                    navController.navigate("mcqresults/$topicName/$wrongNum,$correctNum")
-                    viewModel.deleteQuiz(topic!!.id)
+                    navController.navigate("mcqresults/${topic!!.id}/$topicName/$wrongNum,$correctNum")
                 } else if (currentQN < leftOff) {
                     currentQN += 1
                     selectedAnswer = question[currentQN].selected

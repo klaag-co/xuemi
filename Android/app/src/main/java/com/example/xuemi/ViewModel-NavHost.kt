@@ -12,9 +12,9 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -368,14 +368,25 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     fun addQuiz(topic: String, questions: List<MCQquestion>) {
         viewModelScope.launch(Dispatchers.IO) {
             val exists = mcqDao.topicExists(topic)
-            if (exists == 0) {
+            val topicIndex = mcqList.value?.indexOfFirst { it.topic == topic }
+            if (exists == 0 || topicIndex == null || topicIndex == -1) {
                 mcqDao.addTopic(MCQtopic(topic = topic, leftOff = 0, questions = questions))
             } else {
-                Log.d("temp", "Topic already exists: $topic")
+                // Topic exists, so check if it needs to be deleted and re-added
+                val topicInList = mcqList.value!![topicIndex]
+                Log.d("MCQCHECK", (topicInList.leftOff+1).toString())
+                if (topicInList.leftOff+1 >= questions.size) {
+                    deleteQuiz(topicInList.id)
+                    mcqDao.addTopic(MCQtopic(topic = topic, leftOff = 0, questions = questions))
+                } else {
+                    Log.d("temp", "Topic already exists and leftOff < questions.size: $topic")
+                }
             }
             loadMCQ()
         }
     }
+
+
 
     fun deleteQuiz(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -444,7 +455,18 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
     var selectedTabIndex by rememberSaveable {
         mutableIntStateOf(0)
     }
-    val currentTab by rememberSaveable { mutableStateOf("home") }
+
+    LaunchedEffect(navController) {
+        navController.currentBackStackEntryFlow.collect { backStackEntry ->
+            when (backStackEntry.destination.route) {
+                "home" -> selectedTabIndex = 0
+                "bookmarks" -> selectedTabIndex = 1
+                "notes" -> selectedTabIndex = 2
+                "settings" -> selectedTabIndex = 3
+            }
+        }
+    }
+
     Scaffold(
         bottomBar = {
             NavigationBar {
@@ -507,11 +529,12 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                 MCQ(viewModel, navController, name)
 
             }
-            composable("mcqresults/{name}/{wrong},{correct}") {backStackEntry ->
+            composable("mcqresults/{id}/{name}/{wrong},{correct}") {backStackEntry ->
+                val id = backStackEntry.arguments?.getString("id")!!.toInt()
                 val wrong = backStackEntry.arguments?.getString("wrong")!!.toInt()
                 val correct = backStackEntry.arguments?.getString("correct")!!.toInt()
                 val name = backStackEntry.arguments?.getString("name").toString()
-                MCQresults(viewModel, navController, name, wrong, correct)
+                MCQresults(viewModel, navController, id, name, wrong, correct)
             }
             composable("olevel") { olevel(viewModel, navController) }
 

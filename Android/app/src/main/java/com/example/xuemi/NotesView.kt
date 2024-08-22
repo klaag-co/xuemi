@@ -1,5 +1,6 @@
 package com.example.xuemi
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -17,21 +18,26 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -257,7 +263,7 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.End,
-                    modifier = Modifier
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }
@@ -368,6 +374,8 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
 
     }
 }
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemID: Int?) {
     val notes by viewModel.notesList.observeAsState()
@@ -375,32 +383,55 @@ fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemID: Int
     var title by remember { mutableStateOf(item?.title ?: "") }
     var body by remember { mutableStateOf(item?.body ?: "") }
 
+
     Column {
-        backButton("Notepad") {
-            viewModel.update(title, body, item?.id ?: 0)
-            navController.navigate("notes")
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {},
+                    navigationIcon = {
+                        IconButton(onClick = { navController.popBackStack()
+                            viewModel.update(title, body, item?.id ?: 0)
+                        }) {
+                            Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        }
+
+                    }
+                )
+            }
+        ) {
+            Column(
+                Modifier.padding(
+                    start = 20.dp,
+                    end = 20.dp,
+                    top = 10.dp,
+                    bottom = 90.dp
+                )
+            ) {
+                OutlinedTextField(
+                    value = title,
+                    onValueChange = { title = it },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color.White,
+                        unfocusedBorderColor = Color.White,
+                    ),
+                    textStyle = TextStyle(
+                        fontWeight = FontWeight.ExtraBold,
+                        fontSize = 25.sp
+                    )
+                )
+                HorizontalDivider(Modifier.padding(horizontal = 10.dp))
+                OutlinedTextField(
+                    value = body,
+                    onValueChange = { body = it },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color.White,
+                        unfocusedBorderColor = Color.White,
+                    )
+                )
+            }
+
         }
-        OutlinedTextField(
-            value = title,
-            onValueChange = { title = it },
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.White,
-                unfocusedBorderColor = Color.White,
-            ),
-            textStyle = TextStyle(
-                fontWeight = FontWeight.ExtraBold,
-                fontSize = 25.sp
-            )
-        )
-        HorizontalDivider(Modifier.padding(horizontal = 10.dp))
-        OutlinedTextField(
-            value = body,
-            onValueChange = { body = it },
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = Color.White,
-                unfocusedBorderColor = Color.White,
-            )
-        )
 
     }
 }

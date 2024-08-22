@@ -27,10 +27,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.xuemi.MyViewModel
 import com.example.xuemi.NoteType
+import com.example.xuemi.screenTitle
 
 
 @Composable
-fun MCQresults(viewModel: MyViewModel, navController: NavController, topicName: String, wrong: Int, correct: Int) {
+fun MCQresults(viewModel: MyViewModel, navController: NavController, topicID: Int, topicName: String, wrong: Int, correct: Int) {
     Log.d("results", "topicName: $topicName, wrong: $wrong, correct: $correct")
     val halfWrong = wrong >= correct
     val colour: Color = if (halfWrong) {
@@ -65,64 +66,71 @@ fun MCQresults(viewModel: MyViewModel, navController: NavController, topicName: 
         }
     }
 
-
-    Column (
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(0.87f),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
+    screenTitle(
+        title = "",
+        backButton = false,
+        navController = navController
     ) {
-        Card(
-            elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
-            colors = CardDefaults.cardColors(containerColor = colour),
-            shape = RoundedCornerShape(23.dp)
+        Column (
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.95f),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly
         ) {
-            if (halfWrong) {
+            Card(
+                elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
+                colors = CardDefaults.cardColors(containerColor = colour),
+                shape = RoundedCornerShape(23.dp)
+            ) {
+                if (halfWrong) {
+                    Text(
+                        "继续努力！💪",
+                        style = MaterialTheme.typography.displayMedium,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(15.dp)
+                    )
+                } else {
+                    Text(
+                        "好棒喔！👏",
+                        style = MaterialTheme.typography.displayMedium,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(15.dp)
+                    )
+                }
+            }
+            Column {
                 Text(
-                    "继续努力！💪",
+                    "答对了${correct}题",
                     style = MaterialTheme.typography.displayMedium,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(15.dp)
+                    color = Color(49, 195, 95)
                 )
-            } else {
                 Text(
-                    "好棒喔！👏",
+                    "答错了${wrong}题",
                     style = MaterialTheme.typography.displayMedium,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(15.dp)
+                    color = Color(251, 53, 62)
                 )
             }
-        }
-        Column {
-            Text(
-                "答对了${correct}题",
-                style = MaterialTheme.typography.displayMedium,
-                color = Color(49, 195, 95)
-            )
-            Text(
-                "答错了${wrong}题",
-                style = MaterialTheme.typography.displayMedium,
-                color = Color(251, 53, 62)
-            )
-        }
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                "你总分是${correct}/${correct + wrong}",
-                style = MaterialTheme.typography.displaySmall,
-                modifier = Modifier.padding(10.dp)
-            )
-            Button(
-                onClick = { navController.popBackStack(navController.graph.startDestinationId, false) },
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(Color(0, 123, 255))
-            ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    "Home",
+                    "你总分是${correct}/${correct + wrong}",
                     style = MaterialTheme.typography.displaySmall,
+                    modifier = Modifier.padding(10.dp)
                 )
+                Button(
+                    onClick = { navController.popBackStack(navController.graph.startDestinationId, false)
+                        /*viewModel.deleteQuiz(topicID)*/},
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.buttonColors(Color(0, 123, 255))
+                ) {
+                    Text(
+                        "Home",
+                        style = MaterialTheme.typography.displaySmall,
+                    )
+                }
             }
         }
     }
+
 }
 

@@ -1,20 +1,26 @@
 package com.example.xuemi.quiz
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -36,7 +42,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import com.example.xuemi.MyViewModel
 import com.example.xuemi.SecondaryType
-import com.example.xuemi.backButton
+import com.example.xuemi.screenTitle
 import kotlin.random.Random
 
 @Composable
@@ -86,45 +92,49 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
         }
 
     }
-    Column {
-        backButton("Home") {
-            navController.navigate("home")
-        }
-        title(viewModel = viewModel)
-        chaptertemplate(viewModel, navController, "一","0")
-        chaptertemplate(viewModel, navController,"二","1")
-        chaptertemplate(viewModel, navController,"三","2")
-        chaptertemplate(viewModel, navController,"四","3")
-        chaptertemplate(viewModel, navController,"五","4")
-        if (showButton) {
-            chaptertemplate(viewModel, navController, "六","5")
-        }
-        Button(
-            onClick = {
-                navigateToMCQ.value = true
-            },
-            colors = ButtonDefaults.buttonColors(Color(194, 206, 217)),
-            shape = RoundedCornerShape(20.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 25.dp, vertical = 7.dp)
-        ) {
-            Column {
-                Text(
-                    text = "年终考试",
-                    color = Color.Black,
-                    fontSize = 28.sp,
-                    modifier = Modifier
-                        .padding(horizontal = 5.dp, vertical = 7.dp)
-
-                )
+    screenTitle(
+        title = "",
+        backButton = true,
+        navController = navController
+    ) {
+        Column (Modifier.padding(top = 55.dp)){
+            title(viewModel = viewModel)
+            chaptertemplate(viewModel, navController, "一", "0")
+            chaptertemplate(viewModel, navController, "二", "1")
+            chaptertemplate(viewModel, navController, "三", "2")
+            chaptertemplate(viewModel, navController, "四", "3")
+            chaptertemplate(viewModel, navController, "五", "4")
+            if (showButton) {
+                chaptertemplate(viewModel, navController, "六", "5")
             }
-        }
+            Button(
+                onClick = {
+                    navigateToMCQ.value = true
+                },
+                colors = ButtonDefaults.buttonColors(Color(194, 206, 217)),
+                shape = RoundedCornerShape(20.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 7.dp)
+            ) {
+                Column {
+                    Text(
+                        text = "年终考试",
+                        color = Color.Black,
+                        fontSize = 28.sp,
+                        modifier = Modifier
+                            .padding(horizontal = 5.dp, vertical = 7.dp)
 
+                    )
+                }
+            }
+
+        }
     }
 
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Chapter(viewModel: MyViewModel, navController: NavController) {
@@ -133,25 +143,39 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
         mutableStateOf(false)
     }
 
-    Column {
-        Row (verticalAlignment = Alignment.CenterVertically){
-            backButton("中${viewModel.getFromList(0)}") {
-                navController.navigate("secondary")
-            }
-            Spacer(Modifier.fillMaxWidth(0.3f))
-            Text("单元${viewModel.getFromList(1)}",
-                fontSize = 19.sp,
-                fontWeight = FontWeight.Bold,
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("单元${viewModel.getFromList(1)}",
+                    fontSize = 19.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(0.89f)
+
+                ) },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                    }
+
+                }
             )
         }
-        title(viewModel)
-        topictemplate(viewModel, { isSheetOpen = true }, "一")
-        topictemplate(viewModel, { isSheetOpen = true }, "二" )
-        topictemplate(viewModel, { isSheetOpen = true }, "三")
-    }
-    if (isSheetOpen) {
-        ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
-            Topic(viewModel, navController)
+    ) {
+        Column(Modifier.padding(start = 20.dp, end = 20.dp, top = 65.dp, bottom = 90.dp)) {
+            Row (verticalAlignment = Alignment.CenterVertically){
+                Spacer(Modifier.fillMaxWidth(0.3f))
+
+            }
+            title(viewModel)
+            topictemplate(viewModel, { isSheetOpen = true }, "一")
+            topictemplate(viewModel, { isSheetOpen = true }, "二" )
+            topictemplate(viewModel, { isSheetOpen = true }, "三")
+        }
+        if (isSheetOpen) {
+            ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
+                Topic(viewModel, navController)
+            }
         }
     }
 
@@ -222,7 +246,7 @@ fun title(viewModel: MyViewModel) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .absolutePadding(bottom = 7.dp, right = 25.dp, left = 25.dp),
+            .padding(bottom = 7.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(126, 190, 240),
             contentColor = Color.White
@@ -254,7 +278,7 @@ fun chaptertemplate(viewModel: MyViewModel, navController: NavController, chapte
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 25.dp, vertical = 7.dp)
+            .padding(vertical = 7.dp)
     ) {
         Column {
             Text(
@@ -293,7 +317,7 @@ fun topictemplate(viewModel: MyViewModel, onButtonClick: () -> Unit, topic: Stri
         shape = RoundedCornerShape(20.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 25.dp, vertical = 7.dp)
+            .padding(vertical = 7.dp)
     ) {
         Column {
             Text(

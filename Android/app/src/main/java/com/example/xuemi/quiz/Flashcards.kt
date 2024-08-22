@@ -52,7 +52,7 @@ import androidx.navigation.NavController
 import com.example.xuemi.BookmarkSection
 import com.example.xuemi.MyViewModel
 import com.example.xuemi.R
-import com.example.xuemi.backButton
+import com.example.xuemi.screenTitle
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -105,53 +105,46 @@ fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHo
 
     wordDataSize = wordList?.size ?: 0
 
-    Column (Modifier.padding(16.dp)) {
-        if (fromHome == "home") {
-            backButton("Home") {
-                navController.navigate("home")
-            }
-        } else if (fromHome == "bookmarks") {
-            backButton("Bookmarks") {
-                navController.navigate("bookmarks")
-            }
-        } else {
-            backButton("单元${chapter}") {
-                navController.navigate("chapter")
-            }
-        }
-        LinearProgressIndicator(
-            progress = pagerState.currentPage.toFloat() / (wordDataSize - 1),
-            color = Color(0xFF7EBDF0),
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.06f)
-                .padding(vertical = 15.dp, horizontal = 20.dp)
-                .clip(RoundedCornerShape(20.dp))
-        )
+    screenTitle(
+        title = "",
+        backButton = true,
+        navController = navController
+    ) {
+        Column {
+            LinearProgressIndicator(
+                progress = pagerState.currentPage.toFloat() / (wordDataSize - 1),
+                color = Color(0xFF7EBDF0),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.06f)
+                    .padding(vertical = 15.dp, horizontal = 20.dp)
+                    .clip(RoundedCornerShape(20.dp))
+            )
 
 
 
-        HorizontalPager(
-            count = wordDataSize,
-            state = pagerState,) {page->
+            HorizontalPager(
+                count = wordDataSize,
+                state = pagerState,
+            ) { page ->
 
-            val wordData = wordList?.getOrNull(page)
+                val wordData = wordList?.getOrNull(page)
 
-            Box(Modifier.fillMaxSize(),contentAlignment = Alignment.Center) {
-                if (wordData != null) {
-                    Column {
-                        Flashcard(wordData, viewModel, secondary, chapter)
-                        Spacer(Modifier.padding(30.dp))
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    if (wordData != null) {
+                        Column {
+                            Flashcard(wordData, viewModel, secondary, chapter)
+                            Spacer(Modifier.padding(30.dp))
+                        }
+
+                    } else {
+                        Text("No word data available.")
                     }
-
-                } else {
-                    Text("No word data available.")
                 }
             }
+            Spacer(Modifier.fillMaxHeight(0.5f))
         }
-        Spacer(Modifier.fillMaxHeight(0.5f))
     }
-
 }
 
 fun checkAndSwitchToGoogleTTS(context: Context, tts: TextToSpeech) {
@@ -224,7 +217,7 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
             .fillMaxWidth(0.9f)
-            .fillMaxHeight(0.7f), shape = RoundedCornerShape(30.dp),
+            .fillMaxHeight(0.8f), shape = RoundedCornerShape(30.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(219, 238, 255),
         )
@@ -329,7 +322,7 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
                             textAlign = TextAlign.Center,
                             style = MaterialTheme.typography.h5
                         )
-                        Spacer(Modifier.padding(30.dp))
+                        Spacer(Modifier.padding(10.dp))
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.xuemi
+package org.sstinc.xuemi
 
 import android.content.Intent
 import android.net.Uri

@@ -1,4 +1,4 @@
-package com.example.xuemi.quiz
+package org.sstinc.xuemi.quiz
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -40,9 +40,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
-import com.example.xuemi.MyViewModel
-import com.example.xuemi.SecondaryType
-import com.example.xuemi.screenTitle
+import org.sstinc.xuemi.MyViewModel
+import org.sstinc.xuemi.SecondaryType
+import org.sstinc.xuemi.screenTitle
 import kotlin.random.Random
 
 @Composable

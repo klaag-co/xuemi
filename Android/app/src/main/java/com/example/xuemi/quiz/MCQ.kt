@@ -1,4 +1,4 @@
-package com.example.xuemi.quiz
+package org.sstinc.xuemi.quiz
 
 import android.util.Log
 import androidx.compose.foundation.layout.Box
@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.xuemi.MyViewModel
+import org.sstinc.xuemi.MyViewModel
 
 @Entity
 data class MCQtopic(

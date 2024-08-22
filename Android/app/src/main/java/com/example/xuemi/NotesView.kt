@@ -1,4 +1,4 @@
-package com.example.xuemi
+package org.sstinc.xuemi
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background

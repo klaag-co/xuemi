@@ -1,4 +1,4 @@
-package com.example.xuemi.quiz
+package org.sstinc.xuemi.quiz
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
@@ -25,9 +25,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.xuemi.MyViewModel
-import com.example.xuemi.NoteType
-import com.example.xuemi.screenTitle
+import org.sstinc.xuemi.MyViewModel
+import org.sstinc.xuemi.NoteType
+import org.sstinc.xuemi.screenTitle
 
 
 @Composable

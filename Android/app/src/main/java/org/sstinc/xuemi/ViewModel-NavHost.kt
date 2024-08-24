@@ -27,13 +27,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.room.Room
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.sstinc.xuemi.db.BookmarksDatabase
 import org.sstinc.xuemi.db.BookmarksRepository
 import org.sstinc.xuemi.db.MCQDatabase
@@ -47,6 +40,13 @@ import org.sstinc.xuemi.quiz.MCQresults
 import org.sstinc.xuemi.quiz.MCQtopic
 import org.sstinc.xuemi.quiz.Secondary
 import org.sstinc.xuemi.quiz.Word
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainApplication: Application() {
     companion object {

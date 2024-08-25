@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.xuemi"
+    namespace = "org.sstinc.xuemi"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.xuemi"
+        applicationId = "org.sstinc.xuemi"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -23,7 +23,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -53,7 +54,6 @@ android {
 dependencies {
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.navigation:navigation-compose:2.7.7")
-    implementation("androidx.compose.ui:ui:1.6.7")
     implementation("androidx.compose.material:material:1.6.7")
     implementation("androidx.compose.ui:ui-tooling-preview:1.6.7")
     implementation("com.google.code.gson:gson:2.8.8")
@@ -80,8 +80,6 @@ dependencies {
     val room_version = "2.6.1"
 
     implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-
     ksp("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
 

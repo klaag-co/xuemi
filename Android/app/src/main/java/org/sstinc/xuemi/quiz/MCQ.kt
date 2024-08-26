@@ -91,8 +91,11 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
 
     wordDataSize = question.size
 
-    Log.d("MCQCHECK", "currentQN: $currentQN, leftOff: $leftOff")
+    Log.d("MCQCHECK", "currentQN: $currentQN, leftOff: $leftOff, wordDataSize: $wordDataSize")
 
+    if (currentQN >= wordDataSize) {
+        currentQN -= 1
+    }
     Column {
 
         LinearProgressIndicator(

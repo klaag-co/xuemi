@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -97,35 +98,37 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
         backButton = true,
         navController = navController
     ) {
-        Column (Modifier.padding(top = 55.dp)){
-            title(viewModel = viewModel)
-            chaptertemplate(viewModel, navController, "一", "0")
-            chaptertemplate(viewModel, navController, "二", "1")
-            chaptertemplate(viewModel, navController, "三", "2")
-            chaptertemplate(viewModel, navController, "四", "3")
-            chaptertemplate(viewModel, navController, "五", "4")
-            if (showButton) {
-                chaptertemplate(viewModel, navController, "六", "5")
-            }
-            Button(
-                onClick = {
-                    navigateToMCQ.value = true
-                },
-                colors = ButtonDefaults.buttonColors(Color(194, 206, 217)),
-                shape = RoundedCornerShape(20.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 7.dp)
-            ) {
-                Column {
-                    Text(
-                        text = "年终考试",
-                        color = Color.Black,
-                        fontSize = 28.sp,
-                        modifier = Modifier
-                            .padding(horizontal = 5.dp, vertical = 7.dp)
+        LazyColumn (Modifier.padding(top = 55.dp)){
+            item {
+                title(viewModel = viewModel)
+                chaptertemplate(viewModel, navController, "一", "0")
+                chaptertemplate(viewModel, navController, "二", "1")
+                chaptertemplate(viewModel, navController, "三", "2")
+                chaptertemplate(viewModel, navController, "四", "3")
+                chaptertemplate(viewModel, navController, "五", "4")
+                if (showButton) {
+                    chaptertemplate(viewModel, navController, "六", "5")
+                }
+                Button(
+                    onClick = {
+                        navigateToMCQ.value = true
+                    },
+                    colors = ButtonDefaults.buttonColors(Color(194, 206, 217)),
+                    shape = RoundedCornerShape(20.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 7.dp)
+                ) {
+                    Column {
+                        Text(
+                            text = "年终考试",
+                            color = Color.Black,
+                            fontSize = 28.sp,
+                            modifier = Modifier
+                                .padding(horizontal = 5.dp, vertical = 7.dp)
 
-                    )
+                        )
+                    }
                 }
             }
 

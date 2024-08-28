@@ -128,6 +128,7 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
             ) {
                 Text(
                     text = "中$secondary",
+                    maxLines = 1,
                     style = MaterialTheme.typography.displayLarge,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center

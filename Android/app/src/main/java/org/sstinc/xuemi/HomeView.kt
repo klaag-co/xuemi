@@ -6,17 +6,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -39,12 +38,25 @@ import org.sstinc.xuemi.quiz.generateListOfMCQQuestions
 
 @Composable
 fun Home(viewModel: MyViewModel, navController: NavController) {
+    val configuration = LocalConfiguration.current
+
+    val screenWidthDp = configuration.screenWidthDp
+    val screenHeightDp = configuration.screenHeightDp
+    val screenRatio = screenWidthDp.toFloat() / screenHeightDp.toFloat()
+
+    // Adjust the text size based on the screen width
+    val fontSize = remember(screenRatio) {
+        when {
+            screenRatio < 0.455 -> 45.sp   // Small screens
+            else -> 58.sp                  // Large screens
+        }
+    }
     Column {// Whole app Column
         Text(
             "Home",
             fontSize = 38.sp,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 20.dp, horizontal = 20.dp)
+            modifier = Modifier.padding(vertical = 10.dp, horizontal = 20.dp)
         )
 
         Button(onClick = {
@@ -68,15 +80,17 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
         }
         Row (horizontalArrangement = Arrangement.Center, modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.29f),){// 1st button row
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "一", 0.44f)
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "二", 0.8f)
+            .fillMaxHeight(0.28f)
+            .padding(vertical = 10.dp),){// 1st button row
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "一", 0.45f)
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "二", 0.81f)
         }
         Row (horizontalArrangement = Arrangement.Center, modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.4f)){// 2nd button row
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "三",0.44f)
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "四",0.8f)
+            .fillMaxHeight(0.43f)
+            .padding(vertical = 10.dp)){// 2nd button row
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "三",0.45f)
+            squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "四",0.81f)
         }
         Button(onClick = {
             navController.navigate("olevel")
@@ -86,13 +100,13 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 25.dp, vertical = 10.dp))
+                .padding(start = 25.dp, end = 25.dp, bottom = 20.dp))
 
 
         {
             Text(
                 text = "O 学准备考",
-                style = MaterialTheme.typography.displayLarge,
+                fontSize = fontSize,
                 modifier = Modifier.padding(vertical = 20.dp)
             )
         }
@@ -103,7 +117,22 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
 
 @Composable
 fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: Boolean, secondary: String?, size: Float) {
-    Box (Modifier.fillMaxWidth(size)){
+    val configuration = LocalConfiguration.current
+
+    val screenWidthDp = configuration.screenWidthDp
+    val screenHeightDp = configuration.screenHeightDp
+    val screenRatio = screenWidthDp.toFloat() / screenHeightDp.toFloat()
+
+    // Adjust the text size based on the screen width
+    val fontSize = remember(screenRatio) {
+        when {
+            screenRatio < 0.4 -> 45.sp   // Small screens
+            else -> 58.sp                  // Large screens
+        }
+    }
+    Log.d("screenwidth", screenRatio.toString())
+
+    Box(Modifier.fillMaxWidth(size)) {
         Button(
             onClick = {
                 navController.navigate("secondary")
@@ -118,9 +147,9 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
             colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
-                .padding(5.dp)
-                .width(170.dp)
-                .height(155.dp)
+                .padding(horizontal = 5.dp)
+                .fillMaxWidth()
+                .aspectRatio(1.1f) // Maintain square aspect ratio
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -129,14 +158,16 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
                 Text(
                     text = "中$secondary",
                     maxLines = 1,
-                    style = MaterialTheme.typography.displayLarge,
+                    fontSize = fontSize,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }
     }
 }
+
 
 @Composable
 fun olevel(viewModel: MyViewModel, navController: NavController) {
@@ -221,10 +252,11 @@ fun olevel(viewModel: MyViewModel, navController: NavController) {
                     Text(
                         text = "End-Of-Year Practice",
                         color = Color.Black,
+                        textAlign = TextAlign.Center,
+                        lineHeight = 33.sp,
                         fontSize = 28.sp,
                         modifier = Modifier
                             .padding(horizontal = 5.dp, vertical = 5.dp)
-
                     )
                 }
             }

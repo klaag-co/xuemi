@@ -43,15 +43,20 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
     val screenWidthDp = configuration.screenWidthDp
     val screenHeightDp = configuration.screenHeightDp
     val screenRatio = screenWidthDp.toFloat() / screenHeightDp.toFloat()
-
+    var appear = remember { mutableStateOf(true) }
     // Adjust the text size based on the screen width
-    val fontSize = remember(screenRatio) {
+    val fontSize = remember(screenWidthDp) {
         when {
-            screenRatio < 0.455 -> 45.sp   // Small screens
+            screenWidthDp < 370 -> 43.sp   // Small screens
             else -> 58.sp                  // Large screens
         }
     }
     Column {// Whole app Column
+//        if (appear.value) {
+//            Button(onClick = { appear.value = false }) {
+//                Text(screenWidthDp.toString())
+//            }
+//        }
         Text(
             "Home",
             fontSize = 38.sp,
@@ -124,13 +129,13 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
     val screenRatio = screenWidthDp.toFloat() / screenHeightDp.toFloat()
 
     // Adjust the text size based on the screen width
-    val fontSize = remember(screenRatio) {
+    val fontSize = remember(screenWidthDp) {
         when {
-            screenRatio < 0.4 -> 45.sp   // Small screens
+            screenWidthDp < 370 -> 43.sp   // Small screens
             else -> 58.sp                  // Large screens
         }
     }
-    Log.d("screenwidth", screenRatio.toString())
+    Log.d("screenwidth", screenWidthDp.toString())
 
     Box(Modifier.fillMaxWidth(size)) {
         Button(

@@ -461,7 +461,7 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
         NavItem("Home", R.drawable.home, R.drawable.o_home),
         NavItem("Bookmarks", R.drawable.bookmark, R.drawable.o_bookmark),
         NavItem("Notes", R.drawable.notes, R.drawable.o_notes),
-        NavItem("Settings",R.drawable.settings, R.drawable.o_settings)
+        NavItem("Settings", R.drawable.settings, R.drawable.o_settings)
     )
 
     var selectedTabIndex by rememberSaveable {
@@ -488,17 +488,21 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                         onClick = {
                             selectedTabIndex = index
                             navController.navigate(navItem.label) {
-                                popUpTo(navController.graph.startDestinationId) {
+                                popUpTo("home") {
+                                    inclusive = navItem.label == "home" // Pop up to "home" when navigating away from it
                                     saveState = true
                                 }
                                 launchSingleTop = true
-                                if (navItem.label != "home") {
-                                    restoreState = true
-                                }
+                                restoreState = true
                             }
                         },
                         icon = {
-                            Icon(painter = painterResource(id = if (selectedTabIndex == index) {navItem.selected} else {navItem.unselected}), contentDescription = null)
+                            Icon(
+                                painter = painterResource(
+                                    id = if (selectedTabIndex == index) navItem.selected else navItem.unselected
+                                ),
+                                contentDescription = null
+                            )
                         },
                         label = {
                             Text(navItem.label)
@@ -508,21 +512,21 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
             }
         }
     ) {
-        NavHost( navController,
+        NavHost(
+            navController,
             startDestination = "home",
             modifier = Modifier.padding()
-            ) {
-            // tabs
+        ) {
+            // Tabs
             composable("home") { Home(viewModel, navController) }
             composable("bookmarks") { Bookmarks(viewModel, navController) }
             composable("notes") { Notes(viewModel, navController) }
             composable("settings") { SettingsView(navController) }
 
-            // navigation
+            // Additional Routes
             composable("helloWorld") { HelloWorldScreen(navController) }
             composable("secondary") { Secondary(viewModel, navController) }
             composable("chapter") { Chapter(viewModel, navController) }
-            composable("notes") { Notes(viewModel, navController) }
             composable("addnote") { CreateNote(viewModel, navController) }
             composable("update/{itemId}") { backStackEntry ->
                 val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
@@ -536,12 +540,11 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                 val fromHome = backStackEntry.arguments?.getString("fromHome")!!
                 FlashcardScreen(viewModel, navController, fromHome, secondary, chapter, chapter_, topic)
             }
-            composable("mcq/{name}"){backStackEntry ->
+            composable("mcq/{name}") { backStackEntry ->
                 val name = backStackEntry.arguments?.getString("name") ?: "name"
                 MCQ(viewModel, navController, name)
-
             }
-            composable("mcqresults/{id}/{name}/{wrong},{correct}") {backStackEntry ->
+            composable("mcqresults/{id}/{name}/{wrong},{correct}") { backStackEntry ->
                 val id = backStackEntry.arguments?.getString("id")!!.toInt()
                 val wrong = backStackEntry.arguments?.getString("wrong")!!.toInt()
                 val correct = backStackEntry.arguments?.getString("correct")!!.toInt()
@@ -549,8 +552,6 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                 MCQresults(viewModel, navController, id, name, wrong, correct)
             }
             composable("olevel") { olevel(viewModel, navController) }
-
-
         }
     }
 }

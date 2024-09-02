@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -20,12 +20,19 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.sstinc.xuemi.ui.theme.XuemiTheme
 
 
@@ -56,6 +63,9 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun screenTitle(title: String, backButton: Boolean, navController: NavController, content: @Composable () -> Unit = {}) {
+    var canNavigateBack by remember { mutableStateOf(true) }
+    val coroutineScope = rememberCoroutineScope()
+
     if (title != "") {
         if (backButton) {
             Scaffold(
@@ -63,10 +73,22 @@ fun screenTitle(title: String, backButton: Boolean, navController: NavController
                     TopAppBar(
                         title = {},
                         navigationIcon = {
-                            IconButton(onClick = { navController.popBackStack() }) {
-                                Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
-                            }
+                            IconButton(
+                                onClick = {
+                                    if (canNavigateBack) {
+                                        canNavigateBack = false
+                                        navController.popBackStack()
 
+                                        // Use coroutineScope to launch a coroutine to reset the state
+                                        coroutineScope.launch {
+                                            delay(300) // delay in milliseconds
+                                            canNavigateBack = true
+                                        }
+                                    }
+                                }
+                            ) {
+                                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                            }
                         }
                     )
                 }
@@ -79,7 +101,6 @@ fun screenTitle(title: String, backButton: Boolean, navController: NavController
                         bottom = 90.dp
                     )
                 ) {
-
                     Text(
                         title,
                         fontSize = 45.sp,
@@ -87,9 +108,7 @@ fun screenTitle(title: String, backButton: Boolean, navController: NavController
                         modifier = Modifier.padding(top = 50.dp, bottom = 10.dp)
                     )
                     content()
-
                 }
-
             }
         } else {
             Column(Modifier.padding(start = 20.dp, end = 20.dp, bottom = 90.dp)) {
@@ -100,7 +119,6 @@ fun screenTitle(title: String, backButton: Boolean, navController: NavController
                     modifier = Modifier.padding(vertical = 10.dp)
                 )
                 content()
-
             }
         }
     } else {
@@ -110,21 +128,31 @@ fun screenTitle(title: String, backButton: Boolean, navController: NavController
                     TopAppBar(
                         title = {},
                         navigationIcon = {
-                            IconButton(onClick = { navController.popBackStack() }) {
-                                Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
-                            }
+                            IconButton(
+                                onClick = {
+                                    if (canNavigateBack) {
+                                        canNavigateBack = false
+                                        navController.popBackStack()
 
+                                        // Use coroutineScope to launch a coroutine to reset the state
+                                        coroutineScope.launch {
+                                            delay(300) // delay in milliseconds
+                                            canNavigateBack = true
+                                        }
+                                    }
+                                }
+                            ) {
+                                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                            }
                         }
                     )
                 }
             ) {
                 Column(Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 90.dp)) {
-                   content()
+                    content()
                 }
             }
-
-        }
-        else {
+        } else {
             Column(Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 90.dp)) {
                 content()
             }

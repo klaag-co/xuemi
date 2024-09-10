@@ -414,7 +414,7 @@ fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: Str
 
                 }
                 "Flashcards" -> {
-                    val navigatePath = "${quiz.lowercase()}/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}.chapter"
+                    val navigatePath = "flashcards/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}.chapter"
                     navController.navigate(navigatePath)
                     viewModel.saveContinueLearning()
                 }

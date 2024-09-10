@@ -126,7 +126,7 @@ fun dropdown(
                                     else -> 0
                                 }
                                 navController.navigate("flashcards/${secondary}/${bookmark.chapter}/${chapter_}/${bookmark.topic}.bookmarks")
-                            } // Clickable modifier on each Row
+                            }
                             .padding(19.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {

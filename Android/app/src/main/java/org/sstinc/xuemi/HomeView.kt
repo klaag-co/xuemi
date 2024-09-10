@@ -41,10 +41,8 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
     val configuration = LocalConfiguration.current
 
     val screenWidthDp = configuration.screenWidthDp
-    val screenHeightDp = configuration.screenHeightDp
-    val screenRatio = screenWidthDp.toFloat() / screenHeightDp.toFloat()
+
     var appear = remember { mutableStateOf(true) }
-    // Adjust the text size based on the screen width
     val fontSize = remember(screenWidthDp) {
         when {
             screenWidthDp < 370 -> 43.sp   // Small screens
@@ -125,8 +123,6 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
     val configuration = LocalConfiguration.current
 
     val screenWidthDp = configuration.screenWidthDp
-    val screenHeightDp = configuration.screenHeightDp
-    val screenRatio = screenWidthDp.toFloat() / screenHeightDp.toFloat()
 
     // Adjust the text size based on the screen width
     val fontSize = remember(screenWidthDp) {
@@ -135,14 +131,12 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
             else -> 58.sp                  // Large screens
         }
     }
-    Log.d("screenwidth", screenWidthDp.toString())
 
     Box(Modifier.fillMaxWidth(size)) {
         Button(
             onClick = {
                 navController.navigate("secondary")
                 viewModel.updateItem(0, "$secondary")
-                viewModel.updateItem(4, "false")
                 if (sec4) {
                     viewModel.offButton()
                 } else {

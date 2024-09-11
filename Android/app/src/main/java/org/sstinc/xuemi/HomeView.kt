@@ -45,7 +45,7 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
     var appear = remember { mutableStateOf(true) }
     val fontSize = remember(screenWidthDp) {
         when {
-            screenWidthDp < 370 -> 43.sp   // Small screens
+            screenWidthDp < 375 -> 43.sp   // Small screens
             else -> 58.sp                  // Large screens
         }
     }
@@ -55,6 +55,7 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
 //                Text(screenWidthDp.toString())
 //            }
 //        }
+        Text(screenWidthDp.toString())
         Text(
             "Home",
             fontSize = 38.sp,
@@ -127,7 +128,7 @@ fun squaretemplate(viewModel: MyViewModel, navController: NavController, sec4: B
     // Adjust the text size based on the screen width
     val fontSize = remember(screenWidthDp) {
         when {
-            screenWidthDp < 370 -> 43.sp   // Small screens
+            screenWidthDp < 375 -> 43.sp   // Small screens
             else -> 58.sp                  // Large screens
         }
     }

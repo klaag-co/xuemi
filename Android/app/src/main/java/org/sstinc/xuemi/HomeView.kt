@@ -55,7 +55,6 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
 //                Text(screenWidthDp.toString())
 //            }
 //        }
-        Text(screenWidthDp.toString())
         Text(
             "Home",
             fontSize = 38.sp,

@@ -112,8 +112,9 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                 .padding(horizontal = 20.dp)
                 .padding(top = 10.dp), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.h5)
             val optionNumberList = (0..3).toList()
-
-            Text("正确答案是什么呢？", color = if (wrong) Color.Red else Color.White, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+            if (wrong) {
+            Text("正确答案是什么呢？", color = Color.Red, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+                }
             optionNumberList.forEach { number ->
                 Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                     val option = it.optionList[number]

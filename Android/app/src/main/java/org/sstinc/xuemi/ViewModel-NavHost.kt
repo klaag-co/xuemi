@@ -387,7 +387,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
                 // Topic exists, so check if it needs to be deleted and re-added
                 val topicInList = mcqList.value!![topicIndex]
                 Log.d("MCQCHECK", (topicInList.leftOff+1).toString())
-                if (topicInList.leftOff+1 >= questions.size) {
+                if (topicInList.leftOff+1 >= questions.size+1) {
                     deleteQuiz(topicInList.id)
                     mcqDao.addTopic(MCQtopic(topic = topic, leftOff = 0, questions = questions))
                 } else {

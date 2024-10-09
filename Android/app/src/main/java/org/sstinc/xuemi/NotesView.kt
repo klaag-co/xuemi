@@ -404,7 +404,7 @@ fun UpdateNote(navController: NavController, viewModel: MyViewModel, itemID: Int
                 Modifier.padding(
                     start = 20.dp,
                     end = 20.dp,
-                    top = 10.dp,
+                    top = 50.dp,
                     bottom = 90.dp
                 )
             ) {

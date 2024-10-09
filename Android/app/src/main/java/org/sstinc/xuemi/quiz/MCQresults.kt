@@ -1,6 +1,7 @@
 package org.sstinc.xuemi.quiz
 
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -64,6 +65,10 @@ fun MCQresults(viewModel: MyViewModel, navController: NavController, topicID: In
             noteAdded = true
 
         }
+    }
+
+    BackHandler {
+        navController.popBackStack(navController.graph.startDestinationId, false)
     }
 
     screenTitle(

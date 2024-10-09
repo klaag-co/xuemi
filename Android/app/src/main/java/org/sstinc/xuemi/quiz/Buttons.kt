@@ -171,9 +171,14 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
 
             }
             title(viewModel)
-            topictemplate(viewModel, { isSheetOpen = true }, "一")
-            topictemplate(viewModel, { isSheetOpen = true }, "二" )
-            topictemplate(viewModel, { isSheetOpen = true }, "三")
+            LazyColumn {
+                item {
+                    topictemplate(viewModel, { isSheetOpen = true }, "一")
+                    topictemplate(viewModel, { isSheetOpen = true }, "二" )
+                    topictemplate(viewModel, { isSheetOpen = true }, "三")
+                }
+            }
+
         }
         if (isSheetOpen) {
             ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {

@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -92,6 +93,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     val eoy: MutableStateFlow<List<Word>> = _eoy
     private val _mid: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
     val mid: MutableStateFlow<List<Word>> = _mid
+    var noteAdded by mutableStateOf(false)
 
 
     private val _secondaryStates: MutableMap<SecondaryType, MutableStateFlow<List<Word>?>> =
@@ -386,8 +388,8 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             } else {
                 // Topic exists, so check if it needs to be deleted and re-added
                 val topicInList = mcqList.value!![topicIndex]
-                Log.d("MCQCHECK", (topicInList.leftOff+1).toString())
-                if (topicInList.leftOff+1 >= questions.size+1) {
+                Log.d("MCQCHECK", ("leftoff: ${topicInList.leftOff}, question.size: ${questions.size}").toString())
+                if (topicInList.leftOff == questions.size) {
                     deleteQuiz(topicInList.id)
                     mcqDao.addTopic(MCQtopic(topic = topic, leftOff = 0, questions = questions))
                 } else {

@@ -56,6 +56,7 @@ data class Bookmark(
     val word: String,
     val chapter: String,
     val topic: String,
+    val leftOff: Int
 )
 
 @Composable
@@ -125,7 +126,7 @@ fun dropdown(
                                     "六" -> 5
                                     else -> 0
                                 }
-                                navController.navigate("flashcards/${secondary}/${bookmark.chapter}/${chapter_}/${bookmark.topic}.bookmarks")
+                                navController.navigate("flashcards/${secondary}/${bookmark.chapter}/${chapter_}/${bookmark.topic}/${bookmark.leftOff}.bookmarks")
                             }
                             .padding(19.dp),
                         horizontalArrangement = Arrangement.SpaceBetween

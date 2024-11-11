@@ -64,7 +64,7 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
 
         Button(onClick = {
             if (viewModel.flashcardGetFromList(3) != "T") {
-                navController.navigate("flashcards/${viewModel.flashcardGetFromList(0)}/${viewModel.flashcardGetFromList(1)}/${viewModel.flashcardGetFromList(2)}/${viewModel.flashcardGetFromList(3)}.home")
+                navController.navigate("flashcards/${viewModel.flashcardGetFromList(0)}/${viewModel.flashcardGetFromList(1)}/${viewModel.flashcardGetFromList(2)}/${viewModel.flashcardGetFromList(3)}/0.home")
             } },
             colors = ButtonDefaults.buttonColors(Color(49, 113, 200)),
             shape = RoundedCornerShape(20.dp),

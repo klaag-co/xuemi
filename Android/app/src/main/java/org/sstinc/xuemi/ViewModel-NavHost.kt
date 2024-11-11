@@ -325,14 +325,15 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     }
 
 
-    fun addBookmark(section: BookmarkSection, word: String, chapter: String, topic: String) {
+    fun addBookmark(section: BookmarkSection, word: String, chapter: String, topic: String, leftOff: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             bookmarksDao.addBookmark(
                 Bookmark(
                     type = section,
                     word = word,
                     chapter = chapter,
-                    topic = topic
+                    topic = topic,
+                    leftOff = leftOff
                 )
             )
             loadBookmarks()
@@ -534,13 +535,14 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                 val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
                 UpdateNote(navController, viewModel, itemID = itemId)
             }
-            composable("flashcards/{sec}/{chap}/{chap_}/{topic}.{fromHome}") { backStackEntry ->
+            composable("flashcards/{sec}/{chap}/{chap_}/{topic}/{leftoff}.{fromHome}") { backStackEntry ->
                 val secondary = backStackEntry.arguments?.getString("sec")!!
                 val chapter = backStackEntry.arguments?.getString("chap")!!
                 val chapter_ = backStackEntry.arguments?.getString("chap_")!!.toInt()
                 val topic = backStackEntry.arguments?.getString("topic")!!
                 val fromHome = backStackEntry.arguments?.getString("fromHome")!!
-                FlashcardScreen(viewModel, navController, fromHome, secondary, chapter, chapter_, topic)
+                val leftOff = backStackEntry.arguments?.getString("leftoff")!!.toInt()
+                FlashcardScreen(viewModel, navController, fromHome, secondary, chapter, chapter_, topic, if (leftOff != 0) leftOff else 0)
             }
             composable("mcq/{name}") { backStackEntry ->
                 val name = backStackEntry.arguments?.getString("name") ?: "name"

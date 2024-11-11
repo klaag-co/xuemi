@@ -46,6 +46,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             XuemiTheme {
                 val navController = rememberNavController()
+//                val webView: WebView = findViewById(R.id.webView)
+//                webView.settings.javaScriptEnabled = true
+//                webView.settings.domStorageEnabled = true
+//
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),

@@ -217,18 +217,15 @@ fun Topic(viewModel: MyViewModel, navController: NavController) {
 
 
     LaunchedEffect(Unit) {
-        if (topicExistsState && name != null) {
-            navController.navigate("flashcards/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}")
-        } else {
+        if (!topicExistsState) {
             val generatedQuestions = generateListOfMCQQuestions(words, false)
-            if (name != null) {
-                viewModel.addQuiz(
-                    topic = name,
-                    questions = generatedQuestions
-                )
-            }
+            viewModel.addQuiz(
+                topic = name.toString(),
+                questions = generatedQuestions
+            )
         }
     }
+
     Column {
 
         Text(
@@ -419,7 +416,7 @@ fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: Str
 
                 }
                 "Flashcards" -> {
-                    val navigatePath = "flashcards/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}.chapter"
+                    val navigatePath = "flashcards/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}/0.chapter"
                     navController.navigate(navigatePath)
                     viewModel.saveContinueLearning()
                 }

@@ -3,6 +3,7 @@
 
     <style name="Theme.Xuemi" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:forceDarkAllowed">false</item>
+        <item name="android:colorBackground">#FFFFFF</item>
     </style>
 
 

@@ -7,9 +7,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -97,35 +98,37 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
         backButton = true,
         navController = navController
     ) {
-        Column (Modifier.padding(top = 55.dp)){
-            title(viewModel = viewModel)
-            chaptertemplate(viewModel, navController, "一", "0")
-            chaptertemplate(viewModel, navController, "二", "1")
-            chaptertemplate(viewModel, navController, "三", "2")
-            chaptertemplate(viewModel, navController, "四", "3")
-            chaptertemplate(viewModel, navController, "五", "4")
-            if (showButton) {
-                chaptertemplate(viewModel, navController, "六", "5")
-            }
-            Button(
-                onClick = {
-                    navigateToMCQ.value = true
-                },
-                colors = ButtonDefaults.buttonColors(Color(194, 206, 217)),
-                shape = RoundedCornerShape(20.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 7.dp)
-            ) {
-                Column {
-                    Text(
-                        text = "年终考试",
-                        color = Color.Black,
-                        fontSize = 28.sp,
-                        modifier = Modifier
-                            .padding(horizontal = 5.dp, vertical = 7.dp)
+        LazyColumn (Modifier.padding(top = 55.dp)){
+            item {
+                title(viewModel = viewModel)
+                chaptertemplate(viewModel, navController, "一", "0")
+                chaptertemplate(viewModel, navController, "二", "1")
+                chaptertemplate(viewModel, navController, "三", "2")
+                chaptertemplate(viewModel, navController, "四", "3")
+                chaptertemplate(viewModel, navController, "五", "4")
+                if (showButton) {
+                    chaptertemplate(viewModel, navController, "六", "5")
+                }
+                Button(
+                    onClick = {
+                        navigateToMCQ.value = true
+                    },
+                    colors = ButtonDefaults.buttonColors(Color(194, 206, 217)),
+                    shape = RoundedCornerShape(20.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 7.dp)
+                ) {
+                    Column {
+                        Text(
+                            text = "年终考试",
+                            color = Color.Black,
+                            fontSize = 28.sp,
+                            modifier = Modifier
+                                .padding(horizontal = 5.dp, vertical = 7.dp)
 
-                    )
+                        )
+                    }
                 }
             }
 
@@ -155,7 +158,7 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
                 ) },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
 
                 }
@@ -168,9 +171,14 @@ fun Chapter(viewModel: MyViewModel, navController: NavController) {
 
             }
             title(viewModel)
-            topictemplate(viewModel, { isSheetOpen = true }, "一")
-            topictemplate(viewModel, { isSheetOpen = true }, "二" )
-            topictemplate(viewModel, { isSheetOpen = true }, "三")
+            LazyColumn {
+                item {
+                    topictemplate(viewModel, { isSheetOpen = true }, "一")
+                    topictemplate(viewModel, { isSheetOpen = true }, "二" )
+                    topictemplate(viewModel, { isSheetOpen = true }, "三")
+                }
+            }
+
         }
         if (isSheetOpen) {
             ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
@@ -209,18 +217,15 @@ fun Topic(viewModel: MyViewModel, navController: NavController) {
 
 
     LaunchedEffect(Unit) {
-        if (topicExistsState && name != null) {
-            navController.navigate("flashcards/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}")
-        } else {
+        if (!topicExistsState) {
             val generatedQuestions = generateListOfMCQQuestions(words, false)
-            if (name != null) {
-                viewModel.addQuiz(
-                    topic = name,
-                    questions = generatedQuestions
-                )
-            }
+            viewModel.addQuiz(
+                topic = name.toString(),
+                questions = generatedQuestions
+            )
         }
     }
+
     Column {
 
         Text(
@@ -411,7 +416,7 @@ fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: Str
 
                 }
                 "Flashcards" -> {
-                    val navigatePath = "${quiz.lowercase()}/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}.chapter"
+                    val navigatePath = "flashcards/${viewModel.getFromList(0)}/${viewModel.getFromList(1)}/${viewModel.getFromList(2)}/${viewModel.getFromList(3)}/0.chapter"
                     navController.navigate(navigatePath)
                     viewModel.saveContinueLearning()
                 }

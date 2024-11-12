@@ -15,10 +15,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,7 +36,7 @@ fun MCQresults(viewModel: MyViewModel, navController: NavController, topicID: In
         Color(3, 199, 190)
     }
 
-    var noteAdded by rememberSaveable { mutableStateOf(false) }
+    var noteAdded by viewModel::noteAdded
 
     LaunchedEffect(Unit) {
         if (!noteAdded) {
@@ -66,13 +62,18 @@ fun MCQresults(viewModel: MyViewModel, navController: NavController, topicID: In
         }
     }
 
+//    BackHandler {
+//        navController.popBackStack(navController.graph.startDestinationId, false)
+//    }
+
     screenTitle(
         title = "",
-        backButton = false,
+        backButton = true,
         navController = navController
     ) {
         Column (
             modifier = Modifier
+                .padding(top = 65.dp)
                 .fillMaxWidth()
                 .fillMaxHeight(0.95f),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -119,7 +120,7 @@ fun MCQresults(viewModel: MyViewModel, navController: NavController, topicID: In
                 )
                 Button(
                     onClick = { navController.popBackStack(navController.graph.startDestinationId, false)
-                        /*viewModel.deleteQuiz(topicID)*/},
+                        viewModel.noteAdded = false },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(Color(0, 123, 255))
                 ) {

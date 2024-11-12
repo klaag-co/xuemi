@@ -26,7 +26,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import org.sstinc.xuemi.screenTitle
 
 data class Acknowledgement(
     val name: String,
@@ -158,9 +157,15 @@ fun HelloWorldScreen(navController: NavHostController) {
         backButton = true,
         navController = navController
     ) {
-        Text(
-            text = "Our app, Xuemi, is an app that will help secondary school students improve their Chinese language in a more convenient manner. Students will be able to study anywhere, anytime. The app features will allow students to practise their reading and writing and strengthen their use of the Chinese language. Students will be able to learn how to write the Chinese words correctly, and read passages fluently and with confidence. The app includes a test function which tests students based on the ‘O’ level marking scheme. The content from sec 1-sec 4 will be compiled in this app, allowing easier access to materials for students. Additionally, we will include a note-taking function in the app.",
-            fontSize = 20.sp
-        )
+        LazyColumn {
+            item {
+                Text(
+                    text = "Our app, Xuemi, is an app that will help secondary school students improve their Chinese language in a more convenient manner. Students will be able to study anywhere, anytime. The app features will allow students to practise their reading and writing and strengthen their use of the Chinese language. Students will be able to learn how to write the Chinese words correctly, and read passages fluently and with confidence. The app includes a test function which tests students based on the ‘O’ level marking scheme. The content from sec 1-sec 4 will be compiled in this app, allowing easier access to materials for students. Additionally, we will include a note-taking function in the app.",
+                    fontSize = 20.sp
+                )
+            }
+
+        }
+
     }
 }

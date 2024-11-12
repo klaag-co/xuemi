@@ -49,13 +49,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
-import org.sstinc.xuemi.screenTitle
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import org.sstinc.xuemi.BookmarkSection
 import org.sstinc.xuemi.MyViewModel
 import org.sstinc.xuemi.R
+import org.sstinc.xuemi.screenTitle
 import java.util.Locale
 
 //
@@ -65,7 +65,7 @@ import java.util.Locale
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHome: String, secondary: String, chapter: String, chapter_: Int, topic: String) {
+fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHome: String, secondary: String, chapter: String, chapter_: Int, topic: String, leftOff: Int) {
     LaunchedEffect(Unit) {
         viewModel.loadData("中${secondary}.json")
     }
@@ -86,7 +86,7 @@ fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHo
     }
 
     val dataFromJson by viewModel.loadedData.collectAsState()
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(leftOff)
     val chapterData = dataFromJson?.chapters?.getOrNull(chapter_)?.topics
     var wordDataSize by remember { mutableIntStateOf(0) }
 
@@ -123,13 +123,12 @@ fun FlashcardScreen(viewModel: MyViewModel, navController: NavController, fromHo
                 count = wordDataSize,
                 state = pagerState,
             ) { page ->
-
                 val wordData = wordList?.getOrNull(page)
 
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     if (wordData != null) {
                         Column {
-                            Flashcard(wordData, viewModel, secondary, chapter)
+                            Flashcard(wordData, viewModel, secondary, chapter, pagerState.currentPage)
                             Spacer(Modifier.padding(30.dp))
                         }
 
@@ -183,7 +182,7 @@ private fun promptUserToInstallGoogleTTS(context: Context) {
     }
 }
 @Composable
-fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter: String) {
+fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter: String, leftOff: Int) {
     LaunchedEffect(Unit) {
         viewModel.loadBookmarks()
         viewModel.loadBookmarkNames()
@@ -237,7 +236,8 @@ fun Flashcard(wordSets: Word, viewModel: MyViewModel, secondary: String, chapter
                                 BookmarkSection.valueOf("中${viewModel.flashcardGetFromList(0)}"),
                                 wordSets.word,
                                 viewModel.flashcardGetFromList(1),
-                                viewModel.flashcardGetFromList(3)
+                                viewModel.flashcardGetFromList(3),
+                                leftOff
                             )
                         }
                         viewModel.loadBookmarkNames()

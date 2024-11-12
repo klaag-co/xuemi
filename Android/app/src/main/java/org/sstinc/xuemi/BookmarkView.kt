@@ -56,24 +56,33 @@ data class Bookmark(
     val word: String,
     val chapter: String,
     val topic: String,
+    val leftOff: Int
 )
 
 @Composable
-fun dropdown(viewModel: MyViewModel, navController: NavController, secondary: String, bookmarksList: List<Bookmark>, isFocused: Boolean) {
+fun dropdown(
+    viewModel: MyViewModel,
+    navController: NavController,
+    secondary: String,
+    bookmarksList: List<Bookmark>,
+    isFocused: Boolean
+) {
     var expanded by remember { mutableStateOf(false) }
 
-
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .padding(vertical = 10.dp, horizontal = 20.dp)) {
+    // Column to contain the dropdown header and the expanded list
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 10.dp, horizontal = 20.dp)
+    ) {
+        // Box for the dropdown header
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color(227, 227, 227))
-                .padding(19.dp)
-                .clickable { expanded = !expanded },
+                .clickable { expanded = !expanded } // Clickable modifier on the Box
+                .padding(19.dp),
             contentAlignment = Alignment.CenterStart,
-
         ) {
             Text(
                 text = secondary,
@@ -83,25 +92,30 @@ fun dropdown(viewModel: MyViewModel, navController: NavController, secondary: St
             Icon(
                 imageVector =
                 if (expanded && bookmarksList.isNotEmpty()) {
-                    Icons.Default.KeyboardArrowDown }
-                else {
+                    Icons.Default.KeyboardArrowDown
+                } else {
                     Icons.AutoMirrored.Filled.KeyboardArrowRight
-                     },
+                },
                 contentDescription = null,
                 modifier = Modifier.align(Alignment.CenterEnd)
             )
         }
+
+        // Expand the list of bookmarks if the dropdown is expanded
         if (isFocused) {
             expanded = true
         }
         if (expanded) {
-            Column {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color(227, 227, 227)) // Ensure background covers full width
+            ) {
                 bookmarksList.forEach { bookmark ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(Color.LightGray)
-                            .padding(19.dp)
                             .clickable {
                                 val chapter_ = when (bookmark.chapter) {
                                     "一" -> 0
@@ -112,8 +126,9 @@ fun dropdown(viewModel: MyViewModel, navController: NavController, secondary: St
                                     "六" -> 5
                                     else -> 0
                                 }
-                                navController.navigate("flashcards/${secondary}/${bookmark.chapter}/${chapter_}/${bookmark.topic}.bookmarks")
-                            },
+                                navController.navigate("flashcards/${secondary}/${bookmark.chapter}/${chapter_}/${bookmark.topic}/${bookmark.leftOff}.bookmarks")
+                            }
+                            .padding(19.dp),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Column {
@@ -130,20 +145,19 @@ fun dropdown(viewModel: MyViewModel, navController: NavController, secondary: St
                         IconButton(onClick = {
                             viewModel.deleteBookmark(bookmark.id)
                             viewModel.loadBookmarks()
-
                         }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.bookmark),
                                 contentDescription = null
                             )
                         }
-
                     }
                 }
             }
         }
     }
 }
+
 
 
 @Composable

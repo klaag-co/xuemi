@@ -1,6 +1,5 @@
 package org.sstinc.xuemi.quiz
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +17,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
@@ -91,10 +91,16 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
 
     wordDataSize = question.size
 
-    Log.d("MCQCHECK", "currentQN: $currentQN, leftOff: $leftOff")
+    // This ensures that 'enabled' is updated when coming back to this screen.
+    LaunchedEffect(currentQN) {
+        enabled = currentQN < leftOff
+    }
+
+    if (currentQN >= wordDataSize) {
+        currentQN -= 1
+    }
 
     Column {
-
         LinearProgressIndicator(
             progress = progress,
             color = Color(0xFF7EBDF0),
@@ -109,8 +115,9 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                 .padding(horizontal = 20.dp)
                 .padding(top = 10.dp), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.h5)
             val optionNumberList = (0..3).toList()
-
-            Text("正确答案是什么呢？", color = if (wrong) Color.Red else Color.White, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+            if (wrong) {
+                Text("正确答案是什么呢？", color = Color.Red, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+            }
             optionNumberList.forEach { number ->
                 Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                     val option = it.optionList[number]
@@ -121,7 +128,7 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                                     selectedAnswer = option
                                 }
                                 showAnswer = true
-                                if (leftOff == currentQN) {
+                                if (leftOff == currentQN && leftOff != wordDataSize) {
                                     leftOff += 1
                                 }
                                 viewModel.updateLeftOff(leftOff, topic!!.id)
@@ -159,14 +166,13 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                 }
             }, enabled = isFirst_enabled
             ) {
-                Text("<",
-                    style = MaterialTheme.typography.h4)
+                Text("<", style = MaterialTheme.typography.h4)
             }
             Spacer(Modifier.fillMaxSize(0.82f))
             TextButton(onClick = {
-                if (currentQN+1 >= wordDataSize) {
+                if (currentQN + 1 >= wordDataSize) {
                     val wrongNum = viewModel.countIncorrectAnswers(topicName)
-                    val correctNum = wordDataSize-wrongNum
+                    val correctNum = wordDataSize - wrongNum
                     navController.navigate("mcqresults/${topic!!.id}/$topicName/$wrongNum,$correctNum")
                 } else if (currentQN < leftOff) {
                     currentQN += 1
@@ -178,11 +184,8 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                     wrong = false
                 }
             }, enabled = enabled) {
-                Text(
-                    ">",
-                    style = MaterialTheme.typography.h4)
+                Text(">", style = MaterialTheme.typography.h4)
             }
         }
     }
 }
-

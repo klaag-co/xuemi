@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -27,9 +28,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.room.Room
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.sstinc.xuemi.db.BookmarksDatabase
 import org.sstinc.xuemi.db.BookmarksRepository
 import org.sstinc.xuemi.db.MCQDatabase
+import org.sstinc.xuemi.db.MIGRATION_1_2
 import org.sstinc.xuemi.db.NotesDatabase
 import org.sstinc.xuemi.quiz.Chapter
 import org.sstinc.xuemi.quiz.FlashcardScreen
@@ -40,13 +49,6 @@ import org.sstinc.xuemi.quiz.MCQresults
 import org.sstinc.xuemi.quiz.MCQtopic
 import org.sstinc.xuemi.quiz.Secondary
 import org.sstinc.xuemi.quiz.Word
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainApplication: Application() {
     companion object {
@@ -66,7 +68,7 @@ class MainApplication: Application() {
             applicationContext,
             BookmarksDatabase::class.java,
             BookmarksDatabase.NAME
-        ).build()
+        ).addMigrations(MIGRATION_1_2).build()
         mcqDatabase = Room.databaseBuilder(
             applicationContext,
             MCQDatabase::class.java,
@@ -92,6 +94,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     val eoy: MutableStateFlow<List<Word>> = _eoy
     private val _mid: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
     val mid: MutableStateFlow<List<Word>> = _mid
+    var noteAdded by mutableStateOf(false)
 
 
     private val _secondaryStates: MutableMap<SecondaryType, MutableStateFlow<List<Word>?>> =
@@ -323,14 +326,15 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     }
 
 
-    fun addBookmark(section: BookmarkSection, word: String, chapter: String, topic: String) {
+    fun addBookmark(section: BookmarkSection, word: String, chapter: String, topic: String, leftOff: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             bookmarksDao.addBookmark(
                 Bookmark(
                     type = section,
                     word = word,
                     chapter = chapter,
-                    topic = topic
+                    topic = topic,
+                    leftOff = leftOff
                 )
             )
             loadBookmarks()
@@ -386,8 +390,8 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             } else {
                 // Topic exists, so check if it needs to be deleted and re-added
                 val topicInList = mcqList.value!![topicIndex]
-                Log.d("MCQCHECK", (topicInList.leftOff+1).toString())
-                if (topicInList.leftOff+1 >= questions.size) {
+                Log.d("MCQCHECK", ("leftoff: ${topicInList.leftOff}, question.size: ${questions.size}").toString())
+                if (topicInList.leftOff == questions.size) {
                     deleteQuiz(topicInList.id)
                     mcqDao.addTopic(MCQtopic(topic = topic, leftOff = 0, questions = questions))
                 } else {
@@ -461,7 +465,7 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
         NavItem("Home", R.drawable.home, R.drawable.o_home),
         NavItem("Bookmarks", R.drawable.bookmark, R.drawable.o_bookmark),
         NavItem("Notes", R.drawable.notes, R.drawable.o_notes),
-        NavItem("Settings",R.drawable.settings, R.drawable.o_settings)
+        NavItem("Settings", R.drawable.settings, R.drawable.o_settings)
     )
 
     var selectedTabIndex by rememberSaveable {
@@ -488,17 +492,21 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                         onClick = {
                             selectedTabIndex = index
                             navController.navigate(navItem.label) {
-                                popUpTo(navController.graph.startDestinationId) {
+                                popUpTo("home") {
+                                    inclusive = navItem.label == "home" // Pop up to "home" when navigating away from it
                                     saveState = true
                                 }
                                 launchSingleTop = true
-                                if (navItem.label != "home") {
-                                    restoreState = true
-                                }
+                                restoreState = true
                             }
                         },
                         icon = {
-                            Icon(painter = painterResource(id = if (selectedTabIndex == index) {navItem.selected} else {navItem.unselected}), contentDescription = null)
+                            Icon(
+                                painter = painterResource(
+                                    id = if (selectedTabIndex == index) navItem.selected else navItem.unselected
+                                ),
+                                contentDescription = null
+                            )
                         },
                         label = {
                             Text(navItem.label)
@@ -508,39 +516,40 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
             }
         }
     ) {
-        NavHost( navController,
+        NavHost(
+            navController,
             startDestination = "home",
             modifier = Modifier.padding()
-            ) {
-            // tabs
+        ) {
+            // Tabs
             composable("home") { Home(viewModel, navController) }
             composable("bookmarks") { Bookmarks(viewModel, navController) }
             composable("notes") { Notes(viewModel, navController) }
             composable("settings") { SettingsView(navController) }
-            // navigation
+
+            // Additional Routes
             composable("helloWorld") { HelloWorldScreen(navController) }
             composable("secondary") { Secondary(viewModel, navController) }
             composable("chapter") { Chapter(viewModel, navController) }
-            composable("notes") { Notes(viewModel, navController) }
             composable("addnote") { CreateNote(viewModel, navController) }
             composable("update/{itemId}") { backStackEntry ->
                 val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
                 UpdateNote(navController, viewModel, itemID = itemId)
             }
-            composable("flashcards/{sec}/{chap}/{chap_}/{topic}.{fromHome}") { backStackEntry ->
+            composable("flashcards/{sec}/{chap}/{chap_}/{topic}/{leftoff}.{fromHome}") { backStackEntry ->
                 val secondary = backStackEntry.arguments?.getString("sec")!!
                 val chapter = backStackEntry.arguments?.getString("chap")!!
                 val chapter_ = backStackEntry.arguments?.getString("chap_")!!.toInt()
                 val topic = backStackEntry.arguments?.getString("topic")!!
                 val fromHome = backStackEntry.arguments?.getString("fromHome")!!
-                FlashcardScreen(viewModel, navController, fromHome, secondary, chapter, chapter_, topic)
+                val leftOff = backStackEntry.arguments?.getString("leftoff")!!.toInt()
+                FlashcardScreen(viewModel, navController, fromHome, secondary, chapter, chapter_, topic, if (leftOff != 0) leftOff else 0)
             }
-            composable("mcq/{name}"){backStackEntry ->
+            composable("mcq/{name}") { backStackEntry ->
                 val name = backStackEntry.arguments?.getString("name") ?: "name"
                 MCQ(viewModel, navController, name)
-
             }
-            composable("mcqresults/{id}/{name}/{wrong},{correct}") {backStackEntry ->
+            composable("mcqresults/{id}/{name}/{wrong},{correct}") { backStackEntry ->
                 val id = backStackEntry.arguments?.getString("id")!!.toInt()
                 val wrong = backStackEntry.arguments?.getString("wrong")!!.toInt()
                 val correct = backStackEntry.arguments?.getString("correct")!!.toInt()

@@ -517,7 +517,6 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
             composable("bookmarks") { Bookmarks(viewModel, navController) }
             composable("notes") { Notes(viewModel, navController) }
             composable("settings") { SettingsView(navController) }
-
             // navigation
             composable("helloWorld") { HelloWorldScreen(navController) }
             composable("secondary") { Secondary(viewModel, navController) }
@@ -549,8 +548,6 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                 MCQresults(viewModel, navController, id, name, wrong, correct)
             }
             composable("olevel") { olevel(viewModel, navController) }
-
-
         }
     }
 }

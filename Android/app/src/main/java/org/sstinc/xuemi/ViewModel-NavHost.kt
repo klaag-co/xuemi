@@ -38,7 +38,6 @@ import kotlinx.coroutines.withContext
 import org.sstinc.xuemi.db.BookmarksDatabase
 import org.sstinc.xuemi.db.BookmarksRepository
 import org.sstinc.xuemi.db.MCQDatabase
-import org.sstinc.xuemi.db.MIGRATION_1_2
 import org.sstinc.xuemi.db.NotesDatabase
 import org.sstinc.xuemi.quiz.Chapter
 import org.sstinc.xuemi.quiz.FlashcardScreen
@@ -68,7 +67,7 @@ class MainApplication: Application() {
             applicationContext,
             BookmarksDatabase::class.java,
             BookmarksDatabase.NAME
-        ).addMigrations(MIGRATION_1_2).build()
+        ).fallbackToDestructiveMigration().build()
         mcqDatabase = Room.databaseBuilder(
             applicationContext,
             MCQDatabase::class.java,

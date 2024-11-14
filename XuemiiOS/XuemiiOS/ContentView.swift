@@ -24,9 +24,9 @@ struct ContentView: View {
                 .tabItem {
                     Label("Notes", systemImage: "doc.text")
                 }
-            SettingsView()
+            VocabView()
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label("Vocabulary", systemImage: "pencil.and.list.clipboard")
                 }
         }
         .environmentObject(bookmarkManager)

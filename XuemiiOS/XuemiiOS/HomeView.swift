@@ -110,6 +110,12 @@ struct HomeView: View {
             .padding(20)
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                NavigationLink(destination: SettingsView()) {
+                    Image(systemName: "gear")
+                        .foregroundStyle(.black)
+                }
+            }
             .navigationDestination(for: SecondaryNumber.self) { level in
                 ChapterView(level: level)
             }

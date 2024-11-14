@@ -9,33 +9,29 @@ import SwiftUI
 
 struct SettingsView: View {
     var body: some View {
-        NavigationView {
-            List {
-                
-                // App Section
-                Section(header: Text("App").font(.headline)) {
-                    NavigationLink(destination: AppInfoDetailView()) {
-                        HStack {
-                            Text("About Our App")
-                            Spacer()
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.vertical, 8)
+        List {
+            Section(header: Text("App").font(.headline)) {
+                NavigationLink(destination: AppInfoDetailView()) {
+                    HStack {
+                        Text("About Our App")
+                        Spacer()
+                            .foregroundColor(.gray)
                     }
-                }
-                
-                Section(header: Text("Acknowledgement").font(.headline)) {
-                    ForEach(acknowledgements, id: \.self) { person in
-                        AcknowledgementDetailView(person: person)
-                    }
-                }
-                
-                Section(header: Text("Help and Support").font(.headline)) {
-                    HelpSupportView()
+                    .padding(.vertical, 8)
                 }
             }
-            .navigationTitle("Settings")
+            
+            Section(header: Text("Acknowledgement").font(.headline)) {
+                ForEach(acknowledgements, id: \.self) { person in
+                    AcknowledgementDetailView(person: person)
+                }
+            }
+            
+            Section(header: Text("Help and Support").font(.headline)) {
+                HelpSupportView()
+            }
         }
+        .navigationTitle("Settings")
     }
 }
 

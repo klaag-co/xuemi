@@ -6,7 +6,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import org.sstinc.xuemi.Bookmark
 
-@Database(entities = [Bookmark::class], version = 2)
+@Database(entities = [Bookmark::class], version = 1)
 abstract class BookmarksDatabase: RoomDatabase() {
     companion object {
         const val NAME = "Bookmarks_DB"

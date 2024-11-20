@@ -24,7 +24,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Notes", systemImage: "doc.text")
                 }
-            VocabView()
+            FolderView(vocabManager: VocabManager())
                 .tabItem {
                     Label("Vocabulary", systemImage: "pencil.and.list.clipboard")
                 }

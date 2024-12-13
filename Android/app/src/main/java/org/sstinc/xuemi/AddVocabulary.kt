@@ -27,7 +27,6 @@ fun VocabSection(viewModel: MyViewModel, secondary: String, sectionOfData: List<
     Column {
         sectionOfData.forEach { word ->
             Text(word.word)
-
         }
     }
 

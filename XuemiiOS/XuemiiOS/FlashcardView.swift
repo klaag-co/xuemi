@@ -17,17 +17,19 @@ public struct FlashcardView: View {
     var currentIndex: Int?
     @State var selection: Int? = 0
     @State var spellingText: String? = nil
+    @State var isLargeDevice: Bool
     
     @ObservedObject var bookmarkManager: BookmarkManager = .shared
     @ObservedObject var progressManager: ProgressManager = .shared
     private var synthesizer = AVSpeechSynthesizer()
-    
+   
     init(vocabularies: [Vocabulary], level: SecondaryNumber, chapter: Chapter, topic: Topic, currentIndex: Int? = nil) {
         self.vocabularies = vocabularies
         self.level = level
         self.chapter = chapter
         self.topic = topic
         self.currentIndex = currentIndex
+        self._isLargeDevice = State(initialValue: UIScreen.main.bounds.height > 800)
     }
     
     public var body: some View {
@@ -120,9 +122,10 @@ public struct FlashcardView: View {
                         Spacer()
                         
                         HStack {
+                            Spacer()
                             Text("Click the word to practice handwriting!")
                                 .font(.system(size: 10))
-                                .padding(.leading, 55)
+                                .multilineTextAlignment(.center)
                                 .padding(.bottom, 10)
                             Spacer()
                         }
@@ -131,7 +134,8 @@ public struct FlashcardView: View {
                             Text(vocab.word)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.1)
-                                .font(.system(size: 48))
+                                .font(.system(size:48))
+//                                .font(.system(size: UIFont.textStyleSize(.largeTitle) * 2))
                                 .underline()
                                 .fontWeight(.bold)
                                 .onTapGesture {
@@ -188,4 +192,10 @@ public struct FlashcardView: View {
 
 extension String: Identifiable {
     public var id: String { self }
+}
+
+public extension UIFont {
+    static func textStyleSize(_ style: UIFont.TextStyle) -> CGFloat {
+        UIFont.preferredFont(forTextStyle: style).pointSize
+    }
 }

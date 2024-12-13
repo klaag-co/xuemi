@@ -1,5 +1,6 @@
 package org.sstinc.xuemi
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -13,8 +14,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -36,6 +42,7 @@ import androidx.navigation.NavController
 import org.sstinc.xuemi.quiz.generateListOfMCQQuestions
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun Home(viewModel: MyViewModel, navController: NavController) {
     val configuration = LocalConfiguration.current
@@ -49,72 +56,91 @@ fun Home(viewModel: MyViewModel, navController: NavController) {
             else -> 58.sp                  // Large screens
         }
     }
-    Column {// Whole app Column
+    Scaffold (
+        topBar = {
+            Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp, horizontal = 15.dp)) {
+                Text(
+                    "Home",
+                    fontSize = 38.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding( vertical = 5.dp)
+                )
+                IconButton(onClick = { navController.navigate("settings") }) {
+                    Icon(
+                        Icons.Default.Settings,
+                        contentDescription = "Settings",
+                        modifier = Modifier.fillMaxSize(0.9f)
+                    )
+                }
+            }
+        }
+    ) {
+        Column {// Whole app Column
 //        if (appear.value) {
 //            Button(onClick = { appear.value = false }) {
 //                Text(screenWidthDp.toString())
 //            }
 //        }
-        Text(
-            "Home",
-            fontSize = 38.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 10.dp, horizontal = 20.dp)
-        )
 
-        Button(onClick = {
-            if (viewModel.flashcardGetFromList(3) != "T") {
-                navController.navigate("flashcards/${viewModel.flashcardGetFromList(0)}/${viewModel.flashcardGetFromList(1)}/${viewModel.flashcardGetFromList(2)}/${viewModel.flashcardGetFromList(3)}/0.home")
-            } },
-            colors = ButtonDefaults.buttonColors(Color(49, 113, 200)),
-            shape = RoundedCornerShape(20.dp),
-            modifier = Modifier
-                .padding(horizontal = 26.dp)
-                .padding(bottom = 10.dp))
 
-        {
-            Image(
-                painter = painterResource(id = R.drawable.continue_learning),
-                contentDescription = "Continue learning button",
+
+            Button(onClick = {
+                if (viewModel.flashcardGetFromList(3) != "T") {
+                    navController.navigate("flashcards/${viewModel.flashcardGetFromList(0)}/${viewModel.flashcardGetFromList(1)}/${viewModel.flashcardGetFromList(2)}/${viewModel.flashcardGetFromList(3)}/0.home")
+                } },
+                colors = ButtonDefaults.buttonColors(Color(49, 113, 200)),
+                shape = RoundedCornerShape(20.dp),
                 modifier = Modifier
-                    .size(400.dp, 120.dp)
+                    .padding(horizontal = 26.dp)
+                    .padding(bottom = 10.dp))
 
-            )
-        }
-        Row (horizontalArrangement = Arrangement.Center, modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(0.28f)
-            .padding(vertical = 10.dp),){// 1st button row
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "一", 0.45f)
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "二", 0.81f)
-        }
-        Row (horizontalArrangement = Arrangement.Center, modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(0.43f)
-            .padding(vertical = 10.dp)){// 2nd button row
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "三",0.45f)
-            squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "四",0.81f)
-        }
-        Button(onClick = {
-            navController.navigate("olevel")
-        },
-            colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
-            /*border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
-            shape = RoundedCornerShape(20.dp),
-            modifier = Modifier
+            {
+                Image(
+                    painter = painterResource(id = R.drawable.continue_learning),
+                    contentDescription = "Continue learning button",
+                    modifier = Modifier
+                        .size(400.dp, 120.dp)
+
+                )
+            }
+            Row (horizontalArrangement = Arrangement.Center, modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 25.dp, end = 25.dp, bottom = 20.dp))
+                .fillMaxHeight(0.28f)
+                .padding(vertical = 10.dp),){// 1st button row
+                squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "一", 0.45f)
+                squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "二", 0.81f)
+            }
+            Row (horizontalArrangement = Arrangement.Center, modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.43f)
+                .padding(vertical = 10.dp)){// 2nd button row
+                squaretemplate(viewModel = viewModel, navController = navController, sec4 = false, secondary = "三",0.45f)
+                squaretemplate(viewModel = viewModel, navController = navController, sec4 = true, secondary = "四",0.81f)
+            }
+            Button(onClick = {
+                navController.navigate("olevel")
+            },
+                colors = ButtonDefaults.buttonColors(Color(126, 190, 240)),
+                /*border = BorderStroke(6.dp, Brush.verticalGradient(listOf(Color(90, 142, 179), Color.White))),*/
+                shape = RoundedCornerShape(20.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 25.dp, end = 25.dp, bottom = 20.dp))
 
 
-        {
-            Text(
-                text = "O 学准备考",
-                fontSize = fontSize,
-                modifier = Modifier.padding(vertical = 20.dp)
-            )
+            {
+                Text(
+                    text = "O 学准备考",
+                    fontSize = fontSize,
+                    modifier = Modifier.padding(vertical = 20.dp)
+                )
+            }
+
         }
-
     }
+
 
 }
 

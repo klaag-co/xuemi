@@ -31,7 +31,6 @@ import androidx.room.Room
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -51,6 +50,7 @@ import org.sstinc.xuemi.quiz.MCQresults
 import org.sstinc.xuemi.quiz.MCQtopic
 import org.sstinc.xuemi.quiz.Secondary
 import org.sstinc.xuemi.quiz.Word
+
 
 class MainApplication: Application() {
     companion object {
@@ -122,10 +122,13 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             loadListFromPreferences("continue_list")
             complete_words(listOf("中一", "中二", "中三", "中四"))
 
-            val sections = loadSections()
-            _sectionedData.value = sections
-            Log.d("temp", "in viewmodel: ${sectionedData.value.toString()}")
-
+            try {
+                val sections = sectioning()
+                _sectionedData.value = sections
+                Log.d("temp", "in viewmodel: ${sectionedData.value}")
+            } catch (e: Exception) {
+                Log.e("temp", "Error during sectioning: ${e.message}", e)
+            }
         }
     }
 
@@ -161,33 +164,38 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         loadListFromPreferences(name)
     }
 
-    private suspend fun loadSections(): List<List<Word>> {
-        val sectionNames = listOf("中一", "中二", "中三", "中四")
 
-        val deferredSections = sectionNames.map { sectionName ->
-            coroutineScope {
-                async(Dispatchers.IO) {
-                    val data = loadDataFromJson("$sectionName.json")
-                    val chapterData = data?.chapters
+    private suspend fun sectioning(): List<List<Word>> {
+        val sectionNames = listOf("中二", "中二", "中二", "中四")
 
-                    val words = mutableListOf<Word>()
-                    chapterData?.forEach { chapter ->
-                        chapter.topics.let { topic ->
-                            run {
-                                words.addAll(topic.topic1.topic)
-                                words.addAll(topic.topic2.topic)
-                                words.addAll(topic.topic3.topic)
-                            }
-                        } ?: Log.d("temp", "No topics found in chapter for section $sectionName")
-                    }
-                    words
+        return sectionNames.map { sectionName ->
+
+            withContext(Dispatchers.IO) {
+
+                val data: Secondary? = if (sectionName == "") {
+                    Thread.sleep(1000)
+                    loadDataFromJson("中一.json")
+                } else {
+                    loadDataFromJson("$sectionName.json")
                 }
+
+                Log.d("temp", "Data loaded for $sectionName: $data")
+                val chapterData = data?.chapters
+
+                val words = mutableListOf<Word>()
+                chapterData?.forEach { chapter ->
+                    chapter.topics.let { topic ->
+                        words.addAll(topic.topic1.topic)
+                        words.addAll(topic.topic2.topic)
+                        words.addAll(topic.topic3.topic)
+                    }
+                }
+                Log.d("temp", "Words for $sectionName: $words")
+                words
             }
         }
-        Log.d("temp", "deferred: ${deferredSections.map {it.await() }}")
-        return deferredSections.map { it.await() }
-
     }
+
 
     private fun complete(secondaryList: List<String>, excludeLastTwo: Boolean = false): Deferred<List<Word>> {
         return viewModelScope.async(Dispatchers.IO) {

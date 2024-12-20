@@ -33,11 +33,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.sstinc.xuemi.db.BookmarksDatabase
 import org.sstinc.xuemi.db.BookmarksRepository
 import org.sstinc.xuemi.db.MCQDatabase
+import org.sstinc.xuemi.db.MIGRATION_1_2
 import org.sstinc.xuemi.db.NotesDatabase
 import org.sstinc.xuemi.quiz.Chapter
 import org.sstinc.xuemi.quiz.FlashcardScreen
@@ -48,6 +50,7 @@ import org.sstinc.xuemi.quiz.MCQresults
 import org.sstinc.xuemi.quiz.MCQtopic
 import org.sstinc.xuemi.quiz.Secondary
 import org.sstinc.xuemi.quiz.Word
+
 
 class MainApplication: Application() {
     companion object {
@@ -67,7 +70,7 @@ class MainApplication: Application() {
             applicationContext,
             BookmarksDatabase::class.java,
             BookmarksDatabase.NAME
-        ).fallbackToDestructiveMigration().build()
+        ).addMigrations(MIGRATION_1_2).fallbackToDestructiveMigration().build()
         mcqDatabase = Room.databaseBuilder(
             applicationContext,
             MCQDatabase::class.java,
@@ -89,6 +92,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     private val _current: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences("current_list"))
     private val _continue: MutableStateFlow<List<String>> = MutableStateFlow(loadListFromPreferences("continue_list"))
 
+    // o levels
     private val _eoy: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
     val eoy: MutableStateFlow<List<Word>> = _eoy
     private val _mid: MutableStateFlow<List<Word>> = MutableStateFlow(emptyList())
@@ -98,20 +102,34 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 
     private val _secondaryStates: MutableMap<SecondaryType, MutableStateFlow<List<Word>?>> =
         SecondaryType.entries.associateWith { MutableStateFlow<List<Word>?>(null) }.toMutableMap()
-
     val secondaryStates: Map<SecondaryType, StateFlow<List<Word>?>> = _secondaryStates
 
-    init {
-        if (!sharedPreferences.contains("current_list")) {
-            saveListToPreferences("current_list", listOf("S", "C", "C.", "T", "Q", "W."))
-        }
-        if (!sharedPreferences.contains("continue_list")) {
-            saveListToPreferences("continue_list", listOf("S", "C", "C.", "T"))
+    // vocab list
+    private val _sectionedData = MutableStateFlow<List<List<Word>>>(emptyList())
+    val sectionedData: StateFlow<List<List<Word>>> = _sectionedData.asStateFlow()
 
+
+    init {
+        viewModelScope.launch {
+            if (!sharedPreferences.contains("current_list")) {
+                saveListToPreferences("current_list", listOf("S", "C", "C.", "T", "Q", "W."))
+            }
+            if (!sharedPreferences.contains("continue_list")) {
+                saveListToPreferences("continue_list", listOf("S", "C", "C.", "T"))
+
+            }
+            loadListFromPreferences("current_list")
+            loadListFromPreferences("continue_list")
+            complete_words(listOf("中一", "中二", "中三", "中四"))
+
+            try {
+                val sections = sectioning()
+                _sectionedData.value = sections
+                Log.d("temp", "in viewmodel: ${sectionedData.value}")
+            } catch (e: Exception) {
+                Log.e("temp", "Error during sectioning: ${e.message}", e)
+            }
         }
-        loadListFromPreferences("current_list")
-        loadListFromPreferences("continue_list")
-        complete_words(listOf("中一", "中二", "中三", "中四"))
     }
 
     //============================================================//
@@ -146,17 +164,47 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         loadListFromPreferences(name)
     }
 
+
+    private suspend fun sectioning(): List<List<Word>> {
+        val sectionNames = listOf("中二", "中二", "中二", "中四")
+
+        return sectionNames.map { sectionName ->
+
+            withContext(Dispatchers.IO) {
+
+                val data: Secondary? = if (sectionName == "") {
+                    Thread.sleep(1000)
+                    loadDataFromJson("中一.json")
+                } else {
+                    loadDataFromJson("$sectionName.json")
+                }
+
+                Log.d("temp", "Data loaded for $sectionName: $data")
+                val chapterData = data?.chapters
+
+                val words = mutableListOf<Word>()
+                chapterData?.forEach { chapter ->
+                    chapter.topics.let { topic ->
+                        words.addAll(topic.topic1.topic)
+                        words.addAll(topic.topic2.topic)
+                        words.addAll(topic.topic3.topic)
+                    }
+                }
+                Log.d("temp", "Words for $sectionName: $words")
+                words
+            }
+        }
+    }
+
+
     private fun complete(secondaryList: List<String>, excludeLastTwo: Boolean = false): Deferred<List<Word>> {
         return viewModelScope.async(Dispatchers.IO) {
             val allWords = mutableListOf<Word>()
 
             secondaryList.forEachIndexed { index, secondaryName ->
                 val secondaryType = SecondaryType.entries.getOrNull(index) ?: return@forEachIndexed
-
-                // Load the Secondary data from JSON
                 val secondaryData = loadDataFromJson("$secondaryName.json")
 
-                // Determine which chapters to process
                 val chaptersToProcess = if (excludeLastTwo && secondaryName == "中四") {
                     secondaryData?.chapters?.dropLast(2)
                 } else {
@@ -464,7 +512,7 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
         NavItem("Home", R.drawable.home, R.drawable.o_home),
         NavItem("Bookmarks", R.drawable.bookmark, R.drawable.o_bookmark),
         NavItem("Notes", R.drawable.notes, R.drawable.o_notes),
-        NavItem("Settings", R.drawable.settings, R.drawable.o_settings)
+        NavItem("Vocabulary", R.drawable.vocab, R.drawable.vocab)
     )
 
     var selectedTabIndex by rememberSaveable {
@@ -477,12 +525,22 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                 "home" -> selectedTabIndex = 0
                 "bookmarks" -> selectedTabIndex = 1
                 "notes" -> selectedTabIndex = 2
-                "settings" -> selectedTabIndex = 3
+                "vocabulary" -> selectedTabIndex = 3
             }
         }
     }
 
     Scaffold(
+//        topBar = {
+//            Row(horizontalArrangement = Arrangement.End, modifier = Modifier
+//                .fillMaxWidth()
+//                .fillMaxHeight(0.3f)
+//                .padding(vertical = 10.dp, horizontal = 15.dp)) {
+//                IconButton(onClick = { navController.navigate("settings") }) {
+//                    Icon(Icons.Default.Settings, contentDescription = "Settings",  modifier = Modifier.fillMaxSize())
+//                }
+//            }
+//        },
         bottomBar = {
             NavigationBar {
                 itemList.forEachIndexed { index, navItem ->
@@ -524,9 +582,10 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
             composable("home") { Home(viewModel, navController) }
             composable("bookmarks") { Bookmarks(viewModel, navController) }
             composable("notes") { Notes(viewModel, navController) }
-            composable("settings") { SettingsView(navController) }
+            composable("vocabulary") { Vocabulary(viewModel, navController) }
 
             // Additional Routes
+            composable("settings") { SettingsView(navController) }
             composable("helloWorld") { HelloWorldScreen(navController) }
             composable("secondary") { Secondary(viewModel, navController) }
             composable("chapter") { Chapter(viewModel, navController) }
@@ -556,6 +615,7 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                 MCQresults(viewModel, navController, id, name, wrong, correct)
             }
             composable("olevel") { olevel(viewModel, navController) }
+            composable("addvocab") { AddVocabulary(viewModel)}
         }
     }
 }

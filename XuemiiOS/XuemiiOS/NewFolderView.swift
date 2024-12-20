@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewFolderView: View {
     @ObservedObject var vocabManager: VocabManager
-    @State private var selectedWords: [String] = []
+    @State private var selectedWords: [Vocabulary] = []
     @State private var folderName: String = ""
     @Environment(\.dismiss) var dismiss
 
@@ -23,21 +23,21 @@ struct NewFolderView: View {
                 List {
                     ForEach(vocabManager.sections.keys.sorted(), id: \.self) { section in
                         Section(header: Text(section)) {
-                            ForEach(vocabManager.sections[section]!, id: \.self) { word in
+                            ForEach(vocabManager.sections[section]!, id: \.self) { vocab in
                                 HStack {
-                                    Text(word)
+                                    Text(vocab.word)
                                     Spacer()
-                                    if selectedWords.contains(word) {
+                                    if selectedWords.contains(vocab) {
                                         Image(systemName: "checkmark.circle.fill")
                                             .foregroundColor(.blue)
                                             .onTapGesture {
-                                                selectedWords.removeAll { $0 == word }
+                                                selectedWords.removeAll { $0 == vocab }
                                             }
                                     } else {
                                         Image(systemName: "circle")
                                             .foregroundColor(.gray)
                                             .onTapGesture {
-                                                selectedWords.append(word)
+                                                selectedWords.append(vocab)
                                             }
                                     }
                                 }
@@ -60,7 +60,7 @@ struct NewFolderView: View {
 
     func saveFolder() {
         guard !folderName.isEmpty && !selectedWords.isEmpty else { return }
-        let newFolder = Folder(name: folderName, words: selectedWords)
+        let newFolder = Folder(name: folderName, vocabs: selectedWords)
         vocabManager.addFolder(newFolder)
     }
 }

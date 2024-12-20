@@ -20,15 +20,19 @@ struct MCQView: View {
     @State private var wrongAnswers: Int = 0
     
     @State var vocabularies: [Vocabulary]
-    var level: String
-    var chapter: String
-    var topic: String
-    
+    var level: String?
+    var chapter: String?
+    var topic: String?
+    var folderName: String?
+
+    @Environment(\.dismiss) private var dismiss
+
     init(vocabularies: [Vocabulary], level: String, chapter: String, topic: String) {
         self.vocabularies = vocabularies
         self.level = level
         self.chapter = chapter
         self.topic = topic
+        self.folderName = nil
         self._shuffledOptions = State(initialValue: vocabularies.map { vocabulary in
             var options = vocabularies.map { $0.word }
             options.removeAll { $0 == vocabulary.word }
@@ -39,7 +43,24 @@ struct MCQView: View {
         self._selectedQuestions = State(initialValue: vocabularies.map { _ in Bool.random() ? "q1" : "q2" })
         self._userAnswers = State(initialValue: Array(repeating: nil, count: vocabularies.count))
     }
-    
+
+    init(vocabularies: [Vocabulary], folderName: String) {
+        self.vocabularies = vocabularies
+        self.level = nil
+        self.chapter = nil
+        self.topic = nil
+        self.folderName = folderName
+        self._shuffledOptions = State(initialValue: vocabularies.map { vocabulary in
+            var options = vocabularies.map { $0.word }
+            options.removeAll { $0 == vocabulary.word }
+            options.shuffle()
+            let finalOptions = Array(options.prefix(3)) + [vocabulary.word]
+            return finalOptions.shuffled()
+        })
+        self._selectedQuestions = State(initialValue: vocabularies.map { _ in Bool.random() ? "q1" : "q2" })
+        self._userAnswers = State(initialValue: Array(repeating: nil, count: vocabularies.count))
+    }
+
     var currentVocabulary: Vocabulary {
         vocabularies[currentVocabularyIndex]
     }
@@ -129,14 +150,25 @@ struct MCQView: View {
             loadPreviousState()
         }
         .navigationDestination(isPresented: $showResults) {
-            MCQResultsView(
-                correctAnswers: correctAnswers,
-                wrongAnswers: wrongAnswers,
-                totalQuestions: vocabularies.count,
-                level: level,
-                chapter: chapter,
-                topic: topic
-            )
+            if let level, let chapter, let topic {
+                MCQResultsView(
+                    correctAnswers: correctAnswers,
+                    wrongAnswers: wrongAnswers,
+                    totalQuestions: vocabularies.count,
+                    level: level,
+                    chapter: chapter,
+                    topic: topic
+                )
+            } else if let folderName {
+                MCQResultsView(
+                    correctAnswers: correctAnswers,
+                    wrongAnswers: wrongAnswers,
+                    totalQuestions: vocabularies.count,
+                    folderName: folderName
+                ) {
+                    dismiss()
+                }
+            }
         }
     }
     

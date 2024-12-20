@@ -41,7 +41,8 @@ enum SecondaryNumber: Codable, CaseIterable {
 
 class PathManager: ObservableObject {
     @Published var path: NavigationPath = .init()
-    
+    @Published var folderPath: NavigationPath = .init()
+
     static var global: PathManager = .init()
     
     private init() {}
@@ -49,6 +50,12 @@ class PathManager: ObservableObject {
     func popToRoot() {
         while !path.isEmpty {
             path.removeLast()
+        }
+    }
+
+    func popFolderPathToRoot() {
+        while !folderPath.isEmpty {
+            folderPath.removeLast()
         }
     }
 }

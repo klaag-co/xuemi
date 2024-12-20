@@ -14,15 +14,15 @@ struct VocabView: View {
         List {
             ForEach(vocabManager.sections.keys.sorted(), id: \.self) { section in
                 Section(header: Text(section)) {
-                    ForEach(vocabManager.sections[section]!, id: \.self) { word in
-                        Text(word)
+                    ForEach(vocabManager.sections[section]!, id: \.self) { vocab in
+                        Text(vocab.word)
                     }
                 }
             }
         }
         .navigationTitle("Vocabulary List")
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink(destination: NewFolderView(vocabManager: vocabManager)) {
                     Image(systemName: "folder.badge.plus")
                 }

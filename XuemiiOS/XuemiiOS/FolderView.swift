@@ -16,12 +16,12 @@ struct Folder: Identifiable, Codable, Hashable {
 struct FolderView: View {
     @ObservedObject var vocabManager: VocabManager
     
-    @State private var showingSheet = false
     @State private var showSpeaker = false
     @State private var showContents = false
     @State private var selectedFolder: Folder?
     @State private var selectedFolderForMCQView: Folder?
     @State private var selectedFolderForSpeakerView: Folder?
+    @State private var selectedFolderForContentsView: Folder?
 
     var body: some View {
         NavigationStack {
@@ -40,7 +40,6 @@ struct FolderView: View {
 //                            NavigationLink(destination: CustomFolderWordsView(folder: folder)) {
 //                                Text(folder.name)
                             Button (action: {
-                                showingSheet = true
                                 selectedFolder = folder
                             }) {
                                 Text(folder.name)
@@ -54,7 +53,7 @@ struct FolderView: View {
                             NavigationStack {
                                 VStack {
                                     Button {
-                                        showingSheet = false
+                                        selectedFolder = nil
                                         selectedFolderForMCQView = folder
                                     } label: {
                                         Text("MCQ")
@@ -69,7 +68,7 @@ struct FolderView: View {
                                     }
                                     
                                     Button {
-                                        showingSheet = false
+                                        selectedFolder = nil
                                         selectedFolderForSpeakerView = folder
                                     } label: {
                                         Text("Speaker")
@@ -84,9 +83,8 @@ struct FolderView: View {
                                     }
                                     
                                     Button {
-                                        showingSheet = false
-                                        showContents.toggle()
-                                        selectedFolder = folder
+                                        selectedFolder = nil
+                                        selectedFolderForContentsView = folder
                                     } label: {
                                         Text("Contents")
                                             .font(.title)
@@ -115,10 +113,8 @@ struct FolderView: View {
             .navigationDestination(item: $selectedFolderForMCQView) { folder in
                 MCQView(vocabularies: folder.vocabs, folderName: folder.name)
             }
-            .navigationDestination(isPresented: $showContents) {
-                if let selectedFolder = selectedFolder {
-                    ContentsView(folder: selectedFolder)
-                }
+            .navigationDestination(item: $selectedFolderForContentsView) { folder in
+                ContentsView(folder: folder)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

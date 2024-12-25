@@ -11,7 +11,18 @@ struct NewFolderView: View {
     @ObservedObject var vocabManager: VocabManager
     @State private var selectedWords: [Vocabulary] = []
     @State private var folderName: String = ""
+    @State private var searchText: String = ""
     @Environment(\.dismiss) var dismiss
+
+    var filteredSections: [String: [Vocabulary]] {
+        if searchText.isEmpty {
+            return vocabManager.sections
+        } else {
+            return vocabManager.sections.mapValues { vocabs in
+                vocabs.filter { $0.word.localizedCaseInsensitiveContains(searchText) }
+            }.filter { !$0.value.isEmpty }
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -21,9 +32,9 @@ struct NewFolderView: View {
                     .padding()
 
                 List {
-                    ForEach(vocabManager.sections.keys.sorted(), id: \.self) { section in
+                    ForEach(filteredSections.keys.sorted(), id: \.self) { section in
                         Section(header: Text(section)) {
-                            ForEach(vocabManager.sections[section]!, id: \.self) { vocab in
+                            ForEach(filteredSections[section]!, id: \.self) { vocab in
                                 HStack {
                                     Text(vocab.word)
                                     Spacer()
@@ -46,6 +57,7 @@ struct NewFolderView: View {
                     }
                 }
                 .listStyle(InsetGroupedListStyle())
+                .searchable(text: $searchText, prompt: "Search words")
 
                 Button("Save Folder") {
                     saveFolder()
@@ -64,7 +76,6 @@ struct NewFolderView: View {
         vocabManager.addFolder(newFolder)
     }
 }
-
 
 #Preview {
     NewFolderView(vocabManager: VocabManager())

@@ -52,11 +52,14 @@ import org.sstinc.xuemi.quiz.Secondary
 import org.sstinc.xuemi.quiz.Word
 
 
+// now transfer the loading to viewmodel
+
 class MainApplication: Application() {
     companion object {
         lateinit var notesDatabase: NotesDatabase
         lateinit var bookmarksDatabase: BookmarksDatabase
         lateinit var mcqDatabase: MCQDatabase
+//        lateinit var foldersDatabase: FoldersDatabase
     }
 
     override fun onCreate() {
@@ -76,6 +79,11 @@ class MainApplication: Application() {
             MCQDatabase::class.java,
             MCQDatabase.NAME
         ).build()
+//        foldersDatabase = Room.databaseBuilder(
+//            applicationContext,
+//            FoldersDatabase::class.java,
+//            FoldersDatabase.NAME
+//        ).build()
     }
 }
 
@@ -122,13 +130,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             loadListFromPreferences("continue_list")
             complete_words(listOf("中一", "中二", "中三", "中四"))
 
-            try {
-                val sections = sectioning()
-                _sectionedData.value = sections
-                Log.d("temp", "in viewmodel: ${sectionedData.value}")
-            } catch (e: Exception) {
-                Log.e("temp", "Error during sectioning: ${e.message}", e)
-            }
         }
     }
 
@@ -166,18 +167,13 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 
 
     private suspend fun sectioning(): List<List<Word>> {
-        val sectionNames = listOf("中二", "中二", "中二", "中四")
+        val sectionNames = listOf("中一", "中二", "中三", "中四")
 
         return sectionNames.map { sectionName ->
 
             withContext(Dispatchers.IO) {
+                val data = loadDataFromJson("$sectionName.json")
 
-                val data: Secondary? = if (sectionName == "") {
-                    Thread.sleep(1000)
-                    loadDataFromJson("中一.json")
-                } else {
-                    loadDataFromJson("$sectionName.json")
-                }
 
                 Log.d("temp", "Data loaded for $sectionName: $data")
                 val chapterData = data?.chapters
@@ -195,6 +191,20 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             }
         }
     }
+
+    fun selectJson(num: Int): Deferred<List<Word>> {
+        return viewModelScope.async(Dispatchers.IO) {
+            sectionedData.value[num] // try to load in viewmodel
+        }
+    }
+
+    fun loadJson() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _sectionedData.value = sectioning()
+        }
+    }
+
+
 
 
     private fun complete(secondaryList: List<String>, excludeLastTwo: Boolean = false): Deferred<List<Word>> {

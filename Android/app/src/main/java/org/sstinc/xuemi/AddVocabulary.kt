@@ -1,7 +1,6 @@
 package org.sstinc.xuemi
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,18 +11,22 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.awaitAll
 import org.sstinc.xuemi.quiz.Word
 
 @Composable
 fun VocabSection(viewModel: MyViewModel, secondary: String, sectionOfData: List<Word>) {
 
-    SectionHeader(title = "SECONDARY $secondary")
+    Text("SECONDARY $secondary", color = Color.Gray)
+
     Column {
         sectionOfData.forEach { word ->
             Text(word.word)
@@ -36,8 +39,16 @@ fun VocabSection(viewModel: MyViewModel, secondary: String, sectionOfData: List<
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun AddVocabulary (viewModel: MyViewModel) {
-    val sectionedData by viewModel.sectionedData.collectAsState(emptyList())
-    Log.d("temp", sectionedData.toString())
+    val sectionedData = remember { mutableStateOf<List<List<Word>>>(emptyList()) }
+
+    LaunchedEffect(Unit) {
+        sectionedData.value = listOf(
+            viewModel.selectJson(0),
+            viewModel.selectJson(1),
+            viewModel.selectJson(2),
+            viewModel.selectJson(3)
+        ).awaitAll()
+    }
     Scaffold(
         topBar = {
             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier
@@ -56,11 +67,11 @@ fun AddVocabulary (viewModel: MyViewModel) {
         }
     ) {
         LazyColumn(Modifier.padding(top = 20.dp)) {
-            items(sectionedData.size) { index ->
+            items(sectionedData.value.size) { index ->
                 VocabSection(
                     viewModel,
                     (index + 1).toString(),
-                    sectionOfData = sectionedData[index]
+                    sectionOfData = sectionedData.value[index]
                 )
             }
 

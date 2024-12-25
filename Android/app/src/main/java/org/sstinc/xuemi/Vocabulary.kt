@@ -16,21 +16,30 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import org.sstinc.xuemi.quiz.Word
 
 
+@Entity
 data class Afolder (
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val name: String,
     val items: List<Word>
 )
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
+    LaunchedEffect(Unit) {
+       viewModel.loadJson()
+    }
     Scaffold(
         topBar = {
             Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier

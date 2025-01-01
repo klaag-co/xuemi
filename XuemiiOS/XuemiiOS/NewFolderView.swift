@@ -9,9 +9,20 @@ import SwiftUI
 
 struct NewFolderView: View {
     @ObservedObject var vocabManager: VocabManager
-    @State private var selectedWords: [String] = []
+    @State private var selectedWords: [Vocabulary] = []
     @State private var folderName: String = ""
+    @State private var searchText: String = ""
     @Environment(\.dismiss) var dismiss
+
+    var filteredSections: [String: [Vocabulary]] {
+        if searchText.isEmpty {
+            return vocabManager.sections
+        } else {
+            return vocabManager.sections.mapValues { vocabs in
+                vocabs.filter { $0.word.localizedCaseInsensitiveContains(searchText) }
+            }.filter { !$0.value.isEmpty }
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -21,23 +32,23 @@ struct NewFolderView: View {
                     .padding()
 
                 List {
-                    ForEach(vocabManager.sections.keys.sorted(), id: \.self) { section in
+                    ForEach(filteredSections.keys.sorted(), id: \.self) { section in
                         Section(header: Text(section)) {
-                            ForEach(vocabManager.sections[section]!, id: \.self) { word in
+                            ForEach(filteredSections[section]!, id: \.self) { vocab in
                                 HStack {
-                                    Text(word)
+                                    Text(vocab.word)
                                     Spacer()
-                                    if selectedWords.contains(word) {
+                                    if selectedWords.contains(vocab) {
                                         Image(systemName: "checkmark.circle.fill")
                                             .foregroundColor(.blue)
                                             .onTapGesture {
-                                                selectedWords.removeAll { $0 == word }
+                                                selectedWords.removeAll { $0 == vocab }
                                             }
                                     } else {
                                         Image(systemName: "circle")
                                             .foregroundColor(.gray)
                                             .onTapGesture {
-                                                selectedWords.append(word)
+                                                selectedWords.append(vocab)
                                             }
                                     }
                                 }
@@ -46,6 +57,7 @@ struct NewFolderView: View {
                     }
                 }
                 .listStyle(InsetGroupedListStyle())
+                .searchable(text: $searchText, prompt: "Search words")
 
                 Button("Save Folder") {
                     saveFolder()
@@ -60,11 +72,10 @@ struct NewFolderView: View {
 
     func saveFolder() {
         guard !folderName.isEmpty && !selectedWords.isEmpty else { return }
-        let newFolder = Folder(name: folderName, words: selectedWords)
+        let newFolder = Folder(name: folderName, vocabs: selectedWords)
         vocabManager.addFolder(newFolder)
     }
 }
-
 
 #Preview {
     NewFolderView(vocabManager: VocabManager())

@@ -28,8 +28,9 @@
 		1DCD511B2CE3A57200E895C7 /* VocabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD511A2CE3A57200E895C7 /* VocabView.swift */; };
 		1DCD511F2CE3D0C600E895C7 /* VocabManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD511E2CE3D0C600E895C7 /* VocabManager.swift */; };
 		1DCD51212CE4377B00E895C7 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD51202CE4377B00E895C7 /* FolderView.swift */; };
-		1DCD51232CE43A0500E895C7 /* vocabxuemi.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DCD51222CE43A0500E895C7 /* vocabxuemi.json */; };
 		1DCD51272CEDF2EC00E895C7 /* NewFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD51262CEDF2EC00E895C7 /* NewFolderView.swift */; };
+		1DCD51292CF6A73C00E895C7 /* SpeakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD51282CF6A73C00E895C7 /* SpeakerView.swift */; };
+		1DCD512B2D152ADE00E895C7 /* ContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DCD512A2D152ADE00E895C7 /* ContentsView.swift */; };
 		1DE2948C2C05D1CA00AB6763 /* ChapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE2948B2C05D1CA00AB6763 /* ChapterView.swift */; };
 		1DE294942C0857A200AB6763 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE294932C0857A200AB6763 /* TopicView.swift */; };
 		1DE294962C08974700AB6763 /* CreateNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE294952C08974700AB6763 /* CreateNoteView.swift */; };
@@ -67,8 +68,9 @@
 		1DCD511A2CE3A57200E895C7 /* VocabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabView.swift; sourceTree = "<group>"; };
 		1DCD511E2CE3D0C600E895C7 /* VocabManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabManager.swift; sourceTree = "<group>"; };
 		1DCD51202CE4377B00E895C7 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
-		1DCD51222CE43A0500E895C7 /* vocabxuemi.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = vocabxuemi.json; sourceTree = "<group>"; };
 		1DCD51262CEDF2EC00E895C7 /* NewFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderView.swift; sourceTree = "<group>"; };
+		1DCD51282CF6A73C00E895C7 /* SpeakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerView.swift; sourceTree = "<group>"; };
+		1DCD512A2D152ADE00E895C7 /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
 		1DE2948B2C05D1CA00AB6763 /* ChapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterView.swift; sourceTree = "<group>"; };
 		1DE294932C0857A200AB6763 /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 		1DE294952C08974700AB6763 /* CreateNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteView.swift; sourceTree = "<group>"; };
@@ -137,12 +139,13 @@
 				1DCD51202CE4377B00E895C7 /* FolderView.swift */,
 				1DCD51262CEDF2EC00E895C7 /* NewFolderView.swift */,
 				1DCD511E2CE3D0C600E895C7 /* VocabManager.swift */,
+				1DCD512A2D152ADE00E895C7 /* ContentsView.swift */,
+				1DCD51282CF6A73C00E895C7 /* SpeakerView.swift */,
 				1D0898D62BCE6AA500F2AFCA /* SettingsView.swift */,
 				1D9DD61D2C3268F5004DA356 /* 中一.json */,
 				1D9E9EF32C3CD662000AE606 /* 中二.json */,
 				1D9E9EF52C3D0FA4000AE606 /* 中三.json */,
 				1D9E9EF72C3D1197000AE606 /* 中四.json */,
-				1DCD51222CE43A0500E895C7 /* vocabxuemi.json */,
 				1D0898C62BCE669B00F2AFCA /* Assets.xcassets */,
 				1D0898C82BCE669B00F2AFCA /* Preview Content */,
 			);
@@ -241,7 +244,6 @@
 				F879C9D32C54A52400C047AA /* jquery.min.js in Resources */,
 				1D9DD61E2C3268F5004DA356 /* 中一.json in Resources */,
 				F879C9D22C54A52400C047AA /* index.html in Resources */,
-				1DCD51232CE43A0500E895C7 /* vocabxuemi.json in Resources */,
 				1D9E9EF82C3D1198000AE606 /* 中四.json in Resources */,
 				F879C9D12C54A52400C047AA /* hanzi-writer.min.js in Resources */,
 				1D0898CA2BCE669B00F2AFCA /* Preview Assets.xcassets in Resources */,
@@ -266,6 +268,7 @@
 				1DBBCE0B2C46757A00BCF40C /* MCQView.swift in Sources */,
 				1DCD51272CEDF2EC00E895C7 /* NewFolderView.swift in Sources */,
 				1D0898D12BCE68AF00F2AFCA /* HomeView.swift in Sources */,
+				1DCD51292CF6A73C00E895C7 /* SpeakerView.swift in Sources */,
 				1DE294982C089C6400AB6763 /* NotesView.swift in Sources */,
 				F879C9DA2C54A78800C047AA /* StrokeWriteView.swift in Sources */,
 				1DE294962C08974700AB6763 /* CreateNoteView.swift in Sources */,
@@ -278,6 +281,7 @@
 				F879C9D52C54A54300C047AA /* CanvasController.swift in Sources */,
 				1DA035602C5935D50049C5A1 /* ProgressManager.swift in Sources */,
 				1D0898D72BCE6AA500F2AFCA /* SettingsView.swift in Sources */,
+				1DCD512B2D152ADE00E895C7 /* ContentsView.swift in Sources */,
 				1D98FBD72C568CDF008B49F5 /* MCQResultsView.swift in Sources */,
 				1D0898D32BCE6A8000F2AFCA /* BookmarkView.swift in Sources */,
 				1D0898C32BCE669700F2AFCA /* XuemiiOSApp.swift in Sources */,

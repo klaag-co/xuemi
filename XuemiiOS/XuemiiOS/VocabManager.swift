@@ -8,7 +8,7 @@
 import Foundation
 
 class VocabManager: ObservableObject {
-    @Published var sections: [String: [String]] = [:] 
+    @Published var sections: [String: [Vocabulary]] = [:] 
     @Published var folders: [Folder] = [] {
         didSet {
             saveFoldersToUserDefaults()
@@ -18,27 +18,28 @@ class VocabManager: ObservableObject {
     private let foldersKey = "customFolders"
 
     init() {
-        loadVocabularyFromJSON()
+        loadVocabularies()
         loadFoldersFromUserDefaults()
     }
 
-    // Load Vocabulary List from JSON
-    func loadVocabularyFromJSON() {
-        guard let url = Bundle.main.url(forResource: "vocabxuemi", withExtension: "json") else {
-            print("JSON file not found")
-            return
+    func loadVocabularies() {
+        var vocabSections: [String : [Vocabulary]] = [:]
+
+        for secondary in SecondaryNumber.allCases {
+            for chapter in Chapter.allCases {
+                for topic in Topic.allCases {
+                    if let currentVocab = vocabSections[secondary.filename] {
+                        vocabSections[secondary.filename] = currentVocab + loadVocabulariesFromJSON(fileName: secondary.filename, chapter: chapter.string, topic: topic.string(level: secondary, chapter: chapter))
+                    } else {
+                        vocabSections[secondary.filename] = loadVocabulariesFromJSON(fileName: secondary.filename, chapter: chapter.string, topic: topic.string(level: secondary, chapter: chapter))
+                    }
+                }
+            }
         }
-        
-        do {
-            let data = try Data(contentsOf: url)
-            let decodedData = try JSONDecoder().decode([String: [String]].self, from: data)
-            self.sections = decodedData
-        } catch {
-            print("Error loading JSON: \(error)")
-        }
+
+        self.sections = vocabSections
     }
 
-    // Save Folders to UserDefaults
     private func saveFoldersToUserDefaults() {
         do {
             let data = try JSONEncoder().encode(folders)
@@ -48,7 +49,6 @@ class VocabManager: ObservableObject {
         }
     }
 
-    // Load Folders from UserDefaults
     private func loadFoldersFromUserDefaults() {
         guard let data = UserDefaults.standard.data(forKey: foldersKey) else { return }
         do {
@@ -59,7 +59,6 @@ class VocabManager: ObservableObject {
         }
     }
 
-    // Add a new folder
     func addFolder(_ folder: Folder) {
         folders.append(folder)
     }

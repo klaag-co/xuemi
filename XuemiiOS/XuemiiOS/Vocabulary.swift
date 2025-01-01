@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Vocabulary: Codable, Equatable, Hashable {
+struct Vocabulary: Codable, Equatable, Hashable, Identifiable {
+    var id: UUID = UUID()
     var index: Int
     var word: String
     var pinyin: String

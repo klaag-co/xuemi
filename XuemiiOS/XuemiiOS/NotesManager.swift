@@ -73,8 +73,32 @@ class NotesManager: ObservableObject {
     }
     
     func addResult(level: String, chapter: String, topic: String, correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
+        self.addNotesResult(
+            level: level,
+            chapter: chapter,
+            topic: topic,
+            folderName: nil,
+            correctAnswers: correctAnswers,
+            wrongAnswers: wrongAnswers,
+            totalQuestions: totalQuestions
+        )
+    }
+
+    func addResult(folderName: String, correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
+        self.addNotesResult(
+            level: nil,
+            chapter: nil,
+            topic: nil,
+            folderName: folderName,
+            correctAnswers: correctAnswers,
+            wrongAnswers: wrongAnswers,
+            totalQuestions: totalQuestions
+        )
+    }
+
+    private func addNotesResult(level: String?, chapter: String?, topic: String?, folderName: String?, correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
         let noteType: NoteType
-        
+
         switch level {
         case "一":
             noteType = .sone
@@ -87,18 +111,22 @@ class NotesManager: ObservableObject {
         default:
             noteType = .note
         }
-        
+
         var title = ""
-        if chapter == "年终考试" {
-            title = "中\(level) - \(chapter)"
-        } else if level == "O 水准备考" {
-            title = "\(level) - \(chapter)"
-        } else {
-            title = "中\(level) - \(chapter) - \(topic)"
+        if let level, let chapter, let topic  {
+            if chapter == "年终考试" {
+                title = "中\(level) - \(chapter)"
+            } else if level == "O 水准备考" {
+                title = "\(level) - \(chapter)"
+            } else {
+                title = "中\(level) - \(chapter) - \(topic)"
+            }
+        } else if let folderName {
+            title = "\(folderName) on \(Date().formatted(date: .numeric, time: .omitted)) at \(Date().formatted(date: .omitted, time: .shortened))"
         }
         let content = "Correct: \(correctAnswers)\nWrong: \(wrongAnswers)\nTotal: \(correctAnswers)/\(totalQuestions)"
         let newNote = Note(title: title, content: content, noteType: noteType)
-        
+
         notes.append(newNote)
     }
 }

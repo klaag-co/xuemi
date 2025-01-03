@@ -74,15 +74,18 @@ struct MCQView: View {
             ProgressView(value: Double(currentVocabularyIndex + 1), total: Double(vocabularies.count))
                 .animation(.easeInOut, value: currentVocabulary)
                 .padding()
-            
-            Text(currentQuestion)
-                .font(.title)
-                .minimumScaleFactor(0.1)
-                .padding()
-            
-            Text(selectedAnswer == currentVocabulary.word ? " " : "正确答案是什么呢？")
-                .foregroundColor(showAnswer && selectedAnswer != currentVocabulary.word ? .red : .white)
-                .font(.headline)
+            VStack {
+                Text(currentQuestion)
+                    .font(.system(size:30))
+                    .lineLimit(5)
+                    .minimumScaleFactor(0.1)
+                    .padding()
+                
+                Text(selectedAnswer == currentVocabulary.word ? " " : "正确答案是什么呢？")
+                    .foregroundColor(showAnswer && selectedAnswer != currentVocabulary.word ? .red : .white)
+                    .font(.system(size:17))
+            }
+            .frame(maxHeight: .infinity)
         
             ForEach(shuffledOptions[currentVocabularyIndex], id: \.self) { option in
                 Button(action: {
@@ -100,7 +103,7 @@ struct MCQView: View {
                 }) {
                     Text(option)
                         .frame(maxWidth: .infinity)
-                        .font(.title)
+                        .font(.system(size:30))
                         .bold()
                         .padding()
                         .background(buttonColor(for: option))
@@ -111,8 +114,6 @@ struct MCQView: View {
                 }
                 .disabled(showAnswer)
             }
-            
-            Spacer()
             
             HStack {
                 Button(action: {
@@ -144,6 +145,7 @@ struct MCQView: View {
                 .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
             }
             .padding(.horizontal)
+            .padding(.top)
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {

@@ -324,7 +324,8 @@ struct TopicView: View {
                         VStack(alignment: .leading) {
                             Text(topic.string(level: level, chapter: chapter))
                                 .font(.title)
-                                .minimumScaleFactor(0.1)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.6)
                                 .padding()
                                 .frame(height: 65)
                                 .frame(maxWidth: .infinity)

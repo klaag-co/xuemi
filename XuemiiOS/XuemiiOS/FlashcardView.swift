@@ -101,7 +101,7 @@ public struct FlashcardView: View {
                             Spacer()
                             Text("中\(level.string): \(chapter.string)")
                                 .lineLimit(1)
-                                .minimumScaleFactor(0.1)
+                                .minimumScaleFactor(0.6)
                                 .font(.title3)
                                 .fontWeight(.bold)
                             Spacer()
@@ -133,7 +133,7 @@ public struct FlashcardView: View {
                         VStack {
                             Text(vocab.word)
                                 .lineLimit(1)
-                                .minimumScaleFactor(0.1)
+                                .minimumScaleFactor(0.6)
                                 .font(.system(size:48))
 //                                .font(.system(size: UIFont.textStyleSize(.largeTitle) * 2))
                                 .underline()
@@ -146,7 +146,7 @@ public struct FlashcardView: View {
                         HStack {
                             Text(vocab.pinyin)
                                 .lineLimit(2)
-                                .minimumScaleFactor(0.1)
+                                .minimumScaleFactor(0.6)
                                 .font(.largeTitle)
                             Button(action: {
                                 let utterance = AVSpeechUtterance(string: vocab.word)
@@ -164,9 +164,11 @@ public struct FlashcardView: View {
                         
                         VStack {
                             Text(vocab.chineseDefinition)
-                                .minimumScaleFactor(0.1)
+                                .lineLimit(4)
+                                .minimumScaleFactor(0.6)
                             Text(vocab.englishDefinition)
-                                .minimumScaleFactor(0.1)
+                                .lineLimit(2)
+                                .minimumScaleFactor(0.6)
                                 .padding(.top, 5)
                                 .padding(.bottom, 10)
                         }

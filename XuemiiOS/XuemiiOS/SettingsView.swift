@@ -94,10 +94,14 @@ let acknowledgements = [
     Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill"),
     Acknowledgement(name: "Chay Yu Hung Tristan", role: "Consultant", icon: "person.fill"),
     Acknowledgement(name: "Ms Wong Lu Ting", role: "Head of Department", icon: "person.fill"),
-    Acknowledgement(name: "Ms Yap Hui Min", role: "Teacher-in-Charge", icon: "person.fill"),
+    Acknowledgement(name: "Ms Yap Hui Min", role: "Acting Subject Head", icon: "person.fill"),
+    Acknowledgement(name: "Mr Tan Chuan Leong", role: "Level Head, Upper Secondary", icon: "person.fill"),
     Acknowledgement(name: "Ms Tan Sook Qin", role: "Teacher-in-Charge", icon: "person.fill"),
     Acknowledgement(name: "Ms Yeo Sok Hui", role: "Teacher-in-Charge", icon: "person.fill"),
     Acknowledgement(name: "Ms Xu Wei", role: "Teacher-in-Charge", icon: "person.fill"),
+    Acknowledgement(name: "Ms Ms Liew Sui Qiong", role: "Teacher-in-Charge", icon: "person.fill"),
+    Acknowledgement(name: "Ms Yap Yee Ying", role: "Teacher-in-Charge", icon: "person.fill"),
+    Acknowledgement(name: "Ms Wong Ho Yan", role: "Teacher-in-Charge", icon: "person.fill"),
+    Acknowledgement(name: "Ms Goh Su Huei", role: "Teacher-in-Charge", icon: "person.fill"),
     Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill")
 ]
-

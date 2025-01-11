@@ -13,6 +13,8 @@ struct SpeakerView: View {
     @State private var shuffledWords: [Vocabulary] = []
     @State private var currentIndex: Int = 0
     @State private var revealAnswer: Bool = false
+    
+    let synthesizer = AVSpeechSynthesizer()
 
     var body: some View {
         VStack {
@@ -86,7 +88,6 @@ struct SpeakerView: View {
     private func playSound() {
         let utterance = AVSpeechUtterance(string: shuffledWords[currentIndex].word)
         utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
-        let synthesizer = AVSpeechSynthesizer()
         if let voice = AVSpeechSynthesisVoice.speechVoices().first(where: {
             $0.language == "zh-CN" && $0.gender == .female
         }) {
@@ -113,4 +114,5 @@ struct SpeakerView: View {
         }
     }
 }
+
 

@@ -71,7 +71,7 @@ struct FolderView: View {
                                         selectedFolder = nil
                                         selectedFolderForSpeakerView = folder
                                     } label: {
-                                        Text("Speaker")
+                                        Text("Pronounciation")
                                             .font(.title)
                                             .padding()
                                             .frame(height: 65)

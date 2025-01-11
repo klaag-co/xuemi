@@ -11,6 +11,8 @@ struct VocabView: View {
     @ObservedObject var vocabManager = VocabManager()
     @State private var searchText = ""
     
+    var levels = ["中一", "中二", "中三", "中四"]
+    
     var filteredSections: [String: [Vocabulary]] {
         if searchText.isEmpty {
             return vocabManager.sections
@@ -23,20 +25,16 @@ struct VocabView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                TextField("Search words", text: $searchText)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(.horizontal)
-            }
             List {
-                ForEach(filteredSections.keys.sorted(), id: \.self) { section in
-                    Section(header: Text(section)) {
-                        ForEach(filteredSections[section]!, id: \.self) { vocab in
+                ForEach(levels, id: \.self) { level in
+                    Section(header: Text(level)) {
+                        ForEach(filteredSections[level]!, id: \.self) { vocab in
                             Text(vocab.word)
                         }
                     }
                 }
             }
+            .searchable(text: $searchText, placement: .navigationBarDrawer (displayMode: .always), prompt: "Search words")
             .listStyle(.insetGrouped)
             .scrollContentBackground(.hidden) 
         }
@@ -49,7 +47,7 @@ struct VocabView: View {
             }
         }
         .onAppear {
-            searchText = "" // Reset search text to avoid residual state
+            searchText = ""
         }
     }
 }

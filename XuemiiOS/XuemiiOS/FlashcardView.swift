@@ -150,8 +150,15 @@ public struct FlashcardView: View {
                                 .font(.largeTitle)
                             Button(action: {
                                 let utterance = AVSpeechUtterance(string: vocab.word)
-                                utterance.voice = AVSpeechSynthesisVoice(language: "zh-SG")
-                                utterance.rate = 0.1
+                                if let voice = AVSpeechSynthesisVoice.speechVoices().first(where: {
+                                    $0.language == "zh-CN" && $0.gender == .female
+                                }) {
+                                    utterance.voice = voice
+                                } else {
+                                    utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
+                                }
+                                
+                                utterance.rate = 0.5
                                 synthesizer.speak(utterance)
                             }) {
                                 Image(systemName: "speaker.wave.2.fill")

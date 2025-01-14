@@ -11,9 +11,9 @@ import AVFoundation
 public struct FlashcardView: View {
     @State private var currentSet: Int = 0
     var vocabularies: [Vocabulary]
-    var level: SecondaryNumber
-    var chapter: Chapter
-    var topic: Topic
+    var level: SecondaryNumber?
+    var chapter: Chapter?
+    var topic: Topic?
     var currentIndex: Int?
     @State var selection: Int? = 0
     @State var spellingText: String? = nil
@@ -23,7 +23,7 @@ public struct FlashcardView: View {
     @ObservedObject var progressManager: ProgressManager = .shared
     private var synthesizer = AVSpeechSynthesizer()
    
-    init(vocabularies: [Vocabulary], level: SecondaryNumber, chapter: Chapter, topic: Topic, currentIndex: Int? = nil) {
+    init(vocabularies: [Vocabulary], level: SecondaryNumber? = nil, chapter: Chapter? = nil, topic: Topic? = nil, currentIndex: Int? = nil) {
         self.vocabularies = vocabularies
         self.level = level
         self.chapter = chapter
@@ -69,7 +69,7 @@ public struct FlashcardView: View {
             StrokeWriteView(word: text)
         }
         .onDisappear {
-            if let selection = selection {
+            if let selection, let level, let chapter, let topic {
                 progressManager.updateProgress(
                     level: level,
                     chapter: chapter,
@@ -99,23 +99,25 @@ public struct FlashcardView: View {
                     VStack {
                         HStack {
                             Spacer()
-                            Text("中\(level.string): \(chapter.string)")
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.6)
-                                .font(.title3)
-                                .fontWeight(.bold)
-                            Spacer()
-                            Button {
-                                if !bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
-                                    print("Bookmark appended for word: \(vocab.word)")
-                                    bookmarkManager.bookmarks.append(BookmarkedVocabulary(vocab: vocab, level: level, chapter: chapter, topic: topic, currentIndex: selection ?? 0))
-                                } else {
-                                    print("Bookmark removed for word: \(vocab.word)")
-                                    bookmarkManager.bookmarks.removeAll(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic })
+                            if let level, let chapter, let topic {
+                                Text("中\(level.string): \(chapter.string)")
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.6)
+                                    .font(.title3)
+                                    .fontWeight(.bold)
+                                Spacer()
+                                Button {
+                                    if !bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
+                                        print("Bookmark appended for word: \(vocab.word)")
+                                        bookmarkManager.bookmarks.append(BookmarkedVocabulary(vocab: vocab, level: level, chapter: chapter, topic: topic, currentIndex: selection ?? 0))
+                                    } else {
+                                        print("Bookmark removed for word: \(vocab.word)")
+                                        bookmarkManager.bookmarks.removeAll(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic })
+                                    }
+                                } label: {
+                                    Image(systemName: bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) ? "bookmark.fill" : "bookmark")
+                                        .font(.system(size: 20))
                                 }
-                            } label: {
-                                Image(systemName: bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) ? "bookmark.fill" : "bookmark")
-                                    .font(.system(size: 20))
                             }
                         }
                         .padding([.horizontal, .top], 30)

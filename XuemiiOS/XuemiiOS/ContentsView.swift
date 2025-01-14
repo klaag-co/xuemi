@@ -18,17 +18,23 @@ struct ContentsView: View {
                 .padding()
 
             List(folder.vocabs, id: \.id) { vocab in
-                VStack(alignment: .leading) {
-                    Text(vocab.word)
-                        .font(.headline)
-                    Text("Pinyin: \(vocab.pinyin)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+                NavigationLink(destination: FlashcardView(vocabularies: folder.vocabs, currentIndex: getIndexForVocab(vocab))){
+                    VStack(alignment: .leading) {
+                        Text(vocab.word)
+                            .font(.headline)
+                        Text("Pinyin: \(vocab.pinyin)")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                    .padding()
                 }
-                .padding()
             }
         }
         .navigationTitle("Contents")
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    func getIndexForVocab (_ vocab: Vocabulary) -> Int? {
+        folder.vocabs.firstIndex(of: vocab)
     }
 }

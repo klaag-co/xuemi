@@ -12,6 +12,7 @@ struct NewFolderView: View {
     @State private var selectedWords: [Vocabulary] = []
     @State private var folderName: String = ""
     @State private var searchText: String = ""
+    @State private var showingAlert = false
     @Environment(\.dismiss) var dismiss
 
     var filteredSections: [String: [Vocabulary]] {
@@ -60,8 +61,16 @@ struct NewFolderView: View {
                 .searchable(text: $searchText, prompt: "Search words")
 
                 Button("Save Folder") {
-                    saveFolder()
-                    dismiss()
+                    if folderName == "" {
+                        showingAlert = true
+                    }
+                    else {
+                        saveFolder()
+                        dismiss()
+                    }
+                }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Empty folder name"), message: Text("Please enter a folder name."))
                 }
                 .buttonStyle(.borderedProminent)
                 .padding()

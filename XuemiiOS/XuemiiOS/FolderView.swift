@@ -118,7 +118,9 @@ struct FolderView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    EditButton()
+                    NavigationLink(destination: NewFolderView(vocabManager: vocabManager)) {
+                        Image(systemName: "folder.badge.plus")
+                    }
                 }
             }
         }

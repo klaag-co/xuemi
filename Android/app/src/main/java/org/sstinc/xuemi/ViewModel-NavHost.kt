@@ -38,6 +38,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.sstinc.xuemi.db.BookmarksDatabase
 import org.sstinc.xuemi.db.BookmarksRepository
+import org.sstinc.xuemi.db.FoldersDatabase
 import org.sstinc.xuemi.db.MCQDatabase
 import org.sstinc.xuemi.db.MIGRATION_1_2
 import org.sstinc.xuemi.db.NotesDatabase
@@ -59,7 +60,7 @@ class MainApplication: Application() {
         lateinit var notesDatabase: NotesDatabase
         lateinit var bookmarksDatabase: BookmarksDatabase
         lateinit var mcqDatabase: MCQDatabase
-//        lateinit var foldersDatabase: FoldersDatabase
+        lateinit var foldersDatabase: FoldersDatabase
     }
 
     override fun onCreate() {
@@ -79,11 +80,11 @@ class MainApplication: Application() {
             MCQDatabase::class.java,
             MCQDatabase.NAME
         ).build()
-//        foldersDatabase = Room.databaseBuilder(
-//            applicationContext,
-//            FoldersDatabase::class.java,
-//            FoldersDatabase.NAME
-//        ).build()
+        foldersDatabase = Room.databaseBuilder(
+            applicationContext,
+            FoldersDatabase::class.java,
+            FoldersDatabase.NAME
+        ).build()
     }
 }
 
@@ -116,6 +117,9 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     private val _sectionedData = MutableStateFlow<List<List<Word>>>(emptyList())
     val sectionedData: StateFlow<List<List<Word>>> = _sectionedData.asStateFlow()
 
+    // temp folder item list
+    private val _tempFolder = MutableStateFlow<List<Word>>(emptyList())
+    val tempFolder: StateFlow<List<Word>> = _tempFolder.asStateFlow()
 
     init {
         viewModelScope.launch {
@@ -174,8 +178,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             withContext(Dispatchers.IO) {
                 val data = loadDataFromJson("$sectionName.json")
 
-
-                Log.d("temp", "Data loaded for $sectionName: $data")
                 val chapterData = data?.chapters
 
                 val words = mutableListOf<Word>()
@@ -186,10 +188,14 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
                         words.addAll(topic.topic3.topic)
                     }
                 }
-                Log.d("temp", "Words for $sectionName: $words")
                 words
             }
         }
+    }
+    fun addTempFolder(item: Word) {
+
+        _tempFolder.value = _tempFolder.value + item
+        Log.d("temp", "oh! ${_tempFolder.value}")
     }
 
     fun selectJson(num: Int): Deferred<List<Word>> {
@@ -468,13 +474,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         }
     }
 
-    fun deleteAll() {
-        viewModelScope.launch(Dispatchers.IO) {
-            mcqDao.deleteAll()
-            loadMCQ()
-        }
-    }
-
 
     fun updateLeftOff(newLeftOff: Int, topicId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -504,6 +503,29 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         val questions =
             _mcqList.value?.firstOrNull { it.topic == topicName }?.questions ?: emptyList()
         return questions.count { it.selected.isNotEmpty() && it.selected != it.correct }
+    }
+    //============================================================//
+
+    val foldersDao = MainApplication.foldersDatabase.getFoldersDao()
+    private val _folders = MutableLiveData<List<Afolder>>()
+
+    val folders: LiveData<List<Afolder>> get() = _folders
+
+    fun addFolder(folder: Afolder) {
+        viewModelScope.launch(Dispatchers.IO) {
+            foldersDao.addFolder(folder)
+        }
+    }
+    fun deleteFolder(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            foldersDao.deleteFolder(id)
+        }
+    }
+
+    fun selectFolder(id: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            foldersDao.getFolderByID(id)
+        }
     }
 }
 

@@ -34,6 +34,7 @@ data class Afolder (
     val name: String,
     val items: List<Word>
 )
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Vocabulary(viewModel: MyViewModel, navController: NavController) {

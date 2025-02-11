@@ -6,20 +6,19 @@ import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import org.sstinc.xuemi.db.MCQDao
 import org.sstinc.xuemi.quiz.MCQquestion
 import org.sstinc.xuemi.quiz.MCQtopic
 
 
 @Database(entities = [MCQtopic::class], version = 1)
-@TypeConverters(Converters::class)
+@TypeConverters(ConvertersMCQ::class)
 abstract class MCQDatabase: RoomDatabase() {
     companion object {
         const val NAME = "MCQ_DB"
     }
     abstract fun getMCQDao () : MCQDao
 }
-class Converters {
+class ConvertersMCQ {
     @TypeConverter
     fun fromMCQquestionList(value: List<MCQquestion>): String {
         val gson = Gson()

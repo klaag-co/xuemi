@@ -71,7 +71,7 @@ struct FolderView: View {
                                         selectedFolder = nil
                                         selectedFolderForSpeakerView = folder
                                     } label: {
-                                        Text("Speaker")
+                                        Text("Pronounciation")
                                             .font(.title)
                                             .padding()
                                             .frame(height: 65)
@@ -118,7 +118,9 @@ struct FolderView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    EditButton()
+                    NavigationLink(destination: NewFolderView(vocabManager: vocabManager)) {
+                        Image(systemName: "folder.badge.plus")
+                    }
                 }
             }
         }

@@ -12,6 +12,7 @@ struct NewFolderView: View {
     @State private var selectedWords: [Vocabulary] = []
     @State private var folderName: String = ""
     @State private var searchText: String = ""
+    @State private var showingAlert = false
     @Environment(\.dismiss) var dismiss
 
     var filteredSections: [String: [Vocabulary]] {
@@ -27,10 +28,6 @@ struct NewFolderView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TextField("Enter Folder Name", text: $folderName)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-
                 List {
                     ForEach(filteredSections.keys.sorted(), id: \.self) { section in
                         Section(header: Text(section)) {
@@ -57,19 +54,24 @@ struct NewFolderView: View {
                     }
                 }
                 .listStyle(InsetGroupedListStyle())
-                .searchable(text: $searchText, prompt: "Search words")
+                .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Search words")
 
                 Button("Save Folder") {
-                    saveFolder()
-                    dismiss()
+                        showingAlert = true
+                }
+                .alert("Enter Folder Name", isPresented: $showingAlert) {
+                    TextField("Enter Folder Name", text: $folderName)
+                    Button("OK") {
+                        saveFolder()
+                        dismiss()
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 .padding()
             }
-            .navigationTitle("New Folder")
+            .navigationBarTitle("New Folder")
         }
     }
-
     func saveFolder() {
         guard !folderName.isEmpty && !selectedWords.isEmpty else { return }
         let newFolder = Folder(name: folderName, vocabs: selectedWords)

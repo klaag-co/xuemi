@@ -28,37 +28,41 @@ struct MCQView: View {
     @Environment(\.dismiss) private var dismiss
 
     init(vocabularies: [Vocabulary], level: String, chapter: String, topic: String) {
-        self.vocabularies = vocabularies
+        let shuffledVocabularies = vocabularies.shuffled()
+        self.vocabularies = shuffledVocabularies
         self.level = level
         self.chapter = chapter
         self.topic = topic
         self.folderName = nil
-        self._shuffledOptions = State(initialValue: vocabularies.map { vocabulary in
-            var options = vocabularies.map { $0.word }
+        
+        self._shuffledOptions = State(initialValue: shuffledVocabularies.map { vocabulary in
+            var options = shuffledVocabularies.map { $0.word }
             options.removeAll { $0 == vocabulary.word }
             options.shuffle()
             let finalOptions = Array(options.prefix(3)) + [vocabulary.word]
             return finalOptions.shuffled()
         })
-        self._selectedQuestions = State(initialValue: vocabularies.map { _ in Bool.random() ? "q1" : "q2" })
-        self._userAnswers = State(initialValue: Array(repeating: nil, count: vocabularies.count))
+        self._selectedQuestions = State(initialValue: shuffledVocabularies.map { _ in Bool.random() ? "q1" : "q2" })
+        self._userAnswers = State(initialValue: Array(repeating: nil, count: shuffledVocabularies.count))
     }
 
     init(vocabularies: [Vocabulary], folderName: String) {
-        self.vocabularies = vocabularies
+        let shuffledVocabularies = vocabularies.shuffled()
+        self.vocabularies = shuffledVocabularies
         self.level = nil
         self.chapter = nil
         self.topic = nil
         self.folderName = folderName
-        self._shuffledOptions = State(initialValue: vocabularies.map { vocabulary in
-            var options = vocabularies.map { $0.word }
+        
+        self._shuffledOptions = State(initialValue: shuffledVocabularies.map { vocabulary in
+            var options = shuffledVocabularies.map { $0.word }
             options.removeAll { $0 == vocabulary.word }
             options.shuffle()
             let finalOptions = Array(options.prefix(3)) + [vocabulary.word]
             return finalOptions.shuffled()
         })
-        self._selectedQuestions = State(initialValue: vocabularies.map { _ in Bool.random() ? "q1" : "q2" })
-        self._userAnswers = State(initialValue: Array(repeating: nil, count: vocabularies.count))
+        self._selectedQuestions = State(initialValue: shuffledVocabularies.map { _ in Bool.random() ? "q1" : "q2" })
+        self._userAnswers = State(initialValue: Array(repeating: nil, count: shuffledVocabularies.count))
     }
 
     var currentVocabulary: Vocabulary {
@@ -149,6 +153,7 @@ struct MCQView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
+            reshuffleVocabularies()
             loadPreviousState()
         }
         .navigationDestination(isPresented: $showResults) {
@@ -186,6 +191,24 @@ struct MCQView: View {
         }
     }
     
+    func reshuffleVocabularies() {
+        vocabularies.shuffle()
+        shuffledOptions = vocabularies.map { vocabulary in
+            var options = vocabularies.map { $0.word }
+            options.removeAll { $0 == vocabulary.word }
+            options.shuffle()
+            let finalOptions = Array(options.prefix(3)) + [vocabulary.word]
+            return finalOptions.shuffled()
+        }
+        selectedQuestions = vocabularies.map { _ in Bool.random() ? "q1" : "q2" }
+        userAnswers = Array(repeating: nil, count: vocabularies.count)
+        currentVocabularyIndex = 0
+        correctAnswers = 0
+        wrongAnswers = 0
+        selectedAnswer = nil
+        showAnswer = false
+    }
+    
     func resetState() {
         selectedAnswer = userAnswers[currentVocabularyIndex]
         showAnswer = selectedAnswer != nil
@@ -196,3 +219,4 @@ struct MCQView: View {
         showAnswer = selectedAnswer != nil
     }
 }
+

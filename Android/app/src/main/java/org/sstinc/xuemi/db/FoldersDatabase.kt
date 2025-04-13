@@ -6,7 +6,6 @@ import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import org.sstinc.xuemi.Afolder
 import org.sstinc.xuemi.quiz.Word
 
 @Database(entities = [Afolder::class], version = 1)

@@ -7,7 +7,7 @@
                     "name": "我想对您说",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 228,
                             "word": "犹豫",
                             "pinyin": "yóu yù",
                             "englishDefinition": "to hesitate",
@@ -16,43 +16,43 @@
                             "q2": "我们~了很久，才决定买这栋房子。"
                         },
                         {
-                            "index": 2,
+                            "index": 229,
                             "word": "不分青红皂白",
                             "pinyin": "bù fēn qīng hóng zào bái",
-                            "englishDefinition": "not to distinguish between right and wrong",
+                            "englishDefinition": "can't tell right from wrong. Indiscriminate.",
                             "chineseDefinition": "不分黑白，不分是非。",
                             "q1": "不分黑白，不分是非。",
                             "q2": "他~，一见面就劈头劈脸把他大骂了一顿。"
                         },
                         {
-                            "index": 3,
+                            "index": 230,
                             "word": "教训",
                             "pinyin": "jiào xùn",
                             "englishDefinition": "lesson; moral; to lecture somebody",
-                            "chineseDefinition": "（动）教育训诫 ②（名）指从错误、挫折中取得的经验",
+                            "chineseDefinition": "（动）教育训诫  1.（名）指从错误、挫折中取得的经验",
                             "q1": "（动）教育训诫 ②（名）指从错误、挫折中取得的经验",
                             "q2": "我们要从过去的错误中吸取～，以免重蹈覆辙。"
                         },
                         {
-                            "index": 4,
+                            "index": 231,
                             "word": "叛逆",
                             "pinyin": "pàn nì",
-                            "englishDefinition": "rebel against；revolt against; a rebel",
-                            "chineseDefinition": "（动）违背自己的阶级或集团的利益而投入到敌对的一方去。②（名）有背叛行为的人。",
+                            "englishDefinition": "rebellious. recalcitrant.",
+                            "chineseDefinition": "（动）违背自己的阶级或集团的利益而投入到敌对的一方去。1.（名）有背叛行为的人。",
                             "q1": "（动）违背自己的阶级或集团的利益而投入到敌对的一方去。②（名）有背叛行为的人。",
                             "q2": "升上中学后，他变得很～，根本不愿意听师长的劝导。"
                         },
                         {
-                            "index": 5,
+                            "index": 232,
                             "word": "委屈",
                             "pinyin": "wěi qū",
-                            "englishDefinition": "to feel wronged; to cause somebody to feel wronged; grievance",
-                            "chineseDefinition": "（形）受到不应有的指责或待遇，感到心里难过。②（动）使人受到委屈",
+                            "englishDefinition": "sense of being wronged; grievance",
+                            "chineseDefinition": "（形）受到不应有的指责或待遇，感到心里难过。1.（动）使人受到委屈",
                             "q1": "（形）受到不应有的指责或待遇，感到心里难过。②（动）使人受到委屈",
                             "q2": "朋友误会了他，他觉得很～。"
                         },
                         {
-                            "index": 6,
+                            "index": 233,
                             "word": "内疚",
                             "pinyin": "nèi jiù",
                             "englishDefinition": "guilty conscience; to feel a twinge of guilt",
@@ -61,7 +61,7 @@
                             "q2": "他不小心害朋友受伤，觉得很～。"
                         },
                         {
-                            "index": 7,
+                            "index": 234,
                             "word": "不妨",
                             "pinyin": "bù fáng",
                             "englishDefinition": "there is no harm in; might as well",
@@ -70,7 +70,7 @@
                             "q2": "同学之间有什么意见～当面提出来，不要在背后议论。"
                         },
                         {
-                            "index": 8,
+                            "index": 235,
                             "word": "匿名",
                             "pinyin": "nì míng",
                             "englishDefinition": "anonymous",
@@ -79,7 +79,7 @@
                             "q2": "在这个网站，用户可以～发帖和浏览。"
                         },
                         {
-                            "index": 9,
+                            "index": 236,
                             "word": "监督",
                             "pinyin": "jiān dū",
                             "englishDefinition": "to control; to supervise",
@@ -88,7 +88,7 @@
                             "q2": "这对新婚夫妇不时到新房监～修过程，确保每一个细节都符合他们的要求。"
                         },
                         {
-                            "index": 10,
+                            "index": 237,
                             "word": "代沟",
                             "pinyin": "dài gōu",
                             "englishDefinition": "generation gap",
@@ -97,7 +97,7 @@
                             "q2": "父母和孩子之间的～有时会导致沟通上的困难。"
                         },
                         {
-                            "index": 11,
+                            "index": 238,
                             "word": "上瘾",
                             "pinyin": "shàng yǐn",
                             "englishDefinition": "to get into a habit; to become addicted",
@@ -106,10 +106,10 @@
                             "q2": "烟草含有让人~的成分，戒烟过程往往非常艰难。"
                         },
                         {
-                            "index": 12,
+                            "index": 239,
                             "word": "疏远",
                             "pinyin": "shū yuǎn",
-                            "englishDefinition": "to drift apart; to become estranged",
+                            "englishDefinition": "feeling alienated, estranged",
                             "chineseDefinition": "关系生疏，不亲近。",
                             "q1": "关系生疏，不亲近。",
                             "q2": "由于长时间的分离，我和他的关系渐渐～了。"
@@ -120,7 +120,7 @@
                     "name": "把爱说出来",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 240,
                             "word": "迎刃而解",
                             "pinyin": "yíng rèn ér jiě",
                             "englishDefinition": "(idiom); (figurative) easily solved",
@@ -129,7 +129,7 @@
                             "q2": "经过团队的共同努力，项目中的困难～。"
                         },
                         {
-                            "index": 2,
+                            "index": 241,
                             "word": "称赞",
                             "pinyin": "chēng zàn",
                             "englishDefinition": "to praise; to compliment",
@@ -138,7 +138,7 @@
                             "q2": "我扶老奶奶过马路，妈妈～我是个好孩子。"
                         },
                         {
-                            "index": 3,
+                            "index": 242,
                             "word": "崇拜",
                             "pinyin": "chóng bài",
                             "englishDefinition": "to worship; adoration",
@@ -147,16 +147,16 @@
                             "q2": "我很～为国家付出半辈子心血的前辈，他们的奉献精神深深激励了我。"
                         },
                         {
-                            "index": 4,
+                            "index": 243,
                             "word": "爱不释手",
                             "pinyin": "ài bù shì shǒu",
-                            "englishDefinition": "to love sth too much to part with it (idiom)",
+                            "englishDefinition": "can't let go of something that one is enthusiastic with",
                             "chineseDefinition": "喜爱得舍不得放下。",
                             "q1": "喜爱得舍不得放下。",
                             "q2": "我～地抱着我最喜欢的玩偶。"
                         },
                         {
-                            "index": 5,
+                            "index": 244,
                             "word": "碰钉子",
                             "pinyin": "pèng dīng zi",
                             "englishDefinition": "to meet with a rebuff",
@@ -165,7 +165,7 @@
                             "q2": "～虽让人感到沮丧，但也是成长和学习的机会。"
                         },
                         {
-                            "index": 6,
+                            "index": 245,
                             "word": "泼冷水",
                             "pinyin": "pō lěng shuǐ",
                             "englishDefinition": "(figurative) to dampen one's enthusiasm",
@@ -174,7 +174,7 @@
                             "q2": "我们应鼓励支持他完成试验，而不是一味地～。"
                         },
                         {
-                            "index": 7,
+                            "index": 246,
                             "word": "抽屉",
                             "pinyin": "chōu tì",
                             "englishDefinition": "drawer",
@@ -183,25 +183,25 @@
                             "q2": "他从～里拿出一本厚厚的相册。"
                         },
                         {
-                            "index": 8,
+                            "index": 247,
                             "word": "精疲力竭",
                             "pinyin": "jīng pí lì jié",
-                            "englishDefinition": "spirit weary, strength exhausted (idiom); drained; washed out",
+                            "englishDefinition": "completely exhaused, worn out",
                             "chineseDefinition": "精：精神，精力。竭：尽。精神非常疲劳，没有一点力气。",
                             "q1": "精：精神，精力。竭：尽。精神非常疲劳，没有一点力气。",
                             "q2": "完成了一整天的工作后，～的她躺在沙发上，几乎没过多久就进入了沉沉的睡眠。"
                         },
                         {
-                            "index": 9,
+                            "index": 248,
                             "word": "衰老",
                             "pinyin": "shuāi lǎo",
-                            "englishDefinition": "to deteriorate with age; old and weak",
+                            "englishDefinition": "worn down by ages",
                             "chineseDefinition": "年纪大而精力虚弱。",
                             "q1": "年纪大而精力虚弱。",
                             "q2": "我们无法避免面容随着岁月的流逝而渐渐～，但保持健康的生活习惯可以减缓这一过程。"
                         },
                         {
-                            "index": 10,
+                            "index": 249,
                             "word": "抑郁",
                             "pinyin": "yì yù",
                             "englishDefinition": "depressed; gloomy; depression",
@@ -210,16 +210,16 @@
                             "q2": "运动能缓解～情绪，让我们心情更好，感到更加轻松和愉快。"
                         },
                         {
-                            "index": 11,
+                            "index": 250,
                             "word": "寂寞",
                             "pinyin": "jì mò",
-                            "englishDefinition": "lonely",
+                            "englishDefinition": "feeling of loneliness",
                             "chineseDefinition": "（形）孤独冷清。",
                             "q1": "（形）孤独冷清。",
                             "q2": "每当晚上一个人待在家里，他就会感到～和孤独。"
                         },
                         {
-                            "index": 12,
+                            "index": 251,
                             "word": "启齿",
                             "pinyin": "qǐ chǐ",
                             "englishDefinition": "to open one's mouth; to start talking",
@@ -228,16 +228,16 @@
                             "q2": "这个尴尬的话题让她感到～，不知道如何开口。"
                         },
                         {
-                            "index": 13,
+                            "index": 252,
                             "word": "打退堂鼓",
                             "pinyin": "dǎ tuì táng gǔ",
-                            "englishDefinition": "(figurative) to give up; to turn tail",
+                            "englishDefinition": "sound the retreat, give up",
                             "chineseDefinition": "比喻与人共事而半路退缩。",
                             "q1": "比喻与人共事而半路退缩。",
                             "q2": "即使困难重重，我们也绝不～。"
                         },
                         {
-                            "index": 14,
+                            "index": 253,
                             "word": "懊恼",
                             "pinyin": "ào nǎo",
                             "englishDefinition": "annoyed; vexed; upset",
@@ -246,16 +246,16 @@
                             "q2": "他为了那个小失误而～不已。"
                         },
                         {
-                            "index": 15,
+                            "index": 254,
                             "word": "伺机",
                             "pinyin": "sì jī",
-                            "englishDefinition": "to wait for an opportunity",
+                            "englishDefinition": "waiting to exploit an opportunity",
                             "chineseDefinition": "侦候可乘之机",
                             "q1": "侦候可乘之机",
                             "q2": "小猫蹲伏在草丛里～向猎物发起进攻。"
                         },
                         {
-                            "index": 16,
+                            "index": 255,
                             "word": "心不在焉",
                             "pinyin": "xīn bù zài yān",
                             "englishDefinition": "absent-minded;  inattentive;",
@@ -264,19 +264,19 @@
                             "q2": "他上课～，一直望著窗外发呆。"
                         },
                         {
-                            "index": 17,
+                            "index": 256,
                             "word": "破天荒",
                             "pinyin": "pò tiān huāng",
-                            "englishDefinition": "unprecedented; for the first time; never before",
+                            "englishDefinition": "unprecedented; record breaking",
                             "chineseDefinition": "（动）指从没有过的或第一次出现的。",
                             "q1": "（动）指从没有过的或第一次出现的。",
                             "q2": "这一次他～地提前完成了所有的任务，真是让人意外。"
                         },
                         {
-                            "index": 18,
+                            "index": 257,
                             "word": "仓促",
                             "pinyin": "cāng cù",
-                            "englishDefinition": "all of a sudden; hurriedly",
+                            "englishDefinition": "hurried",
                             "chineseDefinition": "（形）匆忙；急促：～应战。［反］从容。",
                             "q1": "（形）匆忙；急促：～应战。［反］从容。",
                             "q2": "他来不及吃早餐，就～地离家上学去了。"
@@ -287,16 +287,16 @@
                     "name": "放风筝",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 258,
                             "word": "严肃",
                             "pinyin": "yán sù",
                             "englishDefinition": "solemn; grave; serious",
-                            "chineseDefinition": "①（形）郑重；认真。②（动）使人感到敬畏。 ［反］活泼|幽默。",
+                            "chineseDefinition": "1.（形）郑重；认真。2.（动）使人感到敬畏。 ［反］活泼|幽默。",
                             "q1": "①（形）郑重；认真。②（动）使人感到敬畏。 ［反］活泼|幽默。",
                             "q2": "她～地告诫孩子们不可以随便触碰危险的物品。"
                         },
                         {
-                            "index": 2,
+                            "index": 259,
                             "word": "安抚",
                             "pinyin": "ān fǔ",
                             "englishDefinition": "to appease, placate, pacify",
@@ -305,7 +305,7 @@
                             "q2": "小明刚刚受到了惊吓，需要人去～一下。"
                         },
                         {
-                            "index": 3,
+                            "index": 260,
                             "word": "干脆",
                             "pinyin": "gān cuì",
                             "englishDefinition": "straightforward; blunt (e.g. statement); simply",
@@ -314,7 +314,7 @@
                             "q2": "她遇到问题时总是～利索地解决，不留任何后患。"
                         },
                         {
-                            "index": 4,
+                            "index": 261,
                             "word": "风筝",
                             "pinyin": "fēng zhēng",
                             "englishDefinition": "kite",
@@ -323,7 +323,7 @@
                             "q2": "我和父母一起到滨海堤坝放～。"
                         },
                         {
-                            "index": 5,
+                            "index": 262,
                             "word": "挣脱",
                             "pinyin": "zhèng tuō",
                             "englishDefinition": "to throw off; to struggle free of",
@@ -332,7 +332,7 @@
                             "q2": "那狗～链子跑了。"
                         },
                         {
-                            "index": 6,
+                            "index": 263,
                             "word": "惊讶",
                             "pinyin": "jīng yà",
                             "englishDefinition": "amazed; astonished; to surprise;",
@@ -341,7 +341,7 @@
                             "q2": "这一年他有了这么大的进步，让我们～不已。"
                         },
                         {
-                            "index": 7,
+                            "index": 264,
                             "word": "斑",
                             "pinyin": "bān",
                             "englishDefinition": "spot; colored patch; stripe; spotted",
@@ -350,20 +350,20 @@
                             "q2": "你的衬衫上有一个墨水～，需要及时清洗，否则可能会很难去掉。"
                         },
                         {
-                            "index": 8,
+                            "index": 265,
                             "word": "缠绕",
                             "pinyin": "chán rào",
                             "englishDefinition": "twisting; to twine",
-                            "chineseDefinition": "（动）①条状物旋绕在别的物体上 ②纠缠；搅扰。",
+                            "chineseDefinition": "（动）1. 条状物旋绕在别的物体上  2. 纠缠；搅扰。",
                             "q1": "（动）①条状物旋绕在别的物体上 ②纠缠；搅扰。",
                             "q2": "牵牛花～着栅栏爬满了一面墙，美丽极了。"
                         },
                         {
-                            "index": 9,
+                            "index": 266,
                             "word": "搂",
                             "pinyin": "lǒu",
                             "englishDefinition": "to hug；to hold in one's arms",
-                            "chineseDefinition": "（动）1.搂抱 2.用手或工具把东西聚集到自己面前：～柴火。～点儿干草烧。3.用手拢着提起来（指衣服）：～起袖子。她～着裙子蹚水过河。4. （量）两臂合抱的量为一搂：抱来一～麦秸。两～粗的大树。",
+                            "chineseDefinition": "（动）1. 搂抱 2. 用手或工具把东西聚集到自己面前：～柴火。～点儿干草烧。3.用手拢着提起来（指衣服）：～起袖子。她～着裙子蹚水过河。4. （量）两臂合抱的量为一搂：抱来一～麦秸。两～粗的大树。",
                             "q1": "（动）1.搂抱 2.用手或工具把东西聚集到自己面前：～柴火。～点儿干草烧。3.用手拢着提起来（指衣服）：～起袖子。她～着裙子蹚水过河。4. （量）两臂合抱的量为一搂：抱来一～麦秸。两～粗的大树。",
                             "q2": "妈妈把我紧紧地～在怀里、好像怕我被风吹走似的。"
                         }
@@ -378,16 +378,16 @@
                     "name": "助养野生动物",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 267,
                             "word": "捐款",
                             "pinyin": "juān kuǎn",
                             "englishDefinition": "to donate money;  contribution (of money)",
-                            "chineseDefinition": "（动）捐助款项 ②（名）指捐助的款项",
+                            "chineseDefinition": "（动）捐助款项 1. （名）指捐助的款项",
                             "q1": "（动）捐助款项 ②（名）指捐助的款项",
                             "q2": "在得知灾区的需要后，他不仅～，还主动前往灾区帮忙"
                         },
                         {
-                            "index": 2,
+                            "index": 268,
                             "word": "拯救",
                             "pinyin": "zhěng jiù",
                             "englishDefinition": "to save; to rescue",
@@ -396,7 +396,7 @@
                             "q2": "救援队在山中～了被困的登山者。"
                         },
                         {
-                            "index": 3,
+                            "index": 269,
                             "word": "医疗",
                             "pinyin": "yī liáo",
                             "englishDefinition": "medical treatment",
@@ -405,16 +405,16 @@
                             "q2": "～保险可以帮助我们支付看病时的费用。"
                         },
                         {
-                            "index": 4,
+                            "index": 270,
                             "word": "研究",
                             "pinyin": "yán jiū",
                             "englishDefinition": "research; to research; to look into",
-                            "chineseDefinition": "（动）①探求事物的性质、规律等。②考虑；商讨",
+                            "chineseDefinition": "（动）1. 探求事物的性质、规律等。2. 考虑；商讨",
                             "q1": "（动）①探求事物的性质、规律等。②考虑；商讨",
                             "q2": "她在大学里从事环境保护方面的～，致力于改善空气质量。"
                         },
                         {
-                            "index": 5,
+                            "index": 271,
                             "word": "优惠",
                             "pinyin": "yōu huì",
                             "englishDefinition": "privilege; favorable (terms); preferential (treatment); discount (price)",
@@ -423,7 +423,7 @@
                             "q2": "商店推出了新季商品的～活动，吸引了许多顾客前来购买。"
                         },
                         {
-                            "index": 6,
+                            "index": 272,
                             "word": "券",
                             "pinyin": "quàn",
                             "englishDefinition": "voucher",
@@ -432,7 +432,7 @@
                             "q2": "她用折扣～买了一些日常用品，节省了不少钱。"
                         },
                         {
-                            "index": 7,
+                            "index": 273,
                             "word": "四肢",
                             "pinyin": "sì zhī",
                             "englishDefinition": "the four limbs of the body",
@@ -441,7 +441,7 @@
                             "q2": "他伸开～躺在草地上。"
                         },
                         {
-                            "index": 8,
+                            "index": 274,
                             "word": "敏捷",
                             "pinyin": "mǐn jié",
                             "englishDefinition": "nimble; quick",
@@ -450,7 +450,7 @@
                             "q2": "她在羽球场上的表现非常～，迅速的动作赢得了观众的赞赏。"
                         },
                         {
-                            "index": 9,
+                            "index": 275,
                             "word": "穿梭",
                             "pinyin": "chuān suō",
                             "englishDefinition": "to travel back and forth; to shuttle",
@@ -459,7 +459,7 @@
                             "q2": "服务生在客人间来回～着，看起来十分忙碌。"
                         },
                         {
-                            "index": 10,
+                            "index": 276,
                             "word": "友善",
                             "pinyin": "yǒu shàn",
                             "englishDefinition": "friendly",
@@ -468,7 +468,7 @@
                             "q2": "他对每个人都很～，总是带着微笑和大家打招呼。"
                         },
                         {
-                            "index": 11,
+                            "index": 277,
                             "word": "辨识",
                             "pinyin": "biàn shí",
                             "englishDefinition": "identification; to identify; to recognize",
@@ -477,7 +477,7 @@
                             "q2": "在漆黑的夜晚，不易～黑色物体。"
                         },
                         {
-                            "index": 12,
+                            "index": 278,
                             "word": "害羞",
                             "pinyin": "hài xiū",
                             "englishDefinition": "shy; embarrassed; bashful",
@@ -486,16 +486,16 @@
                             "q2": "他在陌生人面前总是显得有些～，不太愿意主动讲话。"
                         },
                         {
-                            "index": 13,
+                            "index": 279,
                             "word": "馋",
                             "pinyin": "chán",
                             "englishDefinition": "greedy; to have a craving",
-                            "chineseDefinition": "1.看见好的食物就想吃；专爱吃好的：嘴～。2.看到喜爱的事物希望参与或得到 3.想吃（某种食物)〈动〉",
+                            "chineseDefinition": "1. 看见好的食物就想吃；专爱吃好的：嘴～。2. 看到喜爱的事物希望参与或得到 3.想吃（某种食物)〈动〉",
                             "q1": "1.看见好的食物就想吃；专爱吃好的：嘴～。2.看到喜爱的事物希望参与或得到 3.想吃（某种食物)〈动〉",
                             "q2": "他看着桌上的美味蛋糕，～得直流口水，迫不及待地想要尝一尝。"
                         },
                         {
-                            "index": 14,
+                            "index": 280,
                             "word": "调皮",
                             "pinyin": "tiáo pí",
                             "englishDefinition": "naughty; mischievous",
@@ -504,7 +504,7 @@
                             "q2": "她~地对朋友眨了眨眼睛，引得大家都哈哈大笑。"
                         },
                         {
-                            "index": 15,
+                            "index": 281,
                             "word": "摔跤",
                             "pinyin": "shuāi jiāo",
                             "englishDefinition": "to trip and fall; wrestling (sports)",
@@ -518,7 +518,7 @@
                     "name": "猫",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 282,
                             "word": "尤其",
                             "pinyin": "yóu qí",
                             "englishDefinition": "especially; particularly",
@@ -527,7 +527,7 @@
                             "q2": "爷爷爱好书法，～擅长草书。"
                         },
                         {
-                            "index": 2,
+                            "index": 283,
                             "word": "愧疚",
                             "pinyin": "kuì jiù",
                             "englishDefinition": "to feel guilty; to feel ashamed of oneself",
@@ -536,7 +536,7 @@
                             "q2": "在朋友有难时，未能及时伸出援手，他感到很～。"
                         },
                         {
-                            "index": 3,
+                            "index": 284,
                             "word": "光泽",
                             "pinyin": "guāng zé",
                             "englishDefinition": "luster; gloss",
@@ -545,7 +545,7 @@
                             "q2": "这孩子长得很健康，脸上透着红润的～。"
                         },
                         {
-                            "index": 4,
+                            "index": 285,
                             "word": "懒懒地",
                             "pinyin": "lǎn lǎn de",
                             "englishDefinition": "lazily",
@@ -554,7 +554,7 @@
                             "q2": "星期六早上，我～躺在沙发上看电视。"
                         },
                         {
-                            "index": 5,
+                            "index": 286,
                             "word": "妻子",
                             "pinyin": "qī zǐ",
                             "englishDefinition": "wife",
@@ -563,25 +563,25 @@
                             "q2": "他和新婚～到日本度蜜月。"
                         },
                         {
-                            "index": 6,
+                            "index": 287,
                             "word": "啾啾",
                             "pinyin": "jiū jiū",
                             "englishDefinition": "chirping of birds",
-                            "chineseDefinition": "1.鸟(如夜莺)发出的鸣叫声。  2.象声词,形容许多小鸟一齐叫的声音。  3.象声词。泛指像各种凄切尖细的声音。",
+                            "chineseDefinition": "1. 鸟(如夜莺)发出的鸣叫声。  2. 象声词,形容许多小鸟一齐叫的声音。  3. 象声词。泛指像各种凄切尖细的声音。",
                             "q1": "1.鸟(如夜莺)发出的鸣叫声。  2.象声词,形容许多小鸟一齐叫的声音。  3.象声词。泛指像各种凄切尖细的声音。",
                             "q2": "鸟儿在枝头欢快地～鸣唱。"
                         },
                         {
-                            "index": 7,
+                            "index": 288,
                             "word": "仰",
                             "pinyin": "yǎng",
                             "englishDefinition": "to face upward; to look up",
-                            "chineseDefinition": "抬头，脸向上看。与「俯」相对。〈动〉",
+                            "chineseDefinition": "（动）抬头，脸向上看。与「俯」相对。",
                             "q1": "抬头，脸向上看。与「俯」相对。〈动〉",
                             "q2": "小孩～着脸看着飞过的飞机，眼中充满了好奇。"
                         },
                         {
-                            "index": 8,
+                            "index": 289,
                             "word": "凝望",
                             "pinyin": "níng wàng",
                             "englishDefinition": "to gaze at; to stare fixedly at",
@@ -590,7 +590,7 @@
                             "q2": "傍晚，我站在新加坡河边，静静地～着天空。"
                         },
                         {
-                            "index": 9,
+                            "index": 290,
                             "word": "鸟笼",
                             "pinyin": "niǎo lóng",
                             "englishDefinition": "birdcage",
@@ -599,16 +599,16 @@
                             "q2": "他打开～，释放了里面的鸟儿。"
                         },
                         {
-                            "index": 10,
+                            "index": 291,
                             "word": "隔",
                             "pinyin": "gé",
                             "englishDefinition": "to separate; to partition;  after or at an interval of",
-                            "chineseDefinition": "1.遮断；隔开：～成两间房2.间隔；距离：～两周再去。相～不远。〈动〉〈名〉",
+                            "chineseDefinition": "1.（动）遮断；隔开：～成两间房 2.（名）间隔；距离：～两周再去。相～不远。",
                             "q1": "1.遮断；隔开：～成两间房2.间隔；距离：～两周再去。相～不远。〈动〉〈名〉",
                             "q2": "房间里有一扇窗户～开了两个区域，使空间看起来更大。"
                         },
                         {
-                            "index": 11,
+                            "index": 292,
                             "word": "愤怒",
                             "pinyin": "fèn nù",
                             "englishDefinition": "angry; indignant; wrath; ire",
@@ -617,7 +617,7 @@
                             "q2": "他无耻的行为令我们～到了极点。"
                         },
                         {
-                            "index": 12,
+                            "index": 293,
                             "word": "畏罪潜逃",
                             "pinyin": "wèi zuì qián táo",
                             "englishDefinition": "flee to escape punishment",
@@ -626,7 +626,7 @@
                             "q2": "偷走项链的他，因怕被发现，所以～。"
                         },
                         {
-                            "index": 13,
+                            "index": 294,
                             "word": "喵",
                             "pinyin": "miāo",
                             "englishDefinition": "(onom.) meow; cat's mewing",
@@ -635,25 +635,25 @@
                             "q2": "小猫在院子里跑来跑去，时不时发出～”的叫声。"
                         },
                         {
-                            "index": 14,
+                            "index": 295,
                             "word": "衔",
                             "pinyin": "xián",
                             "englishDefinition": "to hold in the mouth; to link",
-                            "chineseDefinition": "1.用嘴含：燕子～泥。2.怀在心里：～恨。3.接受：～命。4.职务和级别的名号：职～。军～。大使～。",
+                            "chineseDefinition": "1. 用嘴含：燕子～泥。2. 怀在心里：～恨。3. 接受：～命。4. 职务和级别的名号：职～。军～。大使～。",
                             "q1": "1.用嘴含：燕子～泥。2.怀在心里：～恨。3.接受：～命。4.职务和级别的名号：职～。军～。大使～。",
                             "q2": "小狗有时很淘气，口中～着奶奶的鞋子怎么也不放下。"
                         },
                         {
-                            "index": 15,
+                            "index": 296,
                             "word": "搞",
                             "pinyin": "gǎo",
                             "englishDefinition": "to do; to make",
-                            "chineseDefinition": "1.做；干；从事：～生产。～工作。～建设。2.设法获得；弄：～点儿水来。～材料。〈动〉",
+                            "chineseDefinition": "1. （动）做；干；从事：～生产。～工作。～建设。2. 设法获得；弄：～点儿水来。～材料。",
                             "q1": "1.做；干；从事：～生产。～工作。～建设。2.设法获得；弄：～点儿水来。～材料。〈动〉",
                             "q2": "她最近～了很多研究，希望能在学术上取得一些突破。"
                         },
                         {
-                            "index": 16,
+                            "index": 297,
                             "word": "失踪",
                             "pinyin": "shī zōng",
                             "englishDefinition": "to be missing; to disappear",
@@ -662,7 +662,7 @@
                             "q2": "那位登山者在山中～了，救援队正在进行搜寻工作，希望可以尽快找到他。"
                         },
                         {
-                            "index": 17,
+                            "index": 298,
                             "word": "估计",
                             "pinyin": "gū jì",
                             "englishDefinition": "to estimate; to reckon; to suppose",
@@ -676,34 +676,34 @@
                     "name": "山中奇遇",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 299,
                             "word": "丰富",
                             "pinyin": "fēng fù",
                             "englishDefinition": "to enrich; rich; plentiful",
-                            "chineseDefinition": "（形）种类多；数量大：资源～|经验～。［反］贫乏|单调。②（动）使丰富：～群众的业余生活。［反］减少。",
+                            "chineseDefinition": "（形）种类多；数量大：资源～|经验～。［反］贫乏|单调。1.（动）使丰富：～群众的业余生活。［反］减少。",
                             "q1": "（形）种类多；数量大：资源～|经验～。［反］贫乏|单调。②（动）使丰富：～群众的业余生活。［反］减少。",
                             "q2": "这次旅行让我们体验了～的文化和美食。"
                         },
                         {
-                            "index": 2,
+                            "index": 300,
                             "word": "褐",
                             "pinyin": "hè",
                             "englishDefinition": "brown",
-                            "chineseDefinition": "1.粗布或粗布衣服。2.黑黄色。〈名〉〈形〉",
+                            "chineseDefinition": "1.（名）粗布或粗布衣服。2.（形）黑黄色。",
                             "q1": "1.粗布或粗布衣服。2.黑黄色。〈名〉〈形〉",
                             "q2": "他在画布上用了不同的～色画树干，让画面更有层次感。"
                         },
                         {
-                            "index": 3,
+                            "index": 301,
                             "word": "盘旋",
                             "pinyin": "pán xuán",
                             "englishDefinition": "to spiral; to go around; to hover",
-                            "chineseDefinition": "（动）①回旋往复地绕着圈走或飞。②徘徊；逗留。",
+                            "chineseDefinition": "（动）1. 回旋往复地绕着圈走或飞。2. 徘徊；逗留。",
                             "q1": "（动）①回旋往复地绕着圈走或飞。②徘徊；逗留。",
                             "q2": "他看着风筝在空中～，心情也变得轻松起来。"
                         },
                         {
-                            "index": 4,
+                            "index": 302,
                             "word": "丝毫",
                             "pinyin": "sī háo",
                             "englishDefinition": "the slightest amount or degree; a bit",
@@ -712,7 +712,7 @@
                             "q2": "学习要持之以恒，不能有～松懈。"
                         },
                         {
-                            "index": 5,
+                            "index": 303,
                             "word": "面面相觑",
                             "pinyin": "miàn miàn xiāng qù",
                             "englishDefinition": "to look at each other in dismay (idiom)",
@@ -721,20 +721,20 @@
                             "q2": "听到父母的训斥后，他们～着，一句话也说不出来。"
                         },
                         {
-                            "index": 6,
+                            "index": 304,
                             "word": "愣",
                             "pinyin": "lèng",
                             "englishDefinition": "to look distracted; to stare blankly",
-                            "chineseDefinition": "1.失神；呆：发～。2.说话做事不考虑后果；鲁莽：～小子。开车小心点，别那么～。3.偏偏；偏要：明知不对，他～那么做。〈形〉〈副〉〈动〉",
+                            "chineseDefinition": "1.（形）失神；呆：发～。2.（副）说话做事不考虑后果；鲁莽：～小子。开车小心点，别那么～。3.（动）偏偏；偏要：明知不对，他～那么做。",
                             "q1": "1.失神；呆：发～。2.说话做事不考虑后果；鲁莽：～小子。开车小心点，别那么～。3.偏偏；偏要：明知不对，他～那么做。〈形〉〈副〉〈动〉",
                             "q2": "他听到这个消息时～住了，一时间不知道该说什么。"
                         },
                         {
-                            "index": 7,
+                            "index": 305,
                             "word": "傻",
                             "pinyin": "shǎ",
                             "englishDefinition": "foolish",
-                            "chineseDefinition": "1.头脑糊涂；弱智：～头～脑。不呆不～。2.死心眼；不灵活：卖～力气。～等。〈形〉〈副〉",
+                            "chineseDefinition": "1.（形）头脑糊涂；弱智：～头～脑。不呆不～。2.（副）死心眼；不灵活：卖～力气。～等。",
                             "q1": "1.头脑糊涂；弱智：～头～脑。不呆不～。2.死心眼；不灵活：卖～力气。～等。〈形〉〈副〉",
                             "q2": "那件事这么荒谬，你相信的话可就太～了。"
                         }
@@ -749,16 +749,16 @@
                     "name": "水都去哪儿了？",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 306,
                             "word": "因素",
                             "pinyin": "yīn sù",
                             "englishDefinition": "element; factor",
-                            "chineseDefinition": "（名）①构成事物本质的成分。②决定事物成败的原因或条件。",
+                            "chineseDefinition": "1.（名）构成事物本质的成分。2. 决定事物成败的原因或条件。",
                             "q1": "（名）①构成事物本质的成分。②决定事物成败的原因或条件。",
                             "q2": "家庭环境是影响孩子成长的一个关键～。"
                         },
                         {
-                            "index": 2,
+                            "index": 307,
                             "word": "水喉",
                             "pinyin": "shuǐ hóu",
                             "englishDefinition": "water tap",
@@ -767,7 +767,7 @@
                             "q2": "新加坡有四大国家～为全民供水。"
                         },
                         {
-                            "index": 3,
+                            "index": 308,
                             "word": "资源",
                             "pinyin": "zī yuán",
                             "englishDefinition": "natural resource (such as water or minerals); resource (such as manpower or tourism)",
@@ -776,7 +776,7 @@
                             "q2": "水是一种不能再生的～。"
                         },
                         {
-                            "index": 4,
+                            "index": 309,
                             "word": "艰巨",
                             "pinyin": "jiān jù",
                             "englishDefinition": "arduous; terrible (task); very difficult",
@@ -785,25 +785,25 @@
                             "q2": "这项任务非常～，需要团队成员们共同努力才能完成。"
                         },
                         {
-                            "index": 5,
+                            "index": 310,
                             "word": "昂贵",
                             "pinyin": "áng guì",
                             "englishDefinition": "expensive; costly",
-                            "chineseDefinition": "（形）价格很高：价格～|～的代价。",
+                            "chineseDefinition": "（形）价格很高",
                             "q1": "（形）价格很高：价格～|～的代价。",
                             "q2": "那件上衣很合身，只是价格～所以我没买。"
                         },
                         {
-                            "index": 6,
+                            "index": 311,
                             "word": "消耗",
                             "pinyin": "xiāo hào",
                             "englishDefinition": "to use up; to consume",
-                            "chineseDefinition": "（动）①（精神、力量、物资等）因使用或受损而渐渐减少：高产、优质、低～。［反］积蓄。②使消耗：～敌人的有生力量。［反］积累。",
+                            "chineseDefinition": "1.（动）（精神、力量、物资等）因使用或受损而渐渐减少。［反］积蓄。2. 使消耗：～敌人的有生力量。［反］积累。",
                             "q1": "（动）①（精神、力量、物资等）因使用或受损而渐渐减少：高产、优质、低～。［反］积蓄。②使消耗：～敌人的有生力量。［反］积累。",
                             "q2": "一场足球赛下来，运动员～了大量体力。"
                         },
                         {
-                            "index": 7,
+                            "index": 312,
                             "word": "干旱",
                             "pinyin": "gān hàn",
                             "englishDefinition": "drought; arid; dry",
@@ -812,7 +812,7 @@
                             "q2": "～天气使得农作物无法生长，造成了农民的损失。"
                         },
                         {
-                            "index": 8,
+                            "index": 313,
                             "word": "扩大",
                             "pinyin": "kuò dà",
                             "englishDefinition": "to expand; to broaden one's scope",
@@ -821,7 +821,7 @@
                             "q2": "公司计划～生产线，以满足不断增长的市场需求。"
                         },
                         {
-                            "index": 9,
+                            "index": 314,
                             "word": "蓄水池",
                             "pinyin": "xù shuǐ chí",
                             "englishDefinition": "water reservoir",
@@ -830,7 +830,7 @@
                             "q2": "麦里芝～是新加坡最大的水库。"
                         },
                         {
-                            "index": 10,
+                            "index": 315,
                             "word": "洗澡",
                             "pinyin": "xǐ zǎo",
                             "englishDefinition": "to bathe; to take a shower",
@@ -839,7 +839,7 @@
                             "q2": "在炎热的夏天，～是一种非常舒服的享受。"
                         },
                         {
-                            "index": 11,
+                            "index": 316,
                             "word": "浴室",
                             "pinyin": "yù shì",
                             "englishDefinition": "bathroom (room used for bathing)",
@@ -848,7 +848,7 @@
                             "q2": "他在～里放了一些香氛蜡烛，让洗澡时更放松。"
                         },
                         {
-                            "index": 12,
+                            "index": 317,
                             "word": "趋势",
                             "pinyin": "qū shì",
                             "englishDefinition": "trend; tendency",
@@ -857,7 +857,7 @@
                             "q2": "环保意识的提高使得可再生能源的使用成为全球发展的～。"
                         },
                         {
-                            "index": 13,
+                            "index": 318,
                             "word": "开源节流",
                             "pinyin": "kāi yuán jié liú",
                             "englishDefinition": "to increase income and save on spending;",
@@ -871,16 +871,16 @@
                     "name": "人类最糟糕的发明",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 319,
                             "word": "媒体",
                             "pinyin": "méi tǐ",
                             "englishDefinition": "media, esp. news media",
-                            "chineseDefinition": "（名）指交流、传播信息的工具，如报刊、广播、广告等：新闻～。",
+                            "chineseDefinition": "（名）指交流、传播信息的工具，如报刊、广播、广告等",
                             "q1": "（名）指交流、传播信息的工具，如报刊、广播、广告等：新闻～。",
                             "q2": "社交～的普及改变了人们获取信息的方式。"
                         },
                         {
-                            "index": 2,
+                            "index": 320,
                             "word": "塑料",
                             "pinyin": "sù liào",
                             "englishDefinition": "plastics",
@@ -889,106 +889,106 @@
                             "q2": "大家都以为这花是真的，没想到是用～做的。"
                         },
                         {
-                            "index": 3,
+                            "index": 321,
                             "word": "吨",
                             "pinyin": "dūn",
                             "englishDefinition": "ton (loanword)",
-                            "chineseDefinition": "1.质量或重量单位，符号t。1吨等于1000千克。〈量〉",
+                            "chineseDefinition": "1.（量）质量或重量单位，符号t。1吨等于1000千克。",
                             "q1": "1.质量或重量单位，符号t。1吨等于1000千克。〈量〉",
                             "q2": "一辆小轿车的平均重量是1.5～。"
                         },
                         {
-                            "index": 4,
+                            "index": 322,
                             "word": "廉价",
                             "pinyin": "lián jià",
                             "englishDefinition": "cheaply-priced; low-cost",
-                            "chineseDefinition": "（形）①价钱比一般低：～商品|～劳动力。［反］昂贵。②比喻价值不大或没有价值的：～的眼泪打不动他。［反］昂贵。",
+                            "chineseDefinition": "1.（形）价钱比一般低［反］昂贵。2. 比喻价值不大或没有价值的：～的眼泪打不动他。［反］昂贵。",
                             "q1": "（形）①价钱比一般低：～商品|～劳动力。［反］昂贵。②比喻价值不大或没有价值的：～的眼泪打不动他。［反］昂贵。",
                             "q2": "这种～的塑料产品虽然便宜，但使用寿命较短。"
                         },
                         {
-                            "index": 5,
+                            "index": 323,
                             "word": "提供",
                             "pinyin": "tí gōng",
                             "englishDefinition": "to offer; to supply; to provide",
-                            "chineseDefinition": "（动）供给：～方便|～帮助。",
+                            "chineseDefinition": "（动）供给（意见、资料、物资、条件等）",
                             "q1": "（动）供给：～方便|～帮助。",
                             "q2": "公司将为员工～了各种培训，以帮助他们提高技能。"
                         },
                         {
-                            "index": 6,
+                            "index": 324,
                             "word": "铺",
                             "pinyin": "pū",
                             "englishDefinition": "to spread; to display",
-                            "chineseDefinition": "1.（～儿）铺子；商店：肉～。杂货～儿。2.用板子搭的床：床～。搭一个～。3.把东西展开或摊平：～床。～轨。～被褥。～平道路。平～直叙。〈动〉〈名〉〈动〉",
+                            "chineseDefinition": "1.（动）铺子；商店 2. （名）用板子搭的床   3. （动）把东西展开或摊平",
                             "q1": "1.（～儿）铺子；商店：肉～。杂货～儿。2.用板子搭的床：床～。搭一个～。3.把东西展开或摊平：～床。～轨。～被褥。～平道路。平～直叙。〈动〉〈名〉〈动〉",
                             "q2": "妈妈将地毯擦洗干净，～在客厅的地板上。"
                         },
                         {
-                            "index": 7,
+                            "index": 325,
                             "word": "污染",
                             "pinyin": "wū rǎn",
                             "englishDefinition": "pollution; contamination",
-                            "chineseDefinition": "（动）使沾染上有害物质，破坏人或生物的生存环境：环境～。［反］净化。",
+                            "chineseDefinition": "（动）使沾染上有害物质，破坏人或生物的生存环境［反］净化。",
                             "q1": "（动）使沾染上有害物质，破坏人或生物的生存环境：环境～。［反］净化。",
                             "q2": "河水被严重～，里面的鱼已经少得可怜。"
                         },
                         {
-                            "index": 8,
+                            "index": 326,
                             "word": "焚烧",
                             "pinyin": "fén shāo",
                             "englishDefinition": "to burn; to set on fire",
-                            "chineseDefinition": "（动）烧掉；烧毁：数千克毒品在会场当众被～了。",
+                            "chineseDefinition": "（动）烧掉；烧毁",
                             "q1": "（动）烧掉；烧毁：数千克毒品在会场当众被～了。",
                             "q2": "由于天气干燥，～枯枝时要特别小心，避免引发火灾。"
                         },
                         {
-                            "index": 9,
+                            "index": 327,
                             "word": "烟尘",
                             "pinyin": "yān chén",
                             "englishDefinition": "smoke and dust",
-                            "chineseDefinition": "（名）①烟雾和尘埃：～滚滚。②烽烟和战场上扬起的尘土，指战火：～四起。③（书）指人烟稠密的地方：地处偏僻，绝少～。",
+                            "chineseDefinition": "（名）烟雾和尘埃：～滚滚。2. 烽烟和战场上扬起的尘土，指战火",
                             "q1": "（名）①烟雾和尘埃：～滚滚。②烽烟和战场上扬起的尘土，指战火：～四起。③（书）指人烟稠密的地方：地处偏僻，绝少～。",
                             "q2": "工厂排放的～对周围环境造成了严重污染。"
                         },
                         {
-                            "index": 10,
+                            "index": 328,
                             "word": "土壤",
                             "pinyin": "tǔ rǎng",
                             "englishDefinition": "soil",
-                            "chineseDefinition": "（名）地球表面的一层疏松的物质，由各种颗粒状矿物质、有机物质、水分、空气、微生物等组成：～肥沃。",
+                            "chineseDefinition": "（名）地球表面的一层疏松的物质，由各种颗粒状矿物质、有机物质、水分、空气、微生物等组成",
                             "q1": "（名）地球表面的一层疏松的物质，由各种颗粒状矿物质、有机物质、水分、空气、微生物等组成：～肥沃。",
                             "q2": "在老师的指导下，我们把一株株幼苗插进肥沃的～中。"
                         },
                         {
-                            "index": 11,
+                            "index": 329,
                             "word": "遏制",
                             "pinyin": "è zhì",
                             "englishDefinition": "to keep within limits; to constrain; to restrain",
-                            "chineseDefinition": "（动）阻碍，禁绝：～政策|～敌人。",
+                            "chineseDefinition": "（动）阻碍，禁绝",
                             "q1": "（动）阻碍，禁绝：～政策|～敌人。",
                             "q2": "学校努力～校园暴力，为学生创造一个安全的学习环境。"
                         },
                         {
-                            "index": 12,
+                            "index": 330,
                             "word": "倡导",
                             "pinyin": "chàng dǎo",
                             "englishDefinition": "to advocate; to be a proponent of (an idea or school of thought)",
-                            "chineseDefinition": "（动）带头提倡：～喜事新办。",
+                            "chineseDefinition": "（动）带头提倡",
                             "q1": "（动）带头提倡：～喜事新办。",
                             "q2": "为了改善国民的健康状况，政府～健康生活，鼓励大家定期锻炼和保持均衡饮食。"
                         },
                         {
-                            "index": 13,
+                            "index": 331,
                             "word": "逐渐",
                             "pinyin": "zhú jiàn",
                             "englishDefinition": "gradually",
-                            "chineseDefinition": "（副）渐渐：红颜色～消失了。［反］陡然。",
+                            "chineseDefinition": "（副）渐渐［反］陡然。",
                             "q1": "（副）渐渐：红颜色～消失了。［反］陡然。",
                             "q2": "在同学的帮助下，我的成绩～进步了。"
                         },
                         {
-                            "index": 14,
+                            "index": 332,
                             "word": "威胁",
                             "pinyin": "wēi xié",
                             "englishDefinition": "to threaten; to menace",
@@ -997,7 +997,7 @@
                             "q2": "过度捕捞对海洋生态系统构成了严重的～。"
                         },
                         {
-                            "index": 15,
+                            "index": 333,
                             "word": "煞费苦心",
                             "pinyin": "shà fèi kǔ xīn",
                             "englishDefinition": "to take a lot of trouble (idiom); painstaking; at the cost of a lot of effort",
@@ -1011,16 +1011,16 @@
                     "name": "手机被丢弃之后",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 334,
                             "word": "统计",
                             "pinyin": "tǒng jì",
                             "englishDefinition": "statistics; to count; to add up",
-                            "chineseDefinition": "（动）①总括地计算：～人数|把收支～一下。②指对某一现象有关的数据的搜集、整理、计算和分析等：～学|～人员。",
+                            "chineseDefinition": "1.（动）总括地计算。2. 指对某一现象有关的数据的搜集、整理、计算和分析等",
                             "q1": "（动）①总括地计算：～人数|把收支～一下。②指对某一现象有关的数据的搜集、整理、计算和分析等：～学|～人员。",
                             "q2": "图书馆～了每个月借出的书籍数量，以便更好地管理书籍。"
                         },
                         {
-                            "index": 2,
+                            "index": 335,
                             "word": "选择",
                             "pinyin": "xuǎn zé",
                             "englishDefinition": "to select; to pick; choice",
@@ -1029,25 +1029,25 @@
                             "q2": "她在书店里～了一本喜欢的小说作为生日礼物。"
                         },
                         {
-                            "index": 3,
+                            "index": 336,
                             "word": "泛滥",
                             "pinyin": "fàn làn",
                             "englishDefinition": "to be in flood; to overflow (the banks); to spread unchecked",
-                            "chineseDefinition": "（动）江河湖泊的水溢出。比喻坏事坏思想任意流传扩散：洪水～|～成灾。",
+                            "chineseDefinition": "（动）江河湖泊的水溢出。比喻坏事坏思想任意流传扩散",
                             "q1": "（动）江河湖泊的水溢出。比喻坏事坏思想任意流传扩散：洪水～|～成灾。",
                             "q2": "洪水使河水～，淹没了周围的田地和房屋。"
                         },
                         {
-                            "index": 4,
+                            "index": 337,
                             "word": "寿命",
                             "pinyin": "shòu mìng",
                             "englishDefinition": "life expectancy; lifetime (of a machine)",
-                            "chineseDefinition": "1.生命的年限。  2.比喻事物存在或有效使用的期限。",
+                            "chineseDefinition": "1. 生命的年限。  2. 比喻事物存在或有效使用的期限。",
                             "q1": "1.生命的年限。  2.比喻事物存在或有效使用的期限。",
                             "q2": "机器需要常养护，才能延长使用～。"
                         },
                         {
-                            "index": 5,
+                            "index": 338,
                             "word": "途径",
                             "pinyin": "tú jìng",
                             "englishDefinition": "way; channel",
@@ -1056,16 +1056,16 @@
                             "q2": "读报纸是我们获取知识的一个重要～。"
                         },
                         {
-                            "index": 6,
+                            "index": 339,
                             "word": "缺乏",
                             "pinyin": "quē fá",
                             "englishDefinition": "to lack; to be short of; lack; shortage",
-                            "chineseDefinition": "（动）没有或不够：～人才|～经验。［反］充足。",
+                            "chineseDefinition": "（动）没有或不够。［反］充足。",
                             "q1": "（动）没有或不够：～人才|～经验。［反］充足。",
                             "q2": "由于～时间管理，他经常在做作业时分心，结果经常无法准时交作业。"
                         },
                         {
-                            "index": 7,
+                            "index": 340,
                             "word": "亿",
                             "pinyin": "yì",
                             "englishDefinition": "100 million",
@@ -1074,29 +1074,29 @@
                             "q2": "全球有八十～人口。"
                         },
                         {
-                            "index": 8,
+                            "index": 341,
                             "word": "遗憾",
                             "pinyin": "yí hàn",
                             "englishDefinition": "regret; to regret; to be sorry that",
-                            "chineseDefinition": "（名）余恨。多指没有如愿的事：～终生。②对待别人不周到，表示歉意的话。③（形）外交辞令，表示不满或抗议，有谴责的意思。",
+                            "chineseDefinition": "（名）余恨。多指没有如愿的事：～终生。",
                             "q1": "（名）余恨。多指没有如愿的事：～终生。②对待别人不周到，表示歉意的话。③（形）外交辞令，表示不满或抗议，有谴责的意思。",
                             "q2": "爸爸没能上大学，至今想起来非常～。"
                         },
                         {
-                            "index": 9,
+                            "index": 342,
                             "word": "谨慎",
                             "pinyin": "jǐn shèn",
                             "englishDefinition": "cautious; prudent",
-                            "chineseDefinition": "（形）慎重；小心：小心～。［反］疏忽。",
+                            "chineseDefinition": "（形）慎重；小心。［反］疏忽。",
                             "q1": "（形）慎重；小心：小心～。［反］疏忽。",
                             "q2": "医生在进行手术时必须非常～，以确保病人的安全。"
                         },
                         {
-                            "index": 10,
+                            "index": 343,
                             "word": "妥善",
                             "pinyin": "tuǒ shàn",
                             "englishDefinition": "appropriate; proper",
-                            "chineseDefinition": "（形）妥当完善：～安置。",
+                            "chineseDefinition": "（形）妥当完善",
                             "q1": "（形）妥当完善：～安置。",
                             "q2": "机密文件，一定要由专人～保管。"
                         }
@@ -1111,7 +1111,7 @@
                     "name": "心情手账",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 344,
                             "word": "自卑",
                             "pinyin": "zì bēi",
                             "englishDefinition": "to have low self-esteem",
@@ -1120,7 +1120,7 @@
                             "q2": "小东有时很~，生怕别人瞧不起他。"
                         },
                         {
-                            "index": 2,
+                            "index": 345,
                             "word": "身材",
                             "pinyin": "shēn cái",
                             "englishDefinition": "build (height and weight); figure",
@@ -1129,34 +1129,34 @@
                             "q2": "健身房的教练会根据每个人的～制定个性化的锻炼计划。"
                         },
                         {
-                            "index": 3,
+                            "index": 346,
                             "word": "羡慕",
                             "pinyin": "xiàn mù",
                             "englishDefinition": "to envy; to admire",
-                            "chineseDefinition": "（动）看见别人有某种长处、好处或有利条件而希望自己也有：令人～。［反］鄙视|蔑视。",
+                            "chineseDefinition": "（动）看见别人有某种长处、好处或有利条件而希望自己也有。［反］鄙视|蔑视。",
                             "q1": "（动）看见别人有某种长处、好处或有利条件而希望自己也有：令人～。［反］鄙视|蔑视。",
                             "q2": "小红成绩总是名列前茅，令小静十分~。"
                         },
                         {
-                            "index": 4,
+                            "index": 347,
                             "word": "抗拒",
                             "pinyin": "kàng jù",
                             "englishDefinition": "to resist; to defy",
-                            "chineseDefinition": "（动）抵抗并拒绝：不可～|～改造。［反］顺从。",
+                            "chineseDefinition": "（动）抵抗并拒绝。［反］顺从。",
                             "q1": "（动）抵抗并拒绝：不可～|～改造。［反］顺从。",
                             "q2": "不能~诱惑的人必将发生悲剧，不能克制自己的人终会失去自由。"
                         },
                         {
-                            "index": 5,
+                            "index": 348,
                             "word": "诱惑",
                             "pinyin": "yòu huò",
                             "englishDefinition": "to entice; to lure",
-                            "chineseDefinition": "（动）①引诱；迷惑。②吸引；招引。",
+                            "chineseDefinition": "1.（动）引诱；迷惑。2. 吸引；招引。",
                             "q1": "（动）①引诱；迷惑。②吸引；招引。",
                             "q2": "街头的小吃摊总是充满了美食～，让人忍不住停下来尝尝。"
                         },
                         {
-                            "index": 6,
+                            "index": 349,
                             "word": "毅力",
                             "pinyin": "yì lì",
                             "englishDefinition": "perseverance; willpower",
@@ -1165,52 +1165,52 @@
                             "q2": "他通过不断地练习，凭借～获得了奥林匹克游泳金牌。"
                         },
                         {
-                            "index": 7,
+                            "index": 350,
                             "word": "戒",
                             "pinyin": "jiè",
                             "englishDefinition": "to guard against; to give up or stop doing sth",
-                            "chineseDefinition": "1.防备；警惕：～心。～备.2. 戒除：～烟。～毒。3.指禁止做的事情：开～。杀～。〈动〉〈名〉",
+                            "chineseDefinition": "1. （动）防备；警惕。2. 戒除。（名）指禁止做的事情",
                             "q1": "1.防备；警惕：～心。～备.2. 戒除：～烟。～毒。3.指禁止做的事情：开～。杀～。〈动〉〈名〉",
                             "q2": "经过几年的努力，他终于成功～烟了。"
                         },
                         {
-                            "index": 8,
+                            "index": 351,
                             "word": "茫然",
                             "pinyin": "máng rán",
                             "englishDefinition": "blankly; at a loss",
-                            "chineseDefinition": "（副）①完全不知道或不知所措的样子［近］怅然。②失意的样子：～若失。",
+                            "chineseDefinition": "1. （副）完全不知道或不知所措的样子［近］怅然。2. 失意的样子",
                             "q1": "（副）①完全不知道或不知所措的样子［近］怅然。②失意的样子：～若失。",
                             "q2": "她迷路了，~地站在这条陌生的街道上。"
                         },
                         {
-                            "index": 9,
+                            "index": 352,
                             "word": "瞌睡",
                             "pinyin": "kē shuì",
                             "englishDefinition": "drowsy; to doze; to nap",
-                            "chineseDefinition": "由于困倦而进入睡眠或半睡眠状态；想睡觉：打～。夜里没睡好，白天～得很。",
+                            "chineseDefinition": "由于困倦而进入睡眠或半睡眠状态；想睡觉。",
                             "q1": "由于困倦而进入睡眠或半睡眠状态；想睡觉：打～。夜里没睡好，白天～得很。",
                             "q2": "小明夜里没睡好觉，上课直打~。"
                         },
                         {
-                            "index": 10,
+                            "index": 353,
                             "word": "嫌",
                             "pinyin": "xián",
                             "englishDefinition": "to dislike; suspicion; resentment;",
-                            "chineseDefinition": "1.嫌疑：避～。涉～。2.嫌怨：前～。3.厌恶；不满意：讨人～。〈动〉〈名〉",
+                            "chineseDefinition": "1. （动）厌恶；不满意。1.（名）嫌疑。2. 嫌怨。",
                             "q1": "1.嫌疑：避～。涉～。2.嫌怨：前～。3.厌恶；不满意：讨人～。〈动〉〈名〉",
                             "q2": "老板~他拙手笨脚，所以把他辞退了。"
                         },
                         {
-                            "index": 11,
+                            "index": 354,
                             "word": "逼",
                             "pinyin": "bī",
                             "englishDefinition": "to force (sb to do sth); to compel; to press for",
-                            "chineseDefinition": "1.强迫；威胁：～迫。2.强行索取：～债。～供。3.十分接近；靠近：～真。4.狭窄：～仄。〈形〉〈副〉",
+                            "chineseDefinition": "1.（动）强迫；威胁  2. 强行索取   3.（副）十分接近；靠近  4.（形）狭窄",
                             "q1": "1.强迫；威胁：～迫。2.强行索取：～债。～供。3.十分接近；靠近：～真。4.狭窄：～仄。〈形〉〈副〉",
                             "q2": "他被敌人~到了悬崖上，陷入了进退维谷的境地。"
                         },
                         {
-                            "index": 12,
+                            "index": 355,
                             "word": "烹饪",
                             "pinyin": "pēng rèn",
                             "englishDefinition": "cooking; culinary arts",
@@ -1219,11 +1219,11 @@
                             "q2": "他在～过程中加入了特别的调料，使菜肴更加美味。"
                         },
                         {
-                            "index": 13,
+                            "index": 356,
                             "word": "符合",
                             "pinyin": "fú hé",
                             "englishDefinition": "in keeping with; in line with",
-                            "chineseDefinition": "（动）（数量、形状、条件、情节等）相合；合乎：～条件|～规定|～事实。［反］违背。",
+                            "chineseDefinition": "（动）（数量、形状、条件、情节等）相合；合乎［反］违背。",
                             "q1": "（动）（数量、形状、条件、情节等）相合；合乎：～条件|～规定|～事实。［反］违背。",
                             "q2": "我们制作的视频既～国庆主题又有创意，结果获得了第一奖。"
                         }
@@ -1233,79 +1233,79 @@
                     "name": "恐怖事件",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 357,
                             "word": "憋",
                             "pinyin": "biē",
                             "englishDefinition": "to restrain; to hold back; to hold (one's breath)",
-                            "chineseDefinition": "1.抑制或堵住不让出来：～着一口气。2.闷；呼吸不畅：心里～得慌。〈形〉〈动〉",
+                            "chineseDefinition": "（动）抑制或堵住不让出来（形）闷；呼吸不畅：心里～得慌。",
                             "q1": "1.抑制或堵住不让出来：～着一口气。2.闷；呼吸不畅：心里～得慌。〈形〉〈动〉",
                             "q2": "他刚刚学会游泳，还不能在水中~气。"
                         },
                         {
-                            "index": 2,
+                            "index": 358,
                             "word": "委婉",
                             "pinyin": "wěi wǎn",
                             "englishDefinition": "tactful",
-                            "chineseDefinition": "（形）婉转，不生硬：语气很～。［反］直率。",
+                            "chineseDefinition": "（形）婉转，不生硬［反］直率。",
                             "q1": "（形）婉转，不生硬：语气很～。［反］直率。",
                             "q2": "丈夫~地把那伤心的消息告诉妻子。"
                         },
                         {
-                            "index": 3,
+                            "index": 359,
                             "word": "彻底",
                             "pinyin": "chè dǐ",
                             "englishDefinition": "thorough; thoroughly",
-                            "chineseDefinition": "（形）一直到底；深而透：～改正缺点。",
+                            "chineseDefinition": "（形）一直到底；深而透",
                             "q1": "（形）一直到底；深而透：～改正缺点。",
                             "q2": "他把房间～打扫了一遍，把每个角落都清理干净。"
                         },
                         {
-                            "index": 4,
+                            "index": 360,
                             "word": "缝",
                             "pinyin": "fèng",
                             "englishDefinition": "seam; crack",
-                            "chineseDefinition": "1.接合的地方：无～钢管。2.缝隙：裂～。见～插针。2.用针线将原来不在一起或开了口儿的东西连上：～件衣裳",
+                            "chineseDefinition": "1. 接合的地方 2. 缝隙 3. （动）用针线将原来不在一起或开了口儿的东西连上",
                             "q1": "1.接合的地方：无～钢管。2.缝隙：裂～。见～插针。2.用针线将原来不在一起或开了口儿的东西连上：～件衣裳",
                             "q2": "～合伤口是医生在手术中重要的步骤。"
                         },
                         {
-                            "index": 5,
+                            "index": 361,
                             "word": "掩",
                             "pinyin": "yǎn",
                             "englishDefinition": "to cover up; to close; to surprise",
-                            "chineseDefinition": "1.遮盖；掩蔽：～口而笑。～人耳目。2.关；合：虚～着房门。3.乘人不备（袭击、捕捉）：～杀。～捕。〈动〉",
+                            "chineseDefinition": "（动）1.遮盖；掩蔽  2.关；合  3.乘人不备（袭击、捕捉）",
                             "q1": "1.遮盖；掩蔽：～口而笑。～人耳目。2.关；合：虚～着房门。3.乘人不备（袭击、捕捉）：～杀。～捕。〈动〉",
                             "q2": "她用手～住了自己的眼睛，不想看到那些令人不快的画面。"
                         },
                         {
-                            "index": 6,
+                            "index": 362,
                             "word": "恐惧",
                             "pinyin": "kǒng jù",
                             "englishDefinition": "to be frightened; fear; dread",
-                            "chineseDefinition": "（动）心里慌张不安、害怕：～不安。［近］恐怖|害怕。",
+                            "chineseDefinition": "（动）心里慌张不安、害怕［近］恐怖|害怕。",
                             "q1": "（动）心里慌张不安、害怕：～不安。［近］恐怖|害怕。",
                             "q2": "即使在小小的高台上，他也因为惧高症而感到～和不适。"
                         },
                         {
-                            "index": 7,
+                            "index": 363,
                             "word": "走廊",
                             "pinyin": "zǒu láng",
                             "englishDefinition": "corridor",
-                            "chineseDefinition": "（名）①屋檐下高出平地的走道，或房屋之间有顶的走道。②比喻连接两个较大地区的狭长地带：河西～。",
+                            "chineseDefinition": "1.（名）屋檐下高出平地的走道，或房屋之间有顶的走道。2. 比喻连接两个较大地区的狭长地带",
                             "q1": "（名）①屋檐下高出平地的走道，或房屋之间有顶的走道。②比喻连接两个较大地区的狭长地带：河西～。",
                             "q2": "这条狭长的~通往后面的花园。 ·"
                         },
                         {
-                            "index": 8,
+                            "index": 364,
                             "word": "锁",
                             "pinyin": "suǒ",
                             "englishDefinition": "to lock; lock",
-                            "chineseDefinition": "1.安在门窗、器物等的开合处或连接处，使人不能随便打开的金属器具，要用钥匙、密码、磁卡等才能打开。2.用锁把门窗、器物等的开合处关住或拴住。",
+                            "chineseDefinition": "1. （名）安在门窗、器物等的开合处或连接处，使人不能随便打开的金属器具，要用钥匙、密码、磁卡等才能打开。2. （动）用锁把门窗、器物等的开合处关住或拴住。",
                             "q1": "1.安在门窗、器物等的开合处或连接处，使人不能随便打开的金属器具，要用钥匙、密码、磁卡等才能打开。2.用锁把门窗、器物等的开合处关住或拴住。",
                             "q2": "为了避免家中被盗，他在外出时总是～好门窗。"
                         },
                         {
-                            "index": 9,
+                            "index": 365,
                             "word": "熄灯",
                             "pinyin": "xī dēng",
                             "englishDefinition": "turn out the lights; lights out",
@@ -1314,7 +1314,7 @@
                             "q2": "夜深了，我们该~睡觉了。"
                         },
                         {
-                            "index": 10,
+                            "index": 366,
                             "word": "颤抖",
                             "pinyin": "chàn dǒu",
                             "englishDefinition": "to shiver; to tremble",
@@ -1323,7 +1323,7 @@
                             "q2": "她因为天气寒冷而全身～。"
                         },
                         {
-                            "index": 11,
+                            "index": 367,
                             "word": "隐约",
                             "pinyin": "yǐn yuē",
                             "englishDefinition": "vague; faint; indistinct",
@@ -1332,25 +1332,25 @@
                             "q2": "碧绿的草原一望无际，远处的牛羊~可见。"
                         },
                         {
-                            "index": 12,
+                            "index": 368,
                             "word": "瑟瑟",
                             "pinyin": "sè sè",
                             "englishDefinition": "trembling; rustling",
-                            "chineseDefinition": "(1) 形容风声或其他轻微的声音 (2) 形容颤抖",
+                            "chineseDefinition": "1. 形容风声或其他轻微的声音  2. 形容颤抖",
                             "q1": "(1) 形容风声或其他轻微的声音 (2) 形容颤抖",
                             "q2": "小女孩在寒风中冻得~发抖。"
                         },
                         {
-                            "index": 13,
+                            "index": 369,
                             "word": "恐怖",
                             "pinyin": "kǒng bù",
                             "englishDefinition": "terrible; frightful; frightening",
-                            "chineseDefinition": "（形）因受到某种威胁而引起的恐惧：～事件|～气氛|～万分。［近］恐惧。",
+                            "chineseDefinition": "（形）因受到某种威胁而引起的恐惧［近］恐惧。",
                             "q1": "（形）因受到某种威胁而引起的恐惧：～事件|～气氛|～万分。［近］恐惧。",
                             "q2": "电影的～场景让她整晚都睡不着。"
                         },
                         {
-                            "index": 14,
+                            "index": 370,
                             "word": "通宵",
                             "pinyin": "tōng xiāo",
                             "englishDefinition": "all night; throughout the night",
@@ -1359,7 +1359,7 @@
                             "q2": "他为了准备考试，昨晚～达旦地复习。"
                         },
                         {
-                            "index": 15,
+                            "index": 371,
                             "word": "惊悚",
                             "pinyin": "jīng sǒng",
                             "englishDefinition": "horror (movie); thriller",
@@ -1368,7 +1368,7 @@
                             "q2": "电影的～镜头让观众们都紧张得几乎无法呼吸。"
                         },
                         {
-                            "index": 16,
+                            "index": 372,
                             "word": "和谐",
                             "pinyin": "hé xié",
                             "englishDefinition": "harmonious; harmony",
@@ -1382,7 +1382,7 @@
                     "name": "最美的姿势",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 373,
                             "word": "脖子",
                             "pinyin": "bó zi",
                             "englishDefinition": "neck",
@@ -1391,7 +1391,7 @@
                             "q2": "她～上佩戴了一条精美的项链，使她显得格外迷人。"
                         },
                         {
-                            "index": 2,
+                            "index": 374,
                             "word": "社交媒体",
                             "pinyin": "shè jiāo méi tǐ",
                             "englishDefinition": "social media",
@@ -1400,52 +1400,52 @@
                             "q2": "～上的虚假信息有时会误导人们的判断。"
                         },
                         {
-                            "index": 3,
+                            "index": 375,
                             "word": "缺陷",
                             "pinyin": "quē xiàn",
                             "englishDefinition": "defect; flaw",
-                            "chineseDefinition": "（名）欠缺或不完满的地方：生理～。［近］缺点。［反］优点。",
+                            "chineseDefinition": "（名）欠缺或不完满的地方［近］缺点。［反］优点。",
                             "q1": "（名）欠缺或不完满的地方：生理～。［近］缺点。［反］优点。",
                             "q2": "她从小就有听力～，所以每天都戴助听器。"
                         },
                         {
-                            "index": 4,
+                            "index": 376,
                             "word": "姿势",
                             "pinyin": "zī shì",
                             "englishDefinition": "posture; position",
-                            "chineseDefinition": "（名）身体表现出的样子；架势；阵势：立正的～。［近］架势|姿态。",
+                            "chineseDefinition": "（名）身体表现出的样子；架势；阵势［近］架势|姿态。",
                             "q1": "（名）身体表现出的样子；架势；阵势：立正的～。［近］架势|姿态。",
                             "q2": "看书的~不正确，时间久了就会影响视力。"
                         },
                         {
-                            "index": 5,
+                            "index": 377,
                             "word": "拘束",
                             "pinyin": "jū shù",
                             "englishDefinition": "to restrict; to restrain; constrained",
-                            "chineseDefinition": "（形）神态、言行因受约束而不自然。［近］约束。［反］大方|洒脱。②（动）使受约束。",
+                            "chineseDefinition": "1. （形）神态、言行因受约束而不自然。［近］约束。［反］大方|洒脱。2.（动）使受约束。",
                             "q1": "（形）神态、言行因受约束而不自然。［近］约束。［反］大方|洒脱。②（动）使受约束。",
                             "q2": "他看见陌生人时，不会开口说话，显得有点儿~。"
                         },
                         {
-                            "index": 6,
+                            "index": 378,
                             "word": "嘈杂",
                             "pinyin": "cáo zá",
                             "englishDefinition": "noisy; clamorous",
-                            "chineseDefinition": "（形）（声音）杂乱；喧闹：人声～|声音～刺耳。",
+                            "chineseDefinition": "（形）（声音）杂乱；喧闹",
                             "q1": "（形）（声音）杂乱；喧闹：人声～|声音～刺耳。",
                             "q2": "餐厅里人声～，谈话时必须大声说话。"
                         },
                         {
-                            "index": 7,
+                            "index": 379,
                             "word": "沮丧",
                             "pinyin": "jǔ sàng",
                             "englishDefinition": "dispirited; dejected; dismayed",
-                            "chineseDefinition": "（形）灰心失望：神情～。［近］懊丧。［反］振奋|抖擞。②（动）使灰心失望。",
+                            "chineseDefinition": "1.（形）灰心失望。［近］懊丧。［反］振奋|抖擞。2.（动）使灰心失望。",
                             "q1": "（形）灰心失望：神情～。［近］懊丧。［反］振奋|抖擞。②（动）使灰心失望。",
                             "q2": "他因考试不及格而感到非常~。"
                         },
                         {
-                            "index": 8,
+                            "index": 380,
                             "word": "若有所思",
                             "pinyin": "ruò yǒu suǒ sī",
                             "englishDefinition": "looking pensive; thoughtfully",
@@ -1454,11 +1454,11 @@
                             "q2": "她在听到这个消息后，～地沉默了一会儿。"
                         },
                         {
-                            "index": 9,
+                            "index": 381,
                             "word": "模糊",
                             "pinyin": "mó hu",
                             "englishDefinition": "vague; indistinct; fuzzy",
-                            "chineseDefinition": "（形）不清楚；不分明。［近］含糊。［反］清楚|清晰。②（动）混淆：不能～概念。",
+                            "chineseDefinition": "1.（形）不清楚；不分明。［近］含糊。［反］清楚|清晰。2.（动）混淆：不能～概念。",
                             "q1": "（形）不清楚；不分明。［近］含糊。［反］清楚|清晰。②（动）混淆：不能～概念。",
                             "q2": "她的记忆变得～，已经不太记得当时的具体情况"
                         }
@@ -1473,7 +1473,7 @@
                     "name": "组屋：新加坡一道美丽的风景线",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 382,
                             "word": "简陋",
                             "pinyin": "jiǎn lòu",
                             "englishDefinition": "simple and crude",
@@ -1482,7 +1482,7 @@
                             "q2": "他的房间很～，只有一张床和一张椅子。"
                         },
                         {
-                            "index": 2,
+                            "index": 383,
                             "word": "政府",
                             "pinyin": "zhèng fǔ",
                             "englishDefinition": "government",
@@ -1491,16 +1491,16 @@
                             "q2": "～设立了一个专门的部门来处理环境保护问题。"
                         },
                         {
-                            "index": 3,
+                            "index": 384,
                             "word": "开辟",
                             "pinyin": "kāi pì",
                             "englishDefinition": "to set up; to establish",
-                            "chineseDefinition": "（动）①打开通路；创立：～航线|～市场。［近］开拓。②开拓发展；开垦：～工作",
+                            "chineseDefinition": "1.  （动）打开通路；创立［近］开拓。2. 开拓发展；开垦：～工作",
                             "q1": "（动）①打开通路；创立：～航线|～市场。［近］开拓。②开拓发展；开垦：～工作",
                             "q2": "政府计划～一条新的高速公路，以改善城市之间的交通。"
                         },
                         {
-                            "index": 4,
+                            "index": 385,
                             "word": "市镇",
                             "pinyin": "shì zhèn",
                             "englishDefinition": "town",
@@ -1509,7 +1509,7 @@
                             "q2": "这个～有着悠久的历史和丰富的文化传统。"
                         },
                         {
-                            "index": 5,
+                            "index": 386,
                             "word": "宗教",
                             "pinyin": "zōng jiào",
                             "englishDefinition": "religion",
@@ -1518,16 +1518,16 @@
                             "q2": "我们必须尊重不同~的信仰，这样才能促进社会的和谐。"
                         },
                         {
-                            "index": 6,
+                            "index": 387,
                             "word": "综合",
                             "pinyin": "zōng hé",
                             "englishDefinition": "comprehensive; synthesized",
-                            "chineseDefinition": "（动）①把分析过的对象或现象的各个部分、各属性联合成一个统一的整体。［近］概括。［反］分析。②把各种不同而互相关联的事物或现象组合在一起：～利用。",
+                            "chineseDefinition": "（动）1. 把分析过的对象或现象的各个部分、各属性联合成一个统一的整体。［近］概括。［反］分析。2. 把各种不同而互相关联的事物或现象组合在一起：～利用。",
                             "q1": "（动）①把分析过的对象或现象的各个部分、各属性联合成一个统一的整体。［近］概括。［反］分析。②把各种不同而互相关联的事物或现象组合在一起：～利用。",
                             "q2": "公司在产品设计中～了客户反馈和市场趋势，以提升产品质量。"
                         },
                         {
-                            "index": 7,
+                            "index": 388,
                             "word": "诊疗所",
                             "pinyin": "zhěn liáo suǒ",
                             "englishDefinition": "clinic",
@@ -1536,34 +1536,34 @@
                             "q2": "生病时，我们应该去~求医。"
                         },
                         {
-                            "index": 8,
+                            "index": 389,
                             "word": "经济",
                             "pinyin": "jīng jì",
                             "englishDefinition": "economy; economic",
-                            "chineseDefinition": "（名）经济学上指社会物质生产和再生产的活动。②（名）指生活费用：～宽裕|～拮据。③（形）对国民经济有利或有害的：～作物。④（形）用较少的花费获得较大的成果；效益高：～小吃|～实惠。",
+                            "chineseDefinition": "1. （名）经济学上指社会物质生产和再生产的活动。2.（名）指生活费用  3.（形）对国民经济有利或有害的  4.（形）用较少的花费获得较大的成果；效益高",
                             "q1": "（名）经济学上指社会物质生产和再生产的活动。②（名）指生活费用：～宽裕|～拮据。③（形）对国民经济有利或有害的：～作物。④（形）用较少的花费获得较大的成果；效益高：～小吃|～实惠。",
                             "q2": "这几年~不景气，不少人被裁退。"
                         },
                         {
-                            "index": 9,
+                            "index": 390,
                             "word": "蓬勃",
                             "pinyin": "péng bó",
                             "englishDefinition": "flourishing; full of vitality",
-                            "chineseDefinition": "（形）繁荣而旺盛的样子：朝气～。［近］繁荣。",
+                            "chineseDefinition": "（形）繁荣而旺盛的样子［近］繁荣。",
                             "q1": "（形）繁荣而旺盛的样子：朝气～。［近］繁荣。",
                             "q2": "一群朝气~的孩子在操场上快活地跑来跑去。"
                         },
                         {
-                            "index": 10,
+                            "index": 391,
                             "word": "富裕",
                             "pinyin": "fù yù",
                             "englishDefinition": "prosperous; well-to-do; well-off",
-                            "chineseDefinition": "（形）财物丰富充足：他家越来越～。［近］阔绰。［反］贫困。",
+                            "chineseDefinition": "（形）财物丰富充足［近］阔绰。［反］贫困。",
                             "q1": "（形）财物丰富充足：他家越来越～。［近］阔绰。［反］贫困。",
                             "q2": "她的家境～，每年都能去世界各地旅行。"
                         },
                         {
-                            "index": 11,
+                            "index": 392,
                             "word": "变迁",
                             "pinyin": "biàn qiān",
                             "englishDefinition": "changes",
@@ -1572,34 +1572,34 @@
                             "q2": "随着时代的~，这一带发生了很大的变化。"
                         },
                         {
-                            "index": 12,
+                            "index": 393,
                             "word": "障碍",
                             "pinyin": "zhàng ài",
                             "englishDefinition": "barrier; obstacle",
-                            "chineseDefinition": "（动）挡住道路；阻碍。②（名）阻挡前进的东西：清除～|思想～。",
+                            "chineseDefinition": "1.（动）挡住道路；阻碍。2.（名）阻挡前进的东西",
                             "q1": "（动）挡住道路；阻碍。②（名）阻挡前进的东西：清除～|思想～。",
                             "q2": "心理～让他在公众场合发言时感到不安。"
                         },
                         {
-                            "index": 13,
+                            "index": 394,
                             "word": "驰名",
                             "pinyin": "chí míng",
                             "englishDefinition": "famous",
-                            "chineseDefinition": "（动）声名传播得远（多指好的声名），也称驰誉：～中外。［近］闻名。",
+                            "chineseDefinition": "（动）声名传播得远（多指好的声名），也称驰誉［近］闻名。",
                             "q1": "（动）声名传播得远（多指好的声名），也称驰誉：～中外。［近］闻名。",
                             "q2": "新加坡的滨海湾花园~中外。"
                         },
                         {
-                            "index": 14,
+                            "index": 395,
                             "word": "屡次",
                             "pinyin": "lǚ cì",
                             "englishDefinition": "repeatedly; time and again",
-                            "chineseDefinition": "（副）表示动作、行为多次重复：～获奖。",
+                            "chineseDefinition": "（副）表示动作、行为多次重复",
                             "q1": "（副）表示动作、行为多次重复：～获奖。",
                             "q2": "他~犯错，却从不接受批评。"
                         },
                         {
-                            "index": 15,
+                            "index": 396,
                             "word": "荣誉",
                             "pinyin": "róng yù",
                             "englishDefinition": "honor; credit; glory",
@@ -1613,25 +1613,25 @@
                     "name": "雨树",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 397,
                             "word": "姿态",
                             "pinyin": "zī tài",
                             "englishDefinition": "attitude; posture; stance",
-                            "chineseDefinition": "（名）姿势；态度：～优美|谦虚的～。［近］姿势。",
+                            "chineseDefinition": "（名）姿势；态度［近］姿势。",
                             "q1": "（名）姿势；态度：～优美|谦虚的～。［近］姿势。",
                             "q2": "老师提醒学生在演讲时要注意自己的～，以提升表达效果。"
                         },
                         {
-                            "index": 2,
+                            "index": 398,
                             "word": "接触",
                             "pinyin": "jiē chù",
                             "englishDefinition": "to touch; to contact",
-                            "chineseDefinition": "（动）①挨着；碰着。②接近并交往。［反］隔绝|脱离。",
+                            "chineseDefinition": "1. （动）挨着；碰着。2. （动）接近并交往。［反］隔绝|脱离。",
                             "q1": "（动）①挨着；碰着。②接近并交往。［反］隔绝|脱离。",
                             "q2": "学校组织的交流活动使学生们有机会～不同的文化。"
                         },
                         {
-                            "index": 3,
+                            "index": 399,
                             "word": "翠绿",
                             "pinyin": "cuì lǜ",
                             "englishDefinition": "emerald green",
@@ -1640,7 +1640,7 @@
                             "q2": "这棵植物叶子~，看上去充满生机。"
                         },
                         {
-                            "index": 4,
+                            "index": 400,
                             "word": "心旷神怡",
                             "pinyin": "xīn kuàng shén yí",
                             "englishDefinition": "carefree and relaxed",
@@ -1649,7 +1649,7 @@
                             "q2": "站在船头，放眼大海，真叫人~。"
                         },
                         {
-                            "index": 5,
+                            "index": 401,
                             "word": "合拢",
                             "pinyin": "hé lǒng",
                             "englishDefinition": "to close; to bring together; to fold (wings)",
@@ -1658,7 +1658,7 @@
                             "q2": "只要你轻轻地碰含羞草，它的叶子就会～。"
                         },
                         {
-                            "index": 6,
+                            "index": 402,
                             "word": "林荫",
                             "pinyin": "lín yìn",
                             "englishDefinition": "an avenue of trees",
@@ -1667,7 +1667,7 @@
                             "q2": "公园里的～遮挡了炎热的阳光，让人感到舒适。"
                         },
                         {
-                            "index": 7,
+                            "index": 403,
                             "word": "樟宜",
                             "pinyin": "zhāng yí",
                             "englishDefinition": "Changi",
@@ -1676,7 +1676,7 @@
                             "q2": "新加坡的～机场被誉为全球最先进的机场之一，每年吸引着大量游客。"
                         },
                         {
-                            "index": 8,
+                            "index": 404,
                             "word": "耸立",
                             "pinyin": "sǒng lì",
                             "englishDefinition": "to stand tall; to tower aloft",
@@ -1685,34 +1685,34 @@
                             "q2": "灯塔像一个巨人高高地~着。"
                         },
                         {
-                            "index": 9,
+                            "index": 405,
                             "word": "温馨",
                             "pinyin": "wēn xīn",
                             "englishDefinition": "comfort; soft and fragrant; warm",
-                            "chineseDefinition": "（形）温和芳香：桂花盛开，满院～。",
+                            "chineseDefinition": "（形）温和芳香，温暖",
                             "q1": "（形）温和芳香：桂花盛开，满院～。",
                             "q2": "我们都向往拥有一个~的家。"
                         },
                         {
-                            "index": 10,
+                            "index": 406,
                             "word": "欣赏",
                             "pinyin": "xīn shǎng",
                             "englishDefinition": "to appreciate; to enjoy; to admire",
-                            "chineseDefinition": "（动）①用喜爱的心情享受美好的事物，领略其中的趣味：～音乐。［近］观赏。②认为好；喜欢：～这个人。",
+                            "chineseDefinition": "1. （动）用喜爱的心情享受美好的事物，领略其中的趣味［近］观赏。2. （动）认为好；喜欢",
                             "q1": "（动）①用喜爱的心情享受美好的事物，领略其中的趣味：～音乐。［近］观赏。②认为好；喜欢：～这个人。",
                             "q2": "他站在山顶，～着日落的美丽景色，感叹大自然的奇妙。"
                         },
                         {
-                            "index": 11,
+                            "index": 407,
                             "word": "粗糙",
                             "pinyin": "cū cāo",
                             "englishDefinition": "crude; rough; coarse",
-                            "chineseDefinition": "（形）①质料或工艺不精细，毛糙。［近］毛糙。［反］细腻。②工作草率，不认真。",
+                            "chineseDefinition": "1. （形）质料或工艺不精细，毛糙。［近］毛糙。［反］细腻。2. （形）工作草率，不认真。",
                             "q1": "（形）①质料或工艺不精细，毛糙。［近］毛糙。［反］细腻。②工作草率，不认真。",
                             "q2": "爷爷那双~的大手，记录了他一生的辛劳。"
                         },
                         {
-                            "index": 12,
+                            "index": 408,
                             "word": "婆娑",
                             "pinyin": "pó suō",
                             "englishDefinition": "to swirl about; (of leaves and branches) to sway",
@@ -1721,16 +1721,16 @@
                             "q2": "毕业晚会上，同学们随着悠扬的音乐~起舞。"
                         },
                         {
-                            "index": 13,
+                            "index": 409,
                             "word": "撑",
                             "pinyin": "chēng",
                             "englishDefinition": "to support; to prop up; to maintain",
-                            "chineseDefinition": "1.抵住：两手～着下巴沉思。2.用篙抵住河底使船行进：～船。3.支持 4.张开：～伞。5.充满到容不下的程度：少吃点，别～着。〈动〉〈形〉〈名〉",
+                            "chineseDefinition": "1. （动）抵住：两手～着下巴沉思。2.（动）用篙抵住河底使船行进：～船。3. （动）支持 4.张开：～伞。4（形）充满到容不下的程度",
                             "q1": "1.抵住：两手～着下巴沉思。2.用篙抵住河底使船行进：～船。3.支持 4.张开：～伞。5.充满到容不下的程度：少吃点，别～着。〈动〉〈形〉〈名〉",
                             "q2": "下雨天，街上都是~伞而行的行人。"
                         },
                         {
-                            "index": 14,
+                            "index": 410,
                             "word": "同甘共苦",
                             "pinyin": "tóng gān gòng kǔ",
                             "englishDefinition": "to share life's joys and sorrows",
@@ -1739,34 +1739,34 @@
                             "q2": "作为朋友，在危急时刻应该~，共度难关。"
                         },
                         {
-                            "index": 15,
+                            "index": 411,
                             "word": "茁壮",
                             "pinyin": "zhuó zhuàng",
                             "englishDefinition": "sturdy; thriving; flourishing",
-                            "chineseDefinition": "（形）形容生长得旺盛、健壮：～成长|牛羊～。",
+                            "chineseDefinition": "（形）形容生长得旺盛、健壮",
                             "q1": "（形）形容生长得旺盛、健壮：～成长|牛羊～。",
                             "q2": "只要有阳光，即使在石缝里，小草也照样~成长。"
                         },
                         {
-                            "index": 16,
+                            "index": 412,
                             "word": "移民",
                             "pinyin": "yí mín",
                             "englishDefinition": "to immigrate; emigrant; immigrant",
-                            "chineseDefinition": "（动）居民由一地或一国迁移到另一地或另一国落户：～海外。②（名）迁移到外地或外国去落户的人：安置～。",
+                            "chineseDefinition": "1. （动）居民由一地或一国迁移到另一地或另一国落 2（名）迁移到外地或外国去落户的人",
                             "q1": "（动）居民由一地或一国迁移到另一地或另一国落户：～海外。②（名）迁移到外地或外国去落户的人：安置～。",
                             "q2": "舅舅一家决定~到新加坡。"
                         },
                         {
-                            "index": 17,
+                            "index": 413,
                             "word": "接纳",
                             "pinyin": "jiē nà",
-                            "englishDefinition": "to admit (to membership)",
-                            "chineseDefinition": "（动）接受容纳；采纳：他被～为物理学会会员。［近］接收。",
+                            "englishDefinition": "to admit",
+                            "chineseDefinition": "（动）接受容纳；采纳［近］接收。",
                             "q1": "（动）接受容纳；采纳：他被～为物理学会会员。［近］接收。",
                             "q2": "他已经有自己的打算，不太愿意～我的建议。"
                         },
                         {
-                            "index": 18,
+                            "index": 414,
                             "word": "无怨无悔",
                             "pinyin": "wú yuàn wú huǐ",
                             "englishDefinition": "no complaints; to have no regrets",
@@ -1780,16 +1780,16 @@
                     "name": "如果走散了",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 415,
                             "word": "患",
                             "pinyin": "huàn",
                             "englishDefinition": "to suffer (from illness); to contract (a disease)",
-                            "chineseDefinition": "1.祸害；灾难：～难。防～未然。2.忧虑：忧～。～得～失。3.害（病）：～病。〈动〉〈名〉",
+                            "chineseDefinition": "1.（动）害（病）2.（名）祸害；灾难  3. 忧虑",
                             "q1": "1.祸害；灾难：～难。防～未然。2.忧虑：忧～。～得～失。3.害（病）：～病。〈动〉〈名〉",
                             "q2": "她的父亲～有心脏病，需要定期接受检查。"
                         },
                         {
-                            "index": 2,
+                            "index": 416,
                             "word": "失智症",
                             "pinyin": "shī zhì zhèng",
                             "englishDefinition": "dementia",
@@ -1798,25 +1798,25 @@
                             "q2": "～患者往往会忘记熟悉的人和事，这给家庭带来了很大的挑战。"
                         },
                         {
-                            "index": 3,
+                            "index": 417,
                             "word": "寻找",
                             "pinyin": "xún zhǎo",
                             "englishDefinition": "to seek; to look for",
-                            "chineseDefinition": "（动）找，为了要见到或得到而采取行动：～机会|～目标。［近］找寻|寻觅。",
+                            "chineseDefinition": "（动）找，为了要见到或得到而采取行动［近］找寻|寻觅。",
                             "q1": "（动）找，为了要见到或得到而采取行动：～机会|～目标。［近］找寻|寻觅。",
                             "q2": "我们花了很长时间～丢失的钥匙，最后在沙发缝隙中找到了它。"
                         },
                         {
-                            "index": 4,
+                            "index": 418,
                             "word": "流逝",
                             "pinyin": "liú shì",
                             "englishDefinition": "(of time) to pass; to elapse",
-                            "chineseDefinition": "（动）像流水一样迅速消逝：时光～。［近］流失。",
+                            "chineseDefinition": "（动）像流水一样迅速消逝［近］流失。",
                             "q1": "（动）像流水一样迅速消逝：时光～。［近］流失。",
                             "q2": "随着岁月的~，很多往事都被淡忘了。"
                         },
                         {
-                            "index": 5,
+                            "index": 419,
                             "word": "嬉戏",
                             "pinyin": "xī xì",
                             "englishDefinition": "to frolic; to romp",
@@ -1825,7 +1825,7 @@
                             "q2": "孩子们在公园里尽情～，享受着阳光和玩耍的乐趣。"
                         },
                         {
-                            "index": 6,
+                            "index": 420,
                             "word": "咖喱卜",
                             "pinyin": "gā lí bo",
                             "englishDefinition": "curry puff",
@@ -1834,16 +1834,16 @@
                             "q2": "我最喜欢吃外酥内软的～。"
                         },
                         {
-                            "index": 7,
+                            "index": 421,
                             "word": "俏皮",
                             "pinyin": "qiào pí",
                             "englishDefinition": "charming; attractive; witty",
-                            "chineseDefinition": "（形）①容貌或衣着好看。②谈话风趣，举止活泼伶俐：～话。",
+                            "chineseDefinition": "1. （形）容貌或衣着好看。2. （形）谈话风趣，举止活泼伶俐。",
                             "q1": "（形）①容貌或衣着好看。②谈话风趣，举止活泼伶俐：～话。",
                             "q2": "小狗的～动作逗得大家都哈哈大笑。"
                         },
                         {
-                            "index": 8,
+                            "index": 422,
                             "word": "鲜艳",
                             "pinyin": "xiān yàn",
                             "englishDefinition": "bright-colored",
@@ -1852,7 +1852,7 @@
                             "q2": "这只鹦鹉的羽毛色彩非常～，让人一眼就能注意到它。"
                         },
                         {
-                            "index": 9,
+                            "index": 423,
                             "word": "承载",
                             "pinyin": "chéng zài",
                             "englishDefinition": "to bear the weight; to sustain",
@@ -1871,7 +1871,7 @@
                     "name": "新加坡与世界的联系",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 424,
                             "word": "贸易",
                             "pinyin": "mào yì",
                             "englishDefinition": "(commercial) trade",
@@ -1880,7 +1880,7 @@
                             "q2": "丝绸之路是古代东西方～的重要通道。"
                         },
                         {
-                            "index": 2,
+                            "index": 425,
                             "word": "丝绸",
                             "pinyin": "sī chóu",
                             "englishDefinition": "silk cloth; silk",
@@ -1889,7 +1889,7 @@
                             "q2": "当你抚摸这匹～时，会感受到它的细腻和光滑。"
                         },
                         {
-                            "index": 3,
+                            "index": 426,
                             "word": "陆地",
                             "pinyin": "lù dì",
                             "englishDefinition": "dry land (as opposed to the sea)",
@@ -1898,7 +1898,7 @@
                             "q2": "企鹅在~上行动笨拙，可一到水里就显得异常灵活。"
                         },
                         {
-                            "index": 4,
+                            "index": 427,
                             "word": "奢侈",
                             "pinyin": "shē chǐ",
                             "englishDefinition": "luxurious; extravagant",
@@ -1907,7 +1907,7 @@
                             "q2": "他们生活方式~，难怪背上了很多债务。"
                         },
                         {
-                            "index": 5,
+                            "index": 428,
                             "word": "瓷器",
                             "pinyin": "cí qì",
                             "englishDefinition": "porcelain",
@@ -1916,25 +1916,25 @@
                             "q2": "爸爸收藏了一套名贵的~，时不时拿出来欣赏。"
                         },
                         {
-                            "index": 6,
+                            "index": 429,
                             "word": "仪式",
                             "pinyin": "yí shì",
                             "englishDefinition": "ceremony",
-                            "chineseDefinition": "（名）举行典礼的程序、形式：升旗～|奠基～|阅兵～。",
+                            "chineseDefinition": "（名）举行典礼的程序、形式",
                             "q1": "（名）举行典礼的程序、形式：升旗～|奠基～|阅兵～。",
                             "q2": "举行升旗~时，我们目视着国旗冉冉升起。"
                         },
                         {
-                            "index": 7,
+                            "index": 430,
                             "word": "秉持",
                             "pinyin": "bǐng chí",
                             "englishDefinition": "to uphold; to hold fast to",
-                            "chineseDefinition": "1.操持、执守。  2.持有﹐具有。  3.指操守。",
+                            "chineseDefinition": "1. （动）操持、执守。  2. （动）持有﹐具有。",
                             "q1": "1.操持、执守。  2.持有﹐具有。  3.指操守。",
                             "q2": "公司～顾客至上的理念，不断提升服务质量。"
                         },
                         {
-                            "index": 8,
+                            "index": 431,
                             "word": "枢纽",
                             "pinyin": "shū niǔ",
                             "englishDefinition": "hub (e.g. of traffic network)",
@@ -1943,7 +1943,7 @@
                             "q2": "新加坡港口作为全球重要的～之一，每日处理大量的货物。"
                         },
                         {
-                            "index": 9,
+                            "index": 432,
                             "word": "港口",
                             "pinyin": "gǎng kǒu",
                             "englishDefinition": "port; harbor",
@@ -1952,7 +1952,7 @@
                             "q2": "数十艘豪华邮轮停泊在这个～，场面十分壮观。"
                         },
                         {
-                            "index": 10,
+                            "index": 433,
                             "word": "致力",
                             "pinyin": "zhì lì",
                             "englishDefinition": "to devote one's efforts to",
@@ -1961,16 +1961,16 @@
                             "q2": "公司～于研发新技术，以保持在市场上的竞争力。"
                         },
                         {
-                            "index": 11,
+                            "index": 434,
                             "word": "勾勒",
                             "pinyin": "gōu lè",
                             "englishDefinition": "to outline; to sketch",
-                            "chineseDefinition": "（动）①用线条画出轮廓。②用简单的笔墨描写事物的大致情况。",
+                            "chineseDefinition": "1. （动）用线条画出轮廓。2. （动）用简单的笔墨描写事物的大致情况。",
                             "q1": "（动）①用线条画出轮廓。②用简单的笔墨描写事物的大致情况。",
                             "q2": "她用铅笔～出了风景画的轮廓。"
                         },
                         {
-                            "index": 12,
+                            "index": 435,
                             "word": "高瞻远瞩",
                             "pinyin": "gāo zhān yuǎn zhǔ",
                             "englishDefinition": "acute foresight",
@@ -1984,16 +1984,16 @@
                     "name": "多元而开放的新加坡",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 436,
                             "word": "可谓",
                             "pinyin": "kě wèi",
                             "englishDefinition": "it could even be said",
-                            "chineseDefinition": "1.可以称为；可以说是。  2.何为。",
+                            "chineseDefinition": "1. 可以称为；可以说是。  2. 何为。",
                             "q1": "1.可以称为；可以说是。  2.何为。",
                             "q2": "为了我们健康成长，老师~煞费苦心。"
                         },
                         {
-                            "index": 2,
+                            "index": 437,
                             "word": "岛屿",
                             "pinyin": "dǎo yǔ",
                             "englishDefinition": "island",
@@ -2002,7 +2002,7 @@
                             "q2": "在海上的航行中，我们经过了几个迷人的小～。"
                         },
                         {
-                            "index": 3,
+                            "index": 438,
                             "word": "海峡",
                             "pinyin": "hǎi xiá",
                             "englishDefinition": "channel; strait",
@@ -2011,25 +2011,25 @@
                             "q2": "马六甲~处于新加坡和柔佛之间。"
                         },
                         {
-                            "index": 4,
+                            "index": 439,
                             "word": "历史",
                             "pinyin": "lì shǐ",
                             "englishDefinition": "history",
-                            "chineseDefinition": "（名）①自然界和人类社会的发展过程，也指某种事物的发展过程或个人的经历。②过去的事实。③过去事实的记载。",
+                            "chineseDefinition": "1. （名）自然界和人类社会的发展过程，也指某种事物的发展过程或个人的经历。2. （名）过去的事实。3. （名）过去事实的记载。",
                             "q1": "（名）①自然界和人类社会的发展过程，也指某种事物的发展过程或个人的经历。②过去的事实。③过去事实的记载。",
                             "q2": "博物馆里展示了许多具有～意义的文物。"
                         },
                         {
-                            "index": 5,
+                            "index": 440,
                             "word": "挖掘",
                             "pinyin": "wā jué",
                             "englishDefinition": "to excavate; to dig",
-                            "chineseDefinition": "（动）从深处挖出来：～地下宝藏。［近］发掘。［反］埋藏。",
+                            "chineseDefinition": "（动）从深处挖出来［近］发掘。［反］埋藏。",
                             "q1": "（动）从深处挖出来：～地下宝藏。［近］发掘。［反］埋藏。",
                             "q2": "考古学家在遗址中～出古老的器皿。"
                         },
                         {
-                            "index": 6,
+                            "index": 441,
                             "word": "区域",
                             "pinyin": "qū yù",
                             "englishDefinition": "area; region; district",
@@ -2038,16 +2038,16 @@
                             "q2": "疫情期间，所有公共活动～都进行了彻底消毒，以减少病毒传播的风险。"
                         },
                         {
-                            "index": 7,
+                            "index": 442,
                             "word": "汇集",
                             "pinyin": "huì jí",
                             "englishDefinition": "to collect; to compile; to converge",
-                            "chineseDefinition": "（动）聚集：～精华|～一处。［近］会集|聚集。［反］分散|分开。",
+                            "chineseDefinition": "（动）聚集。［近］会集|聚集。［反］分散|分开。",
                             "q1": "（动）聚集：～精华|～一处。［近］会集|聚集。［反］分散|分开。",
                             "q2": "展览会～了来自不同国家的艺术作品。"
                         },
                         {
-                            "index": 8,
+                            "index": 443,
                             "word": "赋予",
                             "pinyin": "fù yǔ",
                             "englishDefinition": "to assign; to entrust (a task); to bestow",
@@ -2056,16 +2056,16 @@
                             "q2": "历史～我们许多宝贵的经验，以便我们能更好地面对未来。"
                         },
                         {
-                            "index": 9,
+                            "index": 444,
                             "word": "海纳百川",
                             "pinyin": "hǎi nà bǎi chuān",
-                            "englishDefinition": "all rivers run into the sea; use different means to obtain the same result (idiom)",
-                            "chineseDefinition": "大海容得下成百上千条江河之水。比喻接纳和包容的东西非常广泛，而且数量很大。",
+                            "englishDefinition": "This idiom literally means \"the sea accepts all rivers,\" symbolizing the capacity to accommodate diversity and different perspectives. It often describes a person or entity with great inclusiveness, generosity, and tolerance.",
+                            "chineseDefinition": "大海容得下成百上千条江河之水。引申为形容人的胸怀宽广，能容纳各种不同的事物、意见或观点，具有很强的包容性和接纳能力。",
                             "q1": "大海容得下成百上千条江河之水。比喻接纳和包容的东西非常广泛，而且数量很大。",
                             "q2": "新加坡有着~的心胸，欢迎来自五湖四海的朋友。"
                         },
                         {
-                            "index": 10,
+                            "index": 445,
                             "word": "椰浆饭",
                             "pinyin": "yē jiāng fàn",
                             "englishDefinition": "nasi lemak",
@@ -2074,7 +2074,7 @@
                             "q2": "传统的~配菜是江鱼仔、鸡蛋、黄瓜和煎鱼。"
                         },
                         {
-                            "index": 11,
+                            "index": 446,
                             "word": "黄姜饭",
                             "pinyin": "huáng jiāng fàn",
                             "englishDefinition": "nasi biryani",
@@ -2083,7 +2083,7 @@
                             "q2": "为了保持～的美味，做饭时一定要使用新鲜的黄姜。"
                         },
                         {
-                            "index": 12,
+                            "index": 447,
                             "word": "发芽",
                             "pinyin": "fā yá",
                             "englishDefinition": "to germinate",
@@ -2092,16 +2092,16 @@
                             "q2": "小草推开身边的泥土~了。"
                         },
                         {
-                            "index": 13,
+                            "index": 448,
                             "word": "兼容并蓄",
                             "pinyin": "jiān róng bìng xù",
-                            "englishDefinition": "inclusive",
+                            "englishDefinition": "Inclusive and eclectic, means embracing and integrating different things, ideas, or cultures, taking their strengths and combining them harmoniously. It reflects an open-minded and accepting attitude toward diversity.",
                             "chineseDefinition": "把不同内容、不同性质的东西收下来，保存起来。",
                             "q1": "把不同内容、不同性质的东西收下来，保存起来。",
                             "q2": "我们的团队理念是～，欢迎各种不同的意见和建议。"
                         },
                         {
-                            "index": 14,
+                            "index": 449,
                             "word": "携手",
                             "pinyin": "xié shǒu",
                             "englishDefinition": "hand in hand; to collaborate",
@@ -2110,11 +2110,11 @@
                             "q2": "只要我们~共进，明天就会越来越好。"
                         },
                         {
-                            "index": 15,
+                            "index": 450,
                             "word": "辉煌",
                             "pinyin": "huī huáng",
                             "englishDefinition": "splendid; glorious",
-                            "chineseDefinition": "（形）①光辉灿烂：灯火～。②比喻极其优良、出色：成就～。［近］绚烂。",
+                            "chineseDefinition": "1. 光（形）辉灿烂：灯火～。2. （形）比喻极其优良、出色：成就～。［近］绚烂。",
                             "q1": "（形）①光辉灿烂：灯火～。②比喻极其优良、出色：成就～。［近］绚烂。",
                             "q2": "她的音乐会取得了～的成功，赢得了观众们的热烈掌声。"
                         }
@@ -2124,7 +2124,7 @@
                     "name": "别上假信息的当",
                     "topic": [
                         {
-                            "index": 1,
+                            "index": 451,
                             "word": "皇帝",
                             "pinyin": "huáng dì",
                             "englishDefinition": "emperor",
@@ -2133,25 +2133,25 @@
                             "q2": "秦始皇是中国历史上的第一位使用“~”这个称号的人。"
                         },
                         {
-                            "index": 2,
+                            "index": 452,
                             "word": "典型",
                             "pinyin": "diǎn xíng",
                             "englishDefinition": "model; typical; representative",
-                            "chineseDefinition": "（名）①具有代表性或概括性的人或事件：～事迹。［近］典范。［反］一般。②文艺作品中塑造出来的个性和共性相统一的艺术形象。",
+                            "chineseDefinition": "1. （名）具有代表性或概括性的人或事件［近］典范。［反］一般。2. （名）文艺作品中塑造出来的个性和共性相统一的艺术形象。",
                             "q1": "（名）①具有代表性或概括性的人或事件：～事迹。［近］典范。［反］一般。②文艺作品中塑造出来的个性和共性相统一的艺术形象。",
                             "q2": "曹雪芹成功在《红楼梦》中刻画不少~人物，如林黛玉和刘姥姥。"
                         },
                         {
-                            "index": 3,
+                            "index": 453,
                             "word": "普及",
                             "pinyin": "pǔ jí",
                             "englishDefinition": "to spread extensively; widespread",
-                            "chineseDefinition": "（动）①全面地传到（各个地区、范围等）。［近］推广。②为使大众化而普遍推广。［近］遍及。",
+                            "chineseDefinition": "（动）1. 全面地传到（各个地区、范围等）。［近］推广。2. 为使大众化而普遍推广。［近］遍及。",
                             "q1": "（动）①全面地传到（各个地区、范围等）。［近］推广。②为使大众化而普遍推广。［近］遍及。",
                             "q2": "随着互联网的~，大部分人的家里都有一台电脑。"
                         },
                         {
-                            "index": 4,
+                            "index": 454,
                             "word": "真伪",
                             "pinyin": "zhēn wěi",
                             "englishDefinition": "true or bogus; authenticity",
@@ -2160,7 +2160,7 @@
                             "q2": "现在的仿冒产品太逼真了，很难判断~。"
                         },
                         {
-                            "index": 5,
+                            "index": 455,
                             "word": "步伐",
                             "pinyin": "bù fá",
                             "englishDefinition": "pace; (measured) step; march",
@@ -2169,7 +2169,7 @@
                             "q2": "我们需要调整工作～，以适应新的项目要求。"
                         },
                         {
-                            "index": 6,
+                            "index": 456,
                             "word": "询问",
                             "pinyin": "xún wèn",
                             "englishDefinition": "to inquire",
@@ -2178,7 +2178,7 @@
                             "q2": "他详细地～了客户的需求，以便提供更好的服务。"
                         },
                         {
-                            "index": 7,
+                            "index": 457,
                             "word": "人云亦云",
                             "pinyin": "rén yún yì yún",
                             "englishDefinition": "to conform to what one perceives to be the majority view; to follow the herd",
@@ -2187,7 +2187,7 @@
                             "q2": "他总是～，缺乏自己的独立见解。"
                         },
                         {
-                            "index": 8,
+                            "index": 458,
                             "word": "免疫",
                             "pinyin": "miǎn yì",
                             "englishDefinition": "immunity (to disease)",
@@ -2196,7 +2196,7 @@
                             "q2": "长期锻炼身体有助于增强～力，预防各种疾病。"
                         },
                         {
-                            "index": 9,
+                            "index": 459,
                             "word": "凝聚力",
                             "pinyin": "níng jù lì",
                             "englishDefinition": "cohesion; cohesiveness",

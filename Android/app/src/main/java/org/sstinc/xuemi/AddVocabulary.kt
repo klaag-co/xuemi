@@ -111,8 +111,6 @@ fun vocabItem(viewModel: MyViewModel, item: Word) {
     val _tempFolder by viewModel.tempFolder.collectAsState()
     var tempFolder by remember { mutableStateOf(_tempFolder) }
 
-    Text("enheeh", textAlign = TextAlign.Center
-    )
     Row (Modifier.padding(horizontal = 10.dp, vertical = 5.dp)){
         Card(
             shape = RoundedCornerShape(10.dp),

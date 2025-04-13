@@ -1,7 +1,3 @@
-@file:JvmName("VocabularyKt")
-
-package org.sstinc.xuemi
-
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,22 +20,23 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import org.sstinc.xuemi.MyViewModel
 import org.sstinc.xuemi.quiz.Word
 
 
-@Entity
-data class Afolder (
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
-    val name: String,
-    val items: List<Word>
-)
+//@Entity
+//data class Afolder (
+//    @PrimaryKey(autoGenerate = true)
+//    val id: Int = 0,
+//    val name: String,
+//    val items: List<Word>
+//)
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
     LaunchedEffect(Unit) {
-       viewModel.loadJson()
+        viewModel.loadJson()
     }
     Scaffold(
         topBar = {
@@ -68,4 +65,3 @@ fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
     }
 
 }
-

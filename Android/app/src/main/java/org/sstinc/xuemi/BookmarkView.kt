@@ -69,13 +69,11 @@ fun dropdown(
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    // Column to contain the dropdown header and the expanded list
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 10.dp, horizontal = 20.dp)
     ) {
-        // Box for the dropdown header
         Box(
             modifier = Modifier
                 .fillMaxWidth()

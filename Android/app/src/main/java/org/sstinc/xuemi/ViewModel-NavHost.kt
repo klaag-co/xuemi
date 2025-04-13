@@ -1,5 +1,6 @@
 package org.sstinc.xuemi
 
+import Vocabulary
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
@@ -32,10 +33,14 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.sstinc.xuemi.db.Afolder
 import org.sstinc.xuemi.db.BookmarksDatabase
 import org.sstinc.xuemi.db.BookmarksRepository
 import org.sstinc.xuemi.db.FoldersDatabase
@@ -113,13 +118,33 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         SecondaryType.entries.associateWith { MutableStateFlow<List<Word>?>(null) }.toMutableMap()
     val secondaryStates: Map<SecondaryType, StateFlow<List<Word>?>> = _secondaryStates
 
-    // vocab list
-    private val _sectionedData = MutableStateFlow<List<List<Word>>>(emptyList())
-    val sectionedData: StateFlow<List<List<Word>>> = _sectionedData.asStateFlow()
 
     // temp folder item list
     private val _tempFolder = MutableStateFlow<List<Word>>(emptyList())
     val tempFolder: StateFlow<List<Word>> = _tempFolder.asStateFlow()
+
+    // vocab list
+    private val _sectionedData = MutableStateFlow<List<List<Word>>>(emptyList())
+    val sectionedData: StateFlow<List<List<Word>>> = _sectionedData.asStateFlow()
+
+    // filtered vocab list
+    private val _searchText = MutableStateFlow("")
+    val searchText: StateFlow<String> = _searchText.asStateFlow()
+
+    val filteredSectionedData = combine(_sectionedData, _searchText) { sections, query ->
+        // return full list if no search text
+        if (query.isBlank())
+            sections
+        else {
+            sections.map { section ->
+                section.filter { it.word.contains(query/*, ignoreCase = true*/) }
+            }
+        }
+    }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+
+    fun updateSearchText(newText: String) {
+        _searchText.value = newText
+    }
 
     init {
         viewModelScope.launch {
@@ -193,9 +218,14 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         }
     }
     fun addTempFolder(item: Word) {
-
         _tempFolder.value = _tempFolder.value + item
-        Log.d("temp", "oh! ${_tempFolder.value}")
+    }
+    fun delTempFolder(word: String) {
+        _tempFolder.value = _tempFolder.value.toMutableList().filter{it.word != word }
+    }
+
+    fun searchVocabs(searchText: String): List<Word> {
+        return _tempFolder.value.toMutableList().filter { it.word == searchText }
     }
 
     fun selectJson(num: Int): Deferred<List<Word>> {

@@ -254,7 +254,7 @@ fun CreateNote(viewModel: MyViewModel, navController: NavController) {
             TextButton(
                 onClick = {
                     viewModel.add(selectedType, title, body)
-                    navController.navigate("notes")
+                    navController.navigate("org/sstinc/xuemi/.note")
                 },
             ) {
                 Text(

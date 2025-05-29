@@ -80,11 +80,14 @@ fun AddVocabulary (viewModel: MyViewModel) {
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding( vertical = 5.dp)
                 )
-                Button(onClick = {
-                    Log.d("temp", tempFolder.joinToString(", "))
-                } ) {
-                    Text("Finish")
-                }
+
+            }
+        },
+        floatingActionButton = {
+            Button(onClick = {
+                Log.d("temp", tempFolder.joinToString(", "))
+            }, modifier = Modifier.padding(vertical = 80.dp, horizontal = 10.dp)) {
+                Text("Finish")
             }
         }
     ) {
@@ -134,10 +137,10 @@ fun vocabItem(viewModel: MyViewModel, item: Word) {
                 // use tempfolder
                 Checkbox(checked = checked, onCheckedChange = {
                     checked = it
-                    if (checked == true) {
+                    if (checked) {
                         viewModel.addTempFolder(item)
                     }
-                    Log.d("temp", "hoho ${_tempFolder}")
+                    Log.d("temp", "hoho $_tempFolder")
 
                 },
                     modifier = Modifier.padding(3.dp))

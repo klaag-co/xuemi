@@ -1,4 +1,6 @@
+
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,13 +15,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import org.sstinc.xuemi.MyViewModel
 import org.sstinc.xuemi.quiz.Word
 
@@ -35,8 +37,14 @@ import org.sstinc.xuemi.quiz.Word
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
+    val sectionedData = remember { mutableStateOf<List<Word>>(emptyList()) }
+
     LaunchedEffect(Unit) {
         viewModel.loadJson()
+        val result = viewModel.selectJson(0).await()
+        sectionedData.value = result
+        Log.d("temp", "Got JSON result with ${result.size} items")
+
     }
     Scaffold(
         topBar = {
@@ -61,6 +69,7 @@ fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
         }
     ) {
         Column(Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 90.dp)) {
+            Text(viewModel.selectJson(0).toString())
         }
     }
 

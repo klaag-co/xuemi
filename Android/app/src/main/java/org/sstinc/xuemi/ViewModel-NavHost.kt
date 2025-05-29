@@ -219,6 +219,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     }
     fun addTempFolder(item: Word) {
         _tempFolder.value = _tempFolder.value + item
+        Log.d("temp", _tempFolder.value.toString())
     }
     fun delTempFolder(word: String) {
         _tempFolder.value = _tempFolder.value.toMutableList().filter{it.word != word }
@@ -230,7 +231,8 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 
     fun selectJson(num: Int): Deferred<List<Word>> {
         return viewModelScope.async(Dispatchers.IO) {
-            sectionedData.value[num] // try to load in viewmodel
+            Log.d("viewcrash", filteredSectionedData.value[num].toString())
+            filteredSectionedData.value[num]// try to load in viewmodel
         }
     }
 

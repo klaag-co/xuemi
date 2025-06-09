@@ -37,6 +37,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -158,6 +159,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             loadListFromPreferences("current_list")
             loadListFromPreferences("continue_list")
             complete_words(listOf("中一", "中二", "中三", "中四"))
+//            loadAllSections()
 
         }
     }
@@ -170,7 +172,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     val loadedData: StateFlow<Secondary?> get() = _loadedData
 
 
-    suspend fun loadDataFromJson(name: String): Secondary? {
+    fun loadDataFromJson(name: String): Secondary? {
         return jsonReader?.readJsonFile(name)
     }
 
@@ -219,7 +221,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     }
     fun addTempFolder(item: Word) {
         _tempFolder.value = _tempFolder.value + item
-        Log.d("temp", _tempFolder.value.toString())
+        Log.d("temp", "what! ${_tempFolder.value}")
     }
     fun delTempFolder(word: String) {
         _tempFolder.value = _tempFolder.value.toMutableList().filter{it.word != word }
@@ -243,6 +245,32 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     }
 
 
+    val _allWords = MutableStateFlow<List<SectionedWord>>(emptyList())
+    val allWords: StateFlow<List<SectionedWord>> = _allWords
+
+    val groupedSectionedWords = allWords
+        .map { list -> list.groupBy { it.section } }
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyMap())
+
+    fun loadAllSections() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val sectionNames = listOf("中一", "中二", "中三", "中四")
+            val all = mutableListOf<SectionedWord>()
+
+            for (section in sectionNames) {
+                val data = loadDataFromJson("$section.json") ?: continue
+                data.chapters.forEach { chapter ->
+                    chapter.topics.run {
+                        topic1.topic.forEach { all.add(SectionedWord(it, section)) }
+                        topic2.topic.forEach { all.add(SectionedWord(it, section)) }
+                        topic3.topic.forEach { all.add(SectionedWord(it, section)) }
+                    }
+                }
+            }
+
+            _allWords.value = all
+        }
+    }
 
 
     private fun complete(secondaryList: List<String>, excludeLastTwo: Boolean = false): Deferred<List<Word>> {

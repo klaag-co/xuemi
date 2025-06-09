@@ -1,6 +1,5 @@
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,17 +21,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import org.sstinc.xuemi.MyViewModel
 import org.sstinc.xuemi.quiz.Word
 
 
-//@Entity
-//data class Afolder (
-//    @PrimaryKey(autoGenerate = true)
-//    val id: Int = 0,
-//    val name: String,
-//    val items: List<Word>
-//)
+@Entity
+data class Afolder (
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val name: String,
+    val items: List<Word>
+)
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -40,11 +41,7 @@ fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
     val sectionedData = remember { mutableStateOf<List<Word>>(emptyList()) }
 
     LaunchedEffect(Unit) {
-        viewModel.loadJson()
-        val result = viewModel.selectJson(0).await()
-        sectionedData.value = result
-        Log.d("temp", "Got JSON result with ${result.size} items")
-
+        viewModel.loadAllSections()
     }
     Scaffold(
         topBar = {

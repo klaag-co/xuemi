@@ -8,7 +8,7 @@ import androidx.room.Query
 import org.sstinc.xuemi.quiz.Word
 
 @Entity
-data class Afolder (
+data class Afolder(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,

@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 import org.sstinc.xuemi.quiz.Word
 
 @Entity
@@ -17,10 +18,13 @@ data class Afolder(
 @Dao
 interface FoldersDao {
     @Query("SELECT * FROM AFOLDER")
-    fun getAllFolders(): List<Afolder>
+    fun getAllFolders(): Flow<List<Afolder>>
 
     @Insert
-    suspend fun addFolder(folder: Afolder)
+    fun addFolder(folder: Afolder)
+
+    @Query("DELETE FROM Afolder")
+    fun deleteAll()
 
     @Query("DELETE FROM Afolder WHERE id=:id")
     fun deleteFolder(id: Int)

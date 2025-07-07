@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
@@ -14,6 +16,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -39,6 +43,8 @@ data class Afolder (
 @Composable
 fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
     val sectionedData = remember { mutableStateOf<List<Word>>(emptyList()) }
+    val allFolders by viewModel.folders.collectAsState()
+
 
     LaunchedEffect(Unit) {
         viewModel.loadAllSections()
@@ -54,6 +60,9 @@ fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding( vertical = 5.dp)
                 )
+//                Button(onClick = { viewModel.deleteAll() }) {
+//                    Text("DeleteAll")
+//                }
                 IconButton(onClick = { navController.navigate("addvocab") }) {
                     Icon(
                         Icons.Default.Add,
@@ -66,7 +75,12 @@ fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
         }
     ) {
         Column(Modifier.padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 90.dp)) {
-            Text(viewModel.selectJson(0).toString())
+
+            LazyColumn {
+                items(allFolders) { folder ->
+                    Text(folder.name)
+                }
+            }
         }
     }
 

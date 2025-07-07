@@ -37,8 +37,8 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.sstinc.xuemi.db.Afolder
@@ -124,6 +124,8 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     private val _tempFolder = MutableStateFlow<List<Word>>(emptyList())
     val tempFolder: StateFlow<List<Word>> = _tempFolder.asStateFlow()
 
+
+
     // vocab list
     private val _sectionedData = MutableStateFlow<List<List<Word>>>(emptyList())
     val sectionedData: StateFlow<List<List<Word>>> = _sectionedData.asStateFlow()
@@ -132,13 +134,17 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     private val _searchText = MutableStateFlow("")
     val searchText: StateFlow<String> = _searchText.asStateFlow()
 
-    val filteredSectionedData = combine(_sectionedData, _searchText) { sections, query ->
+
+    val filteredSectionedData = _sectionedData.combine(_searchText) { sections, query ->
         // return full list if no search text
-        if (query.isBlank())
+        val cleanQuery = query.trim()
+        if (cleanQuery.isBlank())
             sections
         else {
+            Log.d("temp", "Filtering for: $cleanQuery")
+
             sections.map { section ->
-                section.filter { it.word.contains(query/*, ignoreCase = true*/) }
+                section.filter { it.word.contains(query, ignoreCase = true) }
             }
         }
     }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
@@ -160,6 +166,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
             loadListFromPreferences("continue_list")
             complete_words(listOf("中一", "中二", "中三", "中四"))
 //            loadAllSections()
+
 
         }
     }
@@ -193,7 +200,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     private fun saveListToPreferences(name: String, list: List<String>) {
         val listString = list.joinToString(",")
         sharedPreferences.edit().putString(name, listString).apply()
-        loadListFromPreferences(name)
+//        loadListFromPreferences(name)
     }
 
 
@@ -220,7 +227,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         }
     }
     fun addTempFolder(item: Word) {
-        _tempFolder.value = _tempFolder.value + item
+        _tempFolder.update { it + item }
         Log.d("temp", "what! ${_tempFolder.value}")
     }
     fun delTempFolder(word: String) {
@@ -233,7 +240,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 
     fun selectJson(num: Int): Deferred<List<Word>> {
         return viewModelScope.async(Dispatchers.IO) {
-            Log.d("viewcrash", filteredSectionedData.value[num].toString())
             filteredSectionedData.value[num]// try to load in viewmodel
         }
     }
@@ -248,9 +254,15 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     val _allWords = MutableStateFlow<List<SectionedWord>>(emptyList())
     val allWords: StateFlow<List<SectionedWord>> = _allWords
 
-    val groupedSectionedWords = allWords
-        .map { list -> list.groupBy { it.section } }
-        .stateIn(viewModelScope, SharingStarted.Lazily, emptyMap())
+    val groupedSectionedWords = combine(_allWords, _searchText) { allWords, query ->
+        val filtered = if (query.isBlank()) {
+            allWords
+        } else {
+            allWords.filter { it.word.word.contains (query) } // is ignoreCase unnecessary?
+        }
+        filtered.groupBy { it.section }
+    }.stateIn(viewModelScope, SharingStarted.Lazily, emptyMap())
+
 
     fun loadAllSections() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -323,9 +335,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
 
 
     fun getFromList(index: Int): String {
-        val currentList = _current.value.toMutableList()
-        loadListFromPreferences("current_list")
-        return currentList[index]
+        return _current.value[index]
     }
 
     fun updateItem(index: Int, newItem: String) {
@@ -473,8 +483,6 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         viewModelScope.launch(Dispatchers.IO) {
             val words = repository.getBookmarkWords()
             _bookmarkWords.postValue(words)
-            loadBookmarks()
-            loadBookmarkNames()
         }
     }
 
@@ -569,11 +577,15 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     val foldersDao = MainApplication.foldersDatabase.getFoldersDao()
     private val _folders = MutableLiveData<List<Afolder>>()
 
-    val folders: LiveData<List<Afolder>> get() = _folders
+    val folders: StateFlow<List<Afolder>> = foldersDao.getAllFolders()
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+
 
     fun addFolder(folder: Afolder) {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.d("addfolder", folder.toString())
             foldersDao.addFolder(folder)
+            Log.d("addfolder", folders.value.toString())
         }
     }
     fun deleteFolder(id: Int) {
@@ -707,7 +719,7 @@ fun BottomNavBar(viewModel: MyViewModel, navController: NavHostController) {
                 MCQresults(viewModel, navController, id, name, wrong, correct)
             }
             composable("olevel") { olevel(viewModel, navController) }
-            composable("addvocab") { AddVocabulary(viewModel)}
+            composable("addvocab") { AddVocabulary(viewModel, navController)}
         }
     }
 }

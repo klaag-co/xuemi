@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import GoogleSignIn
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
@@ -24,6 +25,9 @@ struct XuemiiOSApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(BookmarkManager.shared)
+                .onOpenURL { URL in
+                    GIDSignIn.sharedInstance.handle(URL)
+                }
         }
     }
 }

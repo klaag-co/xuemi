@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @ObservedObject private var authmanager: AuthenticationManager = .shared
     var body: some View {
         List {
+            Section(header: Text("Sign out").font(.headline)) {
+                Button("Sign out"){
+                    withAnimation{
+                        authmanager.signOut()
+                    }
+                }
+            }
             Section(header: Text("App").font(.headline)) {
                 NavigationLink(destination: AppInfoDetailView()) {
                     HStack {

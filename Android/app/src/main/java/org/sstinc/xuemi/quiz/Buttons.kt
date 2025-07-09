@@ -216,12 +216,14 @@ fun Topic(viewModel: MyViewModel, navController: NavController) {
     val topicExistsState by topicExists.observeAsState(false)
 
 
+
     LaunchedEffect(Unit) {
         if (!topicExistsState) {
             val generatedQuestions = generateListOfMCQQuestions(words, false)
             viewModel.addQuiz(
                 topic = name.toString(),
-                questions = generatedQuestions
+                questions = generatedQuestions,
+
             )
         }
     }

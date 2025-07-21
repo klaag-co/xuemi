@@ -19,6 +19,7 @@ class AuthenticationManager: ObservableObject {
     @Published var email: String?
     @Published var profilePicUrl: String?
     @Published var errorMessage: String?
+    @Published var isGuest: Bool = false
 
     private init() {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
@@ -51,23 +52,25 @@ class AuthenticationManager: ObservableObject {
         let fullName = user.profile?.name
         let email = user.profile?.email
         let profilePicUrl = user.profile!.imageURL(withDimension: 100)!.absoluteString
-        self.givenName = givenName
-        self.familyName = familyName
-        self.fullName = fullName
-        self.email = email
-        self.profilePicUrl = profilePicUrl
-        withAnimation{
-            self.isLoggedIn = true
-        }
-        print(email)
-        print(givenName)
-        print(familyName)
-        print(fullName)
-        // save the email
-        if let email {
+//        if let email, email.contains("@students.edu.sg") {
+            self.givenName = givenName
+            self.familyName = familyName
+            self.fullName = fullName
+            self.email = email
+            self.profilePicUrl = profilePicUrl
+            withAnimation{
+                self.isLoggedIn = true
+            }
+            print(email)
+            print(givenName)
+            print(familyName)
+            print(fullName)
+            // save the email
             UserDefaults.standard.set(email, forKey: "userEmail")
-        }
-    }
+//        } else {
+//            signOut()
+//        }
+}
 
     private func restoreSignIn() {
         GIDSignIn.sharedInstance.restorePreviousSignIn { _, error in

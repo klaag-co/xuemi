@@ -194,8 +194,8 @@ public struct FlashcardView: View {
 
 #Preview {
     FlashcardView(vocabularies: [
-        Vocabulary(index: 1, word: "hello", pinyin: "hi", englishDefinition: "hi", chineseDefinition: "hi", example: "hi", q1: "", q2: ""),
-        Vocabulary(index: 2, word: "hi2", pinyin: "hi2", englishDefinition: "hi2", chineseDefinition: "hi2", example: "hi2", q1: "", q2: "")
+        Vocabulary(index: 1, word: "hello", pinyin: "hi", englishDefinition: "hi", chineseDefinition: "hi", example: "hi", questions: ["hi", "hi2"]),
+        Vocabulary(index: 2, word: "hi2", pinyin: "hi2", englishDefinition: "hi2", chineseDefinition: "hi2", example: "hi2", questions: ["hi", "hi2"])
     ], level: .one, chapter: .one, topic: .one)
     .environmentObject(BookmarkManager.shared)
     .environmentObject(ProgressManager.shared)

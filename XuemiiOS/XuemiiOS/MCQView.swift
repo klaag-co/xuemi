@@ -42,7 +42,7 @@ struct MCQView: View {
             let finalOptions = Array(options.prefix(3)) + [vocabulary.word]
             return finalOptions.shuffled()
         })
-        self._selectedQuestions = State(initialValue: shuffledVocabularies.map { _ in Bool.random() ? "q1" : "q2" })
+        self._selectedQuestions = State(initialValue: shuffledVocabularies.map { $0.questions.randomElement() ?? "error"})
         self._userAnswers = State(initialValue: Array(repeating: nil, count: shuffledVocabularies.count))
     }
 
@@ -61,7 +61,7 @@ struct MCQView: View {
             let finalOptions = Array(options.prefix(3)) + [vocabulary.word]
             return finalOptions.shuffled()
         })
-        self._selectedQuestions = State(initialValue: shuffledVocabularies.map { _ in Bool.random() ? "q1" : "q2" })
+        self._selectedQuestions = State(initialValue: shuffledVocabularies.map { $0.questions.randomElement() ?? "error"})
         self._userAnswers = State(initialValue: Array(repeating: nil, count: shuffledVocabularies.count))
     }
 
@@ -70,7 +70,7 @@ struct MCQView: View {
     }
     
     var currentQuestion: String {
-        selectedQuestions[currentVocabularyIndex] == "q1" ? currentVocabulary.q1 : currentVocabulary.q2
+        selectedQuestions[currentVocabularyIndex]
     }
     
     var body: some View {
@@ -200,7 +200,7 @@ struct MCQView: View {
             let finalOptions = Array(options.prefix(3)) + [vocabulary.word]
             return finalOptions.shuffled()
         }
-        selectedQuestions = vocabularies.map { _ in Bool.random() ? "q1" : "q2" }
+        selectedQuestions = vocabularies.map { $0.questions.randomElement() ?? "error"}
         userAnswers = Array(repeating: nil, count: vocabularies.count)
         currentVocabularyIndex = 0
         correctAnswers = 0

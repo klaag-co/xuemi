@@ -15,8 +15,7 @@ struct Vocabulary: Codable, Equatable, Hashable, Identifiable {
     var englishDefinition: String
     var chineseDefinition: String
     var example: String
-    var q1: String
-    var q2: String
+    var questions: [String]
     
     enum CodingKeys: CodingKey {
         case index
@@ -25,8 +24,7 @@ struct Vocabulary: Codable, Equatable, Hashable, Identifiable {
         case englishDefinition
         case chineseDefinition
         case example
-        case q1
-        case q2
+        case questions
     }
 }
 

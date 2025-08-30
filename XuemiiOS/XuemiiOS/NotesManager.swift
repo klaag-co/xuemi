@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-struct Note: Codable, Identifiable {
+struct Note: Codable, Hashable, Identifiable {
     var id = UUID()
     var title: String
     var content: String

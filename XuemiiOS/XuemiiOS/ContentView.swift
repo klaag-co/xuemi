@@ -22,10 +22,10 @@ struct ContentView: View {
                     .tabItem {
                         Label("Bookmarks", systemImage: "bookmark")
                     }
-                LeaderboardView()
-                    .tabItem{
-                        Label("Leaderboard", systemImage: "medal")
-                    }
+//                LeaderboardView()
+//                    .tabItem{
+//                        Label("Leaderboard", systemImage: "medal")
+//                    }
                 NotesView()
                     .tabItem {
                         Label("Notes", systemImage: "doc.text")

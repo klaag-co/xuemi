@@ -107,15 +107,23 @@ public struct FlashcardView: View {
                                     .fontWeight(.bold)
                                 Spacer()
                                 Button {
-                                    if !bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
+                                    if !bookmarkManager.bookmarks.contains(where: { $0.vocab.word == vocab.word && $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
                                         print("Bookmark appended for word: \(vocab.word)")
-                                        bookmarkManager.bookmarks.append(BookmarkedVocabulary(vocab: vocab, level: level, chapter: chapter, topic: topic, currentIndex: selection ?? 0))
+                                        Task {
+                                            await bookmarkManager.addBookmarkToFirebase(bookmarkedVocabulary: BookmarkedVocabulary(id: "", vocab: vocab, level: level, chapter: chapter, topic: topic, currentIndex: selection ?? 0))
+                                        }
                                     } else {
                                         print("Bookmark removed for word: \(vocab.word)")
-                                        bookmarkManager.bookmarks.removeAll(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic })
+                                        if let bookmark = bookmarkManager.bookmarks.first(where: {
+                                            $0.vocab.word == vocab.word
+                                        }) {
+                                            Task {
+                                                await bookmarkManager.deleteBookmarkFromFirebase(id: bookmark.id)
+                                            }
+                                        }
                                     }
                                 } label: {
-                                    Image(systemName: bookmarkManager.bookmarks.contains(where: { $0.vocab == vocab && $0.level == level && $0.chapter == chapter && $0.topic == topic }) ? "bookmark.fill" : "bookmark")
+                                    Image(systemName: bookmarkManager.bookmarks.contains(where: { $0.vocab.word == vocab.word && $0.level == level && $0.chapter == chapter && $0.topic == topic }) ? "bookmark.fill" : "bookmark")
                                         .font(.system(size: 20))
                                 }
                             }

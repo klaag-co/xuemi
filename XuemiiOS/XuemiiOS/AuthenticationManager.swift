@@ -8,16 +8,17 @@
 import SwiftUI
 import FirebaseCore
 import FirebaseAuth
+import FirebaseFirestore
 import GoogleSignIn
 
 class AuthenticationManager: ObservableObject {
     static let shared: AuthenticationManager = .init()
+    @Published var userID: String?
     @Published var isLoggedIn: Bool?
     @Published var givenName: String?
     @Published var familyName: String?
     @Published var fullName: String?
     @Published var email: String?
-    @Published var profilePicUrl: String?
     @Published var errorMessage: String?
     @Published var isGuest: Bool = false
     
@@ -40,7 +41,6 @@ class AuthenticationManager: ObservableObject {
             self.familyName = nil
             self.fullName = nil
             self.email = nil
-            self.profilePicUrl = nil
             withAnimation{
                 self.isLoggedIn = false
             }
@@ -51,13 +51,12 @@ class AuthenticationManager: ObservableObject {
         let familyName = user.profile?.familyName
         let fullName = user.profile?.name
         let email = user.profile?.email
-        let profilePicUrl = user.profile!.imageURL(withDimension: 100)!.absoluteString
         //        if let email, email.contains("@students.edu.sg") {
         self.givenName = givenName
         self.familyName = familyName
         self.fullName = fullName
         self.email = email
-        self.profilePicUrl = profilePicUrl
+        self.userID = user.userID
         withAnimation{
             self.isLoggedIn = true
         }
@@ -65,6 +64,18 @@ class AuthenticationManager: ObservableObject {
         print(givenName)
         print(familyName)
         print(fullName)
+        
+        let docRef = Firestore.firestore().collection("users").document(user.userID!)
+            docRef.getDocument { document, error in
+                if let document, document.exists {
+                  let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                  print("Document data: \(dataDescription)")
+                } else {
+                  print("Document does not exist")
+                    Firestore.firestore().collection("users").document(user.userID!).setData([:])
+                }
+            }
+        
         // save the email
         UserDefaults.standard.set(email, forKey: "userEmail")
         //        } else {

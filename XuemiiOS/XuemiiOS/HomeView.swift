@@ -9,8 +9,8 @@ import SwiftUI
 
 //use observableobject to store the thing for secondary chapter topic
 
-enum SecondaryNumber: Codable, CaseIterable {
-    case one, two, three, four
+enum SecondaryNumber: Int, Codable, CaseIterable {
+    case one = 1, two = 2, three = 3, four = 4
 
     var string: String {
         switch self {

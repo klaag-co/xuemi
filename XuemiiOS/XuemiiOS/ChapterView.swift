@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-enum Chapter: CaseIterable, Codable {
-    case one, two, three, four, five, six, eoy
+enum Chapter: Int, CaseIterable, Codable {
+    case one = 1, two = 2, three = 3, four = 4, five = 5, six = 6, eoy = 7
     
     var string: String {
         switch self {

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-enum Topic: Int, Identifiable, Codable, CaseIterable {
-    case one = 1, two = 2, three = 3, eoy = 4
+enum Topic: Identifiable, Codable, CaseIterable {
+    case one, two, three, eoy
     
     var id: UUID {
         switch self {

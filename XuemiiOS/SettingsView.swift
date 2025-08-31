@@ -1,45 +1,89 @@
-//
-//  SettingsView.swift
-//  XuemiiOS
-//
-//  Created by Gracelyn Gosal on 16/4/24.
-//
-
 import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject private var authmanager: AuthenticationManager = .shared
+    @EnvironmentObject private var profile: ProfileManager
+    @State private var showEdit = false
+
     var body: some View {
         List {
-            Section(header: Text("Sign out").font(.headline)) {
-                Button("Sign out"){
-                    withAnimation{
-                        authmanager.signOut()
+            Section {
+                HStack(spacing: 16) {
+                    Button { showEdit = true } label: {
+                        AvatarView(image: profile.avatarImage)
                     }
+                    .buttonStyle(.plain)
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(displayName).font(.headline)
+                        if let handle = profile.profile?.username, !handle.isEmpty {
+                            Text("@\(handle)").foregroundColor(.secondary)
+                        }
+                        if let bio = profile.profile?.bioLine, !bio.isEmpty {
+                            Text(bio).font(.subheadline).foregroundColor(.secondary)
+                        }
+                    }
+                    Spacer()
+                    Button("Edit") { showEdit = true }.buttonStyle(.bordered)
                 }
+                .padding(.vertical, 8)
+            } header: {
+                Text("Profile").font(.headline)
             }
+
+            Section(header: Text("Sign out").font(.headline)) {
+                Button("Sign out") { withAnimation { authmanager.signOut() } }
+            }
+
             Section(header: Text("App").font(.headline)) {
                 NavigationLink(destination: AppInfoDetailView()) {
-                    HStack {
-                        Text("About Our App")
-                        Spacer()
-                            .foregroundColor(.gray)
-                    }
-                    .padding(.vertical, 8)
+                    HStack { Text("About Our App"); Spacer() }.padding(.vertical, 8)
                 }
             }
-            
+
             Section(header: Text("Acknowledgement").font(.headline)) {
                 ForEach(acknowledgements, id: \.self) { person in
                     AcknowledgementDetailView(person: person)
                 }
             }
-            
+
             Section(header: Text("Help and Support").font(.headline)) {
                 HelpSupportView()
             }
         }
         .navigationTitle("Settings")
+        .sheet(isPresented: $showEdit) {
+            EditProfileView(
+                initial: profile.profile,
+                initialAvatar: profile.avatarImage
+            ) { updatedProfile, updatedImage in
+                ProfileManager.shared.update(profile: updatedProfile, avatar: updatedImage)
+            }
+        }
+    }
+
+    private var displayName: String {
+        if let p = profile.profile {
+            if let last = p.lastName, !last.isEmpty { return "\(p.firstName) \(last)" }
+            return p.firstName
+        }
+        return "User"
+    }
+}
+
+struct AvatarView: View {
+    var image: UIImage?
+    var body: some View {
+        Group {
+            if let ui = image {
+                Image(uiImage: ui).resizable().scaledToFill()
+            } else {
+                Image(systemName: "person.crop.circle.fill").resizable().scaledToFit().symbolRenderingMode(.hierarchical)
+            }
+        }
+        .frame(width: 64, height: 64)
+        .clipShape(Circle())
+        .overlay(Circle().stroke(Color.secondary.opacity(0.2), lineWidth: 1))
     }
 }
 
@@ -59,19 +103,14 @@ struct AppInfoDetailView: View {
 
 struct AcknowledgementDetailView: View {
     let person: Acknowledgement
-    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(person.name)
-                    .font(.headline)
-                Text(person.role)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+                Text(person.name).font(.headline)
+                Text(person.role).font(.subheadline).foregroundColor(.gray)
             }
             Spacer()
-            Image(systemName: person.icon)
-                .foregroundColor(.blue)
+            Image(systemName: person.icon).foregroundColor(.blue)
         }
         .padding(.vertical, 8)
     }
@@ -113,3 +152,4 @@ let acknowledgements = [
     Acknowledgement(name: "Ms Goh Su Huei", role: "Teacher-in-Charge", icon: "person.fill"),
     Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill")
 ]
+

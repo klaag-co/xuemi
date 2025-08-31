@@ -24,13 +24,13 @@ struct BookmarkView: View {
         NavigationStack {
             VStack {
                 List {
-                    Section {
-                        bookmarkedWordsForLevel(level: .one)
-                        bookmarkedWordsForLevel(level: .two)
-                        bookmarkedWordsForLevel(level: .three)
-                        bookmarkedWordsForLevel(level: .four)
-                    } footer: {
-                        Text("Swipe left to unbookmark")
+                    bookmarkedWordsForLevel(level: .one)
+                    bookmarkedWordsForLevel(level: .two)
+                    bookmarkedWordsForLevel(level: .three)
+                    bookmarkedWordsForLevel(level: .four)
+                    
+                    Section(header: Text("Swipe left to unbookmark")){
+                        //nothing
                     }
                 }
                 .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
@@ -60,14 +60,18 @@ struct BookmarkView: View {
                 }
                 .swipeActions {
                     Button(role: .destructive) {
-                        Task {
-                            await bookmarkManager.deleteBookmarkFromFirebase(id: bookmarkedVocab.id)
-                        }
+                        removeBookmark(bookmarkedVocab)
                     } label: {
                         Label("Unbookmark", systemImage: "trash")
                     }
                 }
             }
+        }
+    }
+    
+    func removeBookmark(_ bookmarkedVocab: BookmarkedVocabulary) {
+        if let index = bookmarkManager.bookmarks.firstIndex(where: { $0.id == bookmarkedVocab.id }) {
+            bookmarkManager.bookmarks.remove(at: index)
         }
     }
 }

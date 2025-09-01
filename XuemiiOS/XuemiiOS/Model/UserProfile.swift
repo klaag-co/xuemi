@@ -1,7 +1,9 @@
 import Foundation
 
 struct UserProfile: Identifiable, Codable, Hashable {
-    var id: String = UUID().uuidString
+    var id: String { email.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! }
+    
+    var email: String
     var firstName: String
     var lastName: String?
     var username: String

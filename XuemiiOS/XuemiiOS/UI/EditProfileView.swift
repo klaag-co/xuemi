@@ -132,6 +132,7 @@ struct EditProfileView: View {
                         let finalAnimal = favoriteAnimal == "Other" ? customAnimal.trimmingCharacters(in: .whitespacesAndNewlines) : favoriteAnimal
                         let finalColor = favoriteColor == "Other" ? customColor.trimmingCharacters(in: .whitespacesAndNewlines) : favoriteColor
                         let profile = UserProfile(
+                            email: AuthenticationManager.shared.email ?? "local",
                             firstName: firstName.trimmingCharacters(in: .whitespacesAndNewlines),
                             lastName: lastName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : lastName.trimmingCharacters(in: .whitespacesAndNewlines),
                             username: usernameSanitized,

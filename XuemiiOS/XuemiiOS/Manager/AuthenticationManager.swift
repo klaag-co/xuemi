@@ -67,6 +67,8 @@ class AuthenticationManager: ObservableObject {
         print(fullName)
         // save the email
         UserDefaults.standard.set(email, forKey: "userEmail")
+        ProfileManager.shared
+            .switchUser(id: email?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))
         //        } else {
         //            signOut()
         //        }

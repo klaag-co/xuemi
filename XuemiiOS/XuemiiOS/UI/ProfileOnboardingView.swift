@@ -76,6 +76,7 @@ struct ProfileOnboardingView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Continue") {
                         let profile = UserProfile(
+                            email: AuthenticationManager.shared.email ?? "local",
                             firstName: firstName.trimmingCharacters(in: .whitespacesAndNewlines),
                             lastName: lastName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : lastName.trimmingCharacters(in: .whitespacesAndNewlines),
                             username: usernameSanitized,

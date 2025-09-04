@@ -1,0 +1,214 @@
+//
+//  MemoryCardView.swift
+//  XuemiiOS
+//
+//  Created by Gracelyn Gosal on 4/9/25.
+//
+
+import SwiftUI
+
+struct ShakeEffect: GeometryEffect {
+    var shakes: CGFloat = 0
+    var amplitude: CGFloat = 8
+
+    var animatableData: CGFloat {
+        get { shakes }
+        set { shakes = newValue }
+    }
+
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        let translationX = sin(shakes * .pi * 2) * amplitude
+        return ProjectionTransform(CGAffineTransform(translationX: translationX, y: 0))
+    }
+}
+
+struct MemoryCardModel: Identifiable {
+    let id = UUID()
+    let text: String
+    var isFaceUp: Bool = true
+    var isMatched: Bool = false
+}
+
+struct MemoryCardView: View {
+    @State private var cards: [MemoryCardModel] = []
+    @State private var timeRemaining: Int = 15
+    @State private var tries: Int = 0
+    @State private var gameStarted: Bool = false
+    @State private var isProcessing: Bool = false
+    @State private var wrongCardIndex: Int? = nil
+    @State private var wrongShakeTrigger: CGFloat = 0
+    @State private var countdownTimer: Timer? = nil
+
+    @State var vocabularies: [Vocabulary]
+    var level: SecondaryNumber
+    var chapter: Chapter
+    var topic: Topic
+    var folderName: String? = nil
+
+    @State private var targetVocabulary: Vocabulary? = nil
+    @State private var displayedQuestion: String? = nil
+
+    private let maxCards = 6
+
+    var body: some View {
+        VStack(spacing: 12) {
+            if let question = displayedQuestion {
+                Text(question)
+                    .font(.title)
+                    .lineLimit(3)
+                    .minimumScaleFactor(0.5)
+                    .multilineTextAlignment(.center)
+                    .padding()
+            } else {
+                Text("")
+                    .padding()
+            }
+
+            Text("Timing (to see the open cards): \(timeRemaining)s")
+                .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading)
+
+            Text("Tries: \(tries)")
+                .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading)
+
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 2),
+                      spacing: 12) {
+                ForEach(cards.indices, id: \.self) { index in
+                    cardView(for: index)
+                }
+            }
+            .padding()
+        }
+        .onAppear {
+            startNewRound()
+            startCountdown()
+        }
+        .onDisappear {
+            countdownTimer?.invalidate()
+            countdownTimer = nil
+        }
+    }
+
+    @ViewBuilder
+    private func cardView(for index: Int) -> some View {
+        let card = cards[index]
+
+        Button(action: {
+            handleCardTap(at: index)
+        }) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.customblue)
+                    .overlay(
+                        Text(card.text)
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding(6)
+                    )
+                    .opacity(card.isFaceUp ? 1 : 0)
+                    .rotation3DEffect(.degrees(card.isFaceUp ? 0 : -180), axis: (x: 0, y: 1, z: 0))
+
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(white: 0.12))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.customblue.opacity(0.6), lineWidth: 4)
+                    )
+                    .opacity(card.isFaceUp ? 0 : 1)
+                    .rotation3DEffect(.degrees(card.isFaceUp ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+            }
+            .frame(height: 100)
+            .modifier(wrongCardIndex == index ? ShakeEffect(shakes: wrongShakeTrigger) : ShakeEffect(shakes: 0))
+            .animation(.easeInOut(duration: 0.35), value: card.isFaceUp)
+            .animation(.easeInOut(duration: 0.45), value: wrongShakeTrigger)
+        }
+        .disabled(!gameStarted || isProcessing || card.isMatched || card.isFaceUp)
+        .buttonStyle(PlainButtonStyle())
+    }
+
+    private func startNewRound() {
+        let available = vocabularies.shuffled()
+        let selected = Array(available.prefix(maxCards))
+
+        cards = selected.map { MemoryCardModel(text: $0.word, isFaceUp: true, isMatched: false) }
+
+        targetVocabulary = selected.randomElement()
+        displayedQuestion = nil
+        tries = 0
+        gameStarted = false
+        isProcessing = false
+        wrongCardIndex = nil
+        wrongShakeTrigger = 0
+        timeRemaining = 15
+    }
+
+    private func startCountdown() {
+        countdownTimer?.invalidate()
+        timeRemaining = 15
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+            } else {
+                timer.invalidate()
+                countdownTimer = nil
+                hideAllCards()
+                displayedQuestion = targetVocabulary?.questions.randomElement() ?? "问题"
+                gameStarted = true
+            }
+        }
+    }
+
+    private func hideAllCards() {
+        for i in cards.indices {
+            withAnimation(.easeInOut(duration: 0.35)) {
+                cards[i].isFaceUp = false
+            }
+        }
+    }
+
+    private func handleCardTap(at index: Int) {
+        guard gameStarted, !isProcessing, !cards[index].isMatched, !cards[index].isFaceUp else { return }
+
+        isProcessing = true
+        tries += 1
+
+        withAnimation(.easeInOut(duration: 0.35)) {
+            cards[index].isFaceUp = true
+        }
+
+        let tappedIndex = index
+
+        if cards[tappedIndex].text == targetVocabulary?.word {
+            cards[tappedIndex].isMatched = true
+            if let nextTarget = cards.filter({ !$0.isMatched }).randomElement() {
+                targetVocabulary = vocabularies.first { $0.word == nextTarget.text }
+                displayedQuestion = targetVocabulary?.questions.randomElement()
+            } else {
+                checkForCompletion()
+            }
+            isProcessing = false
+        } else {
+            wrongCardIndex = tappedIndex
+            wrongShakeTrigger += 1
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                withAnimation(.easeInOut(duration: 0.35)) {
+                    cards[tappedIndex].isFaceUp = false
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    wrongCardIndex = nil
+                    isProcessing = false
+                }
+            }
+        }
+    }
+
+    private func checkForCompletion() {
+        if cards.allSatisfy({ $0.isMatched }) {
+            gameStarted = false
+        }
+    }
+}

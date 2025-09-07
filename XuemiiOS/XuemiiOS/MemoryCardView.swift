@@ -55,19 +55,15 @@ struct MemoryCardView: View {
             if let question = displayedQuestion {
                 Text(question)
                     .font(.title)
-                    .lineLimit(3)
                     .minimumScaleFactor(0.5)
                     .multilineTextAlignment(.center)
                     .padding()
             } else {
-                Text("")
+                Text("Timing: \(timeRemaining)s")
+                    .font(.title)
+                    .frame(maxWidth: .infinity, alignment: .center)
                     .padding()
             }
-
-            Text("Timing (to see the open cards): \(timeRemaining)s")
-                .font(.subheadline)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading)
 
             Text("Tries: \(tries)")
                 .font(.subheadline)

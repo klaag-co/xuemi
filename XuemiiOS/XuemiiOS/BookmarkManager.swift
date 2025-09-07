@@ -58,8 +58,12 @@ class BookmarkManager: ObservableObject {
     }
     
     func getBookmarksFromFirebase() async {
+        guard let userID = authManager.userID else {
+            return
+        }
         do {
-            let querySnapshot = try await Firestore.firestore().collection("users").document(authManager.userID!).collection("bookmarks").getDocuments()
+            let querySnapshot = try await
+            Firestore.firestore().collection("users").document(authManager.userID!).collection("bookmarks").getDocuments()
             var bookmarksInternal: [BookmarkedVocabulary] = []
             for document in querySnapshot.documents {
                 bookmarksInternal.append(
@@ -88,6 +92,9 @@ class BookmarkManager: ObservableObject {
     }
     
     func addBookmarkToFirebase(bookmarkedVocabulary: BookmarkedVocabulary) async {
+        guard let userID = authManager.userID else {
+            return
+        }
         do {
             let ref = try await Firestore.firestore().collection("users").document(authManager.userID!).collection("bookmarks").addDocument(data: [
                 "chapter": bookmarkedVocabulary.chapter.rawValue,
@@ -110,6 +117,9 @@ class BookmarkManager: ObservableObject {
     }
     
     func deleteBookmarkFromFirebase(id: String) async {
+        guard let userID = authManager.userID else {
+            return
+        }
         do {
             try await Firestore.firestore().collection("users").document(authManager.userID!).collection("bookmarks").document(id).delete()
           print("Document successfully removed!")

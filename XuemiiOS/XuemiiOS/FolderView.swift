@@ -31,6 +31,10 @@ struct FolderView: View {
                         Text("Vocabulary List")
                             .font(.headline)
                     }
+                    NavigationLink(destination: BookmarkView()) {
+                        Text("Bookmarks")
+                            .font(.headline)
+                    }
                 }
                 Section(header: Text("Custom Folders")) {
                     if vocabManager.folders.isEmpty {

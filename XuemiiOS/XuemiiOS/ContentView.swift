@@ -18,13 +18,17 @@ struct ContentView: View {
                     .tabItem {
                         Label("Home", systemImage: "house")
                     }
-                BookmarkView()
-                    .tabItem {
-                        Label("Bookmarks", systemImage: "bookmark")
-                    }
+//                BookmarkView()
+//                    .tabItem {
+//                        Label("Bookmarks", systemImage: "bookmark")
+//                    }
 //                LeaderboardView()
 //                    .tabItem{
 //                        Label("Leaderboard", systemImage: "medal")
+//                    }
+//                ScoreView()
+//                    .tabItem{
+//                        Label("Scores", systemImage: "star.circle")
 //                    }
                 NotesView()
                     .tabItem {

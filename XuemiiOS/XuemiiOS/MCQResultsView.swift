@@ -4,14 +4,17 @@
 //
 //  Created by Gracelyn Gosal on 28/7/24.
 //
+
 import SwiftUI
 
 struct MCQResultsView: View {
     let correctAnswers: Int
     let wrongAnswers: Int
+    let improvements: [(vocab: Vocabulary, index: Int)]
     let totalQuestions: Int
     let level: String?
     let chapter: String?
+    let index: Int?
     let topic: String?
     let folderName: String?
 
@@ -22,16 +25,20 @@ struct MCQResultsView: View {
     init(
         correctAnswers: Int,
         wrongAnswers: Int,
+        improvements: [(vocab: Vocabulary, index: Int)],
         totalQuestions: Int,
         level: String,
         chapter: String,
+        index: Int,
         topic: String
     ) {
         self.correctAnswers = correctAnswers
         self.wrongAnswers = wrongAnswers
+        self.improvements = improvements
         self.totalQuestions = totalQuestions
         self.level = level
         self.chapter = chapter
+        self.index = index
         self.topic = topic
         self.folderName = nil
         self.dismissCallback = {}
@@ -40,12 +47,16 @@ struct MCQResultsView: View {
     init(
         correctAnswers: Int,
         wrongAnswers: Int,
+        improvements: [(vocab: Vocabulary, index: Int)],
+        index: Int,
         totalQuestions: Int,
         folderName: String,
         dismissCallback: @escaping () -> ()
     ) {
         self.correctAnswers = correctAnswers
         self.wrongAnswers = wrongAnswers
+        self.improvements = improvements
+        self.index = index
         self.totalQuestions = totalQuestions
         self.level = nil
         self.chapter = nil
@@ -90,6 +101,34 @@ struct MCQResultsView: View {
                 .font(.largeTitle)
                 .foregroundStyle(.red)
                 .padding(5)
+            
+            if let level = level, let chapter = chapter, let topic = topic, let index = index {
+                List {
+                    ForEach(improvements, id: \.vocab.id) { item in
+                        NavigationLink(destination:
+                            FlashcardView(
+                                vocabularies: loadVocabulariesFromJSON(
+                                    fileName: "中\(level)",
+                                    chapter: chapter,
+                                    topic: topic
+                                ),
+                                level: SecondaryNumber(rawValue: Int(level) ?? 1) ?? .one,
+                                chapter: Chapter(rawValue: Int(chapter) ?? 1) ?? .one,
+                                topic: Topic(rawValue: Int(topic) ?? 1) ?? .eoy,
+                                currentIndex: item.index - 1
+                            )
+                        ) {
+                            VStack(alignment: .leading) {
+                                Text(item.vocab.word)
+                                    .font(.headline)
+                                Text("中\(level) \(chapter)")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                }
+            }
             
             Spacer()
             

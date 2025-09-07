@@ -15,9 +15,9 @@ struct MCQView: View {
     @State private var selectedQuestions: [String] = []
     @State private var userAnswers: [String?] = []
     @State private var showResults = false
-    
     @State private var correctAnswers: Int = 0
     @State private var wrongAnswers: Int = 0
+    @State private var improvements: [(vocab: Vocabulary, index: Int)] = []
     
     @State var vocabularies: [Vocabulary]
     var level: String?
@@ -102,6 +102,7 @@ struct MCQView: View {
                             correctAnswers += 1
                         } else {
                             wrongAnswers += 1
+                            improvements.append((currentVocabulary, currentVocabulary.index))
                         }
                     }
                 }) {
@@ -161,15 +162,19 @@ struct MCQView: View {
                 MCQResultsView(
                     correctAnswers: correctAnswers,
                     wrongAnswers: wrongAnswers,
+                    improvements: improvements,
                     totalQuestions: vocabularies.count,
                     level: level,
                     chapter: chapter,
+                    index: currentVocabularyIndex,
                     topic: topic
                 )
             } else if let folderName {
                 MCQResultsView(
                     correctAnswers: correctAnswers,
                     wrongAnswers: wrongAnswers,
+                    improvements: improvements,
+                    index: currentVocabularyIndex,
                     totalQuestions: vocabularies.count,
                     folderName: folderName
                 ) {

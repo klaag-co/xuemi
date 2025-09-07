@@ -103,27 +103,29 @@ struct MCQResultsView: View {
                 .padding(5)
             
             if let level = level, let chapter = chapter, let topic = topic, let index = index {
-                List {
-                    ForEach(improvements, id: \.vocab.id) { item in
-                        NavigationLink(destination:
-                            FlashcardView(
-                                vocabularies: loadVocabulariesFromJSON(
-                                    fileName: "中\(level)",
-                                    chapter: chapter,
-                                    topic: topic
-                                ),
-                                level: SecondaryNumber(rawValue: Int(level) ?? 1) ?? .one,
-                                chapter: Chapter(rawValue: Int(chapter) ?? 1) ?? .one,
-                                topic: Topic(rawValue: Int(topic) ?? 1) ?? .eoy,
-                                currentIndex: item.index - 1
-                            )
-                        ) {
-                            VStack(alignment: .leading) {
-                                Text(item.vocab.word)
-                                    .font(.headline)
-                                Text("中\(level) \(chapter)")
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
+                if !improvements.isEmpty {
+                    List {
+                        ForEach(improvements, id: \.vocab.id) { item in
+                            NavigationLink(destination:
+                                FlashcardView(
+                                    vocabularies: loadVocabulariesFromJSON(
+                                        fileName: "中\(level)",
+                                        chapter: chapter,
+                                        topic: topic
+                                    ),
+                                    level: SecondaryNumber(rawValue: Int(level) ?? 1) ?? .one,
+                                    chapter: Chapter(rawValue: Int(chapter) ?? 1) ?? .one,
+                                    topic: Topic(rawValue: Int(topic) ?? 1) ?? .eoy,
+                                    currentIndex: item.index - 1
+                                )
+                            ) {
+                                VStack(alignment: .leading) {
+                                    Text(item.vocab.word)
+                                        .font(.headline)
+                                    Text("中\(level) \(chapter)")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
                             }
                         }
                     }

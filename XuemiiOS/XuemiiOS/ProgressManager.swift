@@ -118,11 +118,6 @@ class ProgressManager: ObservableObject {
     private func updateProgressOnFirebase(newProgress: ProgressState) async {
         guard let uid = userDocId else { return }
 
-        // Convert enum cases to indices for storage
-        func indexOf<C: CaseIterable & Equatable>(_ value: C) -> Int {
-            Array(C.allCases).firstIndex(of: value) ?? 0
-        }
-
         let data: [String: Any] = [
             "id": newProgress.id.uuidString,
             "level": newProgress.level.rawValue,
@@ -138,7 +133,7 @@ class ProgressManager: ObservableObject {
             print("Progress updated on firebase")
             await getProgressFromFirebase()
         } catch {
-            print("Error adding document: \(error)")
+            print("Error updating progress: \(error)")
         }
     }
 }

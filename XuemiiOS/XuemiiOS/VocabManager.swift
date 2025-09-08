@@ -63,15 +63,18 @@ class VocabManager: ObservableObject {
     }
 
     private func loadFoldersFromUserDefaults() {
-        do {
-            if let data = UserDefaults.standard.data(forKey: foldersKey) {
-                let loadedFolders = try JSONDecoder().decode([Folder].self, from: data)
-                self.folders = loadedFolders
+        Task {
+            let remoteLoaded = await getFoldersFromFirebase()
+            guard !remoteLoaded else { return /* alr loaded */ }
+            do {
+                if let data = UserDefaults.standard.data(forKey: foldersKey) {
+                    let loadedFolders = try JSONDecoder().decode([Folder].self, from: data)
+                    self.folders = loadedFolders
+                }
+            } catch {
+                print("Failed to load folders: \(error)")
             }
-        } catch {
-            print("Failed to load folders: \(error)")
         }
-        Task { await getFoldersFromFirebase() }
     }
 
     func addFolder(_ folder: Folder) {
@@ -81,8 +84,8 @@ class VocabManager: ObservableObject {
     // MARK: firebase helper functions
     // NOTE: we save documents as B64 data because i am truly not bothered to
     // do the json exploration for a collection and this works decently well anyway.
-    private func getFoldersFromFirebase() async {
-        guard let uid = userDocId else { return }
+    private func getFoldersFromFirebase() async -> Bool {
+        guard let uid = userDocId else { return false }
         do {
             let userDoc = try await Firestore.firestore()
                 .collection("users").document(uid)
@@ -92,19 +95,21 @@ class VocabManager: ObservableObject {
                   let foldersDataString = data[foldersKey] as? String
             else {
                 print("Could not read folders from firebase")
-                return
+                return false
             }
 
             guard let foldersData = Data(base64Encoded: foldersDataString),
                   let folders = try? JSONDecoder().decode([Folder].self, from: foldersData)
             else {
                 print("Could not decode folders data")
-                return
+                return false
             }
 
             await MainActor.run { self.folders = folders }
+            return true
         } catch {
             print("Error getting folders: \(error)")
+            return false
         }
     }
 

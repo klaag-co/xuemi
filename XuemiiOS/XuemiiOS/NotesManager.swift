@@ -77,15 +77,18 @@ class NotesManager: ObservableObject {
     }
     
     func load() {
-        let archiveURL = getArchiveURL()
-        let propertyListDecoder = PropertyListDecoder()
-                
-        if let retrievedNoteData = try? Data(contentsOf: archiveURL),
-           let notesDecoded = try? propertyListDecoder.decode([Note].self, from: retrievedNoteData) {
-            notes = notesDecoded
-        }
+        Task {
+            let remoteLoaded = await getNotesFromFirebase()
+            guard !remoteLoaded else { return /* alr loaded */ }
 
-        Task { await getNotesFromFirebase() }
+            let archiveURL = getArchiveURL()
+            let propertyListDecoder = PropertyListDecoder()
+
+            if let retrievedNoteData = try? Data(contentsOf: archiveURL),
+               let notesDecoded = try? propertyListDecoder.decode([Note].self, from: retrievedNoteData) {
+                notes = notesDecoded
+            }
+        }
     }
     
     func addResult(level: String, chapter: String, topic: String, correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
@@ -148,8 +151,8 @@ class NotesManager: ObservableObject {
 
     // MARK: firebase helpers
 
-    private func getNotesFromFirebase() async {
-        guard let uid = userDocId else { return }
+    private func getNotesFromFirebase() async -> Bool {
+        guard let uid = userDocId else { return false }
         do {
             let userDoc = try await Firestore.firestore()
                 .collection("users").document(uid)
@@ -159,19 +162,22 @@ class NotesManager: ObservableObject {
                   let notesDataString = data["notes"] as? String
             else {
                 print("Could not read notes from firebase")
-                return
+                return false
             }
 
             guard let notesData = Data(base64Encoded: notesDataString),
                   let notes = try? PropertyListDecoder().decode([Note].self, from: notesData)
             else {
                 print("Could not decode notes data")
-                return
+                return false
             }
 
             await MainActor.run { self.notes = notes }
+
+            return true
         } catch {
             print("Error getting notes: \(error)")
+            return false
         }
     }
 

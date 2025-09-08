@@ -50,21 +50,25 @@ final class BookmarkManager: ObservableObject {
     }
 
     private func load() {
-        let url = archiveURL()
-        let decoder = PropertyListDecoder()
-        if
-            let data = try? Data(contentsOf: url),
-            let decoded = try? decoder.decode([BookmarkedVocabulary].self, from: data)
-        {
-            bookmarks = decoded
+        Task {
+            let remoteLoaded = await getBookmarksFromFirebase()
+            guard !remoteLoaded else { return /* alr loaded */ }
+
+            let url = archiveURL()
+            let decoder = PropertyListDecoder()
+            if
+                let data = try? Data(contentsOf: url),
+                let decoded = try? decoder.decode([BookmarkedVocabulary].self, from: data)
+            {
+                bookmarks = decoded
+            }
         }
-        Task { await getBookmarksFromFirebase() }
     }
 
     // MARK: - Firebase helpers
 
-    func getBookmarksFromFirebase() async {
-        guard let uid = userDocId else { return }
+    func getBookmarksFromFirebase() async -> Bool {
+        guard let uid = userDocId else { return false }
         do {
             let snap = try await Firestore.firestore()
                 .collection("users").document(uid)
@@ -123,8 +127,11 @@ final class BookmarkManager: ObservableObject {
             }
 
             await MainActor.run { self.bookmarks = loaded }
+
+            return true
         } catch {
             print("Error getting bookmarks: \(error)")
+            return false
         }
     }
 
@@ -155,7 +162,7 @@ final class BookmarkManager: ObservableObject {
                 .collection("users").document(uid)
                 .collection("bookmarks").addDocument(data: data)
             print("Bookmark added with ID: \(ref.documentID)")
-            await getBookmarksFromFirebase()
+            _ = await getBookmarksFromFirebase()
         } catch {
             print("Error adding bookmark: \(error)")
         }
@@ -168,7 +175,7 @@ final class BookmarkManager: ObservableObject {
                 .collection("users").document(uid)
                 .collection("bookmarks").document(id).delete()
             print("Bookmark deleted")
-            await getBookmarksFromFirebase()
+            _ = await getBookmarksFromFirebase()
         } catch {
             print("Error deleting bookmark: \(error)")
         }

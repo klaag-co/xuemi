@@ -52,13 +52,17 @@ class ProgressManager: ObservableObject {
     }
     
     private func load() {
-        let archiveURL = getArchiveURL()
-        let propertyListDecoder = PropertyListDecoder()
-        if let retrievedProgressData = try? Data(contentsOf: archiveURL),
-           let decodedProgress = try? propertyListDecoder.decode(ProgressState.self, from: retrievedProgressData) {
-            currentProgress = decodedProgress
+        Task {
+            let remoteLoaded = await getProgressFromFirebase()
+            guard !remoteLoaded else { return /* alr loaded */ }
+
+            let archiveURL = getArchiveURL()
+            let propertyListDecoder = PropertyListDecoder()
+            if let retrievedProgressData = try? Data(contentsOf: archiveURL),
+               let decodedProgress = try? propertyListDecoder.decode(ProgressState.self, from: retrievedProgressData) {
+                currentProgress = decodedProgress
+            }
         }
-        Task { await getProgressFromFirebase() }
     }
     
     func updateProgress(level: SecondaryNumber, chapter: Chapter, topic: Topic, currentIndex: Int) {
@@ -73,8 +77,8 @@ class ProgressManager: ObservableObject {
 
     // MARK: firebase helpers
 
-    private func getProgressFromFirebase() async {
-        guard let uid = userDocId else { return }
+    private func getProgressFromFirebase() async -> Bool {
+        guard let uid = userDocId else { return false }
         do {
             let userDoc = try await Firestore.firestore()
                 .collection("users").document(uid)
@@ -84,7 +88,7 @@ class ProgressManager: ObservableObject {
                   let progressData = data["progress"] as? [String: Any]
             else {
                 print("Could not read progress from firebase")
-                return
+                return false
             }
 
             guard let idString = progressData["id"] as? String,
@@ -98,7 +102,7 @@ class ProgressManager: ObservableObject {
                   let currentIndex = progressData["currentIndex"] as? Int
             else {
                 print("Could not read fields of progress")
-                return
+                return false
             }
 
             let progress = ProgressState(
@@ -110,8 +114,11 @@ class ProgressManager: ObservableObject {
             )
 
             await MainActor.run { self.currentProgress = progress }
+
+            return true
         } catch {
             print("Error getting progress: \(error)")
+            return false
         }
     }
 
@@ -131,7 +138,7 @@ class ProgressManager: ObservableObject {
                 .collection("users").document(uid)
                 .setData(["progress": data], merge: true)
             print("Progress updated on firebase")
-            await getProgressFromFirebase()
+            _ = await getProgressFromFirebase()
         } catch {
             print("Error updating progress: \(error)")
         }

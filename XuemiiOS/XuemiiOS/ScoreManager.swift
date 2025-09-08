@@ -93,7 +93,11 @@ public struct ScoreBucket: Identifiable {
 public final class ScoreManager: ObservableObject {
     public static let shared = ScoreManager()
 
-    @Published public private(set) var results: [QuizResult] = []
+    @Published public private(set) var results: [QuizResult] = [] {
+        didSet {
+            self.save()
+        }
+    }
 
     private let storeKey = "quiz_results_v2"
     private var cancellables = Set<AnyCancellable>()
@@ -110,9 +114,6 @@ public final class ScoreManager: ObservableObject {
 
     private init() {
         load()
-        $results
-            .sink { [weak self] _ in self?.save() }
-            .store(in: &cancellables)
     }
 
     // MARK: - Record
@@ -266,7 +267,7 @@ public final class ScoreManager: ObservableObject {
             }
 
             guard let scoresData = Data(base64Encoded: notesDataString),
-                  let scores = try? PropertyListDecoder().decode([QuizResult].self, from: scoresData)
+                  let scores = try? JSONDecoder().decode([QuizResult].self, from: scoresData)
             else {
                 print("Could not decode scores data")
                 return false

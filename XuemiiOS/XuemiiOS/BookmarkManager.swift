@@ -57,8 +57,8 @@ final class BookmarkManager: ObservableObject {
             let decoded = try? decoder.decode([BookmarkedVocabulary].self, from: data)
         {
             bookmarks = decoded
-            Task { await getBookmarksFromFirebase() }
         }
+        Task { await getBookmarksFromFirebase() }
     }
 
     // MARK: - Firebase helpers

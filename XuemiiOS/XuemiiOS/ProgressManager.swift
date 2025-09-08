@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import FirebaseAuth
+import FirebaseFirestore
 
 struct ProgressState: Codable, Identifiable, Hashable {
     var id = UUID()
@@ -23,7 +25,17 @@ class ProgressManager: ObservableObject {
             save()
         }
     }
-    
+
+    // MARK: - Current user document id (uid preferred, else email)
+    private var userDocId: String? {
+        if let uid = Auth.auth().currentUser?.uid { return uid }
+        if let email = AuthenticationManager.shared.email?
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            return email
+        }
+        return nil
+    }
+
     private func getArchiveURL() -> URL {
         let plistName = "progress.plist"
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -46,13 +58,87 @@ class ProgressManager: ObservableObject {
            let decodedProgress = try? propertyListDecoder.decode(ProgressState.self, from: retrievedProgressData) {
             currentProgress = decodedProgress
         }
+        Task { await getProgressFromFirebase() }
     }
     
     func updateProgress(level: SecondaryNumber, chapter: Chapter, topic: Topic, currentIndex: Int) {
-        currentProgress = ProgressState(level: level, chapter: chapter, topic: topic, currentIndex: currentIndex)
+        let newProgress = ProgressState(level: level, chapter: chapter, topic: topic, currentIndex: currentIndex)
+        currentProgress = newProgress
+        Task { await updateProgressOnFirebase(newProgress: newProgress) }
     }
     
     init() {
         load()
+    }
+
+    // MARK: firebase helpers
+
+    private func getProgressFromFirebase() async {
+        guard let uid = userDocId else { return }
+        do {
+            let userDoc = try await Firestore.firestore()
+                .collection("users").document(uid)
+                .getDocument()
+
+            guard let data = userDoc.data(),
+                  let progressData = data["progress"] as? [String: Any]
+            else {
+                print("Could not read progress from firebase")
+                return
+            }
+
+            guard let idString = progressData["id"] as? String,
+                  let id = UUID(uuidString: idString),
+                  let levelInt = progressData["level"] as? Int,
+                  let level = SecondaryNumber(rawValue: levelInt),
+                  let chapterInt = progressData["chapter"] as? Int,
+                  let chapter = Chapter(rawValue: chapterInt),
+                  let topicInt = progressData["topic"] as? Int,
+                  let topic = Topic(rawValue: topicInt),
+                  let currentIndex = progressData["currentIndex"] as? Int
+            else {
+                print("Could not read fields of progress")
+                return
+            }
+
+            let progress = ProgressState(
+                id: id,
+                level: level,
+                chapter: chapter,
+                topic: topic,
+                currentIndex: currentIndex
+            )
+
+            await MainActor.run { self.currentProgress = progress }
+        } catch {
+            print("Error getting progress: \(error)")
+        }
+    }
+
+    private func updateProgressOnFirebase(newProgress: ProgressState) async {
+        guard let uid = userDocId else { return }
+
+        // Convert enum cases to indices for storage
+        func indexOf<C: CaseIterable & Equatable>(_ value: C) -> Int {
+            Array(C.allCases).firstIndex(of: value) ?? 0
+        }
+
+        let data: [String: Any] = [
+            "id": newProgress.id.uuidString,
+            "level": newProgress.level.rawValue,
+            "chapter": newProgress.chapter.rawValue,
+            "topic": newProgress.topic.rawValue,
+            "currentIndex": newProgress.currentIndex
+        ]
+
+        do {
+            try await Firestore.firestore()
+                .collection("users").document(uid)
+                .setData(["progress": data], merge: true)
+            print("Progress updated on firebase")
+            await getProgressFromFirebase()
+        } catch {
+            print("Error adding document: \(error)")
+        }
     }
 }

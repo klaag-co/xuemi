@@ -1,5 +1,7 @@
 import Foundation
 import Combine
+import FirebaseAuth
+import FirebaseFirestore
 
 // MARK: - Lightweight vocab snapshot (so we can reopen past results)
 
@@ -95,6 +97,16 @@ public final class ScoreManager: ObservableObject {
 
     private let storeKey = "quiz_results_v2"
     private var cancellables = Set<AnyCancellable>()
+
+    // MARK: - Current user document id (uid preferred, else email)
+    private var userDocId: String? {
+        if let uid = Auth.auth().currentUser?.uid { return uid }
+        if let email = AuthenticationManager.shared.email?
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            return email
+        }
+        return nil
+    }
 
     private init() {
         load()
@@ -222,15 +234,63 @@ public final class ScoreManager: ObservableObject {
     // MARK: - Persistence
 
     private func load() {
-        guard let data = UserDefaults.standard.data(forKey: storeKey) else { return }
-        if let decoded = try? JSONDecoder().decode([QuizResult].self, from: data) {
-            self.results = decoded
+        Task {
+            let remoteLoaded = await getScoresFromFirebase()
+            guard !remoteLoaded else { return /* alr loaded */ }
+            guard let data = UserDefaults.standard.data(forKey: storeKey) else { return }
+            if let decoded = try? JSONDecoder().decode([QuizResult].self, from: data) {
+                self.results = decoded
+            }
         }
     }
 
     private func save() {
         if let data = try? JSONEncoder().encode(results) {
             UserDefaults.standard.set(data, forKey: storeKey)
+            Task { await updateScoresOnFirebase(newScoresData: data) }
+        }
+    }
+
+    private func getScoresFromFirebase() async -> Bool {
+        guard let uid = userDocId else { return false }
+        do {
+            let userDoc = try await Firestore.firestore()
+                .collection("users").document(uid)
+                .getDocument()
+
+            guard let data = userDoc.data(),
+                  let notesDataString = data["scores"] as? String
+            else {
+                print("Could not read scores from firebase")
+                return false
+            }
+
+            guard let scoresData = Data(base64Encoded: notesDataString),
+                  let scores = try? PropertyListDecoder().decode([QuizResult].self, from: scoresData)
+            else {
+                print("Could not decode scores data")
+                return false
+            }
+
+            await MainActor.run { self.results = scores }
+
+            return true
+        } catch {
+            print("Error getting notes: \(error)")
+            return false
+        }
+    }
+
+    private func updateScoresOnFirebase(newScoresData: Data) async {
+        guard let uid = userDocId else { return }
+
+        do {
+            try await Firestore.firestore()
+                .collection("users").document(uid)
+                .setData(["scores": newScoresData.base64EncodedString()], merge: true)
+            print("Scores updated on firebase")
+        } catch {
+            print("Error updating scores: \(error)")
         }
     }
 }

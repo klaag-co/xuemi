@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 import FirebaseFirestore
 
 struct Note: Codable, Hashable, Identifiable {
@@ -44,7 +45,17 @@ class NotesManager: ObservableObject {
             save()
         }
     }
-        
+
+    // MARK: - Current user document id (uid preferred, else email)
+    private var userDocId: String? {
+        if let uid = Auth.auth().currentUser?.uid { return uid }
+        if let email = AuthenticationManager.shared.email?
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            return email
+        }
+        return nil
+    }
+
     init() {
         load()
     }
@@ -59,8 +70,10 @@ class NotesManager: ObservableObject {
     func save() {
         let archiveURL = getArchiveURL()
         let propertyListEncoder = PropertyListEncoder()
-        let encodedNotes = try? propertyListEncoder.encode(notes)
-        try? encodedNotes?.write(to: archiveURL, options: .noFileProtection)
+        if let encodedNotes = try? propertyListEncoder.encode(notes) {
+            try? encodedNotes.write(to: archiveURL, options: .noFileProtection)
+            Task { await updateNotesOnFirebase(newNotesData: encodedNotes) }
+        }
     }
     
     func load() {
@@ -71,6 +84,8 @@ class NotesManager: ObservableObject {
            let notesDecoded = try? propertyListDecoder.decode([Note].self, from: retrievedNoteData) {
             notes = notesDecoded
         }
+
+        Task { await getNotesFromFirebase() }
     }
     
     func addResult(level: String, chapter: String, topic: String, correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
@@ -129,5 +144,47 @@ class NotesManager: ObservableObject {
         let newNote = Note(title: title, content: content, noteType: noteType)
 
         notes.append(newNote)
+    }
+
+    // MARK: firebase helpers
+
+    private func getNotesFromFirebase() async {
+        guard let uid = userDocId else { return }
+        do {
+            let userDoc = try await Firestore.firestore()
+                .collection("users").document(uid)
+                .getDocument()
+
+            guard let data = userDoc.data(),
+                  let notesDataString = data["notes"] as? String
+            else {
+                print("Could not read notes from firebase")
+                return
+            }
+
+            guard let notesData = Data(base64Encoded: notesDataString),
+                  let notes = try? PropertyListDecoder().decode([Note].self, from: notesData)
+            else {
+                print("Could not decode notes data")
+                return
+            }
+
+            await MainActor.run { self.notes = notes }
+        } catch {
+            print("Error getting notes: \(error)")
+        }
+    }
+
+    private func updateNotesOnFirebase(newNotesData: Data) async {
+        guard let uid = userDocId else { return }
+
+        do {
+            try await Firestore.firestore()
+                .collection("users").document(uid)
+                .setData(["notes": newNotesData.base64EncodedString()], merge: true)
+            print("Notes updated on firebase")
+        } catch {
+            print("Error updating notes: \(error)")
+        }
     }
 }

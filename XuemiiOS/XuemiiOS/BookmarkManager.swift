@@ -2,10 +2,9 @@
 //  BookmarkManager.swift
 //  XuemiiOS
 //
-//  Created by Gracelyn Gosal on 13/7/24.
-//
 
 import SwiftUI
+import FirebaseAuth
 import FirebaseFirestore
 
 struct BookmarkedVocabulary: Identifiable, Codable {
@@ -17,115 +16,162 @@ struct BookmarkedVocabulary: Identifiable, Codable {
     var currentIndex: Int
 }
 
-class BookmarkManager: ObservableObject {
-    static let shared: BookmarkManager = .init()
-    @ObservedObject var authManager = AuthenticationManager.shared
+final class BookmarkManager: ObservableObject {
+    static let shared = BookmarkManager()
+
     @Published var bookmarks: [BookmarkedVocabulary] = [] {
-        didSet {
-            save()
+        didSet { save() }
+    }
+
+    private init() { load() }
+
+    // MARK: - Current user document id (uid preferred, else email)
+    private var userDocId: String? {
+        if let uid = Auth.auth().currentUser?.uid { return uid }
+        if let email = AuthenticationManager.shared.email?
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            return email
         }
+        return nil
     }
-        
-    init() {
-        load()
-    }
-    
-    func getArchiveURL() -> URL {
+
+    // MARK: - Local persistence (unchanged)
+    private func archiveURL() -> URL {
         let plistName = "bookmarks.plist"
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        
         return documentsDirectory.appendingPathComponent(plistName)
     }
-    
-    func save() {
-        let archiveURL = getArchiveURL()
-        let propertyListEncoder = PropertyListEncoder()
-        let encodedBookmarks = try? propertyListEncoder.encode(bookmarks)
-        try? encodedBookmarks?.write(to: archiveURL, options: .noFileProtection)
-    }
-    
-    func load() {
-        let archiveURL = getArchiveURL()
-        let propertyListDecoder = PropertyListDecoder()
-                
-        if let retrievedBookmarkData = try? Data(contentsOf: archiveURL),
-            let bookmarksDecoded = try? propertyListDecoder.decode([BookmarkedVocabulary].self, from: retrievedBookmarkData) {
-            bookmarks = bookmarksDecoded
-            Task {
-                await getBookmarksFromFirebase()
-            }
+
+    private func save() {
+        let encoder = PropertyListEncoder()
+        if let data = try? encoder.encode(bookmarks) {
+            try? data.write(to: archiveURL(), options: .noFileProtection)
         }
     }
-    
+
+    private func load() {
+        let url = archiveURL()
+        let decoder = PropertyListDecoder()
+        if
+            let data = try? Data(contentsOf: url),
+            let decoded = try? decoder.decode([BookmarkedVocabulary].self, from: data)
+        {
+            bookmarks = decoded
+            Task { await getBookmarksFromFirebase() }
+        }
+    }
+
+    // MARK: - Firebase helpers
+
     func getBookmarksFromFirebase() async {
-        guard let userID = authManager.userID else {
-            return
-        }
+        guard let uid = userDocId else { return }
         do {
-            let querySnapshot = try await
-            Firestore.firestore().collection("users").document(authManager.userID!).collection("bookmarks").getDocuments()
-            var bookmarksInternal: [BookmarkedVocabulary] = []
-            for document in querySnapshot.documents {
-                bookmarksInternal.append(
-                    BookmarkedVocabulary(
-                        id: document.documentID,
-                        vocab: Vocabulary(
-                            index: document.data()["index"] as! Int,
-                            word: document.data()["word"] as! String,
-                            pinyin: document.data()["pinyin"] as! String,
-                            englishDefinition: document.data()["englishDefinition"] as! String,
-                            chineseDefinition: document.data()["chineseDefinition"] as! String,
-                            example: document.data()["example"] as! String,
-                            questions: document.data()["questions"] as! [String]
-                        ),
-                        level: SecondaryNumber(rawValue: document.data()["level"] as! Int)!,
-                        chapter: Chapter(rawValue: document.data()["chapter"] as! Int)!,
-                        topic: Topic(rawValue: document.data()["topic"] as! Int)!,
-                        currentIndex: document.data()["currentIndex"] as! Int
-                    )
+            let snap = try await Firestore.firestore()
+                .collection("users").document(uid)
+                .collection("bookmarks")
+                .getDocuments()
+
+            var loaded: [BookmarkedVocabulary] = []
+
+            for doc in snap.documents {
+                let d = doc.data()
+
+                // Read enum indices safely -> cases
+                func caseAtIndex<C: CaseIterable>(_ idx: Int, _: C.Type) -> C? {
+                    let all = Array(C.allCases)
+                    guard idx >= 0 && idx < all.count else { return nil }
+                    return all[idx]
+                }
+
+                guard
+                    let index = d["index"] as? Int,
+                    let word = d["word"] as? String,
+                    let pinyin = d["pinyin"] as? String,
+                    let englishDefinition = d["englishDefinition"] as? String,
+                    let chineseDefinition = d["chineseDefinition"] as? String,
+                    let example = d["example"] as? String,
+                    let questions = d["questions"] as? [String],
+                    let levelIdx = d["level"] as? Int,
+                    let chapterIdx = d["chapter"] as? Int,
+                    let topicIdx = d["topic"] as? Int,
+                    let currentIndex = d["currentIndex"] as? Int,
+                    let level = caseAtIndex(levelIdx, SecondaryNumber.self),
+                    let chapter = caseAtIndex(chapterIdx, Chapter.self),
+                    let topic = caseAtIndex(topicIdx, Topic.self)
+                else {
+                    continue
+                }
+
+                let vocab = Vocabulary(
+                    index: index,
+                    word: word,
+                    pinyin: pinyin,
+                    englishDefinition: englishDefinition,
+                    chineseDefinition: chineseDefinition,
+                    example: example,
+                    questions: questions
                 )
-          }
-            bookmarks = bookmarksInternal
+
+                loaded.append(BookmarkedVocabulary(
+                    id: doc.documentID,
+                    vocab: vocab,
+                    level: level,
+                    chapter: chapter,
+                    topic: topic,
+                    currentIndex: currentIndex
+                ))
+            }
+
+            await MainActor.run { self.bookmarks = loaded }
         } catch {
-          print("Error getting documents: \(error)")
+            print("Error getting bookmarks: \(error)")
         }
     }
-    
+
     func addBookmarkToFirebase(bookmarkedVocabulary: BookmarkedVocabulary) async {
-        guard let userID = authManager.userID else {
-            return
+        guard let uid = userDocId else { return }
+
+        // Convert enum cases to indices for storage
+        func indexOf<C: CaseIterable & Equatable>(_ value: C) -> Int {
+            Array(C.allCases).firstIndex(of: value) ?? 0
         }
+
+        let data: [String: Any] = [
+            "chapter": indexOf(bookmarkedVocabulary.chapter),
+            "currentIndex": bookmarkedVocabulary.currentIndex,
+            "level": indexOf(bookmarkedVocabulary.level),
+            "topic": indexOf(bookmarkedVocabulary.topic),
+            "index": bookmarkedVocabulary.vocab.index,
+            "word": bookmarkedVocabulary.vocab.word,
+            "pinyin": bookmarkedVocabulary.vocab.pinyin,
+            "englishDefinition": bookmarkedVocabulary.vocab.englishDefinition,
+            "chineseDefinition": bookmarkedVocabulary.vocab.chineseDefinition,
+            "example": bookmarkedVocabulary.vocab.example,
+            "questions": bookmarkedVocabulary.vocab.questions
+        ]
+
         do {
-            let ref = try await Firestore.firestore().collection("users").document(authManager.userID!).collection("bookmarks").addDocument(data: [
-                "chapter": bookmarkedVocabulary.chapter.rawValue,
-                "currentIndex": bookmarkedVocabulary.currentIndex,
-                "level" : bookmarkedVocabulary.level.rawValue,
-                "topic" : bookmarkedVocabulary.topic.rawValue,
-                "index" : bookmarkedVocabulary.vocab.index,
-                "word" : bookmarkedVocabulary.vocab.word,
-                "pinyin" : bookmarkedVocabulary.vocab.pinyin,
-                "englishDefinition" : bookmarkedVocabulary.vocab.englishDefinition,
-                "chineseDefinition" : bookmarkedVocabulary.vocab.chineseDefinition,
-                "example" : bookmarkedVocabulary.vocab.example,
-                "questions" : bookmarkedVocabulary.vocab.questions
-          ])
+            let ref = try await Firestore.firestore()
+                .collection("users").document(uid)
+                .collection("bookmarks").addDocument(data: data)
+            print("Bookmark added with ID: \(ref.documentID)")
             await getBookmarksFromFirebase()
-          print("Document added with ID: \(ref.documentID)")
         } catch {
-          print("Error adding document: \(error)")
+            print("Error adding bookmark: \(error)")
         }
     }
-    
+
     func deleteBookmarkFromFirebase(id: String) async {
-        guard let userID = authManager.userID else {
-            return
-        }
+        guard let uid = userDocId else { return }
         do {
-            try await Firestore.firestore().collection("users").document(authManager.userID!).collection("bookmarks").document(id).delete()
-          print("Document successfully removed!")
+            try await Firestore.firestore()
+                .collection("users").document(uid)
+                .collection("bookmarks").document(id).delete()
+            print("Bookmark deleted")
             await getBookmarksFromFirebase()
         } catch {
-          print("Error removing document: \(error)")
+            print("Error deleting bookmark: \(error)")
         }
     }
 }
+

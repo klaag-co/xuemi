@@ -415,9 +415,9 @@ struct TopicView: View {
                         chapter: chapter.string,
                         topic: topicSelected.string(level: level, chapter: chapter)
                     ),
-                    level: level.string,
-                    chapter: chapter.string,
-                    topic: topicSelected.string(level: level, chapter: chapter)
+                    level: level,              // ✅ enum SecondaryNumber
+                    chapter: chapter,          // ✅ enum Chapter
+                    topic: topicSelected       // ✅ enum Topic
                 )
             }
         }

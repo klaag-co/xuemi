@@ -1,10 +1,3 @@
-//
-//  LoginView.swift
-//  XuemiiOS
-//
-//  Created by Gracelyn Gosal on 8/7/25.
-//
-
 import SwiftUI
 import GoogleSignInSwift
 
@@ -77,15 +70,6 @@ struct LoginView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                     .frame(height: 100)
-                    
-                    Button("Continue as Guest") {
-                        authmanager.isGuest = true
-                        withAnimation {
-                            authmanager.isLoggedIn = true
-                        }
-                    }
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
                 }
                 .padding(.horizontal, 40)
                 
@@ -140,3 +124,4 @@ struct WaveShape: Shape {
         return path
     }
 }
+

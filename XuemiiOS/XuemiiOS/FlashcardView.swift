@@ -1,51 +1,61 @@
-//
-//  FlashcardView.swift
-//  XuemiiOS
-//
-//  Created by Gracelyn Gosal on 30/5/24.
-//
-
 import SwiftUI
 import AVFoundation
 
 public struct FlashcardView: View {
     @State private var currentSet: Int = 0
+
+    // Data
     var vocabularies: [Vocabulary]
     var level: SecondaryNumber?
     var chapter: Chapter?
     var topic: Topic?
+    var folderName: String?         // ✅ added
     var currentIndex: Int?
-    @State var selection: Int? = 0
-    @State var spellingText: String? = nil
-    @State var isLargeDevice: Bool
-    
-    @ObservedObject var bookmarkManager: BookmarkManager = .shared
-    @ObservedObject var progressManager: ProgressManager = .shared
+
+    // UI state
+    @State private var selection: Int? = 0
+    @State private var spellingText: String? = nil
+    @State private var isLargeDevice: Bool
+
+    @ObservedObject private var bookmarkManager: BookmarkManager = .shared
+    @ObservedObject private var progressManager: ProgressManager = .shared
     private var synthesizer = AVSpeechSynthesizer()
-   
-    init(vocabularies: [Vocabulary], level: SecondaryNumber? = nil, chapter: Chapter? = nil, topic: Topic? = nil, currentIndex: Int? = nil) {
+
+    // Keep init internal unless all parameter types are public.
+    init(
+        vocabularies: [Vocabulary],
+        level: SecondaryNumber? = nil,
+        chapter: Chapter? = nil,
+        topic: Topic? = nil,
+        folderName: String? = nil,      // ✅ added
+        currentIndex: Int? = nil
+    ) {
         self.vocabularies = vocabularies
         self.level = level
         self.chapter = chapter
         self.topic = topic
+        self.folderName = folderName    // ✅ added
         self.currentIndex = currentIndex
         self._isLargeDevice = State(initialValue: UIScreen.main.bounds.height > 800)
     }
-    
+
     public var body: some View {
         ZStack {
             VStack {
-                ProgressView(value: Double(selection ?? 0) / Double(vocabularies.count - 1), total: 1)
-                    .accentColor(.blue)
-                    .padding(30)
-                    .animation(.default, value: selection)
-                
+                ProgressView(
+                    value: Double(selection ?? 0) / Double(max(1, vocabularies.count - 1)),
+                    total: 1
+                )
+                .accentColor(.blue)
+                .padding(30)
+                .animation(.default, value: selection)
+
                 Spacer()
-                
+
                 if vocabularies.isEmpty {
                     Text("No vocabulary found")
                 } else {
-                    GeometryReader { proxy in
+                    GeometryReader { _ in
                         ScrollView(.horizontal, showsIndicators: false) {
                             LazyHStack(spacing: 0) {
                                 ForEach(Array(vocabularies.enumerated()), id: \.offset) { (index, vocab) in
@@ -60,7 +70,7 @@ public struct FlashcardView: View {
                     .scrollTargetBehavior(.viewAligned)
                     .safeAreaPadding(.horizontal, 25)
                 }
-                
+
                 Spacer()
             }
         }
@@ -80,14 +90,14 @@ public struct FlashcardView: View {
         }
         .onAppear {
             if let currentIndex = currentIndex {
-                withAnimation {
-                    selection = currentIndex
-                }
+                withAnimation { selection = currentIndex }
             }
         }
     }
-    
-    func viewForCard(vocab: Vocabulary) -> some View {
+
+    // MARK: - Card
+
+    private func viewForCard(vocab: Vocabulary) -> some View {
         VStack(spacing: 0) {
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color(UIColor(red: 240/255, green: 248/255, blue: 255/255, alpha: 1)))
@@ -97,6 +107,7 @@ public struct FlashcardView: View {
                 .containerRelativeFrame(.horizontal)
                 .overlay {
                     VStack {
+                        // Header: show path if available; else show folder name
                         HStack {
                             Spacer()
                             if let level, let chapter, let topic {
@@ -105,32 +116,60 @@ public struct FlashcardView: View {
                                     .minimumScaleFactor(0.6)
                                     .font(.title3)
                                     .fontWeight(.bold)
-                                Spacer()
+                            } else if let folderName, !folderName.isEmpty {
+                                Text(folderName)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.6)
+                                    .font(.title3)
+                                    .fontWeight(.bold)
+                            }
+                            Spacer()
+
+                            // Bookmark only when we have full path context (level/chapter/topic)
+                            if let level, let chapter, let topic {
                                 Button {
-                                    if !bookmarkManager.bookmarks.contains(where: { $0.vocab.word == vocab.word && $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
-                                        print("Bookmark appended for word: \(vocab.word)")
+                                    if !bookmarkManager.bookmarks.contains(where: {
+                                        $0.vocab.word == vocab.word &&
+                                        $0.level == level &&
+                                        $0.chapter == chapter &&
+                                        $0.topic == topic
+                                    }) {
                                         Task {
-                                            await bookmarkManager.addBookmarkToFirebase(bookmarkedVocabulary: BookmarkedVocabulary(id: "", vocab: vocab, level: level, chapter: chapter, topic: topic, currentIndex: selection ?? 0))
+                                            await bookmarkManager.addBookmarkToFirebase(
+                                                bookmarkedVocabulary: BookmarkedVocabulary(
+                                                    id: "",
+                                                    vocab: vocab,
+                                                    level: level,
+                                                    chapter: chapter,
+                                                    topic: topic,
+                                                    currentIndex: selection ?? 0
+                                                )
+                                            )
                                         }
-                                    } else {
-                                        print("Bookmark removed for word: \(vocab.word)")
-                                        if let bookmark = bookmarkManager.bookmarks.first(where: {
-                                            $0.vocab.word == vocab.word
-                                        }) {
-                                            Task {
-                                                await bookmarkManager.deleteBookmarkFromFirebase(id: bookmark.id)
-                                            }
-                                        }
+                                    } else if let bookmark = bookmarkManager.bookmarks.first(where: {
+                                        $0.vocab.word == vocab.word &&
+                                        $0.level == level &&
+                                        $0.chapter == chapter &&
+                                        $0.topic == topic
+                                    }) {
+                                        Task { await bookmarkManager.deleteBookmarkFromFirebase(id: bookmark.id) }
                                     }
                                 } label: {
-                                    Image(systemName: bookmarkManager.bookmarks.contains(where: { $0.vocab.word == vocab.word && $0.level == level && $0.chapter == chapter && $0.topic == topic }) ? "bookmark.fill" : "bookmark")
-                                        .font(.system(size: 20))
+                                    Image(systemName:
+                                            bookmarkManager.bookmarks.contains(where: {
+                                                $0.vocab.word == vocab.word &&
+                                                $0.level == level &&
+                                                $0.chapter == chapter &&
+                                                $0.topic == topic
+                                            }) ? "bookmark.fill" : "bookmark")
+                                    .font(.system(size: 20))
                                 }
                             }
                         }
                         .padding([.horizontal, .top], 30)
+
                         Spacer()
-                        
+
                         HStack {
                             Spacer()
                             Text("Click the word to practice handwriting!")
@@ -139,38 +178,34 @@ public struct FlashcardView: View {
                                 .padding(.bottom, 10)
                             Spacer()
                         }
-                        
+
                         VStack {
                             Text(vocab.word)
                                 .lineLimit(1)
                                 .minimumScaleFactor(0.6)
-                                .font(.system(size:48))
-//                                .font(.system(size: UIFont.textStyleSize(.largeTitle) * 2))
+                                .font(.system(size: 48))
                                 .underline()
                                 .fontWeight(.bold)
-                                .onTapGesture {
-                                    spellingText = vocab.word
-                                }
+                                .onTapGesture { spellingText = vocab.word }
                         }
-                        
+
                         HStack {
                             Text(vocab.pinyin)
                                 .lineLimit(2)
                                 .minimumScaleFactor(0.6)
                                 .font(.largeTitle)
-                            Button(action: {
+                            Button {
                                 let utterance = AVSpeechUtterance(string: vocab.word)
                                 if let voice = AVSpeechSynthesisVoice.speechVoices().first(where: {
-                                    $0.language == "zh-CN" && $0.gender == .female
+                                    $0.language == "zh-CN"
                                 }) {
                                     utterance.voice = voice
                                 } else {
                                     utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
                                 }
-                                
                                 utterance.rate = 0.5
                                 synthesizer.speak(utterance)
-                            }) {
+                            } label: {
                                 Image(systemName: "speaker.wave.2.fill")
                                     .font(.system(size: 30))
                                     .foregroundColor(.blue)
@@ -178,7 +213,7 @@ public struct FlashcardView: View {
                             }
                         }
                         .padding(.top, 5)
-                        
+
                         VStack {
                             Text(vocab.chineseDefinition)
                                 .lineLimit(4)
@@ -192,6 +227,7 @@ public struct FlashcardView: View {
                         .font(.title3)
                         .padding(.top)
                         .multilineTextAlignment(.center)
+
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -200,14 +236,24 @@ public struct FlashcardView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
-    FlashcardView(vocabularies: [
-        Vocabulary(index: 1, word: "hello", pinyin: "hi", englishDefinition: "hi", chineseDefinition: "hi", example: "hi", questions: ["hi", "hi2"]),
-        Vocabulary(index: 2, word: "hi2", pinyin: "hi2", englishDefinition: "hi2", chineseDefinition: "hi2", example: "hi2", questions: ["hi", "hi2"])
-    ], level: .one, chapter: .one, topic: .one)
-    .environmentObject(BookmarkManager.shared)
-    .environmentObject(ProgressManager.shared)
+    FlashcardView(
+        vocabularies: [
+            Vocabulary(index: 1, word: "你好", pinyin: "nǐ hǎo",
+                       englishDefinition: "hello", chineseDefinition: "打招呼", example: "你好！",
+                       questions: ["“你好”的英文是什么？", "‘hello’ 的汉语是什么？"]),
+            Vocabulary(index: 2, word: "谢谢", pinyin: "xiè xie",
+                       englishDefinition: "thanks", chineseDefinition: "表达感谢", example: "谢谢你！",
+                       questions: ["‘谢谢’的意思是？"])
+        ],
+        folderName: "Set A",          // ✅ works with MCQResultsView’s calls
+        currentIndex: 0
+    )
 }
+
+// MARK: - Support
 
 extension String: Identifiable {
     public var id: String { self }
@@ -218,3 +264,4 @@ public extension UIFont {
         UIFont.preferredFont(forTextStyle: style).pointSize
     }
 }
+

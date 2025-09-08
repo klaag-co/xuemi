@@ -1,36 +1,28 @@
-//
-//  MemoryCardView.swift
-//  XuemiiOS
-//
-//  Created by Gracelyn Gosal on 4/9/25.
-//
-
 import SwiftUI
 
 struct ShakeEffect: GeometryEffect {
     var shakes: CGFloat = 0
     var amplitude: CGFloat = 8
-
     var animatableData: CGFloat {
         get { shakes }
         set { shakes = newValue }
     }
-
     func effectValue(size: CGSize) -> ProjectionTransform {
-        let translationX = sin(shakes * .pi * 2) * amplitude
-        return ProjectionTransform(CGAffineTransform(translationX: translationX, y: 0))
+        let x = sin(shakes * .pi * 2) * amplitude
+        return ProjectionTransform(CGAffineTransform(translationX: x, y: 0))
     }
 }
 
 struct MemoryCardModel: Identifiable {
     let id = UUID()
-    let text: String
+    let text: String                 // word
     var isFaceUp: Bool = true
     var isMatched: Bool = false
 }
 
 struct MemoryCardView: View {
     @State private var cards: [MemoryCardModel] = []
+    @State private var selectedVocabs: [Vocabulary] = []   // <- keep chosen set with pinyin
     @State private var timeRemaining: Int = 15
     @State private var tries: Int = 0
     @State private var gameStarted: Bool = false
@@ -39,6 +31,11 @@ struct MemoryCardView: View {
     @State private var wrongShakeTrigger: CGFloat = 0
     @State private var countdownTimer: Timer? = nil
 
+    // Results
+    @State private var showResults: Bool = false
+    @State private var finalTries: Int = 0
+
+    // Inputs
     @State var vocabularies: [Vocabulary]
     var level: SecondaryNumber
     var chapter: Chapter
@@ -70,14 +67,15 @@ struct MemoryCardView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading)
 
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 2),
-                      spacing: 12) {
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: 2), spacing: 12) {
                 ForEach(cards.indices, id: \.self) { index in
                     cardView(for: index)
                 }
             }
             .padding()
         }
+        .navigationTitle("Memory")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             startNewRound()
             startCountdown()
@@ -86,15 +84,26 @@ struct MemoryCardView: View {
             countdownTimer?.invalidate()
             countdownTimer = nil
         }
+        .navigationDestination(isPresented: $showResults) {
+            let title = contextTitle()
+            let history = MemoryStats.shared.history(for: title)
+            MemoryResultsView(
+                tries: finalTries,
+                vocabularies: selectedVocabs,
+                level: level,
+                chapter: chapter,
+                topic: topic,
+                folderName: folderName,
+                history: history,
+                onPlayAgain: { restartGame() }
+            )
+        }
     }
 
     @ViewBuilder
     private func cardView(for index: Int) -> some View {
         let card = cards[index]
-
-        Button(action: {
-            handleCardTap(at: index)
-        }) {
+        Button(action: { handleCardTap(at: index) }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.customblue)
@@ -127,12 +136,12 @@ struct MemoryCardView: View {
     }
 
     private func startNewRound() {
+        // pick a set
         let available = vocabularies.shuffled()
-        let selected = Array(available.prefix(maxCards))
+        selectedVocabs = Array(available.prefix(maxCards))
+        cards = selectedVocabs.map { MemoryCardModel(text: $0.word, isFaceUp: true, isMatched: false) }
 
-        cards = selected.map { MemoryCardModel(text: $0.word, isFaceUp: true, isMatched: false) }
-
-        targetVocabulary = selected.randomElement()
+        targetVocabulary = selectedVocabs.randomElement()
         displayedQuestion = nil
         tries = 0
         gameStarted = false
@@ -140,6 +149,13 @@ struct MemoryCardView: View {
         wrongCardIndex = nil
         wrongShakeTrigger = 0
         timeRemaining = 15
+    }
+
+    private func restartGame() {
+        countdownTimer?.invalidate()
+        countdownTimer = nil
+        startNewRound()
+        startCountdown()
     }
 
     private func startCountdown() {
@@ -180,13 +196,16 @@ struct MemoryCardView: View {
 
         if cards[tappedIndex].text == targetVocabulary?.word {
             cards[tappedIndex].isMatched = true
-            if let nextTarget = cards.filter({ !$0.isMatched }).randomElement() {
-                targetVocabulary = vocabularies.first { $0.word == nextTarget.text }
+            if let nextTarget = cards.first(where: { !$0.isMatched }) {
+                targetVocabulary = selectedVocabs.first { $0.word == nextTarget.text }
                 displayedQuestion = targetVocabulary?.questions.randomElement()
+                isProcessing = false
             } else {
+                // finished
+                finalTries = tries
+                recordAttempt(tries: tries)
                 checkForCompletion()
             }
-            isProcessing = false
         } else {
             wrongCardIndex = tappedIndex
             wrongShakeTrigger += 1
@@ -205,6 +224,27 @@ struct MemoryCardView: View {
     private func checkForCompletion() {
         if cards.allSatisfy({ $0.isMatched }) {
             gameStarted = false
+            showResults = true
+        } else {
+            isProcessing = false
         }
     }
+
+    private func contextTitle() -> String {
+        "中\(level.string) · \(chapter.string) · \(topic.string(level: level, chapter: chapter))"
+    }
+
+    private func recordAttempt(tries: Int) {
+        let minis = selectedVocabs.map { VocabLite(id: $0.index, word: $0.word, pinyin: $0.pinyin) }
+        MemoryStats.shared.record(
+            tries: tries,
+            contextTitle: contextTitle(),
+            levelRaw: level.rawValue,
+            chapterRaw: nil,
+            topicRaw: nil,
+            folderName: folderName,
+            vocab: minis
+        )
+    }
 }
+

@@ -1,46 +1,37 @@
-//
-//  SOneChapterView.swift
-//  XuemiiOS
-//
-//  Created by Gracelyn Gosal on 28/5/24.
-//
-
 import SwiftUI
 
-enum Chapter: Int, CaseIterable, Codable {
-    case one = 1, two = 2, three = 3, four = 4, five = 5, six = 6, eoy = 7
-    
+enum Chapter: Int, CaseIterable, Codable, Identifiable, Hashable {
+    case one = 1, two, three, four, five, six, eoy
+    var id: Int { rawValue }
+
     var string: String {
         switch self {
-        case .one:
-            return "单元一"
-        case .two:
-            return "单元二"
-        case .three:
-            return "单元三"
-        case .four:
-            return "单元四"
-        case .five:
-            return "单元五"
-        case .six:
-            return "单元六"
-        case .eoy:
-            return "年终考试"
+        case .one:  return "单元一"
+        case .two:  return "单元二"
+        case .three:return "单元三"
+        case .four: return "单元四"
+        case .five: return "单元五"
+        case .six:  return "单元六"
+        case .eoy:  return "年终考试"
         }
     }
 }
 
 struct ChapterView: View {
-    
-    var level: SecondaryNumber
-    
-    @State var vocabsToPass: [Vocabulary] = []
-    
+    let level: SecondaryNumber
+    @State private var vocabsToPass: [Vocabulary] = []
+
+    // Keep heavy expressions out of the ViewBuilder
+    private var chaptersForLevel: [Chapter] {
+        level == .four
+        ? Chapter.allCases.filter { $0 != .six }   // hide 六 for Sec 4 if needed
+        : Chapter.allCases
+    }
+
     var body: some View {
         ScrollView {
             Text("中 \(level.string)")
-                .font(.largeTitle)
-                .bold()
+                .font(.largeTitle).bold()
                 .padding()
                 .frame(height: 80)
                 .frame(maxWidth: .infinity)
@@ -48,24 +39,11 @@ struct ChapterView: View {
                 .background(.customblue)
                 .mask(RoundedRectangle(cornerRadius: 16))
                 .padding([.horizontal, .bottom])
+
             VStack(spacing: 12) {
-                ForEach(level == .four ? Chapter.allCases.filter({ $0 != .six }) : Chapter.allCases, id: \.hashValue) { chapter in
+                ForEach(chaptersForLevel) { chapter in
                     NavigationLink {
-                        if chapter != .eoy {
-                            TopicView(level: level, chapter: chapter)
-                        } else {
-                            Group {
-                                MCQView(
-                                    vocabularies: vocabsToPass,
-                                    level: level.string,
-                                    chapter: chapter.string,
-                                    topic: Topic.eoy.string(level: level, chapter: chapter)
-                                )
-                            }
-                            .onAppear {
-                                vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
-                            }
-                        }
+                        destination(for: chapter)
                     } label: {
                         Text(chapter.string)
                             .font(.title)
@@ -83,21 +61,48 @@ struct ChapterView: View {
         .navigationBarTitleDisplayMode(.inline)
         .padding(.vertical)
         .onAppear {
-            self.vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
+            vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
         }
     }
-    
-    func allVocabularies() -> [Vocabulary] {
-        var allVocabs: [Vocabulary] = []
-        for chapter in Chapter.allCases {
-            for topic in Topic.allCases {
-                allVocabs.append(contentsOf: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topic.string(level: level, chapter: chapter)))
+
+    @ViewBuilder
+    private func destination(for chapter: Chapter) -> some View {
+        if chapter == .eoy {
+            // ✅ pass enums, not strings
+            MCQView(
+                vocabularies: vocabsToPass,
+                level: level,
+                chapter: chapter,
+                topic: .eoy
+            )
+            .onAppear {
+                // refresh a random set when entering EOY MCQ
+                vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
+            }
+        } else {
+            TopicView(level: level, chapter: chapter)
+        }
+    }
+
+    // Collect all vocabularies for the current level
+    private func allVocabularies() -> [Vocabulary] {
+        var all: [Vocabulary] = []
+        for ch in Chapter.allCases {
+            for tp in Topic.allCases {
+                all.append(contentsOf:
+                    loadVocabulariesFromJSON(
+                        fileName: "中\(level.string)",
+                        chapter: ch.string,
+                        topic: tp.string(level: level, chapter: ch)
+                    )
+                )
             }
         }
-        return allVocabs
+        return all
     }
 }
 
 #Preview {
     ChapterView(level: .three)
 }
+

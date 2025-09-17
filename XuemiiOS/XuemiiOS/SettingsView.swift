@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct SettingsView: View {
     @ObservedObject private var authmanager: AuthenticationManager = .shared
+    
+    @State private var acknowledgements: [Acknowledgement] = []
     var body: some View {
         List {
             Section(header: Text("Sign out").font(.headline)) {
@@ -30,8 +33,12 @@ struct SettingsView: View {
             }
             
             Section(header: Text("Acknowledgement").font(.headline)) {
-                ForEach(acknowledgements, id: \.self) { person in
-                    AcknowledgementDetailView(person: person)
+                if acknowledgements.isEmpty {
+                    ProgressView()
+                } else {
+                    ForEach(acknowledgements, id: \.self) { person in
+                        AcknowledgementDetailView(person: person)
+                    }
                 }
             }
             
@@ -40,6 +47,22 @@ struct SettingsView: View {
             }
         }
         .navigationTitle("Settings")
+        .onAppear {
+            Task {
+                let query = try await Firestore.firestore().collection("acknowledgements").getDocuments()
+                self.acknowledgements = []
+                query.documents.forEach { document in
+                    let acknowledgement = Acknowledgement(
+                        position: document.data()["position"] as? Int ?? -1,
+                        name: document.data()["name"] as? String ?? "",
+                        role: document.data()["role"] as? String ?? "",
+                        icon: document.data()["icon"] as? String ?? ""
+                    )
+                    self.acknowledgements.append(acknowledgement)
+                }
+                acknowledgements.sort(by: { $0.position < $1.position })
+            }
+        }
     }
 }
 
@@ -89,28 +112,8 @@ struct HelpSupportView: View {
 }
 
 struct Acknowledgement: Hashable {
+    let position: Int
     let name: String
     let role: String
     let icon: String
 }
-
-let acknowledgements = [
-    Acknowledgement(name: "Kmy Er Sze Lei", role: "Project Coordinator, Designer, Developer", icon: "person.fill"),
-    Acknowledgement(name: "Gracelyn Gosal", role: "Lead Developer (iOS), Marketing", icon: "hammer.fill"),
-    Acknowledgement(name: "Lau Rei Yan Abigail", role: "Lead Developer (Android)", icon: "hammer.fill"),
-    Acknowledgement(name: "Yoshioka Lili", role: "Lead Designer, Marketing", icon: "paintbrush.fill"),
-    Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill"),
-    Acknowledgement(name: "Chay Yu Hung Tristan", role: "Consultant", icon: "person.fill"),
-    Acknowledgement(name: "Tay Kai Quan", role: "Sync Developer (iOS)", icon: "person.fill"),
-    Acknowledgement(name: "Ms Wong Lu Ting", role: "Head of Department", icon: "person.fill"),
-    Acknowledgement(name: "Ms Yap Hui Min", role: "Acting Subject Head", icon: "person.fill"),
-    Acknowledgement(name: "Mr Tan Chuan Leong", role: "Level Head, Upper Secondary", icon: "person.fill"),
-    Acknowledgement(name: "Ms Tan Sook Qin", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Yeo Sok Hui", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Xu Wei", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Ms Liew Sui Qiong", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Yap Yee Ying", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Wong Ho Yan", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Goh Su Huei", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Chinese Language Department", role: "Client", icon: "building.2.fill")
-]

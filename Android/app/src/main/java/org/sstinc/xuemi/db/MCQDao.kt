@@ -32,7 +32,8 @@ interface MCQDao {
     fun getTopicByName(topicName: String): MCQtopic?
 
     @Query("SELECT COUNT(*) FROM MCQtopic WHERE topic = :topic")
-    suspend fun topicExists(topic: String): Int
+    suspend fun quizNameExists(topic: String): Int
+
 
     @Query("UPDATE MCQtopic SET leftOff = :leftOff WHERE id = :id")
     fun updateLeftOff(leftOff: Int, id: Int)

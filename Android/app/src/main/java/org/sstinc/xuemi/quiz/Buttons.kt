@@ -77,7 +77,8 @@ fun Secondary(viewModel: MyViewModel, navController: NavController) {
             val generatedQuestions = generateListOfMCQQuestions(words, true)
             viewModel.addQuiz(
                 topic = name,
-                questions = generatedQuestions
+                questions = generatedQuestions,
+                allowDupes = false
             )
         } else {
             Log.d("temp", "topic already exists (EOY)")
@@ -223,7 +224,7 @@ fun Topic(viewModel: MyViewModel, navController: NavController) {
             viewModel.addQuiz(
                 topic = name.toString(),
                 questions = generatedQuestions,
-
+                allowDupes = false
             )
         }
     }

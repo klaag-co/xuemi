@@ -14,10 +14,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -25,6 +28,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -35,7 +40,9 @@ import androidx.navigation.NavController
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.sstinc.xuemi.MyViewModel
+import org.sstinc.xuemi.quiz.Topic
 import org.sstinc.xuemi.quiz.Word
+import org.sstinc.xuemi.quiz.generateListOfMCQQuestions
 
 
 @Entity
@@ -47,10 +54,13 @@ data class Afolder (
 )
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
     val sectionedData = remember { mutableStateOf<List<Word>>(emptyList()) }
     val allFolders by viewModel.folders.collectAsState()
+    val sheetstate = rememberModalBottomSheetState()
+    var isSheetOpen: Boolean by rememberSaveable { mutableStateOf(false) }
 
 
     LaunchedEffect(Unit) {
@@ -67,9 +77,10 @@ fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding( vertical = 5.dp)
                 )
-//                Button(onClick = { viewModel.deleteAll() }) {
-//                    Text("DeleteAll")
-//                }
+
+                Button(onClick = {  viewModel.deleteAll()}) {
+                    Text("delete")
+                }
                 IconButton(onClick = { navController.navigate("addvocab") }) {
                     Icon(
                         Icons.Default.Add,
@@ -87,8 +98,13 @@ fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
                 items(allFolders) { folder ->
                     Button (
                         onClick = {
-                                  viewModel.addQuiz()
-                                  },
+                            viewModel.addQuiz(
+                                      topic = folder.name,
+                                      questions = generateListOfMCQQuestions(folder.items, limit = false),
+                                      allowDupes = true
+                            )
+                            isSheetOpen = true
+                             },
                         shape = RoundedCornerShape(10.dp),
                         modifier = Modifier
                             .fillMaxWidth()
@@ -100,18 +116,16 @@ fun Vocabulary(viewModel: MyViewModel, navController: NavController) {
                     }
                 }
             }
+            if (isSheetOpen) {
+                ModalBottomSheet(sheetState = sheetstate, onDismissRequest = { isSheetOpen = false }) {
+                    Topic(viewModel, navController)
+                }
+            }
         }
     }
 
 }
 
-@Composable
-fun options(viewModel: MyViewModel, folderName: String) {
-    LaunchedEffect(Unit) {
-
-    }
-
-}
 
 @Composable
 fun quiztemplate(viewModel: MyViewModel, navController: NavController, quiz: String) {

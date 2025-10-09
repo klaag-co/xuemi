@@ -14,7 +14,7 @@ struct LeaderboardView: View {
         nil,
         nil,
         "Crescent Girls' School",
-        nil,
+        "School of Arts and Culture",
         nil,
         nil,
         nil,

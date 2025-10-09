@@ -9,7 +9,7 @@ public struct FlashcardView: View {
     var level: SecondaryNumber?
     var chapter: Chapter?
     var topic: Topic?
-    var folderName: String?         // ✅ added
+    var folderName: String?
     var currentIndex: Int?
 
     // UI state
@@ -21,20 +21,19 @@ public struct FlashcardView: View {
     @ObservedObject private var progressManager: ProgressManager = .shared
     private var synthesizer = AVSpeechSynthesizer()
 
-    // Keep init internal unless all parameter types are public.
     init(
         vocabularies: [Vocabulary],
         level: SecondaryNumber? = nil,
         chapter: Chapter? = nil,
         topic: Topic? = nil,
-        folderName: String? = nil,      // ✅ added
+        folderName: String? = nil,
         currentIndex: Int? = nil
     ) {
         self.vocabularies = vocabularies
         self.level = level
         self.chapter = chapter
         self.topic = topic
-        self.folderName = folderName    // ✅ added
+        self.folderName = folderName
         self.currentIndex = currentIndex
         self._isLargeDevice = State(initialValue: UIScreen.main.bounds.height > 800)
     }
@@ -58,9 +57,8 @@ public struct FlashcardView: View {
                     GeometryReader { _ in
                         ScrollView(.horizontal, showsIndicators: false) {
                             LazyHStack(spacing: 0) {
-                                ForEach(Array(vocabularies.enumerated()), id: \.offset) { (index, vocab) in
+                                ForEach(Array(vocabularies.enumerated()), id: \.offset) { (_, vocab) in
                                     viewForCard(vocab: vocab)
-                                        .id(index)
                                 }
                             }
                             .scrollTargetLayout()
@@ -75,9 +73,12 @@ public struct FlashcardView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+
+        // ✅ Only the handwriting sheet
         .sheet(item: $spellingText) { text in
             StrokeWriteView(word: text)
         }
+
         .onDisappear {
             if let selection, let level, let chapter, let topic {
                 progressManager.updateProgress(
@@ -86,6 +87,7 @@ public struct FlashcardView: View {
                     topic: topic,
                     currentIndex: selection
                 )
+                LastProgressStore.set(level: level, chapter: chapter, topic: topic, currentIndex: selection)
             }
         }
         .onAppear {
@@ -107,10 +109,10 @@ public struct FlashcardView: View {
                 .containerRelativeFrame(.horizontal)
                 .overlay {
                     VStack {
-                        // Header: show path if available; else show folder name
+                        // Header
                         HStack {
                             Spacer()
-                            if let level, let chapter, let topic {
+                            if let level, let chapter, let _ = topic {
                                 Text("中\(level.string): \(chapter.string)")
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.6)
@@ -125,7 +127,7 @@ public struct FlashcardView: View {
                             }
                             Spacer()
 
-                            // Bookmark only when we have full path context (level/chapter/topic)
+                            // Bookmark only when full path exists
                             if let level, let chapter, let topic {
                                 Button {
                                     if !bookmarkManager.bookmarks.contains(where: {
@@ -248,12 +250,12 @@ public struct FlashcardView: View {
                        englishDefinition: "thanks", chineseDefinition: "表达感谢", example: "谢谢你！",
                        questions: ["‘谢谢’的意思是？"])
         ],
-        folderName: "Set A",          // ✅ works with MCQResultsView’s calls
+        folderName: "Set A",
         currentIndex: 0
     )
 }
 
-// MARK: - Support
+// MARK: - Small helpers
 
 extension String: Identifiable {
     public var id: String { self }

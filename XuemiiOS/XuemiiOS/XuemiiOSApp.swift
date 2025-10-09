@@ -23,7 +23,7 @@ struct XuemiiOSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DeviceBootstrapper()           // ⬅️ injects DeviceTypeManager
                 .environmentObject(BookmarkManager.shared)
                 .onOpenURL { URL in
                     GIDSignIn.sharedInstance.handle(URL)
@@ -31,4 +31,3 @@ struct XuemiiOSApp: App {
         }
     }
 }
-

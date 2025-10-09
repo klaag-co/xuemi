@@ -9,41 +9,41 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
+// MARK: - Models
+
 struct Note: Codable, Hashable, Identifiable {
     var id = UUID()
     var title: String
-    var content: String
     var noteType: NoteType
+
+    // replace content with drawingData
+    // if you still want to keep text notes for backwards compatibility, you can keep both.
+    var content: String = ""        // keep if you want old typed notes
+    var drawingData: Data? = nil    // NEW: for PencilKit drawing
 }
 
 enum NoteType: Codable, CaseIterable {
     case exam, note, sone, stwo, sthree, sfour
-    
+
     var string: String {
         switch self {
-        case .exam:
-            return "Exam"
-        case .note:
-            return "Note"
-        case .sone:
-            return "Secondary 1"
-        case .stwo:
-            return "Secondary 2"
-        case .sthree:
-            return "Secondary 3"
-        case .sfour:
-            return "Secondary 4"
+        case .exam:   return "Exam"
+        case .note:   return "Note"
+        case .sone:   return "Secondary 1"
+        case .stwo:   return "Secondary 2"
+        case .sthree: return "Secondary 3"
+        case .sfour:  return "Secondary 4"
         }
     }
 }
 
+// MARK: - Manager
+
 class NotesManager: ObservableObject {
     static let shared: NotesManager = .init()
-    
+
     @Published var notes: [Note] = [] {
-        didSet {
-            save()
-        }
+        didSet { save() }
     }
 
     // MARK: - Current user document id (uid preferred, else email)
@@ -59,39 +59,44 @@ class NotesManager: ObservableObject {
     init() {
         load()
     }
-    
-    func getArchiveURL() -> URL {
+
+    // MARK: - Local persistence (Property List)
+
+    private func getArchiveURL() -> URL {
         let plistName = "notes.plist"
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        
         return documentsDirectory.appendingPathComponent(plistName)
     }
-    
-    func save() {
+
+    private func save() {
         let archiveURL = getArchiveURL()
-        let propertyListEncoder = PropertyListEncoder()
-        if let encodedNotes = try? propertyListEncoder.encode(notes) {
+        let encoder = PropertyListEncoder()
+        // Property lists encode `Data` fine (as base64), so drawingData is safe here.
+        if let encodedNotes = try? encoder.encode(notes) {
             try? encodedNotes.write(to: archiveURL, options: .noFileProtection)
             Task { await updateNotesOnFirebase(newNotesData: encodedNotes) }
         }
     }
-    
-    func load() {
+
+    private func load() {
         Task {
             let remoteLoaded = await getNotesFromFirebase()
-            guard !remoteLoaded else { return /* alr loaded */ }
+            guard !remoteLoaded else { return /* already loaded from cloud */ }
 
             let archiveURL = getArchiveURL()
-            let propertyListDecoder = PropertyListDecoder()
+            let decoder = PropertyListDecoder()
 
-            if let retrievedNoteData = try? Data(contentsOf: archiveURL),
-               let notesDecoded = try? propertyListDecoder.decode([Note].self, from: retrievedNoteData) {
-                notes = notesDecoded
+            if let retrieved = try? Data(contentsOf: archiveURL),
+               let decoded = try? decoder.decode([Note].self, from: retrieved) {
+                notes = decoded
             }
         }
     }
-    
-    func addResult(level: String, chapter: String, topic: String, correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
+
+    // MARK: - Convenience: record quiz result as a note
+
+    func addResult(level: String, chapter: String, topic: String,
+                   correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
         self.addNotesResult(
             level: level,
             chapter: chapter,
@@ -115,24 +120,19 @@ class NotesManager: ObservableObject {
         )
     }
 
-    private func addNotesResult(level: String?, chapter: String?, topic: String?, folderName: String?, correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
+    private func addNotesResult(level: String?, chapter: String?, topic: String?, folderName: String?,
+                                correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
         let noteType: NoteType
-
         switch level {
-        case "一":
-            noteType = .sone
-        case "二":
-            noteType = .stwo
-        case "三":
-            noteType = .sthree
-        case "四", "O 水准备考":
-            noteType = .sfour
-        default:
-            noteType = .note
+        case "一": noteType = .sone
+        case "二": noteType = .stwo
+        case "三": noteType = .sthree
+        case "四", "O 水准备考": noteType = .sfour
+        default: noteType = .note
         }
 
         var title = ""
-        if let level, let chapter, let topic  {
+        if let level, let chapter, let topic {
             if chapter == "年终考试" {
                 title = "中\(level) - \(chapter)"
             } else if level == "O 水准备考" {
@@ -143,13 +143,13 @@ class NotesManager: ObservableObject {
         } else if let folderName {
             title = "\(folderName) on \(Date().formatted(date: .numeric, time: .omitted)) at \(Date().formatted(date: .omitted, time: .shortened))"
         }
-        let content = "Correct: \(correctAnswers)\nWrong: \(wrongAnswers)\nTotal: \(correctAnswers)/\(totalQuestions)"
-        let newNote = Note(title: title, content: content, noteType: noteType)
 
+        let content = "Correct: \(correctAnswers)\nWrong: \(wrongAnswers)\nTotal: \(correctAnswers)/\(totalQuestions)"
+        let newNote = Note(title: title, noteType: noteType, content: content, drawingData: nil)
         notes.append(newNote)
     }
 
-    // MARK: firebase helpers
+    // MARK: - Firebase helpers (store plist as Base64 inside user doc)
 
     private func getNotesFromFirebase() async -> Bool {
         guard let uid = userDocId else { return false }
@@ -173,7 +173,6 @@ class NotesManager: ObservableObject {
             }
 
             await MainActor.run { self.notes = notes }
-
             return true
         } catch {
             print("Error getting notes: \(error)")
@@ -183,7 +182,6 @@ class NotesManager: ObservableObject {
 
     private func updateNotesOnFirebase(newNotesData: Data) async {
         guard let uid = userDocId else { return }
-
         do {
             try await Firestore.firestore()
                 .collection("users").document(uid)
@@ -194,3 +192,4 @@ class NotesManager: ObservableObject {
         }
     }
 }
+

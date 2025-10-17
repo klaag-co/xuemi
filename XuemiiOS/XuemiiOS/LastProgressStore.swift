@@ -1,7 +1,6 @@
 import Foundation
 
 enum LastProgressStore {
-    // Nested model to avoid global name clashes
     struct Point: Codable, Hashable {
         let level: SecondaryNumber
         let chapter: Chapter
@@ -9,33 +8,41 @@ enum LastProgressStore {
         let currentIndex: Int
     }
 
-    private static let key = "xuemi.lastProgressByLevel"
+    private static let key = "xuemi.lastProgressQueue"
 
-    private static func loadAll() -> [Int: Point] {
-        guard let data = UserDefaults.standard.data(forKey: key) else { return [:] }
-        return (try? JSONDecoder().decode([Int: Point].self, from: data)) ?? [:]
+    private static func loadAll() -> [Point] {
+        guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
+        return (try? JSONDecoder().decode([Point].self, from: data)) ?? []
     }
 
-    private static func saveAll(_ dict: [Int: Point]) {
-        if let data = try? JSONEncoder().encode(dict) {
+    private static func saveAll(_ points: [Point]) {
+        if let data = try? JSONEncoder().encode(points) {
             UserDefaults.standard.set(data, forKey: key)
         }
     }
 
-    static func get(level: SecondaryNumber) -> Point? {
-        loadAll()[level.rawValue]
+    static func getAll() -> [Point] {
+        loadAll()
     }
 
     static func set(level: SecondaryNumber, chapter: Chapter, topic: Topic, currentIndex: Int) {
-        var dict = loadAll()
-        dict[level.rawValue] = Point(level: level, chapter: chapter, topic: topic, currentIndex: currentIndex)
-        saveAll(dict)
+        var points = loadAll()
+
+        points.removeAll {
+            $0.level == level && $0.chapter == chapter && $0.topic == topic
+        }
+
+        let newPoint = Point(level: level, chapter: chapter, topic: topic, currentIndex: currentIndex)
+        points.insert(newPoint, at: 0)
+
+        if points.count > 5 {
+            points = Array(points.prefix(5))
+        }
+
+        saveAll(points)
     }
 
-    static func clear(level: SecondaryNumber) {
-        var dict = loadAll()
-        dict.removeValue(forKey: level.rawValue)
-        saveAll(dict)
+    static func clearAll() {
+        UserDefaults.standard.removeObject(forKey: key)
     }
 }
-

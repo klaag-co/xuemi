@@ -52,102 +52,56 @@ enum OLevels: Hashable {
 }
 // ======================================================
 
-// MARK: - Continue Carousel (aligned + peek + edge-only-when-dragging)
+// MARK: - Continue Carousel
 private struct ContinueCarouselView: View {
     @ObservedObject var pathManager: PathManager = .global
-    @State private var showDialogForLevel: SecondaryNumber? = nil
-    @State private var selection: Int? = 0
-    @State private var isDragging = false
+    @State private var allProgress: [LastProgressStore.Point] = []
 
-    private let SIDE_PADDING: CGFloat = 8
-    private let CARD_HEIGHT: CGFloat = 150
-    private let PEEK: CGFloat = 16
+       var body: some View {
+           Group {
+               if allProgress.isEmpty {
+                   VStack(spacing: 16) {
+                       Text("你还没有最近学习的章节")
+                           .font(.title2)
+                           .foregroundStyle(.secondary)
+                           .padding(.top, 80)
+                   }
+                   .frame(maxWidth: .infinity, maxHeight: .infinity)
+               } else {
+                   TabView {
+                       ForEach(Array(allProgress.enumerated()), id: \.offset) { idx, point in
+                           Button {
+                               pathManager.path.append(Route.resume(point.level))
 
-    var body: some View {
-        GeometryReader { geo in
-            let visibleWidth = geo.size.width - (SIDE_PADDING * 2)
-            let cardWidth = max(0, visibleWidth - PEEK)
+                           } label: {
+                               VStack(alignment: .leading, spacing: 8) {
+                                   Text(point.chapter.string)
+                                       .font(.system(size: 42, weight: .bold))
+                                       .foregroundStyle(.white)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                LazyHStack(spacing: PEEK) {    
-                    ForEach(Array(SecondaryNumber.allCases.enumerated()), id: \.offset) { idx, level in
-                        let resume = LastProgressStore.get(level: level)
-
-                        Button {
-                            if resume != nil {
-                                pathManager.path.append(Route.resume(level))
-                            } else {
-                                showDialogForLevel = level
-                            }
-                        } label: {
-                            ZStack(alignment: .bottomLeading) {
-                                RoundedRectangle(cornerRadius: 16)
-                                    .fill(resume == nil ? Color.customgray : Color.customblue)
-                                    .frame(width: cardWidth, height: CARD_HEIGHT)
-
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text("中\(level.string)")
-                                        .font(.system(size: 42, weight: .bold))
-                                        .foregroundStyle(.white)
-
-                                    if let resume {
-                                        Text("继续学习：\(resume.chapter.string)、\(resume.topic.string(level: level, chapter: resume.chapter))")
-                                            .font(.headline)
-                                            .foregroundStyle(.white.opacity(0.9))
-                                    } else {
-                                        Text("还未开始学习")
-                                            .font(.headline)
-                                            .foregroundStyle(.white.opacity(0.9))
-                                    }
-                                }
-                                .padding(20)
-                            }
-                            .frame(height: CARD_HEIGHT)
-                        }
-                        .buttonStyle(.plain)
-                        .id(idx)
-                    }
-                }
-                .scrollTargetLayout()
-                // Leading/trailing insets so the first/last card align with the same 20pt
-                .padding(.horizontal, SIDE_PADDING)
-            }
-            // let the content go full-bleed ONLY while dragging (compensate parent padding)
-            .padding(.horizontal, isDragging ? -SIDE_PADDING : 0)
-            .animation(.easeOut(duration: 0.15), value: isDragging)
-            .scrollTargetBehavior(.viewAligned)  // snaps each card neatly with peek
-            .scrollPosition(id: $selection)
-            .scrollClipDisabled(true)
-            .ignoresSafeArea(.container, edges: .horizontal)
-            .frame(height: CARD_HEIGHT + 8)
-            .simultaneousGesture(
-                DragGesture(minimumDistance: 1)
-                    .onChanged { _ in if !isDragging { isDragging = true } }
-                    .onEnded { _ in
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) { isDragging = false }
-                    }
-            )
-        }
-        .frame(height: CARD_HEIGHT + 8)
-        .confirmationDialog(
-            "还没有学习这个年级的卡片，要开始吗？",
-            isPresented: Binding(
-                get: { showDialogForLevel != nil },
-                set: { if !$0 { showDialogForLevel = nil } }
-            ),
-            actions: {
-                if let level = showDialogForLevel {
-                    Button("开始学习中\(level.string)") {
-                        pathManager.path.append(Route.level(level))
-                        showDialogForLevel = nil
-                    }
-                }
-                Button("取消", role: .cancel) { showDialogForLevel = nil }
-            }
-        )
-    }
-}
-
+                                   Text("继续学习：中\(point.level.string)、\(point.topic.string(level: point.level, chapter: point.chapter))")
+                                       .font(.headline)
+                                       .foregroundStyle(.white.opacity(0.9))
+                               }
+                               .padding(25)
+                               .frame(maxWidth: .infinity)
+                               .background(Color.customblue)
+                               .mask(RoundedRectangle(cornerRadius: 16))
+                               .padding(20)
+                           }
+                           .buttonStyle(.plain)
+                           .id(idx)
+                       }
+                   }
+                   .tabViewStyle(.page(indexDisplayMode: .always))
+                   .indexViewStyle(.page(backgroundDisplayMode: .never))
+               }
+           }
+           .onAppear {
+               allProgress = LastProgressStore.getAll()
+           }
+       }
+   }
     // MARK: - Helpers
 
     func navigationTile(level: SecondaryNumber) -> some View {
@@ -277,9 +231,17 @@ struct HomeView: View {
                 ContinueCarouselView()
 
                 // Your Sec 1/2/3/4 tiles (unchanged size)
-                HStack { navigationTile(level: .one);  navigationTile(level: .two) }
-                HStack { navigationTile(level: .three); navigationTile(level: .four) }
-
+                HStack {
+                    navigationTile(level: .one)
+                    navigationTile(level: .two)
+                }
+                .padding(.horizontal, 20)
+                HStack {
+                    navigationTile(level: .three)
+                    navigationTile(level: .four)
+                }
+                .padding(.horizontal, 20)
+                
                 // O-Levels entry (unchanged)
                 NavigationLink(value: Route.olevelsMenu) {
                     VStack {
@@ -295,8 +257,8 @@ struct HomeView: View {
                 .frame(maxHeight: .infinity)
                 .background(Color.customteal)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
+                .padding([.horizontal, .bottom], 20)
             }
-            .padding(20)
             .navigationTitle("Home")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
@@ -327,7 +289,7 @@ struct HomeView: View {
                     )
 
                 case .resume(let level):
-                    if let resume = LastProgressStore.get(level: level) {
+                    if let resume = LastProgressStore.getAll().first(where: { $0.level == level }) {
                         FlashcardView(
                             vocabularies: loadVocabulariesFromJSON(
                                 fileName: "中\(level.string)",

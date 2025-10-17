@@ -13,55 +13,57 @@ struct SettingsView: View {
     
     @State private var acknowledgements: [Acknowledgement] = []
     var body: some View {
-        List {
-            Section(header: Text("Sign out").font(.headline)) {
-                Button("Sign out"){
-                    withAnimation{
-                        authmanager.signOut()
+        NavigationStack {
+            List {
+                Section(header: Text("Sign out").font(.headline)) {
+                    Button("Sign out"){
+                        withAnimation{
+                            authmanager.signOut()
+                        }
                     }
                 }
-            }
-            Section(header: Text("App").font(.headline)) {
-                NavigationLink(destination: AppInfoDetailView()) {
-                    HStack {
-                        Text("About Our App")
-                        Spacer()
-                            .foregroundColor(.gray)
-                    }
-                    .padding(.vertical, 8)
-                }
-            }
-            
-            Section(header: Text("Acknowledgement").font(.headline)) {
-                if acknowledgements.isEmpty {
-                    ProgressView()
-                } else {
-                    ForEach(acknowledgements, id: \.self) { person in
-                        AcknowledgementDetailView(person: person)
+                Section(header: Text("App").font(.headline)) {
+                    NavigationLink(destination: AppInfoDetailView()) {
+                        HStack {
+                            Text("About Our App")
+                            Spacer()
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.vertical, 8)
                     }
                 }
-            }
-            
-            Section(header: Text("Help and Support").font(.headline)) {
-                HelpSupportView()
-            }
-        }
-        .navigationTitle("Settings")
-        .onAppear {
-            Task {
-                let query = try await Firestore.firestore().collection("acknowledgements").getDocuments()
-                self.acknowledgements = []
-                query.documents.forEach { document in
-                    let acknowledgement = Acknowledgement(
-                        position: document.data()["position"] as? Int ?? -1,
-                        name: document.data()["name"] as? String ?? "",
-                        role: document.data()["role"] as? String ?? "",
-                        icon: document.data()["icon"] as? String ?? ""
-                    )
-                    self.acknowledgements.append(acknowledgement)
+                
+                Section(header: Text("Acknowledgement").font(.headline)) {
+                    if acknowledgements.isEmpty {
+                        ProgressView()
+                    } else {
+                        ForEach(acknowledgements, id: \.self) { person in
+                            AcknowledgementDetailView(person: person)
+                        }
+                    }
                 }
-                acknowledgements.sort(by: { $0.position < $1.position })
+                
+                Section(header: Text("Help and Support").font(.headline)) {
+                    HelpSupportView()
+                }
             }
+            .onAppear {
+                Task {
+                    let query = try await Firestore.firestore().collection("acknowledgements").getDocuments()
+                    self.acknowledgements = []
+                    query.documents.forEach { document in
+                        let acknowledgement = Acknowledgement(
+                            position: document.data()["position"] as? Int ?? -1,
+                            name: document.data()["name"] as? String ?? "",
+                            role: document.data()["role"] as? String ?? "",
+                            icon: document.data()["icon"] as? String ?? ""
+                        )
+                        self.acknowledgements.append(acknowledgement)
+                    }
+                    acknowledgements.sort(by: { $0.position < $1.position })
+                }
+            }
+            .navigationTitle("Settings")
         }
     }
 }

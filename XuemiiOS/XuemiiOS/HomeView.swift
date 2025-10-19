@@ -64,15 +64,14 @@ private struct ContinueCarouselView: View {
                        Text("你还没有最近学习的章节")
                            .font(.title2)
                            .foregroundStyle(.secondary)
-                           .padding(.top, 80)
+                           .padding(.top, 60)
                    }
-                   .frame(maxWidth: .infinity, maxHeight: .infinity)
+                   .frame(maxWidth: .infinity)
                } else {
                    TabView {
                        ForEach(Array(allProgress.enumerated()), id: \.offset) { idx, point in
                            Button {
                                pathManager.path.append(Route.resume(point.level))
-
                            } label: {
                                VStack(alignment: .leading, spacing: 8) {
                                    Text(point.chapter.string)
@@ -84,7 +83,7 @@ private struct ContinueCarouselView: View {
                                        .foregroundStyle(.white.opacity(0.9))
                                }
                                .padding(25)
-                               .frame(maxWidth: .infinity)
+                               .frame(maxWidth: .infinity, maxHeight: .infinity)
                                .background(Color.customblue)
                                .mask(RoundedRectangle(cornerRadius: 16))
                                .padding(20)
@@ -223,108 +222,209 @@ private struct ProgressChip: View {
 struct HomeView: View {
     @ObservedObject var pathManager: PathManager = .global
     @ObservedObject var progressManager = ProgressManager.shared
+    @EnvironmentObject var deviceTypeManager: DeviceTypeManager
 
     var body: some View {
-        NavigationStack(path: $pathManager.path) {
-            VStack(spacing: 16) {
-                // Swipeable per-level Continue (aligned + peek + edge-only-when-dragging)
-                ContinueCarouselView()
-
-                // Your Sec 1/2/3/4 tiles (unchanged size)
+        if deviceTypeManager.deviceType == .ipad(.regular) {
+            NavigationStack(path: $pathManager.path) {
                 HStack {
-                    navigationTile(level: .one)
-                    navigationTile(level: .two)
-                }
-                .padding(.horizontal, 20)
-                HStack {
-                    navigationTile(level: .three)
-                    navigationTile(level: .four)
-                }
-                .padding(.horizontal, 20)
-                
-                // O-Levels entry (unchanged)
-                NavigationLink(value: Route.olevelsMenu) {
-                    VStack {
-                        Text("O 水准备考").padding(.top, 40)
-                        Text("").padding(.bottom, 30)
+                    ProgressDetailView()
+                    VStack(spacing: 16) {
+                        ContinueCarouselView()
+                            .padding(.top, 20)
+                        HStack {
+                            navigationTile(level: .one)
+                            navigationTile(level: .two)
+                        }
+                        .padding(.horizontal, 20)
+                        HStack {
+                            navigationTile(level: .three)
+                            navigationTile(level: .four)
+                        }
+                        .padding(.horizontal, 20)
+                        NavigationLink(value: Route.olevelsMenu) {
+                            VStack {
+                                Text("O 水准备考").padding(.top, 40)
+                                Text("").padding(.bottom, 30)
+                            }
+                            .bold()
+                            .font(.system(size: 50))
+                        }
+                        .font(.system(size: 40))
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(maxHeight: .infinity)
+                        .background(Color.customteal)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .padding([.horizontal, .bottom], 20)
                     }
-                    .bold()
-                    .font(.system(size: 50))
                 }
-                .font(.system(size: 40))
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
-                .frame(maxHeight: .infinity)
-                .background(Color.customteal)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                .padding([.horizontal, .bottom], 20)
-            }
-            .navigationTitle("Home")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    NavigationLink(value: Route.progressDetail) { ProgressChip() }
-                }
-            }
-            .navigationDestination(for: Route.self) { route in
-                switch route {
-
-                case .level(let level):
-                    ChapterView(level: level)
-
-                case .progress(let progress):
-                    let level = progress.level
-                    let chapter = progress.chapter
-                    let topic = progress.topic
-                    FlashcardView(
-                        vocabularies: loadVocabulariesFromJSON(
-                            fileName: "中\(level.string)",
-                            chapter: chapter.string,
-                            topic: topic.string(level: level, chapter: chapter)
-                        ),
-                        level: level,
-                        chapter: chapter,
-                        topic: topic,
-                        currentIndex: progress.currentIndex
-                    )
-
-                case .resume(let level):
-                    if let resume = LastProgressStore.getAll().first(where: { $0.level == level }) {
+                .navigationTitle("Home")
+                .navigationBarTitleDisplayMode(.large)
+                .navigationDestination(for: Route.self) { route in
+                    switch route {
+                        
+                    case .level(let level):
+                        ChapterView(level: level)
+                        
+                    case .progress(let progress):
+                        let level = progress.level
+                        let chapter = progress.chapter
+                        let topic = progress.topic
                         FlashcardView(
                             vocabularies: loadVocabulariesFromJSON(
                                 fileName: "中\(level.string)",
-                                chapter: resume.chapter.string,
-                                topic: resume.topic.string(level: level, chapter: resume.chapter)
+                                chapter: chapter.string,
+                                topic: topic.string(level: level, chapter: chapter)
                             ),
                             level: level,
-                            chapter: resume.chapter,
-                            topic: resume.topic,
-                            currentIndex: resume.currentIndex
+                            chapter: chapter,
+                            topic: topic,
+                            currentIndex: progress.currentIndex
                         )
-                    } else {
-                        ChapterView(level: level)
+                        
+                    case .resume(let level):
+                        if let resume = LastProgressStore.getAll().first(where: { $0.level == level }) {
+                            FlashcardView(
+                                vocabularies: loadVocabulariesFromJSON(
+                                    fileName: "中\(level.string)",
+                                    chapter: resume.chapter.string,
+                                    topic: resume.topic.string(level: level, chapter: resume.chapter)
+                                ),
+                                level: level,
+                                chapter: resume.chapter,
+                                topic: resume.topic,
+                                currentIndex: resume.currentIndex
+                            )
+                        } else {
+                            ChapterView(level: level)
+                        }
+                        
+                    case .olevelsMenu:
+                        OLevelsMenuView()
+                        
+                    case .oPractice(let practice):
+                        let vocabs = Array(allVocabularies(for: practice).shuffled().prefix(15))
+                        MCQView(vocabularies: vocabs, folderName: practice.string)
+                            .navigationTitle(practice.string)
+                            .navigationBarTitleDisplayMode(.inline)
+                        
+                    case .progressDetail:
+                        ProgressDetailView()
+                        
+                    case .replay(let quiz):
+                        ResultReplayDestination(quiz: quiz)
+                        
+                    case .settings:
+                        SettingsView()
+                        
+                    case .replayMemory(let attempt):
+                        MemoryReplayDestination(attempt: attempt)
                     }
-
-                case .olevelsMenu:
-                    OLevelsMenuView()
-
-                case .oPractice(let practice):
-                    let vocabs = Array(allVocabularies(for: practice).shuffled().prefix(15))
-                    MCQView(vocabularies: vocabs, folderName: practice.string)
-                        .navigationTitle(practice.string)
-                        .navigationBarTitleDisplayMode(.inline)
-
-                case .progressDetail:
-                    ProgressDetailView()
-
-                case .replay(let quiz):
-                    ResultReplayDestination(quiz: quiz)
-
-                case .settings:
-                    SettingsView()
-
-                case .replayMemory(let attempt):
-                    MemoryReplayDestination(attempt: attempt)
+                }
+            }
+        } else {
+            NavigationStack(path: $pathManager.path) {
+                VStack(spacing: 16) {
+                    // Swipeable per-level Continue (aligned + peek + edge-only-when-dragging)
+                    ContinueCarouselView()
+                    
+                    // Your Sec 1/2/3/4 tiles (unchanged size)
+                    HStack {
+                        navigationTile(level: .one)
+                        navigationTile(level: .two)
+                    }
+                    .padding(.horizontal, 20)
+                    HStack {
+                        navigationTile(level: .three)
+                        navigationTile(level: .four)
+                    }
+                    .padding(.horizontal, 20)
+                    
+                    // O-Levels entry (unchanged)
+                    NavigationLink(value: Route.olevelsMenu) {
+                        VStack {
+                            Text("O 水准备考").padding(.top, 40)
+                            Text("").padding(.bottom, 30)
+                        }
+                        .bold()
+                        .font(.system(size: 50))
+                    }
+                    .font(.system(size: 40))
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(maxHeight: .infinity)
+                    .background(Color.customteal)
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    .padding([.horizontal, .bottom], 20)
+                }
+                .navigationTitle("Home")
+                .navigationBarTitleDisplayMode(.large)
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        NavigationLink(value: Route.progressDetail) { ProgressChip() }
+                    }
+                }
+                .navigationDestination(for: Route.self) { route in
+                    switch route {
+                        
+                    case .level(let level):
+                        ChapterView(level: level)
+                        
+                    case .progress(let progress):
+                        let level = progress.level
+                        let chapter = progress.chapter
+                        let topic = progress.topic
+                        FlashcardView(
+                            vocabularies: loadVocabulariesFromJSON(
+                                fileName: "中\(level.string)",
+                                chapter: chapter.string,
+                                topic: topic.string(level: level, chapter: chapter)
+                            ),
+                            level: level,
+                            chapter: chapter,
+                            topic: topic,
+                            currentIndex: progress.currentIndex
+                        )
+                        
+                    case .resume(let level):
+                        if let resume = LastProgressStore.getAll().first(where: { $0.level == level }) {
+                            FlashcardView(
+                                vocabularies: loadVocabulariesFromJSON(
+                                    fileName: "中\(level.string)",
+                                    chapter: resume.chapter.string,
+                                    topic: resume.topic.string(level: level, chapter: resume.chapter)
+                                ),
+                                level: level,
+                                chapter: resume.chapter,
+                                topic: resume.topic,
+                                currentIndex: resume.currentIndex
+                            )
+                        } else {
+                            ChapterView(level: level)
+                        }
+                        
+                    case .olevelsMenu:
+                        OLevelsMenuView()
+                        
+                    case .oPractice(let practice):
+                        let vocabs = Array(allVocabularies(for: practice).shuffled().prefix(15))
+                        MCQView(vocabularies: vocabs, folderName: practice.string)
+                            .navigationTitle(practice.string)
+                            .navigationBarTitleDisplayMode(.inline)
+                        
+                    case .progressDetail:
+                        ProgressDetailView()
+                        
+                    case .replay(let quiz):
+                        ResultReplayDestination(quiz: quiz)
+                        
+                    case .settings:
+                        SettingsView()
+                        
+                    case .replayMemory(let attempt):
+                        MemoryReplayDestination(attempt: attempt)
+                    }
                 }
             }
         }

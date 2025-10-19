@@ -20,11 +20,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct XuemiiOSApp: App {
+    @StateObject private var deviceTypeManager = DeviceTypeManager(horizontalSizeClass: .regular)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            DeviceBootstrapper()           // ⬅️ injects DeviceTypeManager
+            ContentView()
                 .environmentObject(BookmarkManager.shared)
+                .environmentObject(deviceTypeManager)
                 .onOpenURL { URL in
                     GIDSignIn.sharedInstance.handle(URL)
                 }

@@ -9,7 +9,7 @@ struct ContentView: View {
             if #available(iOS 18.0, *) {
                 TabView {
                     Tab("Home", systemImage: "house") { HomeView() }
-                    Tab("Notes", systemImage: "doc.text") { NotesView() }   // <- one Notes tab
+                    Tab("Notes", systemImage: "doc.text") { NotesView() }
                     Tab("Folders", systemImage: "pencil.and.list.clipboard") { FolderView(vocabManager: VocabManager()) }
                     Tab("Settings", systemImage: "gearshape") { SettingsView() }
                 }
@@ -17,7 +17,7 @@ struct ContentView: View {
             } else {
                 TabView {
                     HomeView().tabItem { Label("Home", systemImage: "house") }
-                    NotesView().tabItem { Label("Notes", systemImage: "doc.text") }   // <- one Notes tab
+                    NotesView().tabItem { Label("Notes", systemImage: "doc.text") }
                     FolderView(vocabManager: VocabManager()).tabItem { Label("Folders", systemImage: "pencil.and.list.clipboard") }
                     SettingsView().tabItem { Label("Settings", systemImage: "gearshape") }
                 }

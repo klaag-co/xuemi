@@ -144,7 +144,7 @@ class NotesManager: ObservableObject {
             title = "\(folderName) on \(Date().formatted(date: .numeric, time: .omitted)) at \(Date().formatted(date: .omitted, time: .shortened))"
         }
 
-        let content = "Correct: \(correctAnswers)\nWrong: \(wrongAnswers)\nTotal: \(correctAnswers)/\(totalQuestions)"
+        let content = "Correct: \(correctAnswers)\nWrong: \(wrongAnswers)\nTotal: \(correctAnswers)/\(totalQuestions)\nPercentage: \(String(round((Double(correctAnswers) / Double(totalQuestions)) * 100.0)))%"
         let newNote = Note(title: title, noteType: noteType, content: content, drawingData: nil)
         notes.append(newNote)
     }

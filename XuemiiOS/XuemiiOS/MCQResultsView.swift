@@ -228,7 +228,23 @@ struct MCQResultsView: View {
             let minis: [VocabLite] = vocabularies.map { v in
                 VocabLite(id: v.index, word: v.word, pinyin: v.pinyin)
             }
-
+            if let level, let chapter, let topic {
+                NotesManager.shared.addResult(
+                    level: level.string,
+                    chapter: chapter.string,
+                    topic: topic.string(level: level, chapter: chapter),
+                    correctAnswers: correctAnswers,
+                    wrongAnswers: wrongAnswers,
+                    totalQuestions: totalQuestions
+                )
+            } else if let folderName {
+                NotesManager.shared.addResult(
+                    folderName: folderName,
+                    correctAnswers: correctAnswers,
+                    wrongAnswers: wrongAnswers,
+                    totalQuestions: totalQuestions
+                )
+            }
             ScoreManager.shared.recordSnapshot(
                 correct: correctAnswers,
                 total: vocabularies.count,

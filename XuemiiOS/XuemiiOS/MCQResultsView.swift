@@ -33,20 +33,6 @@ struct MCQResultsView: View {
         return (Double(correctAnswers) / Double(totalQuestions)) * 100.0
     }
 
-    private var grade: String {
-        switch percent {
-        case 75...:      return "A1"
-        case 70..<75:    return "A2"
-        case 65..<70:    return "B3"
-        case 60..<65:    return "B4"
-        case 55..<60:    return "C5"
-        case 50..<55:    return "C6"
-        case 45..<50:    return "D7"
-        case 40..<45:    return "E8"
-        default:         return "F9"
-        }
-    }
-
     private var correctList: [Vocabulary] {
         zip(vocabularies, userAnswers).compactMap { v, ans in
             (ans == v.word) ? v : nil
@@ -71,7 +57,7 @@ struct MCQResultsView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                ResultRing(percent: percent, correct: correctAnswers, total: totalQuestions, grade: grade)
+                ResultRing(percent: percent, correct: correctAnswers, total: totalQuestions)
                     .padding(.top, 8)
 
                 // ===== Buttons =====
@@ -369,7 +355,6 @@ private struct ResultRing: View {
     let percent: Double
     let correct: Int
     let total: Int
-    let grade: String
 
     var body: some View {
         ZStack {
@@ -388,9 +373,6 @@ private struct ResultRing: View {
             VStack(spacing: 6) {
                 Text("\(Int(round(percent)))%")
                     .font(.system(size: 44, weight: .bold))
-                Text("\(grade) • \(correct)/\(total)")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
             }
         }
         .frame(width: 220, height: 220)

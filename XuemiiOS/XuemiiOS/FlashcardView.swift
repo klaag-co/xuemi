@@ -221,7 +221,7 @@ public struct FlashcardView: View {
                                 .lineLimit(4)
                                 .minimumScaleFactor(0.6)
                             Text(vocab.englishDefinition)
-                                .lineLimit(2)
+                                .lineLimit(4)
                                 .minimumScaleFactor(0.6)
                                 .padding(.top, 5)
                                 .padding(.bottom, 10)

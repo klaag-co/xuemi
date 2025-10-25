@@ -32,7 +32,7 @@ final class PathManager: ObservableObject {
 enum Route: Hashable {
     case level(SecondaryNumber)
     case progress(ProgressState)      // existing
-    case resume(SecondaryNumber)      // NEW: per-level continue
+    case resume(SecondaryNumber, Chapter, Topic)      // NEW: per-level continue
     case olevelsMenu
     case oPractice(OLevels)
     case progressDetail
@@ -71,7 +71,7 @@ private struct ContinueCarouselView: View {
                    TabView {
                        ForEach(Array(allProgress.enumerated()), id: \.offset) { idx, point in
                            Button {
-                               pathManager.path.append(Route.resume(point.level))
+                               pathManager.path.append(Route.resume(point.level, point.chapter, point.topic))
                            } label: {
                                VStack(alignment: .leading, spacing: 8) {
                                    Text(point.chapter.string)
@@ -283,8 +283,8 @@ struct HomeView: View {
                             currentIndex: progress.currentIndex
                         )
                         
-                    case .resume(let level):
-                        if let resume = LastProgressStore.getAll().first(where: { $0.level == level }) {
+                    case .resume(let level, let chapter, let topic):
+                        if let resume = LastProgressStore.getAll().first(where: { $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
                             FlashcardView(
                                 vocabularies: loadVocabulariesFromJSON(
                                     fileName: "中\(level.string)",
@@ -387,8 +387,8 @@ struct HomeView: View {
                             currentIndex: progress.currentIndex
                         )
                         
-                    case .resume(let level):
-                        if let resume = LastProgressStore.getAll().first(where: { $0.level == level }) {
+                    case .resume(let level, let chapter, let topic):
+                        if let resume = LastProgressStore.getAll().first(where: { $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
                             FlashcardView(
                                 vocabularies: loadVocabulariesFromJSON(
                                     fileName: "中\(level.string)",

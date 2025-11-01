@@ -10,8 +10,8 @@ import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
 
-class AuthenticationManager: ObservableObject {
-    static let shared: AuthenticationManager = .init()
+final class AuthenticationManager: ObservableObject {
+    static let shared = AuthenticationManager()
 
     @Published var isLoggedIn: Bool?
     @Published var givenName: String?
@@ -36,22 +36,22 @@ class AuthenticationManager: ObservableObject {
     @MainActor
     func checkStatus() {
         if let user = GIDSignIn.sharedInstance.currentUser {
-            givenName      = user.profile?.givenName
-            familyName     = user.profile?.familyName
-            fullName       = user.profile?.name
-            email          = user.profile?.email
-            profilePicUrl  = user.profile?.imageURL(withDimension: 100)?.absoluteString
+            givenName     = user.profile?.givenName
+            familyName    = user.profile?.familyName
+            fullName      = user.profile?.name
+            email         = user.profile?.email
+            profilePicUrl = user.profile?.imageURL(withDimension: 100)?.absoluteString
             withAnimation { isLoggedIn = true }
             if let e = email { UserDefaults.standard.set(e, forKey: "userEmail") }
             return
         }
 
         if let fUser = Auth.auth().currentUser {
-            givenName      = nil
-            familyName     = nil
-            fullName       = fUser.displayName
-            email          = fUser.email
-            profilePicUrl  = fUser.photoURL?.absoluteString
+            givenName     = nil
+            familyName    = nil
+            fullName      = fUser.displayName
+            email         = fUser.email
+            profilePicUrl = fUser.photoURL?.absoluteString
             withAnimation { isLoggedIn = true }
             if let e = fUser.email { UserDefaults.standard.set(e, forKey: "userEmail") }
             return

@@ -168,11 +168,11 @@ private struct ContinueCarouselView: View {
                         .fill(
                             LinearGradient(
                                 colors: [
-                                    Color.customblue.opacity(0.9),
-                                    Color.customteal.opacity(0.8)
+                                    Color.customteal,
+                                    Color.customblue
                                 ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
+                                startPoint: .leading,
+                                endPoint: .trailing
                             )
                         )
 

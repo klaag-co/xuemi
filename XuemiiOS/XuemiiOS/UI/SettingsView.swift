@@ -126,7 +126,8 @@ struct SettingsView: View {
                                 .frame(width: 28)
                                 .foregroundStyle(.blue)
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Contact the Xuemi Team").font(.headline)
+                                Text("Contact the Xuemi Team")
+                                    .font(.headline)
                                 Text("Email us at klaag.co@gmail.com")
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
@@ -134,6 +135,7 @@ struct SettingsView: View {
                             Spacer()
                         }
                     }
+                    .buttonStyle(.plain)
                 }
 
                 Section("Sign Out") {
@@ -289,9 +291,6 @@ struct AcknowledgementsView: View {
         List {
             Section("Special Thanks") {
                 Text("Thank you to everyone who supported Xuemi throughout its development. We are very grateful for your guidance, feedback, and encouragement!")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-                    .padding(.vertical, 6)
             }
             Section("Project Contributors") {
                 ForEach(team) { member in

@@ -1,13 +1,3 @@
-//
-//  SettingsView.swift — Xuemi (No Firebase version)
-//  Avatar picker saved locally, and Personal Info stored locally with AppStorage.
-//  No Firebase imports/usage.
-//
-//  Requirements:
-//  • iOS 16+ (PhotosPicker)
-//  • AuthenticationManager.shared (for signOut only)
-//
-
 import SwiftUI
 import PhotosUI
 
@@ -20,137 +10,132 @@ struct UserProfile: Codable, Hashable {
 }
 
 final class LocalProfileStore: ObservableObject {
-    // Persist simple fields locally
-    @AppStorage("profile_email") private var storedEmail: String = ""
-    @AppStorage("profile_name") private var storedName: String = ""
+    @AppStorage("profile_email")  private var storedEmail: String = ""
+    @AppStorage("profile_name")   private var storedName: String = ""
     @AppStorage("profile_school") private var storedSchool: String = ""
     @AppStorage("profile_avatar_data") var avatarData: Data?
 
-    @Published var profile: UserProfile
+    @Published var profile: UserProfile = .init(email: "", name: "", school: "")
 
     init() {
-        self.profile = UserProfile(email: storedEmail, name: storedName, school: storedSchool)
+        self.profile = .init(email: storedEmail, name: storedName, school: storedSchool)
     }
 
     func save(email: String, name: String, school: String) {
-        storedEmail = email
-        storedName = name
+        storedEmail  = email
+        storedName   = name
         storedSchool = school
-        profile = UserProfile(email: email, name: name, school: school)
+        profile      = .init(email: email, name: name, school: school)
     }
 }
 
-// MARK: - Settings View
+// MARK: - Settings (card layout with section titles)
 
 struct SettingsView: View {
     @ObservedObject private var authmanager: AuthenticationManager = .shared
     @StateObject private var store = LocalProfileStore()
-    
+
+    // Fallback to signed-in email when stored profile email is empty
+    private var accountEmail: String {
+        let stored = store.profile.email.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !stored.isEmpty { return stored }
+        return authmanager.email ?? ""
+    }
+
     var body: some View {
         NavigationStack {
-            List {
-                // Profile header (avatar + name + email)
-                Section { ProfileHeader(profile: store.profile, avatarData: $store.avatarData) }
-                
-                // Account → Personal Info page
-                Section(header: Text("Account").font(.headline)) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+
+                    // -------------------
+                    // ACCOUNT
+                    // -------------------
+                    Text("Account")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.leading, 4)
+
                     NavigationLink {
-                        PersonalInfoView(store: store)
+                        PersonalInfoView(store: store, signedInEmail: authmanager.email ?? "")
                     } label: {
-                        AccountCard(email: store.profile.email,
-                                    subtitle: "Tap to view account information",
-                                    avatarData: store.avatarData)
+                        AccountCard(
+                            email: accountEmail,
+                            subtitle: "Edit name, school & profile photo",
+                            avatarData: store.avatarData
+                        )
                     }
                     .buttonStyle(.plain)
-                    .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
-                    .listRowBackground(Color.clear)
-                }
-                
-                
-                // Sign out (still uses your AuthenticationManager)
-                Section(header: Text("Sign out").font(.headline)) {
-                    Button("Sign out") {
+
+                    // -------------------
+                    // APP DETAILS
+                    // -------------------
+                    Text("App Details")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.leading, 4)
+
+                    NavigationLink {
+                        AppInfoDetailView()
+                    } label: {
+                        LinkCard(title: "About Our App", systemImage: "info.circle")
+                    }
+                    .buttonStyle(.plain)
+
+                    // -------------------
+                    // ACKNOWLEDGEMENTS
+                    // -------------------
+                    Text("Acknowledgements")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.leading, 4)
+
+                    NavigationLink {
+                        AcknowledgementsView()
+                    } label: {
+                        LinkCard(title: "Acknowledgements", systemImage: "heart.fill")
+                    }
+                    .buttonStyle(.plain)
+
+                    // -------------------
+                    // HELP & SUPPORT
+                    // -------------------
+                    Text("Help & Support")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.leading, 4)
+
+                    LinkCardExternal(
+                        title: "Contact the Xuemi Team",
+                        subtitle: "Email us at klaag.co@gmail.com",
+                        systemImage: "envelope",
+                        url: URL(string: "mailto:klaag.co@gmail.com")!
+                    )
+
+                    // -------------------
+                    // SIGN OUT
+                    // -------------------
+                    Text("Sign Out")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                        .padding(.leading, 4)
+
+                    CardButton(
+                        title: "Sign out",
+                        systemImage: "rectangle.portrait.and.arrow.right",
+                        tint: .red
+                    ) {
                         withAnimation { authmanager.signOut() }
                     }
                 }
-                
-                // App info (unchanged)
-                Section(header: Text("App").font(.headline)) {
-                    NavigationLink("About Our App") { AppInfoDetailView() }
-                }
-                
-                // Help & Support (unchanged)
-                Section(header: Text("Help and Support").font(.headline)) {
-                    HelpSupportView()
-                }
+                .padding(16)
             }
+            .background(Color(.systemGroupedBackground))
             .navigationTitle("Settings")
         }
     }
 }
 
-
-// MARK: - Profile Header
-
-struct ProfileHeader: View {
-    let profile: UserProfile
-    @Binding var avatarData: Data?
-    @State private var selectedPhoto: PhotosPickerItem?
-
-    var body: some View {
-        VStack(spacing: 10) {
-            avatarView
-            PhotosPicker(selection: $selectedPhoto, matching: .images) {
-                Text("Change Profile Photo").font(.subheadline).foregroundColor(.blue)
-            }
-            .onChange(of: selectedPhoto) { _, newItem in
-                Task {
-                    guard let newItem else { return }
-                    if let data = try? await newItem.loadTransferable(type: Data.self) {
-                        // Optionally compress to JPEG to reduce size
-                        if let uiImage = UIImage(data: data), let jpeg = uiImage.jpegData(compressionQuality: 0.85) {
-                            avatarData = jpeg
-                        } else {
-                            avatarData = data
-                        }
-                    }
-                }
-            }
-
-            if !profile.name.isEmpty { Text(profile.name).font(.headline) }
-            if !profile.email.isEmpty { Text(profile.email).font(.subheadline).foregroundStyle(.secondary) }
-
-            if avatarData != nil {
-                Button("Reset Photo") { avatarData = nil }
-                    .font(.footnote)
-                    .foregroundColor(.red)
-                    .padding(.top, 2)
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 12)
-    }
-
-    @ViewBuilder private var avatarView: some View {
-        if let data = avatarData, let image = UIImage(data: data) {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 72, height: 72)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.secondary.opacity(0.2), lineWidth: 1))
-        } else {
-            Image(systemName: "person.crop.circle.fill")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 72, height: 72)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.secondary.opacity(0.2), lineWidth: 1))
-        }
-    }
-}
-
-// MARK: - Account Card (custom cell)
+// MARK: - Cards
 
 private struct AccountCard: View {
     let email: String
@@ -158,31 +143,30 @@ private struct AccountCard: View {
     let avatarData: Data?
 
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(Color(.secondarySystemGroupedBackground))
-            HStack(spacing: 14) {
-                avatar
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(email.isEmpty ? "Not set" : email)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                    Text(subtitle)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
+        RoundedRectangle(cornerRadius: 16, style: .continuous)
+            .fill(.background)
+            .overlay(
+                HStack(spacing: 14) {
+                    avatar
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(email.isEmpty ? "Not set" : email)
+                            .font(.headline)
+                            .foregroundStyle(.primary)
+                            .lineLimit(1)
+                            .truncationMode(.middle)
+                        Text(subtitle)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(.tertiary)
                 }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .font(.body.weight(.semibold))
-                    .foregroundColor(Color(.tertiaryLabel))
-            }
-            .padding(16)
-        }
-        .frame(maxWidth: .infinity)
-        .fixedSize(horizontal: false, vertical: true)
-        .padding(.vertical, 2)
+                .padding(16)
+            )
+            .shadow(color: .black.opacity(0.06), radius: 10, y: 2)
+            .frame(maxWidth: .infinity, minHeight: 72)
     }
 
     private var avatar: some View {
@@ -198,6 +182,98 @@ private struct AccountCard: View {
     }
 }
 
+private struct LinkCard: View {
+    let title: String
+    let systemImage: String
+    var body: some View {
+        RoundedRectangle(cornerRadius: 16, style: .continuous)
+            .fill(.background)
+            .overlay(
+                HStack(spacing: 12) {
+                    Image(systemName: systemImage)
+                        .imageScale(.large)
+                        .frame(width: 28)
+                        .foregroundStyle(.blue)
+                    Text(title)
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(.tertiary)
+                }
+                .padding(16)
+            )
+            .shadow(color: .black.opacity(0.06), radius: 10, y: 2)
+            .frame(maxWidth: .infinity, minHeight: 60)
+    }
+}
+
+private struct LinkCardExternal: View {
+    let title: String
+    let subtitle: String
+    let systemImage: String
+    let url: URL
+    var body: some View {
+        Link(destination: url) {
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(.background)
+                .overlay(
+                    HStack(spacing: 12) {
+                        Image(systemName: systemImage)
+                            .imageScale(.large)
+                            .frame(width: 28)
+                            .foregroundStyle(.blue)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(title).font(.headline)
+                            Text(subtitle)
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                            .font(.body.weight(.semibold))
+                            .foregroundStyle(.tertiary)
+                    }
+                    .padding(16)
+                )
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 2)
+                .frame(maxWidth: .infinity, minHeight: 60)
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+private struct CardButton: View {
+    let title: String
+    let systemImage: String
+    let tint: Color
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(.background)
+                .overlay(
+                    HStack(spacing: 12) {
+                        Image(systemName: systemImage)
+                            .imageScale(.large)
+                            .frame(width: 28)
+                            .foregroundStyle(tint)
+                        Text(title)
+                            .font(.headline)
+                            .foregroundStyle(tint)
+                        Spacer()
+                    }
+                    .padding(16)
+                )
+                .shadow(color: .black.opacity(0.06), radius: 10, y: 2)
+                .frame(maxWidth: .infinity, minHeight: 60)
+        }
+        .buttonStyle(.plain)
+    }
+}
+
 private struct InitialsAvatar: View {
     let text: String
     var body: some View {
@@ -206,21 +282,40 @@ private struct InitialsAvatar: View {
             Circle().fill(Color(.systemRed))
             Text(initial)
                 .font(.title3).bold()
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
         }
     }
 }
 
-// MARK: - Personal Info
+// MARK: - Personal Info (with photo chooser + email fallback)
 
 struct PersonalInfoView: View {
     @ObservedObject var store: LocalProfileStore
+    var signedInEmail: String = ""   // passed from SettingsView
+
     @State private var email: String = ""
     @State private var name: String = ""
     @State private var school: String = ""
+    @State private var selectedPhoto: PhotosPickerItem?
 
     var body: some View {
         Form {
+            Section(header: Text("Profile Photo")) {
+                HStack(spacing: 16) {
+                    avatarPreview
+                    VStack(alignment: .leading, spacing: 8) {
+                        PhotosPicker(selection: $selectedPhoto, matching: .images) {
+                            Text("Choose Photo")
+                        }
+                        if store.avatarData != nil {
+                            Button("Reset Photo", role: .destructive) { store.avatarData = nil }
+                                .font(.footnote)
+                        }
+                    }
+                }
+                .padding(.vertical, 4)
+            }
+
             Section(header: Text("Email")) {
                 TextField("you@example.com", text: $email)
                     .keyboardType(.emailAddress)
@@ -236,30 +331,57 @@ struct PersonalInfoView: View {
             }
             Section {
                 Button("Save") {
-                    store.save(email: email.trimmingCharacters(in: .whitespacesAndNewlines),
-                               name: name.trimmingCharacters(in: .whitespacesAndNewlines),
-                               school: school.trimmingCharacters(in: .whitespacesAndNewlines))
+                    store.save(
+                        email: email.trimmingCharacters(in: .whitespacesAndNewlines),
+                        name: name.trimmingCharacters(in: .whitespacesAndNewlines),
+                        school: school.trimmingCharacters(in: .whitespacesAndNewlines)
+                    )
                 }
             }
         }
-        .navigationTitle("Personal Info")
+        .navigationTitle("Account")
         .onAppear {
-            email = store.profile.email
-            name = store.profile.name
+            let stored = store.profile.email.trimmingCharacters(in: .whitespacesAndNewlines)
+            email  = stored.isEmpty ? signedInEmail : stored
+            name   = store.profile.name
             school = store.profile.school
+        }
+        .onChange(of: selectedPhoto) { _, newItem in
+            Task {
+                guard let newItem else { return }
+                if let data = try? await newItem.loadTransferable(type: Data.self) {
+                    if let ui = UIImage(data: data),
+                       let jpeg = ui.jpegData(compressionQuality: 0.85) {
+                        store.avatarData = jpeg
+                    } else {
+                        store.avatarData = data
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder private var avatarPreview: some View {
+        if let data = store.avatarData, let ui = UIImage(data: data) {
+            Image(uiImage: ui).resizable().scaledToFill()
+                .frame(width: 60, height: 60).clipShape(Circle())
+        } else {
+            Image(systemName: "person.crop.circle.fill").resizable().scaledToFill()
+                .frame(width: 60, height: 60).clipShape(Circle())
+                .foregroundStyle(.secondary)
         }
     }
 }
 
-// MARK: - App Info & Support (unchanged from your version)
+// MARK: - About & Acknowledgements
 
 struct AppInfoDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                Text("Our app, Xuemi, is an app that will help secondary school students improve their Chinese language in a more convenient manner.")
-                Text("Students will be able to study anywhere, anytime. The app features will allow students to practise their reading and writing and strengthen their use of the Chinese language. Students will be able to learn how to write the Chinese words correctly, and read passages fluently and with confidence.")
-                Text("The app includes a test function which tests students based on the ‘O’ level marking scheme. The content from sec 1-sec 4 will be compiled in this app, allowing easier access to materials for students. Additionally, we will include a note-taking function in the app.")
+                Text("Our app, Xuemi, helps secondary school students improve their Chinese language conveniently, anywhere, anytime.")
+                Text("Students can practise reading and writing to strengthen their use of Chinese. The app guides correct character writing and builds fluent reading with confidence.")
+                Text("It includes tests aligned to the 'O' Level scheme, covering Sec 1–Sec 4 content for easy access, plus a note-taking function.")
             }
             .padding()
         }
@@ -267,14 +389,53 @@ struct AppInfoDetailView: View {
     }
 }
 
-struct HelpSupportView: View {
+struct Acknowledgement: Identifiable {
+    let id = UUID()
+    let name: String
+    let role: String
+    let icon: String
+}
+
+struct AcknowledgementsView: View {
+    private let team: [Acknowledgement] = [
+        Acknowledgement(name: "Kmy Er Sze Lei", role: "Project Coordinator, Designer, Developer", icon: "person.fill"),
+        Acknowledgement(name: "Gracelyn Gosal", role: "Lead Developer (iOS), Marketing", icon: "hammer.fill"),
+        Acknowledgement(name: "Lau Rei Yan Abigail", role: "Lead Developer (Android)", icon: "hammer.fill"),
+        Acknowledgement(name: "Yoshioka Lili", role: "Lead Designer, Marketing", icon: "paintbrush.fill"),
+        Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill"),
+        Acknowledgement(name: "Chay Yu Hung Tristan", role: "Consultant", icon: "person.fill"),
+        Acknowledgement(name: "Ms Wong Lu Ting", role: "Head of Department", icon: "person.fill"),
+        Acknowledgement(name: "Ms Yap Hui Min", role: "Teacher-in-Charge", icon: "person.fill"),
+        Acknowledgement(name: "Ms Tan Sook Qin", role: "Teacher-in-Charge", icon: "person.fill"),
+        Acknowledgement(name: "Ms Yeo Sok Hui", role: "Teacher-in-Charge", icon: "person.fill"),
+        Acknowledgement(name: "Ms Xu Wei", role: "Teacher-in-Charge", icon: "person.fill"),
+        Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill")
+    ]
+
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("For help and support, please contact:")
-            Link(destination: URL(string: "mailto:klaag.co@gmail.com")!) {
-                Text("klaag.co@gmail.com")
+        List {
+            Section("Project Contributors") {
+                ForEach(team) { member in
+                    HStack(spacing: 14) {
+                        Image(systemName: member.icon)
+                            .frame(width: 28, height: 28)
+                            .foregroundColor(.blue)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(member.name).font(.headline)
+                            Text(member.role).font(.subheadline).foregroundColor(.secondary)
+                        }
+                    }
+                    .padding(.vertical, 6)
+                }
+            }
+            Section("Special Thanks") {
+                Text("Thank you to everyone who supported the Xuemi project throughout its development. Your guidance, feedback, and encouragement played a key role in bringing this app to life.")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    .padding(.vertical, 6)
             }
         }
+        .navigationTitle("Acknowledgements")
     }
 }
 

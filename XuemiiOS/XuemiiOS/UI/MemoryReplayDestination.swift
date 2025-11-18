@@ -27,10 +27,11 @@ struct MemoryReplayDestination: View {
             level: level,
             chapter: nil,
             topic: nil,
-            folderName: attempt.contextTitle,   // acts as set title
+            folderName: attempt.contextTitle,
             history: history,
-            onPlayAgain: nil                    // no play-on replay
+            onPlayAgain: nil
         )
+        .navigationTitle("Memory Replay")
     }
 }
 

@@ -13,7 +13,6 @@ public final class MemoryStats: ObservableObject {
 
     @Published public private(set) var attempts: [MemoryAttempt] = []
 
-    // bump key (schema now includes vocab)
     private let storeKey = "memory_attempts_v2"
     private var cancellables = Set<AnyCancellable>()
 

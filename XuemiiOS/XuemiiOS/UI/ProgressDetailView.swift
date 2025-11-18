@@ -40,14 +40,6 @@ struct ProgressDetailView: View {
     @State private var dataset: DatasetType = .mcq
     @State private var range: ScoreRange = .week
     @State private var folder: LevelFolder = .all
-    @State private var isEditing = false
-
-    // Delete confirmations
-    @State private var pendingQuizToDelete: QuizResult?
-    @State private var showDeleteQuiz = false
-
-    @State private var pendingAttemptToDelete: MemoryAttempt?
-    @State private var showDeleteAttempt = false
 
     // MARK: - Filtering
 
@@ -118,66 +110,11 @@ struct ProgressDetailView: View {
                         StatCard(title: "Best (Least)", value: "\(memBest)")
                     }
                 }
-
-                // ===== Recent =====
-                RecentSection(
-                    dataset: dataset,
-                    isEditing: $isEditing,
-                    mcqItems: mcqFiltered.sorted(by: { $0.date > $1.date }),
-                    memItems: memFiltered.sorted(by: { $0.date > $1.date }),
-                    onTapMCQ: { r in
-                        withAnimation { PathManager.global.path.append(Route.replay(r)) }
-                    },
-                    onTapMem: { a in
-                        withAnimation { PathManager.global.path.append(Route.replayMemory(a)) }
-                    },
-                    onDeleteMCQ: { r in
-                        pendingQuizToDelete = r
-                        showDeleteQuiz = true
-                    },
-                    onDeleteMem: { a in
-                        pendingAttemptToDelete = a
-                        showDeleteAttempt = true
-                    }
-                )
             }
             .padding()
         }
         .navigationTitle("Progress")
         .navigationBarTitleDisplayMode(.inline)
-
-        // Delete confirmations (use confirmationDialog to avoid type-checker headaches)
-        .confirmationDialog(
-            "Delete this quiz?",
-            isPresented: $showDeleteQuiz,
-            titleVisibility: .visible
-        ) {
-            Button("Delete", role: .destructive) {
-                if let q = pendingQuizToDelete {
-                    withAnimation { ScoreManager.shared.delete(q) }
-                }
-                pendingQuizToDelete = nil
-            }
-            Button("Cancel", role: .cancel) {
-                pendingQuizToDelete = nil
-            }
-        }
-
-        .confirmationDialog(
-            "Delete this attempt?",
-            isPresented: $showDeleteAttempt,
-            titleVisibility: .visible
-        ) {
-            Button("Delete", role: .destructive) {
-                if let a = pendingAttemptToDelete {
-                    withAnimation { MemoryStats.shared.delete(a) }
-                }
-                pendingAttemptToDelete = nil
-            }
-            Button("Cancel", role: .cancel) {
-                pendingAttemptToDelete = nil
-            }
-        }
     }
 
     // MARK: - Chart builders
@@ -204,8 +141,8 @@ struct ProgressDetailView: View {
         case .week:
             var b = Array(repeating: 0, count: 7)
             for r in items {
-                let wd = cal.component(.weekday, from: r.date) // 1=Sun..7=Sat
-                let idx = (wd + 5) % 7 // 0=Mon..6=Sun
+                let wd = cal.component(.weekday, from: r.date)       // 1=Sun..7=Sat
+                let idx = (wd + 5) % 7                               // 0=Mon..6=Sun
                 b[idx] += 1
             }
             return (0..<7).map { BarPoint(xIndex: $0 + 1, value: b[$0]) }
@@ -329,7 +266,7 @@ private struct HeaderView: View {
     }
 }
 
-// MARK: - Chart section
+// MARK: - Chart section (category X axis with explicit domain)
 
 private struct ChartSection: View {
     let series: [BarPoint]
@@ -338,130 +275,53 @@ private struct ChartSection: View {
     let title: String
 
     var body: some View {
+        let top = roundedTopCompat(maxY)
+
         ChartCard(title: title) {
-            Chart(series) { p in
-                BarMark(x: .value("Index", p.xIndex), y: .value("Count", p.value))
+            Chart {
+                ForEach(series) { p in
+                    BarMark(
+                        x: .value("Index", categoryKey(for: p.xIndex, in: range)),
+                        y: .value("Count", p.value)
+                    )
+                    .foregroundStyle(.blue)
+                }
             }
-            .chartYAxis(.hidden) // hide Y-axis numbers
+            .chartLegend(.hidden)
+            .chartYScale(domain: 0...max(1, top))
+
+            // 👇 Force the X axis to include ALL slots
+            .chartXScale(domain: allCategoryKeys(for: range))
+
+            // X axis: minor guides for EVERY slot + major labeled ticks
             .chartXAxis {
-                AxisMarks(values: xTickValues(range: range)) { v in
-                    AxisGridLine()
-                    AxisTick()
+                AxisMarks(values: allCategoryKeys(for: range)) { _ in
+                    AxisGridLine().foregroundStyle(.gray.opacity(0.10))
+                    AxisTick().foregroundStyle(.gray.opacity(0.18))
+                }
+                AxisMarks(values: axisTickKeys(for: range)) { v in
+                    AxisGridLine().foregroundStyle(.gray.opacity(0.22))
+                    AxisTick().foregroundStyle(.gray.opacity(0.35))
                     AxisValueLabel {
-                        if let i = v.as(Int.self) { Text(xTickLabel(range: range, index: i)) }
-                    }
-                }
-            }
-            .chartYScale(domain: 0...max(1, maxY))
-            .frame(height: 180)
-        }
-    }
-
-    private func xTickValues(range: ScoreRange) -> [Int] {
-        switch range {
-        case .day:   return [0, 6, 12, 18, 23]
-        case .week:  return [1, 2, 3, 4, 5, 6, 7]
-        case .month:
-            let cal = Calendar.current
-            let comps = cal.dateComponents([.year, .month], from: Date())
-            let start = cal.date(from: comps)!
-            let days = cal.range(of: .day, in: .month, for: start)!.count
-            return [1, 8, 15, 22, 29].filter { $0 <= days }
-        }
-    }
-
-    private func xTickLabel(range: ScoreRange, index: Int) -> String {
-        switch range {
-        case .day:
-            switch index {
-            case 0:  return "12AM"
-            case 6:  return "6AM"
-            case 12: return "12PM"
-            case 18: return "6PM"
-            case 23: return "11PM"
-            default: return ""
-            }
-        case .week:
-            return ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][max(1, min(index, 7)) - 1]
-        case .month:
-            return "\(index)"
-        }
-    }
-}
-
-// MARK: - Recent section (with fixed Edit disable)
-
-private struct RecentSection: View {
-    let dataset: DatasetType
-    @Binding var isEditing: Bool
-
-    let mcqItems: [QuizResult]
-    let memItems: [MemoryAttempt]
-
-    let onTapMCQ: (QuizResult) -> Void
-    let onTapMem: (MemoryAttempt) -> Void
-    let onDeleteMCQ: (QuizResult) -> Void
-    let onDeleteMem: (MemoryAttempt) -> Void
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text("Recent").font(.headline)
-                Spacer()
-
-                // Avoid ternary returning different array types — compute a Bool
-                let nothingToEdit: Bool = {
-                    switch dataset {
-                    case .mcq:    return mcqItems.isEmpty
-                    case .memory: return memItems.isEmpty
-                    }
-                }()
-
-                Button(isEditing ? "Done" : "Edit") {
-                    withAnimation { isEditing.toggle() }
-                }
-                .disabled(nothingToEdit)
-            }
-
-            if dataset == .mcq {
-                ForEach(mcqItems.prefix(50)) { r in
-                    HStack(spacing: 12) {
-                        if isEditing {
-                            Button { onDeleteMCQ(r) } label: {
-                                Image(systemName: "trash.circle.fill")
-                                    .foregroundStyle(.red)
-                                    .font(.title3)
-                            }
-                            RecentRowMCQ(quiz: r)
-                        } else {
-                            Button { onTapMCQ(r) } label: {
-                                RecentRowMCQ(quiz: r)
-                            }
-                            .buttonStyle(.plain)
+                        if let key = v.as(String.self) {
+                            Text(axisLabel(forKey: key, in: range))
                         }
                     }
-                    Divider().opacity(0.25)
-                }
-            } else {
-                ForEach(memItems.prefix(50)) { a in
-                    HStack(spacing: 12) {
-                        if isEditing {
-                            Button { onDeleteMem(a) } label: {
-                                Image(systemName: "trash.circle.fill")
-                                    .foregroundStyle(.red)
-                                    .font(.title3)
-                            }
-                            RecentRowMemory(attempt: a)
-                        } else {
-                            Button { onTapMem(a) } label: {
-                                RecentRowMemory(attempt: a)
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
-                    Divider().opacity(0.25)
+                    .foregroundStyle(.secondary)
                 }
             }
+
+            .chartYAxis {
+                AxisMarks(values: yTickValuesCompat(top: top)) { _ in
+                    AxisGridLine().foregroundStyle(.gray.opacity(0.12))
+                    AxisValueLabel().foregroundStyle(.secondary)
+                }
+            }
+
+            .chartPlotStyle { plot in
+                plot.background(Color(.systemGray6)).cornerRadius(12)
+            }
+            .frame(height: 200)
         }
     }
 }
@@ -496,39 +356,79 @@ private struct StatCard: View {
     }
 }
 
-private struct RecentRowMCQ: View {
-    let quiz: QuizResult
-    private static let mdFormatter: DateFormatter = { let f = DateFormatter(); f.dateFormat = "M/d"; return f }()
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(quiz.contextTitle.isEmpty ? "Practice" : quiz.contextTitle)
-                    .font(.subheadline).lineLimit(1)
-                Text(quiz.date, formatter: Self.mdFormatter)
-                    .font(.footnote).foregroundStyle(.secondary)
-            }
-            Spacer()
-            Text("\(Int(round(quiz.percent)))%").font(.headline)
-        }
-        .padding(.vertical, 6)
+// MARK: - Helpers (single copy only)
+
+// Round the top so tallest bar doesn’t touch the ceiling
+private func roundedTopCompat(_ maxY: Int) -> Int {
+    let m = max(1, maxY)
+    let step = m <= 10 ? 5 : (m <= 50 ? 10 : 20)
+    return ((m + step - 1) / step) * step
+}
+
+// Y-axis ticks: 0, mid, top
+private func yTickValuesCompat(top: Int) -> [Int] {
+    let t = max(1, top)
+    let mid = max(1, t / 2)
+    return [0, mid, t]
+}
+
+// ---- Category X-axis helpers ----
+
+private func categoryKey(for index: Int, in range: ScoreRange) -> String {
+    switch range {
+    case .day:   return String(index)        // "0"..."23"
+    case .week:  return String(index)        // "1"..."7"
+    case .month: return String(index)        // "1"..."<days>"
     }
 }
 
-private struct RecentRowMemory: View {
-    let attempt: MemoryAttempt
-    private static let mdFormatter: DateFormatter = { let f = DateFormatter(); f.dateFormat = "M/d"; return f }()
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(attempt.contextTitle.isEmpty ? "Practice" : attempt.contextTitle)
-                    .font(.subheadline).lineLimit(1)
-                Text(attempt.date, formatter: Self.mdFormatter)
-                    .font(.footnote).foregroundStyle(.secondary)
-            }
-            Spacer()
-            Text("\(attempt.tries) tries").font(.headline)
+private func allCategoryKeys(for range: ScoreRange) -> [String] {
+    switch range {
+    case .day:
+        return (0...23).map { String($0) }
+    case .week:
+        return (1...7).map { String($0) }
+    case .month:
+        let cal = Calendar.current
+        let comps = cal.dateComponents([.year, .month], from: Date())
+        let start = cal.date(from: comps)!
+        let days = cal.range(of: .day, in: .month, for: start)!.count
+        return (1...days).map { String($0) }
+    }
+}
+
+private func axisTickKeys(for range: ScoreRange) -> [String] {
+    switch range {
+    case .day:
+        return ["0","6","12","18","23"]
+    case .week:
+        return ["1","2","3","4","5","6","7"]
+    case .month:
+        let cal = Calendar.current
+        let comps = cal.dateComponents([.year, .month], from: Date())
+        let start = cal.date(from: comps)!
+        let days = cal.range(of: .day, in: .month, for: start)!.count
+        return ["1","8","15","22","29"].filter { Int($0)! <= days }
+    }
+}
+
+private func axisLabel(forKey key: String, in range: ScoreRange) -> String {
+    switch range {
+    case .day:
+        switch key {
+        case "0":  return "12 AM"
+        case "6":  return "6 AM"
+        case "12": return "12 PM"
+        case "18": return "6 PM"
+        case "23": return "11 PM"
+        default:   return ""
         }
-        .padding(.vertical, 6)
+    case .week:
+        let names = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+        let i = max(1, min(Int(key) ?? 1, 7)) - 1
+        return names[i]
+    case .month:
+        return key
     }
 }
 

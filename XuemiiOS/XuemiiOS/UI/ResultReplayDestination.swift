@@ -4,7 +4,6 @@ import SwiftUI
 struct ResultReplayDestination: View {
     let quiz: QuizResult
 
-    // Adjust to your Vocabulary initializer.
     private func makeVocabulary(from lite: VocabLite) -> Vocabulary {
         Vocabulary(
             index: lite.id,
@@ -48,6 +47,7 @@ struct ResultReplayDestination: View {
             isReplay: true,
             recordToHistory: false
         )
+        .navigationTitle("MCQ Replay")
     }
 }
 

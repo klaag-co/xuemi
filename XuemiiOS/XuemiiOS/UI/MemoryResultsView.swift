@@ -5,7 +5,7 @@ struct MemoryResultsView: View {
     let tries: Int
 
     // Context
-    let vocabularies: [Vocabulary]          // <- words used in this round
+    let vocabularies: [Vocabulary]
     let level: SecondaryNumber?
     let chapter: Chapter?
     let topic: Topic?
@@ -31,7 +31,6 @@ struct MemoryResultsView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                // Title
                 VStack(spacing: 6) {
                     Text("Memory Complete!")
                         .font(.largeTitle).bold()
@@ -80,9 +79,9 @@ struct MemoryResultsView: View {
                     }
 
                     Button {
-                        withAnimation { PathManager.global.path.append(Route.progressDetail) }
+                        withAnimation { PathManager.global.goProgressDetail() }
                     } label: {
-                        Text("View Progress")
+                        Text("Back to Progress")
                             .font(.headline)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
@@ -91,7 +90,7 @@ struct MemoryResultsView: View {
                     }
 
                     Button {
-                        withAnimation { PathManager.global.popToRoot() }
+                        withAnimation { PathManager.global.goHome() }
                     } label: {
                         Text("Go to Home")
                             .font(.headline)
@@ -103,7 +102,7 @@ struct MemoryResultsView: View {
                 }
                 .padding(.horizontal)
 
-                // 🔤 Vocab list (like MCQResultsView)
+                // 🔤 Vocab list
                 VStack(alignment: .leading, spacing: 12) {
                     HStack {
                         Text("🃏 Cards  •  \(vocabularies.count)")
@@ -149,7 +148,7 @@ struct MemoryResultsView: View {
         }
     }
 
-    // Flashcard destination (same style as MCQ)
+    // Flashcard destination
     @ViewBuilder
     private func flashcardDestination(for vocab: Vocabulary) -> some View {
         let idx = vocabularies.firstIndex(where: { $0.index == vocab.index && $0.word == vocab.word }) ?? 0
@@ -167,7 +166,7 @@ struct MemoryResultsView: View {
     }
 }
 
-// Reuse small pieces from MCQ results styling
+// Reuse small pieces
 
 private struct StatCard: View {
     let title: String, value: String

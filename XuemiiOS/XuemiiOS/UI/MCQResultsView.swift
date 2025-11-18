@@ -21,7 +21,7 @@ struct MCQResultsView: View {
     var isReplay: Bool = false
     var recordToHistory: Bool = true
     var onDone: (() -> Void)? = nil
-    
+
     // MARK: - Env / State
     @ObservedObject private var pathManager: PathManager = .global
     @Environment(\.dismiss) private var dismiss
@@ -62,13 +62,8 @@ struct MCQResultsView: View {
 
                 // ===== Buttons =====
                 if isReplay {
-                    // ✅ Back to Progress — ONLY mutate path (no dismiss)
                     Button {
-                        withAnimation {
-                            if !pathManager.path.isEmpty {
-                                pathManager.path.removeLast()
-                            }
-                        }
+                        withAnimation { PathManager.global.goProgressDetail() }
                     } label: {
                         Text("Back to Progress")
                             .font(.headline)
@@ -79,11 +74,8 @@ struct MCQResultsView: View {
                     }
                     .padding(.horizontal)
 
-                    // ✅ Go to Home — ONLY popToRoot (no dismiss)
                     Button {
-                        withAnimation {
-                            PathManager.global.popToRoot()
-                        }
+                        withAnimation { PathManager.global.goHome() }
                     } label: {
                         Text("Go to Home")
                             .font(.headline)
@@ -94,10 +86,9 @@ struct MCQResultsView: View {
                     }
                     .padding(.horizontal)
                 } else {
-                    // Fresh quiz flow
                     Button {
                         onDone?()
-                        withAnimation { pathManager.popToRoot() }
+                        withAnimation { PathManager.global.goHome() }
                     } label: {
                         Text("Go to Home page")
                             .font(.headline)
@@ -108,8 +99,8 @@ struct MCQResultsView: View {
                     }
                     .padding(.horizontal)
 
-                    NavigationLink {
-                        ProgressDetailView()
+                    Button {
+                        withAnimation { PathManager.global.goProgressDetail() }
                     } label: {
                         Text("View Progress")
                             .font(.headline)
@@ -145,7 +136,7 @@ struct MCQResultsView: View {
                 }
                 .padding(.horizontal)
 
-                // ❌ Wrong — side-by-side (no labels), only word+pinyin
+                // ❌ Wrong — side-by-side
                 VStack(alignment: .leading, spacing: 12) {
                     SectionHeader(title: "❌ 错误 (Wrong)", count: wrongList.count)
 
@@ -156,7 +147,6 @@ struct MCQResultsView: View {
                             LazyVStack(spacing: 0) {
                                 ForEach(wrongList) { item in
                                     HStack(spacing: 0) {
-                                        // Left: correct vocab
                                         NavigationLink {
                                             flashcardDestination(for: item.correct)
                                         } label: {
@@ -167,7 +157,6 @@ struct MCQResultsView: View {
 
                                         Rectangle().frame(width: 0.5).opacity(0.25)
 
-                                        // Right: chosen vocab in red (or dash)
                                         if let chosen = item.chosen {
                                             NavigationLink {
                                                 flashcardDestination(for: chosen)
@@ -198,8 +187,23 @@ struct MCQResultsView: View {
         .navigationTitle("Results")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
+        .toolbar {
+            // ✅ Top-left back shown when this is a replay (coming from Notes)
+            if isReplay {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()                // pop back to Notes
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "chevron.left")
+                            Text("Back")
+                        }
+                    }
+                }
+            }
+        }
         .onAppear {
-            // Save once unless disabled (replay).
+            // Save once unless disabled (replay)
             guard recordToHistory, !didRecord else { return }
 
             let title: String
@@ -214,6 +218,7 @@ struct MCQResultsView: View {
             let minis: [VocabLite] = vocabularies.map { v in
                 VocabLite(id: v.index, word: v.word, pinyin: v.pinyin)
             }
+
             if let level, let chapter, let topic {
                 NotesManager.shared.addResult(
                     level: level.string,
@@ -231,13 +236,14 @@ struct MCQResultsView: View {
                     totalQuestions: totalQuestions
                 )
             }
+
             ScoreManager.shared.recordSnapshot(
                 correct: correctAnswers,
                 total: vocabularies.count,
                 contextTitle: title,
                 levelRaw: level?.rawValue,
-                chapterRaw: nil,   // fill if you store chapter raw value
-                topicRaw: nil,     // fill if you store topic raw value
+                chapterRaw: nil,
+                topicRaw: nil,
                 folderName: folderName,
                 vocab: minis,
                 userAnswers: userAnswers
@@ -326,7 +332,6 @@ private extension View {
     }
 }
 
-// Compact row: ONLY word + pinyin (no meaning)
 private struct VocabRowCompact: View {
     let v: Vocabulary
     var tint: Color = .primary
@@ -350,7 +355,6 @@ private struct VocabRowCompact: View {
     }
 }
 
-// Ring without gaps: red full track + green correct arc
 private struct ResultRing: View {
     let percent: Double
     let correct: Int
@@ -358,18 +362,12 @@ private struct ResultRing: View {
 
     var body: some View {
         ZStack {
-            // subtle outer track
             Circle().stroke(Color(.systemGray5), lineWidth: 22)
-
-            // red full background for "wrong"
             Circle().stroke(Color.red.opacity(0.75), lineWidth: 22)
-
-            // green arc for "correct"
             Circle()
                 .trim(from: 0, to: CGFloat(percent / 100))
                 .stroke(Color.green, style: StrokeStyle(lineWidth: 22, lineCap: .round))
                 .rotationEffect(.degrees(-90))
-
             VStack(spacing: 6) {
                 Text("\(Int(round(percent)))%")
                     .font(.system(size: 44, weight: .bold))

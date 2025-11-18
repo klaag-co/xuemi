@@ -1,7 +1,7 @@
 import SwiftUI
 import AVFoundation
 
-public struct FlashcardView: View {
+struct FlashcardView: View {
     @State private var currentSet: Int = 0
 
     // Data
@@ -17,9 +17,48 @@ public struct FlashcardView: View {
     @State private var spellingText: String? = nil
     @State private var isLargeDevice: Bool
 
+    // Tag chooser state
+    @State private var showTagMenu = false
+    @State private var showCustomTagPrompt = false
+    @State private var customTagInput = ""
+    @State private var pendingWordForTag: String? = nil   // which vocab we’re tagging
+
     @ObservedObject private var bookmarkManager: BookmarkManager = .shared
     @ObservedObject private var progressManager: ProgressManager = .shared
     private var synthesizer = AVSpeechSynthesizer()
+
+    // Local tag store (must match BookmarkView)
+    private enum TagStore {
+        static let prefix = "bookmark.tag."
+        static let customKey = "bookmark.custom.topics"
+
+        static func key(word: String, level: SecondaryNumber, chapter: Chapter, topic: Topic) -> String {
+            let lv = "L\(level.string)"
+            let ch = "C\(chapter.string)"
+            let tp = "T\(topic.string(level: level, chapter: chapter))"
+            return prefix + [word, lv, ch, tp].joined(separator: "::")
+        }
+
+        static func setTag(_ tag: String, forKey key: String) {
+            UserDefaults.standard.set(tag, forKey: key)
+        }
+
+        static func predefined() -> [String] { ["艺术与文化", "科技", "社区", "环保", "教育", "社会"] }
+
+        static func customTopics() -> [String] {
+            (UserDefaults.standard.array(forKey: customKey) as? [String]) ?? []
+        }
+
+        static func addCustomTopic(_ name: String) {
+            let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard !trimmed.isEmpty else { return }
+            var existing = customTopics()
+            if !existing.contains(trimmed) {
+                existing.append(trimmed)
+                UserDefaults.standard.set(existing, forKey: customKey)
+            }
+        }
+    }
 
     init(
         vocabularies: [Vocabulary],
@@ -38,7 +77,7 @@ public struct FlashcardView: View {
         self._isLargeDevice = State(initialValue: UIScreen.main.bounds.height > 800)
     }
 
-    public var body: some View {
+    var body: some View {
         ZStack {
             VStack {
                 ProgressView(
@@ -79,6 +118,50 @@ public struct FlashcardView: View {
             StrokeWriteView(word: text)
         }
 
+        // 7-topic chooser appears immediately when tapping bookmark
+        .confirmationDialog("选择一个主题 · Choose a topic",
+                            isPresented: $showTagMenu,
+                            titleVisibility: .visible) {
+
+            // 6 fixed topics
+            ForEach(TagStore.predefined(), id: \.self) { tag in
+                Button(tag) { applyTag(tag) }
+            }
+
+            // Already-created custom topics (optional)
+            let customs = TagStore.customTopics()
+            if !customs.isEmpty {
+                Divider()
+                ForEach(customs, id: \.self) { tag in
+                    Button(tag) { applyTag(tag) }
+                }
+            }
+
+            // Other…
+            Divider()
+            Button("其他… · Other…") {
+                showCustomTagPrompt = true
+            }
+
+            Button("取消 · Cancel", role: .cancel) { }
+        }
+
+        .alert("输入自定义主题 · Custom Topic", isPresented: $showCustomTagPrompt) {
+            TextField("e.g. 校园生活", text: $customTagInput)
+            Button("保存 · Save") {
+                let name = customTagInput.trimmingCharacters(in: .whitespacesAndNewlines)
+                guard !name.isEmpty else { return }
+                TagStore.addCustomTopic(name)
+                applyTag(name)
+                customTagInput = ""
+            }
+            Button("取消 · Cancel", role: .cancel) {
+                customTagInput = ""
+            }
+        } message: {
+            Text("请输入一个主题名称\nPlease enter a topic name.")
+        }
+
         .onDisappear {
             if let selection, let level, let chapter, let topic {
                 progressManager.updateProgress(
@@ -95,6 +178,17 @@ public struct FlashcardView: View {
                 withAnimation { selection = currentIndex }
             }
         }
+    }
+
+    // MARK: - Apply tag (after bookmark exists)
+    private func applyTag(_ tag: String) {
+        guard
+            let level, let chapter, let topic,
+            let word = pendingWordForTag
+        else { return }
+
+        let key = TagStore.key(word: word, level: level, chapter: chapter, topic: topic)
+        TagStore.setTag(tag, forKey: key)
     }
 
     // MARK: - Card
@@ -127,44 +221,23 @@ public struct FlashcardView: View {
                             }
                             Spacer()
 
-                            // Bookmark only when full path exists
                             if let level, let chapter, let topic {
+                                let isBookmarked = bookmarkManager.bookmarks.contains {
+                                    $0.vocab.word == vocab.word &&
+                                    $0.level == level &&
+                                    $0.chapter == chapter &&
+                                    $0.topic == topic
+                                }
+
+                                // Tap once:
+                                // 1️⃣ ensure bookmark exists
+                                // 2️⃣ immediately show 7-topic chooser
                                 Button {
-                                    if !bookmarkManager.bookmarks.contains(where: {
-                                        $0.vocab.word == vocab.word &&
-                                        $0.level == level &&
-                                        $0.chapter == chapter &&
-                                        $0.topic == topic
-                                    }) {
-                                        Task {
-                                            await bookmarkManager.addBookmarkToFirebase(
-                                                bookmarkedVocabulary: BookmarkedVocabulary(
-                                                    id: "",
-                                                    vocab: vocab,
-                                                    level: level,
-                                                    chapter: chapter,
-                                                    topic: topic,
-                                                    currentIndex: selection ?? 0
-                                                )
-                                            )
-                                        }
-                                    } else if let bookmark = bookmarkManager.bookmarks.first(where: {
-                                        $0.vocab.word == vocab.word &&
-                                        $0.level == level &&
-                                        $0.chapter == chapter &&
-                                        $0.topic == topic
-                                    }) {
-                                        Task { await bookmarkManager.deleteBookmarkFromFirebase(id: bookmark.id) }
-                                    }
+                                    pendingWordForTag = vocab.word
+                                    handleBookmarkTap(vocab: vocab, level: level, chapter: chapter, topic: topic)
                                 } label: {
-                                    Image(systemName:
-                                            bookmarkManager.bookmarks.contains(where: {
-                                                $0.vocab.word == vocab.word &&
-                                                $0.level == level &&
-                                                $0.chapter == chapter &&
-                                                $0.topic == topic
-                                            }) ? "bookmark.fill" : "bookmark")
-                                    .font(.system(size: 20))
+                                    Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+                                        .font(.system(size: 20))
                                 }
                             }
                         }
@@ -198,9 +271,7 @@ public struct FlashcardView: View {
                                 .font(.largeTitle)
                             Button {
                                 let utterance = AVSpeechUtterance(string: vocab.word)
-                                if let voice = AVSpeechSynthesisVoice.speechVoices().first(where: {
-                                    $0.language == "zh-CN"
-                                }) {
+                                if let voice = AVSpeechSynthesisVoice.speechVoices().first(where: { $0.language == "zh-CN" }) {
                                     utterance.voice = voice
                                 } else {
                                     utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
@@ -236,6 +307,36 @@ public struct FlashcardView: View {
                 }
         }
     }
+
+    // Ensure bookmark exists, then show topic menu
+    private func handleBookmarkTap(vocab: Vocabulary, level: SecondaryNumber, chapter: Chapter, topic: Topic) {
+        let exists = bookmarkManager.bookmarks.contains {
+            $0.vocab.word == vocab.word &&
+            $0.level == level &&
+            $0.chapter == chapter &&
+            $0.topic == topic
+        }
+
+        if exists {
+            showTagMenu = true
+        } else {
+            Task {
+                await bookmarkManager.addBookmarkToFirebase(
+                    bookmarkedVocabulary: BookmarkedVocabulary(
+                        id: "",
+                        vocab: vocab,
+                        level: level,
+                        chapter: chapter,
+                        topic: topic,
+                        currentIndex: selection ?? 0
+                    )
+                )
+                await MainActor.run {
+                    showTagMenu = true
+                }
+            }
+        }
+    }
 }
 
 // MARK: - Preview
@@ -255,7 +356,7 @@ public struct FlashcardView: View {
     )
 }
 
-// MARK: - Small helpers
+// MARK: - Helpers for sheet(item:)
 
 extension String: Identifiable {
     public var id: String { self }

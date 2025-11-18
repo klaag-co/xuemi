@@ -142,6 +142,8 @@
 			);
 			mainGroup = 1D0898B62BCE669700F2AFCA;
 			packageReferences = (
+				1DF550BB2E1D449600AB66FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1DE60C0E2E1D485400BF5193 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 1D0898C02BCE669700F2AFCA /* Products */;
 			projectDirPath = "";
@@ -305,7 +307,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 7K6ZTDFM48;
+				DEVELOPMENT_TEAM = HN3U82MX94;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -324,7 +326,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = memeig.XuemiiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = "-76767.XuemiiOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -347,7 +349,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 7K6ZTDFM48;
+				DEVELOPMENT_TEAM = HN3U82MX94;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -366,7 +368,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = memeig.XuemiiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = "-76767.XuemiiOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

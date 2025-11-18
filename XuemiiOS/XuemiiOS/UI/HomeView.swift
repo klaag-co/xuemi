@@ -67,30 +67,6 @@ enum OLevels: Hashable {
 }
 
 // =====================================
-// MARK: - iPad root sections (Home / Notes / Folders / Settings)
-// =====================================
-
-private enum IPadRootSection: String, CaseIterable, Identifiable, Hashable {
-    case home = "Home"
-    case notes = "Notes"
-    case folders = "Folders"
-    case settings = "Settings"
-
-    var id: String { rawValue }
-
-    var iconName: String {
-        switch self {
-        case .home:    return "house.fill"
-        case .notes:   return "note.text"
-        case .folders: return "folder"
-        case .settings:return "gearshape.fill"
-        }
-    }
-
-    var title: String { rawValue }
-}
-
-// =====================================
 // MARK: - Continue Carousel
 // =====================================
 
@@ -421,177 +397,6 @@ private struct ProgressChip: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
-    }
-}
-
-// =====================================
-// MARK: - iPad Sidebar
-// =====================================
-
-private struct LevelSidebar: View {
-    @ObservedObject var pathManager: PathManager = .global
-    @Binding var rootSection: IPadRootSection
-
-    private func sidebarButton(_ section: IPadRootSection) -> some View {
-        Button {
-            withAnimation(.easeInOut(duration: 0.2)) {
-                rootSection = section
-            }
-        } label: {
-            HStack(spacing: 10) {
-                Image(systemName: section.iconName)
-                    .imageScale(.medium)
-                Text(section.title)
-                    .font(.body)
-                Spacer()
-                if rootSection == section {
-                    Image(systemName: "circle.fill")
-                        .font(.system(size: 8))
-                        .foregroundStyle(Color.customblue)
-                }
-            }
-            .padding(.vertical, 8)
-            .padding(.horizontal, 10)
-            .background(
-                Group {
-                    if rootSection == section {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.customblue.opacity(0.12))
-                    } else {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.clear)
-                    }
-                }
-            )
-        }
-        .buttonStyle(.plain)
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-
-            // Top branding
-            HStack(spacing: 10) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 14)
-                        .fill(
-                            LinearGradient(
-                                colors: [Color.customblue, Color.customteal],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                    Text("学")
-                        .font(.headline.weight(.black))
-                        .foregroundStyle(.white)
-                }
-                .frame(width: 36, height: 36)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Xuemi 学习中心")
-                        .font(.subheadline.weight(.semibold))
-                    Text("选择页面与年级")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .padding(.top, 12)
-
-            // Main section: Home / Notes / Folders / Settings
-            VStack(alignment: .leading, spacing: 10) {
-                Text("主页面")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .textCase(.uppercase)
-                    .padding(.horizontal, 2)
-
-                sidebarButton(.home)
-                sidebarButton(.notes)
-                sidebarButton(.folders)
-                sidebarButton(.settings)
-            }
-
-            Divider()
-                .padding(.vertical, 8)
-
-            // Existing levels section
-            VStack(alignment: .leading, spacing: 12) {
-                Text("年级")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .textCase(.uppercase)
-                    .padding(.horizontal, 2)
-
-                ForEach(SecondaryNumber.allCases, id: \.self) { level in
-                    Button {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            rootSection = .home  // ensure Home tab is active when going into levels
-                            pathManager.path.append(Route.level(level))
-                        }
-                    } label: {
-                        HStack {
-                            Text("中\(level.string)")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-                        }
-                        .padding(.vertical, 6)
-                        .padding(.horizontal, 10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color(.systemGray6).opacity(0.8))
-                        )
-                    }
-                    .buttonStyle(.plain)
-                }
-
-                Button {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        rootSection = .home
-                        pathManager.path.append(Route.olevelsMenu)
-                    }
-                } label: {
-                    HStack {
-                        Text("O 水准备考")
-                            .font(.subheadline.weight(.semibold))
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding(.vertical, 7)
-                    .padding(.horizontal, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.customblue.opacity(0.12))
-                    )
-                }
-                .buttonStyle(.plain)
-                .padding(.top, 8)
-            }
-
-            Spacer()
-        }
-        .padding(.horizontal, 16)
-        .padding(.bottom, 12)
-        .frame(maxHeight: .infinity, alignment: .top)
-        .background(
-            LinearGradient(
-                colors: [
-                    Color(.systemBackground),
-                    Color.customblue.opacity(0.05)
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .overlay(
-                Rectangle()
-                    .frame(width: 1)
-                    .foregroundStyle(Color.black.opacity(0.05)),
-                alignment: .trailing
-            )
-        )
     }
 }
 
@@ -1258,8 +1063,6 @@ struct HomeView: View {
     // iPad-only
     @State private var selectedLevels: Set<SecondaryNumber> =
         Set(SecondaryNumber.allCases)
-    @State private var iPadRootSection: IPadRootSection = .home
-    @State private var splitVisibility: NavigationSplitViewVisibility = .all
 
     // Folder manager for the Folders tab
     @StateObject private var vocabManager = VocabManager()
@@ -1278,52 +1081,90 @@ struct HomeView: View {
     // MARK: - iPad root view: TabView OUTSIDE navigation, sidebar collapsible via NavigationSplitView
 
     private var iPadTabRootView: some View {
-        TabView(selection: $iPadRootSection) {
-
-            // HOME TAB
-            NavigationSplitView(
-                columnVisibility: $splitVisibility.animation(.easeInOut(duration: 0.25))
-            ) {
-                LevelSidebar(rootSection: $iPadRootSection)
-            } detail: {
-                iPadHomeNavigation
-                    .background(
-                        LinearGradient(
-                            colors: [
-                                Color(.systemGroupedBackground),
-                                Color.customblue.opacity(0.03)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                        .ignoresSafeArea()
-                    )
+        Group {
+            if #available(iOS 18.0, *) {
+                TabView {
+                    Tab("Home", systemImage: "house.fill") {
+                        iPadHomeNavigation
+                            .background(
+                                LinearGradient(
+                                    colors: [
+                                        Color(.systemGroupedBackground),
+                                        Color.customblue.opacity(0.03)
+                                    ],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                                .ignoresSafeArea()
+                            )
+                    }
+                    // NOTES TAB
+                    Tab("Notes", systemImage: "note.text") {
+                        NotesView()
+                    }
+                    
+                    // FOLDERS TAB
+                    Tab("Folders", systemImage: "folder.fill") {
+                        FolderView(vocabManager: vocabManager)
+                    }
+                    
+                    // SETTINGS TAB
+                    Tab("Settings", systemImage: "gearshape.fill") {
+                        SettingsView()
+                    }
+                    
+                    TabSection("年级") {
+                        Tab("中一", systemImage: "1.circle.fill") {
+                            ChapterView(level: .one)
+                        }
+                        
+                        Tab("中二", systemImage: "2.circle.fill") {
+                            ChapterView(level: .two)
+                        }
+                        
+                        Tab("中三", systemImage: "3.circle.fill") {
+                            ChapterView(level: .three)
+                        }
+                        
+                        Tab("中四", systemImage: "4.circle.fill") {
+                            ChapterView(level: .four)
+                        }
+                        
+                        Tab("O 水准备考", systemImage: "circle.circle.fill") {
+                            NavigationStack {
+                                OLevelsMenuView()
+                            }
+                        }
+                    }
+                    .defaultVisibility(.hidden, for: .tabBar)
+                }
+                .tabViewStyle(.sidebarAdaptable)
+            } else {
+                TabView {
+                    HomeView()
+                        .tabItem {
+                            Label("Home", systemImage: "house.fill")
+                        }
+                    
+                    // NOTES TAB
+                    NotesView()
+                        .tabItem {
+                            Label("Notes", systemImage: "note.text")
+                        }
+                    
+                    // FOLDERS TAB
+                    FolderView(vocabManager: vocabManager)
+                        .tabItem {
+                            Label("Folders", systemImage: "folder.fill")
+                        }
+                    
+                    // SETTINGS TAB
+                    SettingsView()
+                        .tabItem {
+                            Label("Settings", systemImage: "gearshape.fill")
+                        }
+                }
             }
-            .tag(IPadRootSection.home)
-            .tabItem {
-                Label("Home", systemImage: IPadRootSection.home.iconName)
-            }
-
-            // NOTES TAB
-            NotesView()
-                .tag(IPadRootSection.notes)
-                .tabItem {
-                    Label("Notes", systemImage: IPadRootSection.notes.iconName)
-                }
-
-            // FOLDERS TAB
-            FolderView(vocabManager: vocabManager)
-                .tag(IPadRootSection.folders)
-                .tabItem {
-                    Label("Folders", systemImage: IPadRootSection.folders.iconName)
-                }
-
-            // SETTINGS TAB
-            SettingsView()
-                .tag(IPadRootSection.settings)
-                .tabItem {
-                    Label("Settings", systemImage: IPadRootSection.settings.iconName)
-                }
         }
     }
 
@@ -1331,8 +1172,6 @@ struct HomeView: View {
     private var iPadHomeNavigation: some View {
         NavigationStack(path: $pathManager.path) {
             IPadHomeDashboard(selectedLevels: $selectedLevels)
-                // Hide Home nav bar so it doesn’t push content down
-                .toolbar(.hidden, for: .navigationBar)
                 .navigationDestination(for: Route.self) { route in
                     switch route {
                     case .level(let level):
@@ -1529,25 +1368,25 @@ struct HomeView: View {
                 }
             }
             .tabItem {
-                Label("Home", systemImage: IPadRootSection.home.iconName)
+                Label("Home", systemImage: "house.fill")
             }
 
             // NOTES TAB
             NotesView()
                 .tabItem {
-                    Label("Notes", systemImage: IPadRootSection.notes.iconName)
+                    Label("Notes", systemImage: "note.text")
                 }
 
             // FOLDERS TAB
             FolderView(vocabManager: vocabManager)
                 .tabItem {
-                    Label("Folders", systemImage: IPadRootSection.folders.iconName)
+                    Label("Folders", systemImage: "folder.fill")
                 }
 
             // SETTINGS TAB
             SettingsView()
                 .tabItem {
-                    Label("Settings", systemImage: IPadRootSection.settings.iconName)
+                    Label("Settings", systemImage: "gearshape.fill")
                 }
         }
     }

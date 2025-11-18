@@ -382,6 +382,34 @@ private struct ProgressChip: View {
     }
 
     var body: some View {
+        Group {
+            if #available(iOS 26.0, *) {
+                main
+                    .clipShape(Capsule())
+                    .accessibilityLabel("Progress. Today \(todayCount) quizzes. Overall average \(overallAvg) percent.")
+            } else {
+                main
+                    .background(
+                        LinearGradient(
+                            colors: [
+                                Color.customblue.opacity(0.16),
+                                Color.customteal.opacity(0.16)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .overlay(
+                        Capsule()
+                            .strokeBorder(Color.customblue.opacity(0.3), lineWidth: 0.8)
+                    )
+                    .clipShape(Capsule())
+                    .accessibilityLabel("Progress. Today \(todayCount) quizzes. Overall average \(overallAvg) percent.")
+            }
+        }
+    }
+
+    var main: some View {
         HStack(spacing: 6) {
             Image(systemName: "chart.bar.fill")
                 .font(.subheadline)
@@ -393,22 +421,6 @@ private struct ProgressChip: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
-        .background(
-            LinearGradient(
-                colors: [
-                    Color.customblue.opacity(0.16),
-                    Color.customteal.opacity(0.16)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
-        .overlay(
-            Capsule()
-                .strokeBorder(Color.customblue.opacity(0.3), lineWidth: 0.8)
-        )
-        .clipShape(Capsule())
-        .accessibilityLabel("Progress. Today \(todayCount) quizzes. Overall average \(overallAvg) percent.")
     }
 }
 

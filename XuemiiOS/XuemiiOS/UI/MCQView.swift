@@ -143,32 +143,63 @@ struct MCQView: View {
                 }
 
                 HStack {
-                    Button {
-                        guard currentVocabularyIndex > 0 else { return }
-                        currentVocabularyIndex -= 1
-                        loadPreviousState()
-                    } label: {
-                        Image(systemName: "chevron.left").padding()
+                    if #available(iOS 26.0, *) {
+                        Button {
+                            guard currentVocabularyIndex > 0 else { return }
+                            currentVocabularyIndex -= 1
+                            loadPreviousState()
+                        } label: {
+                            Image(systemName: "chevron.left")
+                                .padding(8)
+                        }
+                        .disabled(currentVocabularyIndex == 0)
+                        .buttonBorderShape(.circle)
+                        .buttonStyle(.glass)
+                    } else {
+                        Button {
+                            guard currentVocabularyIndex > 0 else { return }
+                            currentVocabularyIndex -= 1
+                            loadPreviousState()
+                        } label: {
+                            Image(systemName: "chevron.left").padding()
+                        }
+                        .disabled(currentVocabularyIndex == 0)
                     }
-                    .disabled(currentVocabularyIndex == 0)
 
                     Spacer()
 
-                    Button {
-                        guard showAnswer else { return }
-                        if currentVocabularyIndex < vocabularies.count - 1 {
-                            currentVocabularyIndex += 1
-                            resetState()
-                        } else {
-                            showResults = true
+                    if #available(iOS 26.0, *) {
+                        Button {
+                            guard showAnswer else { return }
+                            if currentVocabularyIndex < vocabularies.count - 1 {
+                                currentVocabularyIndex += 1
+                                resetState()
+                            } else {
+                                showResults = true
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right")
+                                .padding(8)
                         }
-                    } label: {
-                        Image(systemName: "chevron.right").padding()
+                        .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
+                        .buttonBorderShape(.circle)
+                        .buttonStyle(.glass)
+                    } else {
+                        Button {
+                            guard showAnswer else { return }
+                            if currentVocabularyIndex < vocabularies.count - 1 {
+                                currentVocabularyIndex += 1
+                                resetState()
+                            } else {
+                                showResults = true
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
                     }
-                    .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
                 }
-                .padding(.horizontal)
-                .padding(.top)
+                .padding()
             }
         }
         .navigationBarTitleDisplayMode(.inline)

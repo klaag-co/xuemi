@@ -144,11 +144,11 @@ private struct ContinueCarouselView: View {
                         .fill(
                             LinearGradient(
                                 colors: [
-                                    Color.customblue.opacity(0.9),
-                                    Color.customteal.opacity(0.8)
+                                    Color.customteal,
+                                    Color.customblue
                                 ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
+                                startPoint: .leading,
+                                endPoint: .trailing
                             )
                         )
 
@@ -268,16 +268,6 @@ private struct OLevelsMenuView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 18) {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("O 水准备考")
-                        .font(.largeTitle.weight(.bold))
-                    Text("选择练习模式，巩固你的词汇和理解。")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-
                 NavigationLink(value: Route.oPractice(.midyear)) {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(OLevels.midyear.string)

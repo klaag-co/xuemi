@@ -44,245 +44,118 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-
-                    // -------------------
-                    // ACCOUNT
-                    // -------------------
-                    Text("Account")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                        .padding(.leading, 4)
-
+            List {
+                Section("Account") {
                     NavigationLink {
                         PersonalInfoView(store: store, signedInEmail: authmanager.email ?? "")
                     } label: {
-                        AccountCard(
-                            email: accountEmail,
-                            subtitle: "Edit name, school & profile photo",
-                            avatarData: store.avatarData
-                        )
+                        HStack(spacing: 14) {
+                            Group {
+                                if let data = store.avatarData, let ui = UIImage(data: data) {
+                                    Image(uiImage: ui).resizable().scaledToFill()
+                                } else {
+                                    let initial = String((accountEmail.first ?? "K")).uppercased()
+                                    ZStack {
+                                        Circle().fill(Color(.systemRed))
+                                        Text(initial)
+                                            .font(.title3).bold()
+                                            .foregroundStyle(.white)
+                                    }
+                                }
+                            }
+                            .frame(width: 48, height: 48)
+                            .clipShape(Circle())
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(accountEmail.isEmpty ? "Not set" : accountEmail)
+                                    .font(.headline)
+                                    .foregroundStyle(.primary)
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                                Text("Edit name, school & profile photo")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                        }
                     }
                     .buttonStyle(.plain)
+                }
 
-                    // -------------------
-                    // APP DETAILS
-                    // -------------------
-                    Text("App Details")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                        .padding(.leading, 4)
-
+                Section("App Details") {
                     NavigationLink {
                         AppInfoDetailView()
                     } label: {
-                        LinkCard(title: "About Our App", systemImage: "info.circle")
+                        HStack(spacing: 12) {
+                            Image(systemName: "info.circle")
+                                .imageScale(.large)
+                                .frame(width: 28)
+                                .foregroundStyle(.blue)
+                            Text("About Our App")
+                                .font(.headline)
+                                .foregroundStyle(.primary)
+                            Spacer()
+                        }
                     }
                     .buttonStyle(.plain)
+                }
 
-                    // -------------------
-                    // ACKNOWLEDGEMENTS
-                    // -------------------
-                    Text("Acknowledgements")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                        .padding(.leading, 4)
-
+                Section("Acknowledgements") {
                     NavigationLink {
                         AcknowledgementsView()
                     } label: {
-                        LinkCard(title: "Acknowledgements", systemImage: "heart.fill")
+                        HStack(spacing: 12) {
+                            Image(systemName: "heart.fill")
+                                .imageScale(.large)
+                                .frame(width: 28)
+                                .foregroundStyle(.blue)
+                            Text("Acknowledgements")
+                                .font(.headline)
+                                .foregroundStyle(.primary)
+                            Spacer()
+                        }
                     }
                     .buttonStyle(.plain)
-
-                    // -------------------
-                    // HELP & SUPPORT
-                    // -------------------
-                    Text("Help & Support")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                        .padding(.leading, 4)
-
-                    LinkCardExternal(
-                        title: "Contact the Xuemi Team",
-                        subtitle: "Email us at klaag.co@gmail.com",
-                        systemImage: "envelope",
-                        url: URL(string: "mailto:klaag.co@gmail.com")!
-                    )
-
-                    // -------------------
-                    // SIGN OUT
-                    // -------------------
-                    Text("Sign Out")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                        .padding(.leading, 4)
-
-                    CardButton(
-                        title: "Sign out",
-                        systemImage: "rectangle.portrait.and.arrow.right",
-                        tint: .red
-                    ) {
-                        withAnimation { authmanager.signOut() }
-                    }
                 }
-                .padding(16)
-            }
-            .background(Color(.systemGroupedBackground))
-            .navigationTitle("Settings")
-        }
-    }
-}
 
-// MARK: - Cards
-
-private struct AccountCard: View {
-    let email: String
-    let subtitle: String
-    let avatarData: Data?
-
-    var body: some View {
-        RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .fill(.background)
-            .overlay(
-                HStack(spacing: 14) {
-                    avatar
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(email.isEmpty ? "Not set" : email)
-                            .font(.headline)
-                            .foregroundStyle(.primary)
-                            .lineLimit(1)
-                            .truncationMode(.middle)
-                        Text(subtitle)
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.body.weight(.semibold))
-                        .foregroundStyle(.tertiary)
-                }
-                .padding(16)
-            )
-            .shadow(color: .black.opacity(0.06), radius: 10, y: 2)
-            .frame(maxWidth: .infinity, minHeight: 72)
-    }
-
-    private var avatar: some View {
-        Group {
-            if let data = avatarData, let ui = UIImage(data: data) {
-                Image(uiImage: ui).resizable().scaledToFill()
-            } else {
-                InitialsAvatar(text: email)
-            }
-        }
-        .frame(width: 48, height: 48)
-        .clipShape(Circle())
-    }
-}
-
-private struct LinkCard: View {
-    let title: String
-    let systemImage: String
-    var body: some View {
-        RoundedRectangle(cornerRadius: 16, style: .continuous)
-            .fill(.background)
-            .overlay(
-                HStack(spacing: 12) {
-                    Image(systemName: systemImage)
-                        .imageScale(.large)
-                        .frame(width: 28)
-                        .foregroundStyle(.blue)
-                    Text(title)
-                        .font(.headline)
-                        .foregroundStyle(.primary)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.body.weight(.semibold))
-                        .foregroundStyle(.tertiary)
-                }
-                .padding(16)
-            )
-            .shadow(color: .black.opacity(0.06), radius: 10, y: 2)
-            .frame(maxWidth: .infinity, minHeight: 60)
-    }
-}
-
-private struct LinkCardExternal: View {
-    let title: String
-    let subtitle: String
-    let systemImage: String
-    let url: URL
-    var body: some View {
-        Link(destination: url) {
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(.background)
-                .overlay(
-                    HStack(spacing: 12) {
-                        Image(systemName: systemImage)
-                            .imageScale(.large)
-                            .frame(width: 28)
-                            .foregroundStyle(.blue)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(title).font(.headline)
-                            Text(subtitle)
-                                .font(.subheadline)
-                                .foregroundStyle(.secondary)
+                Section("Help & Support") {
+                    Link(destination: URL(string: "mailto:klaag.co@gmail.com")!) {
+                        HStack(spacing: 12) {
+                            Image(systemName: "envelope")
+                                .imageScale(.large)
+                                .frame(width: 28)
+                                .foregroundStyle(.blue)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Contact the Xuemi Team").font(.headline)
+                                Text("Email us at klaag.co@gmail.com")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
                         }
-                        Spacer()
-                        Image(systemName: "arrow.up.right")
-                            .font(.body.weight(.semibold))
-                            .foregroundStyle(.tertiary)
                     }
-                    .padding(16)
-                )
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 2)
-                .frame(maxWidth: .infinity, minHeight: 60)
-        }
-        .buttonStyle(.plain)
-    }
-}
+                }
 
-private struct CardButton: View {
-    let title: String
-    let systemImage: String
-    let tint: Color
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(.background)
-                .overlay(
-                    HStack(spacing: 12) {
-                        Image(systemName: systemImage)
-                            .imageScale(.large)
-                            .frame(width: 28)
-                            .foregroundStyle(tint)
-                        Text(title)
-                            .font(.headline)
-                            .foregroundStyle(tint)
-                        Spacer()
+                Section("Sign Out") {
+                    Button {
+                        withAnimation {
+                            authmanager.signOut()
+                        }
+                    } label: {
+                        HStack(spacing: 12) {
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                                .imageScale(.large)
+                                .frame(width: 28)
+                                .foregroundStyle(.red)
+                            Text("Sign out")
+                                .font(.headline)
+                                .foregroundStyle(.red)
+                            Spacer()
+                        }
                     }
-                    .padding(16)
-                )
-                .shadow(color: .black.opacity(0.06), radius: 10, y: 2)
-                .frame(maxWidth: .infinity, minHeight: 60)
-        }
-        .buttonStyle(.plain)
-    }
-}
-
-private struct InitialsAvatar: View {
-    let text: String
-    var body: some View {
-        let initial = String((text.first ?? "K")).uppercased()
-        ZStack {
-            Circle().fill(Color(.systemRed))
-            Text(initial)
-                .font(.title3).bold()
-                .foregroundStyle(.white)
+                }
+            }
+            .navigationTitle("Settings")
         }
     }
 }

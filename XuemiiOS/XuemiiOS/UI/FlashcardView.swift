@@ -117,16 +117,14 @@ struct FlashcardView: View {
         .sheet(item: $spellingText) { text in
             StrokeWriteView(word: text)
         }
-
-        // 7-topic chooser appears immediately when tapping bookmark
-        .confirmationDialog("选择一个主题 · Choose a topic",
+        .confirmationDialog("选择一个主题",
                             isPresented: $showTagMenu,
                             titleVisibility: .visible) {
 
             // 6 fixed topics
-            ForEach(TagStore.predefined(), id: \.self) { tag in
-                Button(tag) { applyTag(tag) }
-            }
+//            ForEach(TagStore.predefined(), id: \.self) { tag in
+//                Button(tag) { applyTag(tag) }
+//            }
 
             // Already-created custom topics (optional)
             let customs = TagStore.customTopics()
@@ -139,27 +137,24 @@ struct FlashcardView: View {
 
             // Other…
             Divider()
-            Button("其他… · Other…") {
+            Button("加主题…") {
                 showCustomTagPrompt = true
             }
-
-            Button("取消 · Cancel", role: .cancel) { }
         }
-
-        .alert("输入自定义主题 · Custom Topic", isPresented: $showCustomTagPrompt) {
+        .alert("输入自定义主题", isPresented: $showCustomTagPrompt) {
             TextField("e.g. 校园生活", text: $customTagInput)
-            Button("保存 · Save") {
+            Button("保存") {
                 let name = customTagInput.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !name.isEmpty else { return }
                 TagStore.addCustomTopic(name)
                 applyTag(name)
                 customTagInput = ""
             }
-            Button("取消 · Cancel", role: .cancel) {
+            Button("取消", role: .cancel) {
                 customTagInput = ""
             }
         } message: {
-            Text("请输入一个主题名称\nPlease enter a topic name.")
+            Text("请输入一个主题名称")
         }
 
         .onDisappear {
@@ -229,9 +224,6 @@ struct FlashcardView: View {
                                     $0.topic == topic
                                 }
 
-                                // Tap once:
-                                // 1️⃣ ensure bookmark exists
-                                // 2️⃣ immediately show 7-topic chooser
                                 Button {
                                     pendingWordForTag = vocab.word
                                     handleBookmarkTap(vocab: vocab, level: level, chapter: chapter, topic: topic)
@@ -318,7 +310,15 @@ struct FlashcardView: View {
         }
 
         if exists {
-            showTagMenu = true
+            Task {
+                await bookmarkManager.deleteBookmarkFromFirebase(id: bookmarkManager.bookmarks.first {
+                    $0.vocab.word == vocab.word &&
+                    $0.level == level &&
+                    $0.chapter == chapter &&
+                    $0.topic == topic
+                }!.id)
+            }
+//            showTagMenu = true
         } else {
             Task {
                 await bookmarkManager.addBookmarkToFirebase(

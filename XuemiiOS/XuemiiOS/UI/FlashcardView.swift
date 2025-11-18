@@ -122,9 +122,9 @@ struct FlashcardView: View {
                             titleVisibility: .visible) {
 
             // 6 fixed topics
-//            ForEach(TagStore.predefined(), id: \.self) { tag in
-//                Button(tag) { applyTag(tag) }
-//            }
+            ForEach(TagStore.predefined(), id: \.self) { tag in
+                Button(tag) { applyTag(tag) }
+            }
 
             // Already-created custom topics (optional)
             let customs = TagStore.customTopics()

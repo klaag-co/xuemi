@@ -268,7 +268,16 @@ private struct OLevelsMenuView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 18) {
-                NavigationLink(value: Route.oPractice(.midyear)) {
+                NavigationLink {
+                    let practice = OLevels.midyear
+                    let vocabs = Array(allVocabularies(for: practice).shuffled().prefix(15))
+                    MCQView(
+                        vocabularies: vocabs,
+                        folderName: practice.string
+                    )
+                    .navigationTitle(practice.string)
+                    .navigationBarTitleDisplayMode(.inline)
+                } label: {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(OLevels.midyear.string)
                             .font(.title3.weight(.semibold))
@@ -293,7 +302,15 @@ private struct OLevelsMenuView: View {
                 .buttonStyle(.plain)
                 .padding(.horizontal)
 
-                NavigationLink(value: Route.oPractice(.endofyear)) {
+                NavigationLink {
+                    let practice = OLevels.endofyear
+                    MCQView(
+                        vocabularies:  Array(allVocabularies(for: practice).shuffled().prefix(15)),
+                        folderName: practice.string
+                    )
+                    .navigationTitle(practice.string)
+                    .navigationBarTitleDisplayMode(.inline)
+                } label: {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(OLevels.endofyear.string)
                             .font(.title3.weight(.semibold))
@@ -946,72 +963,67 @@ private struct IPadHomeDashboard: View {
                 ContinueCarouselView()
                     .frame(height: 190)
                     // ↓ just a small gap before the MCQ section
-                    .padding(.bottom, 4)
+                    .padding(.bottom, 20)
 
                 // 2. MCQ row
                 VStack(alignment: .leading, spacing: 8) {   // was 12
                     HStack(spacing: 8) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("MCQ 数据")
+                                .font(.title3.weight(.bold))
+                            Text("最近一段时间的练习情况")
+                                .font(.subheadline)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(width: 260, alignment: .leading)
+
                         Spacer()
-                        Text("最近一段时间的练习情况")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                        Picker("", selection: $range) {
+                            ForEach(ScoreRange.allCases) { r in
+                                Text(label(for: r))
+                                    .font(.subheadline.weight(.semibold))
+                                    .tag(r)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .frame(maxWidth: .infinity)
+
+                        Button {
+                            showLevelFilter.toggle()
+                        } label: {
+                            Image(systemName: "line.3.horizontal.decrease.circle.fill")
+                                .imageScale(.large)
+                                .padding(8)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Circle())
+                                .shadow(radius: 1, y: 1)
+                        }
+                        .popover(isPresented: $showLevelFilter) {
+                            LevelChecklist(selectedLevels: $selectedLevels)
+                                .padding()
+                        }
                     }
                     .padding(.horizontal, 20)
 
-                    VStack(alignment: .leading, spacing: 8) {   // was 12
-                        HStack(spacing: 8) {
-                            Text("MCQ 数据")
-                                .font(.title3.weight(.bold))
-                                .frame(width: 260, alignment: .leading)
-                            Spacer()
-                            Picker("", selection: $range) {
-                                ForEach(ScoreRange.allCases) { r in
-                                    Text(label(for: r))
-                                        .font(.subheadline.weight(.semibold))
-                                        .tag(r)
-                                }
-                            }
-                            .pickerStyle(.segmented)
-                            .frame(maxWidth: .infinity)
+                    HStack(alignment: .top, spacing: 18) {
+                        MCQStatsCard(selectedLevels: $selectedLevels)
+                            .frame(width: 260)
 
-                            Button {
-                                showLevelFilter.toggle()
-                            } label: {
-                                Image(systemName: "line.3.horizontal.decrease.circle.fill")
-                                    .imageScale(.large)
-                                    .padding(8)
-                                    .background(.ultraThinMaterial)
-                                    .clipShape(Circle())
-                                    .shadow(radius: 1, y: 1)
-                            }
-                            .popover(isPresented: $showLevelFilter) {
-                                LevelChecklist(selectedLevels: $selectedLevels)
-                                    .padding()
-                            }
-                        }
-                        .padding(.horizontal, 20)
-
-                        HStack(alignment: .top, spacing: 18) {
-                            MCQStatsCard(selectedLevels: $selectedLevels)
-                                .frame(width: 260)
-
-                            DashboardChartView(
-                                dataset: .mcq,
-                                range: $range,
-                                selectedLevels: $selectedLevels
-                            )
-                            .frame(maxWidth: .infinity, minHeight: 220)
-                        }
-                        .padding(.horizontal, 20)
+                        DashboardChartView(
+                            dataset: .mcq,
+                            range: $range,
+                            selectedLevels: $selectedLevels
+                        )
+                        .frame(maxWidth: .infinity, minHeight: 220)
                     }
+                    .padding(.horizontal, 20)
                 }
 
                 // 3. Memory row
                 VStack(alignment: .leading, spacing: 8) {   // was 12
-                    HStack(spacing: 8) {
+                    VStack(alignment: .leading, spacing: 4) {
                         Text("记忆练习数据")
                             .font(.title3.weight(.bold))
-                        Spacer()
                         Text("查看你记忆练习的节奏和效率")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
@@ -1083,18 +1095,20 @@ struct HomeView: View {
             if #available(iOS 18.0, *) {
                 TabView {
                     Tab("Home", systemImage: "house.fill") {
-                        iPadHomeNavigation
-                            .background(
-                                LinearGradient(
-                                    colors: [
-                                        Color(.systemGroupedBackground),
-                                        Color.customblue.opacity(0.03)
-                                    ],
-                                    startPoint: .topLeading,
-                                    endPoint: .bottomTrailing
-                                )
-                                .ignoresSafeArea()
+                        NavigationStack {
+                            IPadHomeDashboard(selectedLevels: $selectedLevels)
+                        }
+                        .background(
+                            LinearGradient(
+                                colors: [
+                                    Color(.systemGroupedBackground),
+                                    Color.customblue.opacity(0.03)
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
                             )
+                            .ignoresSafeArea()
+                        )
                     }
                     // NOTES TAB
                     Tab("Notes", systemImage: "note.text") {
@@ -1171,74 +1185,6 @@ struct HomeView: View {
                         }
                 }
             }
-        }
-    }
-
-    // Home section wrapped in NavigationStack for Route navigation (iPad)
-    private var iPadHomeNavigation: some View {
-        NavigationStack(path: $pathManager.path) {
-            IPadHomeDashboard(selectedLevels: $selectedLevels)
-                .navigationDestination(for: Route.self) { route in
-                    switch route {
-                    case .level(let level):
-                        ChapterView(level: level)
-
-                    case .progress(let progress):
-                        let level = progress.level
-                        let chapter = progress.chapter
-                        let topic = progress.topic
-                        FlashcardView(
-                            vocabularies: loadVocabulariesFromJSON(
-                                fileName: "中\(level.string)",
-                                chapter: chapter.string,
-                                topic: topic.string(level: level, chapter: chapter)
-                            ),
-                            level: level,
-                            chapter: chapter,
-                            topic: topic,
-                            currentIndex: progress.currentIndex
-                        )
-
-                    case .resume(let level, let chapter, let topic):
-                        if let resume = LastProgressStore.getAll()
-                            .first(where: { $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
-                            FlashcardView(
-                                vocabularies: loadVocabulariesFromJSON(
-                                    fileName: "中\(level.string)",
-                                    chapter: resume.chapter.string,
-                                    topic: resume.topic.string(level: level, chapter: resume.chapter)
-                                ),
-                                level: level,
-                                chapter: resume.chapter,
-                                topic: resume.topic,
-                                currentIndex: resume.currentIndex
-                            )
-                        } else {
-                            ChapterView(level: level)
-                        }
-
-                    case .olevelsMenu:
-                        OLevelsMenuView()
-
-                    case .oPractice(let practice):
-                        let vocabs = Array(allVocabularies(for: practice).shuffled().prefix(15))
-                        MCQView(vocabularies: vocabs, folderName: practice.string)
-                            .navigationTitle(practice.string)
-                            .navigationBarTitleDisplayMode(.inline)
-
-                    case .progressDetail:
-                        ProgressDetailView()
-
-                    case .replay(let quiz):
-                        ResultReplayDestination(quiz: quiz)
-
-                    case .settings:
-                        SettingsView()
-
-                    case .replayMemory(let attempt):
-                        MemoryReplayDestination(attempt: attempt)
-                    }
-                }
         }
     }
 

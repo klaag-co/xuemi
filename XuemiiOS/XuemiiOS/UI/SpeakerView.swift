@@ -34,36 +34,52 @@ struct SpeakerView: View {
                 Spacer()
 
                 DisclosureGroup(isExpanded: $revealAnswer) {
-                                   Text(shuffledWords[currentIndex].word)
-                                       .font(.title)
-                                       .padding()
-                               } label: {
-                                   Text(revealAnswer ? "Hide Answer" : "Reveal Answer")
-                                       .font(.headline)
-                                       .padding()
-                                       .foregroundStyle(Color.gray)
-                                       .cornerRadius(8)
-                               }
-                               .padding(25)
+                    Text(shuffledWords[currentIndex].word)
+                        .font(.title)
+                        .padding()
+                } label: {
+                    Text(revealAnswer ? "Hide Answer" : "Reveal Answer")
+                        .font(.headline)
+                        .padding()
+                        .foregroundStyle(Color.gray)
+                        .cornerRadius(8)
+                }
+                .padding(25)
 
                 Spacer()
 
                 HStack {
-                    Button(action: previousWord) {
-                        Image(systemName: "arrow.left")
-                            .font(.largeTitle)
-                            .padding()
+                    if #available(iOS 26.0, *) {
+                        Button(action: previousWord) {
+                            Image(systemName: "chevron.left")
+                                .padding(8)
+                        }
+                        .disabled(currentIndex == 0)
+                        .buttonBorderShape(.circle)
+                        .buttonStyle(.glass)
+                    } else {
+                        Button(action: previousWord) {
+                            Image(systemName: "chevron.left").padding()
+                        }
+                        .disabled(currentIndex == 0)
                     }
-                    .disabled(currentIndex == 0)
 
                     Spacer()
 
-                    Button(action: nextWord) {
-                        Image(systemName: "arrow.right")
-                            .font(.largeTitle)
-                            .padding()
+                    if #available(iOS 26.0, *) {
+                        Button(action: nextWord) {
+                            Image(systemName: "chevron.right")
+                                .padding(8)
+                        }
+                        .disabled(currentIndex == shuffledWords.count - 1)
+                        .buttonBorderShape(.circle)
+                        .buttonStyle(.glass)
+                    } else {
+                        Button(action: nextWord) {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        .disabled(currentIndex == shuffledWords.count - 1)
                     }
-                    .disabled(currentIndex == shuffledWords.count - 1)
                 }
                 .padding()
             } else {

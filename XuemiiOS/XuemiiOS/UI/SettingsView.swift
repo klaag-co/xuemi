@@ -105,7 +105,7 @@ struct SettingsView: View {
                         AcknowledgementsView()
                     } label: {
                         HStack(spacing: 12) {
-                            Image(systemName: "heart.fill")
+                            Image(systemName: "heart")
                                 .imageScale(.large)
                                 .frame(width: 28)
                                 .foregroundStyle(.blue)

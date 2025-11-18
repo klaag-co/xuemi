@@ -58,8 +58,6 @@ struct ChapterView: View {
                 }
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .padding(.vertical)
         .onAppear {
             vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
         }

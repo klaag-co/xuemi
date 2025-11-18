@@ -1103,19 +1103,27 @@ struct HomeView: View {
                     
                     TabSection("年级") {
                         Tab("中一", systemImage: "1.circle.fill") {
-                            ChapterView(level: .one)
+                            NavigationStack {
+                                ChapterView(level: .one)
+                            }
                         }
                         
                         Tab("中二", systemImage: "2.circle.fill") {
-                            ChapterView(level: .two)
+                            NavigationStack {
+                                ChapterView(level: .two)
+                            }
                         }
                         
                         Tab("中三", systemImage: "3.circle.fill") {
-                            ChapterView(level: .three)
+                            NavigationStack {
+                                ChapterView(level: .three)
+                            }
                         }
                         
                         Tab("中四", systemImage: "4.circle.fill") {
-                            ChapterView(level: .four)
+                            NavigationStack {
+                                ChapterView(level: .four)
+                            }
                         }
                         
                         Tab("O 水准备考", systemImage: "circle.circle.fill") {

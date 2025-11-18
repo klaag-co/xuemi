@@ -66,7 +66,7 @@ struct NotesView: View {
 
     var body: some View {
         // ✅ Bind to the global path
-        NavigationStack(path: $pathManager.path) {
+        NavigationStack {
             List {
                 // ===== Ink Notes =====
                 if !filteredInkNotes.isEmpty || UIDevice.current.userInterfaceIdiom == .pad {

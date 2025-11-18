@@ -61,31 +61,7 @@ struct MCQResultsView: View {
                     .padding(.top, 8)
 
                 // ===== Buttons =====
-                if isReplay {
-                    Button {
-                        withAnimation { PathManager.global.goProgressDetail() }
-                    } label: {
-                        Text("Back to Progress")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Color(.systemGray5))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                    .padding(.horizontal)
-
-                    Button {
-                        withAnimation { PathManager.global.goHome() }
-                    } label: {
-                        Text("Go to Home")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Color(.systemGray5))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                    .padding(.horizontal)
-                } else {
+                if !isReplay {
                     Button {
                         onDone?()
                         withAnimation { PathManager.global.goHome() }
@@ -186,22 +162,7 @@ struct MCQResultsView: View {
         }
         .navigationTitle("Results")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            // ✅ Top-left back shown when this is a replay (coming from Notes)
-            if isReplay {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        dismiss()                // pop back to Notes
-                    } label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: "chevron.left")
-                            Text("Back")
-                        }
-                    }
-                }
-            }
-        }
+        .navigationBarBackButtonHidden(isReplay ? false : true)
         .onAppear {
             // Save once unless disabled (replay)
             guard recordToHistory, !didRecord else { return }

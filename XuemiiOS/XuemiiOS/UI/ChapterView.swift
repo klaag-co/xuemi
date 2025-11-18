@@ -30,7 +30,7 @@ struct ChapterView: View {
 
     var body: some View {
         ScrollView {
-            Text("中 \(level.string)")
+            Text("中\(level.string)")
                 .font(.largeTitle).bold()
                 .padding()
                 .frame(height: 80)

@@ -434,6 +434,7 @@ private struct LevelChecklist: View {
                 } label: {
                     HStack(spacing: 8) {
                         Image(systemName: isOn ? "checkmark.circle.fill" : "circle")
+                            .foregroundStyle(.accent)
                         Text("中\(level.string)")
                     }
                     .font(.body)
@@ -441,9 +442,6 @@ private struct LevelChecklist: View {
                 .buttonStyle(.plain)
             }
         }
-        .padding(14)
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 18))
     }
 }
 
@@ -1078,7 +1076,7 @@ struct HomeView: View {
         }
     }
 
-    // MARK: - iPad root view: TabView OUTSIDE navigation, sidebar collapsible via NavigationSplitView
+    // MARK: - iPad root view
 
     private var iPadTabRootView: some View {
         Group {

@@ -287,6 +287,12 @@ struct AcknowledgementsView: View {
 
     var body: some View {
         List {
+            Section("Special Thanks") {
+                Text("Thank you to everyone who supported Xuemi throughout its development. We are very grateful for your guidance, feedback, and encouragement!")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    .padding(.vertical, 6)
+            }
             Section("Project Contributors") {
                 ForEach(team) { member in
                     HStack(spacing: 14) {
@@ -300,12 +306,6 @@ struct AcknowledgementsView: View {
                     }
                     .padding(.vertical, 6)
                 }
-            }
-            Section("Special Thanks") {
-                Text("Thank you to everyone who supported the Xuemi project throughout its development. Your guidance, feedback, and encouragement played a key role in bringing this app to life.")
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-                    .padding(.vertical, 6)
             }
         }
         .navigationTitle("Acknowledgements")

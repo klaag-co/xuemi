@@ -279,9 +279,9 @@ private struct OLevelsMenuView: View {
                     .frame(maxWidth: .infinity, minHeight: 70, alignment: .leading)
                     .background(
                         LinearGradient(
-                            colors: [Color.customgray.opacity(0.9), Color.white],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
+                            colors: [Color.white, Color.customgray.opacity(0.9)],
+                            startPoint: .leading,
+                            endPoint: .trailing
                         )
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 18))
@@ -304,9 +304,9 @@ private struct OLevelsMenuView: View {
                     .frame(maxWidth: .infinity, minHeight: 70, alignment: .leading)
                     .background(
                         LinearGradient(
-                            colors: [Color.customgray.opacity(0.9), Color.white],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
+                            colors: [Color.white, Color.customgray.opacity(0.9)],
+                            startPoint: .leading,
+                            endPoint: .trailing
                         )
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 18))

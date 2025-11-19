@@ -77,6 +77,8 @@ struct MCQResultsView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                         .padding(.horizontal)
+                        
+                        //insert a redo mcq button here
                     } else {
                         Button {
                             onDone?()
@@ -104,30 +106,6 @@ struct MCQResultsView: View {
                         .padding(.horizontal)
                     }
                 }
-//my attempt that failed yep pls fix
-//                if !isReplay {
-//                    Button {
-//                        guard let topic else {
-//                            return
-//                        }
-//                        withAnimation {
-//                            dismiss()
-//                            DispatchQueue.main.async {
-//                                dismiss()
-//
-//                            }
-//                        }
-//                    } label: {
-//                        Text("Try Again")
-//                            .font(.headline)
-//                            .frame(maxWidth: .infinity)
-//                            .padding(.vertical, 14)
-//                            .background(Color(.systemGray5))
-//                            .clipShape(RoundedRectangle(cornerRadius: 12))
-//                    }
-//                    .padding(.horizontal)
-//                }
-
                 // ✅ Correct
                 VStack(alignment: .leading, spacing: 12) {
                     SectionHeader(title: "✅ 正确 (Correct)", count: correctList.count)
@@ -203,26 +181,6 @@ struct MCQResultsView: View {
         .navigationTitle("Results")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(isReplay ? false : true)
-//DOESNT SHUCKING WORK OK BUT THE BUTTONS N THE IDEA IS THERE PLS FIX
-//        .toolbar {
-//            if !isReplay {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Button(action: {
-//                        withAnimation {
-//                            dismiss()
-//                            DispatchQueue.main.async {
-//                                dismiss()
-//                            }
-//                        }
-//                    }) {
-//                        HStack {
-//                            Image(systemName: "chevron.left")
-//                            Text("Back to Topic")
-//                        }
-//                    }
-//                }
-//            }
-//        }
         .onAppear {
             // Save once unless disabled (replay)
             guard recordToHistory, !didRecord else { return }

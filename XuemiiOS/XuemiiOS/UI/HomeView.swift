@@ -73,6 +73,8 @@ enum OLevels: Hashable {
 private struct ContinueCarouselView: View {
     @ObservedObject var pathManager: PathManager = .global
     @State private var allProgress: [LastProgressStore.Point] = []
+    
+    @EnvironmentObject private var deviceType: DeviceTypeManager
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -154,38 +156,84 @@ private struct ContinueCarouselView: View {
 
                     TabView {
                         ForEach(Array(allProgress.enumerated()), id: \.offset) { idx, point in
-                            Button {
-                                pathManager.path.append(
-                                    Route.resume(point.level, point.chapter, point.topic)
-                                )
-                            } label: {
-                                HStack(spacing: 20) {
-                                    VStack(alignment: .leading, spacing: 10) {
-                                        Text(point.chapter.string)
-                                            .font(.system(size: 34, weight: .bold))
-                                            .foregroundStyle(.white)
-
-                                        Text("继续学习：中\(point.level.string)、\(point.topic.string(level: point.level, chapter: point.chapter))")
-                                            .font(.headline)
-                                            .foregroundStyle(.white.opacity(0.9))
-
-                                        HStack(spacing: 6) {
-                                            Image(systemName: "arrow.uturn.forward.circle.fill")
-                                                .font(.subheadline)
-                                            Text("点这里继续")
-                                                .font(.subheadline)
-                                                .bold()
-                                        }
-                                        .foregroundStyle(.white.opacity(0.95))
-                                        .padding(.top, 4)
+                            if deviceType.isIPad {
+                                NavigationLink {
+                                    if let resume = LastProgressStore.getAll()
+                                        .first(where: { $0.level == point.level && $0.chapter == point.chapter && $0.topic == point.topic }) {
+                                        FlashcardView(
+                                            vocabularies: loadVocabulariesFromJSON(
+                                                fileName: "中\(resume.level.string)",
+                                                chapter: resume.chapter.string,
+                                                topic: resume.topic.string(level: resume.level, chapter: resume.chapter)
+                                            ),
+                                            level: resume.level,
+                                            chapter: resume.chapter,
+                                            topic: resume.topic,
+                                            currentIndex: resume.currentIndex
+                                        )
                                     }
-
-                                    Spacer()
+                                } label: {
+                                    HStack(spacing: 20) {
+                                        VStack(alignment: .leading, spacing: 10) {
+                                            Text(point.chapter.string)
+                                                .font(.system(size: 34, weight: .bold))
+                                                .foregroundStyle(.white)
+                                            
+                                            Text("继续学习：中\(point.level.string)、\(point.topic.string(level: point.level, chapter: point.chapter))")
+                                                .font(.headline)
+                                                .foregroundStyle(.white.opacity(0.9))
+                                            
+                                            HStack(spacing: 6) {
+                                                Image(systemName: "arrow.uturn.forward.circle.fill")
+                                                    .font(.subheadline)
+                                                Text("点这里继续")
+                                                    .font(.subheadline)
+                                                    .bold()
+                                            }
+                                            .foregroundStyle(.white.opacity(0.95))
+                                            .padding(.top, 4)
+                                        }
+                                        
+                                        Spacer()
+                                    }
+                                    .padding(24)
                                 }
-                                .padding(24)
+                                .buttonStyle(.plain)
+                                .id(idx)
+                            } else {
+                                Button {
+                                    pathManager.path.append(
+                                        Route.resume(point.level, point.chapter, point.topic)
+                                    )
+                                } label: {
+                                    HStack(spacing: 20) {
+                                        VStack(alignment: .leading, spacing: 10) {
+                                            Text(point.chapter.string)
+                                                .font(.system(size: 34, weight: .bold))
+                                                .foregroundStyle(.white)
+                                            
+                                            Text("继续学习：中\(point.level.string)、\(point.topic.string(level: point.level, chapter: point.chapter))")
+                                                .font(.headline)
+                                                .foregroundStyle(.white.opacity(0.9))
+                                            
+                                            HStack(spacing: 6) {
+                                                Image(systemName: "arrow.uturn.forward.circle.fill")
+                                                    .font(.subheadline)
+                                                Text("点这里继续")
+                                                    .font(.subheadline)
+                                                    .bold()
+                                            }
+                                            .foregroundStyle(.white.opacity(0.95))
+                                            .padding(.top, 4)
+                                        }
+                                        
+                                        Spacer()
+                                    }
+                                    .padding(24)
+                                }
+                                .buttonStyle(.plain)
+                                .id(idx)
                             }
-                            .buttonStyle(.plain)
-                            .id(idx)
                         }
                     }
                     .tabViewStyle(.page(indexDisplayMode: .automatic))

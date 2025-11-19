@@ -754,10 +754,12 @@ private struct BucketKey: Hashable {
 
 private struct DashboardBarPoint: Identifiable {
     let id = UUID()
-    let xIndex: Int
-    let value: Int
+    let xIndex: Int        // bucket index (hour / weekday / day)
+    let value: Double      // 0–100 accuracy
     let level: SecondaryNumber
 }
+
+
 
 private func levelLabel(_ level: SecondaryNumber) -> String {
     switch level {
@@ -777,6 +779,7 @@ private func levelColor(_ level: SecondaryNumber) -> Color {
     }
 }
 
+// 🔧 CLEAN CHART VIEW – Sunday visible, no funky shifts
 private struct DashboardChartView: View {
     let dataset: DashboardDataset
     @Binding var range: ScoreRange
@@ -785,7 +788,16 @@ private struct DashboardChartView: View {
     @ObservedObject private var scoreManager = ScoreManager.shared
     @ObservedObject private var memoryStats = MemoryStats.shared
 
-    private var mcqFiltered: [QuizResult] {
+    // Final series after bucketing + averaging (0–100%)
+    private var series: [DashboardBarPoint] {
+        switch dataset {
+        case .mcq:    return seriesForQuiz(filteredMCQ)
+        case .memory: return seriesForMemory(filteredMemory)
+        }
+    }
+
+    // Filter raw data by selected levels first
+    private var filteredMCQ: [QuizResult] {
         if selectedLevels.count == SecondaryNumber.allCases.count {
             return scoreManager.results
         }
@@ -797,7 +809,7 @@ private struct DashboardChartView: View {
         }
     }
 
-    private var memFiltered: [MemoryAttempt] {
+    private var filteredMemory: [MemoryAttempt] {
         if selectedLevels.count == SecondaryNumber.allCases.count {
             return memoryStats.attempts
         }
@@ -809,28 +821,18 @@ private struct DashboardChartView: View {
         }
     }
 
-    private var series: [DashboardBarPoint] {
-        switch dataset {
-        case .mcq:    return seriesForQuiz(mcqFiltered)
-        case .memory: return seriesForMemory(memFiltered)
-        }
-    }
-
-    private var maxY: Int {
-        [Int: [DashboardBarPoint]]
-            .init(grouping: series, by: { $0.xIndex })
-            .mapValues { $0.reduce(0) { $0 + $1.value } }
-            .values
-            .max() ?? 0
-    }
-
     var body: some View {
+        // ✅ Fixed width – DOESN'T change when you filter levels
+        let barWidth = MarkDimension(integerLiteral: 18)
+
         Chart {
             ForEach(series) { point in
                 BarMark(
-                    x: .value("Index", point.xIndex),
-                    y: .value("Count", point.value)
+                    x: .value("Time", point.xIndex),     // Int bucket index
+                    y: .value("Accuracy", point.value),  // 0–100
+                    width: barWidth
                 )
+                .position(by: .value("Level", levelLabel(point.level)))
                 .foregroundStyle(by: .value("Level", levelLabel(point.level)))
             }
         }
@@ -841,8 +843,40 @@ private struct DashboardChartView: View {
             levelLabel(.three): levelColor(.three),
             levelLabel(.four):  levelColor(.four)
         ])
-        .chartYScale(domain: 0...max(1, maxY))
-        .frame(height: 220)
+
+        // MARK: X-Axis – D / W / M
+        .chartXScale(domain: xAxisDomain())
+        .chartXAxis {
+            AxisMarks(values: xAxisTickValues()) { value in
+                AxisGridLine()
+                AxisTick()
+                AxisValueLabel {
+                    if let intVal = value.as(Int.self) {
+                        Text(xAxisLabel(for: intVal))
+                    }
+                }
+            }
+        }
+
+        // MARK: Y-Axis: 0%, 50%, 100%
+        .chartYScale(domain: 0...100)
+        .chartYAxis {
+            AxisMarks(values: [0, 50, 100]) { value in
+                AxisGridLine()
+                AxisTick()
+                AxisValueLabel {
+                    if let intVal = value.as(Int.self) {
+                        switch intVal {
+                        case 0:   Text("0%")
+                        case 50:  Text("50%")
+                        case 100: Text("100%")
+                        default:  Text("\(intVal)")
+                        }
+                    }
+                }
+            }
+        }
+
         .padding(12)
         .background(
             RoundedRectangle(cornerRadius: 18)
@@ -851,7 +885,57 @@ private struct DashboardChartView: View {
         )
     }
 
-    // MARK: - Helpers
+    // MARK: - X-axis helpers (Int-based)
+
+    private func xAxisDomain() -> ClosedRange<Int> {
+        switch range {
+        case .day:
+            return 0...23               // hours
+        case .week:
+            return 1...7                // Mon–Sun
+        case .month:
+            return 1...31               // day-of-month
+        }
+    }
+
+    private func xAxisTickValues() -> [Int] {
+        switch range {
+        case .day:
+            return [0, 6, 12, 18]       // 12AM, 6AM, 12PM, 6PM
+        case .week:
+            return Array(1...7)         // Mon–Sun
+        case .month:
+            return [1, 8, 15, 22, 29]   // key dates
+        }
+    }
+
+    private func xAxisLabel(for value: Int) -> String {
+        switch range {
+        case .day:
+            switch value {
+            case 0:  return "12AM"
+            case 6:  return "6AM"
+            case 12: return "12PM"
+            case 18: return "6PM"
+            default: return ""
+            }
+        case .week:
+            switch value {
+            case 1: return "Mon"
+            case 2: return "Tue"
+            case 3: return "Wed"
+            case 4: return "Thu"
+            case 5: return "Fri"
+            case 6: return "Sat"
+            case 7: return "Sun"
+            default: return ""
+            }
+        case .month:
+            return "\(value)"
+        }
+    }
+
+    // MARK: - Date bucketing
 
     private func xIndex(for date: Date) -> Int {
         let cal = Calendar.current
@@ -860,6 +944,7 @@ private struct DashboardChartView: View {
             return cal.component(.hour, from: date)
         case .week:
             let wd = cal.component(.weekday, from: date)
+            // Map to Mon=1 ... Sun=7
             return (wd + 5) % 7 + 1
         case .month:
             return cal.component(.day, from: date)
@@ -885,20 +970,33 @@ private struct DashboardChartView: View {
         }
     }
 
+    // MARK: - MCQ series (average percent per bucket)
+
     private func seriesForQuiz(_ items: [QuizResult]) -> [DashboardBarPoint] {
-        var dict: [BucketKey: Int] = [:]
+        // bucket → (sum of percent, count)
+        var bucket: [BucketKey: (sum: Double, count: Int)] = [:]
 
         for r in items where inRange(r.date) {
             guard let level = SecondaryNumber(rawValue: r.levelRaw ?? 0),
                   selectedLevels.contains(level) else { continue }
+
             let idx = xIndex(for: r.date)
             let key = BucketKey(index: idx, level: level)
-            dict[key, default: 0] += 1
+
+            var entry = bucket[key] ?? (0, 0)
+            entry.sum += r.percent
+            entry.count += 1
+            bucket[key] = entry
         }
 
         var result: [DashboardBarPoint] = []
-        for (key, value) in dict {
-            result.append(DashboardBarPoint(xIndex: key.index, value: value, level: key.level))
+        for (key, entry) in bucket {
+            let avg = entry.count > 0 ? entry.sum / Double(entry.count) : 0
+            result.append(DashboardBarPoint(
+                xIndex: key.index,
+                value: min(max(avg, 0), 100),
+                level: key.level
+            ))
         }
 
         result.sort {
@@ -910,20 +1008,40 @@ private struct DashboardChartView: View {
         return result
     }
 
+    // MARK: - Memory series (convert tries → score out of 100)
+
     private func seriesForMemory(_ items: [MemoryAttempt]) -> [DashboardBarPoint] {
-        var dict: [BucketKey: Int] = [:]
+        // Simple mapping: 1 try = 100%, 2 tries = 50%, etc.
+        var bucket: [BucketKey: (sum: Double, count: Int)] = [:]
 
         for a in items where inRange(a.date) {
             guard let level = SecondaryNumber(rawValue: a.levelRaw ?? 0),
                   selectedLevels.contains(level) else { continue }
+
             let idx = xIndex(for: a.date)
             let key = BucketKey(index: idx, level: level)
-            dict[key, default: 0] += 1
+
+            let score: Double
+            if a.tries <= 0 {
+                score = 0
+            } else {
+                score = min(100, 100.0 / Double(a.tries))
+            }
+
+            var entry = bucket[key] ?? (0, 0)
+            entry.sum += score
+            entry.count += 1
+            bucket[key] = entry
         }
 
         var result: [DashboardBarPoint] = []
-        for (key, value) in dict {
-            result.append(DashboardBarPoint(xIndex: key.index, value: value, level: key.level))
+        for (key, entry) in bucket {
+            let avg = entry.count > 0 ? entry.sum / Double(entry.count) : 0
+            result.append(DashboardBarPoint(
+                xIndex: key.index,
+                value: min(max(avg, 0), 100),
+                level: key.level
+            ))
         }
 
         result.sort {
@@ -935,6 +1053,8 @@ private struct DashboardChartView: View {
         return result
     }
 }
+
+
 
 // =====================================
 // MARK: - iPad Home dashboard (for Home section)
@@ -1114,42 +1234,42 @@ struct HomeView: View {
                     Tab("Notes", systemImage: "note.text") {
                         NotesView()
                     }
-                    
+
                     // FOLDERS TAB
                     Tab("Folders", systemImage: "folder.fill") {
                         FolderView(vocabManager: vocabManager)
                     }
-                    
+
                     // SETTINGS TAB
                     Tab("Settings", systemImage: "gearshape.fill") {
                         SettingsView()
                     }
-                    
+
                     TabSection("年级") {
                         Tab("中一", systemImage: "1.circle.fill") {
                             NavigationStack {
                                 ChapterView(level: .one)
                             }
                         }
-                        
+
                         Tab("中二", systemImage: "2.circle.fill") {
                             NavigationStack {
                                 ChapterView(level: .two)
                             }
                         }
-                        
+
                         Tab("中三", systemImage: "3.circle.fill") {
                             NavigationStack {
                                 ChapterView(level: .three)
                             }
                         }
-                        
+
                         Tab("中四", systemImage: "4.circle.fill") {
                             NavigationStack {
                                 ChapterView(level: .four)
                             }
                         }
-                        
+
                         Tab("O 水准备考", systemImage: "circle.circle.fill") {
                             NavigationStack {
                                 OLevelsMenuView()
@@ -1165,19 +1285,19 @@ struct HomeView: View {
                         .tabItem {
                             Label("Home", systemImage: "house.fill")
                         }
-                    
+
                     // NOTES TAB
                     NotesView()
                         .tabItem {
                             Label("Notes", systemImage: "note.text")
                         }
-                    
+
                     // FOLDERS TAB
                     FolderView(vocabManager: vocabManager)
                         .tabItem {
                             Label("Folders", systemImage: "folder.fill")
                         }
-                    
+
                     // SETTINGS TAB
                     SettingsView()
                         .tabItem {

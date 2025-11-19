@@ -75,6 +75,8 @@ struct MCQView: View {
         guard hasData else { return "" }
         return selectedQuestions[currentVocabularyIndex]
     }
+    
+    @EnvironmentObject private var deviceTypeManager: DeviceTypeManager
 
     // MARK: - Body
 
@@ -223,7 +225,13 @@ struct MCQView: View {
                     chapter: chapter,
                     topic: topic,
                     folderName: nil,
-                    onDone: { PathManager.global.popToRoot() } // go Home
+                    onDone: {
+                        if deviceTypeManager.isIPad {
+                            dismiss()
+                        } else {
+                            PathManager.global.popToRoot()
+                        }
+                    } // go Home
                 )
             } else if let folderName {
                 MCQResultsView(
@@ -237,7 +245,13 @@ struct MCQView: View {
                     chapter: nil,
                     topic: nil,
                     folderName: folderName,
-                    onDone: { PathManager.global.popToRoot() } // go Home
+                    onDone: {
+                        if deviceTypeManager.isIPad {
+                            dismiss()
+                        } else {
+                            PathManager.global.popToRoot()
+                        }
+                    } // go Home
                 )
             }
         }

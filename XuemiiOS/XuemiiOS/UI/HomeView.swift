@@ -924,6 +924,7 @@ private struct DashboardChartView: View {
                 }
             }
         }
+        .chartScrollableAxes([.horizontal, .vertical])
 
         .padding(12)
         .background(

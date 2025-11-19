@@ -52,6 +52,8 @@ struct MCQResultsView: View {
             return WrongItem(correct: v, chosen: chosenV)
         }
     }
+    
+    @EnvironmentObject var deviceTypeManager: DeviceTypeManager
 
     // MARK: - UI
     var body: some View {
@@ -62,30 +64,45 @@ struct MCQResultsView: View {
 
                 // ===== Buttons =====
                 if !isReplay {
-                    Button {
-                        onDone?()
-                        withAnimation { PathManager.global.goHome() }
-                    } label: {
-                        Text("Go to Home page")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Color(.systemGray5))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    if deviceTypeManager.isIPad {
+                        Button {
+                            dismiss()
+                            onDone?()
+                        } label: {
+                            Text("Back to Topic")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(Color(.systemGray5))
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                        .padding(.horizontal)
+                    } else {
+                        Button {
+                            onDone?()
+                            withAnimation { PathManager.global.goHome() }
+                        } label: {
+                            Text("Go to Home page")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(Color(.systemGray5))
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                        .padding(.horizontal)
+                        
+                        Button {
+                            withAnimation { PathManager.global.goProgressDetail() }
+                        } label: {
+                            Text("View Progress")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(Color(.systemGray5))
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
-
-                    Button {
-                        withAnimation { PathManager.global.goProgressDetail() }
-                    } label: {
-                        Text("View Progress")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Color(.systemGray5))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                    .padding(.horizontal)
                 }
 //my attempt that failed yep pls fix
 //                if !isReplay {

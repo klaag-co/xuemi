@@ -827,7 +827,6 @@ private func levelColor(_ level: SecondaryNumber) -> Color {
     }
 }
 
-// 🔧 CLEAN CHART VIEW – Sunday visible, no funky shifts
 private struct DashboardChartView: View {
     let dataset: DashboardDataset
     @Binding var range: ScoreRange

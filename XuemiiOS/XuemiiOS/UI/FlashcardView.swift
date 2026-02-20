@@ -1,10 +1,15 @@
+//
+//  FlashcardView.swift
+//  XuemiiOS
+//
+//  Created by Gracelyn Gosal on 30/5/24.
+//
+
 import SwiftUI
 import AVFoundation
 
-struct FlashcardView: View {
+public struct FlashcardView: View {
     @State private var currentSet: Int = 0
-
-    // Data
     var vocabularies: [Vocabulary]
     var level: SecondaryNumber?
     var chapter: Chapter?
@@ -107,13 +112,12 @@ struct FlashcardView: View {
                     .scrollTargetBehavior(.viewAligned)
                     .safeAreaPadding(.horizontal, 25)
                 }
-
+                
                 Spacer()
             }
         }
         .navigationBarTitleDisplayMode(.inline)
 
-        // ✅ Only the handwriting sheet
         .sheet(item: $spellingText) { text in
             StrokeWriteView(word: text)
         }
@@ -121,12 +125,10 @@ struct FlashcardView: View {
                             isPresented: $showTagMenu,
                             titleVisibility: .visible) {
 
-            // 6 fixed topics
             ForEach(TagStore.predefined(), id: \.self) { tag in
                 Button(tag) { applyTag(tag) }
             }
 
-            // Already-created custom topics (optional)
             let customs = TagStore.customTopics()
             if !customs.isEmpty {
                 Divider()
@@ -135,7 +137,6 @@ struct FlashcardView: View {
                 }
             }
 
-            // Other…
             Divider()
             Button("加主题…") {
                 showCustomTagPrompt = true
@@ -175,7 +176,6 @@ struct FlashcardView: View {
         }
     }
 
-    // MARK: - Apply tag (after bookmark exists)
     private func applyTag(_ tag: String) {
         guard
             let level, let chapter, let topic,
@@ -186,7 +186,6 @@ struct FlashcardView: View {
         TagStore.setTag(tag, forKey: key)
     }
 
-    // MARK: - Card
 
     private func viewForCard(vocab: Vocabulary) -> some View {
         VStack(spacing: 0) {
@@ -234,9 +233,8 @@ struct FlashcardView: View {
                             }
                         }
                         .padding([.horizontal, .top], 30)
-
                         Spacer()
-
+                        
                         HStack {
                             Spacer()
                             Text("Click the word to practice handwriting!")
@@ -245,7 +243,7 @@ struct FlashcardView: View {
                                 .padding(.bottom, 10)
                             Spacer()
                         }
-
+                        
                         VStack {
                             Text(vocab.word)
                                 .lineLimit(1)
@@ -278,7 +276,7 @@ struct FlashcardView: View {
                             }
                         }
                         .padding(.top, 5)
-
+                        
                         VStack {
                             Text(vocab.chineseDefinition)
                                 .lineLimit(4)
@@ -292,7 +290,6 @@ struct FlashcardView: View {
                         .font(.title3)
                         .padding(.top)
                         .multilineTextAlignment(.center)
-
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -300,7 +297,7 @@ struct FlashcardView: View {
         }
     }
 
-    // Ensure bookmark exists, then show topic menu
+
     private func handleBookmarkTap(vocab: Vocabulary, level: SecondaryNumber, chapter: Chapter, topic: Topic) {
         let exists = bookmarkManager.bookmarks.contains {
             $0.vocab.word == vocab.word &&
@@ -318,7 +315,7 @@ struct FlashcardView: View {
                     $0.topic == topic
                 }!.id)
             }
-//            showTagMenu = true
+          
         } else {
             Task {
                 await bookmarkManager.addBookmarkToFirebase(
@@ -339,7 +336,6 @@ struct FlashcardView: View {
     }
 }
 
-// MARK: - Preview
 
 #Preview {
     FlashcardView(
@@ -356,7 +352,6 @@ struct FlashcardView: View {
     )
 }
 
-// MARK: - Helpers for sheet(item:)
 
 extension String: Identifiable {
     public var id: String { self }
@@ -367,4 +362,3 @@ public extension UIFont {
         UIFont.preferredFont(forTextStyle: style).pointSize
     }
 }
-

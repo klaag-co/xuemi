@@ -211,11 +211,13 @@ fun olevel(viewModel: MyViewModel, navController: NavController) {
             val mgeneratedQuestions = generateListOfMCQQuestions(mid, true)
             viewModel.addQuiz(
                 topic = "oeoy",
-                questions = egeneratedQuestions
+                questions = egeneratedQuestions,
+                allowDupes = false
             )
             viewModel.addQuiz(
                 topic = "omid",
-                questions = mgeneratedQuestions
+                questions = mgeneratedQuestions,
+                allowDupes = false
             )
         } else {
             Log.d("temp", "topic already exists (Home)")

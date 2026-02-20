@@ -57,6 +57,7 @@ import org.sstinc.xuemi.quiz.MCQresults
 import org.sstinc.xuemi.quiz.MCQtopic
 import org.sstinc.xuemi.quiz.Secondary
 import org.sstinc.xuemi.quiz.Word
+import java.util.UUID
 
 
 // now transfer the loading to viewmodel
@@ -512,21 +513,42 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         }
     }
 
-    fun addQuiz(topic: String, questions: List<MCQquestion>) {
+    fun deleteAll() {
         viewModelScope.launch(Dispatchers.IO) {
-            val exists = mcqDao.topicExists(topic)
-            val topicIndex = mcqList.value?.indexOfFirst { it.topic == topic }
-            if (exists == 0 || topicIndex == null || topicIndex == -1) {
-                mcqDao.addTopic(MCQtopic(topic = topic, leftOff = 0, questions = questions))
+            foldersDao.deleteAll()
+            mcqDao.deleteAll()
+        }
+    }
+
+    fun addQuiz(topic: String, questions: List<MCQquestion>, allowDupes: Boolean ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            Log.d("QuizTemplate", "folders: $folders\nmcqlist: $mcqList")
+
+            if (allowDupes) {
+                mcqDao.addTopic(
+                    MCQtopic(topic = topic, leftOff = 0, questions = questions)
+                )
             } else {
-                // Topic exists, so check if it needs to be deleted and re-added
-                val topicInList = mcqList.value!![topicIndex]
-                Log.d("MCQCHECK", ("leftoff: ${topicInList.leftOff}, question.size: ${questions.size}").toString())
-                if (topicInList.leftOff == questions.size) {
-                    deleteQuiz(topicInList.id)
-                    mcqDao.addTopic(MCQtopic(topic = topic, leftOff = 0, questions = questions))
+
+                val exists = mcqDao.quizNameExists(topic)
+
+                if (exists == 0) {
+                    mcqDao.addTopic(
+                        MCQtopic(topic = topic, leftOff = 0, questions = questions)
+                    )
+
                 } else {
-                    Log.d("temp", "Topic already exists and leftOff < questions.size: $topic")
+                    val topicIndex = mcqList.value?.indexOfFirst { it.topic == topic }
+                    val existing = topicIndex?.let { mcqList.value?.getOrNull(it) } // get index
+
+                        if (existing != null && existing.leftOff == questions.size) {
+                            deleteQuiz(existing.id)
+                            mcqDao.addTopic(
+                                MCQtopic(topic = topic, leftOff = 0, questions = questions)
+                            )
+                        } else {
+                        Log.d("temp", "Topic already exists and leftOff < questions.size: $topic")
+                    }
                 }
             }
             loadMCQ()
@@ -550,6 +572,15 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
         }
     }
 
+    fun updateQuestionAnswer(topicId: Int, currentQN: Int, selected: String, totalQuestions: Int) {
+        val topic = mcqList.value?.find { it.id == topicId } ?: return
+
+        if (currentQN == topic.leftOff && topic.leftOff < totalQuestions) {
+            updateLeftOff(topic.leftOff + 1, topicId)
+        }
+
+        updateQuestionSelected(topicId, currentQN, selected)
+    }
     fun updateQuestionSelected(topicId: Int, questionIndex: Int, newSelected: String) {
         viewModelScope.launch(Dispatchers.IO) {
             mcqDao.updateSelectedQuestion(topicId, questionIndex, newSelected)
@@ -561,7 +592,7 @@ class MyViewModel( appContext: Context, application: Application ) : AndroidView
     fun checkIfTopicExists(topic: String): LiveData<Boolean> {
         val exists = MutableLiveData<Boolean>()
         viewModelScope.launch(Dispatchers.IO) {
-            val count = mcqDao.topicExists(topic)
+            val count = mcqDao.quizNameExists(topic)
             exists.postValue(count > 0)
         }
         return exists

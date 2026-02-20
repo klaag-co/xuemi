@@ -1,5 +1,6 @@
 package org.sstinc.xuemi.quiz
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,14 +55,13 @@ data class MCQquestion(
 )
 
 
-fun buttonColor(option: String, correctAnswer: String, selectedAnswer: String, showAnswer: Boolean, wrong: () -> Unit): Color {
+fun buttonColor(option: String, correctAnswer: String, selectedAnswer: String, showAnswer: Boolean): Color {
     if (showAnswer) {
         if (option == correctAnswer) {
             return Color(107, 237, 97)
         } else if (selectedAnswer == "") {
             return Color(126, 190, 240)
         } else if (option == selectedAnswer) {
-            wrong()
             return Color(235, 64, 52)
         } else {
             return Color(126, 190, 240)
@@ -72,37 +73,36 @@ fun buttonColor(option: String, correctAnswer: String, selectedAnswer: String, s
 
 @Composable
 fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String) {
-    val questions by viewModel.mcqList.observeAsState(emptyList())
-    val topicIndex = questions.indexOfFirst { it.topic == topicName }
-    val topic = questions.getOrNull(topicIndex)
-    val question = questions?.get(topicIndex)?.questions ?: emptyList()
-    var leftOff = topic?.leftOff ?: 0
+    val topics by viewModel.mcqList.observeAsState(emptyList())
 
-    var currentQN by remember { mutableIntStateOf(leftOff) }
-    var selectedAnswer by remember { mutableStateOf(question.getOrNull(currentQN)?.selected ?: "") }
+    val topic = topics.find{ it.topic == topicName }
+    val questions = topic?.questions?: emptyList()
+    val questionsSize = questions.size
+//    val num = question.get(topicIndex).optionList.size
 
-    var wordDataSize by remember { mutableIntStateOf(question.size) }
-
-    var progress by remember { mutableStateOf((leftOff.toFloat() + 1) / wordDataSize) }
-    var enabled by remember { mutableStateOf(currentQN != leftOff) }
-    var isFirst_enabled by remember { mutableStateOf(currentQN != 0) }
-    var showAnswer by remember { mutableStateOf(question.getOrNull(currentQN)?.selected != "") }
-    var wrong by remember { mutableStateOf(false) }
-
-    wordDataSize = question.size
-
-    // This ensures that 'enabled' is updated when coming back to this screen.
-    LaunchedEffect(currentQN) {
-        enabled = currentQN < leftOff
+    var currentQNindex by remember { mutableIntStateOf(topic?.leftOff ?: 0) }
+    if (currentQNindex >= questionsSize && questionsSize > 0) {
+        currentQNindex = questionsSize - 1
     }
 
-    if (currentQN >= wordDataSize) {
-        currentQN -= 1
-    }
+    val currentQN = questions.getOrNull(currentQNindex)
+    val options = currentQN?.optionList?: emptyList()
+
+    var selectedAnswer by remember { mutableStateOf(currentQN?.selected ?: "") }
+
+    val showAnswer = selectedAnswer.isNotEmpty()
+
+    val canGoPrev = currentQNindex > 0
+    val canGoNext = currentQNindex < (topic?.leftOff ?: 0)
+
+
 
     Column {
+//        Log.d("nexterror", "$currentQNindex < ${topic?.leftOff} = $canGoNext, size: $questionsSize")
+        Log.d("nexterror", "progress: ${(currentQNindex + 1).toFloat() / questionsSize}")
+        // .PROGRESS BAR.
         LinearProgressIndicator(
-            progress = progress,
+            progress = ((currentQNindex + 1).toFloat() / questionsSize),
             color = Color(0xFF7EBDF0),
             modifier = Modifier
                 .fillMaxWidth()
@@ -110,80 +110,87 @@ fun MCQ(viewModel: MyViewModel, navController: NavController, topicName: String)
                 .padding(vertical = 15.dp, horizontal = 20.dp)
                 .clip(RoundedCornerShape(20.dp))
         )
-        question.getOrNull(currentQN)?.let {
-            Text(it.question, modifier = Modifier
+
+        // .QUESTION TEXT.
+        Text(
+            currentQN?.question ?: "Unable to find question", modifier = Modifier
                 .padding(horizontal = 20.dp)
                 .padding(top = 10.dp), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.h5)
-            val optionNumberList = (0..3).toList()
-            if (wrong) {
-                Text("正确答案是什么呢？", color = Color.Red, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
-            }
-            optionNumberList.forEach { number ->
-                Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                    val option = it.optionList[number]
-                    Button(
-                        onClick = {
-                            if (!showAnswer) {
-                                if (selectedAnswer == "") {
-                                    selectedAnswer = option
-                                }
-                                showAnswer = true
-                                if (leftOff == currentQN && leftOff != wordDataSize) {
-                                    leftOff += 1
-                                }
-                                viewModel.updateLeftOff(leftOff, topic!!.id)
-                                viewModel.updateQuestionSelected(topic.id, currentQN, selectedAnswer)
-                                enabled = true
-                            }
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth(0.9f)
-                            .height(90.dp)
-                            .padding(vertical = 15.dp),
-                        colors = ButtonDefaults.buttonColors(buttonColor(option, it.correct, selectedAnswer, showAnswer) { wrong = true }),
-                        shape = RoundedCornerShape(10.dp),
-                    ) {
-                        Text(
+
+        // .OPTIONS.
+        if (showAnswer && selectedAnswer != (currentQN?.correct)) {
+            Text("正确答案是什么呢？", color = Color.Red, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
+        }
+
+        options.forEach { option ->
+            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                Button(
+                    onClick = {
+                        if (!showAnswer) {
+                            selectedAnswer = option
+                        }
+                        topic?.let {
+                            viewModel.updateQuestionAnswer(
+                                it.id,
+                                currentQNindex,
+                                option,
+                                questionsSize
+                            )
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .height(90.dp)
+                        .padding(vertical = 15.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        buttonColor(
                             option,
-                            textAlign = TextAlign.Center,
-                            fontSize = 30.sp
+                            currentQN?.correct ?: "",
+                            selectedAnswer,
+                            showAnswer
                         )
-                    }
+                    ),
+                    shape = RoundedCornerShape(10.dp),
+                ) {
+                    Text(
+                        option,
+                        textAlign = TextAlign.Center,
+                        fontSize = 30.sp
+                    )
                 }
+                Spacer(modifier = Modifier.height(12.dp)) // Spacer(Modifier.fillMaxSize(0.82f))
             }
         }
 
-        Row {
-            TextButton(onClick = {
-                if (currentQN > 0) {
-                    currentQN -= 1
-                    selectedAnswer = question[currentQN].selected
-                    showAnswer = selectedAnswer != ""
-                    progress = (currentQN + 1).toFloat() / wordDataSize
-                    isFirst_enabled = currentQN != 0
-                    enabled = true
-                    wrong = false
-                }
-            }, enabled = isFirst_enabled
+        // .NAVIGATION.
+        Row (modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            // ..PREVIOUS..
+            TextButton(
+                onClick = {
+                    if (canGoPrev) {
+                        currentQNindex--
+                        selectedAnswer = questions[currentQNindex].selected
+                    }
+                }, enabled = canGoPrev
             ) {
                 Text("<", style = MaterialTheme.typography.h4)
             }
-            Spacer(Modifier.fillMaxSize(0.82f))
-            TextButton(onClick = {
-                if (currentQN + 1 >= wordDataSize) {
-                    val wrongNum = viewModel.countIncorrectAnswers(topicName)
-                    val correctNum = wordDataSize - wrongNum
-                    navController.navigate("mcqresults/${topic!!.id}/$topicName/$wrongNum,$correctNum")
-                } else if (currentQN < leftOff) {
-                    currentQN += 1
-                    selectedAnswer = question[currentQN].selected
-                    showAnswer = selectedAnswer != ""
-                    progress = (currentQN + 1).toFloat() / wordDataSize
-                    isFirst_enabled = true
-                    enabled = currentQN != leftOff
-                    wrong = false
-                }
-            }, enabled = enabled) {
+            Spacer(modifier = Modifier.weight(1f))
+
+            // ..NEXT..
+            TextButton(
+                onClick = {
+                    if (currentQNindex +1 >= questionsSize) {
+                        val wrongNum = viewModel.countIncorrectAnswers(topicName)
+                        val correctNum = questionsSize - wrongNum
+                        navController.navigate("mcqresults/${topic!!.id}/$topicName/$wrongNum,$correctNum")
+
+                    } else {
+                        currentQNindex++
+                        selectedAnswer = questions[currentQNindex].selected
+                    }
+                }, enabled = canGoNext
+            ) {
                 Text(">", style = MaterialTheme.typography.h4)
             }
         }

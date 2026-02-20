@@ -23,7 +23,6 @@ struct MCQView: View {
 
     // MARK: - Inits
 
-    // Init used when coming from level/chapter/topic
     init(vocabularies: [Vocabulary], level: SecondaryNumber, chapter: Chapter, topic: Topic) {
         let shuffled = vocabularies.shuffled()
         self.vocabularies = shuffled

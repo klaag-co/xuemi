@@ -3,7 +3,6 @@
 //  XuemiiOS
 //
 //  Created by Gracelyn Gosal on 16/4/24.
-//  Updated: Topic tags with always-visible headers, custom topic editing.
 //
 
 import SwiftUI
@@ -217,4 +216,3 @@ struct BookmarkView: View {
     BookmarkView()
         .environmentObject(BookmarkManager.shared)
 }
-

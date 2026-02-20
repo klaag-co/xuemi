@@ -1,18 +1,31 @@
+//
+//  SOneChapterView.swift
+//  XuemiiOS
+//
+//  Created by Gracelyn Gosal on 28/5/24.
+//
+
 import SwiftUI
 
-enum Chapter: Int, CaseIterable, Codable, Identifiable, Hashable {
-    case one = 1, two, three, four, five, six, eoy
-    var id: Int { rawValue }
-
+enum Chapter: CaseIterable, Codable, Hashable {
+    case one, two, three, four, five, six, eoy
+    
     var string: String {
         switch self {
-        case .one:  return "单元一"
-        case .two:  return "单元二"
-        case .three:return "单元三"
-        case .four: return "单元四"
-        case .five: return "单元五"
-        case .six:  return "单元六"
-        case .eoy:  return "年终考试"
+        case .one:
+            return "单元一"
+        case .two:
+            return "单元二"
+        case .three:
+            return "单元三"
+        case .four:
+            return "单元四"
+        case .five:
+            return "单元五"
+        case .six:
+            return "单元六"
+        case .eoy:
+            return "年终考试"
         }
     }
 }
@@ -21,10 +34,9 @@ struct ChapterView: View {
     let level: SecondaryNumber
     @State private var vocabsToPass: [Vocabulary] = []
 
-    // Keep heavy expressions out of the ViewBuilder
     private var chaptersForLevel: [Chapter] {
         level == .four
-        ? Chapter.allCases.filter { $0 != .six }   // hide 六 for Sec 4 if needed
+        ? Chapter.allCases.filter { $0 != .six } 
         : Chapter.allCases
     }
 
@@ -66,7 +78,6 @@ struct ChapterView: View {
     @ViewBuilder
     private func destination(for chapter: Chapter) -> some View {
         if chapter == .eoy {
-            // ✅ pass enums, not strings
             MCQView(
                 vocabularies: vocabsToPass,
                 level: level,
@@ -74,7 +85,6 @@ struct ChapterView: View {
                 topic: .eoy
             )
             .onAppear {
-                // refresh a random set when entering EOY MCQ
                 vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
             }
         } else {
@@ -82,7 +92,6 @@ struct ChapterView: View {
         }
     }
 
-    // Collect all vocabularies for the current level
     private func allVocabularies() -> [Vocabulary] {
         var all: [Vocabulary] = []
         for ch in Chapter.allCases {
@@ -103,4 +112,3 @@ struct ChapterView: View {
 #Preview {
     ChapterView(level: .three)
 }
-

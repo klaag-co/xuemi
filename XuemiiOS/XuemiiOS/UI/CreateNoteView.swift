@@ -1,3 +1,10 @@
+//
+//  CreateNoteView.swift
+//  XuemiiOS
+//
+//  Created by Gracelyn Gosal on 30/5/24.
+//
+
 import SwiftUI
 
 struct CreateNoteView: View {
@@ -14,7 +21,8 @@ struct CreateNoteView: View {
                 TextField("Title", text: $newTitle)
                 Picker("Note Type", selection: $newNoteType) {
                     ForEach(NoteType.allCases, id: \.hashValue) { noteType in
-                        Text(noteType.string).tag(noteType)
+                        Text(noteType.string)
+                            .tag(noteType)
                     }
                 }
                 TextField("Type something...", text: $newContent, axis: .vertical)

@@ -22,6 +22,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct XuemiiOSApp: App {
     @StateObject private var deviceTypeManager = DeviceTypeManager(horizontalSizeClass: .regular)
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
     var body: some Scene {
         WindowGroup {
             ContentView()

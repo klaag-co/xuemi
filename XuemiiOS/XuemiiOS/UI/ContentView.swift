@@ -7,23 +7,6 @@ struct ContentView: View {
     var body: some View {
         if authmanager.isLoggedIn == true {
             HomeView()
-//            if #available(iOS 18.0, *) {
-//                TabView {
-//                    Tab("Home", systemImage: "house") { HomeView() }
-//                    Tab("Notes", systemImage: "doc.text") { NotesView() }
-//                    Tab("Folders", systemImage: "pencil.and.list.clipboard") { FolderView(vocabManager: VocabManager()) }
-//                    Tab("Settings", systemImage: "gearshape") { SettingsView() }
-//                }
-//                .environmentObject(bookmarkManager)
-//            } else {
-//                TabView {
-//                    HomeView().tabItem { Label("Home", systemImage: "house") }
-//                    NotesView().tabItem { Label("Notes", systemImage: "doc.text") }
-//                    FolderView(vocabManager: VocabManager()).tabItem { Label("Folders", systemImage: "pencil.and.list.clipboard") }
-//                    SettingsView().tabItem { Label("Settings", systemImage: "gearshape") }
-//                }
-//                .environmentObject(bookmarkManager)
-//            }
         } else if authmanager.isLoggedIn == false {
             LoginView()
         } else {
@@ -32,5 +15,7 @@ struct ContentView: View {
     }
 }
 
-#Preview { ContentView() }
+#Preview {
+  ContentView() 
+}
 

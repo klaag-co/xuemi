@@ -56,8 +56,7 @@ struct LoginView: View {
                             Text("Sign in with Google")
                                 .font(.system(size: 20))
                                 .padding()
-                                .padding(.leading, 20)
-                                .padding(.trailing, 20)
+                                .padding(.horizontal, 20)
                         }
                         .foregroundColor(.white)
                         .background(
@@ -78,7 +77,7 @@ struct LoginView: View {
             .padding()
         }
         .onAppear {
-            withAnimation(Animation.linear(duration: 2).repeatForever(autoreverses: false)) {
+            withAnimation(.linear(duration: 2).repeatForever(autoreverses: false)) {
                 wavePhase = .pi * 2
             }
         }

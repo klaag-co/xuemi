@@ -2,6 +2,8 @@
 //  NotesView.swift
 //  XuemiiOS
 //
+//  Created by Gracelyn Gosal on 30/5/24.
+//
 
 import SwiftUI
 
@@ -13,7 +15,6 @@ struct NotesView: View {
     @State private var showAddMenu = false
     @State private var createdInkNote: InkNote? = nil   // navigate to editor after creating
 
-    // ✅ Use the global navigation stack so Result screens can mutate it
     @ObservedObject private var pathManager = PathManager.global
 
     @ObservedObject var notesManager: NotesManager = .shared
@@ -105,7 +106,7 @@ struct NotesView: View {
                         notesManager.notes.removeAll { idsToDelete.contains($0.id) }
                     }
                 }
-
+                
                 Section(header: Text("Notes")) {
                     ForEach(filteredNotes.filter { $0.noteType == .note }, id: \.id) { note in
                         if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {

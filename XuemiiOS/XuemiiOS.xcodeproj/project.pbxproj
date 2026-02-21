@@ -63,6 +63,7 @@
 			children = (
 				F8234CD92E65E683008CCF16 /* XuemiiOS */,
 				F879C9CF2C54A52400C047AA /* web */,
+				F8DE45132EBF276700DF7EA9 /* Frameworks */,
 				1D0898C02BCE669700F2AFCA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,6 +85,13 @@
 				F879C9CE2C54A52400C047AA /* jquery.min.js */,
 			);
 			path = web;
+			sourceTree = "<group>";
+		};
+		F8DE45132EBF276700DF7EA9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +313,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = XuemiiOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Xuemi;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -316,7 +325,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = memeig.XuemiiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -346,6 +355,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = XuemiiOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Xuemi;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -357,7 +367,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = memeig.XuemiiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

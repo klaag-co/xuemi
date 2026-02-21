@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Chapter: CaseIterable, Codable {
+enum Chapter: CaseIterable, Codable, Hashable {
     case one, two, three, four, five, six, eoy
     
     var string: String {
@@ -31,16 +31,19 @@ enum Chapter: CaseIterable, Codable {
 }
 
 struct ChapterView: View {
-    
-    var level: SecondaryNumber
-    
-    @State var vocabsToPass: [Vocabulary] = []
-    
+    let level: SecondaryNumber
+    @State private var vocabsToPass: [Vocabulary] = []
+
+    private var chaptersForLevel: [Chapter] {
+        level == .four
+        ? Chapter.allCases.filter { $0 != .six } 
+        : Chapter.allCases
+    }
+
     var body: some View {
         ScrollView {
-            Text("中 \(level.string)")
-                .font(.largeTitle)
-                .bold()
+            Text("中\(level.string)")
+                .font(.largeTitle).bold()
                 .padding()
                 .frame(height: 80)
                 .frame(maxWidth: .infinity)
@@ -48,24 +51,11 @@ struct ChapterView: View {
                 .background(.customblue)
                 .mask(RoundedRectangle(cornerRadius: 16))
                 .padding([.horizontal, .bottom])
+
             VStack(spacing: 12) {
-                ForEach(level == .four ? Chapter.allCases.filter({ $0 != .six }) : Chapter.allCases, id: \.hashValue) { chapter in
+                ForEach(chaptersForLevel) { chapter in
                     NavigationLink {
-                        if chapter != .eoy {
-                            TopicView(level: level, chapter: chapter)
-                        } else {
-                            Group {
-                                MCQView(
-                                    vocabularies: vocabsToPass,
-                                    level: level.string,
-                                    chapter: chapter.string,
-                                    topic: Topic.eoy.string(level: level, chapter: chapter)
-                                )
-                            }
-                            .onAppear {
-                                vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
-                            }
-                        }
+                        destination(for: chapter)
                     } label: {
                         Text(chapter.string)
                             .font(.title)
@@ -80,21 +70,42 @@ struct ChapterView: View {
                 }
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .padding(.vertical)
         .onAppear {
-            self.vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
+            vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
         }
     }
-    
-    func allVocabularies() -> [Vocabulary] {
-        var allVocabs: [Vocabulary] = []
-        for chapter in Chapter.allCases {
-            for topic in Topic.allCases {
-                allVocabs.append(contentsOf: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topic.string(level: level, chapter: chapter)))
+
+    @ViewBuilder
+    private func destination(for chapter: Chapter) -> some View {
+        if chapter == .eoy {
+            MCQView(
+                vocabularies: vocabsToPass,
+                level: level,
+                chapter: chapter,
+                topic: .eoy
+            )
+            .onAppear {
+                vocabsToPass = Array(allVocabularies().shuffled().prefix(15))
+            }
+        } else {
+            TopicView(level: level, chapter: chapter)
+        }
+    }
+
+    private func allVocabularies() -> [Vocabulary] {
+        var all: [Vocabulary] = []
+        for ch in Chapter.allCases {
+            for tp in Topic.allCases {
+                all.append(contentsOf:
+                    loadVocabulariesFromJSON(
+                        fileName: "中\(level.string)",
+                        chapter: ch.string,
+                        topic: tp.string(level: level, chapter: ch)
+                    )
+                )
             }
         }
-        return allVocabs
+        return all
     }
 }
 

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-enum Topic: Identifiable, Codable, CaseIterable {
-    case one, two, three, eoy
+enum Topic: Int, Identifiable, Codable, CaseIterable {
+    case one = 1, two = 2, three = 3, eoy = 4
     
     var id: UUID {
         switch self {
@@ -300,6 +300,7 @@ struct TopicView: View {
     @State private var showingSheet = false
     @State private var showingFlashcards = false
     @State private var showingMCQ = false
+    @State private var showingMemoryCards = false
     @State private var topicSelected: Topic?
     
     var body: some View {
@@ -368,6 +369,21 @@ struct TopicView: View {
                                         .mask(RoundedRectangle(cornerRadius: 16))
                                         .padding(.horizontal)
                                 }
+                                
+                                Button {
+                                    showingSheet = false
+                                    showingMemoryCards.toggle()
+                                } label: {
+                                    Text("Memory Cards")
+                                        .font(.title)
+                                        .padding()
+                                        .frame(height: 65)
+                                        .frame(maxWidth: .infinity)
+                                        .foregroundStyle(.black)
+                                        .background(.customgray)
+                                        .mask(RoundedRectangle(cornerRadius: 16))
+                                        .padding(.horizontal)
+                                }
                             }
                             .navigationTitle("习题")
                         }
@@ -379,21 +395,49 @@ struct TopicView: View {
         }
         .navigationDestination(isPresented: $showingFlashcards) {
             if let topicSelected = topicSelected {
-                FlashcardView(vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string(level: level, chapter: chapter)), level: level, chapter: chapter, topic: topicSelected)
+                FlashcardView(
+                    vocabularies: loadVocabulariesFromJSON(
+                        fileName: "中\(level.string)",
+                        chapter: chapter.string,
+                        topic: topicSelected.string(level: level, chapter: chapter)
+                    ),
+                    level: level,
+                    chapter: chapter,
+                    topic: topicSelected
+                )
             }
         }
         .navigationDestination(isPresented: $showingMCQ) {
             if let topicSelected = topicSelected {
                 MCQView(
-                    vocabularies: loadVocabulariesFromJSON(fileName: "中\(level.string)", chapter: chapter.string, topic: topicSelected.string(level: level, chapter: chapter)),
-                    level: level.string,
-                    chapter: chapter.string,
-                    topic: topicSelected.string(level: level, chapter: chapter)
+                    vocabularies: loadVocabulariesFromJSON(
+                        fileName: "中\(level.string)",
+                        chapter: chapter.string,
+                        topic: topicSelected.string(level: level, chapter: chapter)
+                    ),
+                    level: level,              // ✅ enum SecondaryNumber
+                    chapter: chapter,          // ✅ enum Chapter
+                    topic: topicSelected       // ✅ enum Topic
+                )
+            }
+        }
+        .navigationDestination(isPresented: $showingMemoryCards) {
+            if let topicSelected = topicSelected {
+                MemoryCardView(
+                    vocabularies: loadVocabulariesFromJSON(
+                        fileName: "中\(level.string)",
+                        chapter: chapter.string,
+                        topic: topicSelected.string(level: level, chapter: chapter)
+                    ),
+                    level: level,
+                    chapter: chapter,
+                    topic: topicSelected
                 )
             }
         }
     }
 }
+
 
 #Preview {
     TopicView(level: .one, chapter: .one)

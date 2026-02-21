@@ -31,7 +31,9 @@ struct CreateNoteView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
-                        notesManager.notes.append(Note(title: newTitle, content: newContent, noteType: newNoteType))
+                        notesManager.notes.append(
+                            Note(title: newTitle, noteType: newNoteType, content: newContent)
+                        )
                         dismiss()
                     }
                 }
@@ -40,6 +42,3 @@ struct CreateNoteView: View {
     }
 }
 
-#Preview {
-    CreateNoteView()
-}

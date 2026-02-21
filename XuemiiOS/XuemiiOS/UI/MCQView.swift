@@ -8,19 +8,22 @@ struct MCQView: View {
     @State private var selectedQuestions: [String] = []
     @State private var userAnswers: [String?] = []
     @State private var showResults = false
-
     @State private var correctAnswers: Int = 0
     @State private var wrongAnswers: Int = 0
+    @State private var improvements: [(vocab: Vocabulary, index: Int)] = []
 
+    // INPUTS
     @State var vocabularies: [Vocabulary]
-    var level: String?
-    var chapter: String?
-    var topic: String?
+    var level: SecondaryNumber?
+    var chapter: Chapter?
+    var topic: Topic?
     var folderName: String?
 
     @Environment(\.dismiss) private var dismiss
 
-    init(vocabularies: [Vocabulary], level: String, chapter: String, topic: String) {
+    // MARK: - Inits
+
+    init(vocabularies: [Vocabulary], level: SecondaryNumber, chapter: Chapter, topic: Topic) {
         let shuffled = vocabularies.shuffled()
         self.vocabularies = shuffled
         self.level = level
@@ -28,149 +31,253 @@ struct MCQView: View {
         self.topic = topic
         self.folderName = nil
 
-        self._shuffledOptions = State(initialValue: shuffled.map { v in
-            var options = shuffled.map { $0.word }
-            options.removeAll { $0 == v.word }
-            options.shuffle()
-            let finalOptions = Array(options.prefix(3)) + [v.word]
-            return finalOptions.shuffled()
-        })
+        self._shuffledOptions = State(initialValue: MCQView.buildOptions(from: shuffled))
         self._selectedQuestions = State(initialValue: shuffled.map { $0.questions.randomElement() ?? "error" })
         self._userAnswers = State(initialValue: Array(repeating: nil, count: shuffled.count))
     }
 
+    // Init used when coming from a saved folder/set
     init(vocabularies: [Vocabulary], folderName: String) {
         let shuffled = vocabularies.shuffled()
         self.vocabularies = shuffled
-        self.level = nil; self.chapter = nil; self.topic = nil
+        self.level = nil
+        self.chapter = nil
+        self.topic = nil
         self.folderName = folderName
 
-        self._shuffledOptions = State(initialValue: shuffled.map { v in
-            var options = shuffled.map { $0.word }
-            options.removeAll { $0 == v.word }
-            options.shuffle()
-            let finalOptions = Array(options.prefix(3)) + [v.word]
-            return finalOptions.shuffled()
-        })
+        self._shuffledOptions = State(initialValue: MCQView.buildOptions(from: shuffled))
         self._selectedQuestions = State(initialValue: shuffled.map { $0.questions.randomElement() ?? "error" })
         self._userAnswers = State(initialValue: Array(repeating: nil, count: shuffled.count))
     }
 
-    var currentVocabulary: Vocabulary { vocabularies[currentVocabularyIndex] }
-    var currentQuestion: String { selectedQuestions[currentVocabularyIndex] }
+    // MARK: - Safe helpers
+
+    private var hasData: Bool {
+        !vocabularies.isEmpty &&
+        shuffledOptions.count == vocabularies.count &&
+        selectedQuestions.count == vocabularies.count &&
+        currentVocabularyIndex >= 0 &&
+        currentVocabularyIndex < vocabularies.count
+    }
+
+    private var safeOptions: [String] {
+        guard hasData else { return [] }
+        return shuffledOptions[currentVocabularyIndex]
+    }
+
+    private var currentVocabulary: Vocabulary? {
+        guard hasData else { return nil }
+        return vocabularies[currentVocabularyIndex]
+    }
+
+    private var currentQuestion: String {
+        guard hasData else { return "" }
+        return selectedQuestions[currentVocabularyIndex]
+    }
+    
+    @EnvironmentObject private var deviceTypeManager: DeviceTypeManager
+
+    // MARK: - Body
 
     var body: some View {
         VStack {
-            ProgressView(value: Double(currentVocabularyIndex + 1), total: Double(vocabularies.count))
+            if !hasData {
+                // Empty / error state
+                VStack(spacing: 12) {
+                    Text("没有找到题目")
+                        .font(.title3).bold()
+                    Text("这个单元暂时没有词语。请返回重试。")
+                        .foregroundStyle(.secondary)
+                    Button("返回") { dismiss() }
+                        .buttonStyle(.borderedProminent)
+                }
+                .padding()
+            } else {
+                ProgressView(
+                    value: Double(min(currentVocabularyIndex + 1, vocabularies.count)),
+                    total: Double(max(vocabularies.count, 1))
+                )
                 .animation(.easeInOut, value: currentVocabularyIndex)
                 .padding()
 
-            VStack {
-                Text(currentQuestion)
-                    .font(.system(size: 30))
-                    .lineLimit(5)
-                    .minimumScaleFactor(0.1)
-                    .padding()
+                VStack {
+                    Text(currentQuestion)
+                        .font(.system(size: 30))
+                        .lineLimit(5)
+                        .minimumScaleFactor(0.1)
+                        .padding()
 
-                Text(selectedAnswer == currentVocabulary.word ? " " : "正确答案是什么呢？")
-                    .foregroundColor(showAnswer && selectedAnswer != currentVocabulary.word ? .red : .white)
-                    .font(.system(size: 17))
-            }
-            .frame(maxHeight: .infinity)
+                    // Show prompt only if we have a vocab to compare against
+                    if let vocab = currentVocabulary {
+                        Text(selectedAnswer == vocab.word ? " " : "正确答案是什么呢？")
+                            .foregroundColor(showAnswer && selectedAnswer != vocab.word ? .red : .white)
+                            .font(.system(size: 17))
+                    }
+                }
+                .frame(maxHeight: .infinity)
 
-            ForEach(shuffledOptions[currentVocabularyIndex], id: \.self) { option in
-                Button {
-                    if !showAnswer {
+                ForEach(safeOptions, id: \.self) { option in
+                    Button {
+                        guard !showAnswer, let vocab = currentVocabulary else { return }
                         selectedAnswer = option
                         userAnswers[currentVocabularyIndex] = option
                         showAnswer = true
 
-                        if option == currentVocabulary.word { correctAnswers += 1 }
-                        else { wrongAnswers += 1 }
-                    }
-                } label: {
-                    Text(option)
-                        .frame(maxWidth: .infinity)
-                        .font(.system(size: 30)).bold()
-                        .padding()
-                        .background(buttonColor(for: option))
-                        .foregroundColor(.black)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
-                        .padding(.vertical, 10)
-                }
-                .disabled(showAnswer)
-            }
-
-            HStack {
-                Button {
-                    if currentVocabularyIndex > 0 {
-                        currentVocabularyIndex -= 1
-                        loadPreviousState()
-                    }
-                } label: { Image(systemName: "chevron.left").padding() }
-                .disabled(currentVocabularyIndex == 0)
-
-                Spacer()
-
-                Button {
-                    if showAnswer {
-                        if currentVocabularyIndex < vocabularies.count - 1 {
-                            currentVocabularyIndex += 1
-                            resetState()
+                        if option == vocab.word {
+                            correctAnswers += 1
                         } else {
-                            showResults = true
+                            wrongAnswers += 1
+                            improvements.append((vocab, vocab.index))
                         }
+                    } label: {
+                        Text(option)
+                            .frame(maxWidth: .infinity)
+                            .font(.system(size: 30)).bold()
+                            .padding()
+                            .background(buttonColor(for: option))
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                            .padding(.horizontal)
+                            .padding(.vertical, 10)
                     }
-                } label: { Image(systemName: "chevron.right").padding() }
-                .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
+                    .disabled(showAnswer)
+                }
+
+                HStack {
+                    if #available(iOS 26.0, *) {
+                        Button {
+                            guard currentVocabularyIndex > 0 else { return }
+                            currentVocabularyIndex -= 1
+                            loadPreviousState()
+                        } label: {
+                            Image(systemName: "chevron.left")
+                                .padding(8)
+                        }
+                        .disabled(currentVocabularyIndex == 0)
+                        .buttonBorderShape(.circle)
+                        .buttonStyle(.glass)
+                    } else {
+                        Button {
+                            guard currentVocabularyIndex > 0 else { return }
+                            currentVocabularyIndex -= 1
+                            loadPreviousState()
+                        } label: {
+                            Image(systemName: "chevron.left").padding()
+                        }
+                        .disabled(currentVocabularyIndex == 0)
+                    }
+
+                    Spacer()
+
+                    if #available(iOS 26.0, *) {
+                        Button {
+                            guard showAnswer else { return }
+                            if currentVocabularyIndex < vocabularies.count - 1 {
+                                currentVocabularyIndex += 1
+                                resetState()
+                            } else {
+                                showResults = true
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right")
+                                .padding(8)
+                        }
+                        .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
+                        .buttonBorderShape(.circle)
+                        .buttonStyle(.glass)
+                    } else {
+                        Button {
+                            guard showAnswer else { return }
+                            if currentVocabularyIndex < vocabularies.count - 1 {
+                                currentVocabularyIndex += 1
+                                resetState()
+                            } else {
+                                showResults = true
+                            }
+                        } label: {
+                            Image(systemName: "chevron.right").padding()
+                        }
+                        .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
+                    }
+                }
+                .padding()
             }
-            .padding(.horizontal)
-            .padding(.top)
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            reshuffleVocabularies()
-            loadPreviousState()
-        }
-        .onChange(of: showResults) { done in
-            if done {
-                ScoreManager.shared.record(score: correctAnswers, outOf: vocabularies.count)
+            // Only reshuffle if arrays are out of sync
+            if shuffledOptions.count != vocabularies.count || selectedQuestions.count != vocabularies.count {
+                reshuffleVocabularies()
             }
+            loadPreviousState()
         }
         .navigationDestination(isPresented: $showResults) {
             if let level, let chapter, let topic {
-                MCQResultsView(correctAnswers: correctAnswers,
-                               wrongAnswers: wrongAnswers,
-                               totalQuestions: vocabularies.count,
-                               level: level, chapter: chapter, topic: topic)
+                MCQResultsView(
+                    correctAnswers: correctAnswers,
+                    wrongAnswers: wrongAnswers,
+                    improvements: improvements,
+                    totalQuestions: vocabularies.count,
+                    vocabularies: vocabularies,
+                    userAnswers: userAnswers,
+                    level: level,
+                    chapter: chapter,
+                    topic: topic,
+                    folderName: nil,
+                    onDone: {
+                        if deviceTypeManager.isIPad {
+                            dismiss()
+                        } else {
+                            PathManager.global.popToRoot()
+                        }
+                    } // go Home
+                )
             } else if let folderName {
-                MCQResultsView(correctAnswers: correctAnswers,
-                               wrongAnswers: wrongAnswers,
-                               totalQuestions: vocabularies.count,
-                               folderName: folderName) {
-                    dismiss()
-                }
+                MCQResultsView(
+                    correctAnswers: correctAnswers,
+                    wrongAnswers: wrongAnswers,
+                    improvements: improvements,
+                    totalQuestions: vocabularies.count,
+                    vocabularies: vocabularies,
+                    userAnswers: userAnswers,
+                    level: nil,
+                    chapter: nil,
+                    topic: nil,
+                    folderName: folderName,
+                    onDone: {
+                        if deviceTypeManager.isIPad {
+                            dismiss()
+                        } else {
+                            PathManager.global.popToRoot()
+                        }
+                    } // go Home
+                )
             }
         }
     }
 
-    func buttonColor(for option: String) -> Color {
-        guard showAnswer else { return Color.blue.opacity(0.5) }
-        if option == currentVocabulary.word { return Color.green }
-        if option == selectedAnswer        { return Color.red }
+    // MARK: - Helpers
+
+    private func buttonColor(for option: String) -> Color {
+        guard showAnswer, let vocab = currentVocabulary else { return Color.blue.opacity(0.5) }
+        if option == vocab.word { return .green }
+        if option == selectedAnswer { return .red }
         return Color.blue.opacity(0.5)
     }
 
-    func reshuffleVocabularies() {
-        vocabularies.shuffle()
-        shuffledOptions = vocabularies.map { v in
+    private static func buildOptions(from vocabularies: [Vocabulary]) -> [[String]] {
+        vocabularies.map { v in
             var options = vocabularies.map { $0.word }
             options.removeAll { $0 == v.word }
             options.shuffle()
             let final = Array(options.prefix(3)) + [v.word]
             return final.shuffled()
         }
+    }
+
+    private func reshuffleVocabularies() {
+        vocabularies.shuffle()
+        shuffledOptions = Self.buildOptions(from: vocabularies)
         selectedQuestions = vocabularies.map { $0.questions.randomElement() ?? "error" }
         userAnswers = Array(repeating: nil, count: vocabularies.count)
         currentVocabularyIndex = 0
@@ -180,12 +287,14 @@ struct MCQView: View {
         showAnswer = false
     }
 
-    func resetState() {
+    private func resetState() {
+        guard hasData else { return }
         selectedAnswer = userAnswers[currentVocabularyIndex]
         showAnswer = selectedAnswer != nil
     }
 
-    func loadPreviousState() {
+    private func loadPreviousState() {
+        guard hasData else { return }
         selectedAnswer = userAnswers[currentVocabularyIndex]
         showAnswer = selectedAnswer != nil
     }

@@ -31,6 +31,10 @@ struct FolderView: View {
                         Text("Vocabulary List")
                             .font(.headline)
                     }
+                    NavigationLink(destination: BookmarkView()) {
+                        Text("Bookmarks")
+                            .font(.headline)
+                    }
                 }
                 Section(header: Text("Custom Folders")) {
                     if vocabManager.folders.isEmpty {
@@ -71,7 +75,7 @@ struct FolderView: View {
                                         selectedFolder = nil
                                         selectedFolderForSpeakerView = folder
                                     } label: {
-                                        Text("Pronounciation")
+                                        Text("Spelling")
                                             .font(.title)
                                             .padding()
                                             .frame(height: 65)
@@ -107,9 +111,9 @@ struct FolderView: View {
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Folders")
             .navigationDestination(item: $selectedFolderForSpeakerView) { folder in
-                       SpeakerView(words: folder.vocabs)
-                   }
-
+                SpeakerView(words: folder.vocabs)
+            }
+            
             .navigationDestination(item: $selectedFolderForMCQView) { folder in
                 MCQView(vocabularies: folder.vocabs, folderName: folder.name)
             }

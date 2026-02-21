@@ -1,99 +1,262 @@
 import SwiftUI
+import PhotosUI
+
+// MARK: - Local Profile Store
+
+struct UserProfile: Codable, Hashable {
+    var email: String
+    var name: String
+    var school: String
+}
+
+final class LocalProfileStore: ObservableObject {
+    @AppStorage("profile_email")  private var storedEmail: String = ""
+    @AppStorage("profile_name")   private var storedName: String = ""
+    @AppStorage("profile_school") private var storedSchool: String = ""
+    @AppStorage("profile_avatar_data") var avatarData: Data?
+
+    @Published var profile: UserProfile = .init(email: "", name: "", school: "")
+
+    init() {
+        self.profile = .init(email: storedEmail, name: storedName, school: storedSchool)
+    }
+
+    func save(email: String, name: String, school: String) {
+        storedEmail  = email
+        storedName   = name
+        storedSchool = school
+        profile      = .init(email: email, name: name, school: school)
+    }
+}
+
+// MARK: - Settings (card layout with section titles)
 
 struct SettingsView: View {
     @ObservedObject private var authmanager: AuthenticationManager = .shared
-    @EnvironmentObject private var profile: ProfileManager
-    @State private var showEdit = false
+    @StateObject private var store = LocalProfileStore()
+
+    // Fallback to signed-in email when stored profile email is empty
+    private var accountEmail: String {
+        let stored = store.profile.email.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !stored.isEmpty { return stored }
+        return authmanager.email ?? ""
+    }
 
     var body: some View {
-        List {
-            Section {
-                HStack(spacing: 16) {
-                    Button { showEdit = true } label: {
-                        AvatarView(image: profile.avatarImage)
+        NavigationStack {
+            List {
+                Section("Account") {
+                    NavigationLink {
+                        PersonalInfoView(store: store, signedInEmail: authmanager.email ?? "")
+                    } label: {
+                        HStack(spacing: 14) {
+                            Group {
+                                if let data = store.avatarData, let ui = UIImage(data: data) {
+                                    Image(uiImage: ui).resizable().scaledToFill()
+                                } else {
+                                    let initial = String((accountEmail.first ?? "K")).uppercased()
+                                    ZStack {
+                                        Circle().fill(Color(.systemRed))
+                                        Text(initial)
+                                            .font(.title3).bold()
+                                            .foregroundStyle(.white)
+                                    }
+                                }
+                            }
+                            .frame(width: 48, height: 48)
+                            .clipShape(Circle())
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(accountEmail.isEmpty ? "Not set" : accountEmail)
+                                    .font(.headline)
+                                    .foregroundStyle(.primary)
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                                Text("Edit name, school & profile photo")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                        }
                     }
                     .buttonStyle(.plain)
+                }
 
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(displayName).font(.headline)
-                        if let handle = profile.profile?.username, !handle.isEmpty {
-                            Text("@\(handle)").foregroundColor(.secondary)
-                        }
-                        if let bio = profile.profile?.bioLine, !bio.isEmpty {
-                            Text(bio).font(.subheadline).foregroundColor(.secondary)
+                Section("App Details") {
+                    NavigationLink {
+                        AppInfoDetailView()
+                    } label: {
+                        HStack(spacing: 12) {
+                            Image(systemName: "info.circle")
+                                .imageScale(.large)
+                                .frame(width: 28)
+                                .foregroundStyle(.blue)
+                            Text("About Our App")
+                                .font(.headline)
+                                .foregroundStyle(.primary)
+                            Spacer()
                         }
                     }
-                    Spacer()
-                    Button("Edit") { showEdit = true }.buttonStyle(.bordered)
+                    .buttonStyle(.plain)
                 }
-                .padding(.vertical, 8)
-            } header: {
-                Text("Profile").font(.headline)
-            }
 
-            Section(header: Text("Sign out").font(.headline)) {
-                Button("Sign out") { withAnimation { authmanager.signOut() } }
-            }
+                Section("Acknowledgements") {
+                    NavigationLink {
+                        AcknowledgementsView()
+                    } label: {
+                        HStack(spacing: 12) {
+                            Image(systemName: "heart")
+                                .imageScale(.large)
+                                .frame(width: 28)
+                                .foregroundStyle(.blue)
+                            Text("Acknowledgements")
+                                .font(.headline)
+                                .foregroundStyle(.primary)
+                            Spacer()
+                        }
+                    }
+                    .buttonStyle(.plain)
+                }
 
-            Section(header: Text("App").font(.headline)) {
-                NavigationLink(destination: AppInfoDetailView()) {
-                    HStack { Text("About Our App"); Spacer() }.padding(.vertical, 8)
+                Section("Help & Support") {
+                    Link(destination: URL(string: "mailto:klaag.co@gmail.com")!) {
+                        HStack(spacing: 12) {
+                            Image(systemName: "envelope")
+                                .imageScale(.large)
+                                .frame(width: 28)
+                                .foregroundStyle(.blue)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Contact the Xuemi Team")
+                                    .font(.headline)
+                                Text("Email us at klaag.co@gmail.com")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                        }
+                    }
+                    .buttonStyle(.plain)
+                }
+
+                Section("Sign Out") {
+                    Button {
+                        withAnimation {
+                            authmanager.signOut()
+                        }
+                    } label: {
+                        HStack(spacing: 12) {
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                                .imageScale(.large)
+                                .frame(width: 28)
+                                .foregroundStyle(.red)
+                            Text("Sign out")
+                                .font(.headline)
+                                .foregroundStyle(.red)
+                            Spacer()
+                        }
+                    }
                 }
             }
-
-            Section(header: Text("Acknowledgement").font(.headline)) {
-                ForEach(acknowledgements, id: \.self) { person in
-                    AcknowledgementDetailView(person: person)
-                }
-            }
-
-            Section(header: Text("Help and Support").font(.headline)) {
-                HelpSupportView()
-            }
+            .navigationTitle("Settings")
         }
-        .navigationTitle("Settings")
-        .sheet(isPresented: $showEdit) {
-            EditProfileView(
-                initial: profile.profile,
-                initialAvatar: profile.avatarImage
-            ) { updatedProfile, updatedImage in
-                ProfileManager.shared.update(profile: updatedProfile, avatar: updatedImage)
-            }
-        }
-    }
-
-    private var displayName: String {
-        if let p = profile.profile {
-            if let last = p.lastName, !last.isEmpty { return "\(p.firstName) \(last)" }
-            return p.firstName
-        }
-        return "User"
     }
 }
 
-struct AvatarView: View {
-    var image: UIImage?
+// MARK: - Personal Info (with photo chooser + email fallback)
+
+struct PersonalInfoView: View {
+    @ObservedObject var store: LocalProfileStore
+    var signedInEmail: String = ""   // passed from SettingsView
+
+    @State private var email: String = ""
+    @State private var name: String = ""
+    @State private var school: String = ""
+    @State private var selectedPhoto: PhotosPickerItem?
+
     var body: some View {
-        Group {
-            if let ui = image {
-                Image(uiImage: ui).resizable().scaledToFill()
-            } else {
-                Image(systemName: "person.crop.circle.fill").resizable().scaledToFit().symbolRenderingMode(.hierarchical)
+        Form {
+            Section(header: Text("Profile Photo")) {
+                HStack(spacing: 16) {
+                    avatarPreview
+                    VStack(alignment: .leading, spacing: 8) {
+                        PhotosPicker(selection: $selectedPhoto, matching: .images) {
+                            Text("Choose Photo")
+                        }
+                        if store.avatarData != nil {
+                            Button("Reset Photo", role: .destructive) { store.avatarData = nil }
+                                .font(.footnote)
+                        }
+                    }
+                }
+                .padding(.vertical, 4)
+            }
+
+            Section(header: Text("Email")) {
+                TextField("you@example.com", text: $email)
+                    .keyboardType(.emailAddress)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+            }
+            Section(header: Text("Name")) {
+                TextField("Your name", text: $name)
+                    .textInputAutocapitalization(.words)
+            }
+            Section(header: Text("School")) {
+                TextField("Your school", text: $school)
+            }
+            Section {
+                Button("Save") {
+                    store.save(
+                        email: email.trimmingCharacters(in: .whitespacesAndNewlines),
+                        name: name.trimmingCharacters(in: .whitespacesAndNewlines),
+                        school: school.trimmingCharacters(in: .whitespacesAndNewlines)
+                    )
+                }
             }
         }
-        .frame(width: 64, height: 64)
-        .clipShape(Circle())
-        .overlay(Circle().stroke(Color.secondary.opacity(0.2), lineWidth: 1))
+        .navigationTitle("Account")
+        .onAppear {
+            let stored = store.profile.email.trimmingCharacters(in: .whitespacesAndNewlines)
+            email  = stored.isEmpty ? signedInEmail : stored
+            name   = store.profile.name
+            school = store.profile.school
+        }
+        .onChange(of: selectedPhoto) { _, newItem in
+            Task {
+                guard let newItem else { return }
+                if let data = try? await newItem.loadTransferable(type: Data.self) {
+                    if let ui = UIImage(data: data),
+                       let jpeg = ui.jpegData(compressionQuality: 0.85) {
+                        store.avatarData = jpeg
+                    } else {
+                        store.avatarData = data
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder private var avatarPreview: some View {
+        if let data = store.avatarData, let ui = UIImage(data: data) {
+            Image(uiImage: ui).resizable().scaledToFill()
+                .frame(width: 60, height: 60).clipShape(Circle())
+        } else {
+            Image(systemName: "person.crop.circle.fill").resizable().scaledToFill()
+                .frame(width: 60, height: 60).clipShape(Circle())
+                .foregroundStyle(.secondary)
+        }
     }
 }
+
+// MARK: - About & Acknowledgements
 
 struct AppInfoDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                Text("Our app, Xuemi, is an app that will help secondary school students improve their Chinese language in a more convenient manner.")
-                Text("Students will be able to study anywhere, anytime. The app features will allow students to practise their reading and writing and strengthen their use of the Chinese language. Students will be able to learn how to write the Chinese words correctly, and read passages fluently and with confidence.")
-                Text("The app includes a test function which tests students based on the ‘O’ level marking scheme. The content from sec 1-sec 4 will be compiled in this app, allowing easier access to materials for students. Additionally, we will include a note-taking function in the app.")
+                Text("Our app, Xuemi, helps secondary school students improve their Chinese language conveniently, anywhere, anytime.")
+                Text("Students can practise reading and writing to strengthen their use of Chinese. The app guides correct character writing and builds fluent reading with confidence.")
+                Text("It includes tests aligned to the 'O' Level scheme, covering Sec 1–Sec 4 content for easy access, plus a note-taking function.")
             }
             .padding()
         }
@@ -101,55 +264,50 @@ struct AppInfoDetailView: View {
     }
 }
 
-struct AcknowledgementDetailView: View {
-    let person: Acknowledgement
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(person.name).font(.headline)
-                Text(person.role).font(.subheadline).foregroundColor(.gray)
-            }
-            Spacer()
-            Image(systemName: person.icon).foregroundColor(.blue)
-        }
-        .padding(.vertical, 8)
-    }
-}
-
-struct HelpSupportView: View {
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("For help and support, please contact:")
-            Link(destination: URL(string: "mailto:klaag.co@gmail.com")!) {
-                Text("klaag.co@gmail.com")
-            }
-        }
-    }
-}
-
-struct Acknowledgement: Hashable {
+struct Acknowledgement: Identifiable {
+    let id = UUID()
     let name: String
     let role: String
     let icon: String
 }
 
-let acknowledgements = [
-    Acknowledgement(name: "Kmy Er Sze Lei", role: "Project Coordinator, Designer, Developer", icon: "person.fill"),
-    Acknowledgement(name: "Gracelyn Gosal", role: "Lead Developer (iOS), Marketing", icon: "hammer.fill"),
-    Acknowledgement(name: "Lau Rei Yan Abigail", role: "Lead Developer (Android)", icon: "hammer.fill"),
-    Acknowledgement(name: "Yoshioka Lili", role: "Lead Designer, Marketing", icon: "paintbrush.fill"),
-    Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill"),
-    Acknowledgement(name: "Chay Yu Hung Tristan", role: "Consultant", icon: "person.fill"),
-    Acknowledgement(name: "Ms Wong Lu Ting", role: "Head of Department", icon: "person.fill"),
-    Acknowledgement(name: "Ms Yap Hui Min", role: "Acting Subject Head", icon: "person.fill"),
-    Acknowledgement(name: "Mr Tan Chuan Leong", role: "Level Head, Upper Secondary", icon: "person.fill"),
-    Acknowledgement(name: "Ms Tan Sook Qin", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Yeo Sok Hui", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Xu Wei", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Ms Liew Sui Qiong", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Yap Yee Ying", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Wong Ho Yan", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "Ms Goh Su Huei", role: "Teacher-in-Charge", icon: "person.fill"),
-    Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill")
-]
+struct AcknowledgementsView: View {
+    private let team: [Acknowledgement] = [
+        Acknowledgement(name: "Kmy Er Sze Lei", role: "Project Coordinator, Designer, Developer", icon: "person.fill"),
+        Acknowledgement(name: "Gracelyn Gosal", role: "Lead Developer (iOS), Marketing", icon: "hammer.fill"),
+        Acknowledgement(name: "Lau Rei Yan Abigail", role: "Lead Developer (Android)", icon: "hammer.fill"),
+        Acknowledgement(name: "Yoshioka Lili", role: "Lead Designer, Marketing", icon: "paintbrush.fill"),
+        Acknowledgement(name: "Yeo Shu Axelia", role: "Marketing IC", icon: "megaphone.fill"),
+        Acknowledgement(name: "Chay Yu Hung Tristan", role: "Consultant", icon: "person.fill"),
+        Acknowledgement(name: "Ms Wong Lu Ting", role: "Head of Department", icon: "person.fill"),
+        Acknowledgement(name: "Ms Yap Hui Min", role: "Teacher-in-Charge", icon: "person.fill"),
+        Acknowledgement(name: "Ms Tan Sook Qin", role: "Teacher-in-Charge", icon: "person.fill"),
+        Acknowledgement(name: "Ms Yeo Sok Hui", role: "Teacher-in-Charge", icon: "person.fill"),
+        Acknowledgement(name: "Ms Xu Wei", role: "Teacher-in-Charge", icon: "person.fill"),
+        Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill")
+    ]
+
+    var body: some View {
+        List {
+            Section("Special Thanks") {
+                Text("Thank you to everyone who supported Xuemi throughout its development. We are very grateful for your guidance, feedback, and encouragement!")
+            }
+            Section("Project Contributors") {
+                ForEach(team) { member in
+                    HStack(spacing: 14) {
+                        Image(systemName: member.icon)
+                            .frame(width: 28, height: 28)
+                            .foregroundColor(.blue)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(member.name).font(.headline)
+                            Text(member.role).font(.subheadline).foregroundColor(.secondary)
+                        }
+                    }
+                    .padding(.vertical, 6)
+                }
+            }
+        }
+        .navigationTitle("Acknowledgements")
+    }
+}
 

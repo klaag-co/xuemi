@@ -34,6 +34,8 @@ final class LocalProfileStore: ObservableObject {
 struct SettingsView: View {
     @ObservedObject private var authmanager: AuthenticationManager = .shared
     @StateObject private var store = LocalProfileStore()
+    @State private var EducationStream = "G3"
+    let educationstreams = ["G3", "HCL"]
 
     // Fallback to signed-in email when stored profile email is empty
     private var accountEmail: String {
@@ -99,7 +101,16 @@ struct SettingsView: View {
                     }
                     .buttonStyle(.plain)
                 }
-
+                
+                Section("Education stream") {
+                    Picker("Select", selection: $EducationStream){
+                        ForEach(educationstreams, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
+                
                 Section("Acknowledgements") {
                     NavigationLink {
                         AcknowledgementsView()

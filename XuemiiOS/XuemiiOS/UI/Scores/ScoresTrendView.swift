@@ -3,7 +3,7 @@ import Charts
 
 struct ScoresTrendView: View {
     @EnvironmentObject private var scores: ScoreManager
-    @State private var range: ScoreManager.TrendRange = .daily
+    @State var range: ScoreManager.TrendRange
 
     var body: some View {
         NavigationStack {
@@ -20,8 +20,8 @@ struct ScoresTrendView: View {
 
                 HStack(spacing: 12) {
                     SummaryCard(title: "Score",
-                                value: "\(buckets.reduce(0) { $0 + $1.score })",
-                                sub: "of \(buckets.reduce(0) { $0 + $1.outOf })")
+                                value: "\(buckets.reduce(0) { $0 + $1.count })",
+                                sub: "quizzes")
                     SummaryCard(title: "Avg",
                                 value: String(format: "%.0f%%", avgPercent(buckets)),
                                 sub: label(for: range))
@@ -31,10 +31,10 @@ struct ScoresTrendView: View {
                 Chart(buckets) { b in
                     BarMark(
                         x: .value("Period", b.label),
-                        y: .value("Percent", b.percent)
+                        y: .value("Percent", b.averagePercent)
                     )
                     .annotation(position: .top) {
-                        if b.outOf > 0 { Text("\(Int(round(b.percent)))%").font(.caption2) }
+                        if b.count > 0 { Text("\(Int(round(b.averagePercent)))%").font(.caption2) }
                     }
                 }
                 .chartYScale(domain: 0...100)
@@ -47,10 +47,10 @@ struct ScoresTrendView: View {
         }
     }
 
-    private func avgPercent(_ buckets: [ScoreManager.ScoreBucket]) -> Double {
-        let s = buckets.reduce(0) { $0 + $1.score }
-        let o = buckets.reduce(0) { $0 + $1.outOf }
-        return o > 0 ? Double(s) / Double(o) * 100.0 : 0
+    private func avgPercent(_ buckets: [ScoreBucket]) -> Double {
+        guard !buckets.isEmpty else { return 0 }
+        let total = buckets.reduce(0) { $0 + $1.averagePercent }
+        return total / Double(buckets.count)
     }
 
     private func label(for range: ScoreManager.TrendRange) -> String {

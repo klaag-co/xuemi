@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Chapter: CaseIterable, Codable, Hashable {
+enum Chapter: Int, CaseIterable, Codable, Hashable { //added int here i REALLY hope it doesnt break anyth cuz progressmanager had an error
     case one, two, three, four, five, six, eoy
     
     var string: String {
@@ -53,7 +53,7 @@ struct ChapterView: View {
                 .padding([.horizontal, .bottom])
 
             VStack(spacing: 12) {
-                ForEach(chaptersForLevel) { chapter in
+                ForEach(chaptersForLevel, id: \.self) { chapter in
                     NavigationLink {
                         destination(for: chapter)
                     } label: {

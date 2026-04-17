@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ScoresDetailView: View {
     @EnvironmentObject private var scores: ScoreManager
+    @State var range: ScoreManager.TrendRange = .weekly
     @State private var showTrends = false
 
     var body: some View {
@@ -15,22 +16,23 @@ struct ScoresDetailView: View {
                                 .foregroundColor(.secondary)
                         }
                         Spacer()
-                        Text("\(scores.totalScore) / \(scores.totalOutOf)")
+                        Text("\(scores.results.reduce(0) { $0 + $1.correct }) / \(scores.results.reduce(0) { $0 + $1.total })")
                             .font(.title3).fontWeight(.semibold)
                     }
                 }
+
                 Section("Attempts") {
-                    ForEach(scores.entries.sorted(by: { $0.timestamp > $1.timestamp })) { e in
+                    ForEach(scores.results) { result in
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("\(e.score) / \(e.outOf)")
+                                Text(result.contextTitle.isEmpty ? "Quiz" : result.contextTitle)
                                     .font(.body).fontWeight(.medium)
-                                Text(e.timestamp.formatted(date: .abbreviated, time: .shortened))
+                                Text(result.date.formatted(date: .abbreviated, time: .shortened))
                                     .font(.caption).foregroundColor(.secondary)
                             }
                             Spacer()
-                            let pct = e.outOf > 0 ? Int(Double(e.score) / Double(e.outOf) * 100) : 0
-                            Text("\(pct)%").foregroundColor(.secondary)
+                            Text(String(format: "%.0f%%", result.percent))
+                                .foregroundColor(.secondary)
                         }
                     }
                 }
@@ -47,7 +49,7 @@ struct ScoresDetailView: View {
                 }
             }
             .sheet(isPresented: $showTrends) {
-                ScoresTrendView().environmentObject(scores)
+                ScoresTrendView(range: range).environmentObject(scores)
             }
         }
     }

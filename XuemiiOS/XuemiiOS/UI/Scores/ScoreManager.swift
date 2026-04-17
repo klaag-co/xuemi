@@ -17,6 +17,43 @@ public struct VocabLite: Identifiable, Codable, Hashable {
     }
 }
 
+// MARK: - Ranges & Buckets
+
+public enum ScoreRange: String, CaseIterable, Identifiable {
+    case day = "D"
+    case week = "W"
+    case month = "M"
+    public var id: String { rawValue }
+}
+
+public struct ScoreBucket: Identifiable {
+    public let id = UUID()
+    public let label: String
+    public let date: Date
+    public let averagePercent: Double
+    public let count: Int
+}
+
+private extension DateFormatter {
+    static let shortDay: DateFormatter = {
+        let f = DateFormatter()
+        f.setLocalizedDateFormatFromTemplate("EE")
+        return f
+    }()
+
+    static let shortMonth: DateFormatter = {
+        let f = DateFormatter()
+        f.setLocalizedDateFormatFromTemplate("MMM")
+        return f
+    }()
+
+    static let mmmdd: DateFormatter = {
+        let f = DateFormatter()
+        f.setLocalizedDateFormatFromTemplate("MMM d")
+        return f
+    }()
+}
+
 // MARK: - Stored quiz result
 
 public struct QuizResult: Identifiable, Codable, Hashable {
@@ -72,25 +109,9 @@ public struct QuizResult: Identifiable, Codable, Hashable {
     public func hash(into hasher: inout Hasher) { hasher.combine(id) }
 }
 
-// MARK: - Ranges & Buckets
-
-public enum ScoreRange: String, CaseIterable, Identifiable {
-    case day = "D"
-    case week = "W"
-    case month = "M"
-    public var id: String { rawValue }
-}
-
-public struct ScoreBucket: Identifiable {
-    public let id = UUID()
-    public let label: String      // "1PM", "Mon"
-    public let date: Date         // bucket start
-    public let averagePercent: Double
-}
-
 // MARK: - Manager
 
-public final class ScoreManager: ObservableObject {
+public class ScoreManager: ObservableObject {
     public static let shared = ScoreManager()
 
     @Published public private(set) var results: [QuizResult] = [] {
@@ -98,6 +119,10 @@ public final class ScoreManager: ObservableObject {
             self.save()
         }
     }
+    @Published var totalScore: Int = 0
+    @Published var totalOutOf: Int = 0
+    @Published var todayScore: Int = 0
+    @Published var todayOutOf: Int = 0
 
     private let storeKey = "quiz_results_v2"
     private var cancellables = Set<AnyCancellable>()
@@ -122,6 +147,16 @@ public final class ScoreManager: ObservableObject {
         let new = QuizResult(date: date, correct: correct, total: total)
         results.append(new)
         results.sort { $0.date > $1.date }
+        //results.insert(new, at: 0)
+    }
+    
+    public func clearAll() {
+        results = []
+        
+        totalScore = 0
+        totalOutOf = 0
+        todayScore = 0
+        todayOutOf = 0
     }
 
     public func recordSnapshot(
@@ -165,73 +200,99 @@ public final class ScoreManager: ObservableObject {
 
     // MARK: - Bucketing (D / W / M) — kept for possible reuse elsewhere
 
-    public func buckets(for range: ScoreRange, now: Date = Date()) -> [ScoreBucket] {
+
+    public enum TrendRange: String, CaseIterable, Identifiable {
+        case daily, weekly, monthly
+        public var id: String { rawValue }
+    }
+
+    
+    public func buckets(range: TrendRange, now: Date = Date()) -> [ScoreBucket] {
         switch range {
-        case .day:   return bucketsForDay(now: now)   // 24 hours
-        case .week:  return bucketsForWeek(now: now)  // Mon–Sun
-        case .month: return bucketsForMonthAvg(now: now) // Avg% per calendar day
+        case .daily:   return bucketsDaily(now: now)
+        case .weekly:  return bucketsWeekly(now: now)
+        case .monthly: return bucketsMonthly(now: now)
         }
     }
 
-    private func bucketsForDay(now: Date) -> [ScoreBucket] {
+    private func bucketsDaily(now: Date) -> [ScoreBucket] {
         let cal = Calendar.current
-        let start = cal.startOfDay(for: now)
-        let end = cal.date(byAdding: .day, value: 1, to: start)!
-        let todays = results.filter { $0.date >= start && $0.date < end }
+        let today = cal.startOfDay(for: now)
 
-        var map: [Int: [QuizResult]] = [:]
-        for r in todays {
-            let hour = cal.component(.hour, from: r.date)
-            map[hour, default: []].append(r)
-        }
-
-        return (0..<24).map { hour in
-            let bucketDate = cal.date(byAdding: .hour, value: hour, to: start)!
-            let f = DateFormatter(); f.dateFormat = "ha"
-            let label = f.string(from: bucketDate)
-            let arr = map[hour] ?? []
-            return ScoreBucket(label: label, date: bucketDate, averagePercent: averagePercent(arr))
-        }
-    }
-
-    private func bucketsForWeek(now: Date) -> [ScoreBucket] {
-        let cal = Calendar.current
-        let weekday = cal.component(.weekday, from: now) // 1=Sun … 7=Sat
-        let daysFromMonday = (weekday + 5) % 7
-        let monday = cal.date(byAdding: .day, value: -daysFromMonday, to: cal.startOfDay(for: now))!
-
-        var out: [ScoreBucket] = []
-        let f = DateFormatter(); f.dateFormat = "EEE"
-        for i in 0..<7 {
-            let day = cal.date(byAdding: .day, value: i, to: monday)!
+        return (0..<14).reversed().map { offset in
+            let day = cal.date(byAdding: .day, value: -offset, to: today)!
             let next = cal.date(byAdding: .day, value: 1, to: day)!
+
             let arr = results.filter { $0.date >= day && $0.date < next }
-            out.append(ScoreBucket(label: f.string(from: day), date: day, averagePercent: averagePercent(arr)))
+
+            return ScoreBucket(
+                label: DateFormatter.shortDay.string(from: day),
+                date: day,
+                averagePercent: average(arr),
+                count: arr.count
+            )
         }
-        return out
     }
 
-    private func bucketsForMonthAvg(now: Date) -> [ScoreBucket] {
+    private func bucketsWeekly(now: Date) -> [ScoreBucket] {
         let cal = Calendar.current
-        let start = cal.date(from: cal.dateComponents([.year, .month], from: now))!
-        let range = cal.range(of: .day, in: .month, for: start)! // 1..30/31
+        let startOfWeek = cal.dateInterval(of: .weekOfYear, for: now)!.start
 
-        var out: [ScoreBucket] = []
-        for d in range {
-            let day = cal.date(byAdding: .day, value: d - 1, to: start)!
-            let next = cal.date(byAdding: .day, value: 1, to: day)!
-            let arr = results.filter { $0.date >= day && $0.date < next }
-            out.append(ScoreBucket(label: "\(d)", date: day, averagePercent: averagePercent(arr)))
+        return (0..<12).reversed().map { offset in
+            let start = cal.date(byAdding: .weekOfYear, value: -offset, to: startOfWeek)!
+            let end = cal.date(byAdding: .day, value: 7, to: start)!
+
+            let arr = results.filter { $0.date >= start && $0.date < end }
+
+            return ScoreBucket(
+                label: weekLabel(from: start),
+                date: start,
+                averagePercent: average(arr),
+                count: arr.count
+            )
         }
-        return out
     }
 
-    private func averagePercent(_ arr: [QuizResult]) -> Double {
+    private func bucketsMonthly(now: Date) -> [ScoreBucket] {
+        let cal = Calendar.current
+        let startOfMonth = cal.dateInterval(of: .month, for: now)!.start
+
+        return (0..<12).reversed().map { offset in
+            let start = cal.date(byAdding: .month, value: -offset, to: startOfMonth)!
+            let end = cal.date(byAdding: .month, value: 1, to: start)!
+
+            let arr = results.filter { $0.date >= start && $0.date < end }
+
+            return ScoreBucket(
+                label: DateFormatter.shortMonth.string(from: start),
+                date: start,
+                averagePercent: average(arr),
+                count: arr.count
+            )
+        }
+    }
+
+    public func averagePercent(_ arr: [QuizResult]) -> Double {
         guard !arr.isEmpty else { return 0 }
         let s = arr.reduce(0.0) { $0 + $1.percent }
         return s / Double(arr.count)
     }
+    
+    public var averagePercent: Double {
+        guard !results.isEmpty else { return 0 }
+        return results.reduce(0.0) { $0 + $1.percent } / Double(results.count)
+    }
 
+    private func average(_ arr: [QuizResult]) -> Double {
+        guard !arr.isEmpty else { return 0 }
+        return arr.reduce(0) { $0 + $1.percent } / Double(arr.count)
+    }
+
+    private func weekLabel(from start: Date) -> String {
+        let end = Calendar.current.date(byAdding: .day, value: 6, to: start)!
+        return "\(DateFormatter.mmmdd.string(from: start))–\(DateFormatter.mmmdd.string(from: end))"
+    }
+    
     // MARK: - Persistence
 
     private func load() {

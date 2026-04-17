@@ -82,7 +82,7 @@ public struct FlashcardView: View {
         self._isLargeDevice = State(initialValue: UIScreen.main.bounds.height > 800)
     }
 
-    var body: some View {
+    public var body: some View {
         ZStack {
             VStack {
                 ProgressView(

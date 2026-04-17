@@ -3,10 +3,68 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DA9DB472F911D8F003FEDDB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DA9DAFC2F911D8F003FEDDB /* Preview Assets.xcassets */; };
+		1DA9DB482F911D8F003FEDDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DA9DB3E2F911D8F003FEDDB /* Assets.xcassets */; };
+		1DA9DB492F911D8F003FEDDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1DA9DB3F2F911D8F003FEDDB /* GoogleService-Info.plist */; };
+		1DA9DB4B2F911D8F003FEDDB /* 中一.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DA9DB422F911D8F003FEDDB /* 中一.json */; };
+		1DA9DB4C2F911D8F003FEDDB /* 中三.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DA9DB432F911D8F003FEDDB /* 中三.json */; };
+		1DA9DB4D2F911D8F003FEDDB /* 中二.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DA9DB442F911D8F003FEDDB /* 中二.json */; };
+		1DA9DB4E2F911D8F003FEDDB /* 中四.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DA9DB452F911D8F003FEDDB /* 中四.json */; };
+		1DA9DB4F2F911D8F003FEDDB /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DAFE2F911D8F003FEDDB /* BookmarkManager.swift */; };
+		1DA9DB502F911D8F003FEDDB /* BookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DAFF2F911D8F003FEDDB /* BookmarkView.swift */; };
+		1DA9DB512F911D8F003FEDDB /* ContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB012F911D8F003FEDDB /* ContentsView.swift */; };
+		1DA9DB522F911D8F003FEDDB /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB022F911D8F003FEDDB /* FolderView.swift */; };
+		1DA9DB532F911D8F003FEDDB /* NewFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB032F911D8F003FEDDB /* NewFolderView.swift */; };
+		1DA9DB542F911D8F003FEDDB /* VocabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB042F911D8F003FEDDB /* VocabView.swift */; };
+		1DA9DB552F911D8F003FEDDB /* CanvasController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB062F911D8F003FEDDB /* CanvasController.swift */; };
+		1DA9DB562F911D8F003FEDDB /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB072F911D8F003FEDDB /* CanvasView.swift */; };
+		1DA9DB572F911D8F003FEDDB /* StrokeWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB082F911D8F003FEDDB /* StrokeWriteView.swift */; };
+		1DA9DB582F911D8F003FEDDB /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB0A2F911D8F003FEDDB /* AuthenticationManager.swift */; };
+		1DA9DB592F911D8F003FEDDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB0B2F911D8F003FEDDB /* ContentView.swift */; };
+		1DA9DB5A2F911D8F003FEDDB /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB0C2F911D8F003FEDDB /* DeviceType.swift */; };
+		1DA9DB5B2F911D8F003FEDDB /* DeviceTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB0D2F911D8F003FEDDB /* DeviceTypeManager.swift */; };
+		1DA9DB5C2F911D8F003FEDDB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB0E2F911D8F003FEDDB /* HomeView.swift */; };
+		1DA9DB5D2F911D8F003FEDDB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB0F2F911D8F003FEDDB /* LoginView.swift */; };
+		1DA9DB5E2F911D8F003FEDDB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB102F911D8F003FEDDB /* SettingsView.swift */; };
+		1DA9DB5F2F911D8F003FEDDB /* MCQResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB122F911D8F003FEDDB /* MCQResultsView.swift */; };
+		1DA9DB602F911D8F003FEDDB /* MCQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB132F911D8F003FEDDB /* MCQView.swift */; };
+		1DA9DB612F911D8F003FEDDB /* ResultReplayDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB142F911D8F003FEDDB /* ResultReplayDestination.swift */; };
+		1DA9DB622F911D8F003FEDDB /* MemoryAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB162F911D8F003FEDDB /* MemoryAttempt.swift */; };
+		1DA9DB632F911D8F003FEDDB /* MemoryCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB172F911D8F003FEDDB /* MemoryCardView.swift */; };
+		1DA9DB642F911D8F003FEDDB /* MemoryReplayDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB182F911D8F003FEDDB /* MemoryReplayDestination.swift */; };
+		1DA9DB652F911D8F003FEDDB /* MemoryResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB192F911D8F003FEDDB /* MemoryResultsView.swift */; };
+		1DA9DB662F911D8F003FEDDB /* MemoryStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB1A2F911D8F003FEDDB /* MemoryStats.swift */; };
+		1DA9DB672F911D8F003FEDDB /* ChapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB1C2F911D8F003FEDDB /* ChapterView.swift */; };
+		1DA9DB682F911D8F003FEDDB /* FlashcardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB1D2F911D8F003FEDDB /* FlashcardView.swift */; };
+		1DA9DB692F911D8F003FEDDB /* SpeakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB1E2F911D8F003FEDDB /* SpeakerView.swift */; };
+		1DA9DB6A2F911D8F003FEDDB /* StoredResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB1F2F911D8F003FEDDB /* StoredResultView.swift */; };
+		1DA9DB6B2F911D8F003FEDDB /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB202F911D8F003FEDDB /* TopicView.swift */; };
+		1DA9DB6C2F911D8F003FEDDB /* InkNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB222F911D8F003FEDDB /* InkNote.swift */; };
+		1DA9DB6D2F911D8F003FEDDB /* InkNoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB232F911D8F003FEDDB /* InkNoteDetailView.swift */; };
+		1DA9DB6E2F911D8F003FEDDB /* InkNotesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB242F911D8F003FEDDB /* InkNotesManager.swift */; };
+		1DA9DB6F2F911D8F003FEDDB /* InkNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB252F911D8F003FEDDB /* InkNotesView.swift */; };
+		1DA9DB702F911D8F003FEDDB /* PencilCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB262F911D8F003FEDDB /* PencilCanvasView.swift */; };
+		1DA9DB712F911D8F003FEDDB /* CreateNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB282F911D8F003FEDDB /* CreateNoteView.swift */; };
+		1DA9DB722F911D8F003FEDDB /* NotesDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB292F911D8F003FEDDB /* NotesDetailView.swift */; };
+		1DA9DB732F911D8F003FEDDB /* NotesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB2A2F911D8F003FEDDB /* NotesManager.swift */; };
+		1DA9DB742F911D8F003FEDDB /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB2B2F911D8F003FEDDB /* NotesView.swift */; };
+		1DA9DB752F911D8F003FEDDB /* LastProgressStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB2D2F911D8F003FEDDB /* LastProgressStore.swift */; };
+		1DA9DB762F911D8F003FEDDB /* ProgressDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB2E2F911D8F003FEDDB /* ProgressDetailView.swift */; };
+		1DA9DB772F911D8F003FEDDB /* ProgressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB2F2F911D8F003FEDDB /* ProgressManager.swift */; };
+		1DA9DB782F911D8F003FEDDB /* ScoreBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB302F911D8F003FEDDB /* ScoreBadge.swift */; };
+		1DA9DB792F911D8F003FEDDB /* ScoreChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB312F911D8F003FEDDB /* ScoreChip.swift */; };
+		1DA9DB7B2F911D8F003FEDDB /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB332F911D8F003FEDDB /* ScoreManager.swift */; };
+		1DA9DB7C2F911D8F003FEDDB /* ScoresDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB342F911D8F003FEDDB /* ScoresDetailView.swift */; };
+		1DA9DB7E2F911D8F003FEDDB /* ScoresTrendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB362F911D8F003FEDDB /* ScoresTrendView.swift */; };
+		1DA9DB7F2F911D8F003FEDDB /* VocabManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB382F911D8F003FEDDB /* VocabManager.swift */; };
+		1DA9DB802F911D8F003FEDDB /* Vocabulary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB392F911D8F003FEDDB /* Vocabulary.swift */; };
+		1DA9DB812F911D8F003FEDDB /* CelebrationOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB3B2F911D8F003FEDDB /* CelebrationOverlay.swift */; };
+		1DA9DB822F911D8F003FEDDB /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB3C2F911D8F003FEDDB /* ConfettiView.swift */; };
+		1DA9DB832F911D8F003FEDDB /* XuemiiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA9DB412F911D8F003FEDDB /* XuemiiOSApp.swift */; };
 		1DE60C102E1D485400BF5193 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 1DE60C0F2E1D485400BF5193 /* GoogleSignIn */; };
 		1DE60C122E1D485400BF5193 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 1DE60C112E1D485400BF5193 /* GoogleSignInSwift */; };
 		1DF550BD2E1D449600AB66FA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1DF550BC2E1D449600AB66FA /* FirebaseAuth */; };
@@ -21,25 +79,70 @@
 
 /* Begin PBXFileReference section */
 		1D0898BF2BCE669700F2AFCA /* XuemiiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XuemiiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DA9DAFC2F911D8F003FEDDB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1DA9DAFE2F911D8F003FEDDB /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
+		1DA9DAFF2F911D8F003FEDDB /* BookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkView.swift; sourceTree = "<group>"; };
+		1DA9DB012F911D8F003FEDDB /* ContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsView.swift; sourceTree = "<group>"; };
+		1DA9DB022F911D8F003FEDDB /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
+		1DA9DB032F911D8F003FEDDB /* NewFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFolderView.swift; sourceTree = "<group>"; };
+		1DA9DB042F911D8F003FEDDB /* VocabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabView.swift; sourceTree = "<group>"; };
+		1DA9DB062F911D8F003FEDDB /* CanvasController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasController.swift; sourceTree = "<group>"; };
+		1DA9DB072F911D8F003FEDDB /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		1DA9DB082F911D8F003FEDDB /* StrokeWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeWriteView.swift; sourceTree = "<group>"; };
+		1DA9DB0A2F911D8F003FEDDB /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		1DA9DB0B2F911D8F003FEDDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1DA9DB0C2F911D8F003FEDDB /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
+		1DA9DB0D2F911D8F003FEDDB /* DeviceTypeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTypeManager.swift; sourceTree = "<group>"; };
+		1DA9DB0E2F911D8F003FEDDB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		1DA9DB0F2F911D8F003FEDDB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1DA9DB102F911D8F003FEDDB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		1DA9DB122F911D8F003FEDDB /* MCQResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCQResultsView.swift; sourceTree = "<group>"; };
+		1DA9DB132F911D8F003FEDDB /* MCQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCQView.swift; sourceTree = "<group>"; };
+		1DA9DB142F911D8F003FEDDB /* ResultReplayDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultReplayDestination.swift; sourceTree = "<group>"; };
+		1DA9DB162F911D8F003FEDDB /* MemoryAttempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryAttempt.swift; sourceTree = "<group>"; };
+		1DA9DB172F911D8F003FEDDB /* MemoryCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCardView.swift; sourceTree = "<group>"; };
+		1DA9DB182F911D8F003FEDDB /* MemoryReplayDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryReplayDestination.swift; sourceTree = "<group>"; };
+		1DA9DB192F911D8F003FEDDB /* MemoryResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryResultsView.swift; sourceTree = "<group>"; };
+		1DA9DB1A2F911D8F003FEDDB /* MemoryStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryStats.swift; sourceTree = "<group>"; };
+		1DA9DB1C2F911D8F003FEDDB /* ChapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterView.swift; sourceTree = "<group>"; };
+		1DA9DB1D2F911D8F003FEDDB /* FlashcardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardView.swift; sourceTree = "<group>"; };
+		1DA9DB1E2F911D8F003FEDDB /* SpeakerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerView.swift; sourceTree = "<group>"; };
+		1DA9DB1F2F911D8F003FEDDB /* StoredResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredResultView.swift; sourceTree = "<group>"; };
+		1DA9DB202F911D8F003FEDDB /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
+		1DA9DB222F911D8F003FEDDB /* InkNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkNote.swift; sourceTree = "<group>"; };
+		1DA9DB232F911D8F003FEDDB /* InkNoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkNoteDetailView.swift; sourceTree = "<group>"; };
+		1DA9DB242F911D8F003FEDDB /* InkNotesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkNotesManager.swift; sourceTree = "<group>"; };
+		1DA9DB252F911D8F003FEDDB /* InkNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InkNotesView.swift; sourceTree = "<group>"; };
+		1DA9DB262F911D8F003FEDDB /* PencilCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PencilCanvasView.swift; sourceTree = "<group>"; };
+		1DA9DB282F911D8F003FEDDB /* CreateNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteView.swift; sourceTree = "<group>"; };
+		1DA9DB292F911D8F003FEDDB /* NotesDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDetailView.swift; sourceTree = "<group>"; };
+		1DA9DB2A2F911D8F003FEDDB /* NotesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesManager.swift; sourceTree = "<group>"; };
+		1DA9DB2B2F911D8F003FEDDB /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		1DA9DB2D2F911D8F003FEDDB /* LastProgressStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastProgressStore.swift; sourceTree = "<group>"; };
+		1DA9DB2E2F911D8F003FEDDB /* ProgressDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDetailView.swift; sourceTree = "<group>"; };
+		1DA9DB2F2F911D8F003FEDDB /* ProgressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressManager.swift; sourceTree = "<group>"; };
+		1DA9DB302F911D8F003FEDDB /* ScoreBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreBadge.swift; sourceTree = "<group>"; };
+		1DA9DB312F911D8F003FEDDB /* ScoreChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreChip.swift; sourceTree = "<group>"; };
+		1DA9DB332F911D8F003FEDDB /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
+		1DA9DB342F911D8F003FEDDB /* ScoresDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresDetailView.swift; sourceTree = "<group>"; };
+		1DA9DB362F911D8F003FEDDB /* ScoresTrendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresTrendView.swift; sourceTree = "<group>"; };
+		1DA9DB382F911D8F003FEDDB /* VocabManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabManager.swift; sourceTree = "<group>"; };
+		1DA9DB392F911D8F003FEDDB /* Vocabulary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vocabulary.swift; sourceTree = "<group>"; };
+		1DA9DB3B2F911D8F003FEDDB /* CelebrationOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CelebrationOverlay.swift; sourceTree = "<group>"; };
+		1DA9DB3C2F911D8F003FEDDB /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		1DA9DB3E2F911D8F003FEDDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1DA9DB3F2F911D8F003FEDDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1DA9DB402F911D8F003FEDDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1DA9DB412F911D8F003FEDDB /* XuemiiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XuemiiOSApp.swift; sourceTree = "<group>"; };
+		1DA9DB422F911D8F003FEDDB /* 中一.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "中一.json"; sourceTree = "<group>"; };
+		1DA9DB432F911D8F003FEDDB /* 中三.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "中三.json"; sourceTree = "<group>"; };
+		1DA9DB442F911D8F003FEDDB /* 中二.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "中二.json"; sourceTree = "<group>"; };
+		1DA9DB452F911D8F003FEDDB /* 中四.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "中四.json"; sourceTree = "<group>"; };
 		F879C9CB2C54A52400C047AA /* demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = demo.js; sourceTree = "<group>"; };
 		F879C9CC2C54A52400C047AA /* hanzi-writer.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "hanzi-writer.min.js"; sourceTree = "<group>"; };
 		F879C9CD2C54A52400C047AA /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		F879C9CE2C54A52400C047AA /* jquery.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F8234D162E65E6CA008CCF16 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 1D0898BE2BCE669700F2AFCA /* XuemiiOS */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		F8234CD92E65E683008CCF16 /* XuemiiOS */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (F8234D162E65E6CA008CCF16 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = XuemiiOS; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1D0898BC2BCE669700F2AFCA /* Frameworks */ = {
@@ -61,7 +164,7 @@
 		1D0898B62BCE669700F2AFCA = {
 			isa = PBXGroup;
 			children = (
-				F8234CD92E65E683008CCF16 /* XuemiiOS */,
+				1DA9DB462F911D8F003FEDDB /* XuemiiOS */,
 				F879C9CF2C54A52400C047AA /* web */,
 				F8DE45132EBF276700DF7EA9 /* Frameworks */,
 				1D0898C02BCE669700F2AFCA /* Products */,
@@ -74,6 +177,176 @@
 				1D0898BF2BCE669700F2AFCA /* XuemiiOS.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1DA9DAFD2F911D8F003FEDDB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DAFC2F911D8F003FEDDB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1DA9DB002F911D8F003FEDDB /* Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DAFE2F911D8F003FEDDB /* BookmarkManager.swift */,
+				1DA9DAFF2F911D8F003FEDDB /* BookmarkView.swift */,
+			);
+			path = Bookmark;
+			sourceTree = "<group>";
+		};
+		1DA9DB052F911D8F003FEDDB /* Folders */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB012F911D8F003FEDDB /* ContentsView.swift */,
+				1DA9DB022F911D8F003FEDDB /* FolderView.swift */,
+				1DA9DB032F911D8F003FEDDB /* NewFolderView.swift */,
+				1DA9DB042F911D8F003FEDDB /* VocabView.swift */,
+			);
+			path = Folders;
+			sourceTree = "<group>";
+		};
+		1DA9DB092F911D8F003FEDDB /* Handwriting */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB062F911D8F003FEDDB /* CanvasController.swift */,
+				1DA9DB072F911D8F003FEDDB /* CanvasView.swift */,
+				1DA9DB082F911D8F003FEDDB /* StrokeWriteView.swift */,
+			);
+			path = Handwriting;
+			sourceTree = "<group>";
+		};
+		1DA9DB112F911D8F003FEDDB /* Home stuff */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB0A2F911D8F003FEDDB /* AuthenticationManager.swift */,
+				1DA9DB0B2F911D8F003FEDDB /* ContentView.swift */,
+				1DA9DB0C2F911D8F003FEDDB /* DeviceType.swift */,
+				1DA9DB0D2F911D8F003FEDDB /* DeviceTypeManager.swift */,
+				1DA9DB0E2F911D8F003FEDDB /* HomeView.swift */,
+				1DA9DB0F2F911D8F003FEDDB /* LoginView.swift */,
+				1DA9DB102F911D8F003FEDDB /* SettingsView.swift */,
+			);
+			path = "Home stuff";
+			sourceTree = "<group>";
+		};
+		1DA9DB152F911D8F003FEDDB /* MCQ */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB122F911D8F003FEDDB /* MCQResultsView.swift */,
+				1DA9DB132F911D8F003FEDDB /* MCQView.swift */,
+				1DA9DB142F911D8F003FEDDB /* ResultReplayDestination.swift */,
+			);
+			path = MCQ;
+			sourceTree = "<group>";
+		};
+		1DA9DB1B2F911D8F003FEDDB /* MemoryCards */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB162F911D8F003FEDDB /* MemoryAttempt.swift */,
+				1DA9DB172F911D8F003FEDDB /* MemoryCardView.swift */,
+				1DA9DB182F911D8F003FEDDB /* MemoryReplayDestination.swift */,
+				1DA9DB192F911D8F003FEDDB /* MemoryResultsView.swift */,
+				1DA9DB1A2F911D8F003FEDDB /* MemoryStats.swift */,
+			);
+			path = MemoryCards;
+			sourceTree = "<group>";
+		};
+		1DA9DB212F911D8F003FEDDB /* ImptFeatures */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB152F911D8F003FEDDB /* MCQ */,
+				1DA9DB1B2F911D8F003FEDDB /* MemoryCards */,
+				1DA9DB1C2F911D8F003FEDDB /* ChapterView.swift */,
+				1DA9DB1D2F911D8F003FEDDB /* FlashcardView.swift */,
+				1DA9DB1E2F911D8F003FEDDB /* SpeakerView.swift */,
+				1DA9DB1F2F911D8F003FEDDB /* StoredResultView.swift */,
+				1DA9DB202F911D8F003FEDDB /* TopicView.swift */,
+			);
+			path = ImptFeatures;
+			sourceTree = "<group>";
+		};
+		1DA9DB272F911D8F003FEDDB /* InkNotes */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB222F911D8F003FEDDB /* InkNote.swift */,
+				1DA9DB232F911D8F003FEDDB /* InkNoteDetailView.swift */,
+				1DA9DB242F911D8F003FEDDB /* InkNotesManager.swift */,
+				1DA9DB252F911D8F003FEDDB /* InkNotesView.swift */,
+				1DA9DB262F911D8F003FEDDB /* PencilCanvasView.swift */,
+			);
+			path = InkNotes;
+			sourceTree = "<group>";
+		};
+		1DA9DB2C2F911D8F003FEDDB /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB272F911D8F003FEDDB /* InkNotes */,
+				1DA9DB282F911D8F003FEDDB /* CreateNoteView.swift */,
+				1DA9DB292F911D8F003FEDDB /* NotesDetailView.swift */,
+				1DA9DB2A2F911D8F003FEDDB /* NotesManager.swift */,
+				1DA9DB2B2F911D8F003FEDDB /* NotesView.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		1DA9DB372F911D8F003FEDDB /* Scores */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB2D2F911D8F003FEDDB /* LastProgressStore.swift */,
+				1DA9DB2E2F911D8F003FEDDB /* ProgressDetailView.swift */,
+				1DA9DB2F2F911D8F003FEDDB /* ProgressManager.swift */,
+				1DA9DB302F911D8F003FEDDB /* ScoreBadge.swift */,
+				1DA9DB312F911D8F003FEDDB /* ScoreChip.swift */,
+				1DA9DB332F911D8F003FEDDB /* ScoreManager.swift */,
+				1DA9DB342F911D8F003FEDDB /* ScoresDetailView.swift */,
+				1DA9DB362F911D8F003FEDDB /* ScoresTrendView.swift */,
+			);
+			path = Scores;
+			sourceTree = "<group>";
+		};
+		1DA9DB3A2F911D8F003FEDDB /* Vocabulary */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB382F911D8F003FEDDB /* VocabManager.swift */,
+				1DA9DB392F911D8F003FEDDB /* Vocabulary.swift */,
+			);
+			path = Vocabulary;
+			sourceTree = "<group>";
+		};
+		1DA9DB3D2F911D8F003FEDDB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DB112F911D8F003FEDDB /* Home stuff */,
+				1DA9DB212F911D8F003FEDDB /* ImptFeatures */,
+				1DA9DB092F911D8F003FEDDB /* Handwriting */,
+				1DA9DB2C2F911D8F003FEDDB /* Notes */,
+				1DA9DB002F911D8F003FEDDB /* Bookmark */,
+				1DA9DB052F911D8F003FEDDB /* Folders */,
+				1DA9DB372F911D8F003FEDDB /* Scores */,
+				1DA9DB3A2F911D8F003FEDDB /* Vocabulary */,
+				1DA9DB3B2F911D8F003FEDDB /* CelebrationOverlay.swift */,
+				1DA9DB3C2F911D8F003FEDDB /* ConfettiView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		1DA9DB462F911D8F003FEDDB /* XuemiiOS */ = {
+			isa = PBXGroup;
+			children = (
+				1DA9DAFD2F911D8F003FEDDB /* Preview Content */,
+				1DA9DB3D2F911D8F003FEDDB /* UI */,
+				1DA9DB3E2F911D8F003FEDDB /* Assets.xcassets */,
+				1DA9DB3F2F911D8F003FEDDB /* GoogleService-Info.plist */,
+				1DA9DB402F911D8F003FEDDB /* Info.plist */,
+				1DA9DB412F911D8F003FEDDB /* XuemiiOSApp.swift */,
+				1DA9DB422F911D8F003FEDDB /* 中一.json */,
+				1DA9DB432F911D8F003FEDDB /* 中三.json */,
+				1DA9DB442F911D8F003FEDDB /* 中二.json */,
+				1DA9DB452F911D8F003FEDDB /* 中四.json */,
+			);
+			path = XuemiiOS;
 			sourceTree = "<group>";
 		};
 		F879C9CF2C54A52400C047AA /* web */ = {
@@ -108,9 +381,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				F8234CD92E65E683008CCF16 /* XuemiiOS */,
 			);
 			name = XuemiiOS;
 			productName = XuemiiOS;
@@ -161,6 +431,13 @@
 			files = (
 				F879C9D32C54A52400C047AA /* jquery.min.js in Resources */,
 				F879C9D22C54A52400C047AA /* index.html in Resources */,
+				1DA9DB472F911D8F003FEDDB /* Preview Assets.xcassets in Resources */,
+				1DA9DB482F911D8F003FEDDB /* Assets.xcassets in Resources */,
+				1DA9DB492F911D8F003FEDDB /* GoogleService-Info.plist in Resources */,
+				1DA9DB4B2F911D8F003FEDDB /* 中一.json in Resources */,
+				1DA9DB4C2F911D8F003FEDDB /* 中三.json in Resources */,
+				1DA9DB4D2F911D8F003FEDDB /* 中二.json in Resources */,
+				1DA9DB4E2F911D8F003FEDDB /* 中四.json in Resources */,
 				F879C9D12C54A52400C047AA /* hanzi-writer.min.js in Resources */,
 				F879C9D02C54A52400C047AA /* demo.js in Resources */,
 			);
@@ -173,6 +450,57 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DA9DB4F2F911D8F003FEDDB /* BookmarkManager.swift in Sources */,
+				1DA9DB502F911D8F003FEDDB /* BookmarkView.swift in Sources */,
+				1DA9DB512F911D8F003FEDDB /* ContentsView.swift in Sources */,
+				1DA9DB522F911D8F003FEDDB /* FolderView.swift in Sources */,
+				1DA9DB532F911D8F003FEDDB /* NewFolderView.swift in Sources */,
+				1DA9DB542F911D8F003FEDDB /* VocabView.swift in Sources */,
+				1DA9DB552F911D8F003FEDDB /* CanvasController.swift in Sources */,
+				1DA9DB562F911D8F003FEDDB /* CanvasView.swift in Sources */,
+				1DA9DB572F911D8F003FEDDB /* StrokeWriteView.swift in Sources */,
+				1DA9DB582F911D8F003FEDDB /* AuthenticationManager.swift in Sources */,
+				1DA9DB592F911D8F003FEDDB /* ContentView.swift in Sources */,
+				1DA9DB5A2F911D8F003FEDDB /* DeviceType.swift in Sources */,
+				1DA9DB5B2F911D8F003FEDDB /* DeviceTypeManager.swift in Sources */,
+				1DA9DB5C2F911D8F003FEDDB /* HomeView.swift in Sources */,
+				1DA9DB5D2F911D8F003FEDDB /* LoginView.swift in Sources */,
+				1DA9DB5E2F911D8F003FEDDB /* SettingsView.swift in Sources */,
+				1DA9DB5F2F911D8F003FEDDB /* MCQResultsView.swift in Sources */,
+				1DA9DB602F911D8F003FEDDB /* MCQView.swift in Sources */,
+				1DA9DB612F911D8F003FEDDB /* ResultReplayDestination.swift in Sources */,
+				1DA9DB622F911D8F003FEDDB /* MemoryAttempt.swift in Sources */,
+				1DA9DB632F911D8F003FEDDB /* MemoryCardView.swift in Sources */,
+				1DA9DB642F911D8F003FEDDB /* MemoryReplayDestination.swift in Sources */,
+				1DA9DB652F911D8F003FEDDB /* MemoryResultsView.swift in Sources */,
+				1DA9DB662F911D8F003FEDDB /* MemoryStats.swift in Sources */,
+				1DA9DB672F911D8F003FEDDB /* ChapterView.swift in Sources */,
+				1DA9DB682F911D8F003FEDDB /* FlashcardView.swift in Sources */,
+				1DA9DB692F911D8F003FEDDB /* SpeakerView.swift in Sources */,
+				1DA9DB6A2F911D8F003FEDDB /* StoredResultView.swift in Sources */,
+				1DA9DB6B2F911D8F003FEDDB /* TopicView.swift in Sources */,
+				1DA9DB6C2F911D8F003FEDDB /* InkNote.swift in Sources */,
+				1DA9DB6D2F911D8F003FEDDB /* InkNoteDetailView.swift in Sources */,
+				1DA9DB6E2F911D8F003FEDDB /* InkNotesManager.swift in Sources */,
+				1DA9DB6F2F911D8F003FEDDB /* InkNotesView.swift in Sources */,
+				1DA9DB702F911D8F003FEDDB /* PencilCanvasView.swift in Sources */,
+				1DA9DB712F911D8F003FEDDB /* CreateNoteView.swift in Sources */,
+				1DA9DB722F911D8F003FEDDB /* NotesDetailView.swift in Sources */,
+				1DA9DB732F911D8F003FEDDB /* NotesManager.swift in Sources */,
+				1DA9DB742F911D8F003FEDDB /* NotesView.swift in Sources */,
+				1DA9DB752F911D8F003FEDDB /* LastProgressStore.swift in Sources */,
+				1DA9DB762F911D8F003FEDDB /* ProgressDetailView.swift in Sources */,
+				1DA9DB772F911D8F003FEDDB /* ProgressManager.swift in Sources */,
+				1DA9DB782F911D8F003FEDDB /* ScoreBadge.swift in Sources */,
+				1DA9DB792F911D8F003FEDDB /* ScoreChip.swift in Sources */,
+				1DA9DB7B2F911D8F003FEDDB /* ScoreManager.swift in Sources */,
+				1DA9DB7C2F911D8F003FEDDB /* ScoresDetailView.swift in Sources */,
+				1DA9DB7E2F911D8F003FEDDB /* ScoresTrendView.swift in Sources */,
+				1DA9DB7F2F911D8F003FEDDB /* VocabManager.swift in Sources */,
+				1DA9DB802F911D8F003FEDDB /* Vocabulary.swift in Sources */,
+				1DA9DB812F911D8F003FEDDB /* CelebrationOverlay.swift in Sources */,
+				1DA9DB822F911D8F003FEDDB /* ConfettiView.swift in Sources */,
+				1DA9DB832F911D8F003FEDDB /* XuemiiOSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

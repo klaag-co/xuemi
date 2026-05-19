@@ -103,7 +103,10 @@ struct MemoryCardView: View {
     @ViewBuilder
     private func cardView(for index: Int) -> some View {
         let card = cards[index]
-        Button(action: { handleCardTap(at: index) }) {
+        Button(action: {
+            guard gameStarted, !isProcessing, !card.isMatched, !card.isFaceUp else { return }
+            handleCardTap(at: index)
+        }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.customblue)
@@ -131,8 +134,8 @@ struct MemoryCardView: View {
             .animation(.easeInOut(duration: 0.35), value: card.isFaceUp)
             .animation(.easeInOut(duration: 0.45), value: wrongShakeTrigger)
         }
-        .disabled(!gameStarted || isProcessing || card.isMatched || card.isFaceUp)
         .buttonStyle(PlainButtonStyle())
+        .opacity(gameStarted ? 1 : 0.5)
     }
 
     private func startNewRound() {

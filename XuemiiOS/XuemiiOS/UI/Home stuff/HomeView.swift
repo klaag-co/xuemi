@@ -79,36 +79,6 @@ private struct ContinueCarouselView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
 
-            // Header
-            HStack(spacing: 10) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(
-                            LinearGradient(
-                                colors: [Color.customblue.opacity(0.9), Color.customteal.opacity(0.8)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                    Image(systemName: "play.circle.fill")
-                        .font(.title2)
-                        .foregroundStyle(.white)
-                }
-                .frame(width: 44, height: 44)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("继续学习")
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(.primary)
-                    Text("从你上次停下的地方继续进步")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-
-                Spacer()
-            }
-            .padding(.horizontal, 4)
-
             if allProgress.isEmpty {
                 ZStack {
                     RoundedRectangle(cornerRadius: 22)
@@ -258,15 +228,12 @@ private struct ContinueCarouselView: View {
 
 private func navigationTile(level: SecondaryNumber) -> some View {
     NavigationLink(value: Route.level(level)) {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .center, spacing: 10) {
             Text("中\(level.string)")
-                .font(.system(size: 30, weight: .bold))
-            Text("进入全部章节")
-                .font(.subheadline)
-                .foregroundStyle(.white.opacity(0.9))
+                .font(.system(size: 45, weight: .bold))
         }
         .padding(22)
-        .frame(maxWidth: .infinity, minHeight: 120, alignment: .leading)
+        .frame(maxWidth: .infinity, minHeight: 120, alignment: .center)
         .background(
             LinearGradient(
                 colors: [
@@ -423,31 +390,9 @@ private struct ProgressChip: View {
     }
 
     var body: some View {
-        Group {
-            if #available(iOS 26.0, *) {
-                main
-                    .clipShape(Capsule())
-                    .accessibilityLabel("Progress. Today \(todayCount) quizzes. Overall average \(overallAvg) percent.")
-            } else {
-                main
-                    .background(
-                        LinearGradient(
-                            colors: [
-                                Color.customblue.opacity(0.16),
-                                Color.customteal.opacity(0.16)
-                            ],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .overlay(
-                        Capsule()
-                            .strokeBorder(Color.customblue.opacity(0.3), lineWidth: 0.8)
-                    )
-                    .clipShape(Capsule())
-                    .accessibilityLabel("Progress. Today \(todayCount) quizzes. Overall average \(overallAvg) percent.")
-            }
-        }
+        main
+            .clipShape(Capsule())
+            .accessibilityLabel("Progress. Today \(todayCount) quizzes. Overall average \(overallAvg) percent.")
     }
 
     var main: some View {
@@ -1260,99 +1205,72 @@ struct HomeView: View {
 
     private var iPadTabRootView: some View {
         Group {
-            if #available(iOS 18.0, *) {
-                TabView {
-                    Tab("Home", systemImage: "house.fill") {
-                        NavigationStack {
-                            IPadHomeDashboard(selectedLevels: $selectedLevels)
-                        }
-                        .background(
-                            LinearGradient(
-                                colors: [
-                                    Color(.systemGroupedBackground),
-                                    Color.customblue.opacity(0.03)
-                                ],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                            .ignoresSafeArea()
+            TabView {
+                Tab("Home", systemImage: "house.fill") {
+                    NavigationStack {
+                        IPadHomeDashboard(selectedLevels: $selectedLevels)
+                    }
+                    .background(
+                        LinearGradient(
+                            colors: [
+                                Color(.systemGroupedBackground),
+                                Color.customblue.opacity(0.03)
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
                         )
-                    }
-                    // NOTES TAB
-                    Tab("Notes", systemImage: "note.text") {
-                        NotesView()
-                    }
-
-                    // FOLDERS TAB
-                    Tab("Folders", systemImage: "folder.fill") {
-                        FolderView(vocabManager: vocabManager)
-                    }
-
-                    // SETTINGS TAB
-                    Tab("Settings", systemImage: "gearshape.fill") {
-                        SettingsView()
-                    }
-
-                    TabSection("年级") {
-                        Tab("中一", systemImage: "1.circle.fill") {
-                            NavigationStack {
-                                ChapterView(level: .one)
-                            }
-                        }
-
-                        Tab("中二", systemImage: "2.circle.fill") {
-                            NavigationStack {
-                                ChapterView(level: .two)
-                            }
-                        }
-
-                        Tab("中三", systemImage: "3.circle.fill") {
-                            NavigationStack {
-                                ChapterView(level: .three)
-                            }
-                        }
-
-                        Tab("中四", systemImage: "4.circle.fill") {
-                            NavigationStack {
-                                ChapterView(level: .four)
-                            }
-                        }
-
-                        Tab("O 水准备考", systemImage: "circle.circle.fill") {
-                            NavigationStack {
-                                OLevelsMenuView()
-                            }
-                        }
-                    }
-                    .defaultVisibility(.hidden, for: .tabBar)
+                        .ignoresSafeArea()
+                    )
                 }
-                .tabViewStyle(.sidebarAdaptable)
-            } else {
-                TabView {
-                    HomeView()
-                        .tabItem {
-                            Label("Home", systemImage: "house.fill")
-                        }
-
-                    // NOTES TAB
+                // NOTES TAB
+                Tab("Notes", systemImage: "note.text") {
                     NotesView()
-                        .tabItem {
-                            Label("Notes", systemImage: "note.text")
-                        }
-
-                    // FOLDERS TAB
-                    FolderView(vocabManager: vocabManager)
-                        .tabItem {
-                            Label("Folders", systemImage: "folder.fill")
-                        }
-
-                    // SETTINGS TAB
-                    SettingsView()
-                        .tabItem {
-                            Label("Settings", systemImage: "gearshape.fill")
-                        }
                 }
+                
+                // FOLDERS TAB
+                Tab("Folders", systemImage: "folder.fill") {
+                    FolderView(vocabManager: vocabManager)
+                }
+                
+                // SETTINGS TAB
+                Tab("Settings", systemImage: "gearshape.fill") {
+                    SettingsView()
+                }
+                
+                TabSection("年级") {
+                    Tab("中一", systemImage: "1.circle.fill") {
+                        NavigationStack {
+                            ChapterView(level: .one)
+                        }
+                    }
+                    
+                    Tab("中二", systemImage: "2.circle.fill") {
+                        NavigationStack {
+                            ChapterView(level: .two)
+                        }
+                    }
+                    
+                    Tab("中三", systemImage: "3.circle.fill") {
+                        NavigationStack {
+                            ChapterView(level: .three)
+                        }
+                    }
+                    
+                    Tab("中四", systemImage: "4.circle.fill") {
+                        NavigationStack {
+                            ChapterView(level: .four)
+                        }
+                    }
+                    
+                    Tab("O 水准备考", systemImage: "circle.circle.fill") {
+                        NavigationStack {
+                            OLevelsMenuView()
+                        }
+                    }
+                }
+                .defaultVisibility(.hidden, for: .tabBar)
             }
+            .tabViewStyle(.sidebarAdaptable)
         }
     }
 
@@ -1362,16 +1280,6 @@ struct HomeView: View {
         TabView {
             NavigationStack(path: $pathManager.path) {
                 ZStack {
-                    LinearGradient(
-                        colors: [
-                            Color(.systemGroupedBackground),
-                            Color.customblue.opacity(0.06)
-                        ],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                    .ignoresSafeArea()
-
                     VStack(spacing: 20) {
                         ContinueCarouselView()
 
@@ -1429,7 +1337,7 @@ struct HomeView: View {
                     switch route {
                     case .level(let level):
                         ChapterView(level: level)
-
+                        
                     case .progress(let progress):
                         let level = progress.level
                         let chapter = progress.chapter
@@ -1445,7 +1353,7 @@ struct HomeView: View {
                             topic: topic,
                             currentIndex: progress.currentIndex
                         )
-
+                        
                     case .resume(let level, let chapter, let topic):
                         if let resume = LastProgressStore.getAll()
                             .first(where: { $0.level == level && $0.chapter == chapter && $0.topic == topic }) {
@@ -1463,25 +1371,25 @@ struct HomeView: View {
                         } else {
                             ChapterView(level: level)
                         }
-
+                        
                     case .olevelsMenu:
                         OLevelsMenuView()
-
+                        
                     case .oPractice(let practice):
                         let vocabs = Array(allVocabularies(for: practice).shuffled().prefix(15))
                         MCQView(vocabularies: vocabs, folderName: practice.string)
                             .navigationTitle(practice.string)
                             .navigationBarTitleDisplayMode(.inline)
-
+                        
                     case .progressDetail:
                         ProgressDetailView()
-
+                        
                     case .replay(let quiz):
                         ResultReplayDestination(quiz: quiz)
-
+                        
                     case .settings:
                         SettingsView()
-
+                        
                     case .replayMemory(let attempt):
                         MemoryReplayDestination(attempt: attempt)
                     }
@@ -1490,19 +1398,19 @@ struct HomeView: View {
             .tabItem {
                 Label("Home", systemImage: "house.fill")
             }
-
+            
             // NOTES TAB
             NotesView()
                 .tabItem {
                     Label("Notes", systemImage: "note.text")
                 }
-
+            
             // FOLDERS TAB
             FolderView(vocabManager: vocabManager)
                 .tabItem {
                     Label("Folders", systemImage: "folder.fill")
                 }
-
+            
             // SETTINGS TAB
             SettingsView()
                 .tabItem {

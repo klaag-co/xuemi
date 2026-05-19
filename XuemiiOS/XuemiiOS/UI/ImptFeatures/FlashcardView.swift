@@ -159,7 +159,7 @@ public struct FlashcardView: View {
         }
 
         .onDisappear {
-            if let selection, let level, let chapter, let topic {
+            if let selection, let level, let chapter, let topic, topic != .eoy {
                 progressManager.updateProgress(
                     level: level,
                     chapter: chapter,

@@ -49,37 +49,23 @@ struct SpeakerView: View {
                 Spacer()
 
                 HStack {
-                    if #available(iOS 26.0, *) {
-                        Button(action: previousWord) {
-                            Image(systemName: "chevron.left")
-                                .padding(8)
-                        }
-                        .disabled(currentIndex == 0)
-                        .buttonBorderShape(.circle)
-                        .buttonStyle(.glass)
-                    } else {
-                        Button(action: previousWord) {
-                            Image(systemName: "chevron.left").padding()
-                        }
-                        .disabled(currentIndex == 0)
+                    Button(action: previousWord) {
+                        Image(systemName: "chevron.left")
+                            .padding(8)
                     }
-
+                    .disabled(currentIndex == 0)
+                    .buttonBorderShape(.circle)
+                    .buttonStyle(.glass)
+                    
                     Spacer()
-
-                    if #available(iOS 26.0, *) {
-                        Button(action: nextWord) {
-                            Image(systemName: "chevron.right")
-                                .padding(8)
-                        }
-                        .disabled(currentIndex == shuffledWords.count - 1)
-                        .buttonBorderShape(.circle)
-                        .buttonStyle(.glass)
-                    } else {
-                        Button(action: nextWord) {
-                            Image(systemName: "chevron.right").padding()
-                        }
-                        .disabled(currentIndex == shuffledWords.count - 1)
+                    
+                    Button(action: nextWord) {
+                        Image(systemName: "chevron.right")
+                            .padding(8)
                     }
+                    .disabled(currentIndex == shuffledWords.count - 1)
+                    .buttonBorderShape(.circle)
+                    .buttonStyle(.glass)
                 }
                 .padding()
             } else {

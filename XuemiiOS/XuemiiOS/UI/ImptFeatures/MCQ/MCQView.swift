@@ -99,14 +99,14 @@ struct MCQView: View {
                 )
                 .animation(.easeInOut, value: currentVocabularyIndex)
                 .padding()
-
+                
                 VStack {
                     Text(currentQuestion)
                         .font(.system(size: 30))
                         .lineLimit(5)
                         .minimumScaleFactor(0.1)
                         .padding()
-
+                    
                     // Show prompt only if we have a vocab to compare against
                     if let vocab = currentVocabulary {
                         Text(selectedAnswer == vocab.word ? " " : "正确答案是什么呢？")
@@ -115,14 +115,14 @@ struct MCQView: View {
                     }
                 }
                 .frame(maxHeight: .infinity)
-
+                
                 ForEach(safeOptions, id: \.self) { option in
                     Button {
                         guard !showAnswer, let vocab = currentVocabulary else { return }
                         selectedAnswer = option
                         userAnswers[currentVocabularyIndex] = option
                         showAnswer = true
-
+                        
                         if option == vocab.word {
                             correctAnswers += 1
                         } else {
@@ -142,63 +142,38 @@ struct MCQView: View {
                     }
                     .disabled(showAnswer)
                 }
-
+                
                 HStack {
-                    if #available(iOS 26.0, *) {
-                        Button {
-                            guard currentVocabularyIndex > 0 else { return }
-                            currentVocabularyIndex -= 1
-                            loadPreviousState()
-                        } label: {
-                            Image(systemName: "chevron.left")
-                                .padding(8)
-                        }
-                        .disabled(currentVocabularyIndex == 0)
-                        .buttonBorderShape(.circle)
-                        .buttonStyle(.glass)
-                    } else {
-                        Button {
-                            guard currentVocabularyIndex > 0 else { return }
-                            currentVocabularyIndex -= 1
-                            loadPreviousState()
-                        } label: {
-                            Image(systemName: "chevron.left").padding()
-                        }
-                        .disabled(currentVocabularyIndex == 0)
+                    Button {
+                        guard currentVocabularyIndex > 0 else { return }
+                        currentVocabularyIndex -= 1
+                        loadPreviousState()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                            .padding(8)
                     }
-
+                    .disabled(currentVocabularyIndex == 0)
+                    .buttonBorderShape(.circle)
+                    .buttonStyle(.glass)
+                    
                     Spacer()
-
-                    if #available(iOS 26.0, *) {
-                        Button {
-                            guard showAnswer else { return }
-                            if currentVocabularyIndex < vocabularies.count - 1 {
-                                currentVocabularyIndex += 1
-                                resetState()
-                            } else {
-                                showResults = true
-                            }
-                        } label: {
-                            Image(systemName: "chevron.right")
-                                .padding(8)
+                    
+                    Button {
+                        guard showAnswer else { return }
+                        if currentVocabularyIndex < vocabularies.count - 1 {
+                            currentVocabularyIndex += 1
+                            resetState()
+                        } else {
+                            showResults = true
                         }
-                        .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
-                        .buttonBorderShape(.circle)
-                        .buttonStyle(.glass)
-                    } else {
-                        Button {
-                            guard showAnswer else { return }
-                            if currentVocabularyIndex < vocabularies.count - 1 {
-                                currentVocabularyIndex += 1
-                                resetState()
-                            } else {
-                                showResults = true
-                            }
-                        } label: {
-                            Image(systemName: "chevron.right").padding()
-                        }
-                        .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
+                    } label: {
+                        Image(systemName: "chevron.right")
+                            .padding(8)
                     }
+                    .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
+                    .buttonBorderShape(.circle)
+                    .buttonStyle(.glass)
+                    
                 }
                 .padding()
             }

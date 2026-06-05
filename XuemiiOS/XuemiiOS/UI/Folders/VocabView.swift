@@ -11,16 +11,23 @@ struct VocabView: View {
     @ObservedObject var vocabManager = VocabManager()
     @State private var searchText = ""
     
-    var levels = ["中一", "中二", "中三", "中四"]
+    private let levels = ["中一", "中二", "中三", "中四"]
     
-    var filteredSections: [String: [Vocabulary]] {
-        if searchText.isEmpty {
-            return vocabManager.sections
-        } else {
-            return vocabManager.sections.mapValues { vocabs in
-                vocabs.filter { $0.word.localizedCaseInsensitiveContains(searchText) }
-            }.filter { !$0.value.isEmpty }
+    private var filteredSections: [String: [Vocabulary]] {
+        let all = vocabManager.sections
+        
+        guard !searchText.isEmpty else {
+            return all
         }
+        
+        let filtered = all.mapValues { vocabs in
+            vocabs.filter {
+                $0.word.localizedCaseInsensitiveContains(searchText)
+                || $0.pinyin.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+        
+        return filtered
     }
     
     var body: some View {
@@ -28,15 +35,26 @@ struct VocabView: View {
             List {
                 ForEach(levels, id: \.self) { level in
                     Section(header: Text(level)) {
-                        ForEach(filteredSections[level]!, id: \.self) { vocab in
-                            Text(vocab.word)
+                        
+                        let vocabs = filteredSections[level] ?? []
+                        
+                        if vocabs.isEmpty {
+                            EmptyView()
+                        } else {
+                            ForEach(vocabs, id: \.index) { vocab in
+                                Text(vocab.word)
+                            }
                         }
                     }
                 }
             }
-            .searchable(text: $searchText, placement: .navigationBarDrawer (displayMode: .always), prompt: "Search words")
             .listStyle(.insetGrouped)
-            .scrollContentBackground(.hidden) 
+            .scrollContentBackground(.hidden)
+            .searchable(
+                text: $searchText,
+                placement: .navigationBarDrawer(displayMode: .always),
+                prompt: "Search words"
+            )
         }
         .navigationTitle("Vocabulary List")
         .toolbar {
@@ -46,8 +64,9 @@ struct VocabView: View {
                 }
             }
         }
-        .onAppear {
-            searchText = ""
+        .onChange(of: searchText) { _, newValue in
+            if newValue.isEmpty {
+            }
         }
     }
 }

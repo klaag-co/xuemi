@@ -13,9 +13,8 @@ struct MemoryResultsView: View {
 
     // History (for stats)
     let history: [MemoryAttempt]
-
-    // Actions
-    var onPlayAgain: (() -> Void)?
+    
+    var isReplay: Bool = false
 
     @ObservedObject private var pathManager: PathManager = .global
 
@@ -65,39 +64,28 @@ struct MemoryResultsView: View {
 
                 // Buttons
                 VStack(spacing: 10) {
-                    if let onPlayAgain {
+                    if !isReplay {
                         Button {
-                            onPlayAgain()
+                            withAnimation { PathManager.global.goHome() }
                         } label: {
-                            Text("Play Again")
+                            Text("Go to Home")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 14)
                                 .background(Color(.systemGray5))
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
-                    }
-
-                    Button {
-                        withAnimation { PathManager.global.goProgressDetail() }
-                    } label: {
-                        Text("Back to Progress")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Color(.systemGray5))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-
-                    Button {
-                        withAnimation { PathManager.global.goHome() }
-                    } label: {
-                        Text("Go to Home")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                            .background(Color(.systemGray5))
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                        
+                        Button {
+                            withAnimation { PathManager.global.goProgressDetail() }
+                        } label: {
+                            Text("View Progress")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(Color(.systemGray5))
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
                     }
                 }
                 .padding(.horizontal)
@@ -135,7 +123,7 @@ struct MemoryResultsView: View {
         }
         .navigationTitle("Results")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(!isReplay)
     }
 
     private var contextTitle: String {

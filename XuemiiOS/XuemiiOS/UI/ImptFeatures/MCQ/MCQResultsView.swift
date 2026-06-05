@@ -84,7 +84,7 @@ struct MCQResultsView: View {
                             onDone?()
                             withAnimation { PathManager.global.goHome() }
                         } label: {
-                            Text("Go to Home page")
+                            Text("Go to Home")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 14)

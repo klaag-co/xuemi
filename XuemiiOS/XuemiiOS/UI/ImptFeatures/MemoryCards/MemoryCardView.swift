@@ -95,7 +95,6 @@ struct MemoryCardView: View {
                 topic: topic,
                 folderName: folderName,
                 history: history,
-                onPlayAgain: { restartGame() }
             )
         }
     }

@@ -292,9 +292,6 @@ struct AcknowledgementsView: View {
         Acknowledgement(name: "Chay Yu Hung Tristan", role: "Consultant", icon: "person.fill"),
         Acknowledgement(name: "Ms Wong Lu Ting", role: "Head of Department", icon: "person.fill"),
         Acknowledgement(name: "Ms Yap Hui Min", role: "Teacher-in-Charge", icon: "person.fill"),
-        Acknowledgement(name: "Ms Tan Sook Qin", role: "Teacher-in-Charge", icon: "person.fill"),
-        Acknowledgement(name: "Ms Yeo Sok Hui", role: "Teacher-in-Charge", icon: "person.fill"),
-        Acknowledgement(name: "Ms Xu Wei", role: "Teacher-in-Charge", icon: "person.fill"),
         Acknowledgement(name: "CL Department", role: "Client", icon: "building.2.fill")
     ]
 

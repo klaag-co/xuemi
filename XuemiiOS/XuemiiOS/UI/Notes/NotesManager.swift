@@ -120,15 +120,14 @@ class NotesManager: ObservableObject {
         )
     }
 
-    private func addNotesResult(level: String?, chapter: String?, topic: String?, folderName: String?,
-                                correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
+    private func addNotesResult(level: String?, chapter: String?, topic: String?, folderName: String?, correctAnswers: Int, wrongAnswers: Int, totalQuestions: Int) {
         let noteType: NoteType
         switch level {
         case "一": noteType = .sone
         case "二": noteType = .stwo
         case "三": noteType = .sthree
         case "四", "O 水准备考": noteType = .sfour
-        default: noteType = .note
+        default: noteType = .exam
         }
 
         var title = ""

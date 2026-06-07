@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VocabView: View {
-    @ObservedObject var vocabManager = VocabManager()
+    @ObservedObject var vocabManager: VocabManager
     @State private var searchText = ""
     
     private let levels = ["中一", "中二", "中三", "中四"]
@@ -31,47 +31,33 @@ struct VocabView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(levels, id: \.self) { level in
-                    Section(header: Text(level)) {
-                        
-                        let vocabs = filteredSections[level] ?? []
-                        
-                        if vocabs.isEmpty {
-                            EmptyView()
-                        } else {
-                            ForEach(vocabs, id: \.index) { vocab in
-                                Text(vocab.word)
-                            }
+        List {
+            ForEach(levels, id: \.self) { level in
+                Section(header: Text(level)) {
+                    
+                    let vocabs = filteredSections[level] ?? []
+                    
+                    if vocabs.isEmpty {
+                        EmptyView()
+                    } else {
+                        ForEach(vocabs, id: \.index) { vocab in
+                            Text(vocab.word)
                         }
                     }
                 }
             }
-            .listStyle(.insetGrouped)
-            .scrollContentBackground(.hidden)
-            .searchable(
-                text: $searchText,
-                placement: .navigationBarDrawer(displayMode: .always),
-                prompt: "Search words"
-            )
         }
+        .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
         .navigationTitle("Vocabulary List")
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink(destination: NewFolderView(vocabManager: vocabManager)) {
-                    Image(systemName: "folder.badge.plus")
-                }
-            }
-        }
+        .searchable(
+            text: $searchText,
+            placement: .navigationBarDrawer(displayMode: .always),
+            prompt: "Search words"
+        )
         .onChange(of: searchText) { _, newValue in
             if newValue.isEmpty {
             }
         }
     }
-}
-
-
-#Preview {
-    VocabView()
 }

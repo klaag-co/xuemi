@@ -106,6 +106,43 @@ struct NotesView: View {
                         notesManager.notes.removeAll { idsToDelete.contains($0.id) }
                     }
                 }
+                // BUGGY VER OF NEW EXAM SECTION USED TO STORE O LEVEL RESULTS (the mcq results r of all 4 levels instead of js o level)
+//                Section(header: Text("Exam")) {
+//                    ForEach(filteredNotes.filter { $0.noteType == .exam }, id: \.id) { note in
+//                        if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {
+//                            NavigationLink(destination: NotesDetailView(note: $notesManager.notes[index])) {
+//                                Text(note.title)
+//                            }
+//                        }
+//                    }
+//                    .onDelete { indexSet in
+//                        let idsToDelete = indexSet.map { filteredNotes.filter { $0.noteType == .exam }[$0].id }
+//                        notesManager.notes.removeAll { idsToDelete.contains($0.id) }
+//                    }
+//                    
+//                    let mcq = mcqForExam()
+//                    
+//                    if !mcq.isEmpty {
+//                        Text("MCQ Results")
+//                            .font(.caption)
+//                            .foregroundStyle(.secondary)
+//                        
+//                        ForEach(mcq.prefix(50)) { g in
+//                            NavigationLink(value: Route.replay(g)) {
+//                                RecentRowMCQ(quiz: g)
+//                            }
+//                            .swipeActions {
+//                                Button(role: .destructive) {
+//                                    withAnimation {
+//                                        ScoreManager.shared.delete(g)
+//                                    }
+//                                } label: {
+//                                    Label("Delete", systemImage: "trash")
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
                 
                 Section(header: Text("Notes")) {
                     ForEach(filteredNotes.filter { $0.noteType == .note }, id: \.id) { note in

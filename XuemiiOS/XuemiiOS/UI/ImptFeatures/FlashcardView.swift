@@ -21,6 +21,9 @@ public struct FlashcardView: View {
     @State private var selection: Int? = 0
     @State private var spellingText: String? = nil
     @State private var isLargeDevice: Bool
+    @State private var showTagSheet = false
+    @State private var pendingTagWord: String? = nil
+    @State private var selectedTag: String = ""
 
     // Tag chooser state
     @State private var showTagMenu = false
@@ -31,39 +34,6 @@ public struct FlashcardView: View {
     @ObservedObject private var bookmarkManager: BookmarkManager = .shared
     @ObservedObject private var progressManager: ProgressManager = .shared
     private var synthesizer = AVSpeechSynthesizer()
-
-    // Local tag store (must match BookmarkView)
-    private enum TagStore {
-        static let prefix = "bookmark.tag."
-        static let customKey = "bookmark.custom.topics"
-
-        static func key(word: String, level: SecondaryNumber, chapter: Chapter, topic: Topic) -> String {
-            let lv = "L\(level.string)"
-            let ch = "C\(chapter.string)"
-            let tp = "T\(topic.string(level: level, chapter: chapter))"
-            return prefix + [word, lv, ch, tp].joined(separator: "::")
-        }
-
-        static func setTag(_ tag: String, forKey key: String) {
-            UserDefaults.standard.set(tag, forKey: key)
-        }
-
-        static func predefined() -> [String] { ["艺术与文化", "科技", "社区", "环保", "教育", "社会"] }
-
-        static func customTopics() -> [String] {
-            (UserDefaults.standard.array(forKey: customKey) as? [String]) ?? []
-        }
-
-        static func addCustomTopic(_ name: String) {
-            let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !trimmed.isEmpty else { return }
-            var existing = customTopics()
-            if !existing.contains(trimmed) {
-                existing.append(trimmed)
-                UserDefaults.standard.set(existing, forKey: customKey)
-            }
-        }
-    }
 
     init(
         vocabularies: [Vocabulary],
@@ -117,38 +87,89 @@ public struct FlashcardView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-
         .sheet(item: $spellingText) { text in
             StrokeWriteView(word: text)
         }
-        .confirmationDialog("选择一个主题",
-                            isPresented: $showTagMenu,
-                            titleVisibility: .visible) {
-
-            ForEach(TagStore.predefined(), id: \.self) { tag in
-                Button(tag) { applyTag(tag) }
-            }
-
-            let customs = TagStore.customTopics()
-            if !customs.isEmpty {
-                Divider()
-                ForEach(customs, id: \.self) { tag in
-                    Button(tag) { applyTag(tag) }
+        .sheet(isPresented: $showTagSheet) {
+            NavigationStack {
+                List {
+                    Section("Save to topic tag?") {
+                        
+                        ForEach(BookmarkTagStore.predefined, id: \.self) { tag in
+                            Button {
+                                selectedTag = tag
+                            } label: {
+                                HStack {
+                                    Text(tag)
+                                    
+                                    Spacer()
+                                    
+                                    if selectedTag == tag {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                            .foregroundStyle(.primary)
+                        }
+                        
+                        ForEach(BookmarkTagStore.customTopics(), id: \.self) { tag in
+                            Button {
+                                selectedTag = tag
+                            } label: {
+                                HStack {
+                                    Text(tag)
+                                    
+                                    Spacer()
+                                    
+                                    if selectedTag == tag {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                            .foregroundStyle(.primary)
+                        }
+                        
+                        Button("加主题…") {
+                            showCustomTagPrompt = true
+                        }
+                    }
+                }
+                Button {
+                    if !selectedTag.isEmpty {
+                        applyTag(selectedTag)
+                    }
+                    showTagSheet = false
+                } label: {
+                    Text(selectedTag.isEmpty ? "Skip" : "Save")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .foregroundStyle(.white)
+                        .background(Color.blue)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .padding(.horizontal)
+                }
+                .navigationTitle("Bookmarked ✅")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            showTagSheet = false
+                        } label: {
+                            Image(systemName: "xmark")
+                                .foregroundStyle(.primary)
+                        }
+                    }
                 }
             }
-
-            Divider()
-            Button("加主题…") {
-                showCustomTagPrompt = true
-            }
+            .presentationDetents([.large])
         }
         .alert("输入自定义主题", isPresented: $showCustomTagPrompt) {
             TextField("e.g. 校园生活", text: $customTagInput)
             Button("保存") {
                 let name = customTagInput.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !name.isEmpty else { return }
-                TagStore.addCustomTopic(name)
-                applyTag(name)
+                BookmarkTagStore.addCustomTopic(name)
+                selectedTag = name
                 customTagInput = ""
             }
             Button("取消", role: .cancel) {
@@ -178,12 +199,20 @@ public struct FlashcardView: View {
 
     private func applyTag(_ tag: String) {
         guard
-            let level, let chapter, let topic,
+            let level,
+            let chapter,
+            let topic,
             let word = pendingWordForTag
         else { return }
-
-        let key = TagStore.key(word: word, level: level, chapter: chapter, topic: topic)
-        TagStore.setTag(tag, forKey: key)
+        
+        let key = BookmarkTagStore.key(
+            word: word,
+            level: level,
+            chapter: chapter,
+            topic: topic
+        )
+        
+        BookmarkTagStore.setTag(tag, forKey: key)
     }
 
 
@@ -297,7 +326,6 @@ public struct FlashcardView: View {
         }
     }
 
-
     private func handleBookmarkTap(vocab: Vocabulary, level: SecondaryNumber, chapter: Chapter, topic: Topic) {
         let exists = bookmarkManager.bookmarks.contains {
             $0.vocab.word == vocab.word &&
@@ -329,29 +357,14 @@ public struct FlashcardView: View {
                     )
                 )
                 await MainActor.run {
-                    showTagMenu = true
+                    pendingTagWord = vocab.word
+                    selectedTag = ""
+                    showTagSheet = true
                 }
             }
         }
     }
 }
-
-
-#Preview {
-    FlashcardView(
-        vocabularies: [
-            Vocabulary(index: 1, word: "你好", pinyin: "nǐ hǎo",
-                       englishDefinition: "hello", chineseDefinition: "打招呼", example: "你好！",
-                       questions: ["“你好”的英文是什么？", "‘hello’ 的汉语是什么？"]),
-            Vocabulary(index: 2, word: "谢谢", pinyin: "xiè xie",
-                       englishDefinition: "thanks", chineseDefinition: "表达感谢", example: "谢谢你！",
-                       questions: ["‘谢谢’的意思是？"])
-        ],
-        folderName: "Set A",
-        currentIndex: 0
-    )
-}
-
 
 extension String: Identifiable {
     public var id: String { self }

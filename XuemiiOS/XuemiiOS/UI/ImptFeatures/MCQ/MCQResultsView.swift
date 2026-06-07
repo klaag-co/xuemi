@@ -77,8 +77,6 @@ struct MCQResultsView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                         .padding(.horizontal)
-                        
-                        //insert a redo mcq button here
                     } else {
                         Button {
                             onDone?()

@@ -8,42 +8,69 @@
 import SwiftUI
 
 // MARK: - Local tag store (no backend changes)
-private enum BookmarkTagStore {
-    // 6 fixed topics (the 7th "Other" is for creating custom topics)
-    static let predefined: [String] = ["艺术与文化", "科技", "社区", "环保", "教育", "社会"]
+enum BookmarkTagStore {
 
-    private static let customTopicsKey = "bookmark.custom.topics"                // [String]
-    private static let idToTopicKeyPrefix = "bookmark.tag."                      // per-bookmark key
+    static let predefined: [String] = ["艺术与文化","科技","社区","环保","教育","社会","其他"]
 
-    // Build a stable key from the bookmark identity (no backend change needed)
-    static func key(for vocab: BookmarkedVocabulary) -> String {
-        let w = vocab.vocab.word
-        let lv = "L\(vocab.level.string)"
-        let ch = "C\(vocab.chapter.string)"
-        let tp = "T\(vocab.topic.string(level: vocab.level, chapter: vocab.chapter))"
-        return idToTopicKeyPrefix + [w, lv, ch, tp].joined(separator: "::")
+    private static let customTopicsKey = "bookmark.custom.topics"
+    private static let idToTopicKeyPrefix = "bookmark.tag."
+
+    static func key(
+        word: String,
+        level: SecondaryNumber,
+        chapter: Chapter,
+        topic: Topic
+    ) -> String {
+
+        let lv = "L\(level.string)"
+        let ch = "C\(chapter.string)"
+        let tp = "T\(topic.string(level: level, chapter: chapter))"
+
+        return idToTopicKeyPrefix + [word, lv, ch, tp].joined(separator: "::")
     }
 
-    // Read/write a tag for a specific bookmark “identity”
+    // 👇 ADD THIS
+    static func key(for vocab: BookmarkedVocabulary) -> String {
+        key(
+            word: vocab.vocab.word,
+            level: vocab.level,
+            chapter: vocab.chapter,
+            topic: vocab.topic
+        )
+    }
+
     static func tag(forKey key: String) -> String? {
         UserDefaults.standard.string(forKey: key)
     }
+
     static func setTag(_ tag: String, forKey key: String) {
         UserDefaults.standard.set(tag, forKey: key)
     }
+
     static func clearTag(forKey key: String) {
         UserDefaults.standard.removeObject(forKey: key)
     }
 
-    // Custom topics list
     static func customTopics() -> [String] {
         (UserDefaults.standard.array(forKey: customTopicsKey) as? [String]) ?? []
     }
+
     static func setCustomTopics(_ topics: [String]) {
         UserDefaults.standard.set(topics, forKey: customTopicsKey)
     }
+    
+    static func addCustomTopic(_ name: String) {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
 
-    // All topics (fixed + custom)
+        var existing = customTopics()
+
+        if !existing.contains(trimmed) {
+            existing.append(trimmed)
+            UserDefaults.standard.set(existing, forKey: customTopicsKey)
+        }
+    }
+
     static func allTopics() -> [String] {
         predefined + customTopics()
     }
@@ -51,13 +78,13 @@ private enum BookmarkTagStore {
 
 struct BookmarkView: View {
     @State private var searchText = ""
-
+    
     // For refreshing when tags/custom topics change
     @State private var tagVersion: Int = 0
     @State private var customTopics: [String] = BookmarkTagStore.customTopics()
-
+    
     @EnvironmentObject var bookmarkManager: BookmarkManager
-
+    
     // MARK: - Filter (by search)
     var filteredBookmarks: [BookmarkedVocabulary] {
         if searchText.isEmpty {
@@ -66,7 +93,7 @@ struct BookmarkView: View {
             return bookmarkManager.bookmarks.filter { $0.vocab.word.uppercased().contains(searchText.uppercased()) }
         }
     }
-
+    
     // MARK: - Grouping helpers
     private func tag(for b: BookmarkedVocabulary) -> String? {
         BookmarkTagStore.tag(forKey: BookmarkTagStore.key(for: b))
@@ -147,9 +174,6 @@ struct BookmarkView: View {
                 .id(tagVersion)
                 .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
                 .navigationTitle("Bookmarks")
-                .toolbar {
-                    EditButton() // allows delete for custom topics
-                }
             }
         }
         // Listen for any UserDefaults changes (tags/custom topics) and refresh
@@ -162,23 +186,21 @@ struct BookmarkView: View {
     // Row used in both Level and Topic sections
     private func bookmarkRow(_ bookmarkedVocab: BookmarkedVocabulary) -> some View {
         VStack(alignment: .leading) {
-            NavigationLink(destination: FlashcardView(
-                vocabularies: loadVocabulariesFromJSON(
-                    fileName: "中\(bookmarkedVocab.level.string)",
-                    chapter: bookmarkedVocab.chapter.string,
-                    topic: bookmarkedVocab.topic.string(level: bookmarkedVocab.level, chapter: bookmarkedVocab.chapter)
-                ),
-                level: bookmarkedVocab.level,
-                chapter: bookmarkedVocab.chapter,
-                topic: bookmarkedVocab.topic,
-                currentIndex: bookmarkedVocab.currentIndex
-            )) {
+            NavigationLink {
+                FlashcardView(
+                    vocabularies: [bookmarkedVocab.vocab],
+                    folderName: bookmarkedVocab.level.filename,
+                    currentIndex: 0
+                )
+            } label: {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(bookmarkedVocab.vocab.word)
+                    
                     HStack(spacing: 8) {
                         Text("\(bookmarkedVocab.level.filename) \(bookmarkedVocab.chapter.string)")
                             .font(.subheadline)
                             .foregroundColor(.gray)
+                        
                         if let tag = BookmarkTagStore.tag(forKey: BookmarkTagStore.key(for: bookmarkedVocab)) {
                             Text("• \(tag)")
                                 .font(.subheadline)
@@ -201,7 +223,7 @@ struct BookmarkView: View {
             }
         }
     }
-
+    
     // ===== Existing Level grouping UI (unchanged) =====
     func bookmarkedWordsForLevel(level: SecondaryNumber) -> some View {
         DisclosureGroup(level.filename) {

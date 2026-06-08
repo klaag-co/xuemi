@@ -178,6 +178,11 @@ class NotesManager: ObservableObject {
             return false
         }
     }
+    
+    func reloadForCurrentUser() async {
+        notes = []
+        _ = await getNotesFromFirebase()
+    }
 
     private func updateNotesOnFirebase(newNotesData: Data) async {
         guard let uid = userDocId else { return }

@@ -7,13 +7,18 @@
 
 import Foundation
 import Combine
+import FirebaseAuth
+import FirebaseFirestore
 
 public final class MemoryStats: ObservableObject {
     public static let shared = MemoryStats()
 
     @Published public private(set) var attempts: [MemoryAttempt] = []
 
-    private let storeKey = "memory_attempts_v2"
+    private var storeKey: String {
+        let uid = Auth.auth().currentUser?.uid ?? "guest"
+        return "memory_attempts_v2_\(uid)"
+    }
     private var cancellables = Set<AnyCancellable>()
 
     private init() {

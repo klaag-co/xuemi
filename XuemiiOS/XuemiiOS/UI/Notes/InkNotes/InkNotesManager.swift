@@ -8,7 +8,9 @@ final class InkNotesManager: ObservableObject {
 
     @Published private(set) var notes: [InkNote] = [] { didSet { save() } }
 
-    private let storeKey = "inknotes_v1"
+    private var storeKey: String {
+        "inknotes_v1_\(userDocId ?? "guest")"
+    }
 
     private var userDocId: String? {
         if let uid = Auth.auth().currentUser?.uid { return uid }

@@ -336,11 +336,11 @@
 			isa = PBXGroup;
 			children = (
 				1DA9DAFD2F911D8F003FEDDB /* Preview Content */,
+				1DA9DB412F911D8F003FEDDB /* XuemiiOSApp.swift */,
 				1DA9DB3D2F911D8F003FEDDB /* UI */,
 				1DA9DB3E2F911D8F003FEDDB /* Assets.xcassets */,
 				1DA9DB3F2F911D8F003FEDDB /* GoogleService-Info.plist */,
 				1DA9DB402F911D8F003FEDDB /* Info.plist */,
-				1DA9DB412F911D8F003FEDDB /* XuemiiOSApp.swift */,
 				1DA9DB422F911D8F003FEDDB /* 中一.json */,
 				1DA9DB432F911D8F003FEDDB /* 中三.json */,
 				1DA9DB442F911D8F003FEDDB /* 中二.json */,

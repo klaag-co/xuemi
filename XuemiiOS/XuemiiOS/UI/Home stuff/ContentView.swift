@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var bookmarkManager = BookmarkManager.shared
+// wld remove cuz why is this here??
+//    @StateObject private var bookmarkManager = BookmarkManager.shared
     @ObservedObject private var authmanager: AuthenticationManager = .shared
 
     var body: some View {
@@ -14,8 +15,3 @@ struct ContentView: View {
         }
     }
 }
-
-#Preview {
-  ContentView() 
-}
-

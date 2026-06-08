@@ -87,6 +87,7 @@ public struct FlashcardView: View {
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .ignoresSafeArea(.keyboard)
         .sheet(item: $spellingText) { text in
             StrokeWriteView(word: text)
         }
@@ -287,7 +288,7 @@ public struct FlashcardView: View {
                             Text(vocab.pinyin)
                                 .lineLimit(2)
                                 .minimumScaleFactor(0.6)
-                                .font(.largeTitle)
+                                .font(.title)
                             Button {
                                 let utterance = AVSpeechUtterance(string: vocab.word)
                                 if let voice = AVSpeechSynthesisVoice.speechVoices().first(where: { $0.language == "zh-CN" }) {

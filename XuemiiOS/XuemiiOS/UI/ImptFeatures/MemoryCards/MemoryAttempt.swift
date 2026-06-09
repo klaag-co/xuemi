@@ -12,7 +12,7 @@ public struct MemoryAttempt: Identifiable, Codable, Hashable {
     public let topicRaw: Int?
     public let folderName: String?
 
-    public let vocab: [VocabLite]        // <- store the words used
+    public let vocab: [VocabLite]      
 
     public init(
         id: UUID = UUID(),

@@ -124,9 +124,7 @@ public class ScoreManager: ObservableObject {
     @Published var todayScore: Int = 0
     @Published var todayOutOf: Int = 0
 
-    private var storeKey: String {
-        "quiz_results_v2_\(userDocId ?? "guest")"
-    }
+    private let storeKey = "quiz_results_v2"
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Current user document id (uid preferred, else email)

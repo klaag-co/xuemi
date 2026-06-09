@@ -26,6 +26,7 @@ struct XuemiiOSApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//                .environmentObject(BookmarkManager.shared)
                 .environmentObject(deviceTypeManager)
                 .onOpenURL { URL in
                     GIDSignIn.sharedInstance.handle(URL)

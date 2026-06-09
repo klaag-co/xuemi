@@ -31,8 +31,9 @@ enum LastProgressStore {
         points.removeAll {
             $0.level == level && $0.chapter == chapter && $0.topic == topic
         }
-        
-        points.insert(Point(level: level, chapter: chapter, topic: topic, currentIndex: currentIndex), at: 0)
+
+        let newPoint = Point(level: level, chapter: chapter, topic: topic, currentIndex: currentIndex)
+        points.insert(newPoint, at: 0)
 
         if points.count > 5 {
             points = Array(points.prefix(5))

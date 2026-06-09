@@ -42,10 +42,6 @@ final class AuthenticationManager: ObservableObject {
             email         = user.profile?.email
             profilePicUrl = user.profile?.imageURL(withDimension: 100)?.absoluteString
             withAnimation { isLoggedIn = true }
-            Task {
-                await BookmarkManager.shared.reloadForCurrentUser()
-                await NotesManager.shared.reloadForCurrentUser()
-            }
             if let e = email { UserDefaults.standard.set(e, forKey: "userEmail") }
             return
         }
@@ -111,21 +107,9 @@ final class AuthenticationManager: ObservableObject {
 
     func signOut() {
         GIDSignIn.sharedInstance.signOut()
-
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print(error.localizedDescription)
-        }
-
-        BookmarkManager.shared.bookmarks = []
-        NotesManager.shared.notes = []
-
+        do { try Auth.auth().signOut() } catch { print(error.localizedDescription) }
         UserDefaults.standard.removeObject(forKey: "userEmail")
-
-        Task { @MainActor in
-            self.checkStatus()
-        }
+        Task { @MainActor in self.checkStatus() }
     }
 
     private func getPresenter() -> UIViewController? {

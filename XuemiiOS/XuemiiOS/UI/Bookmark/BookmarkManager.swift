@@ -37,14 +37,9 @@ final class BookmarkManager: ObservableObject {
 
     // MARK: - Local persistence (unchanged)
     private func archiveURL() -> URL {
-        let uid = Auth.auth().currentUser?.uid ?? "guest"
-        let plistName = "bookmarks_\(uid).plist"
-
-        return FileManager.default
-            .urls(for: .documentDirectory,
-                  in: .userDomainMask)
-            .first!
-            .appendingPathComponent(plistName)
+        let plistName = "bookmarks.plist"
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return documentsDirectory.appendingPathComponent(plistName)
     }
 
     private func save() {
@@ -138,11 +133,6 @@ final class BookmarkManager: ObservableObject {
             print("Error getting bookmarks: \(error)")
             return false
         }
-    }
-    
-    func reloadForCurrentUser() async {
-        bookmarks = []
-        _ = await getBookmarksFromFirebase()
     }
 
     func addBookmarkToFirebase(bookmarkedVocabulary: BookmarkedVocabulary) async {

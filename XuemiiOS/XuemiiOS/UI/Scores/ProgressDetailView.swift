@@ -368,9 +368,9 @@ private struct ChartSection: View {
             Chart {
                 ForEach(series) { p in
                     BarMark(
-                        x: .value("Index", p.xIndex),
+                        x: .value("Index", axisKey(for: p.xIndex, in: range)),
                         y: .value("Score", p.value),
-                        width: range == .week ? 28 : 34
+                        width: range == .week ? 24 : 34
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 6))
                     .foregroundStyle(
@@ -382,19 +382,19 @@ private struct ChartSection: View {
             }
             .chartLegend(.hidden)
             .chartYScale(domain: 0...100)
-            .chartXScale(domain: xAxisDomain(for: range))
+            .chartXScale(domain: axisKeys(for: range))
             .chartPlotStyle { plot in
                 plot
                     .frame(maxWidth: .infinity)
-                    .padding(.horizontal, 16)
             }
             .chartXAxis {
-                AxisMarks(values: axisTickValues(for: range)) { v in
+                AxisMarks(values: axisKeys(for: range)) { v in
                     AxisGridLine().foregroundStyle(.clear)
                     AxisTick().foregroundStyle(.clear)
                     AxisValueLabel {
-                        if let value = v.as(Int.self) {
-                            Text(axisLabel(for: value, in: range))
+                        if let key = v.as(String.self),
+                           let index = axisKeys(for: range).firstIndex(of: key) {
+                            Text(axisLabel(for: index + 1, in: range))
                                 .font(.caption)
                         }
                     }
@@ -423,21 +423,15 @@ private struct ChartSection: View {
                             let plotFrame = geo[proxy.plotAreaFrame]
                             let xPosition = location.x - plotFrame.origin.x
 
-                            if let tappedX: Int = proxy.value(atX: xPosition) {
-                                let validValues = axisTickValues(for: range)
-                                let nearest = validValues.min {
-                                    abs($0 - tappedX) < abs($1 - tappedX)
-                                }
-
-                                if let nearest {
-                                    selectedX = nearest
-                                    showDetails = true
-                                }
+                            if let tappedKey: String = proxy.value(atX: xPosition),
+                               let index = axisKeys(for: range).firstIndex(of: tappedKey) {
+                                selectedX = index + 1
+                                showDetails = true
                             }
                         }
                 }
             }
-            .frame(height: 190)
+            .frame(height: 210)
             .sheet(isPresented: $showDetails) {
                 if let selectedPoint {
                     ChartDetailsSheet(
@@ -456,6 +450,8 @@ private struct ChartSection: View {
         }
     }
 }
+
+// MARK: - Detail sheet
 
 private struct ChartDetailsSheet: View {
     let point: BarPoint
@@ -490,11 +486,13 @@ private struct ChartDetailsSheet: View {
                     }
                 }
             }
-            .navigationTitle("\(axisLabel(for: point.xIndex, in: range)) Details")
+            .navigationTitle(detailsTitle(for: point.xIndex, in: range))
             .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
+
+// MARK: - Help sheet
 
 private struct ScoreHelpSheet: View {
     var body: some View {
@@ -524,6 +522,7 @@ private struct ScoreHelpSheet: View {
         }
     }
 }
+
 // MARK: - Small pieces
 
 private struct ChartCard<Content: View>: View {
@@ -558,6 +557,7 @@ private struct ChartCard<Content: View>: View {
         .clipShape(RoundedRectangle(cornerRadius: 22))
     }
 }
+
 private struct StatCard: View {
     let title: String
     let value: String
@@ -581,17 +581,23 @@ private struct StatCard: View {
 
 // MARK: - X-axis helpers
 
-private func xAxisDomain(for range: ScoreRange) -> ClosedRange<Int> {
+private func axisKeys(for range: ScoreRange) -> [String] {
     switch range {
     case .week:
-        return 1...7
+        return ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
 
     case .month:
-        return 1...5
+        return ["w1", "w2", "w3", "w4", "w5"]
 
     case .day:
-        return 1...7
+        return []
     }
+}
+
+private func axisKey(for value: Int, in range: ScoreRange) -> String {
+    let keys = axisKeys(for: range)
+    let i = max(1, min(value, keys.count)) - 1
+    return keys[i]
 }
 
 private func axisTickValues(for range: ScoreRange) -> [Int] {
@@ -610,7 +616,7 @@ private func axisTickValues(for range: ScoreRange) -> [Int] {
 private func axisLabel(for value: Int, in range: ScoreRange) -> String {
     switch range {
     case .week:
-        let names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        let names = ["M", "T", "W", "T", "F", "S", "S"]
         let i = max(1, min(value, 7)) - 1
         return names[i]
 
@@ -619,5 +625,40 @@ private func axisLabel(for value: Int, in range: ScoreRange) -> String {
 
     case .day:
         return ""
+    }
+}
+
+private func detailsTitle(for value: Int, in range: ScoreRange) -> String {
+    switch range {
+    case .week:
+        let fullNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        let i = max(1, min(value, 7)) - 1
+        return "\(fullNames[i]) Details"
+
+    case .month:
+        let cal = Calendar.current
+        let now = Date()
+
+        let comps = cal.dateComponents([.year, .month], from: now)
+        let monthStart = cal.date(from: comps)!
+
+        let startDay = ((value - 1) * 7) + 1
+        let daysInMonth = cal.range(of: .day, in: .month, for: monthStart)!.count
+        let endDay = min(startDay + 6, daysInMonth)
+
+        guard
+            let startDate = cal.date(byAdding: .day, value: startDay - 1, to: monthStart),
+            let endDate = cal.date(byAdding: .day, value: endDay - 1, to: monthStart)
+        else {
+            return "Week \(value) Details"
+        }
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMM"
+
+        return "\(formatter.string(from: startDate)) – \(formatter.string(from: endDate)) Details"
+
+    case .day:
+        return "Details"
     }
 }

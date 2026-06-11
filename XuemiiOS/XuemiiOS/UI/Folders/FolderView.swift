@@ -53,61 +53,62 @@ struct FolderView: View {
                         .onDelete { indexSet in
                             vocabManager.folders.remove(atOffsets: indexSet)
                         }
-                        .sheet(item: $selectedFolder) { folder in
-                            NavigationStack {
-                                VStack {
-                                    Button {
-                                        selectedFolder = nil
-                                        selectedFolderForMCQView = folder
-                                    } label: {
-                                        Text("MCQ")
-                                            .font(.title)
-                                            .padding()
-                                            .frame(height: 65)
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.black)
-                                            .background(.customgray)
-                                            .mask(RoundedRectangle(cornerRadius: 16))
-                                            .padding(.horizontal)
-                                    }
-                                    
-                                    Button {
-                                        selectedFolder = nil
-                                        selectedFolderForSpeakerView = folder
-                                    } label: {
-                                        Text("Spelling")
-                                            .font(.title)
-                                            .padding()
-                                            .frame(height: 65)
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.black)
-                                            .background(.customgray)
-                                            .mask(RoundedRectangle(cornerRadius: 16))
-                                            .padding(.horizontal)
-                                    }
-                                    
-                                    Button {
-                                        selectedFolder = nil
-                                        selectedFolderForContentsView = folder
-                                    } label: {
-                                        Text("Contents")
-                                            .font(.title)
-                                            .padding()
-                                            .frame(height: 65)
-                                            .frame(maxWidth: .infinity)
-                                            .foregroundStyle(.black)
-                                            .background(.customgray)
-                                            .mask(RoundedRectangle(cornerRadius: 16))
-                                            .padding(.horizontal)
-                                    }
-                                }
-                                .navigationTitle("习题")
-                            }
-                            .presentationDetents([.medium])
-                        }
                     }
                 }
             }
+            .sheet(item: $selectedFolder) { folder in
+                NavigationStack {
+                    VStack(spacing: 16) {
+                        Button {
+                            selectedFolder = nil
+                            selectedFolderForMCQView = folder
+                        } label: {
+                            Text("MCQ")
+                                .font(.title)
+                                .padding()
+                                .frame(height: 65)
+                                .frame(maxWidth: .infinity)
+                                .foregroundStyle(.black)
+                                .background(.customgray)
+                                .mask(RoundedRectangle(cornerRadius: 16))
+                                .padding(.horizontal)
+                        }
+                        
+                        Button {
+                            selectedFolder = nil
+                            selectedFolderForSpeakerView = folder
+                        } label: {
+                            Text("Spelling")
+                                .font(.title)
+                                .padding()
+                                .frame(height: 65)
+                                .frame(maxWidth: .infinity)
+                                .foregroundStyle(.black)
+                                .background(.customgray)
+                                .mask(RoundedRectangle(cornerRadius: 16))
+                                .padding(.horizontal)
+                        }
+                        
+                        Button {
+                            selectedFolder = nil
+                            selectedFolderForContentsView = folder
+                        } label: {
+                            Text("Contents")
+                                .font(.title)
+                                .padding()
+                                .frame(height: 65)
+                                .frame(maxWidth: .infinity)
+                                .foregroundStyle(.black)
+                                .background(.customgray)
+                                .mask(RoundedRectangle(cornerRadius: 16))
+                                .padding(.horizontal)
+                        }
+                    }
+                    .navigationTitle("习题")
+                }
+                .presentationDetents([.medium])
+            }
+            
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Folders")
             .navigationDestination(item: $selectedFolderForSpeakerView) { folder in

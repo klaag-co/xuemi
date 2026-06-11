@@ -342,8 +342,8 @@
 				1DA9DB3F2F911D8F003FEDDB /* GoogleService-Info.plist */,
 				1DA9DB402F911D8F003FEDDB /* Info.plist */,
 				1DA9DB422F911D8F003FEDDB /* 中一.json */,
-				1DA9DB432F911D8F003FEDDB /* 中三.json */,
 				1DA9DB442F911D8F003FEDDB /* 中二.json */,
+				1DA9DB432F911D8F003FEDDB /* 中三.json */,
 				1DA9DB452F911D8F003FEDDB /* 中四.json */,
 			);
 			path = XuemiiOS;

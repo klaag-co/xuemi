@@ -14,7 +14,10 @@ final class LocalProfileStore: ObservableObject {
     @AppStorage("profile_name")   private var storedName: String = ""
     @AppStorage("profile_school") private var storedSchool: String = ""
     @AppStorage("profile_avatar_data") var avatarData: Data?
-
+    @AppStorage("dailyReminderEnabled") private var dailyReminderEnabled = false
+    
+    @StateObject private var store = LocalProfileStore()
+    
     @Published var profile: UserProfile = .init(email: "", name: "", school: "")
 
     init() {
@@ -168,10 +171,21 @@ struct SettingsView: View {
                     }
                 }
             }
-            .navigationTitle("Settings")
+            Section("Notifications") {
+                Toggle("Daily Study Reminder", isOn: $dailyReminderEnabled)
+                    .onChange(of: dailyReminderEnabled) { _, newValue in
+                        if newValue {
+                            NotificationManager.shared.requestPermission()
+                            NotificationManager.shared.scheduleDailyReminder(hour: 20, minute: 0)
+                        } else {
+                            NotificationManager.shared.cancelDailyReminder()
+                        }
+                    }
+            }
+            }
         }
     }
-}
+
 
 // MARK: - Personal Info (with photo chooser + email fallback)
 
@@ -264,14 +278,86 @@ struct PersonalInfoView: View {
 struct AppInfoDetailView: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Our app, Xuemi, helps secondary school students improve their Chinese language conveniently, anywhere, anytime.")
-                Text("Students can practise reading and writing to strengthen their use of Chinese. The app guides correct character writing and builds fluent reading with confidence.")
-                Text("It includes tests aligned to the 'O' Level scheme, covering Sec 1–Sec 4 content for easy access, plus a note-taking function.")
+            VStack(alignment: .leading, spacing: 22) {
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Learn Chinese Smarter")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+
+                    Text("Xuemi helps secondary school students practise Chinese anytime, anywhere, with tools for revision, writing, notes and progress tracking.")
+                        .font(.body)
+                        .foregroundStyle(.secondary)
+                }
+                .padding(.bottom, 6)
+
+                VStack(spacing: 14) {
+                    AboutFeatureCard(
+                        icon: "book.fill",
+                        title: "Sec 1–4 Content",
+                        description: "Access Chinese vocabulary and revision materials across secondary levels."
+                    )
+
+                    AboutFeatureCard(
+                        icon: "checkmark.circle.fill",
+                        title: "Quizzes & Practice",
+                        description: "Test your understanding with MCQ and memory card activities."
+                    )
+
+                    AboutFeatureCard(
+                        icon: "pencil.and.scribble",
+                        title: "Writing Support",
+                        description: "Practise Chinese character writing and build confidence."
+                    )
+
+                    AboutFeatureCard(
+                        icon: "folder.fill",
+                        title: "Custom Folders",
+                        description: "Save selected words into folders for personalised revision."
+                    )
+
+                    AboutFeatureCard(
+                        icon: "note.text",
+                        title: "Smart Notes",
+                        description: "Keep notes and review your learning results in one place."
+                    )
+                }
             }
             .padding()
         }
-        .navigationTitle("About Our App")
+        .navigationTitle("About Xuemi")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private struct AboutFeatureCard: View {
+    let icon: String
+    let title: String
+    let description: String
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.headline)
+                .foregroundStyle(.blue)
+                .frame(width: 32, height: 32)
+                .background(Color.blue.opacity(0.12))
+                .clipShape(Circle())
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.headline)
+
+                Text(description)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
+        }
+        .padding(12)
+        .background(Color(.systemGray6))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 }
 

@@ -10,20 +10,22 @@ import SwiftUI
 struct NotesView: View {
     @State private var searchText = ""
     @State private var isCreateNoteViewPresented = false
-
+    
     // Creation chooser
     @State private var showAddMenu = false
     @State private var createdInkNote: InkNote? = nil   // navigate to editor after creating
-
+    
     @ObservedObject private var pathManager = PathManager.global
-
+    
     @ObservedObject var notesManager: NotesManager = .shared
     @ObservedObject private var inkManager = InkNotesManager.shared
-
+    
     // Results managers
     @ObservedObject private var scoreManager = ScoreManager.shared
     @ObservedObject private var memoryStats = MemoryStats.shared
-
+    
+    @EnvironmentObject private var deviceTypeManager: DeviceTypeManager
+    
     // MARK: - Filtering (typed + ink)
     private var filteredNotes: [Note] {
         if searchText.isEmpty {
@@ -32,7 +34,7 @@ struct NotesView: View {
             return notesManager.notes.filter { $0.title.uppercased().contains(searchText.uppercased()) }
         }
     }
-
+    
     private var filteredInkNotes: [InkNote] {
         if searchText.isEmpty {
             return inkManager.notes
@@ -40,7 +42,7 @@ struct NotesView: View {
             return inkManager.notes.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
         }
     }
-
+    
     // MARK: - Helpers (map level to sections)
     private func levelMatches(_ levelRaw: Int?, sec: NoteType) -> Bool {
         guard let lv = levelRaw else { return false }
@@ -52,25 +54,25 @@ struct NotesView: View {
         default:      return false
         }
     }
-
+    
     private func mcqFor(sec: NoteType) -> [QuizResult] {
         scoreManager.results
             .filter { levelMatches($0.levelRaw, sec: sec) }
             .sorted { $0.date > $1.date }
     }
-
+    
     private func memoryFor(sec: NoteType) -> [MemoryAttempt] {
         memoryStats.attempts
             .filter { levelMatches($0.levelRaw, sec: sec) }
             .sorted { $0.date > $1.date }
     }
-
+    
     var body: some View {
         // ✅ Bind to the global path
         NavigationStack {
             List {
                 // ===== Ink Notes =====
-                if !filteredInkNotes.isEmpty || UIDevice.current.userInterfaceIdiom == .pad {
+                if deviceTypeManager.isIPad {
                     Section(header: Text("Ink Notes")) {
                         ForEach(filteredInkNotes) { ink in
                             NavigationLink(destination: InkNoteDetailView(note: ink)) {
@@ -91,7 +93,7 @@ struct NotesView: View {
                         }
                     }
                 }
-
+                
                 // ===== Typed notes (global categories) =====
                 Section(header: Text("Exam")) {
                     ForEach(filteredNotes.filter { $0.noteType == .exam }, id: \.id) { note in
@@ -107,42 +109,42 @@ struct NotesView: View {
                     }
                 }
                 // BUGGY VER OF NEW EXAM SECTION USED TO STORE O LEVEL RESULTS (the mcq results r of all 4 levels instead of js o level)
-//                Section(header: Text("Exam")) {
-//                    ForEach(filteredNotes.filter { $0.noteType == .exam }, id: \.id) { note in
-//                        if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {
-//                            NavigationLink(destination: NotesDetailView(note: $notesManager.notes[index])) {
-//                                Text(note.title)
-//                            }
-//                        }
-//                    }
-//                    .onDelete { indexSet in
-//                        let idsToDelete = indexSet.map { filteredNotes.filter { $0.noteType == .exam }[$0].id }
-//                        notesManager.notes.removeAll { idsToDelete.contains($0.id) }
-//                    }
-//                    
-//                    let mcq = mcqForExam()
-//                    
-//                    if !mcq.isEmpty {
-//                        Text("MCQ Results")
-//                            .font(.caption)
-//                            .foregroundStyle(.secondary)
-//                        
-//                        ForEach(mcq.prefix(50)) { g in
-//                            NavigationLink(value: Route.replay(g)) {
-//                                RecentRowMCQ(quiz: g)
-//                            }
-//                            .swipeActions {
-//                                Button(role: .destructive) {
-//                                    withAnimation {
-//                                        ScoreManager.shared.delete(g)
-//                                    }
-//                                } label: {
-//                                    Label("Delete", systemImage: "trash")
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
+                //                Section(header: Text("Exam")) {
+                //                    ForEach(filteredNotes.filter { $0.noteType == .exam }, id: \.id) { note in
+                //                        if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {
+                //                            NavigationLink(destination: NotesDetailView(note: $notesManager.notes[index])) {
+                //                                Text(note.title)
+                //                            }
+                //                        }
+                //                    }
+                //                    .onDelete { indexSet in
+                //                        let idsToDelete = indexSet.map { filteredNotes.filter { $0.noteType == .exam }[$0].id }
+                //                        notesManager.notes.removeAll { idsToDelete.contains($0.id) }
+                //                    }
+                //
+                //                    let mcq = mcqForExam()
+                //
+                //                    if !mcq.isEmpty {
+                //                        Text("MCQ Results")
+                //                            .font(.caption)
+                //                            .foregroundStyle(.secondary)
+                //
+                //                        ForEach(mcq.prefix(50)) { g in
+                //                            NavigationLink(value: Route.replay(g)) {
+                //                                RecentRowMCQ(quiz: g)
+                //                            }
+                //                            .swipeActions {
+                //                                Button(role: .destructive) {
+                //                                    withAnimation {
+                //                                        ScoreManager.shared.delete(g)
+                //                                    }
+                //                                } label: {
+                //                                    Label("Delete", systemImage: "trash")
+                //                                }
+                //                            }
+                //                        }
+                //                    }
+                //                }
                 
                 Section(header: Text("Notes")) {
                     ForEach(filteredNotes.filter { $0.noteType == .note }, id: \.id) { note in
@@ -157,7 +159,7 @@ struct NotesView: View {
                         notesManager.notes.removeAll { idsToDelete.contains($0.id) }
                     }
                 }
-
+                
                 // ===== Secondary 1..4 with MCQ & Memory results embedded =====
                 secondarySection(title: "Secondary 1", type: .sone)
                 secondarySection(title: "Secondary 2", type: .stwo)
@@ -167,30 +169,37 @@ struct NotesView: View {
             .navigationTitle("Notepad")
             .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) { EditButton() }
+                ToolbarItem(placement: .topBarLeading) {
+                    EditButton()
+                }
 
-                // "+" offers Typed or Ink
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button { showAddMenu = true } label: { Image(systemName: "plus") }
+                    Menu {
+                        Button {
+                            isCreateNoteViewPresented = true
+                        } label: {
+                            Label("New Note", systemImage: "note.text")
+                        }
+
+                        if deviceTypeManager.isIPad {
+                            Button {
+                                let new = inkManager.add(title: "Untitled")
+                                createdInkNote = new
+                            } label: {
+                                Label("New Ink Note", systemImage: "pencil.tip")
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "plus")
+                    }
                 }
-            }
-            .confirmationDialog("New Note", isPresented: $showAddMenu, titleVisibility: .visible) {
-                Button("New Typed Note") { isCreateNoteViewPresented = true }
-                Button("New Ink Note") {
-                    let new = inkManager.add(title: "Untitled")
-                    createdInkNote = new
-                }
-                Button("Cancel", role: .cancel) { }
             }
             .sheet(isPresented: $isCreateNoteViewPresented) {
                 CreateNoteView()
             }
-            // Navigate to Ink editor after creating one
             .navigationDestination(item: $createdInkNote) { note in
                 InkNoteDetailView(note: note)
             }
-
-            // ✅ Only need the two routes from here
             .navigationDestination(for: Route.self) { route in
                 switch route {
                 case .replay(let quiz):
@@ -198,7 +207,7 @@ struct NotesView: View {
                 case .replayMemory(let attempt):
                     MemoryReplayDestination(attempt: attempt)
                 default:
-                    EmptyView() // other routes are handled elsewhere
+                    EmptyView()
                 }
             }
         }
@@ -209,7 +218,6 @@ struct NotesView: View {
     @ViewBuilder
     private func secondarySection(title: String, type: NoteType) -> some View {
         Section(header: Text(title)) {
-            // Original typed notes for that Secondary group
             ForEach(filteredNotes.filter { $0.noteType == type }, id: \.id) { note in
                 if let index = notesManager.notes.firstIndex(where: { $0.id == note.id }) {
                     NavigationLink(destination: NotesDetailView(note: $notesManager.notes[index])) {
@@ -222,7 +230,6 @@ struct NotesView: View {
                 notesManager.notes.removeAll { idsToDelete.contains($0.id) }
             }
 
-            // MCQ Results (tap -> ResultReplayDestination via typed route)
             let mcq = mcqFor(sec: type)
             if !mcq.isEmpty {
                 LabeledContent { EmptyView() } label: {
@@ -242,7 +249,6 @@ struct NotesView: View {
                 }
             }
 
-            // Memory Results (tap -> MemoryReplayDestination via typed route)
             let mem = memoryFor(sec: type)
             if !mem.isEmpty {
                 LabeledContent { EmptyView() } label: {
@@ -263,46 +269,44 @@ struct NotesView: View {
             }
         }
     }
-}
-
-// MARK: - Reused rows (same look as before)
-
-private struct RecentRowMCQ: View {
-    let quiz: QuizResult
-    private static let mdFormatter: DateFormatter = { let f = DateFormatter(); f.dateFormat = "M/d"; return f }()
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(quiz.contextTitle.isEmpty ? "Practice" : quiz.contextTitle)
-                    .font(.subheadline).lineLimit(1)
-                Text(quiz.date, formatter: Self.mdFormatter)
-                    .font(.footnote).foregroundStyle(.secondary)
+    
+    // MARK: - Reused rows (same look as before)
+    
+    private struct RecentRowMCQ: View {
+        let quiz: QuizResult
+        private static let mdFormatter: DateFormatter = { let f = DateFormatter(); f.dateFormat = "M/d"; return f }()
+        var body: some View {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(quiz.contextTitle.isEmpty ? "Practice" : quiz.contextTitle)
+                        .font(.subheadline).lineLimit(1)
+                    Text(quiz.date, formatter: Self.mdFormatter)
+                        .font(.footnote).foregroundStyle(.secondary)
+                }
+                Spacer()
+                Text("\(Int(round(quiz.percent)))%").font(.headline)
             }
-            Spacer()
-            Text("\(Int(round(quiz.percent)))%").font(.headline)
+            .padding(.vertical, 6)
         }
-        .padding(.vertical, 6)
+    }
+    
+    private struct RecentRowMemory: View {
+        let attempt: MemoryAttempt
+        private static let mdFormatter: DateFormatter = { let f = DateFormatter(); f.dateFormat = "M/d"; return f }()
+        var body: some View {
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(attempt.contextTitle.isEmpty ? "Practice" : attempt.contextTitle)
+                        .font(.subheadline).lineLimit(1)
+                    Text(attempt.date, formatter: Self.mdFormatter)
+                        .font(.footnote).foregroundStyle(.secondary)
+                }
+                Spacer()
+                Text("\(attempt.tries) tries").font(.headline)
+            }
+            .padding(.vertical, 6)
+        }
     }
 }
-
-private struct RecentRowMemory: View {
-    let attempt: MemoryAttempt
-    private static let mdFormatter: DateFormatter = { let f = DateFormatter(); f.dateFormat = "M/d"; return f }()
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(attempt.contextTitle.isEmpty ? "Practice" : attempt.contextTitle)
-                    .font(.subheadline).lineLimit(1)
-                Text(attempt.date, formatter: Self.mdFormatter)
-                    .font(.footnote).foregroundStyle(.secondary)
-            }
-            Spacer()
-            Text("\(attempt.tries) tries").font(.headline)
-        }
-        .padding(.vertical, 6)
-    }
-}
-
 // Preview
-#Preview { NotesView() }
 

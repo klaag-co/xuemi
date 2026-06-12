@@ -1,29 +1,73 @@
-//
-//  SpeakerView.swift
-//  XuemiiOS
-//
-//  Created by Gracelyn Gosal on 27/11/24.
-//
-
 import SwiftUI
 import AVFoundation
 
 struct SpeakerView: View {
     var words: [Vocabulary]
+    var folderName: String = "Spelling"
+    var onBackToFolders: (() -> Void)? = nil
+
     @State private var shuffledWords: [Vocabulary] = []
     @State private var currentIndex: Int = 0
     @State private var revealAnswer: Bool = false
-    
+    @State private var isFinished: Bool = false
+
     let synthesizer = AVSpeechSynthesizer()
 
     var body: some View {
         VStack {
-            ProgressView(value: Double(currentIndex) / Double(max(shuffledWords.count - 1, 1)), total: 1)
+            if isFinished {
+                Spacer()
+
+                Image(systemName: "checkmark.circle.fill")
+                    .font(.system(size: 90))
+                    .foregroundStyle(.green)
+
+                Text("Spelling Complete!")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.top)
+
+                Text("You have gone through all the words.")
+                    .font(.headline)
+                    .foregroundStyle(.secondary)
+
+                Button {
+                    restart()
+                } label: {
+                    Text("Restart")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color(.systemGray5))
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                }
+                .padding(.horizontal)
+                .padding(.top, 20)
+
+                Button {
+                    onBackToFolders?()
+                } label: {
+                    Text("Back to Custom Folders")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color(.systemGray5))
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                }
+                .padding(.horizontal)
+                .padding(.top, 8)
+
+                Spacer()
+
+            } else if !shuffledWords.isEmpty {
+                ProgressView(
+                    value: Double(currentIndex + 1),
+                    total: Double(shuffledWords.count)
+                )
                 .accentColor(.blue)
                 .padding()
                 .animation(.default, value: currentIndex)
-            
-            if !shuffledWords.isEmpty {
+
                 Spacer()
 
                 Button(action: playSound) {
@@ -31,6 +75,7 @@ struct SpeakerView: View {
                         .font(.system(size: 110))
                         .foregroundColor(.blue)
                 }
+
                 Spacer()
 
                 DisclosureGroup(isExpanded: $revealAnswer) {
@@ -42,7 +87,6 @@ struct SpeakerView: View {
                         .font(.headline)
                         .padding()
                         .foregroundStyle(Color.gray)
-                        .cornerRadius(8)
                 }
                 .padding(25)
 
@@ -56,40 +100,46 @@ struct SpeakerView: View {
                     .disabled(currentIndex == 0)
                     .buttonBorderShape(.circle)
                     .buttonStyle(.glass)
-                    
+
                     Spacer()
-                    
+
                     Button(action: nextWord) {
-                        Image(systemName: "chevron.right")
+                        Image(systemName: currentIndex == shuffledWords.count - 1 ? "checkmark" : "chevron.right")
                             .padding(8)
                     }
-                    .disabled(currentIndex == shuffledWords.count - 1)
                     .buttonBorderShape(.circle)
                     .buttonStyle(.glass)
                 }
                 .padding()
+
             } else {
                 Spacer()
+
                 Text("No words to read out.")
                     .font(.headline)
                     .foregroundColor(.gray)
                     .padding()
+
                 Spacer()
             }
         }
+        .navigationTitle("Spelling")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            shuffledWords = words.shuffled()
-//            print("Words shuffled for SpeakerView: \(shuffledWords.map { $0.word })")
-            if !shuffledWords.isEmpty {
+            if shuffledWords.isEmpty {
+                shuffledWords = words.shuffled()
                 currentIndex = 0
                 revealAnswer = false
+                isFinished = false
             }
         }
     }
 
     private func playSound() {
+        guard !shuffledWords.isEmpty else { return }
+
         let utterance = AVSpeechUtterance(string: shuffledWords[currentIndex].word)
-        utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
+
         if let voice = AVSpeechSynthesisVoice.speechVoices().first(where: {
             $0.language == "zh-CN" && $0.gender == .female
         }) {
@@ -97,7 +147,7 @@ struct SpeakerView: View {
         } else {
             utterance.voice = AVSpeechSynthesisVoice(language: "zh-CN")
         }
-        
+
         utterance.rate = 0.5
         synthesizer.speak(utterance)
     }
@@ -106,6 +156,8 @@ struct SpeakerView: View {
         if currentIndex < shuffledWords.count - 1 {
             currentIndex += 1
             revealAnswer = false
+        } else {
+            isFinished = true
         }
     }
 
@@ -115,6 +167,10 @@ struct SpeakerView: View {
             revealAnswer = false
         }
     }
+
+    private func restart() {
+        currentIndex = 0
+        revealAnswer = false
+        isFinished = false
+    }
 }
-
-

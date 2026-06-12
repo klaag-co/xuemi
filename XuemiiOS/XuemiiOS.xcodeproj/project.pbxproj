@@ -75,6 +75,7 @@
 		F879C9D12C54A52400C047AA /* hanzi-writer.min.js in Resources */ = {isa = PBXBuildFile; fileRef = F879C9CC2C54A52400C047AA /* hanzi-writer.min.js */; };
 		F879C9D22C54A52400C047AA /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = F879C9CD2C54A52400C047AA /* index.html */; };
 		F879C9D32C54A52400C047AA /* jquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = F879C9CE2C54A52400C047AA /* jquery.min.js */; };
+		F8D2658F2FDB9D6800222815 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2658E2FDB9D6400222815 /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +143,7 @@
 		F879C9CC2C54A52400C047AA /* hanzi-writer.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "hanzi-writer.min.js"; sourceTree = "<group>"; };
 		F879C9CD2C54A52400C047AA /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		F879C9CE2C54A52400C047AA /* jquery.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		F8D2658E2FDB9D6400222815 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +330,7 @@
 				1DA9DB3A2F911D8F003FEDDB /* Vocabulary */,
 				1DA9DB3B2F911D8F003FEDDB /* CelebrationOverlay.swift */,
 				1DA9DB3C2F911D8F003FEDDB /* ConfettiView.swift */,
+				F8D2658C2FDB9D4D00222815 /* Notification */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -358,6 +361,14 @@
 				F879C9CE2C54A52400C047AA /* jquery.min.js */,
 			);
 			path = web;
+			sourceTree = "<group>";
+		};
+		F8D2658C2FDB9D4D00222815 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				F8D2658E2FDB9D6400222815 /* NotificationManager.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		F8DE45132EBF276700DF7EA9 /* Frameworks */ = {
@@ -456,6 +467,7 @@
 				1DA9DB522F911D8F003FEDDB /* FolderView.swift in Sources */,
 				1DA9DB532F911D8F003FEDDB /* NewFolderView.swift in Sources */,
 				1DA9DB542F911D8F003FEDDB /* VocabView.swift in Sources */,
+				F8D2658F2FDB9D6800222815 /* NotificationManager.swift in Sources */,
 				1DA9DB552F911D8F003FEDDB /* CanvasController.swift in Sources */,
 				1DA9DB562F911D8F003FEDDB /* CanvasView.swift in Sources */,
 				1DA9DB572F911D8F003FEDDB /* StrokeWriteView.swift in Sources */,
@@ -655,7 +667,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = memeig.XuemiiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -697,7 +709,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.3;
+				MARKETING_VERSION = 5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = memeig.XuemiiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -63,13 +63,13 @@ struct MCQResultsView: View {
                     .padding(.top, 8)
 
                 // ===== Buttons =====
+                // ===== Buttons =====
                 if !isReplay {
-                    if deviceTypeManager.isIPad {
+                    if folderName != nil {
                         Button {
-                            dismiss()
                             onDone?()
                         } label: {
-                            Text("Back to Topic")
+                            Text("Back to Custom Folders")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 14)
@@ -77,6 +77,32 @@ struct MCQResultsView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                         .padding(.horizontal)
+                        
+                        NavigationLink {
+                            ProgressDetailView()
+                        } label: {
+                            Text("View Progress")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(Color(.systemGray5))
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                        .padding(.horizontal)
+
+                    } else if deviceTypeManager.isIPad {
+                        Button {
+                            PathManager.global.goHome()
+                        } label: {
+                            Text("Go to Home")
+                                .font(.headline)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(Color(.systemGray5))
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                        }
+                        .padding(.horizontal)
+
                     } else {
                         Button {
                             onDone?()
@@ -90,7 +116,7 @@ struct MCQResultsView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                         .padding(.horizontal)
-                        
+
                         Button {
                             withAnimation { PathManager.global.goProgressDetail() }
                         } label: {

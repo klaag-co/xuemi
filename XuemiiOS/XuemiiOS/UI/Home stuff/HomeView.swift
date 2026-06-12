@@ -27,19 +27,39 @@ enum SecondaryNumber: Int, Codable, CaseIterable, Hashable {
     }
 }
 
+enum MainTab: Hashable {
+    case home
+    case notes
+    case folders
+    case settings
+}
+
 final class PathManager: ObservableObject {
     @Published var path: NavigationPath = .init()
     @Published var folderPath: NavigationPath = .init()
+    @Published var selectedTab: MainTab = .home
+
     static let global = PathManager()
     private init() {}
 
-    func popToRoot() { while !path.isEmpty { path.removeLast() } }
-    func popFolderPathToRoot() { while !folderPath.isEmpty { folderPath.removeLast() } }
+    func popToRoot() {
+        while !path.isEmpty { path.removeLast() }
+    }
 
-    func goHome() { popToRoot() }
+    func popFolderPathToRoot() {
+        while !folderPath.isEmpty { folderPath.removeLast() }
+    }
+
+    func goHome() {
+        selectedTab = .home
+        popToRoot()
+        popFolderPathToRoot()
+    }
 
     func goProgressDetail() {
+        selectedTab = .home
         popToRoot()
+        popFolderPathToRoot()
         path.append(Route.progressDetail)
     }
 }
@@ -1368,7 +1388,7 @@ struct HomeView: View {
     // MARK: - iPhone root view (unchanged layout)
 
     private var iPhoneRootView: some View {
-        TabView {
+        TabView(selection: $pathManager.selectedTab) {
             NavigationStack(path: $pathManager.path) {
                 ZStack {
                     VStack(spacing: 20) {
@@ -1489,6 +1509,8 @@ struct HomeView: View {
             .tabItem {
                 Label("Home", systemImage: "house.fill")
             }
+            .tag(MainTab.home)
+
             
             // NOTES TAB
             NotesView()
@@ -1496,17 +1518,19 @@ struct HomeView: View {
                     Label("Notes", systemImage: "note.text")
                 }
             
+                .tag(MainTab.notes)
             // FOLDERS TAB
             FolderView(vocabManager: vocabManager)
                 .tabItem {
                     Label("Folders", systemImage: "folder.fill")
                 }
-            
+                .tag(MainTab.folders)
             // SETTINGS TAB
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape.fill")
                 }
+                .tag(MainTab.settings)
         }
     }
 }

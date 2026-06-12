@@ -1,10 +1,3 @@
-//
-//  FolderView.swift
-//  XuemiiOS
-//
-//  Created by Gracelyn Gosal on 13/11/24.
-//
-
 import SwiftUI
 
 struct Folder: Identifiable, Codable, Hashable {
@@ -15,37 +8,37 @@ struct Folder: Identifiable, Codable, Hashable {
 
 struct FolderView: View {
     @ObservedObject var vocabManager: VocabManager
+    @ObservedObject private var pathManager = PathManager.global
     
-    @State private var showSpeaker = false
-    @State private var showContents = false
     @State private var selectedFolder: Folder?
     @State private var selectedFolderForMCQView: Folder?
     @State private var selectedFolderForSpeakerView: Folder?
     @State private var selectedFolderForContentsView: Folder?
-
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $pathManager.folderPath) {
             List {
                 Section(header: Text("Fixed Folders")) {
                     NavigationLink(destination: VocabView(vocabManager: vocabManager)) {
                         Text("Vocabulary List")
                             .font(.headline)
                     }
+                    
                     NavigationLink(destination: BookmarkView()) {
                         Text("Bookmarks")
                             .font(.headline)
                     }
                 }
+                
                 Section(header: Text("Custom Folders")) {
                     if vocabManager.folders.isEmpty {
-                        Text("No custom folders yet").foregroundColor(.gray)
+                        Text("No custom folders yet")
+                            .foregroundColor(.gray)
                     } else {
                         ForEach(vocabManager.folders) { folder in
-//                            NavigationLink(destination: CustomFolderWordsView(folder: folder)) {
-//                                Text(folder.name)
-                            Button (action: {
+                            Button {
                                 selectedFolder = folder
-                            }) {
+                            } label: {
                                 Text(folder.name)
                                     .foregroundStyle(.black)
                             }
@@ -108,19 +101,37 @@ struct FolderView: View {
                 }
                 .presentationDetents([.medium])
             }
-            
             .listStyle(InsetGroupedListStyle())
             .navigationTitle("Folders")
+            
             .navigationDestination(item: $selectedFolderForSpeakerView) { folder in
-                SpeakerView(words: folder.vocabs)
+                SpeakerView(
+                    words: folder.vocabs,
+                    folderName: folder.name,
+                    onBackToFolders: {
+                        selectedFolderForSpeakerView = nil
+                    }
+                )
             }
             
             .navigationDestination(item: $selectedFolderForMCQView) { folder in
-                MCQView(vocabularies: folder.vocabs, folderName: folder.name)
+                MCQView(
+                    vocabularies: folder.vocabs,
+                    folderName: folder.name,
+                    onBackToFolders: {
+                        selectedFolderForMCQView = nil
+                    }
+                )
             }
+            
             .navigationDestination(item: $selectedFolderForContentsView) { folder in
-                ContentsView(folder: folder)
+                FlashcardView(
+                    vocabularies: folder.vocabs,
+                    folderName: folder.name,
+                    currentIndex: 0
+                )
             }
+            
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink(destination: NewFolderView(vocabManager: vocabManager)) {
@@ -130,32 +141,4 @@ struct FolderView: View {
             }
         }
     }
-}
-
-struct CustomFolderWordsView: View {
-    let folder: Folder
-
-    var body: some View {
-        List(folder.vocabs, id: \.self) { vocab in
-            Text(vocab.word)
-        }
-        .navigationTitle(folder.name)
-    }
-}
-
-
-
-struct FolderDetailView: View {
-    var folder: Folder
-
-    var body: some View {
-        List(folder.vocabs, id: \.self) { vocab in
-            Text(vocab.word)
-        }
-        .navigationTitle(folder.name)
-    }
-}
-
-#Preview {
-    FolderView(vocabManager: VocabManager())
 }

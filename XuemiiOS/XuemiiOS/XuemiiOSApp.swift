@@ -28,6 +28,9 @@ struct XuemiiOSApp: App {
             ContentView()
                 .environmentObject(BookmarkManager.shared)
                 .environmentObject(deviceTypeManager)
+                .onAppear {
+                    NotificationManager.shared.requestPermission()
+                }
                 .onOpenURL { URL in
                     GIDSignIn.sharedInstance.handle(URL)
                 }

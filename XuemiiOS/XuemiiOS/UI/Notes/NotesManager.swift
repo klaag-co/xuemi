@@ -44,6 +44,7 @@ class NotesManager: ObservableObject {
 
     @Published var notes: [Note] = [] {
         didSet { save() }
+
     }
 
     // MARK: - Current user document id (uid preferred, else email)
@@ -59,7 +60,25 @@ class NotesManager: ObservableObject {
     init() {
         load()
     }
+    func addSpellingResult(folderName: String, score: Int, total: Int) {
+        let percent = total > 0 ? (Double(score) / Double(total)) * 100.0 : 0
 
+        let title = "\(folderName) Spelling on \(Date().formatted(date: .numeric, time: .omitted)) at \(Date().formatted(date: .omitted, time: .shortened))"
+
+        let content = """
+        Spelling Score: \(score)/\(total)
+        Percentage: \(String(format: "%.0f", percent))%
+        """
+
+        let newNote = Note(
+            title: title,
+            noteType: .exam,
+            content: content,
+            drawingData: nil
+        )
+
+        notes.append(newNote)
+    }
     // MARK: - Local persistence (Property List)
 
     private func getArchiveURL() -> URL {

@@ -12,16 +12,15 @@ struct MCQView: View {
     @State private var wrongAnswers: Int = 0
     @State private var improvements: [(vocab: Vocabulary, index: Int)] = []
 
-    // INPUTS
     @State var vocabularies: [Vocabulary]
     var level: SecondaryNumber?
     var chapter: Chapter?
     var topic: Topic?
     var folderName: String?
+    var onBackToFolders: (() -> Void)? = nil
 
     @Environment(\.dismiss) private var dismiss
-
-    // MARK: - Inits
+    @EnvironmentObject private var deviceTypeManager: DeviceTypeManager
 
     init(vocabularies: [Vocabulary], level: SecondaryNumber, chapter: Chapter, topic: Topic) {
         let shuffled = vocabularies.shuffled()
@@ -30,27 +29,26 @@ struct MCQView: View {
         self.chapter = chapter
         self.topic = topic
         self.folderName = nil
+        self.onBackToFolders = nil
 
         self._shuffledOptions = State(initialValue: MCQView.buildOptions(from: shuffled))
         self._selectedQuestions = State(initialValue: shuffled.map { $0.questions.randomElement() ?? "error" })
         self._userAnswers = State(initialValue: Array(repeating: nil, count: shuffled.count))
     }
 
-    // Init used when coming from a saved folder/set
-    init(vocabularies: [Vocabulary], folderName: String) {
+    init(vocabularies: [Vocabulary], folderName: String, onBackToFolders: (() -> Void)? = nil) {
         let shuffled = vocabularies.shuffled()
         self.vocabularies = shuffled
         self.level = nil
         self.chapter = nil
         self.topic = nil
         self.folderName = folderName
+        self.onBackToFolders = onBackToFolders
 
         self._shuffledOptions = State(initialValue: MCQView.buildOptions(from: shuffled))
         self._selectedQuestions = State(initialValue: shuffled.map { $0.questions.randomElement() ?? "error" })
         self._userAnswers = State(initialValue: Array(repeating: nil, count: shuffled.count))
     }
-
-    // MARK: - Safe helpers
 
     private var hasData: Bool {
         !vocabularies.isEmpty &&
@@ -74,22 +72,22 @@ struct MCQView: View {
         guard hasData else { return "" }
         return selectedQuestions[currentVocabularyIndex]
     }
-    
-    @EnvironmentObject private var deviceTypeManager: DeviceTypeManager
-
-    // MARK: - Body
 
     var body: some View {
         VStack {
             if !hasData {
-                // Empty / error state
                 VStack(spacing: 12) {
                     Text("没有找到题目")
-                        .font(.title3).bold()
+                        .font(.title3)
+                        .bold()
+
                     Text("这个单元暂时没有词语。请返回重试。")
                         .foregroundStyle(.secondary)
-                    Button("返回") { dismiss() }
-                        .buttonStyle(.borderedProminent)
+
+                    Button("返回") {
+                        dismiss()
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
                 .padding()
             } else {
@@ -99,15 +97,14 @@ struct MCQView: View {
                 )
                 .animation(.easeInOut, value: currentVocabularyIndex)
                 .padding()
-                
+
                 VStack {
                     Text(currentQuestion)
                         .font(.system(size: 30))
                         .lineLimit(5)
                         .minimumScaleFactor(0.1)
                         .padding()
-                    
-                    // Show prompt only if we have a vocab to compare against
+
                     if let vocab = currentVocabulary {
                         Text(selectedAnswer == vocab.word ? " " : "正确答案是什么呢？")
                             .foregroundColor(showAnswer && selectedAnswer != vocab.word ? .red : .white)
@@ -115,14 +112,15 @@ struct MCQView: View {
                     }
                 }
                 .frame(maxHeight: .infinity)
-                
+
                 ForEach(safeOptions, id: \.self) { option in
                     Button {
                         guard !showAnswer, let vocab = currentVocabulary else { return }
+
                         selectedAnswer = option
                         userAnswers[currentVocabularyIndex] = option
                         showAnswer = true
-                        
+
                         if option == vocab.word {
                             correctAnswers += 1
                         } else {
@@ -132,7 +130,8 @@ struct MCQView: View {
                     } label: {
                         Text(option)
                             .frame(maxWidth: .infinity)
-                            .font(.system(size: 30)).bold()
+                            .font(.system(size: 30))
+                            .bold()
                             .padding()
                             .background(buttonColor(for: option))
                             .foregroundColor(.black)
@@ -142,7 +141,7 @@ struct MCQView: View {
                     }
                     .disabled(showAnswer)
                 }
-                
+
                 HStack {
                     Button {
                         guard currentVocabularyIndex > 0 else { return }
@@ -155,11 +154,12 @@ struct MCQView: View {
                     .disabled(currentVocabularyIndex == 0)
                     .buttonBorderShape(.circle)
                     .buttonStyle(.glass)
-                    
+
                     Spacer()
-                    
+
                     Button {
                         guard showAnswer else { return }
+
                         if currentVocabularyIndex < vocabularies.count - 1 {
                             currentVocabularyIndex += 1
                             resetState()
@@ -173,14 +173,12 @@ struct MCQView: View {
                     .disabled(currentVocabularyIndex == vocabularies.count - 1 && !showAnswer)
                     .buttonBorderShape(.circle)
                     .buttonStyle(.glass)
-                    
                 }
                 .padding()
             }
         }
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            // Only reshuffle if arrays are out of sync
             if shuffledOptions.count != vocabularies.count || selectedQuestions.count != vocabularies.count {
                 reshuffleVocabularies()
             }
@@ -205,7 +203,7 @@ struct MCQView: View {
                         } else {
                             PathManager.global.popToRoot()
                         }
-                    } // go Home
+                    }
                 )
             } else if let folderName {
                 MCQResultsView(
@@ -220,23 +218,29 @@ struct MCQView: View {
                     topic: nil,
                     folderName: folderName,
                     onDone: {
-                        if deviceTypeManager.isIPad {
-                            dismiss()
-                        } else {
-                            PathManager.global.popToRoot()
+                        showResults = false
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            onBackToFolders?()
                         }
-                    } // go Home
+                    }
                 )
             }
         }
     }
 
-    // MARK: - Helpers
-
     private func buttonColor(for option: String) -> Color {
-        guard showAnswer, let vocab = currentVocabulary else { return Color.blue.opacity(0.5) }
-        if option == vocab.word { return .green }
-        if option == selectedAnswer { return .red }
+        guard showAnswer, let vocab = currentVocabulary else {
+            return Color.blue.opacity(0.5)
+        }
+
+        if option == vocab.word {
+            return .green
+        }
+
+        if option == selectedAnswer {
+            return .red
+        }
+
         return Color.blue.opacity(0.5)
     }
 
@@ -245,6 +249,7 @@ struct MCQView: View {
             var options = vocabularies.map { $0.word }
             options.removeAll { $0 == v.word }
             options.shuffle()
+
             let final = Array(options.prefix(3)) + [v.word]
             return final.shuffled()
         }
@@ -274,4 +279,3 @@ struct MCQView: View {
         showAnswer = selectedAnswer != nil
     }
 }
-

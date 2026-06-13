@@ -157,7 +157,11 @@ struct MCQResultsView: View {
 
             let title: String
             if let level, let chapter, let topic {
-                title = "中\(level.string) · \(chapter.string) · \(topic.string(level: level, chapter: chapter))"
+                if !topic.string(level: level, chapter: chapter).isEmpty {
+                    title = "中\(level.string) · \(chapter.string) · \(topic.string(level: level, chapter: chapter))"
+                } else {
+                    title = "中\(level.string) · \(chapter.string)"
+                }
             } else if let folderName {
                 title = folderName
             } else {

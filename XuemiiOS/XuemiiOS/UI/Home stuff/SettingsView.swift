@@ -182,7 +182,14 @@ struct SettingsView: View {
                         showDeleteConfirmation = true
                     } label: {
                         HStack {
-                            Label("Delete Account", systemImage: "trash")
+                            Image(systemName: "trash")
+                                .imageScale(.large)
+                                .frame(width: 28)
+                                .foregroundStyle(.red)
+
+                            Text("Delete account")
+                                .font(.headline)
+                                .foregroundStyle(.red)
                             Spacer()
 
                             if isDeletingAccount {

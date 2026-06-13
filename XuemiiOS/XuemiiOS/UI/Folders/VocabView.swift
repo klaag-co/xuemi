@@ -40,7 +40,7 @@ struct VocabView: View {
                     if vocabs.isEmpty {
                         EmptyView()
                     } else {
-                        ForEach(vocabs, id: \.index) { vocab in
+                        ForEach(vocabs) { vocab in
                             Text(vocab.word)
                         }
                     }

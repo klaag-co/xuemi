@@ -198,13 +198,12 @@ struct MCQView: View {
                     topic: topic,
                     folderName: nil,
                     onDone: {
-                        if deviceTypeManager.isIPad {
-                            dismiss()
-                        } else {
-                            PathManager.global.popToRoot()
+                        showResults = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                dismiss()
+                            }
                         }
-                    }
-                )
+                    )
             } else if let folderName {
                 MCQResultsView(
                     correctAnswers: correctAnswers,
@@ -219,9 +218,7 @@ struct MCQView: View {
                     folderName: folderName,
                     onDone: {
                         showResults = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            onBackToFolders?()
-                        }
+                        onBackToFolders?()
                     }
                 )
             }

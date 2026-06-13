@@ -10,14 +10,11 @@ struct UserProfile: Codable, Hashable {
 }
 
 final class LocalProfileStore: ObservableObject {
-    @AppStorage("profile_email")  private var storedEmail: String = ""
-    @AppStorage("profile_name")   private var storedName: String = ""
+    @AppStorage("profile_email") private var storedEmail: String = ""
+    @AppStorage("profile_name") private var storedName: String = ""
     @AppStorage("profile_school") private var storedSchool: String = ""
     @AppStorage("profile_avatar_data") var avatarData: Data?
-    @AppStorage("dailyReminderEnabled") private var dailyReminderEnabled = false
-    
-    @StateObject private var store = LocalProfileStore()
-    
+
     @Published var profile: UserProfile = .init(email: "", name: "", school: "")
 
     init() {
@@ -25,22 +22,34 @@ final class LocalProfileStore: ObservableObject {
     }
 
     func save(email: String, name: String, school: String) {
-        storedEmail  = email
-        storedName   = name
+        storedEmail = email
+        storedName = name
         storedSchool = school
-        profile      = .init(email: email, name: name, school: school)
+        profile = .init(email: email, name: name, school: school)
+    }
+
+    func clearLocalProfile() {
+        storedEmail = ""
+        storedName = ""
+        storedSchool = ""
+        avatarData = nil
+        profile = .init(email: "", name: "", school: "")
     }
 }
 
-// MARK: - Settings (card layout with section titles)
+// MARK: - Settings
 
 struct SettingsView: View {
     @ObservedObject private var authmanager: AuthenticationManager = .shared
     @StateObject private var store = LocalProfileStore()
-//    @State private var EducationStream = "G3"
-//    let educationstreams = ["G3", "HCL"]
+    @AppStorage("appUpdateNotificationsEnabled") private var appUpdateNotificationsEnabled = false
 
-    // Fallback to signed-in email when stored profile email is empty
+    @State private var showDeleteConfirmation = false
+    @State private var showDeleteSuccess = false
+    @State private var showDeleteError = false
+    @State private var deleteErrorMessage = ""
+    @State private var isDeletingAccount = false
+
     private var accountEmail: String {
         let stored = store.profile.email.trimmingCharacters(in: .whitespacesAndNewlines)
         if !stored.isEmpty { return stored }
@@ -57,13 +66,16 @@ struct SettingsView: View {
                         HStack(spacing: 14) {
                             Group {
                                 if let data = store.avatarData, let ui = UIImage(data: data) {
-                                    Image(uiImage: ui).resizable().scaledToFill()
+                                    Image(uiImage: ui)
+                                        .resizable()
+                                        .scaledToFill()
                                 } else {
                                     let initial = String((accountEmail.first ?? "K")).uppercased()
                                     ZStack {
                                         Circle().fill(Color(.systemRed))
                                         Text(initial)
-                                            .font(.title3).bold()
+                                            .font(.title3)
+                                            .bold()
                                             .foregroundStyle(.white)
                                     }
                                 }
@@ -77,10 +89,12 @@ struct SettingsView: View {
                                     .foregroundStyle(.primary)
                                     .lineLimit(1)
                                     .truncationMode(.middle)
+
                                 Text("Edit name, school & profile photo")
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
                             }
+
                             Spacer()
                         }
                     }
@@ -96,24 +110,17 @@ struct SettingsView: View {
                                 .imageScale(.large)
                                 .frame(width: 28)
                                 .foregroundStyle(.blue)
+
                             Text("About Our App")
                                 .font(.headline)
                                 .foregroundStyle(.primary)
+
                             Spacer()
                         }
                     }
                     .buttonStyle(.plain)
                 }
-                
-//                Section("Education stream") {
-//                    Picker("Select", selection: $EducationStream){
-//                        ForEach(educationstreams, id: \.self) {
-//                            Text($0)
-//                        }
-//                    }
-//                    .pickerStyle(.menu)
-//                }
-                
+
                 Section("Acknowledgements") {
                     NavigationLink {
                         AcknowledgementsView()
@@ -123,9 +130,11 @@ struct SettingsView: View {
                                 .imageScale(.large)
                                 .frame(width: 28)
                                 .foregroundStyle(.blue)
+
                             Text("Acknowledgements")
                                 .font(.headline)
                                 .foregroundStyle(.primary)
+
                             Spacer()
                         }
                     }
@@ -139,17 +148,49 @@ struct SettingsView: View {
                                 .imageScale(.large)
                                 .frame(width: 28)
                                 .foregroundStyle(.blue)
+
                             VStack(alignment: .leading, spacing: 2) {
                                 Text("Contact the Xuemi Team")
                                     .font(.headline)
+
                                 Text("Email us at klaag.co@gmail.com")
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
                             }
+
                             Spacer()
                         }
                     }
                     .buttonStyle(.plain)
+                }
+
+                Section("Notifications") {
+                    Toggle("App Update Notifications", isOn: $appUpdateNotificationsEnabled)
+                        .onChange(of: appUpdateNotificationsEnabled) { _, newValue in
+                            if newValue {
+                                NotificationManager.shared.requestPermission()
+                            }
+                        }
+
+                    Text("Receive announcements about new Xuemi features, updates and improvements.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                Section("Account Management") {
+                    Button(role: .destructive) {
+                        showDeleteConfirmation = true
+                    } label: {
+                        HStack {
+                            Label("Delete Account", systemImage: "trash")
+                            Spacer()
+
+                            if isDeletingAccount {
+                                ProgressView()
+                            }
+                        }
+                    }
+                    .disabled(isDeletingAccount)
                 }
 
                 Section("Sign Out") {
@@ -163,35 +204,72 @@ struct SettingsView: View {
                                 .imageScale(.large)
                                 .frame(width: 28)
                                 .foregroundStyle(.red)
+
                             Text("Sign out")
                                 .font(.headline)
                                 .foregroundStyle(.red)
+
                             Spacer()
                         }
                     }
                 }
             }
-            Section("Notifications") {
-                Toggle("Daily Study Reminder", isOn: $dailyReminderEnabled)
-                    .onChange(of: dailyReminderEnabled) { _, newValue in
-                        if newValue {
-                            NotificationManager.shared.requestPermission()
-                            NotificationManager.shared.scheduleDailyReminder(hour: 20, minute: 0)
-                        } else {
-                            NotificationManager.shared.cancelDailyReminder()
-                        }
-                    }
+            .navigationTitle("Settings")
+            .alert("Delete Account?", isPresented: $showDeleteConfirmation) {
+                Button("Cancel", role: .cancel) { }
+
+                Button("Delete Account", role: .destructive) {
+                    deleteAccount()
+                }
+            } message: {
+                Text("""
+                Are you sure you want to delete your account?
+
+                This will permanently remove:
+                • Your profile information
+                • Saved settings
+                • Learning data stored under your account
+
+                This action cannot be undone.
+                """)
             }
+            .alert("Account Deleted", isPresented: $showDeleteSuccess) {
+                Button("OK") { }
+            } message: {
+                Text("Your account has been permanently deleted.")
+            }
+            .alert("Could Not Delete Account", isPresented: $showDeleteError) {
+                Button("OK") { }
+            } message: {
+                Text(deleteErrorMessage)
             }
         }
     }
 
+    private func deleteAccount() {
+        isDeletingAccount = true
 
-// MARK: - Personal Info (with photo chooser + email fallback)
+        AuthenticationManager.shared.deleteAccount { success, error in
+            DispatchQueue.main.async {
+                isDeletingAccount = false
+
+                if success {
+                    store.clearLocalProfile()
+                    showDeleteSuccess = true
+                } else {
+                    deleteErrorMessage = error ?? "Unknown error. Please sign in again and try deleting your account."
+                    showDeleteError = true
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Personal Info
 
 struct PersonalInfoView: View {
     @ObservedObject var store: LocalProfileStore
-    var signedInEmail: String = ""   // passed from SettingsView
+    var signedInEmail: String = ""
 
     @State private var email: String = ""
     @State private var name: String = ""
@@ -203,13 +281,17 @@ struct PersonalInfoView: View {
             Section(header: Text("Profile Photo")) {
                 HStack(spacing: 16) {
                     avatarPreview
+
                     VStack(alignment: .leading, spacing: 8) {
                         PhotosPicker(selection: $selectedPhoto, matching: .images) {
                             Text("Choose Photo")
                         }
+
                         if store.avatarData != nil {
-                            Button("Reset Photo", role: .destructive) { store.avatarData = nil }
-                                .font(.footnote)
+                            Button("Reset Photo", role: .destructive) {
+                                store.avatarData = nil
+                            }
+                            .font(.footnote)
                         }
                     }
                 }
@@ -222,13 +304,16 @@ struct PersonalInfoView: View {
                     .textInputAutocapitalization(.never)
                     .autocorrectionDisabled()
             }
+
             Section(header: Text("Name")) {
                 TextField("Your name", text: $name)
                     .textInputAutocapitalization(.words)
             }
+
             Section(header: Text("School")) {
                 TextField("Your school", text: $school)
             }
+
             Section {
                 Button("Save") {
                     store.save(
@@ -242,8 +327,8 @@ struct PersonalInfoView: View {
         .navigationTitle("Account")
         .onAppear {
             let stored = store.profile.email.trimmingCharacters(in: .whitespacesAndNewlines)
-            email  = stored.isEmpty ? signedInEmail : stored
-            name   = store.profile.name
+            email = stored.isEmpty ? signedInEmail : stored
+            name = store.profile.name
             school = store.profile.school
         }
         .onChange(of: selectedPhoto) { _, newItem in
@@ -263,23 +348,28 @@ struct PersonalInfoView: View {
 
     @ViewBuilder private var avatarPreview: some View {
         if let data = store.avatarData, let ui = UIImage(data: data) {
-            Image(uiImage: ui).resizable().scaledToFill()
-                .frame(width: 60, height: 60).clipShape(Circle())
+            Image(uiImage: ui)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 60, height: 60)
+                .clipShape(Circle())
         } else {
-            Image(systemName: "person.crop.circle.fill").resizable().scaledToFill()
-                .frame(width: 60, height: 60).clipShape(Circle())
+            Image(systemName: "person.crop.circle.fill")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 60, height: 60)
+                .clipShape(Circle())
                 .foregroundStyle(.secondary)
         }
     }
 }
 
-// MARK: - About & Acknowledgements
+// MARK: - About
 
 struct AppInfoDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 22) {
-
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Learn Chinese Smarter")
                         .font(.largeTitle)
@@ -361,6 +451,8 @@ private struct AboutFeatureCard: View {
     }
 }
 
+// MARK: - Acknowledgements
+
 struct Acknowledgement: Identifiable {
     let id = UUID()
     let name: String
@@ -386,15 +478,21 @@ struct AcknowledgementsView: View {
             Section("Special Thanks") {
                 Text("Thank you to everyone who supported Xuemi throughout its development. We are very grateful for your guidance, feedback, and encouragement!")
             }
+
             Section("Project Contributors") {
                 ForEach(team) { member in
                     HStack(spacing: 14) {
                         Image(systemName: member.icon)
                             .frame(width: 28, height: 28)
                             .foregroundColor(.blue)
+
                         VStack(alignment: .leading, spacing: 2) {
-                            Text(member.name).font(.headline)
-                            Text(member.role).font(.subheadline).foregroundColor(.secondary)
+                            Text(member.name)
+                                .font(.headline)
+
+                            Text(member.role)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
                         }
                     }
                     .padding(.vertical, 6)
@@ -404,4 +502,3 @@ struct AcknowledgementsView: View {
         .navigationTitle("Acknowledgements")
     }
 }
-

@@ -178,7 +178,15 @@ final class BookmarkManager: ObservableObject {
             _ = await getBookmarksFromFirebase()
         } catch {
             print("Error deleting bookmark: \(error)")
-        }
+            
+                }
+            }
+    func clearAll() {
+        bookmarks.removeAll()
+
+        let url = archiveURL()
+        try? FileManager.default.removeItem(at: url)
+        
     }
 }
 

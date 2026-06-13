@@ -1,33 +1,25 @@
 import SwiftUI
 
 struct MCQResultsView: View {
-    // MARK: - Inputs (score)
     let correctAnswers: Int
     let wrongAnswers: Int
     let improvements: [(vocab: Vocabulary, index: Int)]
     let totalQuestions: Int
 
-    // MARK: - Inputs (data needed for lists & flashcard nav)
     let vocabularies: [Vocabulary]
     let userAnswers: [String?]
 
-    // MARK: - Context (either enums for course path OR folder name)
     let level: SecondaryNumber?
     let chapter: Chapter?
     let topic: Topic?
     let folderName: String?
 
-    // MARK: - Behavior flags
     var isReplay: Bool = false
     var recordToHistory: Bool = true
     var onDone: (() -> Void)? = nil
 
-    // MARK: - Env / State
-    @ObservedObject private var pathManager: PathManager = .global
-    @Environment(\.dismiss) private var dismiss
     @State private var didRecord = false
 
-    // MARK: - Derived
     private var percent: Double {
         guard totalQuestions > 0 else { return 0 }
         return (Double(correctAnswers) / Double(totalQuestions)) * 100.0
@@ -35,7 +27,7 @@ struct MCQResultsView: View {
 
     private var correctList: [Vocabulary] {
         zip(vocabularies, userAnswers).compactMap { v, ans in
-            (ans == v.word) ? v : nil
+            ans == v.word ? v : nil
         }
     }
 
@@ -52,85 +44,39 @@ struct MCQResultsView: View {
             return WrongItem(correct: v, chosen: chosenV)
         }
     }
-    
-    @EnvironmentObject var deviceTypeManager: DeviceTypeManager
 
-    // MARK: - UI
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
                 ResultRing(percent: percent, correct: correctAnswers, total: totalQuestions)
                     .padding(.top, 8)
 
-                // ===== Buttons =====
-                // ===== Buttons =====
                 if !isReplay {
-                    if folderName != nil {
-                        Button {
-                            onDone?()
-                        } label: {
-                            Text("Back to Custom Folders")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(Color(.systemGray5))
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
-                        .padding(.horizontal)
-                        
-                        NavigationLink {
-                            ProgressDetailView()
-                        } label: {
-                            Text("View Progress")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(Color(.systemGray5))
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
-                        .padding(.horizontal)
-
-                    } else if deviceTypeManager.isIPad {
-                        Button {
-                            PathManager.global.goHome()
-                        } label: {
-                            Text("Go to Home")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(Color(.systemGray5))
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
-                        .padding(.horizontal)
-
-                    } else {
-                        Button {
-                            onDone?()
-                            withAnimation { PathManager.global.goHome() }
-                        } label: {
-                            Text("Go to Home")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(Color(.systemGray5))
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
-                        .padding(.horizontal)
-
-                        Button {
-                            withAnimation { PathManager.global.goProgressDetail() }
-                        } label: {
-                            Text("View Progress")
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 14)
-                                .background(Color(.systemGray5))
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
-                        .padding(.horizontal)
+                    Button {
+                        onDone?()
+                    } label: {
+                        Text(folderName == nil ? "Back to Topics" : "Back to Custom Folders")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(Color(.systemGray5))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
+                    .padding(.horizontal)
+
+                    NavigationLink {
+                        ProgressDetailView()
+                    } label: {
+                        Text("View Progress")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(Color(.systemGray5))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                    .padding(.horizontal)
                 }
-                // ✅ Correct
+
                 VStack(alignment: .leading, spacing: 12) {
                     SectionHeader(title: "✅ 正确 (Correct)", count: correctList.count)
 
@@ -154,7 +100,6 @@ struct MCQResultsView: View {
                 }
                 .padding(.horizontal)
 
-                // ❌ Wrong — side-by-side
                 VStack(alignment: .leading, spacing: 12) {
                     SectionHeader(title: "❌ 错误 (Wrong)", count: wrongList.count)
 
@@ -173,7 +118,9 @@ struct MCQResultsView: View {
                                         .buttonStyle(.plain)
                                         .frame(maxWidth: .infinity)
 
-                                        Rectangle().frame(width: 0.5).opacity(0.25)
+                                        Rectangle()
+                                            .frame(width: 0.5)
+                                            .opacity(0.25)
 
                                         if let chosen = item.chosen {
                                             NavigationLink {
@@ -206,7 +153,6 @@ struct MCQResultsView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(isReplay ? false : true)
         .onAppear {
-            // Save once unless disabled (replay)
             guard recordToHistory, !didRecord else { return }
 
             let title: String
@@ -251,14 +197,15 @@ struct MCQResultsView: View {
                 vocab: minis,
                 userAnswers: userAnswers
             )
+
             didRecord = true
         }
     }
 
-    // MARK: - Destinations
     @ViewBuilder
     private func flashcardDestination(for vocab: Vocabulary) -> some View {
         let idx = indexFor(vocab: vocab)
+
         if let level, let chapter, let topic {
             FlashcardView(
                 vocabularies: vocabularies,
@@ -287,11 +234,10 @@ struct MCQResultsView: View {
     }
 }
 
-// MARK: - Small pieces
-
 private struct SectionHeader: View {
     let title: String
     let count: Int
+
     var body: some View {
         HStack {
             Text("\(title)  •  \(count)")
@@ -303,6 +249,7 @@ private struct SectionHeader: View {
 
 private struct EmptyHint: View {
     let text: String
+
     var body: some View {
         Text(text)
             .foregroundColor(.secondary)
@@ -312,6 +259,7 @@ private struct EmptyHint: View {
 
 private struct Card<Content: View>: View {
     @ViewBuilder var content: Content
+
     var body: some View {
         content
             .padding(.vertical, 4)
@@ -343,10 +291,17 @@ private struct VocabRowCompact: View {
     var body: some View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(v.word).font(.headline).foregroundStyle(tint)
-                Text(v.pinyin).font(.subheadline).foregroundStyle(.secondary)
+                Text(v.word)
+                    .font(.headline)
+                    .foregroundStyle(tint)
+
+                Text(v.pinyin)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
             }
+
             Spacer()
+
             if chevron {
                 Image(systemName: "chevron.right")
                     .foregroundColor(Color(UIColor.tertiaryLabel))
@@ -365,18 +320,20 @@ private struct ResultRing: View {
 
     var body: some View {
         ZStack {
-            Circle().stroke(Color(.systemGray5), lineWidth: 22)
-            Circle().stroke(Color.red.opacity(0.75), lineWidth: 22)
+            Circle()
+                .stroke(Color(.systemGray5), lineWidth: 22)
+
+            Circle()
+                .stroke(Color.red.opacity(0.75), lineWidth: 22)
+
             Circle()
                 .trim(from: 0, to: CGFloat(percent / 100))
                 .stroke(Color.green, style: StrokeStyle(lineWidth: 22, lineCap: .round))
                 .rotationEffect(.degrees(-90))
-            VStack(spacing: 6) {
-                Text("\(Int(round(percent)))%")
-                    .font(.system(size: 44, weight: .bold))
-            }
+
+            Text("\(Int(round(percent)))%")
+                .font(.system(size: 44, weight: .bold))
         }
         .frame(width: 220, height: 220)
     }
 }
-

@@ -81,6 +81,11 @@ class VocabManager: ObservableObject {
         folders.append(folder)
     }
 
+    func clearAll() {
+        folders.removeAll()
+        UserDefaults.standard.removeObject(forKey: foldersKey)
+    }
+
     // MARK: firebase helper functions
     // NOTE: we save documents as B64 data because i am truly not bothered to
     // do the json exploration for a collection and this works decently well anyway.
@@ -126,3 +131,4 @@ class VocabManager: ObservableObject {
         }
     }
 }
+

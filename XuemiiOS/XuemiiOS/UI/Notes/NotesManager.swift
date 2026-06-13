@@ -207,7 +207,15 @@ class NotesManager: ObservableObject {
             print("Notes updated on firebase")
         } catch {
             print("Error updating notes: \(error)")
+            
+            }
         }
+
+    func clearAll() {
+        notes.removeAll()
+
+        let archiveURL = getArchiveURL()
+        try? FileManager.default.removeItem(at: archiveURL)
     }
-}
+    }
 

@@ -85,7 +85,7 @@ struct MCQResultsView: View {
                     } else {
                         Card {
                             LazyVStack(spacing: 0) {
-                                ForEach(correctList, id: \.index) { v in
+                                ForEach(correctList) { v in
                                     NavigationLink {
                                         flashcardDestination(for: v)
                                     } label: {

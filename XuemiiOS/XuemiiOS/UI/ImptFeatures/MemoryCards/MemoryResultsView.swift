@@ -104,7 +104,7 @@ struct MemoryResultsView: View {
                     } else {
                         Card {
                             LazyVStack(spacing: 0) {
-                                ForEach(vocabularies, id: \.index) { v in
+                                ForEach(vocabularies) { v in
                                     NavigationLink {
                                         flashcardDestination(for: v)
                                     } label: {

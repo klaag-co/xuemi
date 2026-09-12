@@ -6,8 +6,8 @@
                 "word": "迅速",
                 "pinyin": "xùn sù",
                 "englishDefinition": "rapid; swift; quick",
-                "chineseDefinition": "速度快，行动或变化很快。",
-                "example": "警察 ~ 赶到现场，控制了局势。",
+                "chineseDefinition": "（形）速度快，行动或变化很快。",
+                "example": "1. 警察～赶到现场，控制了局势。\n2. 由于产品能满足市场需求，他的公司在五年内～发展壮大",
                 "questions": [
                     "警察 ~ 赶到现场，控制了局势。"
                 ]
@@ -17,8 +17,8 @@
                 "word": "瞳孔",
                 "pinyin": "tóng kǒng",
                 "englishDefinition": "pupil (of the eye)",
-                "chineseDefinition": "眼睛中央能调节光线进入的圆孔。",
-                "example": "医生用手电筒检查病人的 ~ 反应。",
+                "chineseDefinition": "（名）眼睛中央能调节光线进入的圆孔。",
+                "example": "1. 医生用强光照射病人的眼睛，观察其～是否有收缩反应。",
                 "questions": [
                     "医生用手电筒检查病人的 ~ 反应。"
                 ]
@@ -28,8 +28,8 @@
                 "word": "头疼",
                 "pinyin": "tóu téng",
                 "englishDefinition": "headache",
-                "chineseDefinition": "1. 头部疼痛；\n2. 比喻烦恼的事。",
-                "example": "这道数学题太难了，真让人 ~ 。",
+                "chineseDefinition": "1.（名）头部疼痛；\n2.（形）比喻烦恼的事。",
+                "example": "1. 一般人来到高原，会因为缺氧而出现头晕、～等反应。\n2. 这件事处理起来非常棘手，让负责人感到十分～。\n3. 这道数学题太难了，真让人～。",
                 "questions": [
                     "这道数学题太难了，真让人 ~ 。"
                 ]
@@ -38,9 +38,9 @@
                 "index": 4,
                 "word": "屋脊",
                 "pinyin": "wū jǐ",
-                "englishDefinition": "rooftop ridge",
-                "chineseDefinition": "屋顶中间最高的部分。",
-                "example": "鸟儿停在 ~ 上，唱起了歌。",
+                "englishDefinition": "ridge of a roof",
+                "chineseDefinition": "（名）屋顶中间最高的部分。",
+                "example": "1. 青藏高原被人们形象地称为“世界～”。\n2. 几只麻雀停在老房子的～上，叽叽喳喳地叫个不停。",
                 "questions": [
                     "鸟儿停在 ~ 上，唱起了歌。"
                 ]
@@ -50,8 +50,8 @@
                 "word": "摄氏度",
                 "pinyin": "shè shì dù",
                 "englishDefinition": "degrees celsius",
-                "chineseDefinition": "表示温度的单位。",
-                "example": "今天的气温高达三十五 ~ 。",
+                "chineseDefinition": "（名）摄氏温标的单位，即表示温度的单位。",
+                "example": "1. 人体的正常体温一般在37～上下。\n2. 夏天，这里的气温有时会高达40～，让人酷热难耐。",
                 "questions": [
                     "今天的气温高达三十五 ~ 。"
                 ]
@@ -61,8 +61,8 @@
                 "word": "汗腺",
                 "pinyin": "hàn xiàn",
                 "englishDefinition": "sweat gland",
-                "chineseDefinition": "皮肤中分泌汗液的腺体",
-                "example": "运动时 ~ 会分泌大量汗水来降温。",
+                "chineseDefinition": "（名）皮肤中分泌汗液的腺体。",
+                "example": "剧烈运动后，人体通过～排出大量汗液，帮助身体降温。",
                 "questions": [
                     "运动时 ~ 会分泌大量汗水来降温。"
                 ]
@@ -71,9 +71,9 @@
                 "index": 7,
                 "word": "纵使",
                 "pinyin": "zòng shǐ",
-                "englishDefinition": "even if；though",
-                "chineseDefinition": "即使、哪怕",
-                "example": " ~ 遇到再大的挫折，他也不会放弃。",
+                "englishDefinition": "even if；even though",
+                "chineseDefinition": "（连）即使、哪怕",
+                "example": "1. ～栖居地的气候寒冷恶劣，因纽特人也能适应。\n2. ～遇到再大的挫折，他也不会放弃。\n3. ～前方布满荆棘，我们也绝不会向困难低头。",
                 "questions": [
                     "~ 遇到再大的挫折，他也不会放弃。"
                 ]
@@ -83,8 +83,8 @@
                 "word": "栖居",
                 "pinyin": "qī jū",
                 "englishDefinition": "to dwell ；to inhabit",
-                "chineseDefinition": "动植物居住、停留。",
-                "example": "这些候鸟每年冬天都 ~ 在南方的湖边。",
+                "chineseDefinition": "（动）指生物（特别是动物）在某处停留、居住。",
+                "example": "1. 因纽特人长期～在极地，拥有令人难以置信的御寒能力。\n2. 候鸟每年冬天都会成群结队地前往南方温暖湿润的地区～。",
                 "questions": [
                     "这些候鸟每年冬天都 ~ 在南方的湖边。"
                 ]
@@ -94,8 +94,8 @@
                 "word": "御寒",
                 "pinyin": "yù hán",
                 "englishDefinition": "keep out the cold ； protect against cold",
-                "chineseDefinition": "抵御寒冷",
-                "example": "她穿上厚外套来 ~ 。",
+                "chineseDefinition": "（动）防冷；保暖；抵御寒冷",
+                "example": "1. 一般人移居到北极数十年，也无法像因纽特人那样拥有极强的～能力。\n2. 在前往雪山旅行之前，我们需要准备足够的～装备。",
                 "questions": [
                     "她穿上厚外套来 ~ 。"
                 ]
@@ -105,8 +105,8 @@
                 "word": "启迪",
                 "pinyin": "qǐ dí",
                 "englishDefinition": "enlighten ； inspire",
-                "chineseDefinition": "启发思考，使人受到教益。",
-                "example": "老师的一番话深深 ~ 了我。",
+                "chineseDefinition": "（动）启发思考，使人受到教益。",
+                "example": "1. 老师的一番话深深～了我，让我明白有志者事竟成。\n2. 诸葛亮以他的人生智慧～我们，要善于从失败中总结经验。",
                 "questions": [
                     "老师的一番话深深 ~ 了我。"
                 ]
@@ -118,8 +118,8 @@
                 "word": "蜘蛛",
                 "pinyin": "zhī zhū",
                 "englishDefinition": "spider",
-                "chineseDefinition": "一种节肢动物，会结网捕食昆虫",
-                "example": " ~ 在角落里织着网。",
+                "chineseDefinition": "（名）一种节肢动物，多结网捕食昆虫。",
+                "example": "1. 被称为纺织专家的～在房檐底下熟练地结网。\n2. 这个角落很久没人打扫了，墙上到处都是～蛛网。",
                 "questions": [
                     "~ 在角落里织着网。"
                 ]
@@ -128,9 +128,9 @@
                 "index": 2,
                 "word": "纺织",
                 "pinyin": "fǎng zhī",
-                "englishDefinition": "spin and weave; textile",
-                "chineseDefinition": "制作布料、纱线的工艺。",
-                "example": "这家工厂以 ~ 布料闻名。",
+                "englishDefinition": "spinning and weaving; textile",
+                "chineseDefinition": "1. （动）制作布料，把纤维纺成纱。\n2. （名）纱线的工艺。",
+                "example": "1. 蜘蛛是自然界的～专家，能织出结构精妙的网。\n2. 现代化的～机器极大地提高了布料的生产效率。\n3. 在这个偏远的小村庄里，妇女们依然擅长在家中～粗布。",
                 "questions": [
                     "这家工厂以 ~ 布料闻名。"
                 ]
@@ -140,8 +140,8 @@
                 "word": "房檐",
                 "pinyin": "fáng yán",
                 "englishDefinition": "edges of the roof",
-                "chineseDefinition": "房屋屋顶伸出的部分。",
-                "example": "雨水顺着 ~ 滴落。",
+                "chineseDefinition": "（名）房顶伸出来的边缘部分。",
+                "example": "1. 雨水顺着～滴落。\n2. 蜘蛛喜欢在～底下结网，单捉那些飞来的将领。\n3. 燕子在老房子的～下搭了窝，整天忙着喂养雏鸟。",
                 "questions": [
                     "雨水顺着 ~ 滴落。"
                 ]
@@ -151,8 +151,8 @@
                 "word": "蜜蜂",
                 "pinyin": "mì fēng",
                 "englishDefinition": "bee",
-                "chineseDefinition": "采蜜并授粉的昆虫。",
-                "example": " ~ 在花丛中忙着采蜜。",
+                "chineseDefinition": "（名）采蜜并授粉的昆虫。",
+                "example": "1. ～在花丛中忙着采蜜。\n2. 面对～这样带枪的飞将，蜘蛛会先用丝将其捆绑。\n3. 春天到了，花园里到处是忙碌采集花粉的～。",
                 "questions": [
                     "~ 在花丛中忙着采蜜。"
                 ]
@@ -162,8 +162,8 @@
                 "word": "捆绑",
                 "pinyin": "kǔn bǎng",
                 "englishDefinition": "tie up ； bind",
-                "chineseDefinition": "用绳索等束缚。",
-                "example": "小偷被警察 ~ 起来。",
+                "chineseDefinition": "（动）用绳索等缠绕系紧。",
+                "example": "1. 蜘蛛用丝将蜜蜂细细地～，直到它无法挣扎。\n2. 搬家工人用粗绳将笨重的行李箱牢牢地～在货车上。",
                 "questions": [
                     "小偷被警察 ~ 起来。"
                 ]
@@ -173,8 +173,8 @@
                 "word": "缚",
                 "pinyin": "fù",
                 "englishDefinition": "tie ； bind",
-                "chineseDefinition": "用绳索绑、捆住。",
-                "example": "犯人被 ~ 在椅子上。",
+                "chineseDefinition": "（动）捆绑住。",
+                "example": "1. 蜘蛛好不容易把甲虫的一条腿～住，那条腿又伸出来了。\n2. 歹徒见已无路可逃，只好束手就～。",
                 "questions": [
                     "犯人被 ~ 在椅子上。"
                 ]
@@ -184,8 +184,8 @@
                 "word": "螳螂",
                 "pinyin": "táng láng",
                 "englishDefinition": "mantis",
-                "chineseDefinition": "一种捕食昆虫。",
-                "example": " ~ 静静地等待猎物。",
+                "chineseDefinition": "（名）前肢像镰刀的昆虫。",
+                "example": "1. ～舞动两把大刀，把蜘蛛网搞得稀巴烂。\n2. 那只～正一动不动地趴在绿叶上，等待捕捉猎物的时机。",
                 "questions": [
                     "~ 静静地等待猎物。"
                 ]
@@ -194,9 +194,9 @@
                 "index": 8,
                 "word": "麻痹",
                 "pinyin": "má bì",
-                "englishDefinition": "(figurative) to numb; to lull",
-                "chineseDefinition": "1. 身体或神经失去感觉；\n2. 比喻不警觉。",
-                "example": "长时间坐着会导致腿部 ~ 。",
+                "englishDefinition": "(figurative) to numb; to lull；paralysis",
+                "chineseDefinition": "1. （形）身体或神经失去感觉。\n2. （动）比喻不警觉。",
+                "example": "1. 蜾蠃用刺刺得蜘蛛全身～，然后将它封在泥房里。\n2. 长时间坐着会导致腿部～。\n3. 敌人故意示弱，企图～我方守军，以便发动突袭。",
                 "questions": [
                     "长时间坐着会导致腿部 ~ 。"
                 ]
@@ -206,8 +206,8 @@
                 "word": "孵",
                 "pinyin": "fū",
                 "englishDefinition": "hatch",
-                "chineseDefinition": "鸟或昆虫产卵后使蛋孵化。",
-                "example": "母鸡正 ~ 蛋。",
+                "chineseDefinition": "（动）鸟或昆虫产卵后使蛋孵化。",
+                "example": "1. 蜾蠃准备把麻痹的蜘蛛，留给它将来～出来的幼虫当粮食。\n2. 母鸡静静地卧在窝里，已经连着～了十几天蛋了。",
                 "questions": [
                     "母鸡正 ~ 蛋。"
                 ]
@@ -215,54 +215,54 @@
             {
                 "index": 10,
                 "word": "粮食",
-                "pinyin": "liáng shí",
+                "pinyin": "liáng shi",
                 "englishDefinition": "grain ； food crops",
-                "chineseDefinition": "可供食用的谷物。",
-                "example": "农民储存了充足的 ~ 。",
+                "chineseDefinition": "（名）可供食用的谷物。",
+                "example": "1. ～安全是国家安全的重要基础。\n2. 面对即将到来的荒年，农民们开始大量储存～以备不时之需。\n3. 气候变化正逐渐影响全球～供应的稳定性。",
                 "questions": [
                     "农民储存了充足的 ~ 。"
                 ]
             },
             {
                 "index": 11,
-                "word": "棚架",
-                "pinyin": "péng jià",
-                "englishDefinition": "trellis; shed frame; scaffolding",
-                "chineseDefinition": "用于支撑植物或遮蔽的架子。",
-                "example": "葡萄藤沿着 ~ 攀爬。",
+                "word": "棚",
+                "pinyin": "péng",
+                "englishDefinition": "trellis; shed frame",
+                "chineseDefinition": "（名）用竹、木、草、金属等搭成的简陋房子或架子。",
+                "example": "1. 葡萄藤沿着～架攀爬。\n2. 蜘蛛腹部放出的液体凝结成丝，用来做网的～架。\n3. 为了营造氛围，配音员关掉了录音～里的灯。",
                 "questions": [
                     "葡萄藤沿着 ~ 攀爬。"
                 ]
             },
             {
                 "index": 12,
-                "word": "辐射线",
-                "pinyin": "fú shè xiàn",
+                "word": "辐射",
+                "pinyin": "fú shè",
                 "englishDefinition": "radiation ray",
-                "chineseDefinition": "从中心向四周扩散的线。",
-                "example": "蜘蛛网的 ~ 呈放射状分布。",
+                "chineseDefinition": "（动/名）从中心向四周扩散的线。",
+                "example": "1. 蜘蛛网的～线呈放射状分布。\n2. 这项实验旨在降低电子产品的电磁～。\n3.核能～泄漏会对生态环境和人类健康造成严重威胁。",
                 "questions": [
                     "蜘蛛网的 ~ 呈放射状分布。"
                 ]
             },
             {
                 "index": 13,
-                "word": "螺旋形线",
-                "pinyin": "luó xuán xíng xiàn",
-                "englishDefinition": "spiral line",
-                "chineseDefinition": "呈螺旋状的线条。",
-                "example": "蜘蛛网的 ~ 很有规律。",
+                "word": "螺旋",
+                "pinyin": "luó xuán",
+                "englishDefinition": "spiral",
+                "chineseDefinition": "（形/名）呈螺旋状的曲线条。",
+                "example": "1. 蜘蛛用葡萄状腺放出来的丝，来做网上～形的线。\n2.飞机的～桨飞速转动，发出巨大的轰鸣声。",
                 "questions": [
                     "蜘蛛网的 ~ 很有规律。"
                 ]
             },
             {
                 "index": 14,
-                "word": "梨状腺",
-                "pinyin": "lí zhuàng xiàn",
+                "word": "梨",
+                "pinyin": "lí",
                 "englishDefinition": "silk gland ； piriform silk gland",
-                "chineseDefinition": "蜘蛛体内分泌丝的腺体",
-                "example": "蜘蛛的 ~ 能分泌丝来织网。",
+                "chineseDefinition": "一种水果；文中指蜘蛛的一种腺体形状。",
+                "example": "1. 蜘蛛的～状腺能分泌丝来织网。\n2. 果园里的～成熟了，散发出阵阵果香。",
                 "questions": [
                     "蜘蛛的 ~ 能分泌丝来织网。"
                 ]
@@ -272,8 +272,8 @@
                 "word": "蚕",
                 "pinyin": "cán",
                 "englishDefinition": "silkworm",
-                "chineseDefinition": "吐丝结茧的昆虫。",
-                "example": "农民在春天养 ~ 。",
+                "chineseDefinition": "（名）吐丝结茧的昆虫，丝可织绸。",
+                "example": "1. 农民在春天养～。\n2. ～的丝可以织绸，但饲养蜘蛛却比养～费事得多。\n3. 这种丝绸是由上等的～丝织成的。",
                 "questions": [
                     "农民在春天养 ~ 。"
                 ]
@@ -283,8 +283,8 @@
                 "word": "昆虫",
                 "pinyin": "kūn chóng",
                 "englishDefinition": "insect",
-                "chineseDefinition": "六足节支无脊椎动物。",
-                "example": " ~ 是生态系统的重要组成部分。",
+                "chineseDefinition": "节肢动物门昆虫纲动物的总称。是动物界中种类最多、分布最广、数量最大的一类无脊椎动物。",
+                "example": "1. 蜘蛛饲养不易，因为它要吃各种各样的～。\n2. 新加坡食品局计划批准进口蟋蟀等16种～作为食物。\n3. ～是生态系统的重要组成部分。",
                 "questions": [
                     "~ 是生态系统的重要组成部分。"
                 ]
@@ -294,8 +294,8 @@
                 "word": "巢穴",
                 "pinyin": "cháo xué",
                 "englishDefinition": "nest ； lair",
-                "chineseDefinition": "动物栖息或生活的地方。",
-                "example": "狐狸在山坡上挖了 ~ 。",
+                "chineseDefinition": "1. 鸟兽栖息的地方。\n2. 比喻盗贼盘踞的地方。",
+                "example": "1. 狐狸在山坡上挖了～。\n2. 水蜘蛛吐出的丝是用来在水下构筑～的。\n3. 警方在深山中成功捣毁了歹徒的～。",
                 "questions": [
                     "狐狸在山坡上挖了 ~ 。"
                 ]
@@ -305,8 +305,8 @@
                 "word": "竞争",
                 "pinyin": "jìng zhēng",
                 "englishDefinition": "competition; to compete",
-                "chineseDefinition": "为争取优势或利益而进行的较量。",
-                "example": "两家公司在市场上激烈 ~ 。",
+                "chineseDefinition": "（名/动）为争取优势或利益而进行的较量。",
+                "example": "1. 两家公司在市场上激烈～。\n2. 在现代社会，职场上的～异常激烈。",
                 "questions": [
                     "两家公司在市场上激烈 ~ 。"
                 ]
@@ -316,8 +316,8 @@
                 "word": "赐予",
                 "pinyin": "cì yǔ",
                 "englishDefinition": "grant ； bestow",
-                "chineseDefinition": "上级或神明给予。",
-                "example": "国王 ~ 勇士丰厚的奖赏。",
+                "chineseDefinition": "（动）赏给（多用于上对下）",
+                "example": "1. 大自然～各种生物不同的能力来适应环境。\n2. 我们应当珍惜生命～的每一个机会。",
                 "questions": [
                     "国王 ~ 勇士丰厚的奖赏。"
                 ]
@@ -326,9 +326,9 @@
                 "index": 20,
                 "word": "栩栩如生",
                 "pinyin": "xǔ xǔ rú shēng",
-                "englishDefinition": "vivid",
-                "chineseDefinition": "形容描写或造型非常逼真。",
-                "example": "雕塑 ~ ，仿佛随时会动。",
+                "englishDefinition": "vivid；lifelike",
+                "chineseDefinition": "（形）形容描写或造型非常逼真。",
+                "example": "1. 作者使用一系列动词，把蜘蛛捕食的情景描述得～。\n2. 展览馆里的这些蜡像制作得～。",
                 "questions": [
                     "雕塑 ~ ，仿佛随时会动。"
                 ]
@@ -340,8 +340,8 @@
                 "word": "滩涂",
                 "pinyin": "tān tú",
                 "englishDefinition": "tidal flat",
-                "chineseDefinition": "潮水涨落间的泥滩。",
-                "example": "渔民们在 ~ 上撒网捕鱼。",
+                "chineseDefinition": "（名）沿海在大潮高潮位与低潮位之间的潮浸地带。",
+                "example": "1. 红树林主要生长在海边的～上。\n2. 退潮后的～成了海鸟觅食的天堂。",
                 "questions": [
                     "渔民们在 ~ 上撒网捕鱼。"
                 ]
@@ -351,8 +351,8 @@
                 "word": "破损",
                 "pinyin": "pò sǔn",
                 "englishDefinition": "damaged ； broken",
-                "chineseDefinition": "出现裂口或损坏。",
-                "example": "快递包裹在运输途中 ~ 了。",
+                "chineseDefinition": "（名/动）出现裂口、残缺、或损坏。",
+                "example": "1. 快递包裹在运输途中～了。\n2. 这些由于运输原因～的货物已经退回厂家。",
                 "questions": [
                     "快递包裹在运输途中 ~ 了。"
                 ]
@@ -362,8 +362,8 @@
                 "word": "胎生",
                 "pinyin": "tāi shēng",
                 "englishDefinition": "viviparous",
-                "chineseDefinition": "胎儿在母体内发育出生的生物。",
-                "example": "哺乳动物大多是 ~ 的。",
+                "chineseDefinition": "（名/动）动物的幼体在母体内发育到一定阶段后产出。",
+                "example": "1. 红树存在一种被称为“植物～”的独特现象。\n2. 绝大多数哺乳动物都是～的。\n3. 这种鲨鱼不像多数鱼类那样卵生，而是直接～出小鲨鱼。",
                 "questions": [
                     "哺乳动物大多是 ~ 的。"
                 ]
@@ -373,8 +373,8 @@
                 "word": "哺乳动物",
                 "pinyin": "bǔ rǔ dòng wù",
                 "englishDefinition": "mammal",
-                "chineseDefinition": "用乳汁喂养幼仔的动物。",
-                "example": "老虎属于 ~ 。",
+                "chineseDefinition": "（名）最高等的脊椎动物，幼时靠母乳喂养。",
+                "example": "1. 红树的繁殖方式和大部分～的方法非常类似。\n2. 鲸鱼虽然生活在水里，但其实是～。",
                 "questions": [
                     "老虎属于 ~ 。"
                 ]
@@ -383,9 +383,9 @@
                 "index": 5,
                 "word": "淤泥",
                 "pinyin": "yū ní",
-                "englishDefinition": "silt ；sludge",
-                "chineseDefinition": "河床或湖底的泥沙沉积物（水中沉积的泥土）。",
-                "example": "河道疏浚后， ~ 被清理干净。",
+                "englishDefinition": "silt ；mud",
+                "chineseDefinition": "（名）沉积在水底的泥。",
+                "example": "1. 红树的胚轴成熟后会直接插入～中。\n2. 为了保持河道通畅，工人正在清理河底的～。\n3. 河道疏浚后，～被清理干净。",
                 "questions": [
                     "河道疏浚后， ~ 被清理干净。"
                 ]
@@ -395,8 +395,8 @@
                 "word": "秧苗",
                 "pinyin": "yāng miáo",
                 "englishDefinition": "seedling ； young plant",
-                "chineseDefinition": "幼小的农作物植物。",
-                "example": "农民在春天移栽水稻 ~ 。",
+                "chineseDefinition": "（名）植物的幼苗。",
+                "example": "1. 红树胚轴落入泥中的过程就像农民在地里插入～一样。\n2. 望着田里长势喜人的～，老农开心地笑了。\n3. 农民在春天移栽水稻～。",
                 "questions": [
                     "农民在春天移栽水稻 ~ 。"
                 ]
@@ -406,8 +406,8 @@
                 "word": "膝盖",
                 "pinyin": "xī gài",
                 "englishDefinition": "knee",
-                "chineseDefinition": "人腿上膝关节部位。",
-                "example": "跑步时他不小心摔伤了 ~ 。",
+                "chineseDefinition": "（名）大腿与小腿相连的关节的前部（人腿上膝关节部位）。",
+                "example": "1. 红树的某些根形状弯曲得就像人的～一样。\n2. 跑步时不小心摔倒，把～都擦破了。",
                 "questions": [
                     "跑步时他不小心摔伤了 ~ 。"
                 ]
@@ -417,8 +417,8 @@
                 "word": "涨潮",
                 "pinyin": "zhǎng cháo",
                 "englishDefinition": "rising tide",
-                "chineseDefinition": "海水水位上升。",
-                "example": "渔民们等到 ~ 时才出海捕鱼。",
+                "chineseDefinition": "（名/动）海水水位上升。",
+                "example": "1. 渔民们等到～时才出海捕鱼。\n2. 在～期间，红树也能通过暴露在空气中的根呼吸。\n3. 海水开始～了，游客们纷纷离开了海滩。 ",
                 "questions": [
                     "渔民们等到 ~ 时才出海捕鱼。"
                 ]
@@ -428,8 +428,8 @@
                 "word": "海啸",
                 "pinyin": "hǎi xiào",
                 "englishDefinition": "tsunami",
-                "chineseDefinition": "由地震或海底活动引起的巨大海浪。",
-                "example": " ~ 袭击了沿海的渔村，造成严重损失。",
+                "chineseDefinition": "（名）由地震或海底活动引起的巨大海浪。",
+                "example": "1. 红树林能有效减弱～对海岸和渔村的破坏。\n2. 那场突如其来的～给沿海居民带来了沉重灾难。 \n3. ～袭击了沿海的渔村，造成严重损失。",
                 "questions": [
                     "~ 袭击了沿海的渔村，造成严重损失。"
                 ]
@@ -439,8 +439,8 @@
                 "word": "渔村",
                 "pinyin": "yú cūn",
                 "englishDefinition": "fishing village",
-                "chineseDefinition": "以捕鱼为生的村庄。",
-                "example": "我们在一个宁静的 ~ 住了两天。",
+                "chineseDefinition": "（名）以捕鱼为生的人聚居的村庄。",
+                "example": "1. 每天清晨，这座～都在渔船的鸣笛声中醒来。 ",
                 "questions": [
                     "我们在一个宁静的 ~ 住了两天。"
                 ]
@@ -449,9 +449,9 @@
                 "index": 11,
                 "word": "堤坝",
                 "pinyin": "dī bà",
-                "englishDefinition": "dam ； embankment",
-                "chineseDefinition": "阻挡水流的土石结构/防洪蓄水的建筑。",
-                "example": " ~ 加固后，可以有效防止洪水。",
+                "englishDefinition": "dam ； embankment；dyke",
+                "chineseDefinition": "（名）阻挡水流的土石结构/防洪蓄水的建筑。",
+                "example": "1. ～加固后，可以有效防止洪水。\n2. 红树林被誉为生态的防浪～，是绿色的海岸卫士。",
                 "questions": [
                     "~ 加固后，可以有效防止洪水。"
                 ]
@@ -465,8 +465,8 @@
                 "word": "耽误",
                 "pinyin": "dān wù",
                 "englishDefinition": "delay ； hold up",
-                "chineseDefinition": "因某事而延误时间。",
-                "example": "他因为生病 ~ 了几天课程。",
+                "chineseDefinition": "（动）因拖延或错过时机而误事。",
+                "example": "1. 他因为生病～了几天课程。\n2. 因为塞车，他～了重要的会议。 ",
                 "questions": [
                     "他因为生病 ~ 了几天课程。"
                 ]
@@ -476,8 +476,8 @@
                 "word": "旨",
                 "pinyin": "zhǐ",
                 "englishDefinition": "purpose ； intent",
-                "chineseDefinition": "目的、意图",
-                "example": "这篇文章 ~ 在提高大家的环保意识。",
+                "chineseDefinition": "（名）目的、主旨、意图",
+                "example": "1. 这篇文章～在提高大家的环保意识。\n2. 设立这个非营利组织，～在向大众宣导环保。\n3. 这次活动的～意是加强邻里间的联系。 ",
                 "questions": [
                     "这篇文章 ~ 在提高大家的环保意识。"
                 ]
@@ -487,8 +487,8 @@
                 "word": "薪水",
                 "pinyin": "xīn shuǐ",
                 "englishDefinition": "salary ； wage",
-                "chineseDefinition": "工资、报酬",
-                "example": "公司每个月按时发放员工 ~ 。",
+                "chineseDefinition": "（名）工资；工作所得的报酬",
+                "example": "1. 公司每个月按时发放员工～。\n2. 虽然现在的～没有以前高，但我觉得工作更有意义。\n3. 辛苦工作一个月后，他终于领到了～。",
                 "questions": [
                     "公司每个月按时发放员工 ~ 。"
                 ]
@@ -497,9 +497,9 @@
                 "index": 4,
                 "word": "绳锯木断",
                 "pinyin": "shéng jù mù duàn",
-                "englishDefinition": "constant effort leads to success",
-                "chineseDefinition": "比喻只要坚持不懈，就能成功。",
-                "example": "他每天练习书法，终于 ~ ，写得越来越好。",
+                "englishDefinition": "constant effort leads to success； perseverance will prevail",
+                "chineseDefinition": "（成语）比喻只要坚持不懈，就能成功。",
+                "example": "1. 在学习华文的道路上，他凭着～的精神终于取得优等。\n2. 所谓“～，水滴石穿”，只要坚持就一定能成功。",
                 "questions": [
                     "他每天练习书法，终于 ~ ，写得越来越好。"
                 ]
@@ -508,9 +508,9 @@
                 "index": 5,
                 "word": "燎原",
                 "pinyin": "liáo yuán",
-                "englishDefinition": "spread quickly",
-                "chineseDefinition": "比喻迅速蔓延。",
-                "example": "新思想像星星之火，终于 ~ 。",
+                "englishDefinition": "spread quickly ；set the prairie ablaze.",
+                "chineseDefinition": "（动/形）火势蔓延，比喻迅速蔓延或比喻气势壮大。",
+                "example": "1. 一点火星落进枯草丛，瞬间便成～之势。\n2. 一颗烟头引发了燎原大火，整片草原化为灰烬。",
                 "questions": [
                     "新思想像星星之火，终于 ~ 。"
                 ]
@@ -520,8 +520,8 @@
                 "word": "债务",
                 "pinyin": "zhài wù",
                 "englishDefinition": "debt",
-                "chineseDefinition": "欠下的财务责任。",
-                "example": "公司因经营不善，欠下巨额 ~ 。",
+                "chineseDefinition": "（名）欠别人的钱财。",
+                "example": "1. 公司因经营不善，欠下巨额～。\n2. 创业失败后，他背负了巨额～，但他没有倒下。\n3. 经过多年的努力，他终于还清了所有～。",
                 "questions": [
                     "公司因经营不善，欠下巨额 ~ 。"
                 ]
@@ -531,8 +531,8 @@
                 "word": "坎坷",
                 "pinyin": "kǎn kě",
                 "englishDefinition": "full of hardships；bumpy; rough",
-                "chineseDefinition": "比喻道路、经历不顺利。",
-                "example": "他经历了 ~ ，但依然乐观向前。",
+                "chineseDefinition": "1. （形）比喻道路不平。\n2. （形）比喻经历不顺利。",
+                "example": "1. 那些～的经历对他而言是财富，让他成熟了许多。\n2. 尽管一生遭遇许多～，他依然保持乐观。",
                 "questions": [
                     "他经历了 ~ ，但依然乐观向前。"
                 ]
@@ -542,8 +542,8 @@
                 "word": "风险",
                 "pinyin": "fēng xiǎn",
                 "englishDefinition": "risk",
-                "chineseDefinition": "可能带来损失或危险。",
-                "example": "投资股市总伴随一定 ~ 。",
+                "chineseDefinition": "（名）可能带来损失或危险。",
+                "example": "1. 虽然创业有～，但他还是喜欢它带来的新鲜感。\n2. 做手术总是有一定的～，家属需要慎重考虑。",
                 "questions": [
                     "投资股市总伴随一定 ~ 。"
                 ]
@@ -552,9 +552,9 @@
                 "index": 9,
                 "word": "萌生",
                 "pinyin": "méng shēng",
-                "englishDefinition": "arise ； sprout",
-                "chineseDefinition": "初步产生（想法或感情）。",
-                "example": "他对绘画 ~ 了浓厚兴趣。",
+                "englishDefinition": "bud ; germinate (ideas)",
+                "chineseDefinition": "(动）初步产生（想法或感情）。",
+                "example": "1. 儿童对画作的喜爱，让她～了出版绘本的念头。\n2. 陷入绝望的他，在医生的鼓励下又～了活下去的希望。",
                 "questions": [
                     "他对绘画 ~ 了浓厚兴趣。"
                 ]
@@ -564,19 +564,19 @@
                 "word": "出版",
                 "pinyin": "chū bǎn",
                 "englishDefinition": "publish",
-                "chineseDefinition": "印刷发行书刊。",
-                "example": "这本小说已经 ~ ，受到了读者欢迎。",
+                "chineseDefinition": "（动）把书刊、图画等印出来公开发行。",
+                "example": "1. 这部60万字的译稿准备在下个月正式～。\n2. 他的第一部短篇小说集终于～了。",
                 "questions": [
                     "这本小说已经 ~ ，受到了读者欢迎。"
                 ]
             },
             {
                 "index": 11,
-                "word": "碧海蓝天",
-                "pinyin": "bì hǎi lán tiān",
-                "englishDefinition": "blue sea and sky",
-                "chineseDefinition": "形容海天一色的美丽景象",
-                "example": "我们在海边度假，欣赏 ~ 的美景。",
+                "word": "碧",
+                "pinyin": "bì",
+                "englishDefinition": "jade-green",
+                "chineseDefinition": "（形）青绿色。",
+                "example": "1. 摄影师特别喜欢拍摄～海蓝天的自然风光。\n2. 雨后的草地一片～绿，空气中弥漫着清新的草香。",
                 "questions": [
                     "我们在海边度假，欣赏 ~ 的美景。"
                 ]
@@ -586,8 +586,8 @@
                 "word": "熙熙攘攘",
                 "pinyin": "xī xī rǎng rǎng",
                 "englishDefinition": "bustling ； crowded",
-                "chineseDefinition": "形容人多、热闹",
-                "example": "春节期间，商场 ~ ，非常热闹。",
+                "chineseDefinition": "（成语）容人来人往，非常热闹。",
+                "example": "1. 新年花市上，到处都是～忙着采购的人们。\n2. 那些～的街道，记录了城市真实的烟火气。",
                 "questions": [
                     "春节期间，商场 ~ ，非常热闹。"
                 ]
@@ -596,9 +596,9 @@
                 "index": 13,
                 "word": "深渊",
                 "pinyin": "shēn yuān",
-                "englishDefinition": "abyss",
-                "chineseDefinition": "很深的水或比喻极危险的境地",
-                "example": "战争让国家陷入 ~ 。",
+                "englishDefinition": "abyss ； chasm",
+                "chineseDefinition": "（名）很深的水或比喻极危险的境地；比喻无法摆脱的困境。",
+                "example": "1. 幸好遇到了那位社工，他才没有跌入万丈～。\n2. 毒品就像一个无底的～，千万不能沾染。",
                 "questions": [
                     "战争让国家陷入 ~ 。"
                 ]
@@ -608,8 +608,8 @@
                 "word": "转捩点",
                 "pinyin": "zhuǎn liè diǎn",
                 "englishDefinition": "turning point",
-                "chineseDefinition": "事情发展出现关键变化的节点",
-                "example": "他大学毕业是人生的一个重要 ~ 。",
+                "chineseDefinition": "（名）事物发展中起决定作用的时间或事情。",
+                "example": "1. 遇到那位社工并重返校园，成为了他一生的～。\n2. 这场战役的胜利成为了战争局势的～。",
                 "questions": [
                     "他大学毕业是人生的一个重要 ~ 。"
                 ]
@@ -620,9 +620,9 @@
                 "index": 1,
                 "word": "圣贤",
                 "pinyin": "shèng xián",
-                "englishDefinition": "sage ； wise person",
-                "chineseDefinition": "德行高尚、学识渊博的人",
-                "example": "他博览群书，被誉为当代 ~ 。",
+                "englishDefinition": "sages and men of virtue",
+                "chineseDefinition": "（名）指圣人和贤人，德行高尚、学识渊博的人",
+                "example": "1.所谓“人非～，孰能无过”，做错事能改就好。\n2. 我们应当多读～之书，学习他们的处世智慧。",
                 "questions": [
                     "他博览群书，被誉为当代 ~ 。"
                 ]
@@ -631,9 +631,9 @@
                 "index": 2,
                 "word": "心无旁骛",
                 "pinyin": "xīn wú páng wù",
-                "englishDefinition": "single-minded ； undistracted",
-                "chineseDefinition": "专心致志，没有杂念",
-                "example": "他 ~ 地专注于科研工作。",
+                "englishDefinition": "single-minded ； concentrated.",
+                "chineseDefinition": "（成语）指心思集中在当前的事上，不向别处追求。",
+                "example": "1. 只有～地专注于学习，效率才能提高。\n2. 实验室内，科学家们正在～地进行研究。",
                 "questions": [
                     "他 ~ 地专注于科研工作。"
                 ]
@@ -643,8 +643,8 @@
                 "word": "有条不紊",
                 "pinyin": "yǒu tiáo bù wěn",
                 "englishDefinition": "methodical ； orderly",
-                "chineseDefinition": "做事有条理，不乱",
-                "example": "她 ~ 地整理资料，效率很高。",
+                "chineseDefinition": "（成语）形容做事有条理，一点也不乱。",
+                "example": "1. 他做事一向按部就班，～地处理各种事务。\n2. 尽管场面一度混乱，他依然能～地指挥大家撤离。",
                 "questions": [
                     "她 ~ 地整理资料，效率很高。"
                 ]
@@ -654,8 +654,8 @@
                 "word": "诱饵",
                 "pinyin": "yòu ěr",
                 "englishDefinition": "bait ； lure",
-                "chineseDefinition": "引诱别人上当的东西",
-                "example": "渔夫把 ~ 放入水中，鱼儿很快上钩。",
+                "chineseDefinition": "（名）引诱人的事物。",
+                "example": "1. 渔夫把～放入水中，鱼儿很快上钩。\n2. 很多人由于经不起名利的～而误入歧途。\n3. 骗子常用高额回报作为～，诱导受害者投资。",
                 "questions": [
                     "渔夫把 ~ 放入水中，鱼儿很快上钩。"
                 ]
@@ -664,9 +664,9 @@
                 "index": 5,
                 "word": "亵渎",
                 "pinyin": "xiè dú",
-                "englishDefinition": "desecrate ； blaspheme",
-                "chineseDefinition": "对神明、圣物或尊严不敬",
-                "example": "他在寺庙里大声喧哗， ~ 了神圣之地。",
+                "englishDefinition": "desecrate ； blaspheme ； profane",
+                "chineseDefinition": "（动）对神明、圣物或尊严不敬。",
+                "example": "1. 他在寺庙里大声喧哗，～了神圣之地。\n2. 如果对工作敷衍了事，那就是在～自己的职业。\n3. 他的言论被认为是对神圣信仰的～",
                 "questions": [
                     "他在寺庙里大声喧哗， ~ 了神圣之地。"
                 ]
@@ -676,19 +676,19 @@
                 "word": "搁置",
                 "pinyin": "gē zhì",
                 "englishDefinition": "put aside ； shelve",
-                "chineseDefinition": "暂时不处理、放置",
-                "example": "由于时间紧迫，这件事暂时被 ~ 。",
+                "chineseDefinition": "（动）放下；放下一边不处理。",
+                "example": "1. 由于时间紧迫，这件事暂时被～。\n2. 这项工程因为经费不足而中途～了。\n3. 在取得共识前，双方决定先～争议较大的部分。",
                 "questions": [
                     "由于时间紧迫，这件事暂时被 ~ 。"
                 ]
             },
             {
                 "index": 7,
-                "word": "接踵而至",
-                "pinyin": "jiē zhǒng ér zhì",
-                "englishDefinition": "come one after another",
-                "chineseDefinition": "人或事物连续不断地到来",
-                "example": "会议结束后，新的问题 ~ 。",
+                "word": "接踵",
+                "pinyin": "jiē zhǒng",
+                "englishDefinition": "come one after another ；  follow on the heels of",
+                "chineseDefinition": "（动）一个接一个，形容连接不断。",
+                "example": "1. 全国最大的购物中心开幕后，购物的人～而至。\n2. 各种困难～而来，考验着他的意志力。",
                 "questions": [
                     "会议结束后，新的问题 ~ 。"
                 ]
@@ -697,9 +697,9 @@
                 "index": 8,
                 "word": "推诿",
                 "pinyin": "tuī wěi",
-                "englishDefinition": "shirk ； evade responsibility",
-                "chineseDefinition": "推卸责任",
-                "example": "他总是 ~ 工作，从不主动承担任务。",
+                "englishDefinition": "shirk(responsibility) ； evade responsibility",
+                "chineseDefinition": "(动）把责任推给别人。",
+                "example": "1. 他总是～工作，从不主动承担任务。\n2. 犯错后应该勇于承担，而不是想方设法～。\n3. 出事后各部门互相～责任，导致问题迟迟得不到解决。",
                 "questions": [
                     "他总是 ~ 工作，从不主动承担任务。"
                 ]
@@ -708,9 +708,9 @@
                 "index": 9,
                 "word": "倘若",
                 "pinyin": "tǎng ruò",
-                "englishDefinition": "if ； supposing",
-                "chineseDefinition": "假如、如果",
-                "example": " ~ 明天下雨，我们就改期出行。",
+                "englishDefinition": "if",
+                "chineseDefinition": "（连）表示假设，相当于“如果”。",
+                "example": "1. ～明天下雨，我们就改期出行。\n2. ～你有困难，可以和我们商量，大家会帮你的。\n3. ～当时我能及时赶到，悲剧或许就不会发生",
                 "questions": [
                     "~ 明天下雨，我们就改期出行。"
                 ]
@@ -719,9 +719,9 @@
                 "index": 10,
                 "word": "玄想",
                 "pinyin": "xuán xiǎng",
-                "englishDefinition": "fanciful thought ； speculation",
-                "chineseDefinition": "不切实际的想法",
-                "example": "他时常沉浸在 ~ 中，想象未来世界的样子。",
+                "englishDefinition": "speculation ； philosophical thinking",
+                "chineseDefinition": "（名/动）超出现实地凭空想象。",
+                "example": "1. 很多伟大的发现最初都源于科学家的～。\n2. 这种不切实际的～，对解决问题没有帮助。",
                 "questions": [
                     "他时常沉浸在 ~ 中，想象未来世界的样子。"
                 ]
@@ -733,8 +733,8 @@
                 "word": "刑",
                 "pinyin": "xíng",
                 "englishDefinition": "punishment ； penalty",
-                "chineseDefinition": "法律规定的惩罚",
-                "example": "犯罪分子最终受到了法律的 ~ 罚。",
+                "chineseDefinition": "（名）法律规定的对犯罪行为的处罚。",
+                "example": "1. 他是～满释放的，但他通过学习为自己大大地减了～。\n2. 法律严明，任何违法者都难逃～罚的制裁。",
                 "questions": [
                     "犯罪分子最终受到了法律的 ~ 罚。"
                 ]
@@ -744,8 +744,8 @@
                 "word": "监狱",
                 "pinyin": "jiān yù",
                 "englishDefinition": "prison ； jail",
-                "chineseDefinition": "用来关押罪犯的场所",
-                "example": "他因盗窃被关进 ~ 。",
+                "chineseDefinition": "（名）用来关押罪犯的场所、",
+                "example": "1. 他因盗窃被关进～。",
                 "questions": [
                     "他因盗窃被关进 ~ 。"
                 ]
@@ -754,9 +754,9 @@
                 "index": 3,
                 "word": "翻译",
                 "pinyin": "fān yì",
-                "englishDefinition": "translate",
-                "chineseDefinition": "将文字或语言从一种语言转化为另一种",
-                "example": "她擅长英汉互译，经常为会议做 ~ 。",
+                "englishDefinition": "translate ；interpreter.",
+                "chineseDefinition": "（名/动）把一种语言文字的意义用另一种语言文字表达出来；也指从事这项工作的人。",
+                "example": "1. 他在狱中带出来一部60万字的～稿，准备出版。\n2. 将网络流行语～成英文是一项非常有挑战性的任务。",
                 "questions": [
                     "她擅长英汉互译，经常为会议做 ~ 。"
                 ]
@@ -766,8 +766,8 @@
                 "word": "囚禁",
                 "pinyin": "qiú jìn",
                 "englishDefinition": "imprison ； confine",
-                "chineseDefinition": "用监禁方式限制自由",
-                "example": "犯人被 ~ 在牢房中。",
+                "chineseDefinition": "（动）把人关押起来，限制自由。",
+                "example": "1. 一个被～的人如果无所事事，往往会感到度日如年。\n2. 既然没有犯罪，谁也没有权利将他～起来。",
                 "questions": [
                     "犯人被 ~ 在牢房中。"
                 ]
@@ -776,9 +776,9 @@
                 "index": 5,
                 "word": "赦免",
                 "pinyin": "shè miǎn",
-                "englishDefinition": "pardon",
-                "chineseDefinition": "官方免除刑罚",
-                "example": "国王 ~ 了部分囚犯。",
+                "englishDefinition": "pardon ；remit",
+                "chineseDefinition": "（动）减轻或免除罪犯的刑罚。",
+                "example": "1. 很多人由于心态问题，明明没有进监狱，却不肯自我～。\n2. 新国王继位后，下令～了一批罪行较轻的囚犯。",
                 "questions": [
                     "国王 ~ 了部分囚犯。"
                 ]
@@ -787,9 +787,9 @@
                 "index": 6,
                 "word": "售票员",
                 "pinyin": "shòu piào yuán",
-                "englishDefinition": "ticket seller",
-                "chineseDefinition": "负责售票的人",
-                "example": " ~ 微笑着把票递给乘客。",
+                "englishDefinition": "ticket seller ； conductor",
+                "chineseDefinition": "（名）在交通工具或公共场所负责卖票的人。",
+                "example": "1. 现在的公共汽车大多实行自动刷卡，很少见到～了。",
                 "questions": [
                     "~ 微笑着把票递给乘客。"
                 ]
@@ -799,8 +799,8 @@
                 "word": "仇人",
                 "pinyin": "chóu rén",
                 "englishDefinition": "enemy ； foe",
-                "chineseDefinition": "与自己有深仇大恨的人",
-                "example": "多年后，他终于见到了旧日 ~ 。",
+                "chineseDefinition": "（名）因怀恨而视之为敌的人。",
+                "example": "1. 无论是面对朋友还是～，学会宽恕都能让我们展露微笑。",
                 "questions": [
                     "多年后，他终于见到了旧日 ~ 。"
                 ]
@@ -810,8 +810,8 @@
                 "word": "窃贼",
                 "pinyin": "qiè zéi",
                 "englishDefinition": "thief ； burglar",
-                "chineseDefinition": "偷东西的人",
-                "example": "警察抓住了入室 ~ 。",
+                "chineseDefinition": "（名）偷东西的人。",
+                "example": "1. 警察经过周密布控，终于在火车站抓获了这名～。",
                 "questions": [
                     "警察抓住了入室 ~ 。"
                 ]
@@ -820,9 +820,9 @@
                 "index": 9,
                 "word": "押",
                 "pinyin": "yā",
-                "englishDefinition": "escort ； guard",
-                "chineseDefinition": "押送（犯人或贵重物品）",
-                "example": "警察 ~ 送嫌疑犯去法院。",
+                "englishDefinition": "escort ； guard ； detain",
+                "chineseDefinition": "1. （动）拘留或看管。\n2. （动）监送；押送（犯人或贵重物品）。",
+                "example": "1. 警察～送嫌疑犯去法院。\n2. 犯人被法警～往法庭接受审判。",
                 "questions": [
                     "警察 ~ 送嫌疑犯去法院。"
                 ]
@@ -831,9 +831,9 @@
                 "index": 10,
                 "word": "锒铛",
                 "pinyin": "láng dāng",
-                "englishDefinition": "shackles ； jail",
-                "chineseDefinition": "用于囚禁的锁链，比喻入狱",
-                "example": "犯人被 ~ 锁在牢房里。",
+                "englishDefinition": "clanking of chains",
+                "chineseDefinition": "1. （名）铁锁链、镣铐\n2. （象声词）形容金属撞击的声音；这里指铁链锁人的声音。",
+                "example": "1. 犯人被～锁在牢房里。\n2. 他因贪污巨额公款，最终落得个～入狱的下场",
                 "questions": [
                     "犯人被 ~ 锁在牢房里。"
                 ]
@@ -843,8 +843,8 @@
                 "word": "揭示",
                 "pinyin": "jiē shì",
                 "englishDefinition": "reveal ； disclose",
-                "chineseDefinition": "公开说明或指示",
-                "example": "调查报告 ~ 了事件的真相。",
+                "chineseDefinition": "（动）使人看见不易看出的事物；显示。",
+                "example": "1. 调查报告～了事件的真相。\n2. 这篇报道向公众～了电子烟对健康的巨大危害。",
                 "questions": [
                     "调查报告 ~ 了事件的真相。"
                 ]
@@ -854,8 +854,8 @@
                 "word": "笔锋",
                 "pinyin": "bǐ fēng",
                 "englishDefinition": "writing style ； pen point",
-                "chineseDefinition": "写作或作画的技巧、风格",
-                "example": "作者的 ~ 犀利，评论深刻。",
+                "chineseDefinition": "1. （名）毛笔的尖端。\n2. （名）指写文章的言辞，或作画的技巧、风格",
+                "example": "1. 写毛笔字时，～要完全蘸满墨汁。\n2. 鲁迅的文章～犀利，像匕首一样刺向旧社会。",
                 "questions": [
                     "作者的 ~ 犀利，评论深刻。"
                 ]
@@ -865,8 +865,8 @@
                 "word": "箭靶子",
                 "pinyin": "jiàn bǎ zi",
                 "englishDefinition": "target ； bullseye",
-                "chineseDefinition": "射箭的靶子，比喻攻击对象",
-                "example": "他成了办公室闲言闲语的 ~ 。",
+                "chineseDefinition": "1. （名）练习射箭时的靶子。\n2. （名）比喻攻击对象。",
+                "example": "1. 在这篇议论文中，消极的心态成了作者攻击的～。\n2. 这位名人在社交媒体上的不当言论，使他成了大众抨击的～。",
                 "questions": [
                     "他成了办公室闲言闲语的 ~ 。"
                 ]
@@ -875,9 +875,9 @@
                 "index": 14,
                 "word": "救赎",
                 "pinyin": "jiù shú",
-                "englishDefinition": "redemption",
-                "chineseDefinition": "解救或挽回错误、罪恶",
-                "example": "他努力工作，希望得到灵魂的 ~ 。",
+                "englishDefinition": "redemption ；salvation.",
+                "chineseDefinition": "（名/动）补救过失；从苦难中拯救出来。",
+                "example": "1. 减轻精神负担、自我解脱，实为心灵的～。\n2. 他余生都在致力于慈善事业，以此作为对昔日过错的～。",
                 "questions": [
                     "他努力工作，希望得到灵魂的 ~ 。"
                 ]
@@ -887,8 +887,8 @@
                 "word": "摧残",
                 "pinyin": "cuī cán",
                 "englishDefinition": "devastate ； ruin",
-                "chineseDefinition": "破坏、损害",
-                "example": "战争 ~ 了无数家庭。",
+                "chineseDefinition": "（动）使政治、经济、文化、身体、精神等受严重损害。",
+                "example": "1. 战争～了无数家庭。\n2. 仇怨、嫉妒等消极情绪会～人的活力，使人失去斗志。\n3. 这种不健康的饮食习惯会严重～你的身体健康。",
                 "questions": [
                     "战争 ~ 了无数家庭。"
                 ]
@@ -899,11 +899,11 @@
         "西游记成功学": [
             {
                 "index": 1,
-                "word": "恻隐之心",
-                "pinyin": "cè yǐn zhī xīn",
+                "word": "恻隐",
+                "pinyin": "cè yǐn",
                 "englishDefinition": "compassion ； sympathy",
-                "chineseDefinition": "对他人不幸的同情心",
-                "example": "他看到流浪孩子， ~ 油然而生。",
+                "chineseDefinition": "（名/形）对别人的不幸表示同情。",
+                "example": "1. 他看到流浪孩子，恻隐之心油然而生。\n2. 面对如此惨状，即便是铁石心肠的人，也会动～。",
                 "questions": [
                     "他看到流浪孩子， ~ 油然而生。"
                 ]
@@ -912,20 +912,20 @@
                 "index": 2,
                 "word": "蒙蔽",
                 "pinyin": "méng bì",
-                "englishDefinition": "deceive ； blind",
-                "chineseDefinition": "被欺骗或遮蔽视听",
-                "example": "他被假消息 ~ ，误以为朋友背叛了他。",
+                "englishDefinition": "deceive ； hoodwink",
+                "chineseDefinition": "（动）遮掩真相，使人上当。",
+                "example": "1. 他被假消息～，误以为朋友背叛了他。\n2. 投资者千万不要被高额回报的虚假宣传所～了。",
                 "questions": [
                     "他被假消息 ~ ，误以为朋友背叛了他。"
                 ]
             },
             {
                 "index": 3,
-                "word": "按捺不住",
-                "pinyin": "àn nà bù zhù",
-                "englishDefinition": "unable to suppress",
-                "chineseDefinition": "抑制不住（情绪、行为）",
-                "example": "听到好消息，她 ~ 心中的喜悦。",
+                "word": "按捺",
+                "pinyin": "àn nà",
+                "englishDefinition": "restrain; control",
+                "chineseDefinition": "（动）抑制、忍耐。",
+                "example": "1. 听到好消息，她～不住心中的喜悦。\n2. 面对对方的再三挑衅，我费了好大劲才～下怒火。",
                 "questions": [
                     "听到好消息，她 ~ 心中的喜悦。"
                 ]
@@ -934,9 +934,9 @@
                 "index": 4,
                 "word": "谗言",
                 "pinyin": "chán yán",
-                "englishDefinition": "slander ； malicious words",
-                "chineseDefinition": "诽谤的话",
-                "example": "他因听信 ~ 而误会了朋友。",
+                "englishDefinition": "slander ； calumny ； malicious words",
+                "chineseDefinition": "（名）陷害；诽谤的话",
+                "example": "1. 他因听信～而误会了朋友。\n2. 作为一个公正的领导者，绝不应随意听信小人的～。",
                 "questions": [
                     "他因听信 ~ 而误会了朋友。"
                 ]
@@ -946,8 +946,8 @@
                 "word": "妖怪",
                 "pinyin": "yāo guài",
                 "englishDefinition": "monster ； demon",
-                "chineseDefinition": "神话或传说中的怪物",
-                "example": "古代故事里常有 ~ 作乱的情节。",
+                "chineseDefinition": "（名）神话传说中形状奇怪、有妖术害人的怪物。",
+                "example": "1. 孙悟空火眼金睛，一眼就看穿了白骨精变幻的～。\n2. 在这个童话故事里，勇敢的王子最终打败了邪恶的～。",
                 "questions": [
                     "古代故事里常有 ~ 作乱的情节。"
                 ]
@@ -957,8 +957,8 @@
                 "word": "憨厚",
                 "pinyin": "hān hòu",
                 "englishDefinition": "simple and honest",
-                "chineseDefinition": "性格老实、敦厚",
-                "example": "他为人 ~ ，总是乐于助人。",
+                "chineseDefinition": "（形）性格老实、敦厚；诚实朴厚。",
+                "example": "1. 他为人～，总是乐于助人。\n2. 这位老农夫为人～，深受邻居们的信任和尊重。",
                 "questions": [
                     "他为人 ~ ，总是乐于助人。"
                 ]
@@ -968,19 +968,19 @@
                 "word": "朴实",
                 "pinyin": "pǔ shí",
                 "englishDefinition": "simple ； honest",
-                "chineseDefinition": "质朴，不浮华",
-                "example": "她的语言 ~ ，却打动了大家的心。",
+                "chineseDefinition": "（形）质朴、诚实、不华丽。",
+                "example": "1. 他穿着～，为人谦虚，一点也没有大老板的架子。",
                 "questions": [
                     "她的语言 ~ ，却打动了大家的心。"
                 ]
             },
             {
                 "index": 8,
-                "word": "忠心耿耿",
-                "pinyin": "zhōng xīn gěng gěng",
-                "englishDefinition": "loyal and devoted",
-                "chineseDefinition": "对人或事非常忠诚",
-                "example": "他对国家 ~ ，尽职尽责。",
+                "word": "耿耿",
+                "pinyin": "gěng gěng",
+                "englishDefinition": "dedicated; bear a lingering grudge.",
+                "chineseDefinition": "1. （形）对人或事非常忠诚。\n2. （形）形容有心事，难以忘怀。",
+                "example": "1. 对之前那次误会，他一直～于怀，至今不肯原谅我。\n2. 岳飞对国家一片赤诚，这份忠心～值得后人钦佩。",
                 "questions": [
                     "他对国家 ~ ，尽职尽责。"
                 ]
@@ -990,8 +990,8 @@
                 "word": "蜕变",
                 "pinyin": "tuì biàn",
                 "englishDefinition": "transform ； metamorphosis",
-                "chineseDefinition": "脱胎换骨，发生重大变化",
-                "example": "经过这次经历，他的性格发生了 ~ 。",
+                "chineseDefinition": "（动）比喻事物发生本质的变化。",
+                "example": "1. 经过四年的中学磨练，他从一个懵懂少年～为成熟青年。\n2. 这种昆虫要经过多次～，才能最终长成成虫。",
                 "questions": [
                     "经过这次经历，他的性格发生了 ~ 。"
                 ]
@@ -1000,9 +1000,9 @@
                 "index": 10,
                 "word": "怂恿",
                 "pinyin": "sǒng yǒng",
-                "englishDefinition": "instigate ； urge",
-                "chineseDefinition": "鼓动、煽动别人做事",
-                "example": "他被朋友 ~ ，做出了错误的决定。",
+                "englishDefinition": "Incite ； egg on",
+                "chineseDefinition": "（动）鼓动、煽动别人做事。",
+                "example": "1 在损友的～下，他竟然瞒着父母旷课去玩电子游戏。",
                 "questions": [
                     "他被朋友 ~ ，做出了错误的决定。"
                 ]
@@ -1012,8 +1012,8 @@
                 "word": "辗转",
                 "pinyin": "zhǎn zhuǎn",
                 "englishDefinition": "toss and turn ； go through",
-                "chineseDefinition": "辗转反侧；辗转多地",
-                "example": "他为了找到真相， ~ 各地调查。",
+                "chineseDefinition": "（动）来回翻转；也指经过许多人的手或经过很多地方。",
+                "example": "1. 他为了找到真相，～各地调查。\n2. 道歉与否的问题在脑海里翻来覆去，让我～反侧。\n3. 这封信经过～，终于送到了远在海外的接收人手中。",
                 "questions": [
                     "他为了找到真相， ~ 各地调查。"
                 ]
@@ -1023,19 +1023,19 @@
                 "word": "宏愿",
                 "pinyin": "hóng yuàn",
                 "englishDefinition": "great ambition ； lofty aspiration",
-                "chineseDefinition": "伟大的志向",
-                "example": "她从小怀抱 ~ ，希望改变世界。",
+                "chineseDefinition": "（名）伟大的志向、志愿。",
+                "example": "1. 毕业典礼上，同学们纷纷立下～，要在未来报效社会。\n2. 他毕生的～就是为贫困地区的儿童建设一百所学校。",
                 "questions": [
                     "她从小怀抱 ~ ，希望改变世界。"
                 ]
             },
             {
                 "index": 13,
-                "word": "齐心协力",
-                "pinyin": "qí xīn xié lì",
-                "englishDefinition": "work together with one heart",
-                "chineseDefinition": "团结合作，共同努力",
-                "example": "面对困难，大家 ~ ，终于成功了。",
+                "word": "协力",
+                "pinyin": "xié lì",
+                "englishDefinition": "work together with one heart ； concerted effort",
+                "chineseDefinition": "（动）合力；共同出力。",
+                "example": "1. 只要大家齐心～，再大的困难我们也一定能克服。\n2. 救援队与当地村民通力～，成功营救了被困的登山者。",
                 "questions": [
                     "面对困难，大家 ~ ，终于成功了。"
                 ]
@@ -1044,9 +1044,9 @@
                 "index": 14,
                 "word": "狂妄",
                 "pinyin": "kuáng wàng",
-                "englishDefinition": "arrogant ； presumptuous",
-                "chineseDefinition": "自大，目中无人",
-                "example": "他 ~ 自大，结果吃了大亏。",
+                "englishDefinition": "arrogant ； conceited",
+                "chineseDefinition": "（形）自大，目中无人；猖狂、妄自尊大。",
+                "example": "1. 他因为取得了一点成绩就变得～起来，不再把别人放在眼里。\n2. 这种～自大的态度只会让你失去朋友，变得孤立无援。",
                 "questions": [
                     "他 ~ 自大，结果吃了大亏。"
                 ]
@@ -1055,9 +1055,9 @@
                 "index": 15,
                 "word": "胆怯",
                 "pinyin": "dǎn qiè",
-                "englishDefinition": "timid ； fearful",
-                "chineseDefinition": "胆小，缺乏勇气",
-                "example": "刚上台演讲的学生显得有些 ~ 。",
+                "englishDefinition": "timid ； fearful ； cowardly",
+                "chineseDefinition": "（形）胆小，缺乏勇气。",
+                "example": "1. 那个～的孩子在老师的鼓励下，终于鼓起勇气走上了讲台。\n2. 面对危险，我们不能～，要保持冷静寻找解决方法。",
                 "questions": [
                     "刚上台演讲的学生显得有些 ~ 。"
                 ]
@@ -1069,19 +1069,19 @@
                 "word": "告诫",
                 "pinyin": "gào jiè",
                 "englishDefinition": "admonish ； warn",
-                "chineseDefinition": "对别人提出警告或忠告",
-                "example": "老师 ~ 学生不要迟到。",
+                "chineseDefinition": "（动）对别人提出警告或忠告。",
+                "example": "1. 老师～学生不要迟到。\n2. 王老师曾经～过我们，若要实现梦想，必须坚持到底。\n3. 医生～病人，一定要按时吃药，否则病情会恶化。",
                 "questions": [
                     "老师 ~ 学生不要迟到。"
                 ]
             },
             {
                 "index": 2,
-                "word": "椭圆形",
-                "pinyin": "tuǒ yuán xíng",
+                "word": "椭圆",
+                "pinyin": "tuǒ yuán",
                 "englishDefinition": "oval ； elliptical",
-                "chineseDefinition": "椭圆状的形状",
-                "example": "这张桌子是 ~ 的，很适合会议使用。",
+                "chineseDefinition": "（形/名）长圆形。",
+                "example": "1. 达·芬奇在老师的指导下，从不同角度练习画～形的鸡蛋。\n2. 运动场的跑道是一个巨大的～形。",
                 "questions": [
                     "这张桌子是 ~ 的，很适合会议使用。"
                 ]
@@ -1091,8 +1091,8 @@
                 "word": "轮廓",
                 "pinyin": "lún kuò",
                 "englishDefinition": "outline ； contour",
-                "chineseDefinition": "外形的轮廓或大体形状",
-                "example": "她的侧脸 ~ 非常清晰。",
+                "chineseDefinition": "（名）物体的外缘线条。",
+                "example": "1. 画蛋时，首先要准确地勾勒出鸡蛋的～。\n2. 夕阳下，远山的～显得格外清晰。",
                 "questions": [
                     "她的侧脸 ~ 非常清晰。"
                 ]
@@ -1102,8 +1102,8 @@
                 "word": "基础",
                 "pinyin": "jī chǔ",
                 "englishDefinition": "foundation ； basis",
-                "chineseDefinition": "事物发展的根本",
-                "example": "学好数学 ~ 对学习物理很重要。",
+                "chineseDefinition": "（名）建筑物的底层；比喻事物的根本。",
+                "example": "1. 万丈高楼平地起，只有打好～，才能建造出一栋栋房子。\n2. 学好数学～对学习物理很重要。\n3. 扎实的双语～，是他在国际舞台上获得成功的关键。",
                 "questions": [
                     "学好数学 ~ 对学习物理很重要。"
                 ]
@@ -1113,8 +1113,8 @@
                 "word": "卓越",
                 "pinyin": "zhuó yuè",
                 "englishDefinition": "outstanding ； excellent",
-                "chineseDefinition": "非凡，出众",
-                "example": "他在科研领域取得了 ~ 成绩。",
+                "chineseDefinition": "（形）非凡，出众；非常优秀，超出一般。",
+                "example": "1.经过不懈努力，他在科学研究领域取得了～的成就。\n2. 这位运动员在奥运会上的～表现赢得了全场观众的喝彩。",
                 "questions": [
                     "他在科研领域取得了 ~ 成绩。"
                 ]
@@ -1124,8 +1124,8 @@
                 "word": "栋",
                 "pinyin": "dòng",
                 "englishDefinition": "measure word for buildings",
-                "chineseDefinition": "用作建筑物的量词",
-                "example": "这小区共有十 ~ 住宅楼。",
+                "chineseDefinition": "（量词）用于房屋建筑。",
+                "example": "1. 城市的发展日新月异，一～楼高耸入云的摩天大楼拔地而起。\n2. 这～古老的建筑见证了新加坡百年的沧桑变化。",
                 "questions": [
                     "这小区共有十 ~ 住宅楼。"
                 ]
@@ -1135,8 +1135,8 @@
                 "word": "显赫",
                 "pinyin": "xiǎn hè",
                 "englishDefinition": "illustrious ； eminent",
-                "chineseDefinition": "名声显著，地位高",
-                "example": "他出身 ~ 家族，从小受人尊敬。",
+                "chineseDefinition": "（形）权势、名声等非常盛大。",
+                "example": "1. 他虽然出身～，但为人低调，从不向人炫耀自己的家世。",
                 "questions": [
                     "他出身 ~ 家族，从小受人尊敬。"
                 ]
@@ -1145,9 +1145,9 @@
                 "index": 8,
                 "word": "耕耘",
                 "pinyin": "gēng yún",
-                "englishDefinition": "cultivate ； toil",
-                "chineseDefinition": "努力劳动或耕作",
-                "example": "他在科研领域 ~ 多年，终于取得成果。",
+                "englishDefinition": "cultivate ； work hard",
+                "chineseDefinition": "1. （动）犁地和除草。\n2. （动）比喻辛勤劳动。",
+                "example": "1. 他在科研领域耕耘多年，终于取得成果。\n2. 所谓“一分～，一分收获”，成功离不开长期的努力。\n3. 老师在教育这块土地上默默～了几十年，培养了无数人才。",
                 "questions": [
                     "他在科研领域 ~ 多年，终于取得成果。"
                 ]
@@ -1157,8 +1157,8 @@
                 "word": "驻足",
                 "pinyin": "zhù zú",
                 "englishDefinition": "stop ； pause",
-                "chineseDefinition": "停下脚步",
-                "example": "游客在风景区 ~ 拍照。",
+                "chineseDefinition": "（动）停下脚步。",
+                "example": "1. 游客在风景区～拍照。\n2. 这里的橱窗布置得非常精美，吸引了许多路人～观看。\n3. 站在古桥上，我不禁～凝望那流淌不息的河水。",
                 "questions": [
                     "游客在风景区 ~ 拍照。"
                 ]
@@ -1168,8 +1168,8 @@
                 "word": "昔日",
                 "pinyin": "xī rì",
                 "englishDefinition": "former days ； in the past",
-                "chineseDefinition": "从前、往日",
-                "example": " ~ 的辉煌如今已不复存在。",
+                "chineseDefinition": "（名）从前、往日。",
+                "example": "1. ～的辉煌如今已不复存在。\n2. 看到这幅旧照片，我不禁回想起～在校园里的快乐时光。\n3. 这个破旧的渔村，如今已变成了繁华的～旅游胜地。",
                 "questions": [
                     "~ 的辉煌如今已不复存在。"
                 ]
@@ -1178,9 +1178,9 @@
                 "index": 11,
                 "word": "磨砺",
                 "pinyin": "mó lì",
-                "englishDefinition": "hone ； temper",
-                "chineseDefinition": "通过努力锻炼提高能力",
-                "example": "他在艰苦的工作中 ~ 了意志。",
+                "englishDefinition": "temper； steel oneself",
+                "chineseDefinition": "（动）磨练，通过努力锻炼提高能力。",
+                "example": "1. 艰苦的生活环境～了他的意志，让他变得更加坚强。\n2. 成功需要经过长期的自我～，没有捷径可走。",
                 "questions": [
                     "他在艰苦的工作中 ~ 了意志。"
                 ]
@@ -1190,8 +1190,8 @@
                 "word": "梅花",
                 "pinyin": "méi huā",
                 "englishDefinition": "plum blossom",
-                "chineseDefinition": "一种花，象征坚韧",
-                "example": "寒冬中， ~ 依然盛开，别有风味。",
+                "chineseDefinition": "（名）一种在严寒中开放的花，常比喻坚韧的品格。",
+                "example": "1. 诗人常借～来歌颂那种不畏严寒、坚贞不屈的精神。\n2. 寒冬中，～依然盛开，别有风味。",
                 "questions": [
                     "寒冬中， ~ 依然盛开，别有风味。"
                 ]
@@ -1201,8 +1201,8 @@
                 "word": "青睐",
                 "pinyin": "qīng lài",
                 "englishDefinition": "favor ； preference",
-                "chineseDefinition": "喜爱、看重",
-                "example": "这部作品深受读者 ~ 。",
+                "chineseDefinition": "（名/动）比喻喜爱或器重。",
+                "example": "1. 这种设计时尚的手表，一上市就得到了年轻人的～。\n2. 他的出色才华得到了多家大型企业的～，竞相邀请他加入。",
                 "questions": [
                     "这部作品深受读者 ~ 。"
                 ]
@@ -1212,8 +1212,8 @@
                 "word": "钦佩",
                 "pinyin": "qīn pèi",
                 "englishDefinition": "admire ； respect",
-                "chineseDefinition": "敬仰、佩服",
-                "example": "我非常 ~ 她的毅力和勇气。",
+                "chineseDefinition": "（动）敬重、敬仰、佩服。",
+                "example": "1. 他那种即使遭遇失败也绝不放弃的精神，实在令人～。\n2. 对这位为了救人而英勇牺牲的英雄，我们表达了由衷的～。",
                 "questions": [
                     "我非常 ~ 她的毅力和勇气。"
                 ]
@@ -1223,8 +1223,8 @@
                 "word": "巩固",
                 "pinyin": "gǒng gù",
                 "englishDefinition": "consolidate ； strengthen",
-                "chineseDefinition": "使稳固、加强",
-                "example": "学习新知识后，要不断复习 ~ 。",
+                "chineseDefinition": "（动）使坚固、不易动摇。",
+                "example": "1. 学习新知识后，要不断复习～。\n2. 学习知识后，必须通过练习来进一步～所学的内容。\n3. 邻里之间经常互动，有助于～彼此的感情，建立和谐社区。",
                 "questions": [
                     "学习新知识后，要不断复习 ~ 。"
                 ]
@@ -1233,9 +1233,9 @@
                 "index": 16,
                 "word": "一丝不苟",
                 "pinyin": "yī sī bù gǒu",
-                "englishDefinition": "meticulous ； rigorous",
-                "chineseDefinition": "做事非常认真，毫不马虎",
-                "example": "他做事 ~ ，从不疏忽。",
+                "englishDefinition": "meticulous ； rigorous ； scrupulous",
+                "chineseDefinition": "（成语）形容做事非常认真、仔细，一点也不马虎。",
+                "example": "1. 他的工作态度向来～，所有的账目都处理得清清楚楚。\n2. 陈老师修改作文非常认真，每一个错别字都会～地指出来。",
                 "questions": [
                     "他做事 ~ ，从不疏忽。"
                 ]
@@ -1246,9 +1246,9 @@
                 "index": 1,
                 "word": "一蹶不振",
                 "pinyin": "yī jué bù zhèn",
-                "englishDefinition": "fail completely ； unable to recover",
-                "chineseDefinition": "遇挫折后不能振作",
-                "example": "失败后，他 ~ ，几天都没来上班。",
+                "englishDefinition": "fail completely ； succumb ; collapse after a setback",
+                "chineseDefinition": "（成语）跌倒一次就再也站不起来，比喻遭到挫折就从此颓废。",
+                "example": "1. 失败后，他~，几天都没来上班。\n2. 我们不能因为一次考试失利就～，应该继续努力争取进步。",
                 "questions": [
                     "失败后，他 ~ ，几天都没来上班。"
                 ]
@@ -1257,9 +1257,9 @@
                 "index": 2,
                 "word": "浸透",
                 "pinyin": "jìn tòu",
-                "englishDefinition": "soak ； permeate",
-                "chineseDefinition": "液体渗透或浸入",
-                "example": "雨水把衣服完全 ~ 了。",
+                "englishDefinition": "soak ；permeate ; saturate",
+                "chineseDefinition": "（动）液体渗透或浸入。",
+                "example": "1. 雨水把衣服完全～了。\n2. 每一份成功的背后，都～了奋斗者的泪水和汗水。\n3. 暴雨过后，他的衣服已经完全被雨水～了。",
                 "questions": [
                     "雨水把衣服完全 ~ 了。"
                 ]
@@ -1269,8 +1269,8 @@
                 "word": "奴仆",
                 "pinyin": "nú pú",
                 "englishDefinition": "servant ； slave",
-                "chineseDefinition": "受人支配为他人工作的下人",
-                "example": "古代的贵族家中常有许多 ~ 。",
+                "chineseDefinition": "（名）旧时在富贵人家服劳役的人。",
+                "example": "1. 在旧社会，穷人的孩子常常被迫卖到大户人家去做～。\n2. 如果一个人只知道盲目崇拜权势，那他在精神上就成了～。",
                 "questions": [
                     "古代的贵族家中常有许多 ~ 。"
                 ]
@@ -1279,9 +1279,9 @@
                 "index": 4,
                 "word": "惨重",
                 "pinyin": "cǎn zhòng",
-                "englishDefinition": "heavy ； serious",
-                "chineseDefinition": "形容损失或伤害非常严重",
-                "example": "这场地震造成了 ~ 的人员伤亡。",
+                "englishDefinition": "heavy ； serious ； disastrous",
+                "chineseDefinition": "（形）损失极其严重。",
+                "example": "1. 这场地震造成了～的人员伤亡。\n2. 由于他的粗心大意，公司在这次交易中蒙受了～的损失。\n3. 这场突如其来的战争，让两国的百姓付出了～的代价。",
                 "questions": [
                     "这场地震造成了 ~ 的人员伤亡。"
                 ]
@@ -1290,20 +1290,20 @@
                 "index": 5,
                 "word": "卧薪尝胆",
                 "pinyin": "wò xīn cháng dǎn",
-                "englishDefinition": "endure hardships to achieve revenge",
-                "chineseDefinition": "含辛茹苦、忍辱图强",
-                "example": "他 ~ 多年，终于取得了成功。",
+                "englishDefinition": "endure hardship to accomplish an ambition.",
+                "chineseDefinition": "（成语）比喻刻苦自励，发愤图强。",
+                "example": "1. 越王勾践～十年，最终成功复国，打败了吴国。\n2. 在跌入人生谷底后，他～，终于在五年后东山再起。\n3. 他～多年，终于取得了成功。",
                 "questions": [
                     "他 ~ 多年，终于取得了成功。"
                 ]
             },
             {
                 "index": 6,
-                "word": "武装起义",
-                "pinyin": "wǔ zhuāng qǐ yì",
+                "word": "武装",
+                "pinyin": "wǔ zhuāng",
                 "englishDefinition": "armed uprising",
-                "chineseDefinition": "用武装手段反抗统治",
-                "example": "农民发动 ~ ，反抗压迫。",
+                "chineseDefinition": "（名/动）军队的组织和装备；也指用武器、知识等装备起来。",
+                "example": "1. 士兵们全副～，正准备前往边境地区执行巡视任务。\n2. 我们应该用科学知识来～自己的头脑，提高思辨能力。",
                 "questions": [
                     "农民发动 ~ ，反抗压迫。"
                 ]
@@ -1312,9 +1312,9 @@
                 "index": 7,
                 "word": "荆棘",
                 "pinyin": "jīng jí",
-                "englishDefinition": "thorn ； bramble",
-                "chineseDefinition": "多刺的植物，比喻困难或障碍",
-                "example": "成功的道路充满 ~ ，需要坚持。",
+                "englishDefinition": "thorn ； briers",
+                "chineseDefinition": "1. （名）带刺的灌木。\n2. （名）比喻前进道路上的困难和障碍。",
+                "example": "1. 虽然成功的道路上布满～，但我们绝不轻言放弃。\n2. 既然选择了远方，便不畏惧路途上的～与坎坷。",
                 "questions": [
                     "成功的道路充满 ~ ，需要坚持。"
                 ]
@@ -1323,9 +1323,9 @@
                 "index": 8,
                 "word": "剥夺",
                 "pinyin": "bō duó",
-                "englishDefinition": "deprive ； take away",
-                "chineseDefinition": "强行夺取权利或利益",
-                "example": "他因违法行为被 ~ 了驾驶资格。",
+                "englishDefinition": "deprive ；strip",
+                "chineseDefinition": "（动）用强制手段夺去。",
+                "example": "1. 他因违法行为被～了驾驶资格。\n2. 无论犯了什么错，都不应该被～学习的机会。\n3. 他因为违反了比赛规则，被组委会～了参赛资格",
                 "questions": [
                     "他因违法行为被 ~ 了驾驶资格。"
                 ]
@@ -1335,8 +1335,8 @@
                 "word": "万劫不复",
                 "pinyin": "wàn jié bù fù",
                 "englishDefinition": "irrecoverable ； hopeless",
-                "chineseDefinition": "比喻极其严重，无法挽回",
-                "example": "战争让国家陷入 ~ 的困境。",
+                "chineseDefinition": "（成语）比喻极其严重，无法挽回。",
+                "example": "1. 战争让国家陷入～的困境。\n2. 毒品就像一个深渊，一旦沾染就可能陷入～的境地。\n3. 历史的教训告诉我们，有些战略性的错误足以让国家陷入～。",
                 "questions": [
                     "战争让国家陷入 ~ 的困境。"
                 ]
@@ -1345,9 +1345,9 @@
                 "index": 10,
                 "word": "孕育",
                 "pinyin": "yùn yù",
-                "englishDefinition": "nurture ； gestate",
-                "chineseDefinition": "比喻孕育发展新事物",
-                "example": "艺术创作 ~ 了丰富的文化成果。",
+                "englishDefinition": "nurture ； breed",
+                "chineseDefinition": "1. (动）怀胎和生育。\n2. （动）比喻在旧事物中酝酿新事物。",
+                "example": "1. 艺术创作～了丰富的文化成果。\n2. 这片富饶的土地～了灿烂的中华文明。\n3. 寒冷的冬天虽然残酷，却在积雪下～着春天的希望。",
                 "questions": [
                     "艺术创作 ~ 了丰富的文化成果。"
                 ]
@@ -1357,8 +1357,8 @@
                 "word": "座右铭",
                 "pinyin": "zuò yòu míng",
                 "englishDefinition": "motto ； maxim",
-                "chineseDefinition": "个人信奉的警示性格言",
-                "example": "“勤奋努力”是他的 ~ 。",
+                "chineseDefinition": "（名）写在座位旁用来提醒自己的格言。",
+                "example": "1. “世上无难事，只怕有心人”是他的～。",
                 "questions": [
                     "“勤奋努力”是他的 ~ 。"
                 ]
@@ -1371,9 +1371,9 @@
                 "index": 1,
                 "word": "偕同",
                 "pinyin": "xié tóng",
-                "englishDefinition": "together with ； accompany",
-                "chineseDefinition": "一起、共同（多用于书面语）",
-                "example": "老师 ~ 学生们参观了科技馆。",
+                "englishDefinition": "together with, accompany by",
+                "chineseDefinition": "（动）一起、共同、伴随（多用于书面语）。",
+                "example": "1. 老师～学生们参观了科技馆。\n2. 他在中学遇到了志同道合的好友，两人便～到国外升学。",
                 "questions": [
                     "老师 ~ 学生们参观了科技馆。"
                 ]
@@ -1382,9 +1382,9 @@
                 "index": 2,
                 "word": "朗诵",
                 "pinyin": "lǎng sòng",
-                "englishDefinition": "recite ； read aloud",
-                "chineseDefinition": "清晰有感情地读出文章或诗歌",
-                "example": "她在 ~ 比赛中表现出色，获得第一名。",
+                "englishDefinition": "recite aloud with expression",
+                "chineseDefinition": "（动）有感情地诵读。",
+                "example": "1. 在毕业典礼上，同学们深情地～了徐志摩的名篇《再别康桥》。\n2. 她在华文课上～了一段抒情散文，赢得了大家热烈的掌声。",
                 "questions": [
                     "她在 ~ 比赛中表现出色，获得第一名。"
                 ]
@@ -1394,8 +1394,8 @@
                 "word": "畔",
                 "pinyin": "pàn",
                 "englishDefinition": "beside ； by the side of",
-                "chineseDefinition": "边、旁边（多用于书面语）",
-                "example": "他们在湖 ~ 散步，欣赏落日美景。",
+                "chineseDefinition": "（名）江、湖、河等水边的陆地。",
+                "example": "1. 那个宁静的夜晚，我们坐在湖～看星星，感觉非常惬意。\n2. 诗人漫步在赛纳河～，寻找创作的灵感。",
                 "questions": [
                     "他们在湖 ~ 散步，欣赏落日美景。"
                 ]
@@ -1405,8 +1405,8 @@
                 "word": "柳",
                 "pinyin": "liǔ",
                 "englishDefinition": "willow",
-                "chineseDefinition": "一种树木，常象征春天",
-                "example": "春风拂面， ~ 条轻轻摇曳。",
+                "chineseDefinition": "（名）柳树；古人常借折柳表达惜别。",
+                "example": "1. 春风拂面，～条轻轻摇曳。\n2. 古人在离别时有折～的习俗，以此寄托对友人的挽留和思念。",
                 "questions": [
                     "春风拂面， ~ 条轻轻摇曳。"
                 ]
@@ -1416,8 +1416,8 @@
                 "word": "荡漾",
                 "pinyin": "dàng yàng",
                 "englishDefinition": "ripple ； sway gently",
-                "chineseDefinition": "（水波、光影、情感）起伏、摇动",
-                "example": "湖面上波光粼粼，水波轻轻 ~ 。",
+                "chineseDefinition": "1. （动）水波波动。\n2. （动）形容某种氛围或情感起伏。",
+                "example": "1. 康桥的美景展现眼前，往昔生活的画面又在诗人的心头～。\n2. 微风吹过湖面，碧绿的湖水泛起阵阵～，波光粼粼。",
                 "questions": [
                     "湖面上波光粼粼，水波轻轻 ~ 。"
                 ]
@@ -1427,8 +1427,8 @@
                 "word": "惟妙惟肖",
                 "pinyin": "wéi miào wéi xiào",
                 "englishDefinition": "vivid and lifelike",
-                "chineseDefinition": "形容描写、模仿非常逼真",
-                "example": "演员把角色演得 ~ ，令人赞叹。",
+                "chineseDefinition": "（成语）形容模仿或描写得非常逼真。",
+                "example": "1. 表弟的对口相声表演得非常精彩，尤其是模仿老师说话的样子更是～。\n2. 这位木雕艺人刻画的小动物～，就像活过来了一样。",
                 "questions": [
                     "演员把角色演得 ~ ，令人赞叹。"
                 ]
@@ -1437,9 +1437,9 @@
                 "index": 7,
                 "word": "懵懂",
                 "pinyin": "měng dǒng",
-                "englishDefinition": "ignorant ； naive",
-                "chineseDefinition": "形容糊涂，不明事理",
-                "example": "那时的他还 ~ ，不懂人生的意义。",
+                "englishDefinition": "ignorant ； naive ； muddled",
+                "chineseDefinition": "（形）糊涂；不明事理的样子。",
+                "example": "1. 回想起那个～的中学时代，我曾因为一点小事就和同学闹别扭。\n2. 我们从当初那个～的孩童，成长为如今有责任感的中学生。",
                 "questions": [
                     "那时的他还 ~ ，不懂人生的意义。"
                 ]
@@ -1449,8 +1449,8 @@
                 "word": "幼稚",
                 "pinyin": "yòu zhì",
                 "englishDefinition": "childish ； immature",
-                "chineseDefinition": "年幼、不成熟",
-                "example": "他的想法太 ~ ，缺乏实际可行性。",
+                "chineseDefinition": "（形）年纪小；也形容头脑简单，不成熟。",
+                "example": "1. 他的想法太～，缺乏实际可行性。\n2. 尽管他已经成年，但处理问题的方式有时还是显得有些～，也不懂人情世故。",
                 "questions": [
                     "他的想法太 ~ ，缺乏实际可行性。"
                 ]
@@ -1460,8 +1460,8 @@
                 "word": "憧憬",
                 "pinyin": "chōng jǐng",
                 "englishDefinition": "yearn for ； look forward to",
-                "chineseDefinition": "充满向往地期待",
-                "example": "她满怀 ~ 地踏上新的旅程。",
+                "chineseDefinition": "（动/名）充满向往地期待。",
+                "example": "1. 她满怀～地踏上新的旅程。\n2. 同学们带着对未来的美好～，离开了相处四年的母校。\n3. 每一个踏入社会的新人，心中都充满了对职场生活的～。",
                 "questions": [
                     "她满怀 ~ 地踏上新的旅程。"
                 ]
@@ -1470,9 +1470,9 @@
                 "index": 10,
                 "word": "拂",
                 "pinyin": "fú",
-                "englishDefinition": "brush ； blow lightly",
-                "chineseDefinition": "轻轻掠过、触碰",
-                "example": "春风拂过她的头发，带来阵阵花香。",
+                "englishDefinition": "brush ； blow lightly ； stroke",
+                "chineseDefinition": "（动）轻轻擦过、掠过。",
+                "example": "1. 春风～过她的头发，带来阵阵花香。\n2. 晚风轻轻～过河畔的金柳，送走了一抹残阳。\n3. 她用手轻轻～去衣服上的灰尘，整理好仪容准备上台。",
                 "questions": [
                     "春风拂过她的头发，带来阵阵花香。"
                 ]
@@ -1482,8 +1482,8 @@
                 "word": "寂静",
                 "pinyin": "jì jìng",
                 "englishDefinition": "silent ； quiet",
-                "chineseDefinition": "没有声音、很安静",
-                "example": "夜深人静，校园里一片 ~ 。",
+                "chineseDefinition": "（形）环境非常安静，没有声音。",
+                "example": "1. 夜深人静，校园里一片～。\n2. 深夜的街道显得格外～，只有偶尔传来的远处的狗吠声。",
                 "questions": [
                     "夜深人静，校园里一片 ~ 。"
                 ]
@@ -1495,8 +1495,8 @@
                 "word": "饯别",
                 "pinyin": "jiàn bié",
                 "englishDefinition": "to give a farewell dinner",
-                "chineseDefinition": "为将要分别的人设宴送行",
-                "example": "老师为即将出国的学生 ~ 。",
+                "chineseDefinition": "（名/动）为将要分别的人设宴送行。",
+                "example": "1. 老师为即将出国的学生～。\n2. 在古代交通不便，亲友远行时，人们往往会设酒～，表达不舍。",
                 "questions": [
                     "老师为即将出国的学生 ~ 。"
                 ]
@@ -1506,8 +1506,8 @@
                 "word": "吟咏",
                 "pinyin": "yín yǒng",
                 "englishDefinition": "to chant or recite poetry",
-                "chineseDefinition": "有感情地诵读诗文",
-                "example": "她喜欢在月下 ~ 古诗。",
+                "chineseDefinition": "（动）有感情地诵读诗文。",
+                "example": "1. 她喜欢在月下～古诗。",
                 "questions": [
                     "她喜欢在月下 ~ 古诗。"
                 ]
@@ -1517,8 +1517,8 @@
                 "word": "歌颂",
                 "pinyin": "gē sòng",
                 "englishDefinition": "to praise; to extol",
-                "chineseDefinition": "用言语或文字赞扬",
-                "example": "诗人用诗歌 ~ 祖国的大好河山。",
+                "chineseDefinition": "（动）用言语或文字赞扬。",
+                "example": "1. 诗人用诗歌～祖国的大好河山。\n2. 许多新谣歌曲通过轻快的旋律，～了新加坡平凡人的生活。",
                 "questions": [
                     "诗人用诗歌 ~ 祖国的大好河山。"
                 ]
@@ -1528,8 +1528,8 @@
                 "word": "脍炙人口",
                 "pinyin": "kuài zhì rén kǒu",
                 "englishDefinition": "widely acclaimed; well-known",
-                "chineseDefinition": "比喻好的事物人人称赞",
-                "example": "这首歌曲旋律优美， ~ 。",
+                "chineseDefinition": "（成语）比喻好的诗文或事物受到人们的称赞和传诵。",
+                "example": "1. 这部电影由于情节精彩感人，上映不久便成了～的佳作。",
                 "questions": [
                     "这首歌曲旋律优美， ~ 。"
                 ]
@@ -1539,8 +1539,8 @@
                 "word": "朝廷",
                 "pinyin": "cháo tíng",
                 "englishDefinition": "imperial court; ancient government",
-                "chineseDefinition": "古代皇帝处理政事的地方",
-                "example": "古代官员每天早上都要上朝向 ~ 汇报政务。",
+                "chineseDefinition": "（名）君主办公和接受朝见的地方；也指中央政府。",
+                "example": "古代官员每天早上都要上朝向～汇报政务。",
                 "questions": [
                     "古代官员每天早上都要上朝向 ~ 汇报政务。"
                 ]
@@ -1550,8 +1550,8 @@
                 "word": "派遣",
                 "pinyin": "pài qiǎn",
                 "englishDefinition": "to dispatch; to send",
-                "chineseDefinition": "派人前往执行任务",
-                "example": "公司 ~ 代表出席会议。",
+                "chineseDefinition": "（动）派人去特定地方做特定工作。",
+                "example": "1. 公司～代表出席会议。\n2. 联合国～了一支维和部队前往受战火波及的地区维护和平。",
                 "questions": [
                     "公司 ~ 代表出席会议。"
                 ]
@@ -1560,9 +1560,9 @@
                 "index": 7,
                 "word": "巡视",
                 "pinyin": "xún shì",
-                "englishDefinition": "to inspect; to check",
-                "chineseDefinition": "到各处查看、检查",
-                "example": "校长每天早上都会 ~ 校园。",
+                "englishDefinition": "make a tour of inspection",
+                "chineseDefinition": "（动）到各处查看、检查、视察。",
+                "example": "1. 校长每天早上都会～校园。\n2. 经理每天都会去各个部门～，以便了解员工的工作进度。",
                 "questions": [
                     "校长每天早上都会 ~ 校园。"
                 ]
@@ -1572,8 +1572,8 @@
                 "word": "喧哗",
                 "pinyin": "xuān huá",
                 "englishDefinition": "noisy; clamorous",
-                "chineseDefinition": "声音大而杂乱",
-                "example": "教室里太 ~ 了，老师皱起了眉头。",
+                "chineseDefinition": "（名/动）声音大而杂乱",
+                "example": "1. 小雨过后，渭城清晨原本热闹～的街道显得格外洁净。\n2. 图书馆是学习的地方，我们不应该在此大声～。",
                 "questions": [
                     "教室里太 ~ 了，老师皱起了眉头。"
                 ]
@@ -1583,8 +1583,8 @@
                 "word": "凄凉",
                 "pinyin": "qī liáng",
                 "englishDefinition": "desolate; bleak; sorrowful",
-                "chineseDefinition": "形容孤单、冷清、悲伤的感觉",
-                "example": "秋风吹过，空荡的庭院显得格外 ~ 。",
+                "chineseDefinition": "（形）寂寞冷落；形容景象或心境悲伤。",
+                "example": "1. 那个孤独的老人独坐窗前，神情显得十分～。",
                 "questions": [
                     "秋风吹过，空荡的庭院显得格外 ~ 。"
                 ]
@@ -1595,9 +1595,9 @@
                 "index": 1,
                 "word": "造诣",
                 "pinyin": "zào yì",
-                "englishDefinition": "attainment; accomplishment in arts or knowledge",
-                "chineseDefinition": "在学问、艺术等方面达到的高深程度",
-                "example": "他在文学方面有很高的 ~ 。",
+                "englishDefinition": "attainment; accomplishment",
+                "chineseDefinition": "（名）在学问、艺术等方面达到的高深程度。",
+                "example": "1. 他在文学方面有很高的～。\n2. 这位钢琴家在古典音乐方面的～深受同行们的钦佩。",
                 "questions": [
                     "他在文学方面有很高的 ~ 。"
                 ]
@@ -1607,8 +1607,8 @@
                 "word": "醉",
                 "pinyin": "zuì",
                 "englishDefinition": "drunk; intoxicated",
-                "chineseDefinition": "因喝酒过量或沉迷于某种情感中",
-                "example": "他 ~ 在美丽的风景中，忘记了时间。",
+                "chineseDefinition": "1. （形）饮酒过量神志不清。\n2. （动）沉迷于某种事物。",
+                "example": "1. 小酌可以怡情，大～则伤身。\n2. 面对如此美丽的夕阳，所有人都沉～其中，久久不愿离去。",
                 "questions": [
                     "他 ~ 在美丽的风景中，忘记了时间。"
                 ]
@@ -1618,8 +1618,8 @@
                 "word": "潇洒",
                 "pinyin": "xiāo sǎ",
                 "englishDefinition": "natural and unrestrained",
-                "chineseDefinition": "自然大方，不拘束",
-                "example": "他走路的姿态十分 ~ 。",
+                "chineseDefinition": "（形）自然大方，不受拘束。",
+                "example": "1. 这是一首浪漫、～的名篇，体现了诗人的博大胸怀。\n2. 他不仅字写得好，为人处事也非常～，从不计较小事。",
                 "questions": [
                     "他走路的姿态十分 ~ 。"
                 ]
@@ -1629,8 +1629,8 @@
                 "word": "媲美",
                 "pinyin": "pì měi",
                 "englishDefinition": "to compare favorably with",
-                "chineseDefinition": "相媲美，意思是可以相提并论",
-                "example": "这部电影的特效可以 ~ 好莱坞大片。",
+                "chineseDefinition": "（动）美好的程度可以相比。",
+                "example": "1. 这部电影的特效可以～好莱坞大片。\n2. 这家餐馆的厨艺高超，做出的家常菜竟然能与五星级酒店的美味相～。",
                 "questions": [
                     "这部电影的特效可以 ~ 好莱坞大片。"
                 ]
@@ -1639,9 +1639,9 @@
                 "index": 5,
                 "word": "豪放",
                 "pinyin": "háo fàng",
-                "englishDefinition": "bold and uninhibited",
-                "chineseDefinition": "性格或风格奔放，不拘小节",
-                "example": "苏轼的诗词风格 ~ 大气。",
+                "englishDefinition": "bold and unconstrained",
+                "chineseDefinition": "（形）性格或风格奔放，不拘小节。",
+                "example": "1. 这种～的性格让他结交了很多志同道合的朋友。",
                 "questions": [
                     "苏轼的诗词风格 ~ 大气。"
                 ]
@@ -1651,8 +1651,8 @@
                 "word": "仕途",
                 "pinyin": "shì tú",
                 "englishDefinition": "official career",
-                "chineseDefinition": "做官的道路或生涯",
-                "example": "他在 ~ 中屡屡升迁，事业有成。",
+                "chineseDefinition": "（名）做官的道路。",
+                "example": "1. 虽然他一生～坎坷，但他始终保持着乐观豁达的心态。",
                 "questions": [
                     "他在 ~ 中屡屡升迁，事业有成。"
                 ]
@@ -1665,9 +1665,9 @@
                 "index": 1,
                 "word": "匹",
                 "pinyin": "pǐ",
-                "englishDefinition": "measure word for horses or a pair",
-                "chineseDefinition": "用于马、骡等；也指相当、配对",
-                "example": "这是一 ~ 健壮的军马。",
+                "englishDefinition": "measure word for horses or bolts，a pair",
+                "chineseDefinition": "（量）用于马、骡或成卷的布帛。",
+                "example": "1. 这是一～健壮的军马。\n2. 纺织女工在织布机前忙碌，生产出了一～又一～漂亮的丝绸。",
                 "questions": [
                     "这是一 ~ 健壮的军马。"
                 ]
@@ -1677,8 +1677,8 @@
                 "word": "喜极而泣",
                 "pinyin": "xǐ jí ér qì",
                 "englishDefinition": "cry tears of joy",
-                "chineseDefinition": "因极度高兴而流下眼泪",
-                "example": "听到儿子获奖的消息，母亲 ~ 。",
+                "chineseDefinition": "（成语）因极度高兴而流下眼泪。",
+                "example": "1. 听到自己终于通过了艰难的面试，他竟然激动得～。\n2. 多年未见的母子在机场重逢，两人紧紧相拥，～。",
                 "questions": [
                     "听到儿子获奖的消息，母亲 ~ 。"
                 ]
@@ -1687,9 +1687,9 @@
                 "index": 3,
                 "word": "小巫见大巫",
                 "pinyin": "xiǎo wū jiàn dà wū",
-                "englishDefinition": "pale in comparison",
-                "chineseDefinition": "比喻相形见绌，远远不如",
-                "example": "他的表演让我自叹不如，简直是 ~ 。",
+                "englishDefinition": "be dwarfed by comparison.",
+                "chineseDefinition": "（成语）比喻两者相差太远，无法相比。",
+                "example": "1. 他的那点收藏在真正的古董收藏家面前，简直是～。\n2. 这个小池塘的景色虽然不错，但比起滨海湾的壮观美景来，真是～。",
                 "questions": [
                     "他的表演让我自叹不如，简直是 ~ 。"
                 ]
@@ -1699,8 +1699,8 @@
                 "word": "发疯",
                 "pinyin": "fā fēng",
                 "englishDefinition": "go crazy",
-                "chineseDefinition": "精神失常或极度情绪化",
-                "example": "他因为找不到孩子，几乎要 ~ 。",
+                "chineseDefinition": "1.（动）神志不清，失去理智。\n2. （形）形容行为极度疯狂。",
+                "example": "1. 临行前才发现护照不见了，我急得快发疯了。\n2. 那只受惊的野马在草原上～似地奔跑，谁也拦不住。",
                 "questions": [
                     "他因为找不到孩子，几乎要 ~ 。"
                 ]
@@ -1709,9 +1709,9 @@
                 "index": 5,
                 "word": "情侣",
                 "pinyin": "qíng lǚ",
-                "englishDefinition": "couple",
-                "chineseDefinition": "有爱情关系的一对男女",
-                "example": "这对 ~ 在海边散步。",
+                "englishDefinition": "couple ； lovers",
+                "chineseDefinition": "（名）相恋的男女。",
+                "example": "1. 傍晚的河畔是许多～散步的好去处，景色非常浪漫。\n2. 那对穿着～装的年轻人手牵手走在街头，引来不少路人驻足。",
                 "questions": [
                     "这对 ~ 在海边散步。"
                 ]
@@ -1721,8 +1721,8 @@
                 "word": "反馈",
                 "pinyin": "fǎn kuì",
                 "englishDefinition": "feedback; response",
-                "chineseDefinition": "回应或反应信息",
-                "example": "老师根据学生的 ~ 调整了教学方法。",
+                "chineseDefinition": "1.（动）把信息、意见返回。\n2.（名）对事物的评价。",
+                "example": "1. 为了维持表面的和气而提供“假～”，往往会导致沟通不畅。\n2. 老师根据学生的～调整了教学方法。",
                 "questions": [
                     "老师根据学生的 ~ 调整了教学方法。"
                 ]
@@ -1732,8 +1732,8 @@
                 "word": "寻觅",
                 "pinyin": "xún mì",
                 "englishDefinition": "seek; search for",
-                "chineseDefinition": "寻找、探求",
-                "example": "他在城市中四处 ~ 失散多年的朋友。",
+                "chineseDefinition": "（动）寻找、探求",
+                "example": "1. 他在城市中四处～失散多年的朋友。",
                 "questions": [
                     "他在城市中四处 ~ 失散多年的朋友。"
                 ]
@@ -1743,8 +1743,8 @@
                 "word": "编辑",
                 "pinyin": "biān jí",
                 "englishDefinition": "edit; editor",
-                "chineseDefinition": "整理、修改、编写资料或文字的人",
-                "example": "他是这本杂志的责任 ~ 。",
+                "chineseDefinition": "1. （动）整理、修改。\n2. （名）编写资料或文字的人。",
+                "example": "1. 他是这本杂志的责任～。\n2. 这部纪录片的后期～工作耗费了制作团队数月的心血。",
                 "questions": [
                     "他是这本杂志的责任 ~ 。"
                 ]
@@ -1756,8 +1756,8 @@
                 "word": "燕子",
                 "pinyin": "yàn zi",
                 "englishDefinition": "swallow (bird)",
-                "chineseDefinition": "一种春天常见的小鸟",
-                "example": "每年春天， ~ 都会飞回老屋的屋檐下筑巢。",
+                "chineseDefinition": "（名）一种候鸟，常在春天飞回北方。",
+                "example": "1. 每年春天，～都会飞回老屋的屋檐下筑巢。",
                 "questions": [
                     "每年春天， ~ 都会飞回老屋的屋檐下筑巢。"
                 ]
@@ -1767,8 +1767,8 @@
                 "word": "杨柳",
                 "pinyin": "yáng liǔ",
                 "englishDefinition": "willow tree",
-                "chineseDefinition": "杨树和柳树的合称",
-                "example": " ~ 依依的春天，总让人心生柔情。",
+                "chineseDefinition": "（名）杨树和柳树的合称；常借杨柳依依表达思念。",
+                "example": "1. 湖畔的～在微风中轻轻摇曳，仿佛在欢迎远方的游客。",
                 "questions": [
                     "~ 依依的春天，总让人心生柔情。"
                 ]
@@ -1778,8 +1778,8 @@
                 "word": "涔涔",
                 "pinyin": "cén cén",
                 "englishDefinition": "dripping; glistening with sweat",
-                "chineseDefinition": "形容液体流动或汗水流下的样子",
-                "example": "他跑完步后，额头汗流 ~ 。",
+                "chineseDefinition": "（形）形容液体流动或汗水流下的样子。",
+                "example": "1. 剧烈运动后，运动员额头上已经是汗～的，正大口喘着气。",
                 "questions": [
                     "他跑完步后，额头汗流 ~ 。"
                 ]
@@ -1788,9 +1788,9 @@
                 "index": 4,
                 "word": "潸潸",
                 "pinyin": "shān shān",
-                "englishDefinition": "(of tears) streaming down",
-                "chineseDefinition": "形容眼泪不断流下",
-                "example": "听到这消息，她泪 ~ 地哭了。",
+                "englishDefinition": "(of tears) streaming down ；tearfully.",
+                "chineseDefinition": "（形）形容眼泪不断流下。",
+                "example": "1. 听到外婆去世的噩耗，她忍不住泪～而下，伤心不已。",
                 "questions": [
                     "听到这消息，她泪 ~ 地哭了。"
                 ]
@@ -1800,8 +1800,8 @@
                 "word": "伶俐",
                 "pinyin": "líng lì",
                 "englishDefinition": "clever; smart",
-                "chineseDefinition": "聪明灵巧",
-                "example": "这个小女孩聪明 ~ ，大家都很喜欢她。",
+                "chineseDefinition": "（形）聪明、灵活。",
+                "example": "1. 这个小姑娘口齿～，说起话来像连珠炮似的，非常讨人喜欢。",
                 "questions": [
                     "这个小女孩聪明 ~ ，大家都很喜欢她。"
                 ]
@@ -1811,8 +1811,8 @@
                 "word": "徘徊",
                 "pinyin": "pái huái",
                 "englishDefinition": "wander; hesitate",
-                "chineseDefinition": "来回走动或犹豫不决",
-                "example": "他在街头 ~ ，不知道该往哪儿走。",
+                "chineseDefinition": "（动）在一个地方来回地走；比喻犹疑不决。",
+                "example": "1. 他在街头～～，不知道该往哪儿走。",
                 "questions": [
                     "他在街头 ~ ，不知道该往哪儿走。"
                 ]
@@ -1822,8 +1822,8 @@
                 "word": "雾",
                 "pinyin": "wù",
                 "englishDefinition": "fog; mist",
-                "chineseDefinition": "空气中悬浮的微小水滴形成的自然现象",
-                "example": "清晨的山谷笼罩在一层薄 ~ 中。",
+                "chineseDefinition": "（名）水汽在地表附近凝结成的小水滴。",
+                "example": "1. 过去的日子像薄～，被初阳蒸融了，没有留下一点痕迹。\n2. 清晨，山间大～弥漫，十米之外就看不清路人的面孔了。",
                 "questions": [
                     "清晨的山谷笼罩在一层薄 ~ 中。"
                 ]
@@ -1833,8 +1833,8 @@
                 "word": "感喟",
                 "pinyin": "gǎn kuì",
                 "englishDefinition": "sigh with emotion",
-                "chineseDefinition": "因感触深而叹息",
-                "example": "看到老照片，他不禁 ~ 时光流逝。",
+                "chineseDefinition": "（动）因感触深而叹息。",
+                "example": "看到老照片，他不禁感喟时光流逝。",
                 "questions": [
                     "看到老照片，他不禁 ~ 时光流逝。"
                 ]
@@ -1844,8 +1844,8 @@
                 "word": "拟人",
                 "pinyin": "nǐ rén",
                 "englishDefinition": "personification",
-                "chineseDefinition": "一种修辞手法，把事物当作人来写",
-                "example": "“小草在微风中点头”是一个 ~ 的例子。",
+                "chineseDefinition": "（名）一种修辞手法，把事物当作人来写。",
+                "example": "1. 作者在文中运用了～的手法，赋予了时光人的情感和动作。",
                 "questions": [
                     "“小草在微风中点头”是一个 ~ 的例子。"
                 ]
@@ -1855,8 +1855,8 @@
                 "word": "轻盈",
                 "pinyin": "qīng yíng",
                 "englishDefinition": "light and graceful",
-                "chineseDefinition": "轻快灵巧",
-                "example": "她 ~ 地走上舞台，像一只蝴蝶。",
+                "chineseDefinition": "形（形）容动作轻快，或身材苗条。",
+                "example": "1. 她在舞台上翩翩起舞，那～的舞姿赢得了台下阵阵喝彩。\n2. 这种昆虫体型小巧，飞行时显得格外～灵活。",
                 "questions": [
                     "她 ~ 地走上舞台，像一只蝴蝶。"
                 ]
@@ -1866,8 +1866,8 @@
                 "word": "执着",
                 "pinyin": "zhí zhuó",
                 "englishDefinition": "persistent",
-                "chineseDefinition": "坚持不放弃",
-                "example": "他 ~ 地追求自己的理想，从未动摇。",
+                "chineseDefinition": "（形/动）对某一事物坚持不放。",
+                "example": "1. 尽管遭到家人的反对，他依然～地坚持自己的艺术梦想。\n2. 这种对学问～钻研的精神，正是每一位学者应该具备的品质。",
                 "questions": [
                     "他 ~ 地追求自己的理想，从未动摇。"
                 ]
@@ -1877,8 +1877,8 @@
                 "word": "韶华",
                 "pinyin": "sháo huá",
                 "englishDefinition": "prime of youth",
-                "chineseDefinition": "美好的青春年华",
-                "example": "要珍惜 ~ ，莫负青春。",
+                "chineseDefinition": "（名）比喻美好的青春时代。",
+                "example": "1. 青春不应被荒废，我们应当珍惜～，努力学习知识。\n2. 看着孩子们的笑脸，她感叹时光荏苒，自己的～已然不在。",
                 "questions": [
                     "要珍惜 ~ ，莫负青春。"
                 ]
@@ -1887,9 +1887,9 @@
                 "index": 13,
                 "word": "缜密",
                 "pinyin": "zhěn mì",
-                "englishDefinition": "meticulous",
-                "chineseDefinition": "周密、细致",
-                "example": "他思维 ~ ，常能发现别人忽略的细节。",
+                "englishDefinition": "meticulous ； thorough",
+                "chineseDefinition": "（形）周密、细致。",
+                "example": "1. 这篇议论文逻辑～，论证充分，让人心服口服。\n2. 警察经过～的侦查，终于锁定了嫌疑人的行踪。",
                 "questions": [
                     "他思维 ~ ，常能发现别人忽略的细节。"
                 ]
@@ -1899,8 +1899,8 @@
                 "word": "逻辑",
                 "pinyin": "luó jí",
                 "englishDefinition": "logic",
-                "chineseDefinition": "思维和推理的规律",
-                "example": "你的论点要有 ~ ，才能让人信服。",
+                "chineseDefinition": "（名）思维和推理的规律。",
+                "example": "1. 他的发言漏洞百出，完全缺乏基本的～性。\n2. 数学是一门讲究～思维的学科，需要极高的专注力。",
                 "questions": [
                     "你的论点要有 ~ ，才能让人信服。"
                 ]
@@ -1910,8 +1910,8 @@
                 "word": "惋惜",
                 "pinyin": "wǎn xī",
                 "englishDefinition": "feel sorry for; regret",
-                "chineseDefinition": "可惜、叹息",
-                "example": "听到他离世的消息，大家都深感 ~ 。",
+                "chineseDefinition": "（动）对意外的变故或失误表示遗憾。",
+                "example": "1. 这位才华横溢的年轻艺术家英年早逝，实在令人深感～。\n2. 由于错失良机，他失去了夺冠的机会，队友们都为他感到～。",
                 "questions": [
                     "听到他离世的消息，大家都深感 ~ 。"
                 ]
@@ -1923,8 +1923,8 @@
                 "word": "姹紫嫣红",
                 "pinyin": "chà zǐ yān hóng",
                 "englishDefinition": "a riot of colors",
-                "chineseDefinition": "形容花朵色彩丰富、艳丽多姿",
-                "example": "春天的公园里，百花盛开， ~ ，美不胜收。",
+                "chineseDefinition": "（成语）形容鲜花色彩娇艳。",
+                "example": "春天的公园里，百花盛开，姹紫嫣红，美不胜收。",
                 "questions": [
                     "春天的公园里，百花盛开， ~ ，美不胜收。"
                 ]
@@ -1933,9 +1933,9 @@
                 "index": 2,
                 "word": "莲花",
                 "pinyin": "lián huā",
-                "englishDefinition": "lotus flower",
-                "chineseDefinition": "一种生长在水中的花，象征纯洁高尚",
-                "example": "池塘里盛开的 ~ ，散发着淡淡的清香。",
+                "englishDefinition": "lotus ",
+                "chineseDefinition": "（名）一种生长在水中的花，象征纯洁高尚。",
+                "example": "她的微笑如昙花一现，短暂而美丽。",
                 "questions": [
                     "池塘里盛开的 ~ ，散发着淡淡的清香。"
                 ]
@@ -1945,8 +1945,8 @@
                 "word": "昙花",
                 "pinyin": "tán huā",
                 "englishDefinition": "epiphyllum (short-lived flower)",
-                "chineseDefinition": "一种夜间开放、花期极短的植物",
-                "example": "她的微笑如 ~ 一现，短暂而美丽。",
+                "chineseDefinition": "（名）一种在夜间开放且时间极短的花；也比喻美好的事物短暂。",
+                "example": "1. 那段所谓的繁荣只不过是～一现，很快就因为经济危机而消失了。\n2. 为了亲眼看一看～开放的瞬间，他守在花前整整一个晚上。",
                 "questions": [
                     "她的微笑如 ~ 一现，短暂而美丽。"
                 ]
@@ -1955,9 +1955,9 @@
                 "index": 4,
                 "word": "蓓蕾",
                 "pinyin": "bèi lěi",
-                "englishDefinition": "bud",
-                "chineseDefinition": "含苞未放的花朵",
-                "example": "春风吹拂，枝头的 ~ 悄然绽放。",
+                "englishDefinition": "flower bud",
+                "chineseDefinition": "（名）花蕾；含苞待放的花。",
+                "example": "1. 枝头上长满了一个个娇嫩的～，预示着春天即将到来。\n2. 老师常把学生比作含苞的～，精心呵护他们茁壮成长。",
                 "questions": [
                     "春风吹拂，枝头的 ~ 悄然绽放。"
                 ]
@@ -1967,8 +1967,8 @@
                 "word": "含苞待放",
                 "pinyin": "hán bāo dài fàng",
                 "englishDefinition": "about to bloom",
-                "chineseDefinition": "形容花朵快要开放；比喻事物即将成熟",
-                "example": "花园里的玫瑰 ~ ，娇嫩可爱。",
+                "chineseDefinition": "（成语）形容花朵快要开放；比喻事物即将成熟。",
+                "example": "1. 那朵～的百合花只要再过一晚，就能完全绽放了。\n2. 阳台上的玫瑰花～，充满了无限的生机。",
                 "questions": [
                     "花园里的玫瑰 ~ ，娇嫩可爱。"
                 ]
@@ -1977,9 +1977,9 @@
                 "index": 6,
                 "word": "静谧",
                 "pinyin": "jìng mì",
-                "englishDefinition": "tranquil; peaceful",
-                "chineseDefinition": "安静宁和",
-                "example": "夜色笼罩下的小镇显得格外 ~ 。",
+                "englishDefinition": "quiet; peaceful",
+                "chineseDefinition": "（形）安静、宁静。",
+                "example": "1. 在那个～的月夜，我独自在河畔漫步，思念远方的家人。\n2. 这里的森林环境十分～祥和，偶尔能听到清脆的鸟鸣声。",
                 "questions": [
                     "夜色笼罩下的小镇显得格外 ~ 。"
                 ]
@@ -1989,8 +1989,8 @@
                 "word": "茗",
                 "pinyin": "míng",
                 "englishDefinition": "tea; fine tea",
-                "chineseDefinition": "茶的雅称",
-                "example": "午后，他喜欢独自品 ~ ，享受宁静时光。",
+                "chineseDefinition": "（名）茶。",
+                "example": "1. 三两好友聚在一起品～聊天，是人生的一大乐事。\n2. 爷爷最喜欢在下午坐在庭院里，泡一壶好～慢慢享用。",
                 "questions": [
                     "午后，他喜欢独自品 ~ ，享受宁静时光。"
                 ]
@@ -1999,9 +1999,9 @@
                 "index": 8,
                 "word": "枯萎",
                 "pinyin": "kū wěi",
-                "englishDefinition": "wither",
-                "chineseDefinition": "植物失去水分后干枯凋谢",
-                "example": "没有阳光和水分，花朵很快就 ~ 了。",
+                "englishDefinition": "withered; shriveled.",
+                "chineseDefinition": "（形/动）植物失去水分后干枯凋谢。",
+                "example": "1. 没有阳光和水分，花朵很快就枯萎了。\n2. 虽然花朵已经～，但它散发出的淡淡余香依然留在书页中。",
                 "questions": [
                     "没有阳光和水分，花朵很快就 ~ 了。"
                 ]
@@ -2011,8 +2011,8 @@
                 "word": "花蕊",
                 "pinyin": "huā ruǐ",
                 "englishDefinition": "stamen；pistil",
-                "chineseDefinition": "花的中心部分，能产生花粉或种子",
-                "example": "蜜蜂在 ~ 间忙碌地采蜜。",
+                "chineseDefinition": "（名）花的中心部分，能产生花粉。",
+                "example": "1. 蜜蜂在～间飞来飞去，忙碌地采集着花粉。\n2. 透过放大镜，我们可以清晰地观察到～细微的构造。",
                 "questions": [
                     "蜜蜂在 ~ 间忙碌地采蜜。"
                 ]
@@ -2022,8 +2022,8 @@
                 "word": "羁绊",
                 "pinyin": "jī bàn",
                 "englishDefinition": "tie; bond; constraint",
-                "chineseDefinition": "拘束、牵挂或阻碍",
-                "example": "他放下了所有 ~ ，踏上新的旅程。",
+                "chineseDefinition": "（名/动）拘束、牵挂或阻碍。",
+                "example": "1. 我们应该将过去的失败视为一种历练，而不是被它所～。\n2. 虽然远在异国他乡，但家人的牵挂始终是他心中最深的情感～。",
                 "questions": [
                     "他放下了所有 ~ ，踏上新的旅程。"
                 ]

@@ -2,7 +2,7 @@
 //  FlashcardItem.swift
 //  Xuemi
 //
-//  Created by Tristan Chay on 14/6/26.
+//  Created by Gracelyn Gosal on 14/6/26.
 //
 
 import SwiftUI

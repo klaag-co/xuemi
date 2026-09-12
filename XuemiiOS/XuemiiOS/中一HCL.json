@@ -16,7 +16,7 @@
                 "index": 2,
                 "word": "惹",
                 "pinyin": "rě",
-                "englishDefinition": "cause trouble\nbring about something bad",
+                "englishDefinition": "cause trouble bring about something bad",
                 "chineseDefinition": "1. （动）招引；引起（多指不好的事情）\n2. （动）触犯；招致",
                 "example": "说话不谨慎，最容易～是非。",
                 "questions": [
@@ -60,7 +60,7 @@
             {
                 "index": 6,
                 "word": "有福同享，有难同当",
-                "pinyin": "yǒu fú tóng xiǎng, \nyǒu nàn tóng dāng",
+                "pinyin": "yǒu fú tóng xiǎng, yǒu nàn tóng dāng",
                 "englishDefinition": "share blessings and hardships",
                 "chineseDefinition": "（成语）共同分享幸福，共同承担困难。",
                 "example": "他们是～的好兄弟。",
@@ -97,7 +97,7 @@
                 "pinyin": "zhào",
                 "englishDefinition": "Zhao",
                 "chineseDefinition": "姓氏。",
-                "example": "\"我的朋友姓“~”，这个姓氏在新加坡不常见。\"",
+                "example": "-",
                 "questions": []
             },
             {
@@ -855,8 +855,8 @@
                 "word": "酷",
                 "pinyin": "kù",
                 "englishDefinition": " (loanword) cool; hip",
-                "chineseDefinition": "（形）形容人或事物“很时髦、很有型、很帅气”（口语色彩）。\n",
-                "example": "他时髦的打扮非常～，吸引了不少人的目光。\n",
+                "chineseDefinition": "（形）形容人或事物“很时髦、很有型、很帅气”（口语色彩）。",
+                "example": "他时髦的打扮非常～，吸引了不少人的目光。",
                 "questions": [
                     "他时髦的打扮非常～，吸引了不少人的目光。"
                 ]
@@ -1091,7 +1091,7 @@
                 "pinyin": "tàn",
                 "englishDefinition": "carbon; charcoal",
                 "chineseDefinition": "1. （名）一种化学元素。\n2. （名）用来燃烧取暖或烧烤的木炭。",
-                "example": "1. 碳是一种常见的化学元素。\n2. 他用木炭生火烧烤。\n\n",
+                "example": "1. 碳是一种常见的化学元素。\n2. 他用木炭生火烧烤。",
                 "questions": [
                     "碳是一种常见的化学元素。",
                     "他用木炭生火烧烤。"
@@ -1493,7 +1493,7 @@
                 "word": "株",
                 "pinyin": "zhū",
                 "englishDefinition": "a plant; classifier for trees or plants; strain (biology)",
-                "chineseDefinition": "1. （名）植物露在地面上的茎和根\n2. （量词）用于某些植物。\n\n\n\n\n\n",
+                "chineseDefinition": "1. （名）植物露在地面上的茎和根\n2. （量词）用于某些植物。",
                 "example": "1. 伐木过后，山里留下了许多光秃秃的树～。\n2. 山脚下那几～老槐树，已经有上百年的历史了。",
                 "questions": [
                     "伐木过后，山里留下了许多光秃秃的树～。",
@@ -1543,7 +1543,7 @@
                 "pinyin": "bèng tiào",
                 "englishDefinition": "to hop; to jump",
                 "chineseDefinition": "（动）跳跃",
-                "example": "听到他们获奖的消息，他高兴得～起来。\n",
+                "example": "听到他们获奖的消息，他高兴得～起来。",
                 "questions": [
                     "听到他们获奖的消息，他高兴得～起来。"
                 ]
@@ -1627,7 +1627,7 @@
                 "pinyin": "zì zhì",
                 "englishDefinition": "autonomy",
                 "chineseDefinition": "（动）民族、团体、地区等除了受所隶属的国家、政府或上级单位领导外，对自己的事务行使一定的权力。",
-                "example": "在一些国家，少数民族地区拥有～权，以保护他们文化和传统。\n",
+                "example": "在一些国家，少数民族地区拥有～权，以保护他们文化和传统。",
                 "questions": [
                     "在一些国家，少数民族地区拥有～权，以保护他们文化和传统。"
                 ]
@@ -1746,10 +1746,10 @@
             {
                 "index": 4,
                 "word": "薄",
-                "pinyin": "báo (口语常用，单用) \nbó (用于合成词或成语)",
+                "pinyin": "báo",
                 "englishDefinition": "thin; light; weak; infertile",
                 "chineseDefinition": "1. （形）厚度小。\n2. （形）不浓；淡。\n3. （形）不肥沃。\n4. （形）感情不深。\n5. （动）看不起；慢待。",
-                "example": "1. 这本书很～，我一个小时就能看完。\n2. 这杯酒味道很～，像掺了水。\n3. 经过改良，原本贫～的荒山变成了良田。\n4. 他们只是普通朋友，交情很～。\n5. 他为人厚道，从不厚此～彼。\n\n",
+                "example": "1. 这本书很～，我一个小时就能看完。\n2. 这杯酒味道很～，像掺了水。\n3. 经过改良，原本贫～的荒山变成了良田。\n4. 他们只是普通朋友，交情很～。\n5. 他为人厚道，从不厚此～彼。",
                 "questions": [
                     "这本书很～，我一个小时就能看完。",
                     "这杯酒味道很～，像掺了水。",
@@ -1987,7 +1987,7 @@
             },
             {
                 "index": 3,
-                "word": "挪窝\n",
+                "word": "挪窝",
                 "pinyin": "nuó wō",
                 "englishDefinition": "to move (house); to shift",
                 "chineseDefinition": "1. （动）离开原来居住的地方；搬家。\n2. （动）移动位置。",
@@ -2166,7 +2166,7 @@
                 "pinyin": "sǎng zi yǎn",
                 "englishDefinition": "throat",
                 "chineseDefinition": "（名）喉咙口。",
-                "example": "1. 我双脚直发抖，心提到了～。\n2. 吃得太急，他感觉食物卡在了～里。\n3. 看到突发状况，他的心提到了～。\n",
+                "example": "1. 我双脚直发抖，心提到了～。\n2. 吃得太急，他感觉食物卡在了～里。\n3. 看到突发状况，他的心提到了～。",
                 "questions": [
                     "我双脚直发抖，心提到了～。",
                     "吃得太急，他感觉食物卡在了～里。",
@@ -2441,7 +2441,7 @@
                 ]
             }
         ],
-        "海底牧场游记\n": [
+        "海底牧场游记": [
             {
                 "index": 1,
                 "word": "牧场",
@@ -2520,7 +2520,7 @@
                 "pinyin": "fáng fǔ",
                 "englishDefinition": "to seem; as if; alike; similar",
                 "chineseDefinition": "1. （副）似乎；好像。\n2. （副）像；类似。 ",
-                "example": "1. 老师～是一盏灯，为我们照亮前方的路。\n2. 她听到这首老歌时，～回到了无忧无虑的童年。\n",
+                "example": "1. 老师～是一盏灯，为我们照亮前方的路。\n2. 她听到这首老歌时，～回到了无忧无虑的童年。",
                 "questions": [
                     "老师～是一盏灯，为我们照亮前方的路。",
                     "她听到这首老歌时，～回到了无忧无虑的童年。"
@@ -2569,7 +2569,7 @@
                 "pinyin": "yī hōng ér sàn",
                 "englishDefinition": "to disperse in confusion (idiom)",
                 "chineseDefinition": "（成语）形容聚在一起的人一下子吵吵嚷嚷地走散了。 ",
-                "example": "1. 李老师一进教室，这群正在追逐打闹的学生就立即～。\n2. 听到警报响起，人群立刻～，四处逃避。\n",
+                "example": "1. 李老师一进教室，这群正在追逐打闹的学生就立即～。\n2. 听到警报响起，人群立刻～，四处逃避。",
                 "questions": [
                     "李老师一进教室，这群正在追逐打闹的学生就立即～。",
                     "听到警报响起，人群立刻～，四处逃避。"
@@ -2605,7 +2605,7 @@
                 "pinyin": "fàn",
                 "englishDefinition": "to float; to be suffused with; general; extensive",
                 "chineseDefinition": "1. （动）漂浮。\n2. （动）透出。\n3. （动）广泛。\n4. （形）肤浅；不深入。",
-                "example": "1. 啤酒倒入杯中，～起细腻的白色泡沫。\n2. 我们～舟湖上，欣赏美景。\n3. 知道自己赢了比赛，他的脸上～起喜悦的光彩。\n4.她听到这个消息时，眼中～起了泪光。\n5. 这本书我只～读了一遍，没仔细研究。\n6. 这篇文章只是～～而谈，缺乏深度分析。\n",
+                "example": "1. 啤酒倒入杯中，～起细腻的白色泡沫。\n2. 我们～舟湖上，欣赏美景。\n3. 知道自己赢了比赛，他的脸上～起喜悦的光彩。\n4.她听到这个消息时，眼中～起了泪光。\n5. 这本书我只～读了一遍，没仔细研究。\n6. 这篇文章只是～～而谈，缺乏深度分析。",
                 "questions": [
                     "啤酒倒入杯中，～起细腻的白色泡沫。",
                     "我们～舟湖上，欣赏美景。",
@@ -2704,7 +2704,7 @@
                 "pinyin": "yín háng",
                 "englishDefinition": "bank",
                 "chineseDefinition": "（名）银行是依法设立的经营金融业务的机构。",
-                "example": "1. 他去～存了一笔钱，为将来做准备。\n2. 现在的社会科技发达，我们在家里就能登入～账户办理业务，不需要到银行。\n\n",
+                "example": "1. 他去～存了一笔钱，为将来做准备。\n2. 现在的社会科技发达，我们在家里就能登入～账户办理业务，不需要到银行。",
                 "questions": [
                     "他去～存了一笔钱，为将来做准备。",
                     "现在的社会科技发达，我们在家里就能登入～账户办理业务，不需要到银行。"
@@ -2716,7 +2716,7 @@
                 "pinyin": "yóu zhōng",
                 "englishDefinition": "heartfelt; sincere",
                 "chineseDefinition": "（副）出于本心。",
-                "example": "1. 面对车窗外美丽的景色，乘客们不时发出～的赞叹。\n2. 他～地感谢老师对他的帮助和支持。\n",
+                "example": "1. 面对车窗外美丽的景色，乘客们不时发出～的赞叹。\n2. 他～地感谢老师对他的帮助和支持。",
                 "questions": [
                     "面对车窗外美丽的景色，乘客们不时发出～的赞叹。",
                     "他～地感谢老师对他的帮助和支持。"
@@ -2995,7 +2995,7 @@
                 "pinyin": "mù hòu",
                 "englishDefinition": "behind the scenes",
                 "chineseDefinition": "（名）舞台帐幕的后面。比喻背着人暗中活动的地方，或指不公开的、背后的工作或人物。",
-                "example": "1. 这场精彩的演出离不开～工作人员的辛勤付出。\n2. 他虽然是公司的董事长，但早已退居～，日常事务都由总经理负责。\n",
+                "example": "1. 这场精彩的演出离不开～工作人员的辛勤付出。\n2. 他虽然是公司的董事长，但早已退居～，日常事务都由总经理负责。",
                 "questions": [
                     "这场精彩的演出离不开～工作人员的辛勤付出。",
                     "他虽然是公司的董事长，但早已退居～，日常事务都由总经理负责。"
@@ -3069,7 +3069,7 @@
                 "pinyin": "jiù xù",
                 "englishDefinition": "to be ready; to be in order",
                 "chineseDefinition": "（形）事情已安排妥当。 ",
-                "example": "1. 一切准备～，只等演出开始了。\n2. 他收拾好行李，整装～，随时可以出发。\n3. 比赛场地已经准备～，只等选手入场。\n",
+                "example": "1. 一切准备～，只等演出开始了。\n2. 他收拾好行李，整装～，随时可以出发。\n3. 比赛场地已经准备～，只等选手入场。",
                 "questions": [
                     "一切准备～，只等演出开始了。",
                     "他收拾好行李，整装～，随时可以出发。",
@@ -3081,7 +3081,7 @@
                 "word": "隧道",
                 "pinyin": "suì dào",
                 "englishDefinition": "tunnel",
-                "chineseDefinition": "（名）指在山中、地下或水下凿成的通道，用于通行车辆、火车、行人或铺设管道等。\n\n",
+                "chineseDefinition": "（名）指在山中、地下或水下凿成的通道，用于通行车辆、火车、行人或铺设管道等。",
                 "example": "1. 这条海底～连接了两座城市，大大缩短了通行时间。\n2. 地铁～内灯光昏暗，列车缓缓前行。",
                 "questions": [
                     "这条海底～连接了两座城市，大大缩短了通行时间。",

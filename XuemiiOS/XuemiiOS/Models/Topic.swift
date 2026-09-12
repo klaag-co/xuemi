@@ -2,7 +2,7 @@
 //  Topic.swift
 //  Xuemi
 //
-//  Created by Tristan Chay on 19/6/26.
+//  Created by Gracelyn Gosal on 19/6/26.
 //
 
 import Foundation

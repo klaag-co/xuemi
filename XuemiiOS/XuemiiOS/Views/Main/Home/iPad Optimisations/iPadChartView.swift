@@ -2,7 +2,7 @@
 //  iPadChartView.swift
 //  Xuemi
 //
-//  Created by Tristan Chay on 17/8/26.
+//  Created by Gracelyn Gosal on 17/8/26.
 //
 
 import SwiftUI

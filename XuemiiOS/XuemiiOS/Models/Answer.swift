@@ -2,7 +2,7 @@
 //  Answer.swift
 //  Xuemi
 //
-//  Created by Tristan Chay on 18/6/26.
+//  Created by Gracelyn Gosal on 18/6/26.
 //
 
 import Foundation

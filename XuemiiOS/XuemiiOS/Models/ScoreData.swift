@@ -2,7 +2,7 @@
 //  ScoreData.swift
 //  Xuemi
 //
-//  Created by Tristan Chay on 17/6/26.
+//  Created by Gracelyn Gosal on 17/6/26.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  SettingsManager.swift
 //  Xuemi
 //
-//  Created by Tristan Chay on 18/8/26.
+//  Created by Gracelyn Gosal on 18/8/26.
 //
 
 import Foundation

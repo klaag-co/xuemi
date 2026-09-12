@@ -2,7 +2,7 @@
 //  iPadHomeView.swift
 //  Xuemi
 //
-//  Created by Tristan Chay on 13/6/26.
+//  Created by Gracelyn Gosal on 13/6/26.
 //
 
 import SwiftUI

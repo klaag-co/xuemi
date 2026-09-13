@@ -119,8 +119,9 @@ struct MemoryCardView: View {
     }
 
     func startCountdown() {
-        countdownTimer?.invalidate()
-        timeRemaining = 15
+        guard timeRemaining > 0 else { return }
+        guard countdownTimer == nil else { return }
+
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             if timeRemaining > 0 {
                 timeRemaining -= 1

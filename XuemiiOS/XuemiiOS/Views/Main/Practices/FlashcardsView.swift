@@ -36,69 +36,67 @@ struct FlashcardsView: View {
         .navigationTitle("Flashcards")
         .navigationBarTitleDisplayMode(.inline)
     }
+
     var main: some View {
-        NavigationStack {
-            VStack {
-                Gauge(value: Double((currentIndex ?? 0) + 1) / Double(max(1, vocabularies.count))) {
-                    EmptyView()
-                }
-                .tint(.accent)
-                .animation(.bouncy, value: currentIndex)
-                .padding(.horizontal)
-                
-                Spacer()
-                
-                if vocabularies.isEmpty {
-                    ContentUnavailableView("Something Went Wrong", systemImage: "questionmark.circle.fill", description: Text("No vocabulary found, please try again later."))
-                } else {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        CustomGlassEffectContainer {
-                            LazyHStack {
-                                ForEach(Array(vocabularies.enumerated()), id: \.offset) { (_, vocabulary) in
-                                    FlashcardItem(
-                                        vocabulary: vocabulary,
-                                        folder: folder,
-                                        handwritingWord: $handwritingWord,
-                                        selectedVocabularyToBookmark: $selectedVocabularyToBookmark
-                                    )
-                                }
+        VStack {
+            Gauge(value: Double((currentIndex ?? 0) + 1) / Double(max(1, vocabularies.count))) {
+                EmptyView()
+            }
+            .tint(.accent)
+            .animation(.bouncy, value: currentIndex)
+            .padding(.horizontal)
+            
+            Spacer()
+            
+            if vocabularies.isEmpty {
+                ContentUnavailableView("Something Went Wrong", systemImage: "questionmark.circle.fill", description: Text("No vocabulary found, please try again later."))
+            } else {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    CustomGlassEffectContainer {
+                        LazyHStack {
+                            ForEach(Array(vocabularies.enumerated()), id: \.offset) { (_, vocabulary) in
+                                FlashcardItem(
+                                    vocabulary: vocabulary,
+                                    folder: folder,
+                                    handwritingWord: $handwritingWord,
+                                    selectedVocabularyToBookmark: $selectedVocabularyToBookmark
+                                )
                             }
-                            .scrollTargetLayout()
                         }
+                        .scrollTargetLayout()
                     }
-                    .scrollPosition(id: $currentIndex)
-                    .scrollTargetBehavior(.viewAligned)
-                    .safeAreaPadding(.horizontal, 32)
                 }
-                
-                Spacer()
+                .scrollPosition(id: $currentIndex)
+                .scrollTargetBehavior(.viewAligned)
+                .safeAreaPadding(.horizontal, 32)
             }
-            .sheet(item: $handwritingWord) { word in
-                HandwritingView(word: word)
-                    .presentationDetents([.medium, .large])
+            
+            Spacer()
+        }
+        .sheet(item: $handwritingWord) { word in
+            HandwritingView(word: word)
+                .presentationDetents([.medium, .large])
+        }
+        .sheet(item: $selectedVocabularyToBookmark) { vocabulary in
+            AddToFolderView(vocabulary: vocabulary)
+                .presentationDetents([.medium, .large])
+        }
+        .onAppear {
+            withAnimation {
+                currentIndex = initialIndex
             }
-            .sheet(item: $selectedVocabularyToBookmark) { vocabulary in
-                AddToFolderView(vocabulary: vocabulary)
-                    .presentationDetents([.medium, .large])
-            }
-            .onAppear {
-                withAnimation {
-                    currentIndex = initialIndex
-                }
-            }
-            .onDisappear {
-                guard let level, let chapter, let topic else { return }
-                
-                Task {
-                    await progressManager.save(
-                        level: level,
-                        chapter: chapter,
-                        topic: topic,
-                        currentIndex: currentIndex ?? 0
-                    )
-                }
+        }
+        .onDisappear {
+            guard let level, let chapter, let topic else { return }
+            
+            Task {
+                await progressManager.save(
+                    level: level,
+                    chapter: chapter,
+                    topic: topic,
+                    currentIndex: currentIndex ?? 0
+                )
             }
         }
     }
 }
-

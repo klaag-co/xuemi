@@ -40,8 +40,13 @@ class CanvasController: UIViewController, UISearchBarDelegate {
         text = character
         guard pageLoaded, let webView, appliedCharacter != character else { return }
         appliedCharacter = character
-        let script = "initializeWriter(\(Self.jsString(character)))"
-        webView.evaluateJavaScript(script)
+//        let script = "initializeWriter(\(Self.jsString(character)))"
+//        webView.evaluateJavaScript(script)
+        webView.evaluateJavaScript("changeCharacter('\(character)')") { (result, error) in
+            if error == nil {
+                // success, do nothing...
+            }
+        }
     }
     
     func setDarkMode(_ dark: Bool) {
